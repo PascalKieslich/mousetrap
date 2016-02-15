@@ -16,6 +16,8 @@ Authors@R: c(
     person("Felix", "Henninger", role = "aut",
             email= "mailbox@felixhenninger.com")
     )
+URL: https://github.com/pascalkieslich/mousetrap
+BugReports: https://github.com/pascalkieslich/mousetrap/issues
 License: GPL-3
 Depends:
     R (>= 3.1.0)
