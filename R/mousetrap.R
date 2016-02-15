@@ -11,8 +11,9 @@
 #'   (and example) of the resulting mousetrap data object can be found in
 #'   \link{mt_example}.
 #'   
-#'   \link{mt_import_mousetrap} imports mouse-tracking data recorded using the 
-#'   mousetrap plug-ins in OpenSesame.
+#'   \link{mt_import_mousetrap} imports mouse-tracking data that were recorded
+#'   using the \href{https://github.com/pascalkieslich/mousetrap-os}{mousetrap
+#'   plug-ins} for OpenSesame.
 #'   
 #'   \link{mt_import_wide} imports mouse-tracking data saved in a wide format 
 #'   (e.g., data exported from MouseTracker).
