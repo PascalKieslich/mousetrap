@@ -1,0 +1,24 @@
+---
+output:
+  md_document:
+    variant: markdown_github
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+# mousetrap
+
+Mouse-tracking, the analysis of mouse movements in computerized experiments, is a method that is becoming increasingly popular in the cognitive sciences.
+The **mousetrap** package offers functions for importing, preprocessing, analyzing, aggregating, and visualizing mouse-tracking data.
+
+## General Information
+
+The `mousetrap` package was developed by Pascal Kieslich and Felix Henninger. It is published under the GNU General Public License (version 3).

@@ -1,0 +1,612 @@
+#' Calculate mouse-tracking measures.
+#' 
+#' Calculate a number of mouse-tracking measures for each trajectory.
+#' 
+#' The calculation of most measures can be deduced directly from their 
+#' definition (see Value). For several more complex measures, a few details are 
+#' provided in the following.
+#' 
+#' The \strong{maximum absolute deviation} (\code{MAD}) is the maximum 
+#' perpendicular deviation from the straight path connecting start and end point
+#' of the trajectory (e.g., Freeman & Ambady, 2010). If the \code{MAD} occurs
+#' above the direct path, this is denoted by a positive value. If it occurs
+#' below the direct path, this is denoted by a negative value. This assumes that
+#' the complete movement in the trial was from bottom to top (i.e., the end
+#' point has a higher y-position than the start point). In case the movement was
+#' from top to bottom, \code{mt_calculate_measures} automatically flips the
+#' signs. Both \code{MD_above} and  \code{MD_below} are also reported
+#' separately. The \strong{average deviation} (\code{AD}) is the average of all
+#' deviations across the trial.
+#' 
+#' The \code{AUC} represents the \strong{area under curve}, i.e., the geometric
+#' area between the actual trajectory and the direct path. Areas above the
+#' direct path are added and areas below are subtracted. The \code{AUC} is
+#' calculated using the \link[pracma]{polyarea} function from the pracma
+#' package.
+#' 
+#' The \code{IMA} is based on the \strong{initial movement angle} used by Buetti
+#' and Kerzel (2009). In their experiment, actual hand movements were recorded 
+#' and the \code{IMA} was the angle between the position of the hand and the 
+#' axis running through the correct response location at a specific point in 
+#' time (in the original study, one fifth of the trial). Adapting this to the 
+#' mouse-tracking setup, the \code{IMA} is the angle between the idealized
+#' response trajectory (straight line) and the movement from the starting point
+#' in the trial to the position of the mouse at the specified percentile. If
+#' this position is above the idealized response trajectory, the angle has a
+#' positive value. If it is below the idealized response trajectory, the angle
+#' has a negative value.
+#' 
+#' The \code{IMA} is calculated for a specific percentile of the trial, which
+#' has to be specified explicitly using \code{ima_percentile} (e.g., 
+#' \code{ima_percentile=0.20} to correspond to the study by Buetti and Kerzel, 
+#' 2009).
+#' 
+#' 
+#' @param data a mousetrap data object created using one of the mt_import 
+#'   functions (see \link{mt_example} for details).
+#' @param use a character string specifying which trajectory data should be 
+#'   used.
+#' @param save_as a character string specifying where the calculated measures 
+#'   should be stored.
+#' @param flip_threshold a numeric value specifying the distance that needs to 
+#'   be exceeded in one direction so that a change in direction counts as an x- 
+#'   or y-flip.
+#' @param ima_percentile a decimal value. If specified, the initial movement 
+#'   angle at the respective percentile will be calculated.
+#' @param show_progress logical indicating whether function should report its 
+#'   progress.
+#'   
+#' @return A mousetrap data object (see \link{mt_example}) where an 
+#'   additional \link{data.frame} has been added (by default called "measures") 
+#'   containing the per-trial mouse-tracking measures. Each row in the 
+#'   data.frame corresponds to one trajectory (the corresponding trajectory is 
+#'   by default identified in the column \link{mt_id}). Each column in the
+#'   data.frame corresponds to one of the measures.
+#'   
+#'   Note that some of the measures will only be returned if specific arguments 
+#'   are provided (e.g., \code{ima_percentile}). Besides, some measures are only
+#'   returned if distance, velocity and acceleration are calculated using 
+#'   \link{mt_calculate_derivatives} before running
+#'   \code{mt_calculate_measures}. Besides, the meaning of these measures
+#'   depends on the values of the arguments in \link{mt_calculate_derivatives}.
+#'   
+#'   The following measures are computed for each trajectory: 
+#'   \item{\link{mt_id}}{Trial ID (can be used for merging measures data.frame 
+#'   with other trial-level data)}
+#'   \item{x_max}{Maximum x-position} 
+#'   \item{x_min}{Minimum x-position}
+#'   \item{y_max}{Maximum y-position} 
+#'   \item{y_min}{Minimum y-position}
+#'   \item{MAD}{Maximum absolute deviation from the direct path connecting start
+#'   and end point of the trajectory (straight line)}
+#'   \item{MAD_time}{Time at which the maximum absolute deviation was reached
+#'   first}
+#'   \item{MD_above}{Maximum deviation above the direct path} 
+#'   \item{MD_above_time}{Time at which the maximum deviation above was reached 
+#'   first}
+#'   \item{MD_below}{Maximum deviation below the direct path} 
+#'   \item{MD_below_time}{Time at which the maximum deviation below was reached 
+#'   first}
+#'   \item{AD}{Average deviation from direct path}
+#'   \item{AUC}{Area under curve, the geometric area between the actual
+#'   trajectory and the direct path where areas below the direct path have been
+#'   subtracted}
+#'   \item{x_flips}{Number of directional changes along x-axis} 
+#'   \item{y_flips}{Number of directional changes along y-axis} 
+#'   \item{x_reversals}{Number of crossings of the y-axis} 
+#'   \item{y_reversals}{Number of crossings of the y-axis}
+#'   \item{RT}{Response time, the total time passed until a response was given}
+#'   \item{initiation_time}{Time passed until first mouse movement was 
+#'   initiated}
+#'   \item{idle_time}{Total time without mouse movement across the entirety of
+#'   the trial}
+#'   \item{xy_dist}{Total distance covered by the trajectory}
+#'   \item{vel_max}{Maximum velocity}
+#'   \item{vel_max_time}{Time at which maximum velocity occurred first}
+#'   \item{vel_min}{Minimum velocity} 
+#'   \item{vel_min_time}{Time at which minimum velocity occurred first} 
+#'   \item{acc_max}{Maximum acceleration}
+#'   \item{acc_max_time}{Time at which maximum acceleration occurred first}
+#'   \item{acc_min}{Minimum acceleration} 
+#'   \item{acc_min_time}{Time where minimum acceleration occurred first} 
+#'   \item{IMA}{Initial movement angle at specified percentile (see Details)} 
+#'   \item{IMA_time}{Time of the specified percentile for the initial movement 
+#'   angle}
+#'   \item{IMD}{Deviation from direct path at the specified percentile for the
+#'   initial movement angle}
+#'   
+#' @references Mousetrap
+#'   
+#'   Buetti, S., & Kerzel, D. (2009). Conflicts during response selection affect
+#'   response programming: Reactions toward the source of stimulation. 
+#'   \emph{Journal of Experimental Psychology: Human Perception and Performance,
+#'   35}(3), 816-834.
+#'   
+#'   Freeman, J. B., & Ambady, N. (2010). MouseTracker: Software for studying 
+#'   real-time mental processing using a computer mouse-tracking method. 
+#'   \emph{Behavior Research Methods, 42}(1), 226-241.
+#'   
+#'   
+#'   
+#' @seealso \link{mt_sample_entropy} for calculating sample entropy.
+#' 
+#' \link{mt_standardize} for standardizing the measures per subject.
+#' 
+#' \link{mt_check_bimodality} for checking bimodality of the measures using
+#' different methods.
+#' 
+#' \link{mt_aggregate} and \link{mt_aggregate_per_subject} for aggregating the
+#' measures.
+#' 
+#' @examples
+#' mt_example <- mt_calculate_derivatives(mt_example)
+#' mt_example <- mt_calculate_measures(mt_example)
+#' 
+#' # merge measures with trial data
+#' mt_example_results <- merge(
+#'   mt_example$data, mt_example$measures,
+#'   by="mt_id")
+#'   
+#' @export
+mt_calculate_measures <- function(data,
+                                  use="trajectories",save_as="measures",
+                                  flip_threshold=0,
+                                  ima_percentile = NULL,
+                                  show_progress=TRUE) {
+  
+  # Helper functions
+  
+  # Function to determine the point on the line between P1 and P2
+  # that forms a line with P0 so that it is orthogonal to P1-P2.
+  # For details regarding the formula, see
+  # http://paulbourke.net/geometry/pointlineplane/
+  point_to_line <- function(P0, P1, P2){
+    
+    u <- ( (P0[1]-P1[1]) * (P2[1]-P1[1]) + 
+           (P0[2]-P1[2]) * (P2[2]-P1[2]) ) / 
+         ( (P2[1]-P1[1])^2 + (P2[2]-P1[2])^2 )
+    
+    P <- c(
+      P1[1] + u * (P2[1] - P1[1]), 
+      P1[2] + u * (P2[2] - P1[2])
+    )
+    
+    return(P)
+  }
+  
+  # Function to determine points on the straight line connecting the start and end points
+  # that result from an orthogonal projection of the individual points on the curve
+  points_on_ideal <- function(points, start=NULL, end=NULL){
+    
+    # Fill start and end values if otherwise unspecified
+    if (is.null(start)) {
+      start <- points[,1]
+    }
+    if (is.null(end)) {
+      end <- points[,ncol(points)]
+    }
+    
+    if (all(start == end)){
+      # If start and end points are identical,
+      # no projection can be computed.
+      # Therefore, we return the start/end point
+      # as a fallback result.
+      warning(
+        "Start and end point identical in trajectory. ",
+        "This might lead to strange results for some measures (e.g., MAD)."
+      )
+      result <- points
+      result[1,] <- start[1]
+      result[2,] <- start[2]
+    } else {
+      result <- apply(
+        points, MARGIN=2, 
+        FUN=point_to_line, 
+        P1=start, P2=end
+      )
+    }
+    
+    return(result)
+  }
+  
+  # Function to calculate the number of flips
+  count_changes <- function(pos, threshold=0, zero_threshold=0) {
+    
+    # Calculate differences in positions between subsequent steps
+    # (pos is a one-dimensional vector)
+    changes <- diff(pos, lag=1)
+    
+    # Exclude logs without changes (above zero_threshold)
+    changes <- changes[abs(changes) > zero_threshold]
+    
+    # Initialize variables
+    cum_changes <- c() # vector of accumulated deltas
+    cum_delta <- changes[1] # current accumulated delta
+    
+    # Iterate over the changes, and summarize
+    # those with the same sign by generating the sum.
+    # When the sign changes, a new value is added to
+    # the cum_changes vector and the cumulative sum
+    # of consecutive changes is reset.
+    for (delta in changes[-1]){
+      
+      # check if previous (accumulated) and current delta have the same sign
+      if (sign(cum_delta) == sign(delta)){
+        
+        # if so, accumulate deltas
+        cum_delta <- delta + cum_delta
+      } else {
+        # if not, save accumulated delta
+        cum_changes <- c(cum_changes, cum_delta)
+        
+        # reset cum_delta to current delta
+        cum_delta <- delta
+      }
+    }
+    
+    # save last cum_delta
+    cum_changes <- c(cum_changes, cum_delta)
+    
+    # Count changes in direction/sign
+    
+    # If there is no threshold, simply look at the number of the accumulated deltas
+    if (threshold == 0){
+      n <- length(cum_changes) - 1
+      
+    } else {
+      # If a threshold is set,
+      # exclude changes below threshold
+      cum_changes <- cum_changes[abs(cum_changes) > abs(threshold)]
+      
+      # Count changes in sign
+      # (the diff converts changes in sign into +-1s or 0s for no changes,
+      # and their absolute values are added up along the vector)
+      n <- sum(abs(diff(cum_changes > 0)))
+    }
+    
+    return(n)
+  }
+  
+
+  # Prepare data
+  trajectories <- extract_data(data=data,use=use)
+  timestamps <- mt_variable_labels["timestamps"]
+  xpos <- mt_variable_labels["xpos"]
+  ypos <- mt_variable_labels["ypos"]
+  dist <- mt_variable_labels["dist"]
+  vel  <- mt_variable_labels["vel"]
+  acc  <- mt_variable_labels["acc"]
+
+  # Calculate number of logs
+  nlogs <- rowSums(!is.na(trajectories[,xpos,,drop=FALSE]))
+  
+  # Setup variable matrix depending on whether timestamps are provided or not
+  if (timestamps %in% dimnames(trajectories)[[2]]){
+    
+    mt_measures <- c(
+      "x_max", "x_min", "y_max", "y_min",
+      "MAD", "MAD_time",
+      "MD_above", "MD_above_time",
+      "MD_below", "MD_below_time",
+      "AD", "AUC",
+      "x_flips", "y_flips",
+      "x_reversals", "y_reversals",
+      "RT", "initiation_time", "idle_time"
+    )
+    
+    # Check if there are trajectories where first timestamp is > 0:
+    if (max(trajectories[,timestamps,1]) > 0) {
+      message(
+        "Trajectories detected where first timestamp is greater than 0. ",
+        "Assuming period without movement starting at timestamp 0."
+      )
+      # only affects: AD, IMA, and _time variables
+    } else if (min(trajectories[,timestamps,1]) < 0) {
+      stop(
+        "Trajectories detected where first timestamp is smaller than 0. ",
+        "Please check that trajectories were logged/imported correctly."
+      )
+    }
+    
+  } else {
+    message(
+      "No timestamps were found in trajectory array. ",
+      "Not computing the corresponding measures."
+    )
+    mt_measures <- c(
+      "x_max", "x_min", "y_max", "y_min",
+      "MAD", "MD_above", "MD_below",
+      "AD", "AUC",
+      "x_flips", "y_flips",
+      "x_reversals", "y_reversals"
+    )
+  }
+  
+  # Add distance, velocity and acceleration-based measures
+  # if the derivatives were precomputed
+  if (dist %in% dimnames(trajectories)[[2]]) {
+    mt_measures <- c(mt_measures, "xy_dist")
+  }
+  
+  if (vel %in% dimnames(trajectories)[[2]] & timestamps %in% dimnames(trajectories)[[2]]) {
+    mt_measures <- c(mt_measures, 
+      "vel_max", "vel_max_time", "vel_min", "vel_min_time")
+  }
+  
+  if (acc %in% dimnames(trajectories)[[2]] & timestamps %in% dimnames(trajectories)[[2]]) {
+    mt_measures <- c(mt_measures, 
+      "acc_max", "acc_max_time", "acc_min", "acc_min_time")
+  }
+  
+  # Add IMAs if requested and timestamps are present
+  if (timestamps %in% dimnames(trajectories)[[2]] &
+    is.null(ima_percentile)==FALSE) {
+    mt_measures <- c(mt_measures, "IMA", "IMA_time", "IMD")
+  }
+  
+  # Create empty matrix for measures
+  # (trajectories in rows, measures in columns)
+  measures <- matrix(data=NA,
+    nrow = nrow(trajectories), 
+    ncol=length(mt_measures),
+    dimnames = list(
+      row.names(trajectories),
+      mt_measures
+    )
+  )
+  
+  # Iterate over trajectories and calculate measures
+  for (i in 1:nrow(trajectories)){
+    
+    current_points <- trajectories[i, c(xpos,ypos), 1:nlogs[i]]
+    current_xpos <- trajectories[i, xpos, 1:nlogs[i]]
+    current_ypos <- trajectories[i, ypos, 1:nlogs[i]]
+    
+    # Determine straight line (idealized trajectory)
+    straight_line <- points_on_ideal(current_points)
+    straight_line_xpos <- straight_line[xpos,]
+    straight_line_ypos <- straight_line[ypos,]
+    
+    # Calculate distance of each point on the curve from straight line
+    # (cf. Pythagoras, some time ago)
+    deviation <- sqrt(colSums((straight_line-current_points)^2))
+    
+    # Check if end point is above the start point
+    end_above_start <- current_ypos[length(current_ypos)] >= current_ypos[1]
+    
+    # Flip deviation for points under the idealized straight line
+    if (end_above_start){
+      deviation[straight_line_ypos > current_ypos] <- 
+        -deviation[straight_line_ypos > current_ypos]
+    } else {
+      deviation[straight_line_ypos < current_ypos] <- 
+        -deviation[straight_line_ypos < current_ypos]
+      }
+    
+    
+    # Calculate min and max values for x and y
+    measures[i,"x_max"] <- max(current_xpos)
+    measures[i,"x_min"] <- min(current_xpos)
+    measures[i,"y_max"] <- max(current_ypos)
+    measures[i,"y_min"] <- min(current_ypos)
+    
+    # Maximum absolute deviation (output including sign)
+    measures[i,"MAD"] <- deviation[which.max(abs(deviation))]
+    
+    # Maximum deviation above idealized trajectory 
+    # (== in direction of non-chosen option)
+    measures[i,"MD_above"] <- max(deviation)
+    
+    # Maximum deviation below idealized trajectory 
+    # (== in direction of chosen option)
+    measures[i,"MD_below"] <- min(deviation)
+    
+    # Calculate average deviation from direct path
+    measures[i,"AD"] <- mean(deviation)
+    
+    # Calculate area under curve
+    # Use deviation of actual trajectory as y coordinates
+    # and distance from starting point of the idealized 
+    # trajectory as x coordinate
+    dist_from_start <- sqrt(
+      (straight_line_xpos-straight_line_xpos[1])^2 + 
+      (straight_line_ypos-straight_line_ypos[1])^2
+    )
+    # Flip sign for points below the idealized line
+    if (end_above_start){
+      dist_from_start[straight_line_ypos < current_ypos[1]] <- 
+        -dist_from_start[straight_line_ypos < current_ypos[1]]
+    } else {
+      dist_from_start[straight_line_ypos > current_ypos[1]] <- 
+        -dist_from_start[straight_line_ypos > current_ypos[1]]
+    }
+    
+    # Compute the area spanned by the x/y coordinate pairs,
+    # which is now the AUC (the coordinate system has been
+    # rotated so that the x axis corresponds to the direct
+    # path between start and end points)
+    measures[i,"AUC"]<- -pracma::polyarea(dist_from_start,deviation)
+    
+    # Calculate number of x_flips and y_flips
+    measures[i,"x_flips"] <- count_changes(current_xpos, threshold=flip_threshold)
+    measures[i,"y_flips"] <- count_changes(current_ypos, threshold=flip_threshold)
+    
+    # Calculate x_reversals
+    # number of crossings of the y-axis (ignoring points exactly on y axis)
+    yside <- current_xpos[current_xpos!=0]>0
+    measures[i,"x_reversals"] <- sum(abs(diff(yside)))
+    
+    # Calculate y_reversals
+    # number of crossings of the x-axis (ignoring points exactly on x axis)
+    xside <- current_ypos[current_ypos != 0] > 0
+    measures[i,"y_reversals"] <- sum(abs(diff(xside)))
+    
+    # Check if timestamps are included and if so,
+    # retrieve timestamps and calculate corresponding measures
+    if (timestamps %in% dimnames(trajectories)[[2]]) {
+      
+      current_timestamps <- trajectories[i,timestamps,1:nlogs[i]]
+      
+      # If first timestamp > 0, add another with 0 to indicate phase without movement
+      if (current_timestamps[1]>0){
+        current_timestamps <- c(0,current_timestamps)
+        current_xpos <- c(current_xpos[1],current_xpos)
+        current_ypos <- c(current_ypos[1],current_ypos)
+        deviation <- c(deviation[1],deviation)
+        nlogs[i] <- nlogs[i]+1
+      }
+
+      measures[i,"RT"] <- max(current_timestamps)
+      
+      # Calculate variables for phases with and without movement
+      time_diffs <- diff(current_timestamps)
+      # Indicate for each sample whether the position changed
+      pos_constant <- (diff(current_xpos) == 0) & (diff(current_ypos) == 0)
+      
+      if (all(pos_constant == FALSE)){
+        # Continuous movement
+        measures[i,"initiation_time"] <- 0
+        measures[i,"idle_time"] <- 0
+      } else if (all(pos_constant == TRUE)){
+        # No movement at all
+        measures[i,"initiation_time"] <- measures[i,"RT"]
+        measures[i,"idle_time"] <- measures[i,"RT"]
+      } else{
+        # Intermittent movement
+        measures[i,"initiation_time"] <- ifelse(
+          !pos_constant[1],
+          0,
+          sum(time_diffs[1:(which(pos_constant==FALSE)[1]-1)])
+        )
+        measures[i,"idle_time"] <- sum(time_diffs[pos_constant])
+      }
+      
+      # notes: timestamps (e.g., for MAD) always correspond
+      # to the first time the max/min value was reached
+      measures[i,"MAD_time"] <- current_timestamps[which.max(abs(deviation))]
+      measures[i,"MD_above_time"] <- current_timestamps[which.max(deviation)]
+      measures[i,"MD_below_time"] <- current_timestamps[which.min(deviation)]
+      
+      # IMA (computed only if the percentile has been specified)
+      if (is.null(ima_percentile) == FALSE){
+        
+        # Look at 3 points (start point, ima_point (interpolated), end point)
+        # First, calculate the timestamp for each of these points.
+        ima_timestamps <- c(
+          current_timestamps[1],
+          ima_percentile * current_timestamps[nlogs[i]],
+          current_timestamps[nlogs[i]]
+        )
+        
+        # Second, interpolate the positions at each of these timestamps
+        # and build a matrix of these
+        ima_points <- rbind(
+          approx(current_timestamps, current_xpos, xout=ima_timestamps)$y,
+          approx(current_timestamps, current_ypos, xout=ima_timestamps)$y
+        )
+        
+        row.names(ima_points) <- c(xpos, ypos)
+        
+        # Calculate initial movement angle (IMA, cf. Buetti & Kerzel, 2009, Fig. 1)
+        # originally: angle between position of hand after one fifth of trajectory had been
+        #             traversed and axis running through correct response location.
+        # here: Angle between the position of the mouse and the idealized response trajectory
+        # depends on MD and the length of the idealized response trajectory,
+        # where MD intersects it (called b here)
+        ima_straight_line <- points_on_ideal(ima_points)
+        imd <- sqrt(sum((ima_straight_line[,2]-ima_points[,2])^2))
+        
+        # Flip sign if point is below the ideal line
+        if (end_above_start){
+          if (ima_points[ypos,2]<ima_straight_line[ypos,2]){
+            imd <- (-imd)
+          }
+        } else {
+          if (ima_points[ypos,2]>ima_straight_line[ypos,2]){
+            imd <- (-imd)
+          }
+        }
+        
+        # Calculate the distance between the point on the ideal line and the start point
+        b <- sqrt(sum((ima_straight_line[,2]-ima_points[,1])^2))
+        
+        # Flip sign if point on ideal line is below the start point
+        if (end_above_start){
+          if (ima_straight_line[ypos,2]<ima_points[ypos,1]){
+            b <- (-b)
+          } 
+        } else {
+          if (ima_straight_line[ypos,2]>ima_points[ypos,1]){
+            b <- (-b)
+          }
+        }
+         
+        
+        # Use trigonometry to determine the angle between the ideal
+        # line and the actual observed trajectory.
+        # If distance from start position is 0, IMA is 0
+        ima <- ifelse(b == 0, 0, atan2(imd,b) * 180/pi)
+        
+        # the value of the ima_point (second point in vector) is of interest
+        measures[i,"IMA"] <- ima
+        measures[i,"IMA_time"] <- ima_timestamps[2]
+        measures[i,"IMD"] <- imd
+      }
+    }
+    
+    # Compute total distance covered
+    if (dist %in% dimnames(trajectories)[[2]]){
+      measures[i,"xy_dist"] <- sum(abs(trajectories[i,dist,]), na.rm=TRUE)
+    }
+    
+    # Velocity-based measures
+    if (vel %in% dimnames(trajectories)[[2]] & timestamps %in% dimnames(trajectories)[[2]]){
+      
+      # Maximum velocity
+      measures[i,"vel_max"] <- max(trajectories[i,vel,], na.rm=TRUE)
+      vel_max_pos <- which.max(trajectories[i,vel,])
+      
+      # Interpolate timestamp of maximum velocity
+      # (see mt_calculate_derivatives for logic of velocity timestamps)
+      vel_max_pos <- ifelse(vel_max_pos==1, 1, c(vel_max_pos-1, vel_max_pos))
+      measures[i,"vel_max_time"] <- mean(trajectories[i,timestamps,vel_max_pos])
+      
+      # Minimum velocity (which is treated analogously)
+      measures[i,"vel_min"] <- min(trajectories[i,vel,],na.rm = TRUE)
+      vel_min_pos <- which.min(trajectories[i,vel,])
+      
+      # average timestamps (see mt_calculate_derivatives for logic of velocity timestamps)
+      vel_min_pos <- ifelse(vel_min_pos==1,1,c(vel_min_pos-1,vel_min_pos))
+      measures[i,"vel_min_time"] <- mean(trajectories[i,timestamps,vel_min_pos])
+    }
+    
+    if (acc %in% dimnames(trajectories)[[2]] & timestamps %in% dimnames(trajectories)[[2]]){
+      # Maximum acceleration
+      measures[i,"acc_max"] <- max(trajectories[i,acc,], na.rm=TRUE)
+      measures[i,"acc_max_time"] <- trajectories[i,timestamps,which.max(trajectories[i,acc,])]
+      
+      # Minimum acceleration
+      measures[i,"acc_min"] <- min(trajectories[i,acc,], na.rm=TRUE)
+      measures[i,"acc_min_time"] <- trajectories[i,timestamps,which.min(trajectories[i,acc,])]
+    }
+    
+    if (show_progress){
+      if (i %% 100 == 0) message(paste(i, "trials completed"))
+    }
+  }
+  
+  if (show_progress){
+    message(paste("all",i,"trials completed"))
+  }
+  
+  # Convert results to data.frame
+  results <- data.frame(row.names(trajectories))
+  colnames(results) <- mt_id
+  rownames(results) <- results[,mt_id]
+  results <- cbind(results,data.frame(measures))
+  
+  # Append results to data object
+  data[[save_as]] <- results
+  
+  return(data)
+}

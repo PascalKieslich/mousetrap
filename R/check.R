@@ -1,0 +1,56 @@
+#' Check logging resolution by looking at timestamp differences.
+#' 
+#' \code{mt_check_resolution} computes the timestamp differences as a measure of
+#' the logging resolution. It provides various descriptive statistics to check
+#' the logging resolution.
+#' 
+#' If mouse-tracking experiments are conducted using the mousetrap plug-ins for 
+#' OpenSesame, the logging resolution can be specified explicitly in the 
+#' experiment under "Logging resolution", which corresponds to the delay (in 
+#' milliseconds) between recordings of the mouse position. By default, mouse 
+#' positions are recorded every 10 ms (corresponding to a 100 Hz sampling rate).
+#' As the actual resolution achieved depends on the performance of the hardware,
+#' it makes sense to check the logging resolution using 
+#' \code{mt_check_resolution}. Note that delays smaller than the specified delay
+#' typically result from mouse clicks in the experiment.
+#' 
+#' 
+#' @param data a mousetrap data object created using one of the mt_import 
+#'   functions (see \link{mt_example} for details).
+#' @param use a character string specifying which trajectory data should be
+#'   used.
+#'   
+#' @return A list with various descriptive statistics. For convenience, the
+#'   relative frequencies are rounded to 4 decimal places.
+#'
+#' @references
+#' Mousetrap
+#'
+#' @examples
+#' mt_check_resolution(mt_example)
+#' 
+#' @export
+mt_check_resolution <- function(data, use="trajectories") {
+  
+  trajectories <- extract_data(data=data,use=use)
+  timestamps <- mt_variable_labels["timestamps"]
+  
+  # Compute steps in the timestamps
+  if(dim( trajectories )[1] == 1) {
+    log_diffs <- diff(trajectories[, timestamps, ])
+  } else {
+    log_diffs <- diff(t(trajectories[, timestamps, ]))
+  }
+  
+  # Clean data type and remove empty values
+  log_diffs <- as.numeric(log_diffs)
+  log_diffs <- log_diffs[!is.na(log_diffs)]
+
+  return(list(
+    summary=summary(log_diffs),
+    sd=sd(log_diffs),
+    frequencies=table(log_diffs),
+    relative_frequencies=round(
+      table(log_diffs) / length(log_diffs), 4)
+  ))
+}
