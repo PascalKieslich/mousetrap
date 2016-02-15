@@ -53,11 +53,9 @@ mt_example <- mt_space_normalize(mt_example,
 
 }
 \references{
-Mousetrap
-
-Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor responses in the
-time course of categorizing atypical exemplars. \emph{Memory & Cognition,
-35}(1), 15-28.
+Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor
+  responses in the time course of categorizing atypical exemplars.
+  \emph{Memory & Cognition, 35}(1), 15-28.
 }
 \seealso{
 \link{mt_remap_symmetric} for remapping trajectories.

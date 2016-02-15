@@ -53,11 +53,11 @@ Please note that \code{mt_example_raw} should only be used for exploring the
 features of the mousetrap package and not for any substantive analysis.
 }
 \references{
-Mousetrap
-
-  Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor responses in the
-  time course of categorizing atypical exemplars. \emph{Memory & Cognition,
-  35}(1), 15-28.
+Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor
+  responses in the time course of categorizing atypical exemplars.
+  \emph{Memory & Cognition, 35}(1), 15-28.
+  
+  Mousetrap
 }
 \keyword{datasets}
 

@@ -67,7 +67,4 @@ mt_example <- mt_remap_symmetric(mt_example,
   remap_xpos="no", remap_ypos="up")
   
 }
-\references{
-Mousetrap
-}
 

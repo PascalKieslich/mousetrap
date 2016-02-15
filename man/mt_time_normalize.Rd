@@ -54,11 +54,10 @@ mt_example <- mt_time_normalize(mt_example,
   
 }
 \references{
-Mousetrap
-
-Spivey, M. J., Grosjean, M., & Knoblich, G. (2005). Continuous attraction
-toward phonological competitors. \emph{Proceedings of the National Academy of
-Sciences of the United States of America, 102}(29), 10393-10398.
+Spivey, M. J., Grosjean, M., & Knoblich, G. (2005). Continuous
+  attraction toward phonological competitors. \emph{Proceedings of the
+  National Academy of Sciences of the United States of America, 102}(29),
+  10393-10398.
 }
 \seealso{
 \link{approx} for information about the function used for linear

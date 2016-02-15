@@ -68,9 +68,6 @@ mt_example <- mt_average(mt_example, save_as="av_trajectories",
   interval_size=100)
 
 }
-\references{
-Mousetrap
-}
 \seealso{
 \link{mt_calculate_derivatives} for calculating velocity and 
 acceleration.

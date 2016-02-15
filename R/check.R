@@ -23,9 +23,6 @@
 #' @return A list with various descriptive statistics. For convenience, the
 #'   relative frequencies are rounded to 4 decimal places.
 #'
-#' @references
-#' Mousetrap
-#'
 #' @examples
 #' mt_check_resolution(mt_example)
 #' 

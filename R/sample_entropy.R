@@ -52,11 +52,9 @@
 #'   
 #'   If not, an additional \link{data.frame} will be added.
 #'   
-#' @references Mousetrap
-#' 
-#' Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor responses in the
-#' time course of categorizing atypical exemplars. \emph{Memory & Cognition,
-#' 35}(1), 15-28.
+#' @references Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor
+#'   responses in the time course of categorizing atypical exemplars.
+#'   \emph{Memory & Cognition, 35}(1), 15-28.
 #' 
 #' Hehman, E., Stolier, R. M., & Freeman, J. B. (2015). Advanced mouse-tracking
 #' analytic techniques for enhancing psychological science. \emph{Group

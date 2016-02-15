@@ -52,9 +52,6 @@ mt_example <- mt_calculate_measures(mt_example)
 mt_example <- mt_subset(mt_example, MAD<200, check="measures")
 
 }
-\references{
-Mousetrap
-}
 \seealso{
 \link{subset} for the R base subset function for vectors, matrices,
 or data.frames.

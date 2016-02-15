@@ -55,8 +55,9 @@
 #'   If mouse-tracking data were recorded using the mousetrap plug-ins for
 #'   OpenSesame, the unit of the timestamps is milliseconds.
 #'   
-#' @references Mousetrap
-#' 
+#' @references Mousetrap plug-ins for OpenSesame 
+#'   (\url{https://github.com/pascalkieslich/mousetrap-os})
+#'   
 #' @seealso \link[readbulk]{read_opensesame} from the \code{readbulk} library 
 #'   for reading and combining raw data files that were collected with 
 #'   OpenSesame.
@@ -451,8 +452,6 @@ mt_import_wide <- function(raw_data,
 #'   
 #' @return  A mousetrap data object (see \link{mt_example}).
 #'   
-#' @references Mousetrap
-#' 
 #' @seealso \link{mt_import_mousetrap} and \link{mt_import_wide} for importing
 #' mouse-tracking data from other sources.
 #' 

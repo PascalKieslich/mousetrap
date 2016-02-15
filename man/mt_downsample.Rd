@@ -62,9 +62,6 @@ mt_example <- mt_downsample(mt_example,
   step_size=50)
   
 }
-\references{
-Mousetrap
-}
 \seealso{
 \link{approx} for information about the function used for linear
 interpolation.

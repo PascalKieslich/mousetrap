@@ -75,9 +75,6 @@ mt_example <- mt_calculate_derivatives(mt_example,
   dimension="xpos")
   
 }
-\references{
-Mousetrap
-}
 \seealso{
 \link{mt_average} for averaging trajectories across constant time
 intervals.

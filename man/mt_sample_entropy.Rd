@@ -84,11 +84,9 @@ mt_example <- mt_sample_entropy(mt_example,
 
 }
 \references{
-Mousetrap
-
-Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor responses in the
-time course of categorizing atypical exemplars. \emph{Memory & Cognition,
-35}(1), 15-28.
+Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor
+  responses in the time course of categorizing atypical exemplars.
+  \emph{Memory & Cognition, 35}(1), 15-28.
 
 Hehman, E., Stolier, R. M., & Freeman, J. B. (2015). Advanced mouse-tracking
 analytic techniques for enhancing psychological science. \emph{Group

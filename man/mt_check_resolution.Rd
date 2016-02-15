@@ -37,7 +37,4 @@ typically result from mouse clicks in the experiment.
 mt_check_resolution(mt_example)
 
 }
-\references{
-Mousetrap
-}
 

@@ -48,8 +48,6 @@
 #'   Euclidian distance, velocity, and acceleration added as additional columns 
 #'   to the trajectory array.
 #'   
-#' @references Mousetrap
-#' 
 #' @seealso \link{mt_average} for averaging trajectories across constant time
 #' intervals.
 #' 

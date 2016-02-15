@@ -72,9 +72,6 @@ exp_data <- read.csv("exp_data.csv")
 data <- mt_import_long(exp_data)
 }
 }
-\references{
-Mousetrap
-}
 \seealso{
 \link{mt_import_mousetrap} and \link{mt_import_wide} for importing
 mouse-tracking data from other sources.

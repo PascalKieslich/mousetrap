@@ -81,7 +81,8 @@ mt_example <- mt_import_mousetrap(mt_example_raw)
 
 }
 \references{
-Mousetrap
+Mousetrap plug-ins for OpenSesame 
+  (\url{https://github.com/pascalkieslich/mousetrap-os})
 }
 \seealso{
 \link[readbulk]{read_opensesame} from the \code{readbulk} library 

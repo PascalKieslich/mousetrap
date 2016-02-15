@@ -53,9 +53,6 @@ mt_example <- mt_exclude_initiation(mt_example,
   save_as="mod_trajectories")
   
 }
-\references{
-Mousetrap
-}
 \seealso{
 \link{mt_calculate_measures} for calculating the initiation time.
 }

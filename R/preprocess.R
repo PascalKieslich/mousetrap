@@ -39,8 +39,6 @@
 #' @return A mousetrap data object (see \link{mt_example}) with remapped
 #'   trajectories.
 #'   
-#' @references Mousetrap
-#' 
 #' @examples
 #' # Remap trajectories so that all trajectories
 #' # end in the top-left corner
@@ -144,8 +142,6 @@ mt_remap_symmetric <- function(data,
 #' @return A mousetrap data object (see \link{mt_example}) from which the
 #'   initial phase without mouse movement was removed.
 #'   
-#' @references Mousetrap
-#' 
 #' @seealso \link{mt_calculate_measures} for calculating the initiation time.
 #' 
 #' @examples
@@ -244,11 +240,9 @@ mt_exclude_initiation <- function(data,
 #'   array (by default called \code{sn_trajectories}) containing the 
 #'   space-normalized trajectories.
 #'   
-#' @references Mousetrap
-#' 
-#' Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor responses in the
-#' time course of categorizing atypical exemplars. \emph{Memory & Cognition,
-#' 35}(1), 15-28.
+#' @references Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor
+#'   responses in the time course of categorizing atypical exemplars.
+#'   \emph{Memory & Cognition, 35}(1), 15-28.
 #' 
 #' @seealso \link{mt_remap_symmetric} for remapping trajectories.
 #' 
@@ -347,11 +341,10 @@ mt_space_normalize <- function(data,
 #'   \code{steps}) has been added with increasing integer values indexing the 
 #'   time-normalized position.
 #'   
-#' @references Mousetrap
-#' 
-#' Spivey, M. J., Grosjean, M., & Knoblich, G. (2005). Continuous attraction
-#' toward phonological competitors. \emph{Proceedings of the National Academy of
-#' Sciences of the United States of America, 102}(29), 10393-10398.
+#' @references Spivey, M. J., Grosjean, M., & Knoblich, G. (2005). Continuous
+#'   attraction toward phonological competitors. \emph{Proceedings of the
+#'   National Academy of Sciences of the United States of America, 102}(29),
+#'   10393-10398.
 #' 
 #' @seealso \link{approx} for information about the function used for linear
 #' interpolation.
@@ -460,8 +453,6 @@ mt_time_normalize <- function(data,
 #'   array (by default called \code{ds_trajectories}) containing the downsampled
 #'   trajectories.
 #'   
-#' @references Mousetrap
-#' 
 #' @seealso \link{approx} for information about the function used for linear
 #' interpolation.
 #' 
@@ -608,8 +599,6 @@ mt_downsample <- function(data,
 #'   However, this value does not necessarily correspond to the empirical mean 
 #'   of the timestamps in the interval.
 #'   
-#' @references Mousetrap
-#'   
 #' @seealso \link{mt_calculate_derivatives} for calculating velocity and 
 #' acceleration.
 #' 
@@ -749,8 +738,6 @@ mt_average <- function(data,
 #' @return A mousetrap data object (see \link{mt_example}) with filtered
 #'   data and trajectories.
 #'   
-#' @references Mousetrap
-#' 
 #' @seealso \link{subset} for the R base subset function for vectors, matrices,
 #' or data.frames.
 #' 
