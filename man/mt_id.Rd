@@ -25,10 +25,13 @@ mt_id <- "mt_id"
 # Calculate mouse-tracking measures
 mt_example <- mt_calculate_measures(mt_example)
 
-# .. and merge them with trial data using mt_id
+# Merge measures with trial data (adding "_raw"
+# to columns already existing in the trial data,
+# e.g., "initiation_time" if data were collected
+# using the mousetrap plug-ins in OpenSesame)
 mt_example_results <- merge(
   mt_example$data, mt_example$measures,
-  by="mt_id")
+  by="mt_id",suffixes=c("_raw",""))
 
 }
 \keyword{datasets}

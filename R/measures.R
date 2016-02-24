@@ -138,14 +138,19 @@
 #' \link{mt_aggregate} and \link{mt_aggregate_per_subject} for aggregating the
 #' measures.
 #' 
+#' \link{merge} for merging data.
+#' 
 #' @examples
 #' mt_example <- mt_calculate_derivatives(mt_example)
 #' mt_example <- mt_calculate_measures(mt_example)
 #' 
-#' # merge measures with trial data
+#' # Merge measures with trial data (adding "_raw"
+#' # to columns already existing in the trial data,
+#' # e.g., "initiation_time" if data were collected
+#' # using the mousetrap plug-ins in OpenSesame)
 #' mt_example_results <- merge(
 #'   mt_example$data, mt_example$measures,
-#'   by="mt_id")
+#'   by="mt_id",suffixes=c("_raw",""))
 #'   
 #' @export
 mt_calculate_measures <- function(data,
