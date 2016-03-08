@@ -68,14 +68,16 @@ scale_within <-function(data,
     label <- paste(prefix,var,sep="")
     
     if (is.null(within)) {
-      data[,label] <- scale(data[,var])
+      data[,label] <- as.vector(scale(data[,var]))
       
     } else {
       
       for (i in unique(within_values)){
         data[within_values==i,label] <- 
-          base::scale(data[within_values==i,var],
+          as.vector(
+            base::scale(data[within_values==i,var],
                       center=center,scale=scale)
+          )
       } 
     }
   }
