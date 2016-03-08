@@ -11,13 +11,13 @@ scale_within(data, variables = NULL, within = NULL, prefix = "",
 \item{data}{a \link{data.frame}.}
 
 \item{variables}{a character string (or vector) specifying one or more
-variables scale is applied to. If unspecified, \code{scale_within} will be
-applied to all variables in data.}
+variables that \link{scale} is applied to. If unspecified,
+\code{scale_within} will be applied to all variables in data.}
 
 \item{within}{a character string specifying the name of one or more variables
-in \code{data}. For each of the levels of this variable (or for each 
-combination of levels, if more than one variable is specified), 
-\link{scale} is applied separately. Alternatively, a vector directly 
+in \code{data}. For each of the levels of this variable (or for each
+combination of levels, if more than one variable is specified),
+\link{scale} is applied separately. Alternatively, a vector directly
 containing the level values.}
 
 \item{prefix}{a character string that is inserted before each scaled
@@ -32,11 +32,11 @@ The original data.frame including the centered and / or scaled
   variables.
 }
 \description{
-\code{scale_within} centers and/or scales variables in a data.frame (using 
-\link{scale}) depending on the levels of another variable (or several 
-variables). By default, variables are standardized (i.e., centered and 
-scaled). A typical application is the within-subject standardization of 
-variables in a repeated measures design.
+\code{scale_within} centers and/or scales variables in a data.frame (using
+\link{scale}) depending on the levels of one or more other variables By
+default, variables are standardized (i.e., centered and scaled). A typical
+application is the within-subject standardization of variables in a repeated
+measures design.
 }
 \examples{
 ChickWeight_scaled <-  scale_within(

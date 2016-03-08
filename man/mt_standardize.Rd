@@ -2,13 +2,13 @@
 % Please edit documentation in R/standardize.R
 \name{mt_standardize}
 \alias{mt_standardize}
-\title{Standardize mouse-tracking measures per level of another variable.}
+\title{Standardize mouse-tracking measures per level of other variables.}
 \usage{
 mt_standardize(data, use = "measures", use_variables = NULL,
   within = "subject_nr", prefix = "z_", center = TRUE, scale = TRUE)
 }
 \arguments{
-\item{data}{a mousetrap data object created using one of the mt_import 
+\item{data}{a mousetrap data object created using one of the mt_import
 functions (see \link{mt_example} for details).}
 
 \item{use}{a character string specifying which data should be used. By
@@ -18,10 +18,10 @@ default points to the \code{measures} data.frame created using
 \item{use_variables}{a vector specifying which variables should be
 standardized. If unspecified, all variables will be standardized.}
 
-\item{within}{a character string specifying one or more variables in 
-\code{data[["data"]]}. All measures will be standardized separately for 
+\item{within}{a character string specifying one or more variables in
+\code{data[["data"]]}. All measures will be standardized separately for
 each level of the variable (or for each combination of levels, if more than
-one variable is specified). By default, points to the subject identifier 
+one variable is specified). By default, points to the subject identifier
 used in OpenSesame ("subject_nr").}
 
 \item{prefix}{a character string that is inserted before each standardized
@@ -37,10 +37,10 @@ A mousetrap data object (see \link{mt_example})
 including the standardized measures.
 }
 \description{
-Standardize selected mouse-tracking measures per level of another variable 
-(or several variables) and store them in new variables. This function is a 
-thin wrapper around \link{scale_within}, but focussed on mouse-tracking data 
-stored in a mousetrap data object.
+Standardize selected mouse-tracking measures per level of one or more other
+variable, and store them in new variables. This function is a thin wrapper
+around \link{scale_within}, focussed on mouse-tracking data stored in a
+mousetrap data object.
 }
 \examples{
 mt_example <- mt_calculate_measures(mt_example)
@@ -53,7 +53,7 @@ mt_example <- mt_standardize(mt_example,
 # Standardize MAD and AD per subject and Condition
 mt_example <- mt_standardize(mt_example,
   use_variables=c("MAD", "AD"),
-  within=c("subject_nr","Condition"),
+  within=c("subject_nr", "Condition"),
   prefix="z_")
 }
 \seealso{
