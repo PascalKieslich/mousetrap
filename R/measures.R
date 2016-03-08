@@ -24,23 +24,6 @@
 #' calculated using the \link[pracma]{polyarea} function from the pracma
 #' package.
 #' 
-#' The \code{IMA} is based on the \strong{initial movement angle} used by Buetti
-#' and Kerzel (2009). In their experiment, actual hand movements were recorded 
-#' and the \code{IMA} was the angle between the position of the hand and the 
-#' axis running through the correct response location at a specific point in 
-#' time (in the original study, one fifth of the trial). Adapting this to the 
-#' mouse-tracking setup, the \code{IMA} is the angle between the idealized
-#' response trajectory (straight line) and the movement from the starting point
-#' in the trial to the position of the mouse at the specified percentile. If
-#' this position is above the idealized response trajectory, the angle has a
-#' positive value. If it is below the idealized response trajectory, the angle
-#' has a negative value.
-#' 
-#' The \code{IMA} is calculated for a specific percentile of the trial, which
-#' has to be specified explicitly using \code{ima_percentile} (e.g., 
-#' \code{ima_percentile=0.20} to correspond to the study by Buetti and Kerzel, 
-#' 2009).
-#' 
 #' 
 #' @param data a mousetrap data object created using one of the mt_import 
 #'   functions (see \link{mt_example} for details).
@@ -51,8 +34,6 @@
 #' @param flip_threshold a numeric value specifying the distance that needs to 
 #'   be exceeded in one direction so that a change in direction counts as an x- 
 #'   or y-flip.
-#' @param ima_percentile a decimal value. If specified, the initial movement 
-#'   angle at the respective percentile will be calculated.
 #' @param show_progress logical indicating whether function should report its 
 #'   progress.
 #'   
@@ -63,12 +44,11 @@
 #'   by default identified in the column \link{mt_id}). Each column in the
 #'   data.frame corresponds to one of the measures.
 #'   
-#'   Note that some of the measures will only be returned if specific arguments 
-#'   are provided (e.g., \code{ima_percentile}). Besides, some measures are only
-#'   returned if distance, velocity and acceleration are calculated using 
-#'   \link{mt_calculate_derivatives} before running
-#'   \code{mt_calculate_measures}. Besides, the meaning of these measures
-#'   depends on the values of the arguments in \link{mt_calculate_derivatives}.
+#'   Note that some measures are only returned if distance, velocity and
+#'   acceleration are calculated using \link{mt_calculate_derivatives} before
+#'   running \code{mt_calculate_measures}. Besides, the meaning of these
+#'   measures depends on the values of the arguments in
+#'   \link{mt_calculate_derivatives}.
 #'   
 #'   The following measures are computed for each trajectory: 
 #'   \item{\link{mt_id}}{Trial ID (can be used for merging measures data.frame 
@@ -109,18 +89,8 @@
 #'   \item{acc_max_time}{Time at which maximum acceleration occurred first}
 #'   \item{acc_min}{Minimum acceleration} 
 #'   \item{acc_min_time}{Time where minimum acceleration occurred first} 
-#'   \item{IMA}{Initial movement angle at specified percentile (see Details)} 
-#'   \item{IMA_time}{Time of the specified percentile for the initial movement 
-#'   angle}
-#'   \item{IMD}{Deviation from direct path at the specified percentile for the
-#'   initial movement angle}
 #'   
 #' @references Mousetrap
-#'   
-#'   Buetti, S., & Kerzel, D. (2009). Conflicts during response selection affect
-#'   response programming: Reactions toward the source of stimulation. 
-#'   \emph{Journal of Experimental Psychology: Human Perception and Performance,
-#'   35}(3), 816-834.
 #'   
 #'   Freeman, J. B., & Ambady, N. (2010). MouseTracker: Software for studying 
 #'   real-time mental processing using a computer mouse-tracking method. 
@@ -129,6 +99,8 @@
 #'   
 #'   
 #' @seealso \link{mt_sample_entropy} for calculating sample entropy.
+#' 
+#' \link{mt_movement_angle} for calculating the initial movement angle.
 #' 
 #' \link{mt_standardize} for standardizing the measures per subject.
 #' 
@@ -156,7 +128,6 @@
 mt_calculate_measures <- function(data,
                                   use="trajectories",save_as="measures",
                                   flip_threshold=0,
-                                  ima_percentile = NULL,
                                   show_progress=TRUE) {
 
   # Prepare data
@@ -191,7 +162,7 @@ mt_calculate_measures <- function(data,
         "Trajectories detected where first timestamp is greater than 0. ",
         "Assuming period without movement starting at timestamp 0."
       )
-      # only affects: AD, IMA, and _time variables
+      # only affects _time variables
     } else if (min(trajectories[,timestamps,1]) < 0) {
       stop(
         "Trajectories detected where first timestamp is smaller than 0. ",
@@ -227,12 +198,6 @@ mt_calculate_measures <- function(data,
   if (acc %in% dimnames(trajectories)[[2]] & timestamps %in% dimnames(trajectories)[[2]]) {
     mt_measures <- c(mt_measures, 
       "acc_max", "acc_max_time", "acc_min", "acc_min_time")
-  }
-  
-  # Add IMAs if requested and timestamps are present
-  if (timestamps %in% dimnames(trajectories)[[2]] &
-    is.null(ima_percentile)==FALSE) {
-    mt_measures <- c(mt_measures, "IMA", "IMA_time", "IMD")
   }
   
   # Create empty matrix for measures
@@ -378,71 +343,6 @@ mt_calculate_measures <- function(data,
       measures[i,"MD_above_time"] <- current_timestamps[which.max(deviation)]
       measures[i,"MD_below_time"] <- current_timestamps[which.min(deviation)]
       
-      # IMA (computed only if the percentile has been specified)
-      if (is.null(ima_percentile) == FALSE){
-        
-        # Look at 3 points (start point, ima_point (interpolated), end point)
-        # First, calculate the timestamp for each of these points.
-        ima_timestamps <- c(
-          current_timestamps[1],
-          ima_percentile * current_timestamps[nlogs[i]],
-          current_timestamps[nlogs[i]]
-        )
-        
-        # Second, interpolate the positions at each of these timestamps
-        # and build a matrix of these
-        ima_points <- rbind(
-          approx(current_timestamps, current_xpos, xout=ima_timestamps)$y,
-          approx(current_timestamps, current_ypos, xout=ima_timestamps)$y
-        )
-        
-        row.names(ima_points) <- c(xpos, ypos)
-        
-        # Calculate initial movement angle (IMA, cf. Buetti & Kerzel, 2009, Fig. 1)
-        # originally: angle between position of hand after one fifth of trajectory had been
-        #             traversed and axis running through correct response location.
-        # here: Angle between the position of the mouse and the idealized response trajectory
-        # depends on MD and the length of the idealized response trajectory,
-        # where MD intersects it (called b here)
-        ima_straight_line <- points_on_ideal(ima_points)
-        imd <- sqrt(sum((ima_straight_line[,2]-ima_points[,2])^2))
-        
-        # Flip sign if point is below the ideal line
-        if (end_above_start){
-          if (ima_points[ypos,2]<ima_straight_line[ypos,2]){
-            imd <- (-imd)
-          }
-        } else {
-          if (ima_points[ypos,2]>ima_straight_line[ypos,2]){
-            imd <- (-imd)
-          }
-        }
-        
-        # Calculate the distance between the point on the ideal line and the start point
-        b <- sqrt(sum((ima_straight_line[,2]-ima_points[,1])^2))
-        
-        # Flip sign if point on ideal line is below the start point
-        if (end_above_start){
-          if (ima_straight_line[ypos,2]<ima_points[ypos,1]){
-            b <- (-b)
-          } 
-        } else {
-          if (ima_straight_line[ypos,2]>ima_points[ypos,1]){
-            b <- (-b)
-          }
-        }
-         
-        
-        # Use trigonometry to determine the angle between the ideal
-        # line and the actual observed trajectory.
-        # If distance from start position is 0, IMA is 0
-        ima <- ifelse(b == 0, 0, atan2(imd,b) * 180/pi)
-        
-        # the value of the ima_point (second point in vector) is of interest
-        measures[i,"IMA"] <- ima
-        measures[i,"IMA_time"] <- ima_timestamps[2]
-        measures[i,"IMD"] <- imd
-      }
     }
     
     # Compute total distance covered

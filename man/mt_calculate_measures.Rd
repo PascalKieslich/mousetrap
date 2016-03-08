@@ -5,7 +5,7 @@
 \title{Calculate mouse-tracking measures.}
 \usage{
 mt_calculate_measures(data, use = "trajectories", save_as = "measures",
-  flip_threshold = 0, ima_percentile = NULL, show_progress = TRUE)
+  flip_threshold = 0, show_progress = TRUE)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
@@ -21,9 +21,6 @@ should be stored.}
 be exceeded in one direction so that a change in direction counts as an x- 
 or y-flip.}
 
-\item{ima_percentile}{a decimal value. If specified, the initial movement 
-angle at the respective percentile will be calculated.}
-
 \item{show_progress}{logical indicating whether function should report its 
 progress.}
 }
@@ -35,12 +32,11 @@ A mousetrap data object (see \link{mt_example}) where an
   by default identified in the column \link{mt_id}). Each column in the
   data.frame corresponds to one of the measures.
   
-  Note that some of the measures will only be returned if specific arguments 
-  are provided (e.g., \code{ima_percentile}). Besides, some measures are only
-  returned if distance, velocity and acceleration are calculated using 
-  \link{mt_calculate_derivatives} before running
-  \code{mt_calculate_measures}. Besides, the meaning of these measures
-  depends on the values of the arguments in \link{mt_calculate_derivatives}.
+  Note that some measures are only returned if distance, velocity and
+  acceleration are calculated using \link{mt_calculate_derivatives} before
+  running \code{mt_calculate_measures}. Besides, the meaning of these
+  measures depends on the values of the arguments in
+  \link{mt_calculate_derivatives}.
   
   The following measures are computed for each trajectory: 
   \item{\link{mt_id}}{Trial ID (can be used for merging measures data.frame 
@@ -80,12 +76,7 @@ A mousetrap data object (see \link{mt_example}) where an
   \item{acc_max}{Maximum acceleration}
   \item{acc_max_time}{Time at which maximum acceleration occurred first}
   \item{acc_min}{Minimum acceleration} 
-  \item{acc_min_time}{Time where minimum acceleration occurred first} 
-  \item{IMA}{Initial movement angle at specified percentile (see Details)} 
-  \item{IMA_time}{Time of the specified percentile for the initial movement 
-  angle}
-  \item{IMD}{Deviation from direct path at the specified percentile for the
-  initial movement angle}
+  \item{acc_min_time}{Time where minimum acceleration occurred first}
 }
 \description{
 Calculate a number of mouse-tracking measures for each trajectory.
@@ -112,23 +103,6 @@ area between the actual trajectory and the direct path. Areas above the
 direct path are added and areas below are subtracted. The \code{AUC} is
 calculated using the \link[pracma]{polyarea} function from the pracma
 package.
-
-The \code{IMA} is based on the \strong{initial movement angle} used by Buetti
-and Kerzel (2009). In their experiment, actual hand movements were recorded 
-and the \code{IMA} was the angle between the position of the hand and the 
-axis running through the correct response location at a specific point in 
-time (in the original study, one fifth of the trial). Adapting this to the 
-mouse-tracking setup, the \code{IMA} is the angle between the idealized
-response trajectory (straight line) and the movement from the starting point
-in the trial to the position of the mouse at the specified percentile. If
-this position is above the idealized response trajectory, the angle has a
-positive value. If it is below the idealized response trajectory, the angle
-has a negative value.
-
-The \code{IMA} is calculated for a specific percentile of the trial, which
-has to be specified explicitly using \code{ima_percentile} (e.g., 
-\code{ima_percentile=0.20} to correspond to the study by Buetti and Kerzel, 
-2009).
 }
 \examples{
 mt_example <- mt_calculate_derivatives(mt_example)
@@ -146,17 +120,14 @@ mt_example_results <- merge(
 \references{
 Mousetrap
   
-  Buetti, S., & Kerzel, D. (2009). Conflicts during response selection affect
-  response programming: Reactions toward the source of stimulation. 
-  \emph{Journal of Experimental Psychology: Human Perception and Performance,
-  35}(3), 816-834.
-  
   Freeman, J. B., & Ambady, N. (2010). MouseTracker: Software for studying 
   real-time mental processing using a computer mouse-tracking method. 
   \emph{Behavior Research Methods, 42}(1), 226-241.
 }
 \seealso{
 \link{mt_sample_entropy} for calculating sample entropy.
+
+\link{mt_movement_angle} for calculating the initial movement angle.
 
 \link{mt_standardize} for standardizing the measures per subject.
 
