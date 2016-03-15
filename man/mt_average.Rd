@@ -2,10 +2,11 @@
 % Please edit documentation in R/preprocess.R
 \name{mt_average}
 \alias{mt_average}
-\title{Average trajectories across constant time intervals.}
+\title{Average trajectories across intervals.}
 \usage{
 mt_average(data, use = "trajectories", save_as = "av_trajectories",
-  interval_size = 100, max_time = NULL, show_progress = TRUE)
+  dimension = "timestamps", intervals = NULL, interval_size = 100,
+  max_interval = NULL, show_progress = TRUE)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
@@ -17,60 +18,75 @@ used.}
 \item{save_as}{a character string specifying where the resulting trajectory 
 data should be stored.}
 
-\item{interval_size}{an integer specifying the size of the constant time 
-interval. The unit corresponds to the unit of the timestamps.}
+\item{dimension}{a character string specifying which values should be used
+for determining the intervals for averaging ("timestamps" by default).}
 
-\item{max_time}{an integer specifying the upper time limit of the last time 
-interval that should be included (therefore, it should be a multiple of the
-\code{interval_size}). If specified, only values will be used for averaging
-where the timestamps are smaller than \code{max_time}. If unspecified (the
-default), all values will be included.}
+\item{intervals}{an optional numeric vector. If specified, these values are 
+taken as the borders of the intervals (\code{interval_size} and 
+\code{max_interval} are ignored).}
+
+\item{interval_size}{an integer specifying the size of the constant dimension
+interval.}
+
+\item{max_interval}{an integer specifying the upper limit of the last
+dimension value that should be included (therefore, it should be a multiple
+of the \code{interval_size}). If specified, only values will be used for
+averaging where the dimension values are smaller than \code{max_interval}.
+If unspecified (the default), all values will be included.}
 
 \item{show_progress}{logical indicating whether function should report its 
 progress.}
 }
 \value{
-A mousetrap data object (see \link{mt_example}) with an additional
-  array (by default called \code{av_trajectories}) that contains the average
-  trajectory data per time interval.
+A mousetrap data object (see \link{mt_example}) with an additional 
+  array (by default called \code{av_trajectories}) that contains the average 
+  trajectory data per dimension interval.
   
-  For the timestamps, the mid point of the respective time interval is 
+  For the dimension values, the mid point of the respective interval is 
   reported, which is helpful for plotting the trajectory data later on. 
   However, this value does not necessarily correspond to the empirical mean 
-  of the timestamps in the interval.
+  of the dimension values in the interval.
 }
 \description{
-Average trajectory data across constant time intervals. For every variable 
-that was recorded and stored in the trajectory array (x- and y-position, 
-possibly also velocity and acceleration etc.), the mean value for the 
-respective time interval is calculated (see Details for information regarding
-the exact averaging procedure).
+Average trajectory data across specified intervals (e.g., constant time
+intervals). For every variable that was recorded and stored in the trajectory
+array (x- and y-position, possibly also velocity and acceleration etc.), the
+mean value for the respective interval is calculated (see Details for
+information regarding the exact averaging procedure).
 }
 \details{
-For each time interval, it is first determined which of the timestamps lie 
-within the respective time interval. Intervals are left-open, right-closed 
-(e.g., a timestamp of 1200 would be included in the interval 1100-1200 while 
-a timestamp of 1300 would be included in the interval 1200-1300). Then, all 
-values for which the corresponding timestamps lie within the interval are 
-averaged.
+For each interval, it is first determined which of the values lie within the
+respective interval of the dimension used for averaging (e.g., timestamps).
+Intervals are left-open, right-closed (e.g., if values are averaged across
+constant timestamps of 100 ms, a timestamp of 1200 would be included in the
+interval 1100-1200 while a timestamp of 1300 would be included in the
+interval 1200-1300). Then, all values for which the corresponding average
+dimension values lie within the interval are averaged.
 
-In case the last interval is not fully covered by the timestamps (e.g., if 
+In case the last interval is not fully covered (e.g., if 
 the last timestamp has the value 1250), values for the corresponding interval
 (1200-1300) will be computed based on the average of the values up to the 
-last timestamp.
+last existing value.
 
 If average velocity and acceleration are of interest, 
 \link{mt_calculate_derivatives} should be called before averaging.
 }
 \examples{
 mt_example <- mt_calculate_derivatives(mt_example)
+
+# average trajectories across 100 ms intervals
 mt_example <- mt_average(mt_example, save_as="av_trajectories",
   interval_size=100)
+  
+# average time-normalized trajectories across specific intervals
+mt_example <- mt_time_normalize(mt_example)
+mt_example <- mt_average(mt_example, use="tn_trajectories",
+  save_as="av_tn_trajectories",intervals = c(0.5,33.5,67.5,101.5))
 
 }
 \seealso{
 \link{mt_calculate_derivatives} for calculating velocity and 
-acceleration.
+  acceleration.
 
 \link{mt_downsample} for resampling trajectories using a constant time 
 interval.

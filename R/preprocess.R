@@ -551,25 +551,26 @@ mt_downsample <- function(data,
   return(data)
 }
 
-#' Average trajectories across constant time intervals.
+#' Average trajectories across intervals.
 #' 
-#' Average trajectory data across constant time intervals. For every variable 
-#' that was recorded and stored in the trajectory array (x- and y-position, 
-#' possibly also velocity and acceleration etc.), the mean value for the 
-#' respective time interval is calculated (see Details for information regarding
-#' the exact averaging procedure).
+#' Average trajectory data across specified intervals (e.g., constant time
+#' intervals). For every variable that was recorded and stored in the trajectory
+#' array (x- and y-position, possibly also velocity and acceleration etc.), the
+#' mean value for the respective interval is calculated (see Details for
+#' information regarding the exact averaging procedure).
 #' 
-#' For each time interval, it is first determined which of the timestamps lie 
-#' within the respective time interval. Intervals are left-open, right-closed 
-#' (e.g., a timestamp of 1200 would be included in the interval 1100-1200 while 
-#' a timestamp of 1300 would be included in the interval 1200-1300). Then, all 
-#' values for which the corresponding timestamps lie within the interval are 
-#' averaged.
+#' For each interval, it is first determined which of the values lie within the
+#' respective interval of the dimension used for averaging (e.g., timestamps).
+#' Intervals are left-open, right-closed (e.g., if values are averaged across
+#' constant timestamps of 100 ms, a timestamp of 1200 would be included in the
+#' interval 1100-1200 while a timestamp of 1300 would be included in the
+#' interval 1200-1300). Then, all values for which the corresponding average
+#' dimension values lie within the interval are averaged.
 #' 
-#' In case the last interval is not fully covered by the timestamps (e.g., if 
+#' In case the last interval is not fully covered (e.g., if 
 #' the last timestamp has the value 1250), values for the corresponding interval
 #' (1200-1300) will be computed based on the average of the values up to the 
-#' last timestamp.
+#' last existing value.
 #' 
 #' If average velocity and acceleration are of interest, 
 #' \link{mt_calculate_derivatives} should be called before averaging.
@@ -580,64 +581,88 @@ mt_downsample <- function(data,
 #'   used.
 #' @param save_as a character string specifying where the resulting trajectory 
 #'   data should be stored.
-#' @param interval_size an integer specifying the size of the constant time 
-#'   interval. The unit corresponds to the unit of the timestamps.
-#' @param max_time an integer specifying the upper time limit of the last time 
-#'   interval that should be included (therefore, it should be a multiple of the
-#'   \code{interval_size}). If specified, only values will be used for averaging
-#'   where the timestamps are smaller than \code{max_time}. If unspecified (the
-#'   default), all values will be included.
+#' @param dimension a character string specifying which values should be used
+#'   for determining the intervals for averaging ("timestamps" by default).
+#' @param intervals an optional numeric vector. If specified, these values are 
+#'   taken as the borders of the intervals (\code{interval_size} and 
+#'   \code{max_interval} are ignored).
+#' @param interval_size an integer specifying the size of the constant dimension
+#'   interval.
+#' @param max_interval an integer specifying the upper limit of the last
+#'   dimension value that should be included (therefore, it should be a multiple
+#'   of the \code{interval_size}). If specified, only values will be used for
+#'   averaging where the dimension values are smaller than \code{max_interval}.
+#'   If unspecified (the default), all values will be included.
 #' @param show_progress logical indicating whether function should report its 
 #'   progress.
 #'   
-#' @return A mousetrap data object (see \link{mt_example}) with an additional
-#'   array (by default called \code{av_trajectories}) that contains the average
-#'   trajectory data per time interval.
+#' @return A mousetrap data object (see \link{mt_example}) with an additional 
+#'   array (by default called \code{av_trajectories}) that contains the average 
+#'   trajectory data per dimension interval.
 #'   
-#'   For the timestamps, the mid point of the respective time interval is 
+#'   For the dimension values, the mid point of the respective interval is 
 #'   reported, which is helpful for plotting the trajectory data later on. 
 #'   However, this value does not necessarily correspond to the empirical mean 
-#'   of the timestamps in the interval.
+#'   of the dimension values in the interval.
 #'   
 #' @seealso \link{mt_calculate_derivatives} for calculating velocity and 
-#' acceleration.
+#'   acceleration.
 #' 
 #' \link{mt_downsample} for resampling trajectories using a constant time 
 #' interval.
 #' 
 #' @examples
 #' mt_example <- mt_calculate_derivatives(mt_example)
+#' 
+#' # average trajectories across 100 ms intervals
 #' mt_example <- mt_average(mt_example, save_as="av_trajectories",
 #'   interval_size=100)
+#'   
+#' # average time-normalized trajectories across specific intervals
+#' mt_example <- mt_time_normalize(mt_example)
+#' mt_example <- mt_average(mt_example, use="tn_trajectories",
+#'   save_as="av_tn_trajectories",intervals = c(0.5,33.5,67.5,101.5))
 #' 
 #' @export
 mt_average <- function(data,
   use="trajectories", save_as="av_trajectories",
-  interval_size=100, max_time=NULL,
+  dimension="timestamps", intervals=NULL,
+  interval_size=100, max_interval=NULL,
   show_progress=TRUE) {
   
   trajectories <- extract_data(data=data,use=use)
-  timestamps <- mt_variable_labels["timestamps"]
-  
-  # Compute the maximum number of possible intervals
-  if (is.null(max_time)){
-    # Determine this number automatically based on
-    # the given interval size
-    max_intervals <- ceiling(
-      max(trajectories[,timestamps,], na.rm=TRUE) / interval_size
-    )
-  } else {
-    # If trajectories are truncated at max_time,
-    # calculate the number of steps up to this point
-    if(max_time %% interval_size != 0){
-      warning("max_time is not a multiple of interval_size.")
-    }
-    max_intervals <- ceiling(max_time / interval_size)
+  if (!dimension %in% dimnames(trajectories)[[2]]){
+    stop("Dimesion '",dimension,"' not found in trajectory array.")
   }
+  
+  
+  if (is.null(intervals)) {
+    
+    # Compute the maximum number of possible intervals
+    if (is.null(max_interval)){
+      # Determine this number automatically based on
+      # the given interval size
+      max_n_intervals <- ceiling(
+        max(trajectories[,dimension,], na.rm=TRUE) / interval_size
+      )
+    } else {
+      # If trajectories are truncated at max_interval,
+      # calculate the number of steps up to this point
+      if(max_interval %% interval_size != 0){
+        warning("max_interval is not a multiple of interval_size.")
+      }
+      max_n_intervals <- ceiling(max_interval / interval_size)
+    }
+    
+  } else {
+    max_n_intervals <- length(intervals)-1
+    max_interval <- intervals[length(intervals)]
+  }
+  
   
   # Create an empty output array
   av_trajectories <- array(
-    dim=c(nrow(trajectories), ncol(trajectories), max_intervals),
+    dim=c(nrow(trajectories), ncol(trajectories), max_n_intervals),
     dimnames=list(
       dimnames(trajectories)[[1]],
       dimnames(trajectories)[[2]],
@@ -646,9 +671,9 @@ mt_average <- function(data,
   )
   
   # Check if there are trajectories where first timestamp is > 0:
-  if (max(trajectories[,timestamps,1]) > 0){
-    stop(
-      "Trajectories detected where first timestamp ",
+  if (is.null(intervals) & max(trajectories[,dimension,1]) > 0){
+    warning(
+      "Trajectories detected where first ",dimension," value ",
       "is greater than 0. Please check the trajectory data."
     )  
   }
@@ -656,33 +681,45 @@ mt_average <- function(data,
   
   for (i in 1:nrow(trajectories)){
     
-    current_timestamps <- trajectories[i,timestamps,]
-    nlogs <- sum(!is.na(current_timestamps))
-    current_timestamps <- current_timestamps[1:nlogs]
+    current_av_values <- trajectories[i,dimension,]
+    nlogs <- sum(!is.na(current_av_values))
+    current_av_values <- current_av_values[1:nlogs]
     
-    if(!is.null(max_time)){
-      # In case an upper time limit is set
-      # only keep timestamps up to the maximum time.
-      if (current_timestamps[nlogs]>max_time){
-        nlogs <- sum(current_timestamps<=max_time)
-        current_timestamps <- current_timestamps[1:nlogs]
+    if(!is.null(max_interval)){
+      # In case an upper interval limit is set
+      # only keep values up to the maximum interval
+      if (current_av_values[nlogs]>max_interval){
+        nlogs <- sum(current_av_values<=max_interval)
+        current_av_values <- current_av_values[1:nlogs]
       }
     }
     
-    # subtract small number from upper border as intervals are right-closed
-    lower_borders <- seq(0, current_timestamps[nlogs]-1e-6, interval_size)
+    # Set lower borders
+    if (is.null(intervals)){
+      # Subtract small number from last value as intervals are right-closed
+      lower_borders <- seq(0, current_av_values[nlogs]-1e-6, interval_size)
+    } else {
+      lower_borders <- intervals[-length(intervals)]
+    }
+    
+    
     nintervals <- length(lower_borders)
-    av_trajectories[i,timestamps,1:nintervals] <- lower_borders + interval_size / 2
+    
+    if (is.null(intervals)){
+      av_trajectories[i,dimension,1:nintervals] <- lower_borders + interval_size / 2
+    } else {
+      av_trajectories[i,dimension,1:nintervals] <- intervals[1:nintervals]+diff(intervals[1:(nintervals+1)])/2
+    }
     
     for (var in colnames(trajectories)){
       
-      # Manipulate any variable except for timestamps
-      if (var != timestamps){
+      # Manipulate any variable except for dimension
+      if (var != dimension){
         current_measures <- trajectories[i, var, 1:nlogs]
         
         # Perform averaging
         av_measures <- sapply(lower_borders, function(lb){
-          in_interval <- current_timestamps > lb & current_timestamps <= (lb + interval_size)
+          in_interval <- current_av_values > lb & current_av_values <= (lb + interval_size)
           return(mean(current_measures[in_interval], na.rm=TRUE))
         })
         
