@@ -63,7 +63,7 @@ Spivey, M. J., Grosjean, M., & Knoblich, G. (2005). Continuous
 \link{approx} for information about the function used for linear
 interpolation.
 
-\link{mt_downsample} for resampling trajectories using a constant time
+\link{mt_resample} for resampling trajectories using a constant time
 interval.
 }
 

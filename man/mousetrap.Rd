@@ -48,7 +48,7 @@ following, a brief overview of the functions in this package is given.
   \link{mt_time_normalize}	performs time-normalization, resulting in an
   identical number of samples for all trajectories.
   
-  \link{mt_downsample}	resamples trajectories such that samples occur at
+  \link{mt_resample}	resamples trajectories such that samples occur at
   constant intervals of a specified length.
   
   \link{mt_average} averages trajectory coordinates for time bins of constant

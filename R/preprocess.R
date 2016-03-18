@@ -349,7 +349,7 @@ mt_space_normalize <- function(data,
 #' @seealso \link{approx} for information about the function used for linear
 #' interpolation.
 #' 
-#' \link{mt_downsample} for resampling trajectories using a constant time
+#' \link{mt_resample} for resampling trajectories using a constant time
 #' interval.
 #' 
 #' @examples
@@ -450,7 +450,7 @@ mt_time_normalize <- function(data,
 #'   progress.
 #'   
 #' @return A mousetrap data object (see \link{mt_example}) with an additional
-#'   array (by default called \code{ds_trajectories}) containing the downsampled
+#'   array (by default called \code{ds_trajectories}) containing the resampled
 #'   trajectories.
 #'   
 #' @seealso \link{approx} for information about the function used for linear
@@ -461,12 +461,12 @@ mt_time_normalize <- function(data,
 #' \link{mt_time_normalize} for time-normalizing trajectories.
 #' 
 #' @examples
-#' mt_example <- mt_downsample(mt_example,
+#' mt_example <- mt_resample(mt_example,
 #'   save_as="ds_trajectories",
 #'   step_size=50)
 #'   
 #' @export
-mt_downsample <- function(data,
+mt_resample <- function(data,
   use="trajectories", save_as="ds_trajectories",
   step_size=10, exact_last_timestamp=TRUE,
   show_progress=TRUE) {
@@ -608,7 +608,7 @@ mt_downsample <- function(data,
 #' @seealso \link{mt_calculate_derivatives} for calculating velocity and 
 #'   acceleration.
 #' 
-#' \link{mt_downsample} for resampling trajectories using a constant time 
+#' \link{mt_resample} for resampling trajectories using a constant time 
 #' interval.
 #' 
 #' @examples

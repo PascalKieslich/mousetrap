@@ -90,7 +90,7 @@ mt_example <- mt_average(mt_example,
 \link{mt_calculate_derivatives} for calculating velocity and 
   acceleration.
 
-\link{mt_downsample} for resampling trajectories using a constant time 
+\link{mt_resample} for resampling trajectories using a constant time 
 interval.
 }
 
