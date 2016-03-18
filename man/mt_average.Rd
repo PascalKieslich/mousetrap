@@ -68,6 +68,12 @@ the last timestamp has the value 1250), values for the corresponding interval
 (1200-1300) will be computed based on the average of the values up to the 
 last existing value.
 
+Note that \code{mt_average} assumes that the trajectory variables are 
+recorded with a constant sampling rate (i.e., with a constant difference in 
+the timestamps). If the sampling rate varies considerably, \link{mt_resample}
+should be called before averaging to arrive at equally spaced timestamps. The
+sampling rate can be investigated using \link{mt_check_resolution}.
+
 If average velocity and acceleration are of interest, 
 \link{mt_calculate_derivatives} should be called before averaging.
 }
