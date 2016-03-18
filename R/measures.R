@@ -124,12 +124,11 @@
 #'   
 #' @export
 mt_calculate_measures <- function(data,
-                                  use="trajectories",save_as="measures",
-                                  flip_threshold=0,
-                                  show_progress=TRUE) {
+  use="trajectories", save_as="measures",
+  flip_threshold=0, show_progress=TRUE) {
 
   # Prepare data
-  trajectories <- extract_data(data=data,use=use)
+  trajectories <- extract_data(data=data, use=use)
   timestamps <- mt_variable_labels["timestamps"]
   xpos <- mt_variable_labels["xpos"]
   ypos <- mt_variable_labels["ypos"]
@@ -139,10 +138,9 @@ mt_calculate_measures <- function(data,
 
   # Calculate number of logs
   nlogs <- rowSums(!is.na(trajectories[,xpos,,drop=FALSE]))
-  
+
   # Setup variable matrix depending on whether timestamps are provided or not
-  if (timestamps %in% dimnames(trajectories)[[2]]){
-    
+  if (timestamps %in% dimnames(trajectories)[[2]]) {
     mt_measures <- c(
       "x_max", "x_min", "y_max", "y_min",
       "MAD", "MAD_time",
@@ -201,7 +199,7 @@ mt_calculate_measures <- function(data,
   # Create empty matrix for measures
   # (trajectories in rows, measures in columns)
   measures <- matrix(data=NA,
-    nrow = nrow(trajectories), 
+    nrow=nrow(trajectories), 
     ncol=length(mt_measures),
     dimnames = list(
       row.names(trajectories),
@@ -210,8 +208,8 @@ mt_calculate_measures <- function(data,
   )
   
   # Iterate over trajectories and calculate measures
-  for (i in 1:nrow(trajectories)){
-    
+  for (i in 1:nrow(trajectories)) {
+
     current_points <- trajectories[i, c(xpos,ypos), 1:nlogs[i]]
     current_xpos <- trajectories[i, xpos, 1:nlogs[i]]
     current_ypos <- trajectories[i, ypos, 1:nlogs[i]]
@@ -229,15 +227,14 @@ mt_calculate_measures <- function(data,
     end_above_start <- current_ypos[length(current_ypos)] >= current_ypos[1]
     
     # Flip deviation for points under the idealized straight line
-    if (end_above_start){
+    if (end_above_start) {
       deviation[straight_line_ypos > current_ypos] <- 
         -deviation[straight_line_ypos > current_ypos]
     } else {
       deviation[straight_line_ypos < current_ypos] <- 
         -deviation[straight_line_ypos < current_ypos]
-      }
-    
-    
+    }
+
     # Calculate min and max values for x and y
     measures[i,"x_max"] <- max(current_xpos)
     measures[i,"x_min"] <- min(current_xpos)
@@ -287,7 +284,7 @@ mt_calculate_measures <- function(data,
     
     # Calculate x_reversals
     # number of crossings of the y-axis (ignoring points exactly on y axis)
-    yside <- current_xpos[current_xpos!=0]>0
+    yside <- current_xpos[current_xpos!=0] > 0
     measures[i,"x_reversals"] <- sum(abs(diff(yside)))
     
     # Calculate y_reversals
@@ -302,12 +299,12 @@ mt_calculate_measures <- function(data,
       current_timestamps <- trajectories[i,timestamps,1:nlogs[i]]
       
       # If first timestamp > 0, add another with 0 to indicate phase without movement
-      if (current_timestamps[1]>0){
-        current_timestamps <- c(0,current_timestamps)
-        current_xpos <- c(current_xpos[1],current_xpos)
-        current_ypos <- c(current_ypos[1],current_ypos)
-        deviation <- c(deviation[1],deviation)
-        nlogs[i] <- nlogs[i]+1
+      if (current_timestamps[1] > 0) {
+        current_timestamps <- c(0, current_timestamps)
+        current_xpos <- c(current_xpos[1], current_xpos)
+        current_ypos <- c(current_ypos[1], current_ypos)
+        deviation <- c(deviation[1], deviation)
+        nlogs[i] <- nlogs[i] + 1
       }
 
       measures[i,"RT"] <- max(current_timestamps)
@@ -316,21 +313,21 @@ mt_calculate_measures <- function(data,
       time_diffs <- diff(current_timestamps)
       # Indicate for each sample whether the position changed
       pos_constant <- (diff(current_xpos) == 0) & (diff(current_ypos) == 0)
-      
-      if (all(pos_constant == FALSE)){
+
+      if (all(pos_constant == FALSE)) {
         # Continuous movement
         measures[i,"initiation_time"] <- 0
         measures[i,"idle_time"] <- 0
-      } else if (all(pos_constant == TRUE)){
+      } else if (all(pos_constant == TRUE)) {
         # No movement at all
         measures[i,"initiation_time"] <- measures[i,"RT"]
         measures[i,"idle_time"] <- measures[i,"RT"]
-      } else{
+      } else {
         # Intermittent movement
         measures[i,"initiation_time"] <- ifelse(
           !pos_constant[1],
           0,
-          sum(time_diffs[1:(which(pos_constant==FALSE)[1]-1)])
+          sum(time_diffs[1:(which(pos_constant == FALSE)[1]-1)])
         )
         measures[i,"idle_time"] <- sum(time_diffs[pos_constant])
       }
@@ -344,13 +341,13 @@ mt_calculate_measures <- function(data,
     }
     
     # Compute total distance covered
-    if (dist %in% dimnames(trajectories)[[2]]){
+    if (dist %in% dimnames(trajectories)[[2]]) {
       measures[i,"xy_dist"] <- sum(abs(trajectories[i,dist,]), na.rm=TRUE)
     }
     
     # Velocity-based measures
-    if (vel %in% dimnames(trajectories)[[2]] & timestamps %in% dimnames(trajectories)[[2]]){
-      
+    if (vel %in% dimnames(trajectories)[[2]] & timestamps %in% dimnames(trajectories)[[2]]) {
+
       # Maximum velocity
       measures[i,"vel_max"] <- max(trajectories[i,vel,], na.rm=TRUE)
       vel_max_pos <- which.max(trajectories[i,vel,])
@@ -361,15 +358,18 @@ mt_calculate_measures <- function(data,
       measures[i,"vel_max_time"] <- mean(trajectories[i,timestamps,vel_max_pos])
       
       # Minimum velocity (which is treated analogously)
-      measures[i,"vel_min"] <- min(trajectories[i,vel,],na.rm = TRUE)
+      measures[i,"vel_min"] <- min(trajectories[i,vel,], na.rm=TRUE)
       vel_min_pos <- which.min(trajectories[i,vel,])
       
       # average timestamps (see mt_calculate_derivatives for logic of velocity timestamps)
-      vel_min_pos <- ifelse(vel_min_pos==1,1,c(vel_min_pos-1,vel_min_pos))
+      vel_min_pos <- ifelse(
+        vel_min_pos == 1,
+        1, c(vel_min_pos-1, vel_min_pos)
+      )
       measures[i,"vel_min_time"] <- mean(trajectories[i,timestamps,vel_min_pos])
     }
-    
-    if (acc %in% dimnames(trajectories)[[2]] & timestamps %in% dimnames(trajectories)[[2]]){
+
+    if (acc %in% dimnames(trajectories)[[2]] & timestamps %in% dimnames(trajectories)[[2]]) {
       # Maximum acceleration
       measures[i,"acc_max"] <- max(trajectories[i,acc,], na.rm=TRUE)
       measures[i,"acc_max_time"] <- trajectories[i,timestamps,which.max(trajectories[i,acc,])]
@@ -378,22 +378,22 @@ mt_calculate_measures <- function(data,
       measures[i,"acc_min"] <- min(trajectories[i,acc,], na.rm=TRUE)
       measures[i,"acc_min_time"] <- trajectories[i,timestamps,which.min(trajectories[i,acc,])]
     }
-    
-    if (show_progress){
-      if (i %% 100 == 0) message(paste(i, "trials completed"))
+
+    if (show_progress & i %% 100 == 0) {
+      message(paste(i, "trials completed"))
     }
   }
-  
-  if (show_progress){
-    message(paste("all",i,"trials completed"))
+
+  if (show_progress) {
+    message(paste("all", i, "trials completed"))
   }
   
   # Convert results to data.frame
   results <- data.frame(row.names(trajectories))
   colnames(results) <- mt_id
   rownames(results) <- results[,mt_id]
-  results <- cbind(results,data.frame(measures))
-  
+  results <- cbind(results, data.frame(measures))
+
   # Append results to data object
   data[[save_as]] <- results
   
