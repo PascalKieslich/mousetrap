@@ -232,7 +232,7 @@ mt_reshape <- function(data,
       custom_formula <- paste(c(mt_id, mt_seq, selected_variables[-1]), collapse="+")
     }
     
-    custom_formula <- as.formula(paste(custom_formula, "mt_variable", sep="~"))
+    custom_formula <- stats::as.formula(paste(custom_formula, "mt_variable", sep="~"))
     dataset <- reshape2::dcast(
       dataset,
       custom_formula,
@@ -261,7 +261,7 @@ mt_reshape <- function(data,
       # should only be performed within subjects
       if (aggregate_subjects_only) {
         custom_formula <- paste(c(subject_id, use2_variables, mt_seq), collapse="+")
-        custom_formula <- as.formula(paste(custom_formula, "mt_variable", sep="~"))
+        custom_formula <- stats::as.formula(paste(custom_formula, "mt_variable", sep="~"))
         dataset <- reshape2::dcast(dataset, 
           custom_formula,
           fun.aggregate=aggregation_function,
@@ -271,7 +271,7 @@ mt_reshape <- function(data,
       # ... or also across subjects afterwards
       } else {
         custom_formula <- paste(c(subject_id, use2_variables, mt_seq, "mt_variable"), collapse="+")
-        custom_formula <- as.formula(paste(custom_formula, ".", sep="~"))
+        custom_formula <- stats::as.formula(paste(custom_formula, ".", sep="~"))
         dataset <- reshape2::dcast(dataset,
           custom_formula,
           fun.aggregate=aggregation_function,
@@ -300,7 +300,7 @@ mt_reshape <- function(data,
       }
       
       # Perform aggregation
-      custom_formula <- as.formula(paste(custom_formula, "mt_variable", sep="~"))
+      custom_formula <- stats::as.formula(paste(custom_formula, "mt_variable", sep="~"))
       dataset <- reshape2::dcast(dataset,
         custom_formula,
         fun.aggregate=aggregation_function,
@@ -325,7 +325,7 @@ mt_reshape <- function(data,
     )
     custom_formula_rows <- paste(colnames(dataset)[!colnames(dataset) %in% c("mt_variable", "value", mt_seq)], collapse="+")
     custom_formula_cols <- paste(c("mt_variable", mt_seq), collapse="+")
-    custom_formula <- as.formula(paste(custom_formula_rows, custom_formula_cols, sep="~"))
+    custom_formula <- stats::as.formula(paste(custom_formula_rows, custom_formula_cols, sep="~"))
     dataset <- reshape2::dcast(dataset,
       custom_formula,
       fun.aggregate=aggregation_function,

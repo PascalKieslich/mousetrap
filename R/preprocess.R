@@ -346,8 +346,8 @@ mt_space_normalize <- function(data,
 #'   National Academy of Sciences of the United States of America, 102}(29),
 #'   10393-10398.
 #' 
-#' @seealso \link{approx} for information about the function used for linear
-#' interpolation.
+#' @seealso \link[stats]{approx} for information about the function used for
+#'   linear interpolation.
 #' 
 #' \link{mt_resample} for resampling trajectories using a constant time
 #' interval.
@@ -383,13 +383,13 @@ mt_time_normalize <- function(data,
     # for coordinates.
     
     # Timestamps
-    tn_trajectories[i,timestamps,] <- approx(
+    tn_trajectories[i,timestamps,] <- stats::approx(
       trajectories[i,timestamps,], trajectories[i,timestamps,], n=nsteps)$y
     
     # X and Y coordinates
-    tn_trajectories[i,xpos,] <- approx(
+    tn_trajectories[i,xpos,] <- stats::approx(
       trajectories[i,timestamps,], trajectories[i,xpos,], n=nsteps)$y
-    tn_trajectories[i,ypos,] <- approx(
+    tn_trajectories[i,ypos,] <- stats::approx(
       trajectories[i,timestamps,], trajectories[i,ypos,], n=nsteps)$y
     
     # Label steps as such
@@ -453,7 +453,7 @@ mt_time_normalize <- function(data,
 #'   array (by default called \code{rs_trajectories}) containing the resampled
 #'   trajectories.
 #'   
-#' @seealso \link{approx} for information about the function used for linear
+#' @seealso \link[stats]{approx} for information about the function used for linear
 #' interpolation.
 #' 
 #' \link{mt_average} for averaging trajectories across constant time intervals.
@@ -528,9 +528,9 @@ mt_resample <- function(data,
     }
       
     # Perform linear interpolation using custom steps
-    int_timestamps <- approx(current_timestamps, current_timestamps, xout=custom_timesteps)$y
-    int_xpos <- approx(current_timestamps, current_xpos, xout=custom_timesteps)$y
-    int_ypos <- approx(current_timestamps, current_ypos, xout=custom_timesteps)$y
+    int_timestamps <- stats::approx(current_timestamps, current_timestamps, xout=custom_timesteps)$y
+    int_xpos <- stats::approx(current_timestamps, current_xpos, xout=custom_timesteps)$y
+    int_ypos <- stats::approx(current_timestamps, current_ypos, xout=custom_timesteps)$y
       
     # append data
     rs_trajectories[i,timestamps,1:length(int_timestamps)] <- int_timestamps

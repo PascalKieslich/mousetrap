@@ -45,7 +45,7 @@ mt_check_resolution <- function(data, use="trajectories") {
 
   return(list(
     summary=summary(log_diffs),
-    sd=sd(log_diffs),
+    sd=stats::sd(log_diffs),
     frequencies=table(log_diffs),
     relative_frequencies=round(
       table(log_diffs) / length(log_diffs), 4)

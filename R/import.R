@@ -213,7 +213,7 @@ mt_import_mousetrap <- function(raw_data,
 
   # Check for each trial, if the number of logs is the same for every variale
   nlogs <- apply(trajectories, c(1,2), function(x) {sum(!is.na(x))})
-  nlogs_sd <- apply(nlogs, 1, sd)
+  nlogs_sd <- apply(nlogs, 1, stats::sd)
   if (any(nlogs_sd > 0)) {
     warning(paste(
       "In the following trials, the number of logs is not the same for all variables:",
@@ -537,7 +537,7 @@ mt_import_long <- function(raw_data,
   # Create array for selected variables
   trajectories <- reshape2::melt(raw_data,
     measure.vars=mt_include, variable.name="mt_variable")
-  custom.formula <- as.formula(paste(
+  custom.formula <- stats::as.formula(paste(
     mt_id, "mt_variable", mt_seq_label, sep="~"
   ))
   trajectories <- reshape2::acast(trajectories,

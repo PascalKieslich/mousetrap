@@ -328,7 +328,7 @@ mt_plot_per_trajectory <- function(data, file,
   ylim[2] <- ylim[2] + yoffset
   
   # Create plots
-  pdf(file, ...)
+  grDevices::pdf(file, ...)
   
   # Plot each trajectory individually
   # (as a separate page in the PDF file)
@@ -353,7 +353,7 @@ mt_plot_per_trajectory <- function(data, file,
   }
   
   # Close device
-  dev.off()
+  grDevices::dev.off()
 }
 
 #' Plot density of mouse positions across time steps.
@@ -446,7 +446,7 @@ mt_plot_riverbed <- function(data, use='tn_trajectories',
     step_data <- data[,,step]
     
     # Calculate histogram based on this data
-    step_hist <- hist(
+    step_hist <- graphics::hist(
       step_data[,y], 
       breaks=y_breaks,
       plot=FALSE

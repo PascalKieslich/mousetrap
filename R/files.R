@@ -87,7 +87,7 @@ read_mousetracker <- function(file,
   # (using character where appropriate, rather than
   # factors)
   for (i in 1:ncol(raw_data)){
-    raw_data[,i] <- type.convert(as.character(raw_data[,i]), as.is=TRUE)
+    raw_data[,i] <- utils::type.convert(as.character(raw_data[,i]), as.is=TRUE)
   }
 
   # Return dataset

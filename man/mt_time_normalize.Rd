@@ -60,8 +60,8 @@ Spivey, M. J., Grosjean, M., & Knoblich, G. (2005). Continuous
   10393-10398.
 }
 \seealso{
-\link{approx} for information about the function used for linear
-interpolation.
+\link[stats]{approx} for information about the function used for
+  linear interpolation.
 
 \link{mt_resample} for resampling trajectories using a constant time
 interval.

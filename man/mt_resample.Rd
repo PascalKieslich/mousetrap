@@ -63,7 +63,7 @@ mt_example <- mt_resample(mt_example,
   
 }
 \seealso{
-\link{approx} for information about the function used for linear
+\link[stats]{approx} for information about the function used for linear
 interpolation.
 
 \link{mt_average} for averaging trajectories across constant time intervals.

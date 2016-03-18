@@ -137,9 +137,9 @@ mt_sample_entropy <- function(data,
   # cf. Dale et al., 2007, p. 20
   if (is.null(r)) {
     if (length(nlogs) == 1) {
-      r <- .2 * sd(diff(trajectories[,dimension,]), na.rm=TRUE)
+      r <- .2 * stats::sd(diff(trajectories[,dimension,]), na.rm=TRUE)
     } else {
-      r <- .2 * sd(diff(t(trajectories[,dimension,])), na.rm=TRUE)
+      r <- .2 * stats::sd(diff(t(trajectories[,dimension,])), na.rm=TRUE)
     }
   }
     

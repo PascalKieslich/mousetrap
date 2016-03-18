@@ -104,8 +104,8 @@ mt_movement_angle <- function(data,
     # Second, interpolate the positions at each of these timestamps
     # and build a matrix of these
     ima_points <- rbind(
-      approx(current_timestamps, current_xpos, xout=ima_timestamps)$y,
-      approx(current_timestamps, current_ypos, xout=ima_timestamps)$y
+      stats::approx(current_timestamps, current_xpos, xout=ima_timestamps)$y,
+      stats::approx(current_timestamps, current_ypos, xout=ima_timestamps)$y
     )
     
     row.names(ima_points) <- c(xpos, ypos)
