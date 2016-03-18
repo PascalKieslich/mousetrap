@@ -1,7 +1,7 @@
 Package: mousetrap
 Type: Package
 Version: 1.0.0
-Date: 2016-02-15
+Date: 2016-03-18
 Title: Process and Analyze Mouse-Tracking Data
 Description: Mouse-tracking, the analysis of mouse movements in computerized
     experiments, is a method that is becoming increasingly popular in the
