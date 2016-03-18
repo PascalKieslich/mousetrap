@@ -114,6 +114,9 @@ following, a brief overview of the functions in this package is given.
   trajectory.
   
   \link{mt_plot_add_rect} adds rectangles to a trajectory plot.
+  
+  \link{mt_plot_riverbed} plots the relative frequency of a selected variable
+  across time.
 }
 
 \section{Helper functions}{

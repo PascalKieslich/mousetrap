@@ -127,6 +127,8 @@ mt_plot(mt_example, use="av_trajectories",
 \seealso{
 \link{mt_plot_add_rect} for adding rectangles representing the
 response buttons to the plot.
+\link{mt_plot_riverbed} for plotting the relative frequency of a selected
+variable across time.
 
 \link{mt_plot_per_trajectory} for individually plotting all trajectories as
 individual pdf files.
