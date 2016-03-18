@@ -26,6 +26,7 @@ Imports:
     pracma,
     reshape2,
     ggplot2,
+    scales,
     psych (>= 1.2.4),
     diptest
 Suggests:

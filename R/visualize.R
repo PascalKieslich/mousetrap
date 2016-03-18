@@ -443,21 +443,22 @@ mt_plot_riverbed <- function(data, use='tn_trajectories',
       data.frame(
         value_x=step,
         value_y=y_bins,
-        density=step_hist$density * diff(y_breaks)
+        frequency=step_hist$density * diff(y_breaks),
+        alpha=step_hist$density > 0
       )
     )
   }
   
   # Create plot output
-  output <- ggplot2::ggplot(aes(x=value_x, y=value_y, fill=density, alpha=density>0), data=riverbed) +
-    geom_raster() +
-    scale_fill_gradient(name='Frequency', trans='log', labels=scales::percent) +
-    scale_alpha_manual(values=c(0, 1), guide='none') +
-    xlab(x_label) + ylab(y_label) +
-    theme(
-      panel.background = element_rect(fill='black'),
-      panel.grid.major = element_line(colour='gray30'),
-      panel.grid.minor = element_line(colour='gray10')
+  output <- ggplot2::ggplot(ggplot2::aes_string(x='value_x', y='value_y', fill='frequency', alpha='alpha'), data=riverbed) +
+    ggplot2::geom_raster() +
+    ggplot2::scale_fill_gradient(name='Frequency', trans='log', labels=scales::percent) +
+    ggplot2::scale_alpha_manual(values=c(0, 1), guide='none') +
+    ggplot2::xlab(x_label) + ggplot2::ylab(y_label) +
+    ggplot2::theme(
+      panel.background = ggplot2::element_rect(fill='black'),
+      panel.grid.major = ggplot2::element_line(colour='gray30'),
+      panel.grid.minor = ggplot2::element_line(colour='gray10')
     )
   
   return(output)
