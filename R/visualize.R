@@ -82,10 +82,15 @@
 #' mt_plot_aggregate(mt_example, use="tn_trajectories",
 #'   x="xpos", y="ypos", color="Condition")
 #'                   
-#' # ... and first aggregate trajectories within subjects
+#' # ... first aggregating trajectories within subjects
 #' mt_plot_aggregate(mt_example, use="tn_trajectories",
 #'   x="xpos", y="ypos", color="Condition",
 #'   subject_id="subject_nr")
+#'         
+#' # ... adding points for each position to the plot
+#' mt_plot_aggregate(mt_example, use="tn_trajectories",
+#'   x="xpos", y="ypos", color="Condition")+
+#'   geom_point()                   
 #'         
 #' # Plot velocity profiles based on the averaged trajectories
 #' # varying the color depending on the condition
