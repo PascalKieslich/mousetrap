@@ -56,7 +56,7 @@ every recorded mouse position is saved in a separate variable. This is, e.g.,
 the case when exporting trajectories from MouseTracker (Freeman & Ambady,
 2010). From this data.frame, \code{mt_import_wide} creates a mousetrap data
 object containing the trajectories and additional data for further processing
-within the mousetrap package. \code{mt_import_wide} returns a list, which 
+within the mousetrap package. \code{mt_import_wide} returns a list, which
 includes the trajectory data as an array, and all other data as a data.frame.
 This data structure can then be passed on to other functions within this
 package, such as \link{mt_time_normalize} or \link{mt_calculate_measures}.
@@ -70,7 +70,7 @@ stem from a "time normalized analysis" in MouseTracker (Freeman & Ambady,
 
 If no \code{pos_ids} are provided, column labels for the respective variable
 (e.g., x-positions) are extracted using \link{grep} returning all variables
-that start with the respective character string (e.g. "X" for x-positions). 
+that start with the respective character string (e.g. "X" for x-positions).
 This is, e.g., useful when importing trajectory data that stem from a "raw
 time analysis" in MouseTracker (Freeman & Ambady, 2010).
 
@@ -96,7 +96,7 @@ data <- mt_import_wide(raw_data)
 }
 \references{
 Freeman, J. B., & Ambady, N. (2010). MouseTracker: Software for
-studying real-time mental processing using a computer mouse-tracking method. 
+studying real-time mental processing using a computer mouse-tracking method.
 \emph{Behavior Research Methods, 42}(1), 226-241.
 }
 \seealso{

@@ -41,30 +41,30 @@ progress.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}).
-  
+
   If mouse-tracking data were recorded using the mousetrap plug-ins for
   OpenSesame, the unit of the timestamps is milliseconds.
 }
 \description{
-\code{mt_import_mousetrap} accepts a data.frame of (merged) raw data from a 
-mouse-tracking experiment implemented in OpenSesame using one of the 
+\code{mt_import_mousetrap} accepts a data.frame of (merged) raw data from a
+mouse-tracking experiment implemented in OpenSesame using one of the
 \href{https://github.com/pascalkieslich/mousetrap-os}{mousetrap plug-ins}.
 From this data.frame, \code{mt_import_mousetrap} creates a mousetrap data
 object containing the trajectories and additional data for further processing
 within the mousetrap package. \code{mt_import_mousetrap} returns a list,
 which includes the trajectory data as an array, and all other data as a
 data.frame. This data structure can then be passed on to other functions
-within this package, such as \link{mt_time_normalize} or 
+within this package, such as \link{mt_time_normalize} or
 \link{mt_calculate_measures}.
 }
 \details{
-When working with mouse-tracking data that were recorded using the mousetrap 
-plug-ins for OpenSesame, usually only the \code{raw_data} need to be 
+When working with mouse-tracking data that were recorded using the mousetrap
+plug-ins for OpenSesame, usually only the \code{raw_data} need to be
 provided. All other arguments have sensible defaults.
 
-The column names for the timestamps, x- and y-positions are extracted using 
-\link{grep} to find the column that starts with the respective character 
-string (these will typically also contain the name of the item that was used 
+The column names for the timestamps, x- and y-positions are extracted using
+\link{grep} to find the column that starts with the respective character
+string (these will typically also contain the name of the item that was used
 to record them, such as \code{xpos_track_mouse}). This means that the exact
 column names do not have to be provided - as long as mouse-tracking data was
 collected only by a single item throughout the experiment (i.e., if only one
@@ -73,7 +73,7 @@ exact column names have to be specified.
 
 \code{duplicates} allows for different options to handle duplicate timestamps
 within a trial: \itemize{ \item{\code{remove_first}: First timestamp and
-corresponding x-/y-positions are removed (the default).} 
+corresponding x-/y-positions are removed (the default).}
 \item{\code{remove_last}: Last timestamp and corresponding x-/y-positions are
 removed.} \item{\code{ignore}: Duplicates are kept.} }
 }
@@ -82,12 +82,12 @@ mt_example <- mt_import_mousetrap(mt_example_raw)
 
 }
 \references{
-Mousetrap plug-ins for OpenSesame 
+Mousetrap plug-ins for OpenSesame
   (\url{https://github.com/pascalkieslich/mousetrap-os})
 }
 \seealso{
-\link[readbulk]{read_opensesame} from the \code{readbulk} library 
-  for reading and combining raw data files that were collected with 
+\link[readbulk]{read_opensesame} from the \code{readbulk} library
+  for reading and combining raw data files that were collected with
   OpenSesame.
 
 \link{mt_import_wide} and \link{mt_import_long} for importing mouse-tracking

@@ -46,9 +46,9 @@ A mousetrap data object (see \link{mt_example}).
 }
 \description{
 \code{mt_import_long} receives a data.frame in which mouse-tracking data are
-stored in long format, i.e., where one row contains the logging data 
+stored in long format, i.e., where one row contains the logging data
 (timestamp, x- and y-position etc.) at one specific point in the trial. This
-is, for example, the case when exporting the trajectory data from the 
+is, for example, the case when exporting the trajectory data from the
 mousetrap package using \link{mt_reshape}. From this data.frame,
 \code{mt_import_long} creates a mousetrap data object containing the
 trajectories and additional data for further processing within the mousetrap
