@@ -112,8 +112,7 @@ and \link{aggregate}, or through the R packages \code{reshape2} or
 }
 \examples{
 # Time-normalize trajectories
-mt_example <- mt_time_normalize(mt_example,
-  save_as="tn_trajectories", nsteps=101)
+mt_example <- mt_time_normalize(mt_example)
   
 # Reshape time-normalized trajectories data into long format
 # adding Condition variable

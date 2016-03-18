@@ -62,8 +62,7 @@ variables. \code{mt_aggregate_per_subject} is a wrapper function for
 }
 \examples{
 # Time-normalize trajectories
-mt_example <- mt_time_normalize(mt_example,
-  save_as="tn_trajectories", nsteps=101)
+mt_example <- mt_time_normalize(mt_example)
   
 # Aggregate time-normalized trajectories per condition
 # separately per subject

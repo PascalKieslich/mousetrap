@@ -90,8 +90,7 @@ visualizing mouse trajectories. For additional flexibility, we recommend that
 library(ggplot2)
 
 # Time-normalize trajectories
-mt_example <- mt_time_normalize(mt_example,
-  save_as="tn_trajectories", nsteps=101)
+mt_example <- mt_time_normalize(mt_example)
   
 # Plot all time-normalized trajectories
 # varying the color depending on the condition
@@ -112,11 +111,10 @@ mt_plot_aggregate(mt_example, use="tn_trajectories",
   x="xpos", y="ypos", color="Condition",
   subject_id="subject_nr")
         
-# Plot velocity profiles of subject 1
-# based on the averaged trajectories
+# Plot velocity profiles based on the averaged trajectories
 # varying the color depending on the condition
 mt_example <- mt_calculate_derivatives(mt_example)
-mt_example <- mt_average(mt_example)
+mt_example <- mt_average(mt_example, interval_size = 100)
 mt_plot(mt_example, use="av_trajectories",
   x="timestamps", y="vel", color="Condition")
 

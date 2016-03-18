@@ -72,6 +72,8 @@ following, a brief overview of the functions in this package is given.
   
   \link{mt_sample_entropy}	calculates sample entropy.
   
+  \link{mt_sample_entropy}	calculates the initial movement angle.
+  
   \link{mt_standardize} standardizes mouse-tracking measures onto a common 
   scale (individually for subsets of the data, e.g. z-scaled data per
   participant).

@@ -104,8 +104,7 @@
 #' 
 #' @examples
 #' # Time-normalize trajectories
-#' mt_example <- mt_time_normalize(mt_example,
-#'   save_as="tn_trajectories", nsteps=101)
+#' mt_example <- mt_time_normalize(mt_example)
 #'   
 #' # Reshape time-normalized trajectories data into long format
 #' # adding Condition variable
@@ -394,8 +393,7 @@ mt_reshape <- function(data,
 #' 
 #' @examples
 #' # Time-normalize trajectories
-#' mt_example <- mt_time_normalize(mt_example,
-#'   save_as="tn_trajectories", nsteps=101)
+#' mt_example <- mt_time_normalize(mt_example)
 #'    
 #' # Aggregate time-normalized trajectories per condition
 #'   average_trajectories <-  mt_aggregate(mt_example,
@@ -495,8 +493,7 @@ mt_aggregate <- function(data,
 #' 
 #' @examples
 #' # Time-normalize trajectories
-#' mt_example <- mt_time_normalize(mt_example,
-#'   save_as="tn_trajectories", nsteps=101)
+#' mt_example <- mt_time_normalize(mt_example)
 #'   
 #' # Aggregate time-normalized trajectories per condition
 #' # separately per subject

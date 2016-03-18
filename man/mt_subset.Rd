@@ -45,11 +45,11 @@ plots, note that other mousetrap functions (e.g., \link{mt_reshape},
 }
 \examples{
 # Subset based on trial data
-mt_example <- mt_subset(mt_example, Condition!="Example")
+mt_example_atypical <- mt_subset(mt_example, Condition=="Atypical")
 
 # Subset based on mouse-tracking measure (MAD)
 mt_example <- mt_calculate_measures(mt_example)
-mt_example <- mt_subset(mt_example, MAD<200, check="measures")
+mt_example_mad_sub <- mt_subset(mt_example, MAD<400, check="measures")
 
 }
 \seealso{

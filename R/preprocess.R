@@ -619,9 +619,11 @@ mt_downsample <- function(data,
 #'   interval_size=100)
 #'   
 #' # average time-normalized trajectories across specific intervals
+#' # of the time steps
 #' mt_example <- mt_time_normalize(mt_example)
-#' mt_example <- mt_average(mt_example, use="tn_trajectories",
-#'   save_as="av_tn_trajectories",intervals = c(0.5,33.5,67.5,101.5))
+#' mt_example <- mt_average(mt_example,
+#'   use="tn_trajectories", save_as="av_tn_trajectories",
+#'   dimension = "steps", intervals = c(0.5,33.5,67.5,101.5))
 #' 
 #' @export
 mt_average <- function(data,
@@ -783,11 +785,11 @@ mt_average <- function(data,
 #' 
 #' @examples
 #' # Subset based on trial data
-#' mt_example <- mt_subset(mt_example, Condition!="Example")
+#' mt_example_atypical <- mt_subset(mt_example, Condition=="Atypical")
 #' 
 #' # Subset based on mouse-tracking measure (MAD)
 #' mt_example <- mt_calculate_measures(mt_example)
-#' mt_example <- mt_subset(mt_example, MAD<200, check="measures")
+#' mt_example_mad_sub <- mt_subset(mt_example, MAD<400, check="measures")
 #' 
 #' @export
 mt_subset <- function(data,subset,check="data"){

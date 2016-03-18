@@ -26,9 +26,7 @@ mt_id <- "mt_id"
 mt_example <- mt_calculate_measures(mt_example)
 
 # Merge measures with trial data (adding "_raw"
-# to columns already existing in the trial data,
-# e.g., "initiation_time" if data were collected
-# using the mousetrap plug-ins in OpenSesame)
+# to columns already existing in the trial data)
 mt_example_results <- merge(
   mt_example$data, mt_example$measures,
   by="mt_id",suffixes=c("_raw",""))
