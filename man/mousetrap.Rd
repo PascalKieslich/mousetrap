@@ -127,6 +127,8 @@ following, a brief overview of the functions in this package is given.
 \examples{
 mt_example <- mt_import_mousetrap(mt_example_raw)
 mt_example <- mt_remap_symmetric(mt_example)
+mt_example <- mt_space_normalize(mt_example,
+ xpos_start = 0,ypos_start = 0,save_as="trajectories")
 mt_example <- mt_time_normalize(mt_example)
 mt_example <- mt_calculate_derivatives(mt_example)
 mt_example <- mt_calculate_measures(mt_example)

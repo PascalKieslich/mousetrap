@@ -35,9 +35,9 @@
 #'   The variables included relate to the item that was presented
 #'   (\code{Exemplar}), the answer categories (\code{Category1} and
 #'   \code{Category2}), the subject identifier (\code{subject_nr}) the subjects'
-#'   response (\code{response_track_mouse}), as well as the mouse-tracking
-#'   variables (\code{timestamps_track_mouse}, \code{xpos_track_mouse} and
-#'   \code{ypos_track_mouse}). Besides, a number of additional variables are
+#'   response (\code{response_get_response}), as well as the mouse-tracking
+#'   variables (\code{timestamps_get_response}, \code{xpos_get_response} and
+#'   \code{ypos_get_response}). Besides, a number of additional variables are
 #'   included, e.g., some variables relating to the general settings of the
 #'   experiment (e.g., the \code{width} and \code{height} of the screen in
 #'   pixels).
@@ -45,7 +45,7 @@
 #'   Each mouse-tracking variable contains a list of values (separated by ', ')
 #'   - one entry for each recorded position of the mouse. The position
 #'   coordinates are given in pixels, such that values of zero for both
-#'   \code{xpos_track_mouse} and \code{ypos_track_mouse} indicate that the
+#'   \code{xpos_get_response} and \code{ypos_get_response} indicate that the
 #'   cursor is located in the center of the screen. Both variables increase in
 #'   value as the mouse moves toward the bottom right. Timestamps are given in
 #'   milliseconds.
@@ -57,9 +57,10 @@
 #' A mousetrap data object with example data created by importing
 #' \link{mt_example_raw} and applying basic post-processing.
 #'
-#' The raw data set was imported using \link{mt_import_mousetrap}. Trajectories
-#' were then remapped using \link{mt_remap_symmetric} so that all trajectories
-#' end in the top-left corner.
+#' The raw data set was imported using \link{mt_import_mousetrap}. Trajectories 
+#' were then remapped using \link{mt_remap_symmetric} so that all trajectories 
+#' end in the top-left corner and their starting point was aligned using
+#' \link{mt_space_normalize} to a common value (0,0).
 #'
 #' @format A mousetrap data object is a \link{list} containing  at least the
 #'   following objects:

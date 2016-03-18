@@ -37,9 +37,10 @@ A mousetrap data object with example data created by importing
 \link{mt_example_raw} and applying basic post-processing.
 }
 \details{
-The raw data set was imported using \link{mt_import_mousetrap}. Trajectories
-were then remapped using \link{mt_remap_symmetric} so that all trajectories
-end in the top-left corner.
+The raw data set was imported using \link{mt_import_mousetrap}. Trajectories 
+were then remapped using \link{mt_remap_symmetric} so that all trajectories 
+end in the top-left corner and their starting point was aligned using
+\link{mt_space_normalize} to a common value (0,0).
 }
 \keyword{datasets}
 

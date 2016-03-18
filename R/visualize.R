@@ -209,9 +209,10 @@ mt_plot_aggregate <- function(data,
 #' # Load ggplot2
 #' library(ggplot2)
 #' 
-#' # Time-normalize trajectories
-#' mt_example <- mt_time_normalize(mt_example,
-#'   save_as="tn_trajectories", nsteps=101)
+#' # Import, flip, and time-normalize raw trajectories
+#' mt_example <- mt_import_mousetrap(mt_example_raw)
+#' mt_example <- mt_remap_symmetric(mt_example,remap_xpos="no")
+#' mt_example <- mt_time_normalize(mt_example)
 #' 
 #' # Create rectangles matrix
 #' rectangles <- matrix(
@@ -220,8 +221,8 @@ mt_plot_aggregate <- function(data,
 #'   # (i.e. x, y, width and height values) 
 #'   # in separate rows)
 #'   c(
-#'     -840, 525, 280, -210,
-#'     840, 525, -280, -210
+#'    -840, 525,  350, -170,
+#'     840, 525, -350, -170
 #'   ),
 #'   ncol=4, byrow=TRUE)
 #'
