@@ -4,7 +4,7 @@
 \alias{mt_resample}
 \title{Resample trajectories using a constant time interval.}
 \usage{
-mt_resample(data, use = "trajectories", save_as = "ds_trajectories",
+mt_resample(data, use = "trajectories", save_as = "rs_trajectories",
   step_size = 10, exact_last_timestamp = TRUE, show_progress = TRUE)
 }
 \arguments{
@@ -29,7 +29,7 @@ progress.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) with an additional
-  array (by default called \code{ds_trajectories}) containing the resampled
+  array (by default called \code{rs_trajectories}) containing the resampled
   trajectories.
 }
 \description{
@@ -58,7 +58,7 @@ this, \link{mt_average} can be used.
 }
 \examples{
 mt_example <- mt_resample(mt_example,
-  save_as="ds_trajectories",
+  save_as="rs_trajectories",
   step_size=50)
   
 }

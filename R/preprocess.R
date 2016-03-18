@@ -450,7 +450,7 @@ mt_time_normalize <- function(data,
 #'   progress.
 #'   
 #' @return A mousetrap data object (see \link{mt_example}) with an additional
-#'   array (by default called \code{ds_trajectories}) containing the resampled
+#'   array (by default called \code{rs_trajectories}) containing the resampled
 #'   trajectories.
 #'   
 #' @seealso \link{approx} for information about the function used for linear
@@ -462,12 +462,12 @@ mt_time_normalize <- function(data,
 #' 
 #' @examples
 #' mt_example <- mt_resample(mt_example,
-#'   save_as="ds_trajectories",
+#'   save_as="rs_trajectories",
 #'   step_size=50)
 #'   
 #' @export
 mt_resample <- function(data,
-  use="trajectories", save_as="ds_trajectories",
+  use="trajectories", save_as="rs_trajectories",
   step_size=10, exact_last_timestamp=TRUE,
   show_progress=TRUE) {
   
@@ -483,7 +483,7 @@ mt_resample <- function(data,
   ) + 1
   
   # Create an empty output array
-  ds_trajectories <- array(
+  rs_trajectories <- array(
     dim=c(nrow(trajectories), 3, max_steps),
     dimnames=list(
       dimnames(trajectories)[[1]],
@@ -533,9 +533,9 @@ mt_resample <- function(data,
     int_ypos <- approx(current_timestamps, current_ypos, xout=custom_timesteps)$y
       
     # append data
-    ds_trajectories[i,timestamps,1:length(int_timestamps)] <- int_timestamps
-    ds_trajectories[i,xpos,1:length(int_xpos)] <- int_xpos
-    ds_trajectories[i,ypos,1:length(int_ypos)] <- int_ypos
+    rs_trajectories[i,timestamps,1:length(int_timestamps)] <- int_timestamps
+    rs_trajectories[i,xpos,1:length(int_xpos)] <- int_xpos
+    rs_trajectories[i,ypos,1:length(int_ypos)] <- int_ypos
     
     if (show_progress){
       if (i %% 100 == 0) message(paste(i, "trials finished")) 
@@ -546,7 +546,7 @@ mt_resample <- function(data,
     message(paste("all", i, "trials finished")) 
   }  
   
-  data[[save_as]] <- ds_trajectories
+  data[[save_as]] <- rs_trajectories
   
   return(data)
 }
