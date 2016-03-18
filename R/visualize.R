@@ -392,12 +392,27 @@ mt_plot_per_trajectory <- function(data, file,
 #' # Time-normalize trajectories
 #' mt_example <- mt_time_normalize(mt_example)
 #'   
-#' # Plot all time-normalized trajectories
-#' # varying the color depending on the condition
+#' # Create riverbed plot for all trials
 #' mt_plot_riverbed(mt_example)
-#' # Note that this ignores the condition variable
-#' # present in the data -- the subset would have to
-#' # be made manually using mt_subset
+#' 
+#' 
+#' # Create separate plots for typical and atypical trials:
+#' 
+#' # assess range for x-positions across both conditions
+#' xpos_range <- range(mt_example$tn_trajectories[,"xpos",])
+#' 
+#' # create subsets of trials
+#' mt_example_atypical <- mt_subset(mt_example,Condition=="Atypical")
+#' mt_example_typical <- mt_subset(mt_example,Condition=="Typical")
+#' 
+#' # create separate riverbed plots
+#' mt_plot_riverbed(mt_example_atypical,
+#'   use="tn_trajectories", y_range=xpos_range)+
+#'   ggtitle("Atypical condition")
+#' 
+#' mt_plot_riverbed(mt_example_typical,
+#'   use="tn_trajectories", y_range=xpos_range)+
+#'   ggtitle("Typical condition")
 #' 
 #' @export
 mt_plot_riverbed <- function(data, use='tn_trajectories', 
