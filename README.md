@@ -12,7 +12,7 @@ The `mousetrap` package was developed by Pascal Kieslich and Felix Henninger. It
 Installation
 ------------
 
--   Once `mousetrap` is available on CRAN, the current stable version can be installed via `install.packages("mousetrap")`.
+-   The current stable version is available on CRAN and can be installed via `install.packages("mousetrap")`.
 -   To install the latest development version from GitHub, you need the `devtools` package . The development version can be installed via `devtools::install_github("pascalkieslich/mousetrap@master")`.
 
 Acknowledgments
