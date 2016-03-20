@@ -4,7 +4,7 @@
 \alias{mt_check_resolution}
 \title{Check logging resolution by looking at timestamp differences.}
 \usage{
-mt_check_resolution(data, use = "trajectories")
+mt_check_resolution(data, use = "trajectories", desired = NULL)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
@@ -12,6 +12,10 @@ functions (see \link{mt_example} for details).}
 
 \item{use}{a character string specifying which trajectory data should be
 used.}
+
+\item{desired}{an optional integer. If specified, additional statistics are
+computed concerning the (relative) frequencies with which exactly the
+desired timestamp difference (with tolerance 1e-12) occurred.}
 }
 \value{
 A list with various descriptive statistics. For convenience, the

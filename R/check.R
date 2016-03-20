@@ -19,6 +19,9 @@
 #'   functions (see \link{mt_example} for details).
 #' @param use a character string specifying which trajectory data should be
 #'   used.
+#' @param desired an optional integer. If specified, additional statistics are
+#'   computed concerning the (relative) frequencies with which exactly the
+#'   desired timestamp difference (with tolerance 1e-12) occurred.
 #'   
 #' @return A list with various descriptive statistics. For convenience, the
 #'   relative frequencies are rounded to 4 decimal places.
@@ -27,7 +30,7 @@
 #' mt_check_resolution(mt_example)
 #' 
 #' @export
-mt_check_resolution <- function(data, use="trajectories") {
+mt_check_resolution <- function(data, use="trajectories", desired=NULL) {
   
   trajectories <- extract_data(data=data,use=use)
   timestamps <- mt_variable_labels["timestamps"]
@@ -42,12 +45,31 @@ mt_check_resolution <- function(data, use="trajectories") {
   # Clean data type and remove empty values
   log_diffs <- as.numeric(log_diffs)
   log_diffs <- log_diffs[!is.na(log_diffs)]
-
-  return(list(
+  
+  results <- list(
     summary=summary(log_diffs),
     sd=stats::sd(log_diffs),
     frequencies=table(log_diffs),
     relative_frequencies=round(
       table(log_diffs) / length(log_diffs), 4)
-  ))
+  )
+  
+  if (!is.null(desired)){
+    log_diffs_class <-
+      cut(log_diffs,
+        c(0,desired-10^(-12),desired+10^(-12),Inf),
+        c("smaller","desired","greater")
+      )
+    
+    results <-
+      c(results,
+        list(
+          frequencies_desired=table(log_diffs_class),
+          relative_frequencies_desired=round(
+            table(log_diffs_class) / length(log_diffs_class), 4)
+        ))
+    
+  }
+
+  return(results)  
 }
