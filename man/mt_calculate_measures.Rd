@@ -62,7 +62,7 @@ A mousetrap data object (see \link{mt_example}) where an
   \item{x_flips}{Number of directional changes along x-axis} 
   \item{y_flips}{Number of directional changes along y-axis} 
   \item{x_reversals}{Number of crossings of the y-axis} 
-  \item{y_reversals}{Number of crossings of the y-axis}
+  \item{y_reversals}{Number of crossings of the x-axis}
   \item{RT}{Response time, the total time passed until a response was given}
   \item{initiation_time}{Time passed until first mouse movement was 
   initiated}
