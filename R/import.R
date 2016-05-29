@@ -138,7 +138,7 @@ mt_import_mousetrap <- function(raw_data,
     # Split according to specified character
     x <- strsplit(x, split=split)
     
-    return(as.integer(unlist(x)))
+    return(as.numeric(unlist(x)))
   }
 
   data_list <- apply(raw_data[,columns], c(1, 2), split_raw_data)
