@@ -13,13 +13,13 @@ mt_import_mousetrap(raw_data, xpos_label = "xpos", ypos_label = "ypos",
 \arguments{
 \item{raw_data}{a data.frame containing the raw data.}
 
-\item{xpos_label}{a character string specifying the name of the column in
+\item{xpos_label}{a character string specifying the name of the column(s) in
 which the x-positions are stored (see Details).}
 
-\item{ypos_label}{a character string specifying the name of the column in
+\item{ypos_label}{a character string specifying the name of the column(s) in
 which the y-positions are stored (see Details).}
 
-\item{timestamps_label}{a character string specifying the name of the column
+\item{timestamps_label}{a character string specifying the name of the column(s)
 in which the timestamps are stored (see Details).}
 
 \item{mt_id_label}{an optional character string specifying the name of the
@@ -62,14 +62,25 @@ When working with mouse-tracking data that were recorded using the mousetrap
 plug-ins for OpenSesame, usually only the \code{raw_data} need to be
 provided. All other arguments have sensible defaults.
 
-The column names for the timestamps, x- and y-positions are extracted using
-\link{grep} to find the column that starts with the respective character
-string (these will typically also contain the name of the item that was used
-to record them, such as \code{xpos_track_mouse}). This means that the exact
-column names do not have to be provided - as long as mouse-tracking data was
-collected only by a single item throughout the experiment (i.e., if only one
-column contains timestamps, xpos, and ypos respectively). Otherwise, the
-exact column names have to be specified.
+If the relevant timestamps, x-positions, and y-positions are each stored in 
+one variable, a character string specifying (parts of) the respective column 
+name needs to be provided. In this case, the column names are extracted using
+\link{grep} to find the column that starts with the respective character 
+string (in OpenSesame these will typically contain the name of the item that
+was used to record them, such as \code{xpos_get_response}). This means that
+the exact column names do not have to be provided - as long as only one 
+column starts with the respective character string (otherwise, the exact 
+column names have to be provided).
+
+If several variables contain the timestamps, x-positions, and y-positions 
+within a trial (e.g., \code{xpos_part1} and \code{xpos_part2}), a vector of 
+the exact column names has to be provided (e.g., 
+\code{xpos_label=c("xpos_part1","xpos_part2"))}. \code{mt_import_mousetrap} 
+will then merge all raw data in the order with which the variable labels have
+been specified. If one variable contains NAs or an empty string in a trial, 
+these cases will be ignored (this covers the special case that, e.g., 
+\code{xpos_part2} is only relevant for some trials and contains NAs in the 
+other trials).
 
 \code{duplicates} allows for different options to handle duplicate timestamps
 within a trial: \itemize{ \item{\code{remove_first}: First timestamp and
