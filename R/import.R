@@ -164,13 +164,23 @@ mt_import_mousetrap <- function(raw_data,
       trajectories[i,xpos,] <- data_list[,i,columns[xpos_label]]
       trajectories[i,ypos,] <- data_list[,i,columns[ypos_label]]
     }
+    
+    
+    # Check timestamps
+    
+    # Extract timestamps
+    current_timestamps <- trajectories[i,timestamps,]
+    current_timestamps <- current_timestamps[1:sum(!is.na(current_timestamps))]
+    
+    # Check that timestamps are monotonically increasing
+    if (any(diff(current_timestamps)<0)) {
+      warning("For some trajectories timestamps are not monotonically increasing.")
+    }
 
-    # Check for duplicated timestamps
+    # Check for duplicates
     if (duplicates != "ignore") {
       if (duplicates %in% c("remove_first", "remove_last")) {
-        current_timestamps <- trajectories[i,timestamps,]
-        current_timestamps <- current_timestamps[1:sum(!is.na(current_timestamps))]
-
+        
         if (anyDuplicated(current_timestamps) > 0) {
           current_xpos <- trajectories[i, xpos, 1:length(current_timestamps)]
           current_ypos <- trajectories[i, ypos, 1:length(current_timestamps)]
