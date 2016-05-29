@@ -6,7 +6,7 @@
 OpenSesame.}
 \usage{
 mt_import_mousetrap(raw_data, xpos_label = "xpos", ypos_label = "ypos",
-  timestamps_label = "timestamps", mt_id_label = NULL, split = ", ",
+  timestamps_label = "timestamps", mt_id_label = NULL, split = ",",
   duplicates = "remove_first", reset_timestamps = TRUE,
   show_progress = TRUE)
 }

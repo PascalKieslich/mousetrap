@@ -74,7 +74,7 @@ mt_import_mousetrap <- function(raw_data,
   xpos_label="xpos", ypos_label="ypos",
   timestamps_label="timestamps",
   mt_id_label=NULL,
-  split=", ", duplicates="remove_first",
+  split=",", duplicates="remove_first",
   reset_timestamps=TRUE,
   show_progress=TRUE) {
 
@@ -126,8 +126,18 @@ mt_import_mousetrap <- function(raw_data,
 
   # Split data
   split_raw_data <- function(x) {
-    x <- gsub(pattern="(\\[|\\])", replacement="", x)
+    
+    # Remove all irrelevant characters
+    x <- gsub(pattern=paste0("[^-0123456789.",split,"]"),replacement = "", x)
+    
+    # Remove leading / end / double split characters
+    x <- gsub(pattern=paste0("^",split),replacement = "", x)
+    x <- gsub(pattern=paste0(split,"$"),replacement = "", x)
+    x <- gsub(pattern=paste0(split,split),replacement = "", x)
+    
+    # Split according to specified character
     x <- strsplit(x, split=split)
+    
     return(as.integer(unlist(x)))
   }
 
