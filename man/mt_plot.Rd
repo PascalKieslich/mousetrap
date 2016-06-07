@@ -41,9 +41,9 @@ array should be displayed on the y-axis (defaults to ypos).}
 \code{data[[use2]]} should be used for varying the linetype of the 
 trajectories.}
 
-\item{only_ggplot}{logical. If \code{TRUE}, only the ggplot object is 
-returned. If \code{FALSE}(the default), the trajectories are plotted using 
-\link[ggplot2]{geom_path}.}
+\item{only_ggplot}{logical. If \code{TRUE}, only the ggplot object without
+geoms is returned. If \code{FALSE} (the default), the trajectories are
+plotted using \link[ggplot2]{geom_path}.}
 
 \item{...}{additional arguments passed on to \link{mt_reshape} (such as 
 \code{subset}).}
@@ -122,6 +122,14 @@ mt_example <- mt_calculate_derivatives(mt_example)
 mt_example <- mt_average(mt_example, interval_size = 100)
 mt_plot(mt_example, use="av_trajectories",
   x="timestamps", y="vel", color="Condition")
+
+ 
+# Use only_ggplot option to return a ggplot object without geoms
+mt_avg_plot <- mt_plot_aggregate(mt_example, use="tn_trajectories",
+  x="xpos", y="ypos", color="Condition", only_ggplot=TRUE)
+
+# ... and add a geom to it with a custom line width
+mt_avg_plot + geom_path(size=1.5)
 
 }
 \seealso{

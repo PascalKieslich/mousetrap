@@ -44,9 +44,9 @@
 #' @param linetype an optional character string specifying which variable in 
 #'   \code{data[[use2]]} should be used for varying the linetype of the 
 #'   trajectories.
-#' @param only_ggplot logical. If \code{TRUE}, only the ggplot object is 
-#'   returned. If \code{FALSE}(the default), the trajectories are plotted using 
-#'   \link[ggplot2]{geom_path}.
+#' @param only_ggplot logical. If \code{TRUE}, only the ggplot object without
+#'   geoms is returned. If \code{FALSE} (the default), the trajectories are
+#'   plotted using \link[ggplot2]{geom_path}.
 #' @param subject_id a character string specifying which column contains the 
 #'   subject identifier. Only relevant for \code{mt_plot_aggregate}. If 
 #'   specified, aggregation will be performed within subjects first. Note that 
@@ -100,6 +100,14 @@
 #' mt_example <- mt_average(mt_example, interval_size = 100)
 #' mt_plot(mt_example, use="av_trajectories",
 #'   x="timestamps", y="vel", color="Condition")
+#' 
+#'  
+#' # Use only_ggplot option to return a ggplot object without geoms
+#' mt_avg_plot <- mt_plot_aggregate(mt_example, use="tn_trajectories",
+#'   x="xpos", y="ypos", color="Condition", only_ggplot=TRUE)
+#' 
+#' # ... and add a geom to it with a custom line width
+#' mt_avg_plot + geom_path(size=1.5)
 #' 
 #' @describeIn mt_plot Plot individual trajectory data
 #' @export
@@ -160,8 +168,8 @@ mt_plot_aggregate <- function(data,
     }
   }
   
-  # Merge tracking data with metadata,aggregate it
-  # and and reshape it into long format
+  # Merge tracking data with metadata, aggregate it
+  # and reshape it into long format
   trajectories <- mt_aggregate(data=data,
     use=use, use2=use2, use2_variables=use2_variables,
     subject_id=subject_id, ...
