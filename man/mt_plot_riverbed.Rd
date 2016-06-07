@@ -5,8 +5,8 @@
 \title{Plot density of mouse positions across time steps.}
 \usage{
 mt_plot_riverbed(data, use = "tn_trajectories", y = "xpos",
-  y_range = NULL, y_bins = 250, x_label = "Time step",
-  y_label = "X coordinate")
+  y_range = NULL, y_bins = 250, facet_row = NULL, facet_col = NULL,
+  facet_data = "data")
 }
 \arguments{
 \item{data}{mousetrap data object containing the data to be plotted.}
@@ -25,21 +25,31 @@ from the data provided.}
 \item{y_bins}{number of bins to distribute along the y axis (defaults to
 250).}
 
-\item{x_label}{label placed on the output's x axis (defaults to 'Time step').}
+\item{facet_row}{an optional character string specifying a variable in 
+\code{data[[facet_data]]} that should be used for (row-wise) faceting. If 
+specified, separate riverbed plots for each level of the variable will be 
+created.}
 
-\item{y_label}{label placed on the output's y axis (defaults to 'X 
-coordinate', as appropriate given the default for \code{y}).}
+\item{facet_col}{an optional character string specifying a variable in 
+\code{data[[facet_data]]} that should be used for (column-wise) faceting.
+If specified, separate riverbed plots for each level of the variable will
+be created.}
+
+\item{facet_data}{a character string specifying where the (optional) data
+containing the faceting variables can be found.}
 }
 \description{
-\code{mt_plot_riverbed} creates a plot showing the relative frequency of
-x-values per time step.
+\code{mt_plot_riverbed} creates a plot showing the distribution of one
+trajectory variable (e.g., the x-positions or velocity) per time step.
 }
 \details{
-This plot indicates where the majority of trajectories lie, and the degree to
-which trajectories deviate from the average trajectory. In most data sets,
-this plot will result in a horizontal line of high density indicating that
-participants took a certain amount of time before deviating from their
-starting point.
+This function plots the relative frequency of the values of a trajectory 
+variable separately for a series of time steps. This type of plot has been
+used in previous research to visualize the distribution of x-positions per
+time step (e.g., Scherbaum et al., 2010).
+
+\code{mt_plot_riverbed} usually is applied to time-normalized trajectory data
+as all trajectories are required to have the same number of values.
 }
 \examples{
 # Load ggplot2
@@ -51,27 +61,30 @@ mt_example <- mt_time_normalize(mt_example)
 # Create riverbed plot for all trials
 mt_plot_riverbed(mt_example)
 
+# Create riverbed plot with custom x and y axis labels
+mt_plot_riverbed(mt_example)+
+  xlab("Time step")+ylab("X coordinate")
 
-# Create separate plots for typical and atypical trials:
+# Create separate plots for typical and atypical trials
+mt_plot_riverbed(mt_example, facet_col="Condition")
 
-# assess range for x-positions across both conditions
-xpos_range <- range(mt_example$tn_trajectories[,"xpos",])
+# Note that it is also possible to replace the
+# default scale for fill with a custom scale
+\dontrun{
+mt_plot_riverbed(mt_example, facet_col="Condition")+
+  scale_fill_gradientn(colours=grDevices::heat.colors(9),
+    name="Frequency", trans="log", labels=scales::percent)
+}
 
-# create subsets of trials
-mt_example_atypical <- mt_subset(mt_example,Condition=="Atypical")
-mt_example_typical <- mt_subset(mt_example,Condition=="Typical")
-
-# create separate riverbed plots
-mt_plot_riverbed(mt_example_atypical,
-  use="tn_trajectories", y_range=xpos_range)+
-  ggtitle("Atypical condition")
-
-mt_plot_riverbed(mt_example_typical,
-  use="tn_trajectories", y_range=xpos_range)+
-  ggtitle("Typical condition")
-
+}
+\references{
+Scherbaum, S., Dshemuchadse, M., Fischer, R., & Goschke, T.
+  (2010). How decisions evolve: The temporal dynamics of action selection.
+  \emph{Cognition, 115}(3), 407-416.
 }
 \seealso{
 \link{mt_plot} for plotting trajectory data.
+
+\link{mt_time_normalize} for time-normalizing trajectories.
 }
 

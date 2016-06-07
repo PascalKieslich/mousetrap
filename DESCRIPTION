@@ -31,7 +31,8 @@ Imports:
     ggplot2,
     scales,
     psych (>= 1.2.4),
-    diptest
+    diptest,
+    RColorBrewer
 Suggests:
     readbulk,
     testthat
