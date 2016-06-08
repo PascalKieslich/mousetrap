@@ -44,12 +44,12 @@ trajectory variable (e.g., the x-positions or velocity) per time step.
 }
 \details{
 This function plots the relative frequency of the values of a trajectory 
-variable separately for a series of time steps. This type of plot has been
-used in previous research to visualize the distribution of x-positions per
-time step (e.g., Scherbaum et al., 2010).
+variable separately for each of a series of time steps. This type of plot has
+been used in previous research to visualize the distribution of x-positions
+per time step (e.g., Scherbaum et al., 2010).
 
 \code{mt_plot_riverbed} usually is applied to time-normalized trajectory data
-as all trajectories are required to have the same number of values.
+as all trajectories must contain the same number of values.
 }
 \examples{
 # Load ggplot2
@@ -62,8 +62,8 @@ mt_example <- mt_time_normalize(mt_example)
 mt_plot_riverbed(mt_example)
 
 # Create riverbed plot with custom x and y axis labels
-mt_plot_riverbed(mt_example)+
-  xlab("Time step")+ylab("X coordinate")
+mt_plot_riverbed(mt_example) +
+  xlab("Time step") + ylab("X coordinate")
 
 # Create separate plots for typical and atypical trials
 mt_plot_riverbed(mt_example, facet_col="Condition")
@@ -71,7 +71,7 @@ mt_plot_riverbed(mt_example, facet_col="Condition")
 # Note that it is also possible to replace the
 # default scale for fill with a custom scale
 \dontrun{
-mt_plot_riverbed(mt_example, facet_col="Condition")+
+mt_plot_riverbed(mt_example, facet_col="Condition") +
   scale_fill_gradientn(colours=grDevices::heat.colors(9),
     name="Frequency", trans="log", labels=scales::percent)
 }

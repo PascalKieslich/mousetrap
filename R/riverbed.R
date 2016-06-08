@@ -4,12 +4,12 @@
 #' trajectory variable (e.g., the x-positions or velocity) per time step.
 #' 
 #' This function plots the relative frequency of the values of a trajectory 
-#' variable separately for a series of time steps. This type of plot has been
-#' used in previous research to visualize the distribution of x-positions per
-#' time step (e.g., Scherbaum et al., 2010).
+#' variable separately for each of a series of time steps. This type of plot has
+#' been used in previous research to visualize the distribution of x-positions
+#' per time step (e.g., Scherbaum et al., 2010).
 #' 
 #' \code{mt_plot_riverbed} usually is applied to time-normalized trajectory data
-#' as all trajectories are required to have the same number of values.
+#' as all trajectories must contain the same number of values.
 #' 
 #' @param data mousetrap data object containing the data to be plotted.
 #' @param use character string specifying the set of trajectories to use in the
@@ -53,8 +53,8 @@
 #' mt_plot_riverbed(mt_example)
 #' 
 #' # Create riverbed plot with custom x and y axis labels
-#' mt_plot_riverbed(mt_example)+
-#'   xlab("Time step")+ylab("X coordinate")
+#' mt_plot_riverbed(mt_example) +
+#'   xlab("Time step") + ylab("X coordinate")
 #' 
 #' # Create separate plots for typical and atypical trials
 #' mt_plot_riverbed(mt_example, facet_col="Condition")
@@ -62,7 +62,7 @@
 #' # Note that it is also possible to replace the
 #' # default scale for fill with a custom scale
 #' \dontrun{
-#' mt_plot_riverbed(mt_example, facet_col="Condition")+
+#' mt_plot_riverbed(mt_example, facet_col="Condition") +
 #'   scale_fill_gradientn(colours=grDevices::heat.colors(9),
 #'     name="Frequency", trans="log", labels=scales::percent)
 #' }
@@ -90,7 +90,6 @@ mt_plot_riverbed <- function(data, use='tn_trajectories',
   # Extract number of steps on x axis
   steps <- dim(trajectories)[3]
   
-  
   # Prepare optional facet variables
   if (!is.null(facet_row)){
     facet_row_values <- data[[facet_data]][,facet_row]
@@ -110,17 +109,15 @@ mt_plot_riverbed <- function(data, use='tn_trajectories',
     names(facet_col_values) <- dimnames(trajectories)[[1]]
   }
   
-  
-  
   # Create empty data.frame for plot data
   riverbed <- data.frame()
   
   
   # Iterate across facet_row levels
-  for (facet_row_value in unique(facet_row_values)){
+  for (facet_row_value in unique(facet_row_values)) {
     
     # Iterate across facet_col levels
-    for (facet_col_value in unique(facet_col_values)){
+    for (facet_col_value in unique(facet_col_values)) {
       
       # Iterate across x-axis steps
       for (step in 1:steps) {
@@ -151,12 +148,12 @@ mt_plot_riverbed <- function(data, use='tn_trajectories',
     }
   }
   
-  
   # Create plot output
-  output <- ggplot2::ggplot(ggplot2::aes_string(x='value_x', y='value_y', fill='frequency', alpha='alpha'), data=riverbed) +
+  output <- ggplot2::ggplot(ggplot2::aes_string(x='value_x', y='value_y', 
+      fill='frequency', alpha='alpha'), data=riverbed) +
     ggplot2::geom_raster() +
-    ggplot2::scale_fill_gradientn(colours = rev(RColorBrewer::brewer.pal(9,"YlOrRd")),
-                                  name='Frequency',trans='log', labels=scales::percent)+
+    ggplot2::scale_fill_gradientn(colours=rev(RColorBrewer::brewer.pal(9, "YlOrRd")),
+      name='Frequency', trans='log', labels=scales::percent) +
     ggplot2::scale_alpha_manual(values=c(0, 1), guide='none') +
     ggplot2::xlab('Steps') + ggplot2::ylab(y) +
     ggplot2::theme(
@@ -166,7 +163,7 @@ mt_plot_riverbed <- function(data, use='tn_trajectories',
     )
   
   # Return output with / without facets depending on the specified variables
-  if(is.null(facet_row) & is.null(facet_col)){
+  if(is.null(facet_row) & is.null(facet_col)) {
     return(output)
   } else {
     facet_row <- ifelse(is.null(facet_row),'.','facet_row')
@@ -174,6 +171,5 @@ mt_plot_riverbed <- function(data, use='tn_trajectories',
     facet_formula <- as.formula(paste(facet_row,facet_col,sep='~'))
     return(output+ggplot2::facet_grid(facet_formula))
   }
-  
   
 }
