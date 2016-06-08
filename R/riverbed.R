@@ -168,8 +168,8 @@ mt_plot_riverbed <- function(data, use='tn_trajectories',
   } else {
     facet_row <- ifelse(is.null(facet_row),'.','facet_row')
     facet_col <- ifelse(is.null(facet_col),'.','facet_col')
-    facet_formula <- as.formula(paste(facet_row,facet_col,sep='~'))
-    return(output+ggplot2::facet_grid(facet_formula))
+    facet_formula <- stats::as.formula(paste(facet_row,facet_col,sep='~'))
+    return(output + ggplot2::facet_grid(facet_formula))
   }
   
 }
