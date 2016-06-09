@@ -7,3 +7,8 @@ There were no ERRORs, WARNINGs, or NOTEs.
 
 ## Downstream dependencies
 There are currently no downstream dependencies for this package.
+
+## Resubmission
+This is a resubmission. In this version we have:
+
+* Reduced the time of the examples in `mt_plot_riverbed`
