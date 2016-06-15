@@ -9,7 +9,8 @@ mt_remap_symmetric(data, use = "trajectories", save_as = use,
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
-functions (see \link{mt_example} for details).}
+functions (see \link{mt_example} for details). Alternatively, a trajectory
+array can be provided directly (in this case \code{use} will be ignored).}
 
 \item{use}{a character string specifying which trajectory data should be 
 used.}
@@ -30,8 +31,9 @@ default), and the reverse occurs if the parameter is set to "down". If it
 is set to "no", y-values remain untouched.}
 }
 \value{
-A mousetrap data object (see \link{mt_example}) with remapped
-  trajectories.
+A mousetrap data object (see \link{mt_example}) with remapped 
+  trajectories. If the trajectory array was provided directly as \code{data},
+  only the trajectory array will be returned.
 }
 \description{
 Remap all trajectories to one side (or one quadrant) of the coordinate 

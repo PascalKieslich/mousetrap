@@ -20,7 +20,8 @@
 #' are symmetric, in that they all are equally distant from the screen center.
 #' 
 #' @param data a mousetrap data object created using one of the mt_import 
-#'   functions (see \link{mt_example} for details).
+#'   functions (see \link{mt_example} for details). Alternatively, a trajectory
+#'   array can be provided directly (in this case \code{use} will be ignored).
 #' @param use a character string specifying which trajectory data should be 
 #'   used.
 #' @param save_as a character string specifying where the resulting trajectory 
@@ -36,8 +37,9 @@
 #'   default), and the reverse occurs if the parameter is set to "down". If it 
 #'   is set to "no", y-values remain untouched.
 #'   
-#' @return A mousetrap data object (see \link{mt_example}) with remapped
-#'   trajectories.
+#' @return A mousetrap data object (see \link{mt_example}) with remapped 
+#'   trajectories. If the trajectory array was provided directly as \code{data},
+#'   only the trajectory array will be returned.
 #'   
 #' @examples
 #' # Remap trajectories so that all trajectories
@@ -99,10 +101,14 @@ mt_remap_symmetric <- function(data,
         
   }
   
-  # Add remapped trajectories to the data object
-  data[[save_as]] <- trajectories
+  # Return data depending on input format
+  if (is_mousetrap_data(data)){
+    data[[save_as]] <- trajectories
+    return(data)
+  }else{
+    return(trajectories)
+  }
   
-  return(data)
 }
 
 
@@ -129,7 +135,8 @@ mt_remap_symmetric <- function(data,
 #' this function.
 #' 
 #' @param data a mousetrap data object created using one of the mt_import 
-#'   functions (see \link{mt_example} for details).
+#'   functions (see \link{mt_example} for details). Alternatively, a trajectory 
+#'   array can be provided directly (in this case \code{use} will be ignored).
 #' @param use a character string specifying which trajectory data should be 
 #'   used.
 #' @param save_as a character string specifying where the resulting trajectory 
@@ -139,8 +146,10 @@ mt_remap_symmetric <- function(data,
 #' @param show_progress logical indicating whether function should report its 
 #'   progress.
 #'   
-#' @return A mousetrap data object (see \link{mt_example}) from which the
-#'   initial phase without mouse movement was removed.
+#' @return A mousetrap data object (see \link{mt_example}) from which the 
+#'   initial phase without mouse movement was removed. If the trajectory array
+#'   was provided directly as \code{data}, only the trajectory array will be
+#'   returned.
 #'   
 #' @seealso \link{mt_calculate_measures} for calculating the initiation time.
 #' 
@@ -204,9 +213,14 @@ mt_exclude_initiation <- function(data,
     trajectories[,timestamps,] <- trajectories[, timestamps, ] - trajectories[, timestamps, 1]
   }
   
-  data[[save_as]] <- trajectories
   
-  return(data)
+  if (is_mousetrap_data(data)){
+    data[[save_as]] <- trajectories
+    return(data)
+  }else{
+    return(trajectories)
+  }
+  
 }
 
 
@@ -218,7 +232,8 @@ mt_exclude_initiation <- function(data,
 #' they have the same start position.
 #' 
 #' @param data a mousetrap data object created using one of the mt_import 
-#'   functions (see \link{mt_example} for details).
+#'   functions (see \link{mt_example} for details). Alternatively, a trajectory
+#'   array can be provided directly (in this case \code{use} will be ignored).
 #' @param use a character string specifying which trajectory data should be 
 #'   used.
 #' @param save_as a character string specifying where the resulting trajectory 
@@ -238,7 +253,8 @@ mt_exclude_initiation <- function(data,
 #'   
 #' @return A mousetrap data object (see \link{mt_example}) with an additional
 #'   array (by default called \code{sn_trajectories}) containing the 
-#'   space-normalized trajectories.
+#'   space-normalized trajectories. If a trajectory array was provided directly
+#'   as \code{data}, only the space-normalized trajectories will be returned.
 #'   
 #' @references Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor
 #'   responses in the time course of categorizing atypical exemplars.
@@ -301,9 +317,14 @@ mt_space_normalize <- function(data,
     message(paste("all",i,"trials finished")) 
   }  
   
-  data[[save_as]] <- trajectories
   
-  return(data)
+  if (is_mousetrap_data(data)){
+    data[[save_as]] <- trajectories
+    return(data)
+  }else{
+    return(trajectories)
+  }
+  
 }
 
 #' Time normalize trajectories.
@@ -326,7 +347,8 @@ mt_space_normalize <- function(data,
 #' average trajectories, which are often used in plots.
 #' 
 #' @param data a mousetrap data object created using one of the mt_import 
-#'   functions (see \link{mt_example} for details).
+#'   functions (see \link{mt_example} for details). Alternatively, a trajectory
+#'   array can be provided directly (in this case \code{use} will be ignored).
 #' @param use a character string specifying which trajectory data should be 
 #'   used.
 #' @param save_as a character string specifying where the resulting trajectory 
@@ -339,7 +361,8 @@ mt_space_normalize <- function(data,
 #'   array (by default called \code{tn_trajectories}) containing the 
 #'   time-normalized trajectories. In this array, another dimension (called 
 #'   \code{steps}) has been added with increasing integer values indexing the 
-#'   time-normalized position.
+#'   time-normalized position. If a trajectory array was provided directly as
+#'   \code{data}, only the time-normalized trajectories will be returned.
 #'   
 #' @references Spivey, M. J., Grosjean, M., & Knoblich, G. (2005). Continuous
 #'   attraction toward phonological competitors. \emph{Proceedings of the
@@ -404,9 +427,14 @@ mt_time_normalize <- function(data,
     message(paste("all",i,"trials finished")) 
   }  
   
-  data[[save_as]] <- tn_trajectories
   
-  return(data)
+  if (is_mousetrap_data(data)){
+    data[[save_as]] <- tn_trajectories
+    return(data)
+  }else{
+    return(tn_trajectories)
+  }
+  
 }
 
 
@@ -436,7 +464,8 @@ mt_time_normalize <- function(data,
 #' this, \link{mt_average} can be used.
 #' 
 #' @param data a mousetrap data object created using one of the mt_import 
-#'   functions (see \link{mt_example} for details).
+#'   functions (see \link{mt_example} for details). Alternatively, a trajectory
+#'   array can be provided directly (in this case \code{use} will be ignored).
 #' @param use a character string specifying which trajectory data should be 
 #'   used.
 #' @param save_as a character string specifying where the resulting trajectory 
@@ -449,9 +478,10 @@ mt_time_normalize <- function(data,
 #' @param show_progress logical indicating whether function should report its 
 #'   progress.
 #'   
-#' @return A mousetrap data object (see \link{mt_example}) with an additional
-#'   array (by default called \code{rs_trajectories}) containing the resampled
-#'   trajectories.
+#' @return A mousetrap data object (see \link{mt_example}) with an additional 
+#'   array (by default called \code{rs_trajectories}) containing the resampled 
+#'   trajectories. If a trajectory array was provided directly as \code{data},
+#'   only the resampled trajectories will be returned.
 #'   
 #' @seealso \link[stats]{approx} for information about the function used for linear
 #' interpolation.
@@ -546,9 +576,14 @@ mt_resample <- function(data,
     message(paste("all", i, "trials finished")) 
   }  
   
-  data[[save_as]] <- rs_trajectories
   
-  return(data)
+  if (is_mousetrap_data(data)){
+    data[[save_as]] <- rs_trajectories
+    return(data)
+  }else{
+    return(rs_trajectories)
+  }
+  
 }
 
 #' Average trajectories across intervals.
@@ -582,7 +617,8 @@ mt_resample <- function(data,
 #' \link{mt_calculate_derivatives} should be called before averaging.
 #' 
 #' @param data a mousetrap data object created using one of the mt_import 
-#'   functions (see \link{mt_example} for details).
+#'   functions (see \link{mt_example} for details). Alternatively, a trajectory
+#'   array can be provided directly (in this case \code{use} will be ignored).
 #' @param use a character string specifying which trajectory data should be 
 #'   used.
 #' @param save_as a character string specifying where the resulting trajectory 
@@ -604,7 +640,8 @@ mt_resample <- function(data,
 #'   
 #' @return A mousetrap data object (see \link{mt_example}) with an additional 
 #'   array (by default called \code{av_trajectories}) that contains the average 
-#'   trajectory data per dimension interval.
+#'   trajectory data per dimension interval. If a trajectory array was provided 
+#'   directly as \code{data}, only the average trajectories will be returned.
 #'   
 #'   For the dimension values, the mid point of the respective interval is 
 #'   reported, which is helpful for plotting the trajectory data later on. 
@@ -745,9 +782,14 @@ mt_average <- function(data,
     message(paste("all", i, "trials finished")) 
   }  
   
-  data[[save_as]] <- av_trajectories
   
-  return(data)
+  if (is_mousetrap_data(data)){
+    data[[save_as]] <- av_trajectories
+    return(data)
+  }else{
+    return(av_trajectories)
+  }
+  
 }
 
 #' Filter mousetrap data.

@@ -10,7 +10,8 @@ mt_sample_entropy(data, use = "tn_trajectories", save_as = "measures",
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
-functions (see \link{mt_example} for details).}
+functions (see \link{mt_example} for details). Alternatively, a trajectory 
+array can be provided directly (in this case \code{use} will be ignored).}
 
 \item{use}{a character string specifying which trajectory data should be
 used.}
@@ -41,6 +42,9 @@ A mousetrap data object (see \link{mt_example}).
   additional column(s) (by merging them using the \link{mt_id} variable).
   
   If not, an additional \link{data.frame} will be added.
+  
+  If a trajectory array was provided directly as \code{data}, only the 
+  data.frame will be returned.
 }
 \description{
 Calculate sample entropy for each trajectory.

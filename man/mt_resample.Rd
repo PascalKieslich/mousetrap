@@ -9,7 +9,8 @@ mt_resample(data, use = "trajectories", save_as = "rs_trajectories",
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
-functions (see \link{mt_example} for details).}
+functions (see \link{mt_example} for details). Alternatively, a trajectory
+array can be provided directly (in this case \code{use} will be ignored).}
 
 \item{use}{a character string specifying which trajectory data should be 
 used.}
@@ -28,9 +29,10 @@ last timestamp is only appended if it is a multiple of the step_size.}
 progress.}
 }
 \value{
-A mousetrap data object (see \link{mt_example}) with an additional
-  array (by default called \code{rs_trajectories}) containing the resampled
-  trajectories.
+A mousetrap data object (see \link{mt_example}) with an additional 
+  array (by default called \code{rs_trajectories}) containing the resampled 
+  trajectories. If a trajectory array was provided directly as \code{data},
+  only the resampled trajectories will be returned.
 }
 \description{
 Resample trajectory positions using a constant time interval. If no timestamp

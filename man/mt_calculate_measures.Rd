@@ -9,7 +9,8 @@ mt_calculate_measures(data, use = "trajectories", save_as = "measures",
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
-functions (see \link{mt_example} for details).}
+functions (see \link{mt_example} for details). Alternatively, a trajectory 
+array can be provided directly (in this case \code{use} will be ignored).}
 
 \item{use}{a character string specifying which trajectory data should be 
 used.}
@@ -25,12 +26,13 @@ or y-flip.}
 progress.}
 }
 \value{
-A mousetrap data object (see \link{mt_example}) where an 
-  additional \link{data.frame} has been added (by default called "measures") 
-  containing the per-trial mouse-tracking measures. Each row in the 
-  data.frame corresponds to one trajectory (the corresponding trajectory is 
-  by default identified in the column \link{mt_id}). Each column in the
-  data.frame corresponds to one of the measures.
+A mousetrap data object (see \link{mt_example}) where an additional
+  \link{data.frame} has been added (by default called "measures") containing
+  the per-trial mouse-tracking measures. Each row in the data.frame
+  corresponds to one trajectory (the corresponding trajectory is by default
+  identified in the column \link{mt_id}). Each column in the data.frame
+  corresponds to one of the measures. If a trajectory array was provided 
+  directly as \code{data}, only the measures data.frame will be returned.
   
   Note that some measures are only returned if distance, velocity and
   acceleration are calculated using \link{mt_calculate_derivatives} before

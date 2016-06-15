@@ -23,7 +23,8 @@
 #' percentile is included (\code{IMD}).
 #' 
 #' @param data a mousetrap data object created using one of the mt_import 
-#'   functions (see \link{mt_example} for details).
+#'   functions (see \link{mt_example} for details). Alternatively, a trajectory 
+#'   array can be provided directly (in this case \code{use} will be ignored).
 #' @param use a character string specifying which trajectory data should be
 #'   used.
 #' @param save_as a character string specifying where the calculated measures
@@ -41,6 +42,9 @@
 #'   the \link{mt_id} variable).
 #'   
 #'   If not, an additional \link{data.frame} will be added.
+#'   
+#'   If a trajectory array was provided directly as \code{data}, only the
+#'   data.frame will be returned.
 #'   
 #' @references Buetti, S., & Kerzel, D. (2009). Conflicts during response 
 #'   selection affect response programming: Reactions toward the source of 
@@ -169,11 +173,17 @@ mt_movement_angle <- function(data,
   rownames(results) <- results[,mt_id]
   results <- cbind(results,data.frame(measures))
   
-  if (save_as %in% names(data)) {
-    data[[save_as]] <- merge(data[[save_as]], results, by=mt_id)
-  } else {
-    data[[save_as]] <- results
+  
+  if (is_mousetrap_data(data)){
+    if (save_as %in% names(data)) {
+      data[[save_as]] <- merge(data[[save_as]], results, by=mt_id)
+    } else {
+      data[[save_as]] <- results
+    }
+    return(data)
+    
+  }else{
+    return(results)
   }
   
-  return(data)
 }

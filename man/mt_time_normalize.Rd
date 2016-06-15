@@ -9,7 +9,8 @@ mt_time_normalize(data, use = "trajectories", save_as = "tn_trajectories",
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
-functions (see \link{mt_example} for details).}
+functions (see \link{mt_example} for details). Alternatively, a trajectory
+array can be provided directly (in this case \code{use} will be ignored).}
 
 \item{use}{a character string specifying which trajectory data should be 
 used.}
@@ -27,7 +28,8 @@ A mousetrap data object (see \link{mt_example}) with an additional
   array (by default called \code{tn_trajectories}) containing the 
   time-normalized trajectories. In this array, another dimension (called 
   \code{steps}) has been added with increasing integer values indexing the 
-  time-normalized position.
+  time-normalized position. If a trajectory array was provided directly as
+  \code{data}, only the time-normalized trajectories will be returned.
 }
 \description{
 Compute time-normalized trajectories using a constant number of equally sized

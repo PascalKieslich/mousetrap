@@ -29,7 +29,8 @@
 #' negative velocity.
 #' 
 #' @param data a mousetrap data object created using one of the mt_import 
-#'   functions (see \link{mt_example} for details).
+#'   functions (see \link{mt_example} for details). Alternatively, a trajectory
+#'   array can be provided directly (in this case \code{use} will be ignored).
 #' @param use a character string specifying which trajectory data should be used
 #'   (defaults to 'trajectories')
 #' @param save_as a character string specifying where the resulting trajectory 
@@ -46,7 +47,8 @@
 #'   
 #' @return A mousetrap data object (see \link{mt_example}) with 
 #'   Euclidian distance, velocity, and acceleration added as additional columns 
-#'   to the trajectory array.
+#'   to the trajectory array. If the trajectory array was provided directly as
+#'   \code{data}, only the trajectory array will be returned.
 #'   
 #' @seealso \link{mt_average} for averaging trajectories across constant time
 #' intervals.
@@ -150,8 +152,12 @@ mt_calculate_derivatives <- function(data,
     message(paste("all",i,"trials finished"))
   }
   
-  # Add array to data
-  data[[save_as]] <- derivatives
-
-  return(data)
+  
+  if (is_mousetrap_data(data)){
+    data[[save_as]] <- derivatives
+    return(data)
+  }else{
+    return(derivatives)
+  }
+  
 }

@@ -26,7 +26,8 @@
 #' 
 #' 
 #' @param data a mousetrap data object created using one of the mt_import 
-#'   functions (see \link{mt_example} for details).
+#'   functions (see \link{mt_example} for details). Alternatively, a trajectory 
+#'   array can be provided directly (in this case \code{use} will be ignored).
 #' @param use a character string specifying which trajectory data should be 
 #'   used.
 #' @param save_as a character string specifying where the calculated measures 
@@ -37,12 +38,13 @@
 #' @param show_progress logical indicating whether function should report its 
 #'   progress.
 #'   
-#' @return A mousetrap data object (see \link{mt_example}) where an 
-#'   additional \link{data.frame} has been added (by default called "measures") 
-#'   containing the per-trial mouse-tracking measures. Each row in the 
-#'   data.frame corresponds to one trajectory (the corresponding trajectory is 
-#'   by default identified in the column \link{mt_id}). Each column in the
-#'   data.frame corresponds to one of the measures.
+#' @return A mousetrap data object (see \link{mt_example}) where an additional
+#'   \link{data.frame} has been added (by default called "measures") containing
+#'   the per-trial mouse-tracking measures. Each row in the data.frame
+#'   corresponds to one trajectory (the corresponding trajectory is by default
+#'   identified in the column \link{mt_id}). Each column in the data.frame
+#'   corresponds to one of the measures. If a trajectory array was provided 
+#'   directly as \code{data}, only the measures data.frame will be returned.
 #'   
 #'   Note that some measures are only returned if distance, velocity and
 #'   acceleration are calculated using \link{mt_calculate_derivatives} before
@@ -394,8 +396,12 @@ mt_calculate_measures <- function(data,
   rownames(results) <- results[,mt_id]
   results <- cbind(results, data.frame(measures))
 
-  # Append results to data object
-  data[[save_as]] <- results
   
-  return(data)
+  if (is_mousetrap_data(data)){
+    data[[save_as]] <- results
+    return(data)
+  }else{
+    return(results)
+  }
+  
 }

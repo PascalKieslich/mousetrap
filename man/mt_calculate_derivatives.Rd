@@ -9,7 +9,8 @@ mt_calculate_derivatives(data, use = "trajectories", save_as = use,
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
-functions (see \link{mt_example} for details).}
+functions (see \link{mt_example} for details). Alternatively, a trajectory
+array can be provided directly (in this case \code{use} will be ignored).}
 
 \item{use}{a character string specifying which trajectory data should be used
 (defaults to 'trajectories')}
@@ -32,7 +33,8 @@ progress.}
 \value{
 A mousetrap data object (see \link{mt_example}) with 
   Euclidian distance, velocity, and acceleration added as additional columns 
-  to the trajectory array.
+  to the trajectory array. If the trajectory array was provided directly as
+  \code{data}, only the trajectory array will be returned.
 }
 \description{
 Calculate distance traveled, velocity, and acceleration for each logged 

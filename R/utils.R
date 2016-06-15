@@ -1,11 +1,27 @@
+# Check that data is a mousetrap object
+is_mousetrap_data <- function(data){
+  
+  return(class(data)=="list")
+  
+}
+
+
 # Extract data from mousetrap object
 extract_data <- function(data,use){
   
-  extracted <- data[[use]]
-  if(is.null(extracted)){
-    stop("No data called '",use,"' found.")
+  if (is_mousetrap_data(data)){
+    
+    extracted <- data[[use]]
+    if(is.null(extracted)){
+      stop("No data called '",use,"' found.")
+    }
+    return(extracted)
+    
+  } else {
+    
+    return(data)
   }
-  return(extracted)
+  
 }
 
 

@@ -28,7 +28,8 @@
 #' calculate sample_entropy values using both functions ("both").
 #'
 #' @param data a mousetrap data object created using one of the mt_import 
-#'   functions (see \link{mt_example} for details).
+#'   functions (see \link{mt_example} for details). Alternatively, a trajectory 
+#'   array can be provided directly (in this case \code{use} will be ignored).
 #' @param use a character string specifying which trajectory data should be
 #'   used.
 #' @param save_as a character string specifying where the calculated measures
@@ -51,6 +52,9 @@
 #'   additional column(s) (by merging them using the \link{mt_id} variable).
 #'   
 #'   If not, an additional \link{data.frame} will be added.
+#'   
+#'   If a trajectory array was provided directly as \code{data}, only the 
+#'   data.frame will be returned.
 #'   
 #' @references Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor
 #'   responses in the time course of categorizing atypical exemplars.
@@ -126,7 +130,7 @@ mt_sample_entropy <- function(data,
   
   # Prepare data
   trajectories <- extract_data(data=data, use=use)
-  if (!(dimension %in% colnames(data$trajectories))) {
+  if (!(dimension %in% colnames(trajectories))) {
     stop(paste("Dimension", dimension, "not found in trajectory array."))
   }
   
@@ -213,11 +217,17 @@ mt_sample_entropy <- function(data,
   rownames(results) <- results[,mt_id]
   results <- cbind(results,data.frame(measures))
   
-  if (save_as %in% names(data)) {
-    data[[save_as]] <- merge(data[[save_as]], results, by=mt_id)
-  } else {
-    data[[save_as]] <- results
+  
+  if (is_mousetrap_data(data)){
+    if (save_as %in% names(data)) {
+      data[[save_as]] <- merge(data[[save_as]], results, by=mt_id)
+    } else {
+      data[[save_as]] <- results
+    }
+    return(data)
+    
+  }else{
+    return(results)
   }
   
-  return(data)
 }

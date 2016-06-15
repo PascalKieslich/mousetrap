@@ -10,7 +10,8 @@ mt_space_normalize(data, use = "trajectories", save_as = "sn_trajectories",
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
-functions (see \link{mt_example} for details).}
+functions (see \link{mt_example} for details). Alternatively, a trajectory
+array can be provided directly (in this case \code{use} will be ignored).}
 
 \item{use}{a character string specifying which trajectory data should be 
 used.}
@@ -38,7 +39,8 @@ progress.}
 \value{
 A mousetrap data object (see \link{mt_example}) with an additional
   array (by default called \code{sn_trajectories}) containing the 
-  space-normalized trajectories.
+  space-normalized trajectories. If a trajectory array was provided directly
+  as \code{data}, only the space-normalized trajectories will be returned.
 }
 \description{
 Adjust trajectories so that all trajectories have an identical start and end
