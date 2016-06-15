@@ -145,6 +145,19 @@ mt_plot_riverbed <- function(data, use='tn_trajectories',
     }
   }
   
+  # Preserve factor levels if facet variables are factors
+  if(!is.null(facet_row)){
+    if(is.factor(data[[facet_data]][,facet_row])){
+      riverbed[,'facet_row'] <- factor(riverbed[,'facet_row'],levels=levels(data[[facet_data]][,facet_row]))
+    }
+  }
+  if(!is.null(facet_col)){
+    if(is.factor(data[[facet_data]][,facet_col])){
+      riverbed[,'facet_col'] <- factor(riverbed[,'facet_col'],levels=levels(data[[facet_data]][,facet_col]))
+    }
+  }
+  
+  
   # Create plot output
   output <- ggplot2::ggplot(ggplot2::aes_string(x='value_x', y='value_y', 
       fill='frequency', alpha='alpha'), data=riverbed) +
