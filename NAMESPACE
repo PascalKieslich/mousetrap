@@ -3,6 +3,7 @@
 export(bimodality_coefficient)
 export(mt_aggregate)
 export(mt_aggregate_per_subject)
+export(mt_align_start)
 export(mt_average)
 export(mt_calculate_derivatives)
 export(mt_calculate_measures)

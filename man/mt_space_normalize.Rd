@@ -22,16 +22,16 @@ data should be stored.}
 \item{xpos_start}{an integer specifying the value the first x-position should
 have in each trial.}
 
-\item{xpos_end}{an (optional) integer specifying the value the last
-x-position should have in each trial. If unspecified (the default),
-trajectories are only adjusted so that they have the same start position.}
+\item{xpos_end}{an integer specifying the value the last x-position should
+have in each trial. If \code{NULL}, trajectories are only adjusted so that
+they have the same start position.}
 
 \item{ypos_start}{an integer specifying the value the first y-position should
 have in each trial.}
 
-\item{ypos_end}{an (optional) integer specifying the value the last
-y-position should have in each trial. If unspecified (the default),
-trajectories are only adjusted so that they have the same start position.}
+\item{ypos_end}{an integer specifying the value the last y-position should
+have in each trial. If  \code{NULL}, trajectories are only adjusted so that
+they have the same start position.}
 
 \item{show_progress}{logical indicating whether function should report its 
 progress.}
@@ -60,6 +60,9 @@ Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor
   \emph{Memory & Cognition, 35}(1), 15-28.
 }
 \seealso{
-\link{mt_remap_symmetric} for remapping trajectories.
+\link{mt_align_start} for aligning the start position of
+  trajectories.
+  
+  \link{mt_remap_symmetric} for remapping trajectories.
 }
 

@@ -240,14 +240,14 @@ mt_exclude_initiation <- function(data,
 #'   data should be stored.
 #' @param xpos_start an integer specifying the value the first x-position should
 #'   have in each trial.
-#' @param xpos_end an (optional) integer specifying the value the last
-#'   x-position should have in each trial. If unspecified (the default),
-#'   trajectories are only adjusted so that they have the same start position.
+#' @param xpos_end an integer specifying the value the last x-position should
+#'   have in each trial. If \code{NULL}, trajectories are only adjusted so that
+#'   they have the same start position.
 #' @param ypos_start an integer specifying the value the first y-position should
 #'   have in each trial.
-#' @param ypos_end an (optional) integer specifying the value the last
-#'   y-position should have in each trial. If unspecified (the default),
-#'   trajectories are only adjusted so that they have the same start position.
+#' @param ypos_end an integer specifying the value the last y-position should
+#'   have in each trial. If  \code{NULL}, trajectories are only adjusted so that
+#'   they have the same start position.
 #' @param show_progress logical indicating whether function should report its 
 #'   progress.
 #'   
@@ -260,7 +260,10 @@ mt_exclude_initiation <- function(data,
 #'   responses in the time course of categorizing atypical exemplars.
 #'   \emph{Memory & Cognition, 35}(1), 15-28.
 #' 
-#' @seealso \link{mt_remap_symmetric} for remapping trajectories.
+#' @seealso \link{mt_align_start} for aligning the start position of
+#'   trajectories.
+#'   
+#'   \link{mt_remap_symmetric} for remapping trajectories.
 #' 
 #' @examples
 #' mt_example <- mt_space_normalize(mt_example,
@@ -325,6 +328,38 @@ mt_space_normalize <- function(data,
     return(trajectories)
   }
   
+}
+
+
+#' Align start position of trajectories.
+#' 
+#' Adjust trajectories so that all trajectories have the same start position.
+#' 
+#' @inheritParams mt_space_normalize
+#' 
+#' @return A mousetrap data object (see \link{mt_example}) with aligned 
+#'   trajectories. If the trajectory array was provided directly as \code{data},
+#'   only the trajectory array will be returned.
+#'   
+#' @seealso \link{mt_space_normalize} for space normalizing trajectories.
+#' 
+#' \link{mt_remap_symmetric} for remapping trajectories.
+#' 
+#' @examples
+#' mt_example <- mt_align_start(mt_example,
+#'   xpos_start=0, ypos_start=0)
+#' 
+#' @export
+mt_align_start <- function(data,
+                           use="trajectories", save_as="trajectories",
+                           xpos_start = 0, ypos_start = 0,
+                           show_progress=TRUE) {
+  
+  return(mt_space_normalize(data=data, use=use, save_as=save_as,
+                            xpos_start=xpos_start, xpos_end = NULL,
+                            ypos_start=xpos_start, ypos_end = NULL,
+                            show_progress = show_progress))
+
 }
 
 #' Time normalize trajectories.

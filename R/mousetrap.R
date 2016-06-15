@@ -33,6 +33,8 @@
 #'   \link{mt_exclude_initiation}	excludes the initial phase of a trial without 
 #'   mouse movement.
 #'   
+#'   \link{mt_align_start} aligns the start position of trajectories.
+#'   
 #'   \link{mt_space_normalize} performs space-normalization by remapping all
 #'   trajectories so that they share a common initial and final coordinate.
 #'   
@@ -116,8 +118,7 @@
 #' @examples
 #' mt_example <- mt_import_mousetrap(mt_example_raw)
 #' mt_example <- mt_remap_symmetric(mt_example)
-#' mt_example <- mt_space_normalize(mt_example,
-#'  xpos_start = 0,ypos_start = 0,save_as="trajectories")
+#' mt_example <- mt_align_start(mt_example)
 #' mt_example <- mt_time_normalize(mt_example)
 #' mt_example <- mt_calculate_derivatives(mt_example)
 #' mt_example <- mt_calculate_measures(mt_example)
