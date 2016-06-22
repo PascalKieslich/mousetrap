@@ -59,6 +59,9 @@
 #'   \link{mt_calculate_derivatives} calculates distance, velocity, and 
 #'   acceleration for trajectories.
 #'   
+#'   \link{mt_calculate_deviations} calculates the deviations from an idealized
+#'   trajectory (straight line).
+#'   
 #'   \link{mt_calculate_measures}	calculates a set of mouse-tracking measures.
 #'   
 #'   \link{mt_sample_entropy}	calculates sample entropy.
@@ -121,6 +124,7 @@
 #' mt_example <- mt_align_start(mt_example)
 #' mt_example <- mt_time_normalize(mt_example)
 #' mt_example <- mt_calculate_derivatives(mt_example)
+#' mt_example <- mt_calculate_deviations(mt_example)
 #' mt_example <- mt_calculate_measures(mt_example)
 #' 
 #' average_measures <- mt_aggregate(

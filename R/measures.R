@@ -116,6 +116,7 @@
 #' 
 #' @examples
 #' mt_example <- mt_calculate_derivatives(mt_example)
+#' mt_example <- mt_calculate_deviations(mt_example)
 #' mt_example <- mt_calculate_measures(mt_example)
 #' 
 #' # Merge measures with trial data (adding "_raw"
@@ -132,14 +133,24 @@ mt_calculate_measures <- function(data,
   # Prepare data
   trajectories <- extract_data(data=data, use=use)
   timestamps <- mt_variable_labels["timestamps"]
-  xpos <- mt_variable_labels["xpos"]
-  ypos <- mt_variable_labels["ypos"]
-  dist <- mt_variable_labels["dist"]
-  vel  <- mt_variable_labels["vel"]
-  acc  <- mt_variable_labels["acc"]
+  xpos <- mt_variable_labels[["xpos"]]
+  ypos <- mt_variable_labels[["ypos"]]
+  dist <- mt_variable_labels[["dist"]]
+  vel  <- mt_variable_labels[["vel"]]
+  acc  <- mt_variable_labels[["acc"]]
+  xpos_ideal <- mt_variable_labels[["xpos_ideal"]]
+  ypos_ideal <- mt_variable_labels[["ypos_ideal"]]
+  dev_ideal <- mt_variable_labels[["dev_ideal"]]
 
   # Calculate number of logs
   nlogs <- rowSums(!is.na(trajectories[,xpos,,drop=FALSE]))
+  
+  # Calculate deviations if no deviations were found in the data
+  if (!dev_ideal %in% dimnames(trajectories)[[2]]) {
+    trajectories <- mt_calculate_deviations(
+      data=trajectories, show_progress = FALSE
+    )
+  }
 
   # Setup variable matrix depending on whether timestamps are provided or not
   if (timestamps %in% dimnames(trajectories)[[2]]) {
@@ -211,32 +222,14 @@ mt_calculate_measures <- function(data,
   
   # Iterate over trajectories and calculate measures
   for (i in 1:nrow(trajectories)) {
-
-    current_points <- trajectories[i, c(xpos,ypos), 1:nlogs[i]]
+    
+    # Extract variables
     current_xpos <- trajectories[i, xpos, 1:nlogs[i]]
     current_ypos <- trajectories[i, ypos, 1:nlogs[i]]
+    current_xpos_ideal <- trajectories[i, xpos_ideal, 1:nlogs[i]]
+    current_ypos_ideal <- trajectories[i, ypos_ideal, 1:nlogs[i]]
+    current_dev_ideal <- trajectories[i, dev_ideal, 1:nlogs[i]]
     
-    # Determine straight line (idealized trajectory)
-    straight_line <- points_on_ideal(current_points)
-    straight_line_xpos <- straight_line[xpos,]
-    straight_line_ypos <- straight_line[ypos,]
-    
-    # Calculate distance of each point on the curve from straight line
-    # (cf. Pythagoras, some time ago)
-    deviation <- sqrt(colSums((straight_line-current_points)^2))
-    
-    # Check if end point is above the start point
-    end_above_start <- current_ypos[length(current_ypos)] >= current_ypos[1]
-    
-    # Flip deviation for points under the idealized straight line
-    if (end_above_start) {
-      deviation[straight_line_ypos > current_ypos] <- 
-        -deviation[straight_line_ypos > current_ypos]
-    } else {
-      deviation[straight_line_ypos < current_ypos] <- 
-        -deviation[straight_line_ypos < current_ypos]
-    }
-
     # Calculate min and max values for x and y
     measures[i,"x_max"] <- max(current_xpos)
     measures[i,"x_min"] <- min(current_xpos)
@@ -244,41 +237,42 @@ mt_calculate_measures <- function(data,
     measures[i,"y_min"] <- min(current_ypos)
     
     # Maximum absolute deviation (output including sign)
-    measures[i,"MAD"] <- deviation[which.max(abs(deviation))]
+    measures[i,"MAD"] <- current_dev_ideal[which.max(abs(current_dev_ideal))]
     
     # Maximum deviation above idealized trajectory 
     # (== in direction of non-chosen option)
-    measures[i,"MD_above"] <- max(deviation)
+    measures[i,"MD_above"] <- max(current_dev_ideal)
     
     # Maximum deviation below idealized trajectory 
     # (== in direction of chosen option)
-    measures[i,"MD_below"] <- min(deviation)
+    measures[i,"MD_below"] <- min(current_dev_ideal)
     
     # Calculate average deviation from direct path
-    measures[i,"AD"] <- mean(deviation)
+    measures[i,"AD"] <- mean(current_dev_ideal)
     
     # Calculate area under curve
     # Use deviation of actual trajectory as y coordinates
     # and distance from starting point of the idealized 
     # trajectory as x coordinate
     dist_from_start <- sqrt(
-      (straight_line_xpos-straight_line_xpos[1])^2 + 
-      (straight_line_ypos-straight_line_ypos[1])^2
+      (current_xpos_ideal-current_xpos_ideal[1])^2 + 
+      (current_ypos_ideal-current_ypos_ideal[1])^2
     )
+    
     # Flip sign for points below the idealized line
-    if (end_above_start){
-      dist_from_start[straight_line_ypos < current_ypos[1]] <- 
-        -dist_from_start[straight_line_ypos < current_ypos[1]]
+    if (current_ypos_ideal[length(current_ypos_ideal)] >= current_ypos_ideal[1]){
+      dist_from_start[current_ypos_ideal < current_ypos_ideal[1]] <- 
+        -dist_from_start[current_ypos_ideal < current_ypos_ideal[1]]
     } else {
-      dist_from_start[straight_line_ypos > current_ypos[1]] <- 
-        -dist_from_start[straight_line_ypos > current_ypos[1]]
+      dist_from_start[current_ypos_ideal > current_ypos_ideal[1]] <- 
+        -dist_from_start[current_ypos_ideal > current_ypos_ideal[1]]
     }
     
     # Compute the area spanned by the x/y coordinate pairs,
     # which is now the AUC (the coordinate system has been
     # rotated so that the x axis corresponds to the direct
     # path between start and end points)
-    measures[i,"AUC"]<- -pracma::polyarea(dist_from_start,deviation)
+    measures[i,"AUC"]<- -pracma::polyarea(dist_from_start,current_dev_ideal)
     
     # Calculate number of x_flips and y_flips
     measures[i,"x_flips"] <- count_changes(current_xpos, threshold=flip_threshold)
@@ -305,7 +299,7 @@ mt_calculate_measures <- function(data,
         current_timestamps <- c(0, current_timestamps)
         current_xpos <- c(current_xpos[1], current_xpos)
         current_ypos <- c(current_ypos[1], current_ypos)
-        deviation <- c(deviation[1], deviation)
+        current_dev_ideal <- c(current_dev_ideal[1], current_dev_ideal)
         nlogs[i] <- nlogs[i] + 1
       }
 
@@ -336,9 +330,9 @@ mt_calculate_measures <- function(data,
       
       # notes: timestamps (e.g., for MAD) always correspond
       # to the first time the max/min value was reached
-      measures[i,"MAD_time"] <- current_timestamps[which.max(abs(deviation))]
-      measures[i,"MD_above_time"] <- current_timestamps[which.max(deviation)]
-      measures[i,"MD_below_time"] <- current_timestamps[which.min(deviation)]
+      measures[i,"MAD_time"] <- current_timestamps[which.max(abs(current_dev_ideal))]
+      measures[i,"MD_above_time"] <- current_timestamps[which.max(current_dev_ideal)]
+      measures[i,"MD_below_time"] <- current_timestamps[which.min(current_dev_ideal)]
       
     }
     

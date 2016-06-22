@@ -108,6 +108,7 @@ package.
 }
 \examples{
 mt_example <- mt_calculate_derivatives(mt_example)
+mt_example <- mt_calculate_deviations(mt_example)
 mt_example <- mt_calculate_measures(mt_example)
 
 # Merge measures with trial data (adding "_raw"
