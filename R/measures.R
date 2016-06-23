@@ -146,7 +146,7 @@ mt_calculate_measures <- function(data,
   nlogs <- rowSums(!is.na(trajectories[,xpos,,drop=FALSE]))
   
   # Calculate deviations if no deviations were found in the data
-  if (!dev_ideal %in% dimnames(trajectories)[[2]]) {
+  if (!all(c(dev_ideal,xpos_ideal,ypos_ideal) %in% dimnames(trajectories)[[2]])) {
     trajectories <- mt_calculate_deviations(
       data=trajectories, show_progress = FALSE
     )
