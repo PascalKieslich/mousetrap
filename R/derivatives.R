@@ -39,6 +39,8 @@
 #'   distances, velocity, and acceleration are calculated. By default ("xypos"),
 #'   they are calculated across both x and y dimensions. Alternatively, only the
 #'   x- ("xpos") or the y- ("ypos") dimension can be used.
+#' @param prefix an optional character string that is added as a prefix to the 
+#'   to be created new trajectory dimensions.
 #' @param acc_on_abs_vel logical indicating if acceleration should be calculated
 #'   based on absolute velocity values (ignoring direction). Only relevant if 
 #'   velocity can be negative (see Details).
@@ -69,7 +71,8 @@
 #' @export
 mt_calculate_derivatives <- function(data,
   use="trajectories", save_as=use,
-  dimension="xypos", acc_on_abs_vel=FALSE,
+  dimension="xypos", prefix="",
+  acc_on_abs_vel=FALSE,
   show_progress=TRUE) {
   
   # Extract trajectories and labels
@@ -77,9 +80,9 @@ mt_calculate_derivatives <- function(data,
   timestamps <- mt_variable_labels[["timestamps"]]
   xpos <- mt_variable_labels[["xpos"]]
   ypos <- mt_variable_labels[["ypos"]]
-  dist <- mt_variable_labels[["dist"]]
-  vel  <- mt_variable_labels[["vel"]]
-  acc  <- mt_variable_labels[["acc"]]
+  dist <- paste0(prefix,mt_variable_labels[["dist"]])
+  vel  <- paste0(prefix,mt_variable_labels[["vel"]])
+  acc  <- paste0(prefix,mt_variable_labels[["acc"]])
   
   # Remove potentially existing derivates in original data
   trajectories <- trajectories[

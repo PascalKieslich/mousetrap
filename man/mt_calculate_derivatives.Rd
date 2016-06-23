@@ -5,7 +5,8 @@
 \title{Calculate distance, velocity, and acceleration.}
 \usage{
 mt_calculate_derivatives(data, use = "trajectories", save_as = use,
-  dimension = "xypos", acc_on_abs_vel = FALSE, show_progress = TRUE)
+  dimension = "xypos", prefix = "", acc_on_abs_vel = FALSE,
+  show_progress = TRUE)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
@@ -22,6 +23,9 @@ data should be stored.}
 distances, velocity, and acceleration are calculated. By default ("xypos"),
 they are calculated across both x and y dimensions. Alternatively, only the
 x- ("xpos") or the y- ("ypos") dimension can be used.}
+
+\item{prefix}{an optional character string that is added as a prefix to the 
+to be created new trajectory dimensions.}
 
 \item{acc_on_abs_vel}{logical indicating if acceleration should be calculated
 based on absolute velocity values (ignoring direction). Only relevant if 
