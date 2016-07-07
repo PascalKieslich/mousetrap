@@ -69,9 +69,9 @@ mt_movement_angle <- function(data,
 
   # Prepare data
   trajectories <- extract_data(data=data, use=use)
-  timestamps <- mt_variable_labels["timestamps"]
-  xpos <- mt_variable_labels["xpos"]
-  ypos <- mt_variable_labels["ypos"]
+  timestamps <- mt_variable_labels[["timestamps"]]
+  xpos <- mt_variable_labels[["xpos"]]
+  ypos <- mt_variable_labels[["ypos"]]
   
   # Calculate number of logs
   nlogs <- rowSums(!is.na(trajectories[,xpos,,drop=FALSE]))

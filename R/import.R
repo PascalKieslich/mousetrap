@@ -419,17 +419,17 @@ mt_import_wide <- function(raw_data,
   rownames(raw_data) <- raw_data[,mt_id]
 
   # Extract timestamps from mt_variable_labels
-  timestamps <- mt_variable_labels["timestamps"]
-  xpos <- mt_variable_labels["xpos"]
+  timestamps <- mt_variable_labels[["timestamps"]]
+  xpos <- mt_variable_labels[["xpos"]]
 
   # Create list with variables
   mt_variable_labels <- list(
-    xpos = list("label"=xpos_label, "name"=mt_variable_labels["xpos"]),
-    ypos = list("label"=ypos_label, "name"=mt_variable_labels["ypos"]),
-    timestamps = list("label"=timestamps_label, "name"=mt_variable_labels["timestamps"]),
-    dist = list("label"=dist_label, "name"=mt_variable_labels["dist"]),
-    vel = list("label"=vel_label, "name"=mt_variable_labels["vel"]),
-    acc = list("label"=acc_label, "name"=mt_variable_labels["acc"])
+    xpos = list("label"=xpos_label, "name"=mt_variable_labels[["xpos"]]),
+    ypos = list("label"=ypos_label, "name"=mt_variable_labels[["ypos"]]),
+    timestamps = list("label"=timestamps_label, "name"=mt_variable_labels[["timestamps"]]),
+    dist = list("label"=dist_label, "name"=mt_variable_labels[["dist"]]),
+    vel = list("label"=vel_label, "name"=mt_variable_labels[["vel"]]),
+    acc = list("label"=acc_label, "name"=mt_variable_labels[["acc"]])
   )
 
   if (is.null(pos_ids)){
@@ -594,13 +594,13 @@ mt_import_long <- function(raw_data,
     dist=dist_label, vel=vel_label, acc=acc_label
   )
   mt_include <- c()
-  timestamps <- mt_variable_labels["timestamps"]
+  timestamps <- mt_variable_labels[["timestamps"]]
 
   for (var in names(mt_labels)) {
     label <- mt_labels[var]
     if (label %in% colnames(raw_data)) {
-      colnames(raw_data)[colnames(raw_data) == label] <- mt_variable_labels[var]
-      mt_include <- c(mt_include, mt_variable_labels[var])
+      colnames(raw_data)[colnames(raw_data) == label] <- mt_variable_labels[[var]]
+      mt_include <- c(mt_include, mt_variable_labels[[var]])
     }
   }
 

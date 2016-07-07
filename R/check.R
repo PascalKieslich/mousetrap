@@ -34,7 +34,7 @@
 mt_check_resolution <- function(data, use="trajectories", desired=NULL) {
   
   trajectories <- extract_data(data=data,use=use)
-  timestamps <- mt_variable_labels["timestamps"]
+  timestamps <- mt_variable_labels[["timestamps"]]
   
   # Compute steps in the timestamps
   if(dim( trajectories )[1] == 1) {

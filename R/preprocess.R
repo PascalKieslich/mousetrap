@@ -60,8 +60,8 @@ mt_remap_symmetric <- function(data,
   
   # Data setup
   trajectories <- extract_data(data=data,use=use)
-  xpos <- mt_variable_labels["xpos"]
-  ypos <- mt_variable_labels["ypos"]
+  xpos <- mt_variable_labels[["xpos"]]
+  ypos <- mt_variable_labels[["ypos"]]
   
   # Argument checking
   if (!(remap_xpos %in% c('left', 'right', 'no'))) {
@@ -164,9 +164,9 @@ mt_exclude_initiation <- function(data,
   
   # Gather necessary data
   trajectories <- extract_data(data=data,use=use)
-  timestamps <- mt_variable_labels["timestamps"]
-  xpos <- mt_variable_labels["xpos"]
-  ypos <- mt_variable_labels["ypos"]
+  timestamps <- mt_variable_labels[["timestamps"]]
+  xpos <- mt_variable_labels[["xpos"]]
+  ypos <- mt_variable_labels[["ypos"]]
   
   # Calculate number of logs
   nlogs <- rowSums(!is.na(trajectories[, timestamps, , drop=FALSE]))
@@ -280,9 +280,9 @@ mt_space_normalize <- function(data,
   
   # Preparation
   trajectories <- extract_data(data=data,use=use)
-  timestamps <- mt_variable_labels["timestamps"]
-  xpos <- mt_variable_labels["xpos"]
-  ypos <- mt_variable_labels["ypos"]
+  timestamps <- mt_variable_labels[["timestamps"]]
+  xpos <- mt_variable_labels[["xpos"]]
+  ypos <- mt_variable_labels[["ypos"]]
   
   # Remove potentially existing other trajectory information in original data
   trajectories <- trajectories[
@@ -421,9 +421,9 @@ mt_time_normalize <- function(data,
   
   # Preparation
   trajectories <- extract_data(data=data,use=use)
-  timestamps <- mt_variable_labels["timestamps"]
-  xpos <- mt_variable_labels["xpos"]
-  ypos <- mt_variable_labels["ypos"]
+  timestamps <- mt_variable_labels[["timestamps"]]
+  xpos <- mt_variable_labels[["xpos"]]
+  ypos <- mt_variable_labels[["ypos"]]
   
   # Create empty array for output
   tn_trajectories <- array(
@@ -538,9 +538,9 @@ mt_resample <- function(data,
   
   # Preparation
   trajectories <- extract_data(data=data,use=use)
-  timestamps <- mt_variable_labels["timestamps"]
-  xpos <- mt_variable_labels["xpos"]
-  ypos <- mt_variable_labels["ypos"]
+  timestamps <- mt_variable_labels[["timestamps"]]
+  xpos <- mt_variable_labels[["xpos"]]
+  ypos <- mt_variable_labels[["ypos"]]
   
   # Calculate the number of steps after resampling
   max_steps <- ceiling(
