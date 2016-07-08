@@ -34,12 +34,6 @@ A mousetrap data object (see \link{mt_example}) where an additional
   corresponds to one of the measures. If a trajectory array was provided 
   directly as \code{data}, only the measures data.frame will be returned.
   
-  Note that some measures are only returned if distance, velocity and
-  acceleration are calculated using \link{mt_calculate_derivatives} before
-  running \code{mt_calculate_measures}. Besides, the meaning of these
-  measures depends on the values of the arguments in
-  \link{mt_calculate_derivatives}.
-  
   The following measures are computed for each trajectory: 
   \item{\link{mt_id}}{Trial ID (can be used for merging measures data.frame 
   with other trial-level data)}
@@ -84,6 +78,17 @@ A mousetrap data object (see \link{mt_example}) where an additional
 Calculate a number of mouse-tracking measures for each trajectory.
 }
 \details{
+Note that some measures are only returned if distance, velocity and 
+acceleration are calculated using \link{mt_calculate_derivatives} before 
+running \code{mt_calculate_measures}. Besides, the meaning of these measures
+depends on the values of the arguments in \link{mt_calculate_derivatives}.
+  
+If the deviations from the idealized response trajectory have been calculated
+using \link{mt_calculate_deviations} before running
+\code{mt_calculate_measures}, the corresponding data in the trajectory array
+will be used. If not, \code{mt_calculate_measures} will calculate these
+deviations automatically.
+
 The calculation of most measures can be deduced directly from their 
 definition (see Value). For several more complex measures, a few details are 
 provided in the following.

@@ -2,6 +2,17 @@
 #' 
 #' Calculate a number of mouse-tracking measures for each trajectory.
 #' 
+#' Note that some measures are only returned if distance, velocity and 
+#' acceleration are calculated using \link{mt_calculate_derivatives} before 
+#' running \code{mt_calculate_measures}. Besides, the meaning of these measures
+#' depends on the values of the arguments in \link{mt_calculate_derivatives}.
+#'   
+#' If the deviations from the idealized response trajectory have been calculated
+#' using \link{mt_calculate_deviations} before running
+#' \code{mt_calculate_measures}, the corresponding data in the trajectory array
+#' will be used. If not, \code{mt_calculate_measures} will calculate these
+#' deviations automatically.
+#' 
 #' The calculation of most measures can be deduced directly from their 
 #' definition (see Value). For several more complex measures, a few details are 
 #' provided in the following.
@@ -39,12 +50,6 @@
 #'   identified in the column \link{mt_id}). Each column in the data.frame
 #'   corresponds to one of the measures. If a trajectory array was provided 
 #'   directly as \code{data}, only the measures data.frame will be returned.
-#'   
-#'   Note that some measures are only returned if distance, velocity and
-#'   acceleration are calculated using \link{mt_calculate_derivatives} before
-#'   running \code{mt_calculate_measures}. Besides, the meaning of these
-#'   measures depends on the values of the arguments in
-#'   \link{mt_calculate_derivatives}.
 #'   
 #'   The following measures are computed for each trajectory: 
 #'   \item{\link{mt_id}}{Trial ID (can be used for merging measures data.frame 
@@ -141,9 +146,15 @@ mt_calculate_measures <- function(data,
   
   # Calculate deviations if no deviations were found in the data
   if (!all(c(dev_ideal,xpos_ideal,ypos_ideal) %in% dimnames(trajectories)[[2]])) {
+    if (show_progress) {
+      message("Start calculating deviations of actual from idealized response trajectory.")
+    }
     trajectories <- mt_calculate_deviations(
-      data=trajectories, show_progress = FALSE
+      data=trajectories, show_progress = show_progress
     )
+    if (show_progress) {
+      message("Start calculating mouse-tracking measures.")
+    }
   }
 
   # Setup variable matrix depending on whether timestamps are provided or not
