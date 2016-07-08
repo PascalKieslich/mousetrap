@@ -1,3 +1,11 @@
+# mousetrap 1.2.0
+* New function `mt_align_start` adjusts trajectories so that they have the same start position (wrapper for `mt_space_normalize`)
+* New function `mt_calculate_deviations` calculates the idealized trajectory and the perpendicular deviations of the actual trajectory from it for each position in the trajectory array
+* For many functions, a trajectory array can now be provided directly via the `data` argument. In this case, the `use` argument will be ignored and only the resulting trajectory array will be returned
+* `mt_plot_riverbed` now preserves factor levels for facets
+* `mt_calculate_derivatives` now allows for custom dimension names using the `prefix` argument
+* `mt_plot_per_trajectory` now receives the file name as the first argument
+
 # mousetrap 1.1.0
 * `mt_import_mousetrap` now offers possibility to combine several variables in mouse-tracking raw data
 * `mt_plot_riverbed` now allows for faceting
