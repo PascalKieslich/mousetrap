@@ -6,9 +6,10 @@
 #' for timestamps, \code{dist} for distance traveled, \code{vel} for velocity, 
 #' and \code{acc} for acceleration. Besides, \code{xpos_ideal} for x-positions 
 #' and \code{ypos_ideal} for y-positions of an idealized trajectory, and 
-#' \code{dev_ideal} for deviations of the actual trajectory from the idealized
-#' trajectory. These labels will be used for labeling the respective dimensions
-#' in the trajectory array (see \link{mt_example}).
+#' \code{dev_ideal} for deviations of the actual trajectory from the idealized 
+#' trajectory. These labels will be used for labeling the respective dimensions 
+#' in the trajectory array (see \link{mt_example}). Please note that it is
+#' currently not possible to change the default labels.
 #' 
 #' @examples
 #' # the default values
@@ -36,10 +37,11 @@ mt_variable_labels=c(
 #' every trial. By default, this label is called \code{mt_id}. This ID is 
 #' generated when importing data using one of the mt_import functions (e.g., 
 #' \link{mt_import_mousetrap}). Every data.frame that is added to a mousetrap 
-#' data object (see \link{mt_example}) contains a column of that name. In every
-#' trajectory array, the first dimension corresponding to the different trials
-#' has the respective label of the trial as name. Using the \code{mt_id}
+#' data object (see \link{mt_example}) contains a column of that name. In every 
+#' trajectory array, the first dimension corresponding to the different trials 
+#' has the respective label of the trial as name. Using the \code{mt_id} 
 #' variable, data from different data.frames or arrays can be merged easily.
+#' Please note that it is currently not possible to change the default value.
 #' 
 #' @examples
 #' # the default value

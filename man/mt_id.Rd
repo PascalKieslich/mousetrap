@@ -13,10 +13,11 @@ A character string specifying the name of the column containing the ID of
 every trial. By default, this label is called \code{mt_id}. This ID is 
 generated when importing data using one of the mt_import functions (e.g., 
 \link{mt_import_mousetrap}). Every data.frame that is added to a mousetrap 
-data object (see \link{mt_example}) contains a column of that name. In every
-trajectory array, the first dimension corresponding to the different trials
-has the respective label of the trial as name. Using the \code{mt_id}
+data object (see \link{mt_example}) contains a column of that name. In every 
+trajectory array, the first dimension corresponding to the different trials 
+has the respective label of the trial as name. Using the \code{mt_id} 
 variable, data from different data.frames or arrays can be merged easily.
+Please note that it is currently not possible to change the default value.
 }
 \examples{
 # the default value
