@@ -10,11 +10,11 @@ mt_calculate_derivatives(data, use = "trajectories", save_as = use,
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
-functions (see \link{mt_example} for details). Alternatively, a trajectory
+functions (see \link{mt_example} for details). Alternatively, a trajectory 
 array can be provided directly (in this case \code{use} will be ignored).}
 
-\item{use}{a character string specifying which trajectory data should be used
-(defaults to 'trajectories')}
+\item{use}{a character string specifying which trajectory data should be 
+used.}
 
 \item{save_as}{a character string specifying where the resulting trajectory 
 data should be stored.}
@@ -31,7 +31,7 @@ to be created new trajectory dimensions.}
 based on absolute velocity values (ignoring direction). Only relevant if 
 velocity can be negative (see Details).}
 
-\item{show_progress}{logical indicating whether function should report its 
+\item{show_progress}{logical indicating whether function should report on its
 progress.}
 }
 \value{

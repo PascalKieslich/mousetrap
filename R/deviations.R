@@ -15,13 +15,7 @@
 #' case the movement was from top to bottom, \code{mt_calculate_deviations}
 #' automatically flips the signs.
 #' 
-#' @param data a mousetrap data object created using one of the mt_import 
-#'   functions (see \link{mt_example} for details). Alternatively, a trajectory
-#'   array can be provided directly (in this case \code{use} will be ignored).
-#' @param use a character string specifying which trajectory data should be used
-#'   (defaults to 'trajectories')
-#' @param save_as a character string specifying where the resulting trajectory 
-#'   data should be stored.
+#' @inheritParams mt_time_normalize
 #' @param start_ideal an optional vector specifying the start position (see
 #'   Example). If specified, this position will be used as the starting point of
 #'   the idealized trajectory (instead of the actual starting point).
@@ -30,8 +24,6 @@
 #'   idealized trajectory (instead of the actual end point).
 #' @param prefix an optional character string that is added as a prefix to the 
 #'   to be created new trajectory dimensions.
-#' @param show_progress logical indicating whether function should report its 
-#'   progress.
 #'   
 #' @return A mousetrap data object (see \link{mt_example}) with the x- and
 #'   y-positions of the idealized trajectory and the perpendicular deviations of

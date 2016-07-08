@@ -13,7 +13,7 @@ mt_sample_entropy(data, use = "tn_trajectories", save_as = "measures",
 functions (see \link{mt_example} for details). Alternatively, a trajectory 
 array can be provided directly (in this case \code{use} will be ignored).}
 
-\item{use}{a character string specifying which trajectory data should be
+\item{use}{a character string specifying which trajectory data should be 
 used.}
 
 \item{save_as}{a character string specifying where the calculated measures
@@ -31,7 +31,7 @@ used.}
 \item{r}{a numeric value passed on to the sample entropy function (see
 Details).}
 
-\item{show_progress}{logical indicating whether function should report on the
+\item{show_progress}{logical indicating whether function should report on its
 progress.}
 }
 \value{

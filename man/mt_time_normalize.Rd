@@ -9,7 +9,7 @@ mt_time_normalize(data, use = "trajectories", save_as = "tn_trajectories",
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
-functions (see \link{mt_example} for details). Alternatively, a trajectory
+functions (see \link{mt_example} for details). Alternatively, a trajectory 
 array can be provided directly (in this case \code{use} will be ignored).}
 
 \item{use}{a character string specifying which trajectory data should be 
@@ -20,7 +20,7 @@ data should be stored.}
 
 \item{nsteps}{an integer specifying the number of equally sized time steps.}
 
-\item{show_progress}{logical indicating whether function should report its 
+\item{show_progress}{logical indicating whether function should report on its
 progress.}
 }
 \value{

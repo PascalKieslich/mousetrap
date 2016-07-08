@@ -22,7 +22,7 @@ should be stored.}
 be exceeded in one direction so that a change in direction counts as an x- 
 or y-flip.}
 
-\item{show_progress}{logical indicating whether function should report its 
+\item{show_progress}{logical indicating whether function should report on its
 progress.}
 }
 \value{

@@ -28,13 +28,7 @@
 #' used, increases in x (or y) values result in positive velocity, decreases in 
 #' negative velocity.
 #' 
-#' @param data a mousetrap data object created using one of the mt_import 
-#'   functions (see \link{mt_example} for details). Alternatively, a trajectory
-#'   array can be provided directly (in this case \code{use} will be ignored).
-#' @param use a character string specifying which trajectory data should be used
-#'   (defaults to 'trajectories')
-#' @param save_as a character string specifying where the resulting trajectory 
-#'   data should be stored.
+#' @inheritParams mt_time_normalize
 #' @param dimension a character string specifying across which dimension(s) 
 #'   distances, velocity, and acceleration are calculated. By default ("xypos"),
 #'   they are calculated across both x and y dimensions. Alternatively, only the
@@ -44,8 +38,6 @@
 #' @param acc_on_abs_vel logical indicating if acceleration should be calculated
 #'   based on absolute velocity values (ignoring direction). Only relevant if 
 #'   velocity can be negative (see Details).
-#' @param show_progress logical indicating whether function should report its 
-#'   progress.
 #'   
 #' @return A mousetrap data object (see \link{mt_example}) with 
 #'   Euclidian distance, velocity, and acceleration added as additional columns 

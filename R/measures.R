@@ -25,18 +25,12 @@
 #' package.
 #' 
 #' 
-#' @param data a mousetrap data object created using one of the mt_import 
-#'   functions (see \link{mt_example} for details). Alternatively, a trajectory 
-#'   array can be provided directly (in this case \code{use} will be ignored).
-#' @param use a character string specifying which trajectory data should be 
-#'   used.
+#' @inheritParams mt_time_normalize
 #' @param save_as a character string specifying where the calculated measures 
 #'   should be stored.
 #' @param flip_threshold a numeric value specifying the distance that needs to 
 #'   be exceeded in one direction so that a change in direction counts as an x- 
 #'   or y-flip.
-#' @param show_progress logical indicating whether function should report its 
-#'   progress.
 #'   
 #' @return A mousetrap data object (see \link{mt_example}) where an additional
 #'   \link{data.frame} has been added (by default called "measures") containing

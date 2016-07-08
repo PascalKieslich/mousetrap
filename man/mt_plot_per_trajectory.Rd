@@ -4,27 +4,27 @@
 \alias{mt_plot_per_trajectory}
 \title{Create pdf with separate plots per trajectory.}
 \usage{
-mt_plot_per_trajectory(data, file, use = "trajectories", x = "xpos",
+mt_plot_per_trajectory(file, data, use = "trajectories", x = "xpos",
   y = "ypos", show_progress = TRUE, ...)
 }
 \arguments{
-\item{data}{a mousetrap data object created using one of the mt_import
-functions (e.g., \link{mt_import_mousetrap}).}
-
 \item{file}{a character string specifying the name of the pdf file. Passed on
 to \link{pdf}.}
 
-\item{use}{a character string specifying which trajectories should be
-plotted. The corresponding trajectories are selected from data using
-\code{data[[use]]}. Usually, this value corresponds to either
-"trajectories", "tn_trajectories" or "av_trajectories", depending on
-whether the raw, time-normalized or averaged trajectories should be
+\item{data}{a mousetrap data object created using one of the mt_import 
+functions (e.g., \link{mt_import_mousetrap}).}
+
+\item{use}{a character string specifying which trajectories should be 
+plotted. The corresponding trajectories are selected from data using 
+\code{data[[use]]}. Usually, this value corresponds to either 
+"trajectories", "tn_trajectories" or "av_trajectories", depending on 
+whether the raw, time-normalized or averaged trajectories should be 
 plotted.}
 
-\item{x}{a character string specifying which dimension in the trajectory
+\item{x}{a character string specifying which dimension in the trajectory 
 array should be displayed on the x-axis (defaults to xpos).}
 
-\item{y}{a character string specifying which dimension in the trajectory
+\item{y}{a character string specifying which dimension in the trajectory 
 array should be displayed on the y-axis (defaults to ypos).}
 
 \item{show_progress}{logical indicating whether function should report its 

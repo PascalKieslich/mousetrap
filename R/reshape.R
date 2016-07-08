@@ -36,52 +36,53 @@
 #' 
 #' @param data a mousetrap data object created using one of the mt_import 
 #'   functions (see \link{mt_example} for details).
-#' @param use a character string specifying which data should be reshaped. The
+#' @param use a character string specifying which data should be reshaped. The 
 #'   corresponding data are selected from data using \code{data[[use]]}. 
-#'   Usually, this value corresponds to either "trajectories",
-#'   "tn_trajectories", or "measures", depending on whether the analysis
-#'   concerns raw trajectories, time-normalized trajectories, or derived
+#'   Usually, this value corresponds to either "trajectories", 
+#'   "tn_trajectories", or "measures", depending on whether the analysis 
+#'   concerns raw trajectories, time-normalized trajectories, or derived 
 #'   measures.
-#' @param use_variables a character vector specifying which mouse-tracking
-#'   variables should be reshaped. Corresponds to the column names in case a
-#'   data.frame with mouse-tracking measures is provided. Corresponds to the
-#'   labels of the array dimensions in case a trajectory array is provided. If
+#' @param use_variables a character vector specifying which mouse-tracking 
+#'   variables should be reshaped. Corresponds to the column names in case a 
+#'   data.frame with mouse-tracking measures is provided. Corresponds to the 
+#'   labels of the array dimensions in case a trajectory array is provided. If 
 #'   unspecified, all variables will be reshaped.
-#' @param use2 a character string specifying where the other trial data can be
+#' @param use2 a character string specifying where the other trial data can be 
 #'   found. Defaults to "data" as \code{data[["data"]]} usually contains all non
-#'   mouse-tracking trial data. Alternatively, a data.frame can be provided
+#'   mouse-tracking trial data. Alternatively, a data.frame can be provided 
 #'   directly.
 #' @param use2_variables a character string (or vector) specifying the variables
-#'   (in \code{data[[use2]]}) that should be merged with the data. If
+#'   (in \code{data[[use2]]}) that should be merged with the data. If 
 #'   \code{aggregate==TRUE}, the trajectories / measures will be aggregated 
-#'   separately for each of the levels of these variables using
+#'   separately for each of the levels of these variables using 
 #'   \link[reshape2]{dcast}.
-#' @param subset a logical expression (passed on to \link{subset}) indicating
-#'   elements or rows to keep. If specified, \code{data[[use2]]} will be
-#'   subsetted using this expression, and, afterwards, \code{data[[use]]} will
+#' @param subset a logical expression (passed on to \link{subset}) indicating 
+#'   elements or rows to keep. If specified, \code{data[[use2]]} will be 
+#'   subsetted using this expression, and, afterwards, \code{data[[use]]} will 
 #'   be filtered accordingly.
-#' @param subject_id a character string specifying which column contains the
-#'   subject identifier in \code{data[[use2]]}. If specified and
-#'   \code{aggregate==TRUE}, aggregation will be performed within subjects
+#' @param subject_id a character string specifying which column contains the 
+#'   subject identifier in \code{data[[use2]]}. If specified and 
+#'   \code{aggregate==TRUE}, aggregation will be performed within subjects 
 #'   first.
 #' @param aggregate logical indicating whether data should be aggregated. If 
 #'   \code{use2_variables} are specified, aggregation will be performed 
 #'   separately for each of the levels of the \code{use2_variables}.
 #' @param aggregate_subjects_only logical indicating whether data should only be
-#'   aggregated per subject (if \code{subject_id} is specified and
+#'   aggregated per subject (if \code{subject_id} is specified and 
 #'   \code{aggregate==TRUE}).
-#' @param aggregation_function the aggregation function passed on to
+#' @param aggregation_function the aggregation function passed on to 
 #'   \link[reshape2]{dcast}. By default, the \link{mean} is calculated.
 #' @param trajectories_long logical indicating if the reshaped trajectories 
-#'   should be returned in long or wide format. If \code{TRUE}, every recorded
+#'   should be returned in long or wide format. If \code{TRUE}, every recorded 
 #'   position in a trajectory is placed in another row (whereby the order of the
-#'   positions is logged in \code{mt_seq}). If \code{FALSE}, every trajectory is
-#'   saved in wide format and the respective positions are indexed by adding an
-#'   integer to the corresponding label (e.g., \code{xpos_1},\code{xpos_2},
-#'   ...). Only relevant if \code{data[[use]]} contains trajectories.
-#' @param mt_seq a character string specifying the name of the column that will
-#'   contain the integers indicating the order of the mouse positions per
-#'   trajectory. Only relevant if \code{data[[use]]} contains trajectories and
+#'   positions is logged in the variable \code{mt_seq}). If \code{FALSE}, every 
+#'   trajectory is saved in wide format and the respective positions are indexed
+#'   by adding an integer to the corresponding label (e.g., \code{xpos_1}, 
+#'   \code{xpos_2}, ...). Only relevant if \code{data[[use]]} contains 
+#'   trajectories.
+#' @param mt_seq a character string specifying the name of the column that will 
+#'   contain the integers indicating the order of the mouse positions per 
+#'   trajectory. Only relevant if \code{data[[use]]} contains trajectories and 
 #'   \code{trajectories_long==TRUE}.
 #'   
 #' @return A \link{data.frame} containing the reshaped data.
@@ -344,39 +345,30 @@ mt_reshape <- function(data,
 #' separately for each level of the condition variables. \code{mt_aggregate} is
 #' a wrapper function for \link{mt_reshape}.
 #' 
-#' @param data a mousetrap data object created using one of the mt_import 
-#'   functions (see \link{mt_example} for details).
-#' @param use a character string specifying which data should be reshaped. The
+#' @inheritParams mt_reshape
+#' @param use a character string specifying which data should be reshaped. The 
 #'   corresponding data are selected from data using \code{data[[use]]}. 
 #'   Usually, this value corresponds to either "tn_trajectories" or "measures", 
 #'   depending on whether the time-normalized trajectories or derived measures 
 #'   should be aggregated.
-#' @param use_variables a character vector specifying which mouse-tracking
-#'   variables should be aggregated. Corresponds to the column names in case a
-#'   data.frame with mouse-tracking measures is provided. Corresponds to the
-#'   labels of the array dimensions in case a trajectory array is provided. If
+#' @param use_variables a character vector specifying which mouse-tracking 
+#'   variables should be aggregated. Corresponds to the column names in case a 
+#'   data.frame with mouse-tracking measures is provided. Corresponds to the 
+#'   labels of the array dimensions in case a trajectory array is provided. If 
 #'   unspecified, all variables will be aggregated.
-#' @param use2 a character string specifying where the data containing the
-#'   condition information can be found. Defaults to "data" as
+#' @param use2 a character string specifying where the data containing the 
+#'   condition information can be found. Defaults to "data" as 
 #'   \code{data[["data"]]} usually contains all non mouse-tracking trial data. 
 #'   Alternatively, a data.frame can be provided directly.
 #' @param use2_variables a character string (or vector) specifying the variables
-#'   (in \code{data[[use2]]}) across which the trajectories / measures will be
+#'   (in \code{data[[use2]]}) across which the trajectories / measures will be 
 #'   aggregated. For each combination of levels of the grouping variable(s), 
 #'   aggregation will be performed separately using \link[reshape2]{dcast}.
 #' @param subject_id a character string specifying which column contains the 
 #'   subject identifier. If specified, aggregation will be performed within 
-#'   subjects first (that is, within subjects for all available values of the
+#'   subjects first (that is, within subjects for all available values of the 
 #'   grouping variables specified in \code{use2_variables}).
-#' @param trajectories_long logical indicating if the reshaped trajectories 
-#'   should be returned in long or wide format. If \code{TRUE}, every recorded 
-#'   position in a trajectory is placed in another row (whereby the order of the
-#'   positions is logged in the variable \code{mt_seq}). If \code{FALSE}, every 
-#'   trajectory is saved in wide format and the respective positions are indexed
-#'   by adding an integer to the corresponding label (e.g., \code{xpos_1},
-#'   \code{xpos_2}, ...). Only relevant if \code{data[[use]]} contains
-#'   trajectories.
-#' @param ... additional arguments passed on to \link{mt_reshape} (such as
+#' @param ... additional arguments passed on to \link{mt_reshape} (such as 
 #'   \code{subset}).
 #' 
 #' @return A \link{data.frame} containing the aggregated data.
@@ -446,38 +438,9 @@ mt_aggregate <- function(data,
 #' variables. \code{mt_aggregate_per_subject} is a wrapper function for
 #' \link{mt_reshape}.
 #' 
-#' @param data a mousetrap data object created using one of the mt_import 
-#'   functions (see \link{mt_example} for details).
-#' @param use a character string specifying which data should be reshaped. The
-#'   corresponding data are selected from data using \code{data[[use]]}. 
-#'   Usually, this value corresponds to either "tn_trajectories" or "measures", 
-#'   depending on whether the time-normalized trajectories or derived measures 
-#'   should be aggregated.
-#' @param use_variables a character vector specifying which mouse-tracking
-#'   variables should be aggregated. Corresponds to the column names in case a
-#'   data.frame with mouse-tracking measures is provided. Corresponds to the
-#'   labels of the array dimensions in case a trajectory array is provided. If
-#'   unspecified, all variables will be aggregated.
-#' @param use2 a character string specifying where the data containing the
-#'   condition information can be found. Defaults to "data" as
-#'   \code{data[["data"]]} usually contains all non mouse-tracking trial data. 
-#'   Alternatively, a data.frame can be provided directly.
-#' @param use2_variables a character string (or vector) specifying the variables
-#'   (in \code{data[[use2]]}) across which the trajectories / measures will be
-#'   aggregated. For each combination of levels of the grouping variable(s), 
-#'   aggregation will be performed separately using \link[reshape2]{dcast}.
-#' @param subject_id a character string specifying which column contains the
+#' @inheritParams mt_aggregate
+#' @param subject_id a character string specifying which column contains the 
 #'   subject identifier.
-#' @param trajectories_long logical indicating if the reshaped trajectories 
-#'   should be returned in long or wide format. If \code{TRUE}, every recorded 
-#'   position in a trajectory is placed in another row (whereby the order of the
-#'   positions is logged in the variable \code{mt_seq}). If \code{FALSE}, every 
-#'   trajectory is saved in wide format and the respective positions are indexed
-#'   by adding an integer to the corresponding label (e.g., \code{xpos_1},
-#'   \code{xpos_2}, ...). Only relevant if \code{data[[use]]} contains
-#'   trajectories.
-#' @param ... additional arguments passed on to \link{mt_reshape} (such as
-#'   \code{subset}).
 #'   
 #' @return A \link{data.frame} containing the aggregated data.
 #'   

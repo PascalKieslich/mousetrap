@@ -291,20 +291,9 @@ mt_plot_add_rect <- function(rect,
 #' all trajectories individually using \link{mt_plot}. Every plot is labeled 
 #' using the \link{mt_id} variable.
 #' 
-#' @param data a mousetrap data object created using one of the mt_import
-#'   functions (e.g., \link{mt_import_mousetrap}).
+#' @inheritParams mt_plot
 #' @param file a character string specifying the name of the pdf file. Passed on
 #'   to \link{pdf}.
-#' @param use a character string specifying which trajectories should be
-#'   plotted. The corresponding trajectories are selected from data using
-#'   \code{data[[use]]}. Usually, this value corresponds to either
-#'   "trajectories", "tn_trajectories" or "av_trajectories", depending on
-#'   whether the raw, time-normalized or averaged trajectories should be
-#'   plotted.
-#' @param x a character string specifying which dimension in the trajectory
-#'   array should be displayed on the x-axis (defaults to xpos).
-#' @param y a character string specifying which dimension in the trajectory
-#'   array should be displayed on the y-axis (defaults to ypos).
 #' @param show_progress logical indicating whether function should report its 
 #'   progress.
 #' @param ... additional arguments passed on to \link{pdf}.
@@ -320,8 +309,8 @@ mt_plot_add_rect <- function(rect,
 #' }
 #' 
 #' @export
-mt_plot_per_trajectory <- function(data, file,
-  use="trajectories", x="xpos", y="ypos",
+mt_plot_per_trajectory <- function(file,
+  data, use="trajectories", x="xpos", y="ypos",
   show_progress=TRUE, ...) {
   
   # Define axis limits across all plots

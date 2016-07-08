@@ -22,17 +22,11 @@
 #' Besides, the perpendicular deviation from the direct path at the specified
 #' percentile is included (\code{IMD}).
 #' 
-#' @param data a mousetrap data object created using one of the mt_import 
-#'   functions (see \link{mt_example} for details). Alternatively, a trajectory 
-#'   array can be provided directly (in this case \code{use} will be ignored).
-#' @param use a character string specifying which trajectory data should be
-#'   used.
+#' @inheritParams mt_time_normalize
 #' @param save_as a character string specifying where the calculated measures
 #'   should be stored.
 #' @param ima_percentile a decimal value. The initial movement angle will be
 #'   calculated at the respective percentile .
-#' @param show_progress logical indicating whether function should report on the
-#'   progress.
 #'   
 #' @return A mousetrap data object (see \link{mt_example}).
 #'   

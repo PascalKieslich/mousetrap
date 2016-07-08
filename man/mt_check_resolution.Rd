@@ -8,10 +8,10 @@ mt_check_resolution(data, use = "trajectories", desired = NULL)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
-functions (see \link{mt_example} for details). Alternatively, a trajectory
+functions (see \link{mt_example} for details). Alternatively, a trajectory 
 array can be provided directly (in this case \code{use} will be ignored).}
 
-\item{use}{a character string specifying which trajectory data should be
+\item{use}{a character string specifying which trajectory data should be 
 used.}
 
 \item{desired}{an optional integer. If specified, additional statistics are

@@ -21,7 +21,7 @@ data should be stored.}
 \item{reset_timestamps}{logical indicating whether the timestamps should be 
 reset after removing the initial phase without movement (see Details).}
 
-\item{show_progress}{logical indicating whether function should report its 
+\item{show_progress}{logical indicating whether function should report on its
 progress.}
 }
 \value{

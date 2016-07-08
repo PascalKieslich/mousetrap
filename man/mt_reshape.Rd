@@ -14,38 +14,38 @@ mt_reshape(data, use = "trajectories", use_variables = NULL,
 \item{data}{a mousetrap data object created using one of the mt_import 
 functions (see \link{mt_example} for details).}
 
-\item{use}{a character string specifying which data should be reshaped. The
+\item{use}{a character string specifying which data should be reshaped. The 
 corresponding data are selected from data using \code{data[[use]]}. 
-Usually, this value corresponds to either "trajectories",
-"tn_trajectories", or "measures", depending on whether the analysis
-concerns raw trajectories, time-normalized trajectories, or derived
+Usually, this value corresponds to either "trajectories", 
+"tn_trajectories", or "measures", depending on whether the analysis 
+concerns raw trajectories, time-normalized trajectories, or derived 
 measures.}
 
-\item{use_variables}{a character vector specifying which mouse-tracking
-variables should be reshaped. Corresponds to the column names in case a
-data.frame with mouse-tracking measures is provided. Corresponds to the
-labels of the array dimensions in case a trajectory array is provided. If
+\item{use_variables}{a character vector specifying which mouse-tracking 
+variables should be reshaped. Corresponds to the column names in case a 
+data.frame with mouse-tracking measures is provided. Corresponds to the 
+labels of the array dimensions in case a trajectory array is provided. If 
 unspecified, all variables will be reshaped.}
 
-\item{use2}{a character string specifying where the other trial data can be
+\item{use2}{a character string specifying where the other trial data can be 
 found. Defaults to "data" as \code{data[["data"]]} usually contains all non
-mouse-tracking trial data. Alternatively, a data.frame can be provided
+mouse-tracking trial data. Alternatively, a data.frame can be provided 
 directly.}
 
 \item{use2_variables}{a character string (or vector) specifying the variables
-(in \code{data[[use2]]}) that should be merged with the data. If
+(in \code{data[[use2]]}) that should be merged with the data. If 
 \code{aggregate==TRUE}, the trajectories / measures will be aggregated 
-separately for each of the levels of these variables using
+separately for each of the levels of these variables using 
 \link[reshape2]{dcast}.}
 
-\item{subset}{a logical expression (passed on to \link{subset}) indicating
-elements or rows to keep. If specified, \code{data[[use2]]} will be
-subsetted using this expression, and, afterwards, \code{data[[use]]} will
+\item{subset}{a logical expression (passed on to \link{subset}) indicating 
+elements or rows to keep. If specified, \code{data[[use2]]} will be 
+subsetted using this expression, and, afterwards, \code{data[[use]]} will 
 be filtered accordingly.}
 
-\item{subject_id}{a character string specifying which column contains the
-subject identifier in \code{data[[use2]]}. If specified and
-\code{aggregate==TRUE}, aggregation will be performed within subjects
+\item{subject_id}{a character string specifying which column contains the 
+subject identifier in \code{data[[use2]]}. If specified and 
+\code{aggregate==TRUE}, aggregation will be performed within subjects 
 first.}
 
 \item{aggregate}{logical indicating whether data should be aggregated. If 
@@ -53,23 +53,24 @@ first.}
 separately for each of the levels of the \code{use2_variables}.}
 
 \item{aggregate_subjects_only}{logical indicating whether data should only be
-aggregated per subject (if \code{subject_id} is specified and
+aggregated per subject (if \code{subject_id} is specified and 
 \code{aggregate==TRUE}).}
 
-\item{aggregation_function}{the aggregation function passed on to
+\item{aggregation_function}{the aggregation function passed on to 
 \link[reshape2]{dcast}. By default, the \link{mean} is calculated.}
 
 \item{trajectories_long}{logical indicating if the reshaped trajectories 
-should be returned in long or wide format. If \code{TRUE}, every recorded
+should be returned in long or wide format. If \code{TRUE}, every recorded 
 position in a trajectory is placed in another row (whereby the order of the
-positions is logged in \code{mt_seq}). If \code{FALSE}, every trajectory is
-saved in wide format and the respective positions are indexed by adding an
-integer to the corresponding label (e.g., \code{xpos_1},\code{xpos_2},
-...). Only relevant if \code{data[[use]]} contains trajectories.}
+positions is logged in the variable \code{mt_seq}). If \code{FALSE}, every 
+trajectory is saved in wide format and the respective positions are indexed
+by adding an integer to the corresponding label (e.g., \code{xpos_1}, 
+\code{xpos_2}, ...). Only relevant if \code{data[[use]]} contains 
+trajectories.}
 
-\item{mt_seq}{a character string specifying the name of the column that will
-contain the integers indicating the order of the mouse positions per
-trajectory. Only relevant if \code{data[[use]]} contains trajectories and
+\item{mt_seq}{a character string specifying the name of the column that will 
+contain the integers indicating the order of the mouse positions per 
+trajectory. Only relevant if \code{data[[use]]} contains trajectories and 
 \code{trajectories_long==TRUE}.}
 }
 \value{

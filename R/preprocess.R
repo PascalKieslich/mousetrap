@@ -1,3 +1,114 @@
+#' Time normalize trajectories.
+#' 
+#' Compute time-normalized trajectories using a constant number of equally sized
+#' time steps. Time normalization is performed separately for the x- and 
+#' y-positions using linear interpolation based on the timestamps. By default, 
+#' 101 time steps are used (following Spivey et al., 2005).
+#' 
+#' Time-normalization is often performed if the number of recorded x- and 
+#' y-positions varies across trajectories, which typically occurs when 
+#' trajectories vary in their response time. After time-normalization, all 
+#' trajectories have the same number of recorded positions (which is specified 
+#' using \code{nsteps}) and the positions at different relative time points can 
+#' be compared across trajectories.
+#' 
+#' For example, time normalized trajectories can be compared across conditions 
+#' that differed in their overall response time, as the timestamps are now 
+#' relative to the overall trial duration. This is also helpful for creating 
+#' average trajectories, which are often used in plots.
+#' 
+#' @param data a mousetrap data object created using one of the mt_import 
+#'   functions (see \link{mt_example} for details). Alternatively, a trajectory 
+#'   array can be provided directly (in this case \code{use} will be ignored).
+#' @param use a character string specifying which trajectory data should be 
+#'   used.
+#' @param save_as a character string specifying where the resulting trajectory 
+#'   data should be stored.
+#' @param nsteps an integer specifying the number of equally sized time steps.
+#' @param show_progress logical indicating whether function should report on its
+#'   progress.
+#'   
+#' @return A mousetrap data object (see \link{mt_example}) with an additional
+#'   array (by default called \code{tn_trajectories}) containing the 
+#'   time-normalized trajectories. In this array, another dimension (called 
+#'   \code{steps}) has been added with increasing integer values indexing the 
+#'   time-normalized position. If a trajectory array was provided directly as
+#'   \code{data}, only the time-normalized trajectories will be returned.
+#'   
+#' @references Spivey, M. J., Grosjean, M., & Knoblich, G. (2005). Continuous
+#'   attraction toward phonological competitors. \emph{Proceedings of the
+#'   National Academy of Sciences of the United States of America, 102}(29),
+#'   10393-10398.
+#' 
+#' @seealso \link[stats]{approx} for information about the function used for
+#'   linear interpolation.
+#' 
+#' \link{mt_resample} for resampling trajectories using a constant time
+#' interval.
+#' 
+#' @examples
+#' mt_example <- mt_time_normalize(mt_example,
+#'   save_as="tn_trajectories", nsteps=101)
+#'   
+#' @export
+mt_time_normalize <- function(data,
+                              use="trajectories", save_as="tn_trajectories",
+                              nsteps=101, show_progress=TRUE) {
+  
+  # Preparation
+  trajectories <- extract_data(data=data,use=use)
+  timestamps <- mt_variable_labels[["timestamps"]]
+  xpos <- mt_variable_labels[["xpos"]]
+  ypos <- mt_variable_labels[["ypos"]]
+  
+  # Create empty array for output
+  tn_trajectories <- array(
+    dim=c(nrow(trajectories), 4, nsteps),
+    dimnames=list(
+      dimnames(trajectories)[[1]],
+      c(timestamps, xpos, ypos, "steps"),
+      NULL
+    )
+  )
+  
+  # Perform time normalization
+  for (i in 1:nrow(trajectories)){ 
+    # The approx() function performs linear interpolation
+    # for coordinates.
+    
+    # Timestamps
+    tn_trajectories[i,timestamps,] <- stats::approx(
+      trajectories[i,timestamps,], trajectories[i,timestamps,], n=nsteps)$y
+    
+    # X and Y coordinates
+    tn_trajectories[i,xpos,] <- stats::approx(
+      trajectories[i,timestamps,], trajectories[i,xpos,], n=nsteps)$y
+    tn_trajectories[i,ypos,] <- stats::approx(
+      trajectories[i,timestamps,], trajectories[i,ypos,], n=nsteps)$y
+    
+    # Label steps as such
+    tn_trajectories[i,"steps",] <- 1:nsteps
+    
+    if (show_progress){
+      if (i %% 100 == 0) message(paste(i, "trials finished")) 
+    }
+  }
+  
+  if (show_progress){
+    message(paste("all",i,"trials finished")) 
+  }  
+  
+  
+  if (is_mousetrap_data(data)){
+    data[[save_as]] <- tn_trajectories
+    return(data)
+  }else{
+    return(tn_trajectories)
+  }
+  
+}
+
+
 #' Remap mouse trajectories.
 #' 
 #' Remap all trajectories to one side (or one quadrant) of the coordinate 
@@ -19,13 +130,7 @@
 #' Second, it assumes that the response buttons in the mouse-tracking experiment
 #' are symmetric, in that they all are equally distant from the screen center.
 #' 
-#' @param data a mousetrap data object created using one of the mt_import 
-#'   functions (see \link{mt_example} for details). Alternatively, a trajectory
-#'   array can be provided directly (in this case \code{use} will be ignored).
-#' @param use a character string specifying which trajectory data should be 
-#'   used.
-#' @param save_as a character string specifying where the resulting trajectory 
-#'   data should be stored.
+#' @inheritParams mt_time_normalize
 #' @param remap_xpos character string indicating the direction in which to remap
 #'   values on the x axis. If set to "left" (as per default), trajectories with 
 #'   an endpoint on the right (i.e. with a positive x-value) will be remapped to
@@ -134,17 +239,9 @@ mt_remap_symmetric <- function(data,
 #' \code{MAD_time}). Typically, however, these changes are desired when using
 #' this function.
 #' 
-#' @param data a mousetrap data object created using one of the mt_import 
-#'   functions (see \link{mt_example} for details). Alternatively, a trajectory 
-#'   array can be provided directly (in this case \code{use} will be ignored).
-#' @param use a character string specifying which trajectory data should be 
-#'   used.
-#' @param save_as a character string specifying where the resulting trajectory 
-#'   data should be stored.
+#' @inheritParams mt_time_normalize
 #' @param reset_timestamps logical indicating whether the timestamps should be 
 #'   reset after removing the initial phase without movement (see Details).
-#' @param show_progress logical indicating whether function should report its 
-#'   progress.
 #'   
 #' @return A mousetrap data object (see \link{mt_example}) from which the 
 #'   initial phase without mouse movement was removed. If the trajectory array
@@ -231,13 +328,7 @@ mt_exclude_initiation <- function(data,
 #' point. If no end points are provided, trajectories are only adjusted so that
 #' they have the same start position.
 #' 
-#' @param data a mousetrap data object created using one of the mt_import 
-#'   functions (see \link{mt_example} for details). Alternatively, a trajectory
-#'   array can be provided directly (in this case \code{use} will be ignored).
-#' @param use a character string specifying which trajectory data should be 
-#'   used.
-#' @param save_as a character string specifying where the resulting trajectory 
-#'   data should be stored.
+#' @inheritParams mt_time_normalize
 #' @param xpos_start an integer specifying the value the first x-position should
 #'   have in each trial.
 #' @param xpos_end an integer specifying the value the last x-position should
@@ -248,8 +339,6 @@ mt_exclude_initiation <- function(data,
 #' @param ypos_end an integer specifying the value the last y-position should
 #'   have in each trial. If  \code{NULL}, trajectories are only adjusted so that
 #'   they have the same start position.
-#' @param show_progress logical indicating whether function should report its 
-#'   progress.
 #'   
 #' @return A mousetrap data object (see \link{mt_example}) with an additional
 #'   array (by default called \code{sn_trajectories}) containing the 
@@ -362,116 +451,6 @@ mt_align_start <- function(data,
 
 }
 
-#' Time normalize trajectories.
-#' 
-#' Compute time-normalized trajectories using a constant number of equally sized
-#' time steps. Time normalization is performed separately for the x- and 
-#' y-positions using linear interpolation based on the timestamps. By default, 
-#' 101 time steps are used (following Spivey et al., 2005).
-#' 
-#' Time-normalization is often performed if the number of recorded x- and 
-#' y-positions varies across trajectories, which typically occurs when 
-#' trajectories vary in their response time. After time-normalization, all 
-#' trajectories have the same number of recorded positions (which is specified 
-#' using \code{nsteps}) and the positions at different relative time points can 
-#' be compared across trajectories.
-#' 
-#' For example, time normalized trajectories can be compared across conditions 
-#' that differed in their overall response time, as the timestamps are now 
-#' relative to the overall trial duration. This is also helpful for creating 
-#' average trajectories, which are often used in plots.
-#' 
-#' @param data a mousetrap data object created using one of the mt_import 
-#'   functions (see \link{mt_example} for details). Alternatively, a trajectory
-#'   array can be provided directly (in this case \code{use} will be ignored).
-#' @param use a character string specifying which trajectory data should be 
-#'   used.
-#' @param save_as a character string specifying where the resulting trajectory 
-#'   data should be stored.
-#' @param nsteps an integer specifying the number of equally sized time steps.
-#' @param show_progress logical indicating whether function should report its 
-#'   progress.
-#'   
-#' @return A mousetrap data object (see \link{mt_example}) with an additional
-#'   array (by default called \code{tn_trajectories}) containing the 
-#'   time-normalized trajectories. In this array, another dimension (called 
-#'   \code{steps}) has been added with increasing integer values indexing the 
-#'   time-normalized position. If a trajectory array was provided directly as
-#'   \code{data}, only the time-normalized trajectories will be returned.
-#'   
-#' @references Spivey, M. J., Grosjean, M., & Knoblich, G. (2005). Continuous
-#'   attraction toward phonological competitors. \emph{Proceedings of the
-#'   National Academy of Sciences of the United States of America, 102}(29),
-#'   10393-10398.
-#' 
-#' @seealso \link[stats]{approx} for information about the function used for
-#'   linear interpolation.
-#' 
-#' \link{mt_resample} for resampling trajectories using a constant time
-#' interval.
-#' 
-#' @examples
-#' mt_example <- mt_time_normalize(mt_example,
-#'   save_as="tn_trajectories", nsteps=101)
-#'   
-#' @export
-mt_time_normalize <- function(data,
-  use="trajectories", save_as="tn_trajectories",
-  nsteps=101, show_progress=TRUE) {
-  
-  # Preparation
-  trajectories <- extract_data(data=data,use=use)
-  timestamps <- mt_variable_labels[["timestamps"]]
-  xpos <- mt_variable_labels[["xpos"]]
-  ypos <- mt_variable_labels[["ypos"]]
-  
-  # Create empty array for output
-  tn_trajectories <- array(
-    dim=c(nrow(trajectories), 4, nsteps),
-    dimnames=list(
-      dimnames(trajectories)[[1]],
-      c(timestamps, xpos, ypos, "steps"),
-      NULL
-    )
-  )
-  
-  # Perform time normalization
-  for (i in 1:nrow(trajectories)){ 
-    # The approx() function performs linear interpolation
-    # for coordinates.
-    
-    # Timestamps
-    tn_trajectories[i,timestamps,] <- stats::approx(
-      trajectories[i,timestamps,], trajectories[i,timestamps,], n=nsteps)$y
-    
-    # X and Y coordinates
-    tn_trajectories[i,xpos,] <- stats::approx(
-      trajectories[i,timestamps,], trajectories[i,xpos,], n=nsteps)$y
-    tn_trajectories[i,ypos,] <- stats::approx(
-      trajectories[i,timestamps,], trajectories[i,ypos,], n=nsteps)$y
-    
-    # Label steps as such
-    tn_trajectories[i,"steps",] <- 1:nsteps
-    
-    if (show_progress){
-      if (i %% 100 == 0) message(paste(i, "trials finished")) 
-    }
-  }
-  
-  if (show_progress){
-    message(paste("all",i,"trials finished")) 
-  }  
-  
-  
-  if (is_mousetrap_data(data)){
-    data[[save_as]] <- tn_trajectories
-    return(data)
-  }else{
-    return(tn_trajectories)
-  }
-  
-}
-
 
 
 #' Resample trajectories using a constant time interval.
@@ -498,20 +477,12 @@ mt_time_normalize <- function(data,
 #' Note that \code{mt_resample} does not average across time intervals. For 
 #' this, \link{mt_average} can be used.
 #' 
-#' @param data a mousetrap data object created using one of the mt_import 
-#'   functions (see \link{mt_example} for details). Alternatively, a trajectory
-#'   array can be provided directly (in this case \code{use} will be ignored).
-#' @param use a character string specifying which trajectory data should be 
-#'   used.
-#' @param save_as a character string specifying where the resulting trajectory 
-#'   data should be stored.
+#' @inheritParams mt_time_normalize
 #' @param step_size an integer specifying the size of the constant time 
 #'   interval. The unit corresponds to the unit of the timestamps.
 #' @param exact_last_timestamp logical indicating if the last timestamp should 
 #'   always be appended (which is the case by default). If \code{FALSE}, the
 #'   last timestamp is only appended if it is a multiple of the step_size.
-#' @param show_progress logical indicating whether function should report its 
-#'   progress.
 #'   
 #' @return A mousetrap data object (see \link{mt_example}) with an additional 
 #'   array (by default called \code{rs_trajectories}) containing the resampled 
@@ -651,13 +622,7 @@ mt_resample <- function(data,
 #' If average velocity and acceleration are of interest, 
 #' \link{mt_calculate_derivatives} should be called before averaging.
 #' 
-#' @param data a mousetrap data object created using one of the mt_import 
-#'   functions (see \link{mt_example} for details). Alternatively, a trajectory
-#'   array can be provided directly (in this case \code{use} will be ignored).
-#' @param use a character string specifying which trajectory data should be 
-#'   used.
-#' @param save_as a character string specifying where the resulting trajectory 
-#'   data should be stored.
+#' @inheritParams mt_time_normalize
 #' @param dimension a character string specifying which values should be used
 #'   for determining the intervals for averaging ("timestamps" by default).
 #' @param intervals an optional numeric vector. If specified, these values are 
@@ -670,8 +635,6 @@ mt_resample <- function(data,
 #'   of the \code{interval_size}). If specified, only values will be used for
 #'   averaging where the dimension values are smaller than \code{max_interval}.
 #'   If unspecified (the default), all values will be included.
-#' @param show_progress logical indicating whether function should report its 
-#'   progress.
 #'   
 #' @return A mousetrap data object (see \link{mt_example}) with an additional 
 #'   array (by default called \code{av_trajectories}) that contains the average 

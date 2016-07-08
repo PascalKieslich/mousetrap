@@ -11,31 +11,31 @@ mt_aggregate(data, use = "measures", use_variables = NULL, use2 = "data",
 \item{data}{a mousetrap data object created using one of the mt_import 
 functions (see \link{mt_example} for details).}
 
-\item{use}{a character string specifying which data should be reshaped. The
+\item{use}{a character string specifying which data should be reshaped. The 
 corresponding data are selected from data using \code{data[[use]]}. 
 Usually, this value corresponds to either "tn_trajectories" or "measures", 
 depending on whether the time-normalized trajectories or derived measures 
 should be aggregated.}
 
-\item{use_variables}{a character vector specifying which mouse-tracking
-variables should be aggregated. Corresponds to the column names in case a
-data.frame with mouse-tracking measures is provided. Corresponds to the
-labels of the array dimensions in case a trajectory array is provided. If
+\item{use_variables}{a character vector specifying which mouse-tracking 
+variables should be aggregated. Corresponds to the column names in case a 
+data.frame with mouse-tracking measures is provided. Corresponds to the 
+labels of the array dimensions in case a trajectory array is provided. If 
 unspecified, all variables will be aggregated.}
 
-\item{use2}{a character string specifying where the data containing the
-condition information can be found. Defaults to "data" as
+\item{use2}{a character string specifying where the data containing the 
+condition information can be found. Defaults to "data" as 
 \code{data[["data"]]} usually contains all non mouse-tracking trial data. 
 Alternatively, a data.frame can be provided directly.}
 
 \item{use2_variables}{a character string (or vector) specifying the variables
-(in \code{data[[use2]]}) across which the trajectories / measures will be
+(in \code{data[[use2]]}) across which the trajectories / measures will be 
 aggregated. For each combination of levels of the grouping variable(s), 
 aggregation will be performed separately using \link[reshape2]{dcast}.}
 
 \item{subject_id}{a character string specifying which column contains the 
 subject identifier. If specified, aggregation will be performed within 
-subjects first (that is, within subjects for all available values of the
+subjects first (that is, within subjects for all available values of the 
 grouping variables specified in \code{use2_variables}).}
 
 \item{trajectories_long}{logical indicating if the reshaped trajectories 
@@ -43,11 +43,11 @@ should be returned in long or wide format. If \code{TRUE}, every recorded
 position in a trajectory is placed in another row (whereby the order of the
 positions is logged in the variable \code{mt_seq}). If \code{FALSE}, every 
 trajectory is saved in wide format and the respective positions are indexed
-by adding an integer to the corresponding label (e.g., \code{xpos_1},
-\code{xpos_2}, ...). Only relevant if \code{data[[use]]} contains
+by adding an integer to the corresponding label (e.g., \code{xpos_1}, 
+\code{xpos_2}, ...). Only relevant if \code{data[[use]]} contains 
 trajectories.}
 
-\item{...}{additional arguments passed on to \link{mt_reshape} (such as
+\item{...}{additional arguments passed on to \link{mt_reshape} (such as 
 \code{subset}).}
 }
 \value{
