@@ -29,7 +29,8 @@ extract_data <- function(data,use){
 # that forms a line with P0 so that it is orthogonal to P1-P2.
 # For details regarding the formula, see
 # http://paulbourke.net/geometry/pointlineplane/
-# expects P0 to be a matrix
+#
+# The function expects P0 to be a matrix of points.
 point_to_line <- function(P0, P1, P2){
   
   u <- ( (P0[1,]-P1[1]) * (P2[1]-P1[1]) + 
@@ -41,7 +42,7 @@ point_to_line <- function(P0, P1, P2){
     P1[2] + u * (P2[2] - P1[2])), nrow = 2, byrow = TRUE
   )
   
-  rownames(P) <- names(P1)
+  rownames(P) <- rownames(P0)
   
   return(P)
 }
