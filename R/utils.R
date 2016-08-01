@@ -29,16 +29,19 @@ extract_data <- function(data,use){
 # that forms a line with P0 so that it is orthogonal to P1-P2.
 # For details regarding the formula, see
 # http://paulbourke.net/geometry/pointlineplane/
+# expects P0 to be a matrix
 point_to_line <- function(P0, P1, P2){
   
-  u <- ( (P0[1]-P1[1]) * (P2[1]-P1[1]) + 
-           (P0[2]-P1[2]) * (P2[2]-P1[2]) ) / 
+  u <- ( (P0[1,]-P1[1]) * (P2[1]-P1[1]) + 
+           (P0[2,]-P1[2]) * (P2[2]-P1[2]) ) / 
     ( (P2[1]-P1[1])^2 + (P2[2]-P1[2])^2 )
   
-  P <- c(
+  P <- matrix(c(
     P1[1] + u * (P2[1] - P1[1]), 
-    P1[2] + u * (P2[2] - P1[2])
+    P1[2] + u * (P2[2] - P1[2])), nrow = 2, byrow = TRUE
   )
+  
+  rownames(P) <- names(P1)
   
   return(P)
 }
@@ -69,11 +72,8 @@ points_on_ideal <- function(points, start=NULL, end=NULL){
     result[1,] <- start[1]
     result[2,] <- start[2]
   } else {
-    result <- apply(
-      points, MARGIN=2, 
-      FUN=point_to_line, 
-      P1=start, P2=end
-    )
+    # compute the projection onto the idealized straight line for all points
+    result <- point_to_line(P0 = points, P1 = start, P2 = end)
   }
   
   return(result)
