@@ -886,25 +886,30 @@ mt_subset <- function(data,subset,check="data"){
 #' coordinate and wants to add them to an existing trajectory array.
 #' 
 #' @inheritParams mt_time_normalize
-#' @param variables a character vector specifying the name of the new variables
-#'   that should be added to the trajectory array.
-#'   
+#' @param variables either a character vector specifying the name of the new 
+#'   variables that should be added to the trajectory array. In this case, the 
+#'   new variables are added as additional columns to the trajectory array 
+#'   filled with \code{NA}s. Or a list of matrices that each contain the data of
+#'   one of the to be added variables. In this case, the new variables with
+#'   their values are added as additional columns to the trajectory array.
 #' @return A mousetrap data object (see \link{mt_example}) where the new 
 #'   variables have been added as additional columns to the trajectory array. 
-#'   The values for the added variables are \code{NA} and have to be filled in 
-#'   manually (see Examples). If columns of the same name already existed, they 
-#'   have been removed. If the trajectory array was provided directly as 
-#'   \code{data}, only the trajectory array will be returned.
+#'   Depending on the input to \code{variables}, the values for the added 
+#'   variables are either \code{NA}s or their actual values. If columns of the
+#'   same name already existed, they have been removed. If the trajectory array
+#'   was provided directly as \code{data}, only the trajectory array will be 
+#'   returned.
 #'   
 #' @examples
-#' # Add a new variable (called "xy_sum") to the trajectory array
-#' mt_example <- mt_add_variables(mt_example,variables="xy_sum")
+#' # Calculate new (arbitrary) variables for this example
+#' # ... the sum of the x- and y-positions
+#' xy_sum <- mt_example$trajectories[,"xpos",] + mt_example$trajectories[,"ypos",]
+#' # ... the product of the x- and y-positions
+#' xy_prod <- mt_example$trajectories[,"xpos",] * mt_example$trajectories[,"ypos",]
 #' 
-#' # Fill the new variable with the corresponding values
-#' # (in this arbitrary example the sum of the x- and y-positions)
-#' mt_example$trajectories[,"xy_sum",] <- 
-#'   mt_example$trajectories[,"xpos",] + mt_example$trajectories[,"ypos",]
-#' 
+#' # Add the new variables to the trajectory array
+#' mt_example <- mt_add_variables(mt_example,
+#'   variables=list(xy_sum=xy_sum, xy_prod=xy_prod))
 #' 
 #' @export
 mt_add_variables <- function(data,
@@ -914,7 +919,18 @@ mt_add_variables <- function(data,
   # Extract trajectories
   trajectories <- extract_data(data=data,use=use)
   
-  # Remove potentially existing deviations in original data
+  # If variables are provided as list with actual data,
+  # extract variable names
+  if (is.list(variables)){
+    data_list <- variables
+    variables <- names(variables)
+  } else if (is.vector(variables)){
+    data_list <- NULL
+  } else {
+    stop("Variables can either be a vector or a list.")
+  }
+  
+  # Remove potentially existing variables in original array
   trajectories <- trajectories[
     ,
     !dimnames(trajectories)[[2]] %in% variables,
@@ -933,9 +949,16 @@ mt_add_variables <- function(data,
     )
   )
   
-  #  Fill it with existing data
+  # Fill it with existing data
   trajectories_ext[,dimnames(trajectories)[[2]],] <- 
     trajectories[,dimnames(trajectories)[[2]],]
+  
+  # Add new data if new data was provided
+  if (is.null(data_list)==FALSE){
+    for (var in variables){
+      trajectories_ext[,var,] <- data_list[[var]]
+    }
+  }
   
   if (is_mousetrap_data(data)){
     data[[save_as]] <- trajectories_ext

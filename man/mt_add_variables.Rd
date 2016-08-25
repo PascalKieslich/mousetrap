@@ -17,16 +17,21 @@ used.}
 \item{save_as}{a character string specifying where the resulting trajectory 
 data should be stored.}
 
-\item{variables}{a character vector specifying the name of the new variables
-that should be added to the trajectory array.}
+\item{variables}{either a character vector specifying the name of the new 
+variables that should be added to the trajectory array. In this case, the 
+new variables are added as additional columns to the trajectory array 
+filled with \code{NA}s. Or a list of matrices that each contain the data of
+one of the to be added variables. In this case, the new variables with
+their values are added as additional columns to the trajectory array.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) where the new 
   variables have been added as additional columns to the trajectory array. 
-  The values for the added variables are \code{NA} and have to be filled in 
-  manually (see Examples). If columns of the same name already existed, they 
-  have been removed. If the trajectory array was provided directly as 
-  \code{data}, only the trajectory array will be returned.
+  Depending on the input to \code{variables}, the values for the added 
+  variables are either \code{NA}s or their actual values. If columns of the
+  same name already existed, they have been removed. If the trajectory array
+  was provided directly as \code{data}, only the trajectory array will be 
+  returned.
 }
 \description{
 Add new variables to the trajectory array (and remove potentially existing 
@@ -36,14 +41,15 @@ can also be helpful if the user has calculated new variables for each logged
 coordinate and wants to add them to an existing trajectory array.
 }
 \examples{
-# Add a new variable (called "xy_sum") to the trajectory array
-mt_example <- mt_add_variables(mt_example,variables="xy_sum")
+# Calculate new (arbitrary) variables for this example
+# ... the sum of the x- and y-positions
+xy_sum <- mt_example$trajectories[,"xpos",] + mt_example$trajectories[,"ypos",]
+# ... the product of the x- and y-positions
+xy_prod <- mt_example$trajectories[,"xpos",] * mt_example$trajectories[,"ypos",]
 
-# Fill the new variable with the corresponding values
-# (in this arbitrary example the sum of the x- and y-positions)
-mt_example$trajectories[,"xy_sum",] <- 
-  mt_example$trajectories[,"xpos",] + mt_example$trajectories[,"ypos",]
-
+# Add the new variables to the trajectory array
+mt_example <- mt_add_variables(mt_example,
+  variables=list(xy_sum=xy_sum, xy_prod=xy_prod))
 
 }
 
