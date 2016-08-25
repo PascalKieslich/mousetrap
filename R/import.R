@@ -372,8 +372,8 @@ mt_import_mousetrap <- function(raw_data,
 #' @seealso \link{read_mousetracker} for reading data into R that were exported
 #' from MouseTracker (Freeman & Ambady, 2010).
 #'
-#' \link{mt_import_mousetrap} and \link{mt_import_long} for importing
-#' mouse-tracking data from other sources.
+#' \link{mt_import_mousetrap} and \link{mt_import_long} for importing 
+#' mouse-tracking data in other formats.
 #'
 #' @examples
 #' \dontrun{
@@ -520,48 +520,47 @@ mt_import_wide <- function(raw_data,
 #' was created using \link{mt_reshape}.
 #'
 #' The coordinates are ordered according to the values in the column provided in
-#' the \code{mt_seq_label} parameter (\code{mt_seq} by default). If the
-#' corresponding column does not exist, the coordinates will be ordered
-#' according to their timestamps (drawn from the \code{timestamps} column by
-#' default).
+#' the \code{mt_seq_label} parameter (\code{mt_seq} by default). If the 
+#' corresponding column does not exist, the coordinates will be imported in the
+#' order they were stored in the raw_data.
 #'
 #' @param raw_data a data.frame in long format, containing the raw data.
-#' @param xpos_label a character string specifying the column containing the
-#'   x-positions.
-#' @param ypos_label a character string specifying the column containing the
-#'   y-positions.
-#' @param timestamps_label a character string specifying the column containing
-#'   the timestamps.
-#' @param dist_label a character string specifying the column containing the
-#'   distance traveled.
-#' @param vel_label a character string specifying the column containing the
-#'   velocity.
-#' @param acc_label a character string specifying the column containing the
-#'   acceleration.
+#' @param mt_labels a named character vector. Its values specify the columns in 
+#'   the data.frame containing the mouse-tracking variables (if a value is not 
+#'   found in the data.frame, the variable is dropped). Its names correspond to 
+#'   the names that should be given to the respective dimensions in the 
+#'   trajectory array. These names should correspond to the names in
+#'   \link{mt_variable_labels}.
 #' @param mt_id_label a character string specifying the column that provides a
 #'   unique ID for every trial.
-#' @param mt_seq_label a character string specifying the column that indicactes
-#'   the order of the logged coordinates within a trial. If unspecified, the
-#'   coordinates will be ordered according to their timestamps.
-#' @param reset_timestamps logical indicating if the first timestamp should be
-#'   subtracted from all timestamps within a trial. Default is TRUE as it is
-#'   recommended for all following analyses in mousetrap.
+#' @param mt_seq_label a character string specifying the column that indicactes 
+#'   the order of the logged coordinates within a trial. If unspecified, the 
+#'   coordinates will be imported in the order they were stored in
+#'   \code{raw_data}.
+#' @param reset_timestamps logical indicating if the first timestamp should be 
+#'   subtracted from all timestamps within a trial. Default is \code{TRUE} as it
+#'   is recommended for all following analyses in mousetrap.
 #'
 #' @return  A mousetrap data object (see \link{mt_example}).
 #'
-#' @seealso \link{mt_import_mousetrap} and \link{mt_import_wide} for importing
-#' mouse-tracking data from other sources.
+#' @seealso \link{mt_import_mousetrap} and \link{mt_import_wide} for importing 
+#'   mouse-tracking data in other formats.
 #'
 #' @examples
+#' # Export data using mt_reshape
+#' exp_data <- mt_reshape(mt_example, use2_variables="Condition")
+#' # Import the exported data again using mt_import_long
+#' mt_data <- mt_import_long(exp_data)
+#' 
 #' \dontrun{
-#' exp_data <- read.csv("exp_data.csv")
-#' data <- mt_import_long(exp_data)
+#' # Import a hypothetical dataset that contains the custom variable "ANGLE"
+#' # which should receive the name "angle" in the trajectory array
+#' mt_data <- mt_import_long(exp_data,
+#'   mt_labels= c(timestamps="timestamps", xpos="xpos", ypos="ypos", angle="ANGLE"))
 #' }
 #' @export
 mt_import_long <- function(raw_data,
-  xpos_label="xpos", ypos_label="ypos",
-  timestamps_label="timestamps",
-  dist_label="dist", vel_label="vel", acc_label="acc",
+  mt_labels = mt_variable_labels,
   mt_id_label=mt_id, mt_seq_label="mt_seq",
   reset_timestamps=TRUE) {
 
@@ -569,13 +568,10 @@ mt_import_long <- function(raw_data,
   if (is.null(mt_seq_label) | (mt_seq_label %in% colnames(raw_data) == FALSE)) {
     message(
       "No mt_seq variable found (that indicates the order of the logs). ",
-      "Automatically created variable based on the timestamps."
+      "Importing data in sequential order."
     )
     mt_seq_label <- "mt_seq"
     raw_data[,"mt_seq"] <- 0
-
-    # Sort dataset according to mt_id and timestamps
-    raw_data <- raw_data[order(raw_data[,mt_id_label], raw_data[,timestamps_label]),]
 
     # Add mt_seq
     for (current_id in unique(raw_data[,mt_id_label])) {
@@ -587,37 +583,37 @@ mt_import_long <- function(raw_data,
   # Sort dataset according to mt_id and mt_seq
   raw_data <- raw_data[order(raw_data[,mt_id_label], raw_data[,mt_seq_label]),]
 
-  # Rename and collect variables
-  mt_labels <- c(
-    timestamps=timestamps_label,
-    xpos=xpos_label, ypos=ypos_label,
-    dist=dist_label, vel=vel_label, acc=acc_label
-  )
+  # Collect and rename variables
   mt_include <- c()
-  timestamps <- mt_variable_labels[["timestamps"]]
-
   for (var in names(mt_labels)) {
-    label <- mt_labels[var]
+    label <- mt_labels[[var]]
     if (label %in% colnames(raw_data)) {
-      colnames(raw_data)[colnames(raw_data) == label] <- mt_variable_labels[[var]]
-      mt_include <- c(mt_include, mt_variable_labels[[var]])
+      colnames(raw_data)[colnames(raw_data) == label] <- var
+      mt_include <- c(mt_include, var)
     }
   }
-
+  
+  
   # Create array for selected variables
   trajectories <- reshape2::melt(raw_data,
-    measure.vars=mt_include, variable.name="mt_variable")
+    measure.vars=mt_include,
+    variable.name="mt_variable",
+    value.name="value")
+  
   custom.formula <- stats::as.formula(paste(
     mt_id, "mt_variable", mt_seq_label, sep="~"
   ))
+  
   trajectories <- reshape2::acast(trajectories,
     custom.formula, value.var="value")
+  
 
   # Remove dimnames for logs
   dimnames(trajectories)[[3]] <- NULL
 
   # Subtract first timestamp for each trial
-  if (reset_timestamps) {
+  timestamps <- mt_variable_labels[["timestamps"]]
+  if (timestamps%in%mt_include & reset_timestamps) {
     trajectories[,timestamps,] <- trajectories[,timestamps,] - trajectories[,timestamps,1]
   }
 

@@ -4,42 +4,30 @@
 \alias{mt_import_long}
 \title{Import mouse-tracking data saved in long format.}
 \usage{
-mt_import_long(raw_data, xpos_label = "xpos", ypos_label = "ypos",
-  timestamps_label = "timestamps", dist_label = "dist", vel_label = "vel",
-  acc_label = "acc", mt_id_label = mt_id, mt_seq_label = "mt_seq",
-  reset_timestamps = TRUE)
+mt_import_long(raw_data, mt_labels = mt_variable_labels,
+  mt_id_label = mt_id, mt_seq_label = "mt_seq", reset_timestamps = TRUE)
 }
 \arguments{
 \item{raw_data}{a data.frame in long format, containing the raw data.}
 
-\item{xpos_label}{a character string specifying the column containing the
-x-positions.}
-
-\item{ypos_label}{a character string specifying the column containing the
-y-positions.}
-
-\item{timestamps_label}{a character string specifying the column containing
-the timestamps.}
-
-\item{dist_label}{a character string specifying the column containing the
-distance traveled.}
-
-\item{vel_label}{a character string specifying the column containing the
-velocity.}
-
-\item{acc_label}{a character string specifying the column containing the
-acceleration.}
+\item{mt_labels}{a named character vector. Its values specify the columns in 
+the data.frame containing the mouse-tracking variables (if a value is not 
+found in the data.frame, the variable is dropped). Its names correspond to 
+the names that should be given to the respective dimensions in the 
+trajectory array. These names should correspond to the names in
+\link{mt_variable_labels}.}
 
 \item{mt_id_label}{a character string specifying the column that provides a
 unique ID for every trial.}
 
-\item{mt_seq_label}{a character string specifying the column that indicactes
-the order of the logged coordinates within a trial. If unspecified, the
-coordinates will be ordered according to their timestamps.}
+\item{mt_seq_label}{a character string specifying the column that indicactes 
+the order of the logged coordinates within a trial. If unspecified, the 
+coordinates will be imported in the order they were stored in
+\code{raw_data}.}
 
-\item{reset_timestamps}{logical indicating if the first timestamp should be
-subtracted from all timestamps within a trial. Default is TRUE as it is
-recommended for all following analyses in mousetrap.}
+\item{reset_timestamps}{logical indicating if the first timestamp should be 
+subtracted from all timestamps within a trial. Default is \code{TRUE} as it
+is recommended for all following analyses in mousetrap.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}).
@@ -61,19 +49,25 @@ was created using \link{mt_reshape}.
 }
 \details{
 The coordinates are ordered according to the values in the column provided in
-the \code{mt_seq_label} parameter (\code{mt_seq} by default). If the
-corresponding column does not exist, the coordinates will be ordered
-according to their timestamps (drawn from the \code{timestamps} column by
-default).
+the \code{mt_seq_label} parameter (\code{mt_seq} by default). If the 
+corresponding column does not exist, the coordinates will be imported in the
+order they were stored in the raw_data.
 }
 \examples{
+# Export data using mt_reshape
+exp_data <- mt_reshape(mt_example, use2_variables="Condition")
+# Import the exported data again using mt_import_long
+mt_data <- mt_import_long(exp_data)
+
 \dontrun{
-exp_data <- read.csv("exp_data.csv")
-data <- mt_import_long(exp_data)
+# Import a hypothetical dataset that contains the custom variable "ANGLE"
+# which should receive the name "angle" in the trajectory array
+mt_data <- mt_import_long(exp_data,
+  mt_labels= c(timestamps="timestamps", xpos="xpos", ypos="ypos", angle="ANGLE"))
 }
 }
 \seealso{
-\link{mt_import_mousetrap} and \link{mt_import_wide} for importing
-mouse-tracking data from other sources.
+\link{mt_import_mousetrap} and \link{mt_import_wide} for importing 
+  mouse-tracking data in other formats.
 }
 

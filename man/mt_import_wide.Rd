@@ -103,7 +103,7 @@ studying real-time mental processing using a computer mouse-tracking method.
 \link{read_mousetracker} for reading data into R that were exported
 from MouseTracker (Freeman & Ambady, 2010).
 
-\link{mt_import_mousetrap} and \link{mt_import_long} for importing
-mouse-tracking data from other sources.
+\link{mt_import_mousetrap} and \link{mt_import_long} for importing 
+mouse-tracking data in other formats.
 }
 
