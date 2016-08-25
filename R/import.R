@@ -1,16 +1,16 @@
 #' Import mouse-tracking data recorded using the mousetrap plug-ins in
 #' OpenSesame.
 #'
-#' \code{mt_import_mousetrap} accepts a data.frame of (merged) raw data from a
-#' mouse-tracking experiment implemented in OpenSesame using one of the
-#' \href{https://github.com/pascalkieslich/mousetrap-os}{mousetrap plug-ins}.
-#' From this data.frame, \code{mt_import_mousetrap} creates a mousetrap data
+#' \code{mt_import_mousetrap} accepts a data.frame of (merged) raw data from a 
+#' mouse-tracking experiment implemented in OpenSesame using one of the 
+#' \href{https://github.com/pascalkieslich/mousetrap-os}{mousetrap plug-ins}. 
+#' From this data.frame, \code{mt_import_mousetrap} creates a mousetrap data 
 #' object containing the trajectories and additional data for further processing
-#' within the mousetrap package. \code{mt_import_mousetrap} returns a list,
-#' which includes the trajectory data as an array, and all other data as a
-#' data.frame. This data structure can then be passed on to other functions
-#' within this package, such as \link{mt_time_normalize} or
-#' \link{mt_calculate_measures}.
+#' within the mousetrap package. Specifically, it returns a list that includes
+#' the trajectory data as an array (called \code{trajectories}), and all other
+#' data as a data.frame (called \code{data}). This data structure can then be
+#' passed on to other functions within this package, such as
+#' \link{mt_time_normalize} or \link{mt_calculate_measures}.
 #'
 #' When working with mouse-tracking data that were recorded using the mousetrap
 #' plug-ins for OpenSesame, usually only the \code{raw_data} need to be
@@ -477,24 +477,25 @@ mt_import_wide <- function(raw_data,
 
 #' Import mouse-tracking data saved in long format.
 #'
-#' \code{mt_import_long} receives a data.frame in which mouse-tracking data are
-#' stored in long format, i.e., where one row contains the logging data
-#' (timestamp, x- and y-position etc.) at one specific point in the trial. This
-#' is, for example, the case when exporting the trajectory data from the
-#' mousetrap package using \link{mt_reshape}. From this data.frame,
-#' \code{mt_import_long} creates a mousetrap data object containing the
-#' trajectories and additional data for further processing within the mousetrap
-#' package. \code{mt_import_long} returns a list, which includes the trajectory
-#' data as an array, and all other data as a data.frame. This data structure can
-#' then be passed on to other functions within this package, such as
-#' \link{mt_time_normalize} or \link{mt_calculate_measures}. The defaults are
-#' set so that no adjustments have to be made when importing a data.frame that
-#' was created using \link{mt_reshape}.
+#' \code{mt_import_long} receives a data.frame in which mouse-tracking data are 
+#' stored in long format, i.e., where one row contains the logging data 
+#' (timestamp, x- and y-position etc.) at one specific point in the trial. This 
+#' is, for example, the case when exporting the trajectory data from the 
+#' mousetrap package using \link{mt_reshape}. From this data.frame, 
+#' \code{mt_import_long} creates a mousetrap data object containing the 
+#' trajectories and additional data for further processing within the mousetrap 
+#' package. Specifically, it returns a list that includes the trajectory data as
+#' an array (called \code{trajectories}), and all other data as a data.frame
+#' (called \code{data}). This data structure can then be passed on to other
+#' functions within this package, such as \link{mt_time_normalize} or
+#' \link{mt_calculate_measures}. The defaults are set so that no adjustments
+#' have to be made when importing a data.frame that was created using
+#' \link{mt_reshape}.
 #'
 #' The coordinates are ordered according to the values in the column provided in
 #' the \code{mt_seq_label} parameter (\code{mt_seq} by default). If the 
 #' corresponding column does not exist, the coordinates will be imported in the
-#' order they were stored in the raw_data.
+#' order in which they were stored in the raw_data.
 #'
 #' @param raw_data a data.frame in long format, containing the raw data.
 #' @param mt_labels a named character vector. Its values specify the columns in 
@@ -507,10 +508,10 @@ mt_import_wide <- function(raw_data,
 #'   provides a unique ID for every trial. If more than one variable name is
 #'   provided, a new ID variable will be created by combining the values of each
 #'   variable.
-#' @param mt_seq_label a character string specifying the column that indicactes 
-#'   the order of the logged coordinates within a trial. If no column of the
+#' @param mt_seq_label a character string specifying the column that indicates 
+#'   the order of the logged coordinates within a trial. If no column of the 
 #'   specified name is found in the data.frame, the coordinates will be imported
-#'   in the order they were stored in \code{raw_data}.
+#'   in the order in which they were stored in \code{raw_data}.
 #' @param reset_timestamps logical indicating if the first timestamp should be 
 #'   subtracted from all timestamps within a trial. Default is \code{TRUE} as it
 #'   is recommended for all following analyses in mousetrap.
@@ -521,10 +522,12 @@ mt_import_wide <- function(raw_data,
 #'   mouse-tracking data in other formats.
 #'
 #' @examples
-#' # Export data using mt_reshape
-#' exp_data <- mt_reshape(mt_example, use2_variables="Condition")
-#' # Import the exported data again using mt_import_long
-#' mt_data <- mt_import_long(exp_data)
+#' # Create data in long format for test purposes
+#' mt_data_long <- mt_reshape(mt_example, use2_variables="Condition")
+#' 
+#' # Import the data using mt_import_long
+#' mt_data <- mt_import_long(mt_data_long)
+#' 
 #' 
 #' \dontrun{
 #' # Import a hypothetical dataset that contains the custom variable "ANGLE"
