@@ -63,28 +63,9 @@ mt_calculate_deviations <- function(data,
   ypos_ideal <- paste0(prefix,mt_variable_labels[["ypos_ideal"]])
   dev_ideal <- paste0(prefix,mt_variable_labels[["dev_ideal"]])
   
-
-  # Remove potentially existing deviations in original data
-  trajectories <- trajectories[
-    ,
-    !dimnames(trajectories)[[2]] %in% c(xpos_ideal,ypos_ideal,dev_ideal),
-    , drop=FALSE]
-  
-  # Setup new array
-  deviations <- array(
-    dim=dim(trajectories) + c(0, 3, 0),
-    dimnames=list(
-      dimnames(trajectories)[[1]],
-      c(
-        dimnames(trajectories)[[2]],
-        xpos_ideal,ypos_ideal,dev_ideal
-      ),
-      dimnames(trajectories)[[3]]
-    )
-  )
-  
-  #  Fill it with existing data
-  deviations[,dimnames(trajectories)[[2]],] <- trajectories[,dimnames(trajectories)[[2]],]
+  # Create new array with added columns for the new variables
+  deviations <- mt_add_variables(trajectories,
+    variables=c(xpos_ideal,ypos_ideal,dev_ideal))
   
   # Calculate number of logs
   nlogs <- rowSums(!is.na(deviations[,xpos,,drop=FALSE]))

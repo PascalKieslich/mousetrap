@@ -874,3 +874,74 @@ mt_subset <- function(data,subset,check="data"){
   
   return(data)
 }
+
+
+
+#' Add new variables to trajectory array.
+#' 
+#' Add new variables to the trajectory array (and remove potentially existing 
+#' variables of the same name). This is mostly a helper function used by other 
+#' functions in this package (e.g., \link{mt_calculate_deviations}). However, it
+#' can also be helpful if the user has calculated new variables for each logged 
+#' coordinate and wants to add them to an existing trajectory array.
+#' 
+#' @inheritParams mt_time_normalize
+#' @param variables a character vector specifying the name of the new variables
+#'   that should be added to the trajectory array.
+#'   
+#' @return A mousetrap data object (see \link{mt_example}) where the new 
+#'   variables have been added as additional columns to the trajectory array. 
+#'   The values for the added variables are \code{NA} and have to be filled in 
+#'   manually (see Examples). If columns of the same name already existed, they 
+#'   have been removed. If the trajectory array was provided directly as 
+#'   \code{data}, only the trajectory array will be returned.
+#'   
+#' @examples
+#' # Add a new variable (called "xy_sum") to the trajectory array
+#' mt_example <- mt_add_variables(mt_example,variables="xy_sum")
+#' 
+#' # Fill the new variable with the corresponding values
+#' # (in this arbitrary example the sum of the x- and y-positions)
+#' mt_example$trajectories[,"xy_sum",] <- 
+#'   mt_example$trajectories[,"xpos",] + mt_example$trajectories[,"ypos",]
+#' 
+#' 
+#' @export
+mt_add_variables <- function(data,
+                             use="trajectories", save_as=use,
+                             variables) {
+  
+  # Extract trajectories
+  trajectories <- extract_data(data=data,use=use)
+  
+  # Remove potentially existing deviations in original data
+  trajectories <- trajectories[
+    ,
+    !dimnames(trajectories)[[2]] %in% variables,
+    , drop=FALSE]
+  
+  # Setup new array
+  trajectories_ext <- array(
+    dim=dim(trajectories) + c(0, length(variables), 0),
+    dimnames=list(
+      dimnames(trajectories)[[1]],
+      c(
+        dimnames(trajectories)[[2]],
+        variables
+      ),
+      dimnames(trajectories)[[3]]
+    )
+  )
+  
+  #  Fill it with existing data
+  trajectories_ext[,dimnames(trajectories)[[2]],] <- 
+    trajectories[,dimnames(trajectories)[[2]],]
+  
+  if (is_mousetrap_data(data)){
+    data[[save_as]] <- trajectories_ext
+    return(data)
+  }else{
+    return(trajectories_ext)
+  }
+  
+}

@@ -58,6 +58,9 @@ following, a brief overview of the functions in this package is given.
   
   \link{mt_subset}	filters mouse-tracking data by trials, such that are only
   those meeting defined criteria are included.
+  
+  \link{mt_add_variables} adds new, self created variables to a trajectory 
+  array.
 }
 
 \section{Analysis functions}{

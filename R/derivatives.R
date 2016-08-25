@@ -76,28 +76,10 @@ mt_calculate_derivatives <- function(data,
   vel  <- paste0(prefix,mt_variable_labels[["vel"]])
   acc  <- paste0(prefix,mt_variable_labels[["acc"]])
   
-  # Remove potentially existing derivates in original data
-  trajectories <- trajectories[
-    ,
-    !dimnames(trajectories)[[2]] %in% c(dist,vel,acc),
-    , drop=FALSE]
-  
-  # Setup new array
-  derivatives <- array(
-    dim=dim(trajectories) + c(0, 3, 0),
-    dimnames=list(
-      dimnames(trajectories)[[1]],
-      c(
-        dimnames(trajectories)[[2]],
-        dist, vel, acc
-      ),
-      dimnames(trajectories)[[3]]
-    )
-  )
-  
-  #  Fill it with existing data
-  derivatives[,dimnames(trajectories)[[2]],] <- trajectories[,dimnames(trajectories)[[2]],]
-  
+  # Create new array with added columns for the new variables
+  derivatives <- mt_add_variables(trajectories,
+    variables=c(dist,vel,acc))
+
   # Calculate derivatives
   for (i in 1:nrow(trajectories)){
     
