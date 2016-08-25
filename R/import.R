@@ -531,8 +531,10 @@ mt_import_wide <- function(raw_data,
 #'   the names that should be given to the respective dimensions in the 
 #'   trajectory array. These names should correspond to the names in
 #'   \link{mt_variable_labels}.
-#' @param mt_id_label a character string specifying the column that provides a
-#'   unique ID for every trial.
+#' @param mt_id_label a character string (or vector) specifying the column that 
+#'   provides a unique ID for every trial. If more than one variable name is
+#'   provided, a new ID variable will be created by combining the values of each
+#'   variable.
 #' @param mt_seq_label a character string specifying the column that indicactes 
 #'   the order of the logged coordinates within a trial. If no column of the
 #'   specified name is found in the data.frame, the coordinates will be imported
@@ -563,7 +565,18 @@ mt_import_long <- function(raw_data,
   mt_labels = mt_variable_labels,
   mt_id_label=mt_id, mt_seq_label="mt_seq",
   reset_timestamps=TRUE) {
-
+  
+  # Ensure that raw_data is a data.frame
+  raw_data <- as.data.frame(raw_data)
+  
+  # If more than one trial identifying variable is specified,
+  # combine them into one unique identifier.
+  if (length(mt_id_label)>1){
+    raw_data[,mt_id] <- apply(raw_data[,mt_id_label],1,paste,collapse="_")
+    mt_id_label <- mt_id
+  }
+  
+  
   # Look for mt_seq variable (that indicates the order of the logs)
   if (is.null(mt_seq_label) | (mt_seq_label %in% colnames(raw_data) == FALSE)) {
     message(
@@ -601,7 +614,7 @@ mt_import_long <- function(raw_data,
     value.name="value")
   
   custom.formula <- stats::as.formula(paste(
-    mt_id, "mt_variable", mt_seq_label, sep="~"
+    mt_id_label, "mt_variable", mt_seq_label, sep="~"
   ))
   
   trajectories <- reshape2::acast(trajectories,

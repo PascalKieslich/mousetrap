@@ -17,8 +17,10 @@ the names that should be given to the respective dimensions in the
 trajectory array. These names should correspond to the names in
 \link{mt_variable_labels}.}
 
-\item{mt_id_label}{a character string specifying the column that provides a
-unique ID for every trial.}
+\item{mt_id_label}{a character string (or vector) specifying the column that 
+provides a unique ID for every trial. If more than one variable name is
+provided, a new ID variable will be created by combining the values of each
+variable.}
 
 \item{mt_seq_label}{a character string specifying the column that indicactes 
 the order of the logged coordinates within a trial. If no column of the
