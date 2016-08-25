@@ -21,9 +21,9 @@ trajectory array. These names should correspond to the names in
 unique ID for every trial.}
 
 \item{mt_seq_label}{a character string specifying the column that indicactes 
-the order of the logged coordinates within a trial. If unspecified, the 
-coordinates will be imported in the order they were stored in
-\code{raw_data}.}
+the order of the logged coordinates within a trial. If no column of the
+specified name is found in the data.frame, the coordinates will be imported
+in the order they were stored in \code{raw_data}.}
 
 \item{reset_timestamps}{logical indicating if the first timestamp should be 
 subtracted from all timestamps within a trial. Default is \code{TRUE} as it

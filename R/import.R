@@ -534,9 +534,9 @@ mt_import_wide <- function(raw_data,
 #' @param mt_id_label a character string specifying the column that provides a
 #'   unique ID for every trial.
 #' @param mt_seq_label a character string specifying the column that indicactes 
-#'   the order of the logged coordinates within a trial. If unspecified, the 
-#'   coordinates will be imported in the order they were stored in
-#'   \code{raw_data}.
+#'   the order of the logged coordinates within a trial. If no column of the
+#'   specified name is found in the data.frame, the coordinates will be imported
+#'   in the order they were stored in \code{raw_data}.
 #' @param reset_timestamps logical indicating if the first timestamp should be 
 #'   subtracted from all timestamps within a trial. Default is \code{TRUE} as it
 #'   is recommended for all following analyses in mousetrap.
