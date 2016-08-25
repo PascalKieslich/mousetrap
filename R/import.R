@@ -88,7 +88,10 @@ mt_import_mousetrap <- function(raw_data,
   split=",", duplicates="remove_first",
   reset_timestamps=TRUE,
   show_progress=TRUE) {
-
+  
+  # Ensure that raw_data is a data.frame
+  raw_data <- as.data.frame(raw_data)
+  
   # Add mt_id variable
   if (is.null(mt_id_label)) {
     # if no column name for ID variable is provided create one
@@ -393,7 +396,10 @@ mt_import_wide <- function(raw_data,
   mt_id_label=NULL,
   pos_sep="_", pos_ids=NULL,
   reset_timestamps=TRUE) {
-
+  
+  # Ensure that raw_data is a data.frame
+  raw_data <- as.data.frame(raw_data)
+  
   # Add mt_id variable
   if (is.null(mt_id_label)) {
     # if no column name for ID variable is provided, create one
