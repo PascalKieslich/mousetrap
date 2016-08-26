@@ -658,6 +658,7 @@ mt_import_long <- function(raw_data,
   # If more than one trial identifying variable is specified,
   # combine them into one unique identifier.
   if (length(mt_id_label)>1){
+    
     raw_data[,"mt_id"] <- apply(raw_data[,mt_id_label],1,paste,collapse="_")
     mt_id_label <- "mt_id"
   
@@ -673,18 +674,14 @@ mt_import_long <- function(raw_data,
       "No mt_seq variable found (that indicates the order of the logs). ",
       "Importing data in sequential order."
     )
-    mt_seq_label <- "mt_seq"
-    raw_data[,"mt_seq"] <- 0
-
-    # Add mt_seq
-    for (current_id in unique(raw_data[,"mt_id"])) {
-      raw_data[raw_data[,"mt_id"] == current_id,mt_seq_label] <-
-        1:sum(raw_data[,"mt_id"] == current_id)
-    }
+    # Sort dataset according to mt_id
+    raw_data <- raw_data[order(raw_data[,"mt_id"]),]
+    
+  } else {
+    # Sort dataset according to mt_id and mt_seq
+    raw_data <- raw_data[order(raw_data[,"mt_id"], raw_data[,mt_seq_label]),]
   }
 
-  # Sort dataset according to mt_id and mt_seq
-  raw_data <- raw_data[order(raw_data[,"mt_id"], raw_data[,mt_seq_label]),]
 
   # Collect and rename variables
   timestamps <- "timestamps"
@@ -707,16 +704,18 @@ mt_import_long <- function(raw_data,
   
   
   # Create array for selected variables
-  ids <- as.vector(raw_data[,"mt_id"])
-  trajectories_data <- as.matrix(raw_data[,mt_include])
+  n_logs <- plyr::ddply(raw_data,"mt_id",nrow)
+  n_max <- max(n_logs$V1)
   
-  trajectories  <- array(
-    dim=c(length(unique(ids)), length(mt_labels), max(table(ids))),
-    dimnames=list(unique(ids), mt_include, NULL))
   
-  for (id in ids) {
-    sel <- ids==id
-    trajectories[id,,1:sum(sel)] <- t(trajectories_data[sel,])
+  trajectories <- array(
+    dim = c(nrow(n_logs),length(mt_include), n_max),
+    dimnames = list(n_logs$mt_id, mt_include, NULL))
+  
+  for(var in mt_include){
+    tmp_list <- plyr::dlply(raw_data,"mt_id",function(x) c(x[,var],rep(NA,n_max-nrow(x))))
+    tmp_mat  <- do.call(rbind,tmp_list)
+    trajectories[,var,] <- tmp_mat
   }
   
   
@@ -747,7 +746,7 @@ mt_import_long <- function(raw_data,
   
 
   # Create data.frame from leftover variables
-  raw_data <- raw_data[,!colnames(raw_data) %in% c(mt_include, mt_seq_label), drop=FALSE]
+  raw_data <- plyr::ddply(raw_data,"mt_id",function(x) x[1,!names(x)%in%mt_include])
   raw_data <- unique(raw_data)
   
   # Issue warning if more than one line per mt_id remains
