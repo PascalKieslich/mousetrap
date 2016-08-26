@@ -22,19 +22,21 @@ which the y-positions are stored (see Details).}
 \item{timestamps_label}{a character string specifying the name of the column(s)
 in which the timestamps are stored (see Details).}
 
-\item{mt_id_label}{an optional character string specifying the name of the
-column that provides a unique ID for every trial in the raw data. If
-unspecified, an ID variable will be generated.}
+\item{mt_id_label}{an optional character string specifying the name of the 
+column that provides a unique ID for every trial. If unspecified (the 
+default), an ID variable will be generated. If more than one variable name 
+is provided, a new ID variable will be created by combining the values of 
+each variable.}
 
-\item{split}{a character string indicating how the different timestamps (and
-coordinates) within a trial are separated.}
+\item{split}{a character string indicating how the different timestamps and 
+coordinates within a trial are separated.}
 
 \item{duplicates}{a character string indicating how duplicate timestamps
 within a trial are handled (see Details).}
 
-\item{reset_timestamps}{logical indicating if the first timestamp should be
-subtracted from all timestamps within a trial. Default is TRUE as it is
-recommended for all following analyses in mousetrap.}
+\item{reset_timestamps}{logical indicating if the first timestamp should be 
+subtracted from all timestamps within a trial. Default is \code{TRUE} as it
+is recommended for all following analyses in mousetrap.}
 
 \item{show_progress}{logical indicating whether function should report its
 progress.}

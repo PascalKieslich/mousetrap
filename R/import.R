@@ -49,16 +49,18 @@
 #'   which the y-positions are stored (see Details).
 #' @param timestamps_label a character string specifying the name of the column(s)
 #'   in which the timestamps are stored (see Details).
-#' @param mt_id_label an optional character string specifying the name of the
-#'   column that provides a unique ID for every trial in the raw data. If
-#'   unspecified, an ID variable will be generated.
-#' @param split a character string indicating how the different timestamps (and
-#'   coordinates) within a trial are separated.
+#' @param mt_id_label an optional character string specifying the name of the 
+#'   column that provides a unique ID for every trial. If unspecified (the 
+#'   default), an ID variable will be generated. If more than one variable name 
+#'   is provided, a new ID variable will be created by combining the values of 
+#'   each variable.
+#' @param split a character string indicating how the different timestamps and 
+#'   coordinates within a trial are separated.
 #' @param duplicates a character string indicating how duplicate timestamps
 #'   within a trial are handled (see Details).
-#' @param reset_timestamps logical indicating if the first timestamp should be
-#'   subtracted from all timestamps within a trial. Default is TRUE as it is
-#'   recommended for all following analyses in mousetrap.
+#' @param reset_timestamps logical indicating if the first timestamp should be 
+#'   subtracted from all timestamps within a trial. Default is \code{TRUE} as it
+#'   is recommended for all following analyses in mousetrap.
 #' @param show_progress logical indicating whether function should report its
 #'   progress.
 #'
@@ -89,31 +91,47 @@ mt_import_mousetrap <- function(raw_data,
   reset_timestamps=TRUE,
   show_progress=TRUE) {
   
+  # Set labels
+  timestamps <- "timestamps"
+  xpos <- "xpos"
+  ypos <- "ypos"
+  
   # Ensure that raw_data is a data.frame
   raw_data <- as.data.frame(raw_data)
   
   # Add mt_id variable
   if (is.null(mt_id_label)) {
+    message("No mt_id_label provided. ",
+            "A new trial identifying variable called mt_id was created.")
     # if no column name for ID variable is provided create one
     ids <- 1:nrow(raw_data)
     # use formatC to add leading 0s
-    raw_data[,mt_id] <- paste(
+    raw_data[,"mt_id"] <- paste(
       "id",
       formatC(ids, width=trunc(log10(nrow(raw_data))) + 1, flag="0"),
       sep=""
     )
   } else {
-    if(anyDuplicated(raw_data[,mt_id_label]) > 0){
-      stop(
-        "Values in specified mt_id variable - ",
-        mt_id_label,
-        " - are not unique."
-      )
+    
+    # If more than one trial identifying variable is specified,
+    # combine them into one unique identifier called mt_id.
+    if (length(mt_id_label)>1){
+      raw_data[,"mt_id"] <- apply(raw_data[,mt_id_label],1,paste,collapse="_")
+      
+    # Otherwise simply rename mt_id_label column to mt_id.
+    } else {
+      colnames(raw_data)[colnames(raw_data) == mt_id_label] <- "mt_id"
     }
-    raw_data[,mt_id] <- raw_data[,mt_id_label]
+    mt_id_label <- "mt_id"
+    
+    if(anyDuplicated(raw_data[,mt_id_label]) > 0) {
+      stop("Values in specified mt_id_label variable are not unique.")
+    }
+    
   }
 
-  rownames(raw_data) <- raw_data[,mt_id]
+  # Set rownames of raw_data to trial identifier
+  rownames(raw_data) <- raw_data[,"mt_id"]
   
   # Get length of label variables
   n_labels <- c(length(xpos_label),length(ypos_label),length(timestamps_label))
@@ -136,7 +154,8 @@ mt_import_mousetrap <- function(raw_data,
     raw_data[,xpos_label[1]] <- join_data(raw_data[,xpos_label,drop=FALSE])  
     raw_data[,ypos_label[1]] <- join_data(raw_data[,ypos_label,drop=FALSE])  
     
-    mt_labels <- c(timestamps=timestamps_label[1], xpos=xpos_label[1], ypos=ypos_label[1])
+    mt_labels <- c(timestamps_label[1], xpos_label[1], ypos_label[1])
+    names(mt_labels) <- c(timestamps, xpos, ypos)
     columns <- mt_labels
     names(columns) <- mt_labels
     
@@ -165,7 +184,8 @@ mt_import_mousetrap <- function(raw_data,
       }
     }
     
-    mt_labels <- c(timestamps=timestamps_label, xpos=xpos_label, ypos=ypos_label)
+    mt_labels <- c(timestamps_label, xpos_label, ypos_label)
+    names(mt_labels) <- c(timestamps, xpos, ypos)
     columns <- sapply(mt_labels, check_columns)
     names(columns) <- mt_labels
     
@@ -197,16 +217,11 @@ mt_import_mousetrap <- function(raw_data,
   } else {
     max_logs <- dim(data_list)[1]
   }
-
-  # Extract labels for trajectory array
-  timestamps <- mt_variable_labels[["timestamps"]]
-  xpos <- mt_variable_labels[["xpos"]]
-  ypos <- mt_variable_labels[["ypos"]]
-
+  
   # Create array with raw MT data
   trajectories <- array(
     dim=c(nrow(raw_data), 3, max_logs),
-    dimnames=list(raw_data[,mt_id], c(timestamps,xpos,ypos), NULL)
+    dimnames=list(raw_data[,"mt_id"], c(timestamps,xpos,ypos), NULL)
   )
 
   for (i in 1:dim(trajectories)[1]) {
@@ -214,7 +229,7 @@ mt_import_mousetrap <- function(raw_data,
     if (class(data_list) == "matrix") {
       for (j in names(mt_labels)) {
         mt_l <- columns[mt_labels[j]]
-        trajectories[i, mt_variable_labels[j], 1:length(data_list[i,][[mt_l]])] <- data_list[i,][[mt_l]]
+        trajectories[i, j, 1:length(data_list[i,][[mt_l]])] <- data_list[i,][[mt_l]]
       }
     # Special case (only one trajectory or equal number of logs)
     } else {
@@ -439,7 +454,7 @@ mt_import_wide <- function(raw_data,
     mt_id_label <- "mt_id"
     
     if(anyDuplicated(raw_data[,mt_id_label]) > 0) {
-      stop("Values in specified mt_id variable are not unique.")
+      stop("Values in specified mt_id_label variable are not unique.")
     }
     
   }
