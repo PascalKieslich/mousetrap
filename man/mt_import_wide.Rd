@@ -4,24 +4,36 @@
 \alias{mt_import_wide}
 \title{Import mouse-tracking data saved in wide format.}
 \usage{
-mt_import_wide(raw_data, mt_labels = c(xpos = "X", ypos = "Y"),
+mt_import_wide(raw_data, xpos_label = "X", ypos_label = "Y",
+  zpos_label = NULL, timestamps_label = "T", add_labels = NULL,
   mt_id_label = NULL, pos_sep = "_", pos_ids = NULL,
   reset_timestamps = TRUE)
 }
 \arguments{
 \item{raw_data}{a data.frame containing the raw data.}
 
-\item{mt_labels}{a named character vector. Its values specify the core of the
-column labels in the data.frame containing the mouse-tracking variables 
-(e.g., \code{mt_labels = c(xpos="X", ypos="Y")}, if the x-positions are
-stored in "X_1", "X_2",... and y-positions in "Y_1", "Y_2",...). Its names 
-correspond to the names that should be given to the respective dimensions 
-in the trajectory array. These names should correspond to the names in 
-\link{mt_variable_labels}.}
+\item{xpos_label}{a character string specifying the core of the column labels
+containing the x-positions (e.g., "X" for "X_1", "X_2", ...).}
+
+\item{ypos_label}{a character string specifying the core of the column labels
+containing the y-positions (e.g., "Y" for "Y_1", "Y_2", ...).}
+
+\item{zpos_label}{a character string specifying the core of the column labels
+containing the z-positions.}
+
+\item{timestamps_label}{an optional character string specifying the core of 
+the column labels containing the timestamps. If no timestamps are found in
+the data, a timestamps variable with increasing integers will be created
+(assuming equidistant time steps).}
+
+\item{add_labels}{a character vector specifying the core of columns
+containing additional mouse-tracking variables.}
 
 \item{mt_id_label}{an optional character string specifying the name of the 
-column that provides a unique ID for every trial. If unspecified (the
-default), an ID variable will be generated.}
+column that provides a unique ID for every trial. If unspecified (the 
+default), an ID variable will be generated. If more than one variable name
+is provided, a new ID variable will be created by combining the values of
+each variable.}
 
 \item{pos_sep}{a character string indicating the character that connects the
 core label and the position, (e.g., "_" for "X_1", "Y_1", ...).}
@@ -31,9 +43,9 @@ y-coordinates etc. (e.g., 1:101 for time-normalized trajectories from
 MouseTracker). If unspecified (the default), column labels for the
 respective variable will be extracted using grep (see Details).}
 
-\item{reset_timestamps}{logical indicating if the first timestamp should be
-subtracted from all timestamps within a trial. Default is TRUE as it is
-recommended for all following analyses in mousetrap.}
+\item{reset_timestamps}{logical indicating if the first timestamp should be 
+subtracted from all timestamps within a trial. Default is \code{TRUE} as it
+is recommended for all following analyses in mousetrap.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}).
@@ -61,9 +73,14 @@ stem from a "time normalized analysis" in MouseTracker (Freeman & Ambady,
 
 If no \code{pos_ids} are provided, column labels for the respective variable 
 (e.g., x-positions) are extracted using \link{grep} returning all variables 
-that start with the respective character string. This is, e.g., useful when
-importing trajectory data that stem from a "raw time analysis" in
+that start with the respective character string (e.g., "X_" if
+\code{xpos_label="ypos"} and \code{pos_sep="_"}). This is, e.g., useful when 
+importing trajectory data that stem from a "raw time analysis" in 
 MouseTracker (Freeman & Ambady, 2010).
+
+If no timestamps are found in the data, \code{mt_import_wide} automatically 
+creates a timestamps variable with increasing integers (starting with 0) 
+assuming equally spaced sampling intervals.
 }
 \examples{
 # Create data in wide format for test purposes
@@ -72,8 +89,7 @@ mt_data_wide <- mt_reshape(mt_example, use2_variables="Condition",
 
 # Import the data using mt_import_wide
 mt_data <- mt_import_wide(mt_data_wide,
-  mt_labels=c(timestamps="timestamps", xpos="xpos", ypos="ypos"),
-  pos_sep="_")
+  xpos_label="xpos", ypos_label="ypos", timestamps="timestamps")
 
 
 \dontrun{
