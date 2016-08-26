@@ -113,18 +113,22 @@ mt_import_mousetrap <- function(raw_data,
     )
   } else {
     
+    # Extract values of mt_id variable (and convert them to character)
+    ids <- as.character(raw_data[,mt_id_label[[1]]])
+    
     # If more than one trial identifying variable is specified,
-    # combine them into one unique identifier called mt_id.
-    if (length(mt_id_label)>1){
-      raw_data[,"mt_id"] <- apply(raw_data[,mt_id_label],1,paste,collapse="_")
-      
-    # Otherwise add column called mt_id to raw_data
-    # (using the values in mt_id_label converted to character)
-    } else {
-      raw_data[,"mt_id"] <- as.character(raw_data[,mt_id_label])
+    # combine them into one unique identifier.
+    if(length(mt_id_label)>1){
+      for(var in mt_id_label[-1]){
+        ids <- paste0(ids,'_',raw_data[,var])
+      }
     }
-
-    if(anyDuplicated(raw_data[,"mt_id"]) > 0) {
+    
+    # Add mt_id column to raw_data
+    raw_data[,"mt_id"] <- ids
+    
+    
+    if(anyDuplicated(ids) > 0) {
       stop("Values in specified mt_id_label variable are not unique.")
     }
     
@@ -442,19 +446,22 @@ mt_import_wide <- function(raw_data,
       )
   } else {
     
-    # If more than one trial identifying variable is specified,
-    # combine them into one unique identifier called mt_id.
-    if (length(mt_id_label)>1){
-      raw_data[,"mt_id"] <- apply(raw_data[,mt_id_label],1,paste,collapse="_")
+    # Extract values of mt_id variable (and convert them to character)
+    ids <- as.character(raw_data[,mt_id_label[[1]]])
     
-      
-    # Otherwise add column called mt_id to raw_data
-    # (using the values in mt_id_label converted to character)
-    } else {
-      raw_data[,"mt_id"] <- as.character(raw_data[,mt_id_label])
+    # If more than one trial identifying variable is specified,
+    # combine them into one unique identifier.
+    if(length(mt_id_label)>1){
+      for(var in mt_id_label[-1]){
+        ids <- paste0(ids,'_',raw_data[,var])
+      }
     }
     
-    if(anyDuplicated(raw_data[,"mt_id"]) > 0) {
+    # Add mt_id column to raw_data
+    raw_data[,"mt_id"] <- ids
+    
+    
+    if(anyDuplicated(ids) > 0) {
       stop("Values in specified mt_id_label variable are not unique.")
     }
     
@@ -655,21 +662,25 @@ mt_import_long <- function(raw_data,
   # Ensure that raw_data is a data.frame
   raw_data <- as.data.frame(raw_data)
   
+  
+  # Extract values of mt_id variable (and convert them to character)
+  ids <- as.character(raw_data[,mt_id_label[[1]]])
+  
   # If more than one trial identifying variable is specified,
   # combine them into one unique identifier.
-  if (length(mt_id_label)>1){
-    
-    raw_data[,"mt_id"] <- apply(raw_data[,mt_id_label],1,paste,collapse="_")
-    mt_id_label <- "mt_id"
-  
-  # Otherwise add column called mt_id to raw_data
-  # (using the values in mt_id_label converted to character)
-  } else {
-    raw_data[,"mt_id"] <- as.character(raw_data[,mt_id_label])
+  if(length(mt_id_label)>1){
+    for(var in mt_id_label[-1]){
+      ids <- paste0(ids,'_',raw_data[,var])
+    }
   }
   
+  # Add mt_id column to raw_data
+  raw_data[,"mt_id"] <- ids
+  mt_id_label <- "mt_id"
+  
   # Get order of ids (to preserve original order)
-  ids <- unique(raw_data[,"mt_id"])
+  ids <- unique(ids)
+  
   
   # Look for mt_seq variable (that indicates the order of the logs)
   if (is.null(mt_seq_label) | (mt_seq_label %in% colnames(raw_data) == FALSE)) {
