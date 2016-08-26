@@ -91,7 +91,7 @@ corresponding x-/y-positions are removed (the default).}
 removed.} \item{\code{ignore}: Duplicates are kept.} }
 }
 \examples{
-mt_example <- mt_import_mousetrap(mt_example_raw)
+mt_data <- mt_import_mousetrap(mt_example_raw)
 
 }
 \references{

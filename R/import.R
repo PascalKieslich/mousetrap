@@ -80,7 +80,7 @@
 #' data from other sources.
 #'
 #' @examples
-#' mt_example <- mt_import_mousetrap(mt_example_raw)
+#' mt_data <- mt_import_mousetrap(mt_example_raw)
 #'
 #' @export
 mt_import_mousetrap <- function(raw_data,
@@ -118,13 +118,13 @@ mt_import_mousetrap <- function(raw_data,
     if (length(mt_id_label)>1){
       raw_data[,"mt_id"] <- apply(raw_data[,mt_id_label],1,paste,collapse="_")
       
-    # Otherwise simply rename mt_id_label column to mt_id.
+    # Otherwise add column called mt_id to raw_data
+    # (using the values in mt_id_label converted to character)
     } else {
-      colnames(raw_data)[colnames(raw_data) == mt_id_label] <- "mt_id"
+      raw_data[,"mt_id"] <- as.character(raw_data[,mt_id_label])
     }
-    mt_id_label <- "mt_id"
-    
-    if(anyDuplicated(raw_data[,mt_id_label]) > 0) {
+
+    if(anyDuplicated(raw_data[,"mt_id"]) > 0) {
       stop("Values in specified mt_id_label variable are not unique.")
     }
     
@@ -447,13 +447,14 @@ mt_import_wide <- function(raw_data,
     if (length(mt_id_label)>1){
       raw_data[,"mt_id"] <- apply(raw_data[,mt_id_label],1,paste,collapse="_")
     
-    # Otherwise simply rename mt_id_label column to mt_id.
+      
+    # Otherwise add column called mt_id to raw_data
+    # (using the values in mt_id_label converted to character)
     } else {
-      colnames(raw_data)[colnames(raw_data) == mt_id_label] <- "mt_id"
+      raw_data[,"mt_id"] <- as.character(raw_data[,mt_id_label])
     }
-    mt_id_label <- "mt_id"
     
-    if(anyDuplicated(raw_data[,mt_id_label]) > 0) {
+    if(anyDuplicated(raw_data[,"mt_id"]) > 0) {
       stop("Values in specified mt_id_label variable are not unique.")
     }
     
@@ -659,8 +660,12 @@ mt_import_long <- function(raw_data,
   if (length(mt_id_label)>1){
     raw_data[,"mt_id"] <- apply(raw_data[,mt_id_label],1,paste,collapse="_")
     mt_id_label <- "mt_id"
-  }
   
+  # Otherwise add column called mt_id to raw_data
+  # (using the values in mt_id_label converted to character)
+  } else {
+    raw_data[,"mt_id"] <- as.character(raw_data[,mt_id_label])
+  }
   
   # Look for mt_seq variable (that indicates the order of the logs)
   if (is.null(mt_seq_label) | (mt_seq_label %in% colnames(raw_data) == FALSE)) {
@@ -672,14 +677,14 @@ mt_import_long <- function(raw_data,
     raw_data[,"mt_seq"] <- 0
 
     # Add mt_seq
-    for (current_id in unique(raw_data[,mt_id_label])) {
-      raw_data[raw_data[,mt_id_label] == current_id,mt_seq_label] <-
-        1:sum(raw_data[,mt_id_label] == current_id)
+    for (current_id in unique(raw_data[,"mt_id"])) {
+      raw_data[raw_data[,"mt_id"] == current_id,mt_seq_label] <-
+        1:sum(raw_data[,"mt_id"] == current_id)
     }
   }
 
   # Sort dataset according to mt_id and mt_seq
-  raw_data <- raw_data[order(raw_data[,mt_id_label], raw_data[,mt_seq_label]),]
+  raw_data <- raw_data[order(raw_data[,"mt_id"], raw_data[,mt_seq_label]),]
 
   # Collect and rename variables
   timestamps <- "timestamps"
@@ -708,7 +713,7 @@ mt_import_long <- function(raw_data,
     value.name="value")
   
   custom.formula <- stats::as.formula(paste(
-    mt_id_label, "mt_variable", mt_seq_label, sep="~"
+    "mt_id", "mt_variable", mt_seq_label, sep="~"
   ))
   
   trajectories <- reshape2::acast(trajectories,
@@ -747,8 +752,7 @@ mt_import_long <- function(raw_data,
   # Create data.frame from leftover variables
   raw_data <- raw_data[,!colnames(raw_data) %in% c(mt_include, mt_seq_label), drop=FALSE]
   raw_data <- unique(raw_data)
-  # Rename mt_id column
-  colnames(raw_data)[colnames(raw_data) == mt_id_label] <- "mt_id"
+  
   # Issue warning if more than one line per mt_id remains
   if (max(table(raw_data[,"mt_id"])) > 1) {
     warning(
