@@ -707,21 +707,18 @@ mt_import_long <- function(raw_data,
   
   
   # Create array for selected variables
-  trajectories <- reshape2::melt(raw_data,
-    measure.vars=mt_include,
-    variable.name="mt_variable",
-    value.name="value")
+  ids <- as.vector(raw_data[,"mt_id"])
+  trajectories_data <- as.matrix(raw_data[,mt_include])
   
-  custom.formula <- stats::as.formula(paste(
-    "mt_id", "mt_variable", mt_seq_label, sep="~"
-  ))
+  trajectories  <- array(
+    dim=c(length(unique(ids)), length(mt_labels), max(table(ids))),
+    dimnames=list(unique(ids), mt_include, NULL))
   
-  trajectories <- reshape2::acast(trajectories,
-    custom.formula, value.var="value")
+  for (id in ids) {
+    sel <- ids==id
+    trajectories[id,,1:sum(sel)] <- t(trajectories_data[sel,])
+  }
   
-
-  # Remove dimnames for logs
-  dimnames(trajectories)[[3]] <- NULL
   
   # If no timestamps are found in the data, create timestamps
   if (!timestamps%in%mt_include){
