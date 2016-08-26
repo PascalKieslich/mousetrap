@@ -668,6 +668,9 @@ mt_import_long <- function(raw_data,
     raw_data[,"mt_id"] <- as.character(raw_data[,mt_id_label])
   }
   
+  # Get order of ids (to preserve original order)
+  ids <- unique(raw_data[,"mt_id"])
+  
   # Look for mt_seq variable (that indicates the order of the logs)
   if (is.null(mt_seq_label) | (mt_seq_label %in% colnames(raw_data) == FALSE)) {
     message(
@@ -707,7 +710,6 @@ mt_import_long <- function(raw_data,
   n_logs <- plyr::ddply(raw_data,"mt_id",nrow)
   n_max <- max(n_logs$V1)
   
-  
   trajectories <- array(
     dim = c(nrow(n_logs),length(mt_include), n_max),
     dimnames = list(n_logs$mt_id, mt_include, NULL))
@@ -738,23 +740,30 @@ mt_import_long <- function(raw_data,
   # Subtract first timestamp for each trial 
   # if real timestamps are provided and option was selected
   } else {
-    
     if (reset_timestamps) {
       trajectories[,timestamps,] <- trajectories[,timestamps,] - trajectories[,timestamps,1]
     }
   }
   
-
-  # Create data.frame from leftover variables
-  raw_data <- plyr::ddply(raw_data,"mt_id",function(x) x[1,!names(x)%in%mt_include])
-  raw_data <- unique(raw_data)
+  # Order trajectories
+  trajectories <- trajectories[ids,,]
   
-  # Issue warning if more than one line per mt_id remains
+  # Create data.frame from leftover variables
+  raw_data <- plyr::ddply(raw_data,"mt_id",function(x) unique(x[,!names(x)%in%c(mt_include,mt_seq_label)]))
+  
   if (max(table(raw_data[,"mt_id"])) > 1) {
+    # Issue warning if more than one line per mt_id remains
     warning(
       "After removing trajectory data, ",
       "more than one unique row per mt_id remains."
     )
+    
+  } else {
+    
+    # Set rownames of raw_data to trial identifier
+    rownames(raw_data) <- raw_data[,"mt_id"]
+    # Ensure order of raw_data
+    raw_data <- raw_data[ids,]
   }
 
   return(list("data"=raw_data, "trajectories"=trajectories))

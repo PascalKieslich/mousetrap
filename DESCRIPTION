@@ -32,7 +32,8 @@ Imports:
     scales,
     psych (>= 1.2.4),
     diptest,
-    RColorBrewer
+    RColorBrewer,
+    plyr
 Suggests:
     readbulk,
     testthat
