@@ -69,7 +69,7 @@ mt_plot_riverbed(mt_example, facet_col="Condition")
 # Note that it is also possible to replace the
 # default scale for fill with a custom scale
 mt_plot_riverbed(mt_example, facet_col="Condition") +
-  scale_fill_gradientn(colours=grDevices::heat.colors(9),
+  ggplot2::scale_fill_gradientn(colours=grDevices::heat.colors(9),
     name="Frequency", trans="log", labels=scales::percent)
 }
 
