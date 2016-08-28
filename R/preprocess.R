@@ -848,28 +848,19 @@ mt_subset <- function(data,subset,check="data"){
   data[[check]] <- extract_data(data=data,use=check)
   data[[check]] <- base::subset(data[[check]], subset=eval(subset))
  
-  # Remove trajectories
+  # Remove trials and trajectories
   for (use in names(data)){
     
-    if (class(data[[use]]) == "data.frame") {
-      
+    if (length(dim(data[[use]])) == 2) {
       data[[use]] <- data[[use]][
-        data[[use]][,mt_id] %in% data[[check]][,mt_id],
-      ]
-      
+        rownames(data[[use]]) %in% rownames(data[[check]]),,drop=FALSE
+        ]
     } else {
-      
-      if (length(dim(data[[use]])) == 2) {
-        data[[use]] <- data[[use]][
-          row.names(data[[use]]) %in% data[[check]][,mt_id],,drop=FALSE
+      data[[use]] <- data[[use]][
+        rownames(data[[use]]) %in% rownames(data[[check]]),,,drop=FALSE
         ]
-      } else {
-        data[[use]] <- data[[use]][
-          row.names(data[[use]]) %in% data[[check]][,mt_id],,,drop=FALSE
-        ]
-      }
-      
     }
+    
   }
   
   return(data)
