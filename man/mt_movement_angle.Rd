@@ -29,8 +29,7 @@ A mousetrap data object (see \link{mt_example}).
   
   If a data.frame with label specified in \code{save_as} (by default 
   "measures") already exists, the \code{IMA}, \code{IMA_time}, and \code{IMD}
-  values (see Details) are added as additional columns (by merging them using
-  the \link{mt_id} variable).
+  values (see Details) are added as additional columns.
   
   If not, an additional \link{data.frame} will be added.
   

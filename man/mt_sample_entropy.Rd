@@ -39,7 +39,7 @@ A mousetrap data object (see \link{mt_example}).
   
   If a data.frame with label specified in \code{save_as} (by default
   "measures") already exists, the sample entropy values are added as
-  additional column(s) (by merging them using the \link{mt_id} variable).
+  additional column(s).
   
   If not, an additional \link{data.frame} will be added.
   

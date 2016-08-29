@@ -43,7 +43,7 @@
 #'   
 #'   If a data.frame with label specified in \code{save_as} (by default
 #'   "measures") already exists, the sample entropy values are added as
-#'   additional column(s) (by merging them using the \link{mt_id} variable).
+#'   additional column(s).
 #'   
 #'   If not, an additional \link{data.frame} will be added.
 #'   
@@ -206,22 +206,8 @@ mt_sample_entropy <- function(data,
     message(paste("all", i, "trials finished"))
   }
   
-  results <- data.frame(row.names(trajectories))
-  colnames(results) <- mt_id
-  rownames(results) <- results[,mt_id]
-  results <- cbind(results,data.frame(measures))
-  
-  
-  if (is_mousetrap_data(data)){
-    if (save_as %in% names(data)) {
-      data[[save_as]] <- merge(data[[save_as]], results, by=mt_id)
-    } else {
-      data[[save_as]] <- results
-    }
-    return(data)
-    
-  }else{
-    return(results)
-  }
+  return(create_results(
+    data=data, results=measures, use=use, save_as=save_as,
+    ids=rownames(trajectories), overwrite=FALSE))
   
 }

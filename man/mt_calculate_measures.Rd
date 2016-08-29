@@ -26,17 +26,18 @@ or y-flip.}
 progress.}
 }
 \value{
-A mousetrap data object (see \link{mt_example}) where an additional
-  \link{data.frame} has been added (by default called "measures") containing
-  the per-trial mouse-tracking measures. Each row in the data.frame
-  corresponds to one trajectory (the corresponding trajectory is by default
-  identified in the column \link{mt_id}). Each column in the data.frame
-  corresponds to one of the measures. If a trajectory array was provided 
-  directly as \code{data}, only the measures data.frame will be returned.
+A mousetrap data object (see \link{mt_example}) where an additional 
+  \link{data.frame} has been added (by default called "measures") containing 
+  the per-trial mouse-tracking measures. Each row in the data.frame 
+  corresponds to one trajectory (the corresponding trajectory is identified 
+  via the rownames and, additionally, in the column "mt_id"). Each column in 
+  the data.frame corresponds to one of the measures. If a trajectory array 
+  was provided directly as \code{data}, only the measures data.frame will be 
+  returned.
   
   The following measures are computed for each trajectory: 
-  \item{\link{mt_id}}{Trial ID (can be used for merging measures data.frame 
-  with other trial-level data)}
+  \item{mt_id}{Trial ID (can be used for merging measures data.frame with
+  other trial-level data)}
   \item{x_max}{Maximum x-position} 
   \item{x_min}{Minimum x-position}
   \item{y_max}{Maximum y-position} 

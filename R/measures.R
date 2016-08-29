@@ -43,17 +43,18 @@
 #'   be exceeded in one direction so that a change in direction counts as an x- 
 #'   or y-flip.
 #'   
-#' @return A mousetrap data object (see \link{mt_example}) where an additional
-#'   \link{data.frame} has been added (by default called "measures") containing
-#'   the per-trial mouse-tracking measures. Each row in the data.frame
-#'   corresponds to one trajectory (the corresponding trajectory is by default
-#'   identified in the column \link{mt_id}). Each column in the data.frame
-#'   corresponds to one of the measures. If a trajectory array was provided 
-#'   directly as \code{data}, only the measures data.frame will be returned.
+#' @return A mousetrap data object (see \link{mt_example}) where an additional 
+#'   \link{data.frame} has been added (by default called "measures") containing 
+#'   the per-trial mouse-tracking measures. Each row in the data.frame 
+#'   corresponds to one trajectory (the corresponding trajectory is identified 
+#'   via the rownames and, additionally, in the column "mt_id"). Each column in 
+#'   the data.frame corresponds to one of the measures. If a trajectory array 
+#'   was provided directly as \code{data}, only the measures data.frame will be 
+#'   returned.
 #'   
 #'   The following measures are computed for each trajectory: 
-#'   \item{\link{mt_id}}{Trial ID (can be used for merging measures data.frame 
-#'   with other trial-level data)}
+#'   \item{mt_id}{Trial ID (can be used for merging measures data.frame with
+#'   other trial-level data)}
 #'   \item{x_max}{Maximum x-position} 
 #'   \item{x_min}{Minimum x-position}
 #'   \item{y_max}{Maximum y-position} 
@@ -389,18 +390,8 @@ mt_calculate_measures <- function(data,
     message(paste("all", i, "trials completed"))
   }
   
-  # Convert results to data.frame
-  results <- data.frame(row.names(trajectories))
-  colnames(results) <- mt_id
-  rownames(results) <- results[,mt_id]
-  results <- cbind(results, data.frame(measures))
-
-  
-  if (is_mousetrap_data(data)){
-    data[[save_as]] <- results
-    return(data)
-  }else{
-    return(results)
-  }
+  return(create_results(
+    data=data, results=measures, use=use, save_as=save_as,
+    ids=rownames(trajectories), overwrite=TRUE))
   
 }

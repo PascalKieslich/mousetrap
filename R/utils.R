@@ -24,6 +24,61 @@ extract_data <- function(data,use){
   
 }
 
+# Function to create results
+create_results <- function(data,results,use,save_as,ids=NULL,overwrite=TRUE){
+  
+  # Procedure for trajectories
+  if (length(dim(results))>2){
+    if (is_mousetrap_data(data)){
+      data[[save_as]] <- results
+      return(data)
+    }else{
+      return(results)
+    }
+    
+    
+  # Procedure for measures
+  } else {
+    
+    results <- as.data.frame(results)
+    
+    # Extract / set ids
+    if (is.null(ids)){
+      if(is.null(rownames(results))){
+        stop("No ids for create_results function provided.")
+      } else{
+        ids <- rownames(results)
+      }
+    } else{
+      rownames(results) <- ids
+    }
+    
+    # Return results depending on type of data and overwrite setting
+    if (is_mousetrap_data(data)){
+      if (save_as %in% names(data) & overwrite==FALSE) {
+        # merge by rownames
+        data[[save_as]] <- merge(data[[save_as]], results, by=0)
+        # set rownames again
+        rownames(data[[save_as]]) <- data[[save_as]][,1]
+        # sort data and remove row.names column
+        data[[save_as]] <- data[[save_as]][ids,-1]
+      } else {
+        data[[save_as]] <- cbind(mt_id=ids,results)
+      }
+      # ensure rownames are just characters
+      data[[save_as]][,1] <- as.character(data[[save_as]][,1])
+      return(data)
+      # 
+    }else{
+      return(cbind(mt_id=ids,results))
+    }
+    
+  }
+  
+}
+
+
+
 
 # Function to determine the point on the line between P1 and P2
 # that forms a line with P0 so that it is orthogonal to P1-P2.
@@ -138,3 +193,5 @@ count_changes <- function(pos, threshold=0, zero_threshold=0) {
   
   return(n)
 }
+
+
