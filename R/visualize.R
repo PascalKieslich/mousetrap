@@ -293,7 +293,7 @@ mt_plot_add_rect <- function(rect,
 #' 
 #' \code{mt_plot_per_trajectory} creates a pdf using \link{pdf}. Next, it plots 
 #' all trajectories individually using \link{mt_plot}. Every plot is labeled 
-#' using the \link{mt_id} variable.
+#' using the \link{rownames} of the trajectories.
 #' 
 #' @inheritParams mt_plot
 #' @param file a character string specifying the name of the pdf file. Passed on
@@ -337,7 +337,7 @@ mt_plot_per_trajectory <- function(file,
     # Build plot
     current_plot <- mt_plot(
       data=data, use=use, x=x, y=y,
-      use2=subset(data[["data"]], mt_id==current_id)
+      use2=data[["data"]][current_id,]
     )
     
     # Output plot

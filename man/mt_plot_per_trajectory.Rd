@@ -43,7 +43,7 @@ acceleration profiles.
 \details{
 \code{mt_plot_per_trajectory} creates a pdf using \link{pdf}. Next, it plots 
 all trajectories individually using \link{mt_plot}. Every plot is labeled 
-using the \link{mt_id} variable.
+using the \link{rownames} of the trajectories.
 }
 \examples{
 \dontrun{
