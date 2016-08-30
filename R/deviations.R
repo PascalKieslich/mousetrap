@@ -114,12 +114,6 @@ mt_calculate_deviations <- function(data,
     message(paste("all",i,"trials finished"))
   }
   
-  
-  if (is_mousetrap_data(data)){
-    data[[save_as]] <- deviations
-    return(data)
-  }else{
-    return(deviations)
-  }
+  return(create_results(data=data, results=deviations, use=use, save_as=save_as))
   
 }

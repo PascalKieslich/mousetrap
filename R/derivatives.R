@@ -129,12 +129,6 @@ mt_calculate_derivatives <- function(data,
     message(paste("all",i,"trials finished"))
   }
   
-  
-  if (is_mousetrap_data(data)){
-    data[[save_as]] <- derivatives
-    return(data)
-  }else{
-    return(derivatives)
-  }
+  return(create_results(data=data, results=derivatives, use=use, save_as=save_as))
   
 }

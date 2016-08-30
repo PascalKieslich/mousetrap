@@ -98,13 +98,7 @@ mt_time_normalize <- function(data,
     message(paste("all",i,"trials finished")) 
   }  
   
-  
-  if (is_mousetrap_data(data)){
-    data[[save_as]] <- tn_trajectories
-    return(data)
-  }else{
-    return(tn_trajectories)
-  }
+  return(create_results(data=data, results=tn_trajectories, use=use, save_as=save_as))
   
 }
 
@@ -206,13 +200,7 @@ mt_remap_symmetric <- function(data,
         
   }
   
-  # Return data depending on input format
-  if (is_mousetrap_data(data)){
-    data[[save_as]] <- trajectories
-    return(data)
-  }else{
-    return(trajectories)
-  }
+  return(create_results(data=data, results=trajectories, use=use, save_as=save_as))
   
 }
 
@@ -310,13 +298,7 @@ mt_exclude_initiation <- function(data,
     trajectories[,timestamps,] <- trajectories[, timestamps, ] - trajectories[, timestamps, 1]
   }
   
-  
-  if (is_mousetrap_data(data)){
-    data[[save_as]] <- trajectories
-    return(data)
-  }else{
-    return(trajectories)
-  }
+  return(create_results(data=data, results=trajectories, use=use, save_as=save_as))
   
 }
 
@@ -409,13 +391,7 @@ mt_space_normalize <- function(data,
     message(paste("all",i,"trials finished")) 
   }  
   
-  
-  if (is_mousetrap_data(data)){
-    data[[save_as]] <- trajectories
-    return(data)
-  }else{
-    return(trajectories)
-  }
+  return(create_results(data=data, results=trajectories, use=use, save_as=save_as))
   
 }
 
@@ -580,15 +556,9 @@ mt_resample <- function(data,
   
   if (show_progress){
     message(paste("all", i, "trials finished")) 
-  }  
-  
-  
-  if (is_mousetrap_data(data)){
-    data[[save_as]] <- rs_trajectories
-    return(data)
-  }else{
-    return(rs_trajectories)
   }
+  
+  return(create_results(data=data, results=rs_trajectories, use=use, save_as=save_as))
   
 }
 
@@ -781,12 +751,7 @@ mt_average <- function(data,
   }  
   
   
-  if (is_mousetrap_data(data)){
-    data[[save_as]] <- av_trajectories
-    return(data)
-  }else{
-    return(av_trajectories)
-  }
+  return(create_results(data=data, results=av_trajectories, use=use, save_as=save_as))
   
 }
 
@@ -951,11 +916,6 @@ mt_add_variables <- function(data,
     }
   }
   
-  if (is_mousetrap_data(data)){
-    data[[save_as]] <- trajectories_ext
-    return(data)
-  }else{
-    return(trajectories_ext)
-  }
+  return(create_results(data=data, results=trajectories_ext, use=use, save_as=save_as))
   
 }
