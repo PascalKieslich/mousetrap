@@ -72,7 +72,7 @@
 #'     \item{\code{trajectories}: \link{array} containing raw mouse-tracking
 #'     trajectories. The first dimension represents the different trials. It
 #'     uses the ID of the trial as names (this ID is by default logged under
-#'     \link{mt_id} in \code{data}). The second dimension corresponds to the
+#'     "mt_id" in \code{data}). The second dimension corresponds to the
 #'     different variables (timestamps, x-positions, y-positions) with the names
 #'     as specified in \link{mt_variable_labels} (by default: \code{timestamps},
 #'     \code{xpos}, \code{ypos}). The third dimension corresponds to the samples
