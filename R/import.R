@@ -49,11 +49,14 @@
 #'   which the y-positions are stored (see Details).
 #' @param timestamps_label a character string specifying the name of the column(s)
 #'   in which the timestamps are stored (see Details).
-#' @param mt_id_label an optional character string specifying the name of the 
-#'   column that provides a unique ID for every trial. If unspecified (the 
-#'   default), an ID variable will be generated. If more than one variable name 
-#'   is provided, a new ID variable will be created by combining the values of 
-#'   each variable.
+#' @param mt_id_label an optional character string (or vector) specifying the 
+#'   name of the column that provides a unique ID for every trial (the trial 
+#'   identifier). If unspecified (the default), an ID variable will be 
+#'   generated. If more than one variable name is provided, a new ID variable 
+#'   will be created by combining the values of each variable. The trial 
+#'   identifier will be set as the \link{rownames} of the resulting trajectories
+#'   and trial data, and additionally be stored in the column "mt_id" in the 
+#'   trial data.
 #' @param split a character string indicating how the different timestamps and 
 #'   coordinates within a trial are separated.
 #' @param duplicates a character string indicating how duplicate timestamps
@@ -358,7 +361,8 @@ mt_import_mousetrap <- function(raw_data,
 #' If no timestamps are found in the data, \code{mt_import_wide} automatically 
 #' creates a timestamps variable with increasing integers (starting with 0) 
 #' assuming equally spaced sampling intervals.
-#'
+#' 
+#' @inheritParams mt_import_mousetrap
 #' @param raw_data a data.frame containing the raw data.
 #' @param xpos_label a character string specifying the core of the column labels
 #'   containing the x-positions (e.g., "X" for "X_1", "X_2", ...).
@@ -372,20 +376,12 @@ mt_import_mousetrap <- function(raw_data,
 #'   (assuming equidistant time steps).
 #' @param add_labels a character vector specifying the core of columns
 #'   containing additional mouse-tracking variables.
-#' @param mt_id_label an optional character string specifying the name of the 
-#'   column that provides a unique ID for every trial. If unspecified (the 
-#'   default), an ID variable will be generated. If more than one variable name
-#'   is provided, a new ID variable will be created by combining the values of
-#'   each variable.
 #' @param pos_sep a character string indicating the character that connects the
 #'   core label and the position, (e.g., "_" for "X_1", "Y_1", ...).
 #' @param pos_ids the vector of IDs used for indexing the x-coordinates, 
 #'   y-coordinates etc. (e.g., 1:101 for time-normalized trajectories from 
 #'   MouseTracker). If unspecified (the default), column labels for the
 #'   respective variable will be extracted using grep (see Details).
-#' @param reset_timestamps logical indicating if the first timestamp should be 
-#'   subtracted from all timestamps within a trial. Default is \code{TRUE} as it
-#'   is recommended for all following analyses in mousetrap.
 #'
 #' @return A mousetrap data object (see \link{mt_example}).
 #'
@@ -608,6 +604,7 @@ mt_import_wide <- function(raw_data,
 #' creates a timestamps variable with increasing integers (starting with 0)
 #' assuming equally spaced sampling intervals.
 #'
+#' @inheritParams mt_import_mousetrap
 #' @param raw_data a data.frame in long format, containing the raw data.
 #' @param xpos_label a character string specifying the column containing the
 #'   x-positions.
@@ -621,17 +618,16 @@ mt_import_wide <- function(raw_data,
 #'   time steps).
 #' @param add_labels a character vector specifying columns containing additional
 #'   mouse-tracking variables.
-#' @param mt_id_label a character string (or vector) specifying the column that 
-#'   provides a unique ID for every trial. If more than one variable name is
-#'   provided, a new ID variable will be created by combining the values of each
-#'   variable.
+#' @param mt_id_label a character string (or vector) specifying the name of the
+#'   column that provides a unique ID for every trial (the trial identifier). If
+#'   more than one variable name is provided, a new ID variable will be created
+#'   by combining the values of each variable. The trial identifier will be set
+#'   as the \link{rownames} of the resulting trajectories and trial data, and
+#'   additionally be stored in the column "mt_id" in the trial data.
 #' @param mt_seq_label a character string specifying the column that indicates 
 #'   the order of the logged coordinates within a trial. If no column of the 
 #'   specified name is found in the data.frame, the coordinates will be imported
 #'   in the order in which they were stored in \code{raw_data}.
-#' @param reset_timestamps logical indicating if the first timestamp should be 
-#'   subtracted from all timestamps within a trial. Default is \code{TRUE} as it
-#'   is recommended for all following analyses in mousetrap.
 #'
 #' @return  A mousetrap data object (see \link{mt_example}).
 #'
@@ -676,8 +672,7 @@ mt_import_long <- function(raw_data,
   
   # Add mt_id column to raw_data
   raw_data[,"mt_id"] <- ids
-  mt_id_label <- "mt_id"
-  
+
   # Get order of ids (to preserve original order)
   ids <- unique(ids)
   

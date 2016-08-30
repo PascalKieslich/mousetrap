@@ -28,10 +28,12 @@ time steps).}
 \item{add_labels}{a character vector specifying columns containing additional
 mouse-tracking variables.}
 
-\item{mt_id_label}{a character string (or vector) specifying the column that 
-provides a unique ID for every trial. If more than one variable name is
-provided, a new ID variable will be created by combining the values of each
-variable.}
+\item{mt_id_label}{a character string (or vector) specifying the name of the
+column that provides a unique ID for every trial (the trial identifier). If
+more than one variable name is provided, a new ID variable will be created
+by combining the values of each variable. The trial identifier will be set
+as the \link{rownames} of the resulting trajectories and trial data, and
+additionally be stored in the column "mt_id" in the trial data.}
 
 \item{mt_seq_label}{a character string specifying the column that indicates 
 the order of the logged coordinates within a trial. If no column of the 

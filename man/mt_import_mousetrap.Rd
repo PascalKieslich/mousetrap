@@ -22,11 +22,14 @@ which the y-positions are stored (see Details).}
 \item{timestamps_label}{a character string specifying the name of the column(s)
 in which the timestamps are stored (see Details).}
 
-\item{mt_id_label}{an optional character string specifying the name of the 
-column that provides a unique ID for every trial. If unspecified (the 
-default), an ID variable will be generated. If more than one variable name 
-is provided, a new ID variable will be created by combining the values of 
-each variable.}
+\item{mt_id_label}{an optional character string (or vector) specifying the 
+name of the column that provides a unique ID for every trial (the trial 
+identifier). If unspecified (the default), an ID variable will be 
+generated. If more than one variable name is provided, a new ID variable 
+will be created by combining the values of each variable. The trial 
+identifier will be set as the \link{rownames} of the resulting trajectories
+and trial data, and additionally be stored in the column "mt_id" in the 
+trial data.}
 
 \item{split}{a character string indicating how the different timestamps and 
 coordinates within a trial are separated.}
