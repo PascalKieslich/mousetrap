@@ -150,9 +150,9 @@ mt_standardize <-function(data, use="measures",
   prefix="z_", center=TRUE, scale=TRUE) {
 
   data[[use]] <- extract_data(data=data,use=use)
-
+  
   # Extract within variable values
-  within <- data$data[, within, drop=FALSE]
+  within <- data$data[rownames(data[[use]]), within, drop=FALSE]
 
   # Combine within variable values to one
   # vector coding each combination of values
