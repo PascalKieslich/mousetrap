@@ -90,7 +90,7 @@ mt_plot_riverbed <- function(data, use='tn_trajectories',
   # Prepare optional facet variables
   if (!is.null(facet_row)){
     facet_row_values <- data[[facet_data]][,facet_row]
-    names(facet_row_values) <- data[[facet_data]][,mt_id]
+    names(facet_row_values) <- rownames(data[[facet_data]])
     facet_row_values <- facet_row_values[dimnames(trajectories)[[1]]]
   } else {
     facet_row_values <- rep('constant',each=dim(trajectories)[1])
@@ -99,7 +99,7 @@ mt_plot_riverbed <- function(data, use='tn_trajectories',
   
   if (!is.null(facet_col)){
     facet_col_values <- data[[facet_data]][,facet_col]
-    names(facet_col_values) <- data[[facet_data]][,mt_id]
+    names(facet_col_values) <- rownames(data[[facet_data]])
     facet_col_values <- facet_col_values[dimnames(trajectories)[[1]]]
   } else {
     facet_col_values <- rep('constant',each=dim(trajectories)[1])
