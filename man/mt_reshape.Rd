@@ -7,7 +7,7 @@
 mt_reshape(data, use = "trajectories", use_variables = NULL,
   use2 = "data", use2_variables = NULL, subset = NULL,
   subject_id = NULL, aggregate = FALSE, aggregate_subjects_only = FALSE,
-  aggregation_function = mean, trajectories_long = TRUE,
+  aggregation_function = mean, trajectories_long = TRUE, mt_id = "mt_id",
   mt_seq = "mt_seq")
 }
 \arguments{
@@ -68,10 +68,15 @@ by adding an integer to the corresponding label (e.g., \code{xpos_1},
 \code{xpos_2}, ...). Only relevant if \code{data[[use]]} contains 
 trajectories.}
 
+\item{mt_id}{a character string specifying the name of the column that will 
+contain the trial identifier in the reshaped data. The values for the trial
+identifier correspond to the \code{rownames} of \code{data[[use]]} and 
+\code{data[[use2]]}.}
+
 \item{mt_seq}{a character string specifying the name of the column that will 
 contain the integers indicating the order of the mouse positions per 
-trajectory. Only relevant if \code{data[[use]]} contains trajectories and 
-\code{trajectories_long==TRUE}.}
+trajectory in the reshaped data. Only relevant if \code{data[[use]]}
+contains trajectories and \code{trajectories_long==TRUE}.}
 }
 \value{
 A \link{data.frame} containing the reshaped data.
@@ -84,9 +89,12 @@ additional (wrapper) functions for more specific purposes (cf. "See Also")
 are available.
 }
 \details{
-\code{mt_reshape} uses the \link{mt_id} variable for merging the trajectories
-/ measures (in \code{data[[use]]}) and the trial data (in
-\code{data[[use2]]}).
+\code{mt_reshape} uses the \link{rownames} of \code{data[[use]]} and 
+\code{data[[use2]]} for merging the trajectories / measures and the trial 
+data. For convenience (and for trajectories in long format also of 
+necessity), an additional column (labelled as specified in the \code{mt_id}
+argument) is added to the reshaped data containing the rownames as trial
+identifier.
 
 The main purpose of this function is to reshape the trajectory data into a 
 two-dimensional data.frame, as this format is required for many further
