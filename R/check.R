@@ -16,6 +16,8 @@
 #' 
 #' 
 #' @inheritParams mt_time_normalize
+#' @param timestamps a character string specifying the trajectory dimension
+#'   containing the timestamps.
 #' @param desired an optional integer. If specified, additional statistics are
 #'   computed concerning the (relative) frequencies with which exactly the
 #'   desired timestamp difference (with tolerance 1e-12) occurred.
@@ -27,11 +29,11 @@
 #' mt_check_resolution(mt_example)
 #' 
 #' @export
-mt_check_resolution <- function(data, use="trajectories", desired=NULL) {
+mt_check_resolution <- function(data, use="trajectories",
+  timestamps="timestamps", desired=NULL) {
   
   trajectories <- extract_data(data=data,use=use)
-  timestamps <- mt_variable_labels[["timestamps"]]
-  
+
   # Compute steps in the timestamps
   if(dim( trajectories )[1] == 1) {
     log_diffs <- diff(trajectories[, timestamps, ])
