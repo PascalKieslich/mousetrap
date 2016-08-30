@@ -6,7 +6,8 @@
 \title{Plot trajectory data.}
 \usage{
 mt_plot(data, use = "trajectories", use2 = "data", x = "xpos",
-  y = "ypos", color = NULL, linetype = NULL, only_ggplot = FALSE, ...)
+  y = "ypos", color = NULL, linetype = NULL, only_ggplot = FALSE,
+  mt_id = "mt_id", ...)
 
 mt_plot_aggregate(data, use = "trajectories", use2 = "data", x = "xpos",
   y = "ypos", color = NULL, linetype = NULL, only_ggplot = FALSE,
@@ -45,6 +46,10 @@ trajectories.}
 geoms is returned. If \code{FALSE} (the default), the trajectories are
 plotted using \link[ggplot2]{geom_path}.}
 
+\item{mt_id}{a character string specifying the internal label used for the 
+trial identifier (passed on to the group aesthetic). Only relevant for
+\code{mt_plot}.}
+
 \item{...}{additional arguments passed on to \link{mt_reshape} (such as 
 \code{subset}).}
 
@@ -65,11 +70,12 @@ for plotting velocity and acceleration profiles.
 \details{
 \code{mt_plot} internally uses \link{mt_reshape} for reshaping trajectories 
 into a long format. Next, it creates a ggplot object using the 
-\link[ggplot2]{ggplot} function of the \code{ggplot2} package. The
-\link[ggplot2]{aes} mappings are taken from the function arguments for x, y
-etc.; in addition, the group mapping is set to \link{mt_id}. If
-\code{return_ggplot=FALSE}, the trajectories are plotted using the
-\link[ggplot2]{geom_path} function of the \code{ggplot2} package.
+\link[ggplot2]{ggplot} function of the \code{ggplot2} package. The 
+\link[ggplot2]{aes} mappings are taken from the function arguments for x, y 
+etc.; in addition, the group mapping is set to the internal trial identifier
+(by default called "mt_id"). If \code{return_ggplot=FALSE}, the trajectories
+are plotted using the \link[ggplot2]{geom_path} function of the
+\code{ggplot2} package.
 
 \code{mt_plot_aggregate} works similarly, but uses \link{mt_aggregate} for 
 reshaping and aggregating trajectories prior to plotting.

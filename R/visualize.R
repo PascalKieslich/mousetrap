@@ -9,11 +9,12 @@
 #' 
 #' \code{mt_plot} internally uses \link{mt_reshape} for reshaping trajectories 
 #' into a long format. Next, it creates a ggplot object using the 
-#' \link[ggplot2]{ggplot} function of the \code{ggplot2} package. The
-#' \link[ggplot2]{aes} mappings are taken from the function arguments for x, y
-#' etc.; in addition, the group mapping is set to \link{mt_id}. If
-#' \code{return_ggplot=FALSE}, the trajectories are plotted using the
-#' \link[ggplot2]{geom_path} function of the \code{ggplot2} package.
+#' \link[ggplot2]{ggplot} function of the \code{ggplot2} package. The 
+#' \link[ggplot2]{aes} mappings are taken from the function arguments for x, y 
+#' etc.; in addition, the group mapping is set to the internal trial identifier
+#' (by default called "mt_id"). If \code{return_ggplot=FALSE}, the trajectories
+#' are plotted using the \link[ggplot2]{geom_path} function of the
+#' \code{ggplot2} package.
 #' 
 #' \code{mt_plot_aggregate} works similarly, but uses \link{mt_aggregate} for 
 #' reshaping and aggregating trajectories prior to plotting.
@@ -47,6 +48,9 @@
 #' @param only_ggplot logical. If \code{TRUE}, only the ggplot object without
 #'   geoms is returned. If \code{FALSE} (the default), the trajectories are
 #'   plotted using \link[ggplot2]{geom_path}.
+#' @param mt_id a character string specifying the internal label used for the 
+#'   trial identifier (passed on to the group aesthetic). Only relevant for
+#'   \code{mt_plot}.
 #' @param subject_id a character string specifying which column contains the 
 #'   subject identifier. Only relevant for \code{mt_plot_aggregate}. If 
 #'   specified, aggregation will be performed within subjects first. Note that 
@@ -115,7 +119,7 @@ mt_plot <- function(data,
   use="trajectories", use2="data",
   x="xpos", y="ypos",
   color=NULL, linetype=NULL, 
-  only_ggplot=FALSE, ...) {
+  only_ggplot=FALSE, mt_id="mt_id", ...) {
   
   # Extract plotting options from metadata
   use2_variables <- c(color, linetype)
@@ -129,7 +133,7 @@ mt_plot <- function(data,
   # and reshape it into long format
   trajectories <- mt_reshape(data=data,
     use=use, use2=use2, use2_variables=use2_variables,
-    aggregate=FALSE, ...)
+    aggregate=FALSE,mt_id=mt_id, ...)
   
   # Build plot
   current_plot <- ggplot2::ggplot(
