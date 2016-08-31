@@ -64,8 +64,9 @@
 #' @param reset_timestamps logical indicating if the first timestamp should be 
 #'   subtracted from all timestamps within a trial. Default is \code{TRUE} as it
 #'   is recommended for all following analyses in mousetrap.
-#' @param show_progress logical indicating whether function should report its
+#' @param verbose logical indicating whether function should report its 
 #'   progress.
+#' @param show_progress Deprecated. Please use \code{verbose} instead.
 #'
 #' @return A mousetrap data object (see \link{mt_example}).
 #'
@@ -92,7 +93,14 @@ mt_import_mousetrap <- function(raw_data,
   mt_id_label=NULL,
   split=",", duplicates="remove_first",
   reset_timestamps=TRUE,
-  show_progress=TRUE) {
+  verbose=FALSE,
+  show_progress=NULL) {
+  
+  if(is.null(show_progress)==FALSE){
+    warning("The argument show_progress is deprecated. ",
+            "Please use verbose instead.")
+    verbose <- show_progress
+  }
   
   # Set labels
   timestamps <- "timestamps"
@@ -283,12 +291,12 @@ mt_import_mousetrap <- function(raw_data,
 
     }
 
-    if (show_progress && i %% 100 == 0) {
+    if (verbose && i %% 100 == 0) {
       message(paste(i, "trials finished"))
     }
   }
 
-  if (show_progress) {
+  if (verbose) {
     message(paste("all", i, "trials finished"))
   }
 
