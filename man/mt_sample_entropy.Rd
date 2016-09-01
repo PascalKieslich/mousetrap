@@ -31,8 +31,7 @@ used.}
 \item{r}{a numeric value passed on to the sample entropy function (see
 Details).}
 
-\item{show_progress}{logical indicating whether function should report on its
-progress.}
+\item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}).

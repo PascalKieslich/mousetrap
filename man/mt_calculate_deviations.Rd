@@ -5,8 +5,8 @@
 \title{Calculate deviations from idealized trajectory.}
 \usage{
 mt_calculate_deviations(data, use = "trajectories", save_as = use,
-  start_ideal = NULL, end_ideal = NULL, prefix = "",
-  show_progress = TRUE)
+  start_ideal = NULL, end_ideal = NULL, prefix = "", verbose = FALSE,
+  show_progress = NULL)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
@@ -30,8 +30,10 @@ idealized trajectory (instead of the actual end point).}
 \item{prefix}{an optional character string that is added as a prefix to the 
 to be created new trajectory dimensions.}
 
-\item{show_progress}{logical indicating whether function should report on its
+\item{verbose}{logical indicating whether function should report its 
 progress.}
+
+\item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) with the x- and

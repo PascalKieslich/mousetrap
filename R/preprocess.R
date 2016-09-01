@@ -25,8 +25,9 @@
 #' @param save_as a character string specifying where the resulting trajectory 
 #'   data should be stored.
 #' @param nsteps an integer specifying the number of equally sized time steps.
-#' @param show_progress logical indicating whether function should report on its
+#' @param verbose logical indicating whether function should report its 
 #'   progress.
+#' @param show_progress Deprecated. Please use \code{verbose} instead.
 #'   
 #' @return A mousetrap data object (see \link{mt_example}) with an additional
 #'   array (by default called \code{tn_trajectories}) containing the 
@@ -53,7 +54,14 @@
 #' @export
 mt_time_normalize <- function(data,
                               use="trajectories", save_as="tn_trajectories",
-                              nsteps=101, show_progress=TRUE) {
+                              nsteps=101,
+                              verbose=FALSE,show_progress=NULL) {
+  
+  if(is.null(show_progress)==FALSE){
+    warning("The argument show_progress is deprecated. ",
+            "Please use verbose instead.")
+    verbose <- show_progress
+  }
   
   # Preparation
   trajectories <- extract_data(data=data,use=use)
@@ -89,12 +97,12 @@ mt_time_normalize <- function(data,
     # Label steps as such
     tn_trajectories[i,"steps",] <- 1:nsteps
     
-    if (show_progress){
+    if (verbose){
       if (i %% 100 == 0) message(paste(i, "trials finished")) 
     }
   }
   
-  if (show_progress){
+  if (verbose){
     message(paste("all",i,"trials finished")) 
   }  
   
@@ -245,7 +253,14 @@ mt_remap_symmetric <- function(data,
 #' @export
 mt_exclude_initiation <- function(data,
   use="trajectories", save_as=use,
-  reset_timestamps=TRUE, show_progress=TRUE) {
+  reset_timestamps=TRUE,
+  verbose=FALSE,show_progress=NULL) {
+  
+  if(is.null(show_progress)==FALSE){
+    warning("The argument show_progress is deprecated. ",
+            "Please use verbose instead.")
+    verbose <- show_progress
+  }
   
   # Gather necessary data
   trajectories <- extract_data(data=data,use=use)
@@ -284,12 +299,12 @@ mt_exclude_initiation <- function(data,
     trajectories[i, xpos, 1:length(current_xpos)] <- current_xpos
     trajectories[i, ypos, 1:length(current_ypos)] <- current_ypos
     
-    if (show_progress){
+    if (verbose){
       if (i %% 100 == 0) message(paste(i, "trials finished")) 
     }
   }
   
-  if (show_progress){
+  if (verbose){
     message(paste("all", i, "trials finished")) 
   }  
   
@@ -347,7 +362,13 @@ mt_space_normalize <- function(data,
                                use="trajectories", save_as="sn_trajectories",
                                xpos_start = 0, xpos_end = NULL,
                                ypos_start = 0, ypos_end = NULL,
-                               show_progress=TRUE) {
+                               verbose=FALSE,show_progress=NULL) {
+  
+  if(is.null(show_progress)==FALSE){
+    warning("The argument show_progress is deprecated. ",
+            "Please use verbose instead.")
+    verbose <- show_progress
+  }
   
   # Preparation
   trajectories <- extract_data(data=data,use=use)
@@ -382,12 +403,12 @@ mt_space_normalize <- function(data,
     }
     trajectories[i, ypos, ] <-  current_ypos + ypos_start
     
-    if (show_progress){
+    if (verbose){
       if (i %% 100 == 0) message(paste(i, "trials finished")) 
     }
   }
   
-  if (show_progress){
+  if (verbose){
     message(paste("all",i,"trials finished")) 
   }  
   
@@ -418,12 +439,13 @@ mt_space_normalize <- function(data,
 mt_align_start <- function(data,
                            use="trajectories", save_as="trajectories",
                            xpos_start = 0, ypos_start = 0,
-                           show_progress=TRUE) {
+                           verbose=FALSE,show_progress=NULL) {
   
+ 
   return(mt_space_normalize(data=data, use=use, save_as=save_as,
-                            xpos_start=xpos_start, xpos_end = NULL,
-                            ypos_start=xpos_start, ypos_end = NULL,
-                            show_progress = show_progress))
+                            xpos_start=xpos_start, xpos_end=NULL,
+                            ypos_start=xpos_start, ypos_end=NULL,
+                            verbose=verbose, show_progress=show_progress))
 
 }
 
@@ -481,7 +503,13 @@ mt_align_start <- function(data,
 mt_resample <- function(data,
   use="trajectories", save_as="rs_trajectories",
   step_size=10, exact_last_timestamp=TRUE,
-  show_progress=TRUE) {
+  verbose=FALSE,show_progress=NULL) {
+  
+  if(is.null(show_progress)==FALSE){
+    warning("The argument show_progress is deprecated. ",
+            "Please use verbose instead.")
+    verbose <- show_progress
+  }
   
   # Preparation
   trajectories <- extract_data(data=data,use=use)
@@ -549,12 +577,12 @@ mt_resample <- function(data,
     rs_trajectories[i,xpos,1:length(int_xpos)] <- int_xpos
     rs_trajectories[i,ypos,1:length(int_ypos)] <- int_ypos
     
-    if (show_progress){
+    if (verbose){
       if (i %% 100 == 0) message(paste(i, "trials finished")) 
     }
   }
   
-  if (show_progress){
+  if (verbose){
     message(paste("all", i, "trials finished")) 
   }
   
@@ -641,7 +669,13 @@ mt_average <- function(data,
   use="trajectories", save_as="av_trajectories",
   dimension="timestamps", intervals=NULL,
   interval_size=100, max_interval=NULL,
-  show_progress=TRUE) {
+  verbose=FALSE,show_progress=NULL) {
+  
+  if(is.null(show_progress)==FALSE){
+    warning("The argument show_progress is deprecated. ",
+            "Please use verbose instead.")
+    verbose <- show_progress
+  }
   
   trajectories <- extract_data(data=data,use=use)
   if (!dimension %in% dimnames(trajectories)[[2]]){
@@ -741,12 +775,12 @@ mt_average <- function(data,
       
     }
     
-    if (show_progress){
+    if (verbose){
       if (i %% 100 == 0) message(paste(i, "trials finished")) 
     }
   }
   
-  if (show_progress){
+  if (verbose){
     message(paste("all", i, "trials finished")) 
   }  
   

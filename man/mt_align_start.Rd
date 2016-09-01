@@ -5,7 +5,7 @@
 \title{Align start position of trajectories.}
 \usage{
 mt_align_start(data, use = "trajectories", save_as = "trajectories",
-  xpos_start = 0, ypos_start = 0, show_progress = TRUE)
+  xpos_start = 0, ypos_start = 0, verbose = FALSE, show_progress = NULL)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
@@ -24,8 +24,10 @@ have in each trial.}
 \item{ypos_start}{an integer specifying the value the first y-position should
 have in each trial.}
 
-\item{show_progress}{logical indicating whether function should report on its
+\item{verbose}{logical indicating whether function should report its 
 progress.}
+
+\item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) with aligned 

@@ -5,7 +5,7 @@
 \title{Exclude initial phase without mouse movement.}
 \usage{
 mt_exclude_initiation(data, use = "trajectories", save_as = use,
-  reset_timestamps = TRUE, show_progress = TRUE)
+  reset_timestamps = TRUE, verbose = FALSE, show_progress = NULL)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
@@ -21,8 +21,10 @@ data should be stored.}
 \item{reset_timestamps}{logical indicating whether the timestamps should be 
 reset after removing the initial phase without movement (see Details).}
 
-\item{show_progress}{logical indicating whether function should report on its
+\item{verbose}{logical indicating whether function should report its 
 progress.}
+
+\item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) from which the 

@@ -5,7 +5,7 @@
 \title{Calculate mouse-tracking measures.}
 \usage{
 mt_calculate_measures(data, use = "trajectories", save_as = "measures",
-  flip_threshold = 0, show_progress = TRUE)
+  flip_threshold = 0, verbose = FALSE, show_progress = NULL)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
@@ -22,8 +22,10 @@ should be stored.}
 be exceeded in one direction so that a change in direction counts as an x- 
 or y-flip.}
 
-\item{show_progress}{logical indicating whether function should report on its
+\item{verbose}{logical indicating whether function should report its 
 progress.}
+
+\item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) where an additional 

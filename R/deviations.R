@@ -53,7 +53,13 @@ mt_calculate_deviations <- function(data,
   use="trajectories", save_as=use,
   start_ideal=NULL,end_ideal=NULL,
   prefix="",
-  show_progress=TRUE) {
+  verbose=FALSE,show_progress=NULL) {
+  
+  if(is.null(show_progress)==FALSE){
+    warning("The argument show_progress is deprecated. ",
+            "Please use verbose instead.")
+    verbose <- show_progress
+  }
   
   # Extract trajectories and labels
   trajectories <- extract_data(data=data,use=use)
@@ -105,12 +111,12 @@ mt_calculate_deviations <- function(data,
     deviations[i,ypos_ideal,1:nlogs[i]] <- current_ypos_ideal
     deviations[i,dev_ideal,1:nlogs[i]] <- current_dev_ideal 
     
-    if (show_progress){
+    if (verbose){
       if (i %% 100 == 0) message(paste(i,"trials finished"))
     }
   }
   
-  if (show_progress){
+  if (verbose){
     message(paste("all",i,"trials finished"))
   }
   

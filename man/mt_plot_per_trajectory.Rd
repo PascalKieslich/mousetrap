@@ -5,7 +5,7 @@
 \title{Create pdf with separate plots per trajectory.}
 \usage{
 mt_plot_per_trajectory(file, data, use = "trajectories", x = "xpos",
-  y = "ypos", show_progress = TRUE, ...)
+  y = "ypos", verbose = FALSE, show_progress = NULL, ...)
 }
 \arguments{
 \item{file}{a character string specifying the name of the pdf file. Passed on
@@ -27,8 +27,10 @@ array should be displayed on the x-axis (defaults to xpos).}
 \item{y}{a character string specifying which dimension in the trajectory 
 array should be displayed on the y-axis (defaults to ypos).}
 
-\item{show_progress}{logical indicating whether function should report its 
+\item{verbose}{logical indicating whether function should report its 
 progress.}
+
+\item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 
 \item{...}{additional arguments passed on to \link{pdf}.}
 }

@@ -5,7 +5,7 @@
 \title{Time normalize trajectories.}
 \usage{
 mt_time_normalize(data, use = "trajectories", save_as = "tn_trajectories",
-  nsteps = 101, show_progress = TRUE)
+  nsteps = 101, verbose = FALSE, show_progress = NULL)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
@@ -20,8 +20,10 @@ data should be stored.}
 
 \item{nsteps}{an integer specifying the number of equally sized time steps.}
 
-\item{show_progress}{logical indicating whether function should report on its
+\item{verbose}{logical indicating whether function should report its 
 progress.}
+
+\item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) with an additional

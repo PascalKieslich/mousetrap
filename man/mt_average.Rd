@@ -6,7 +6,7 @@
 \usage{
 mt_average(data, use = "trajectories", save_as = "av_trajectories",
   dimension = "timestamps", intervals = NULL, interval_size = 100,
-  max_interval = NULL, show_progress = TRUE)
+  max_interval = NULL, verbose = FALSE, show_progress = NULL)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
@@ -35,8 +35,10 @@ of the \code{interval_size}). If specified, only values will be used for
 averaging where the dimension values are smaller than \code{max_interval}.
 If unspecified (the default), all values will be included.}
 
-\item{show_progress}{logical indicating whether function should report on its
+\item{verbose}{logical indicating whether function should report its 
 progress.}
+
+\item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) with an additional 

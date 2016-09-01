@@ -6,7 +6,7 @@
 \usage{
 mt_space_normalize(data, use = "trajectories", save_as = "sn_trajectories",
   xpos_start = 0, xpos_end = NULL, ypos_start = 0, ypos_end = NULL,
-  show_progress = TRUE)
+  verbose = FALSE, show_progress = NULL)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
@@ -33,8 +33,10 @@ have in each trial.}
 have in each trial. If  \code{NULL}, trajectories are only adjusted so that
 they have the same start position.}
 
-\item{show_progress}{logical indicating whether function should report on its
+\item{verbose}{logical indicating whether function should report its 
 progress.}
+
+\item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) with an additional

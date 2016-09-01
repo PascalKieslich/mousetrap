@@ -65,7 +65,13 @@ mt_calculate_derivatives <- function(data,
   use="trajectories", save_as=use,
   dimension="xypos", prefix="",
   acc_on_abs_vel=FALSE,
-  show_progress=TRUE) {
+  verbose=FALSE,show_progress=NULL) {
+  
+  if(is.null(show_progress)==FALSE){
+    warning("The argument show_progress is deprecated. ",
+            "Please use verbose instead.")
+    verbose <- show_progress
+  }
   
   # Extract trajectories and labels
   trajectories <- extract_data(data=data,use=use)
@@ -120,12 +126,12 @@ mt_calculate_derivatives <- function(data,
     derivatives[i,vel,] <- c(0, velocities)
     derivatives[i,acc,] <- c(0, accelerations)
     
-    if (show_progress){
+    if (verbose){
       if (i %% 100 == 0) message(paste(i,"trials finished"))
     }
   }
   
-  if (show_progress){
+  if (verbose){
     message(paste("all",i,"trials finished"))
   }
   

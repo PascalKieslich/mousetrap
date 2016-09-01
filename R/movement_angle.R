@@ -57,7 +57,13 @@
 mt_movement_angle <- function(data,
                               use="trajectories", save_as="measures",
                               ima_percentile=0.2,
-                              show_progress=TRUE) {
+                              verbose=FALSE,show_progress=NULL) {
+  
+  if(is.null(show_progress)==FALSE){
+    warning("The argument show_progress is deprecated. ",
+            "Please use verbose instead.")
+    verbose <- show_progress
+  }
   
 
   # Prepare data
@@ -152,12 +158,12 @@ mt_movement_angle <- function(data,
     measures[i,"IMA_time"] <- ima_timestamps[2]
     measures[i,"IMD"] <- imd
     
-    if (show_progress) {
+    if (verbose) {
       if (i %% 100 == 0) message(paste(i, "trials finished"))
     }
   }
   
-  if (show_progress) {
+  if (verbose) {
     message(paste("all", i, "trials finished"))
   }
   

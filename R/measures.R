@@ -128,8 +128,15 @@
 #' @export
 mt_calculate_measures <- function(data,
   use="trajectories", save_as="measures",
-  flip_threshold=0, show_progress=TRUE) {
-
+  flip_threshold=0,
+  verbose=FALSE,show_progress=NULL) {
+  
+  if(is.null(show_progress)==FALSE){
+    warning("The argument show_progress is deprecated. ",
+            "Please use verbose instead.")
+    verbose <- show_progress
+  }
+  
   # Prepare data
   trajectories <- extract_data(data=data, use=use)
   timestamps <- mt_variable_labels["timestamps"]
@@ -147,13 +154,13 @@ mt_calculate_measures <- function(data,
   
   # Calculate deviations if no deviations were found in the data
   if (!all(c(dev_ideal,xpos_ideal,ypos_ideal) %in% dimnames(trajectories)[[2]])) {
-    if (show_progress) {
+    if (verbose) {
       message("Start calculating deviations of actual from idealized response trajectory.")
     }
     trajectories <- mt_calculate_deviations(
-      data=trajectories, show_progress = show_progress
+      data=trajectories, verbose=verbose
     )
-    if (show_progress) {
+    if (verbose) {
       message("Start calculating mouse-tracking measures.")
     }
   }
@@ -381,12 +388,12 @@ mt_calculate_measures <- function(data,
       measures[i,"acc_min_time"] <- trajectories[i,timestamps,which.min(trajectories[i,acc,])]
     }
 
-    if (show_progress & i %% 100 == 0) {
+    if (verbose & i %% 100 == 0) {
       message(paste(i, "trials completed"))
     }
   }
 
-  if (show_progress) {
+  if (verbose) {
     message(paste("all", i, "trials completed"))
   }
   

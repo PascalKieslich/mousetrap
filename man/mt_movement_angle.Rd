@@ -5,7 +5,7 @@
 \title{Calculate initial movement angle.}
 \usage{
 mt_movement_angle(data, use = "trajectories", save_as = "measures",
-  ima_percentile = 0.2, show_progress = TRUE)
+  ima_percentile = 0.2, verbose = FALSE, show_progress = NULL)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
@@ -21,8 +21,10 @@ should be stored.}
 \item{ima_percentile}{a decimal value. The initial movement angle will be
 calculated at the respective percentile .}
 
-\item{show_progress}{logical indicating whether function should report on its
+\item{verbose}{logical indicating whether function should report its 
 progress.}
+
+\item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}).

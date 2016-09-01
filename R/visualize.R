@@ -298,8 +298,9 @@ mt_plot_add_rect <- function(rect,
 #' @inheritParams mt_plot
 #' @param file a character string specifying the name of the pdf file. Passed on
 #'   to \link{pdf}.
-#' @param show_progress logical indicating whether function should report its 
+#' @param verbose logical indicating whether function should report its 
 #'   progress.
+#' @param show_progress Deprecated. Please use \code{verbose} instead.
 #' @param ... additional arguments passed on to \link{pdf}.
 #' 
 #' @seealso
@@ -315,7 +316,13 @@ mt_plot_add_rect <- function(rect,
 #' @export
 mt_plot_per_trajectory <- function(file,
   data, use="trajectories", x="xpos", y="ypos",
-  show_progress=TRUE, ...) {
+  verbose=FALSE,show_progress=NULL,...) {
+  
+  if(is.null(show_progress)==FALSE){
+    warning("The argument show_progress is deprecated. ",
+            "Please use verbose instead.")
+    verbose <- show_progress
+  }
   
   # Define axis limits across all plots
   xlim <- range(data[[use]][,x,], na.rm=TRUE)
@@ -348,7 +355,7 @@ mt_plot_per_trajectory <- function(file,
     )
     
     # Display progress, if desired
-    if (show_progress) {
+    if (verbose) {
       message("trajectory ", current_id, " plotted")
     }
   }

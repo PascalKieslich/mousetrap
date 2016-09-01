@@ -6,7 +6,7 @@
 \usage{
 mt_calculate_derivatives(data, use = "trajectories", save_as = use,
   dimension = "xypos", prefix = "", acc_on_abs_vel = FALSE,
-  show_progress = TRUE)
+  verbose = FALSE, show_progress = NULL)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
@@ -31,8 +31,10 @@ to be created new trajectory dimensions.}
 based on absolute velocity values (ignoring direction). Only relevant if 
 velocity can be negative (see Details).}
 
-\item{show_progress}{logical indicating whether function should report on its
+\item{verbose}{logical indicating whether function should report its 
 progress.}
+
+\item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) with 
