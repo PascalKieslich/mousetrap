@@ -76,7 +76,13 @@
 mt_sample_entropy <- function(data,
   use="tn_trajectories", save_as="measures",
   method="pracma", dimension="xpos", lag=3, r=NULL,
-  show_progress=TRUE) {
+  verbose=FALSE,show_progress=NULL) {
+  
+  if(is.null(show_progress)==FALSE){
+    warning("The argument show_progress is deprecated. ",
+            "Please use verbose instead.")
+    verbose <- show_progress
+  }
   
   # Function to calculate sample entropy
   # based on Hehman et al. (2015)
@@ -197,12 +203,12 @@ mt_sample_entropy <- function(data,
       measures[i,"sample_entropy_hehman"] <- se_hehman
     }
 
-    if (show_progress) {
+    if (verbose) {
       if (i %% 100 == 0) message(paste(i, "trials finished"))
     }
   }
   
-  if (show_progress) {
+  if (verbose) {
     message(paste("all", i, "trials finished"))
   }
   
