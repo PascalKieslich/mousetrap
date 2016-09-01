@@ -7,7 +7,7 @@
 mt_import_wide(raw_data, xpos_label = "X", ypos_label = "Y",
   zpos_label = NULL, timestamps_label = "T", add_labels = NULL,
   mt_id_label = NULL, pos_sep = "_", pos_ids = NULL,
-  reset_timestamps = TRUE)
+  reset_timestamps = TRUE, verbose = TRUE)
 }
 \arguments{
 \item{raw_data}{a data.frame containing the raw data.}
@@ -49,6 +49,9 @@ respective variable will be extracted using grep (see Details).}
 \item{reset_timestamps}{logical indicating if the first timestamp should be 
 subtracted from all timestamps within a trial. Default is \code{TRUE} as it
 is recommended for all following analyses in mousetrap.}
+
+\item{verbose}{logical indicating whether function should report its 
+progress.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}).

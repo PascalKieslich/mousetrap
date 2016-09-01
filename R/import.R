@@ -93,8 +93,7 @@ mt_import_mousetrap <- function(raw_data,
   mt_id_label=NULL,
   split=",", duplicates="remove_first",
   reset_timestamps=TRUE,
-  verbose=FALSE,
-  show_progress=NULL) {
+  verbose=FALSE, show_progress=NULL) {
   
   if(is.null(show_progress)==FALSE){
     warning("The argument show_progress is deprecated. ",
@@ -112,8 +111,11 @@ mt_import_mousetrap <- function(raw_data,
   
   # Add mt_id variable
   if (is.null(mt_id_label)) {
-    message("No mt_id_label provided. ",
-            "A new trial identifying variable called mt_id was created.")
+    if (verbose) {
+      message("No mt_id_label provided. ",
+              "A new trial identifying variable called mt_id was created.")
+    }
+    
     # if no column name for ID variable is provided create one
     ids <- 1:nrow(raw_data)
     # use formatC to add leading 0s
@@ -431,15 +433,19 @@ mt_import_wide <- function(raw_data,
   add_labels=NULL,
   mt_id_label=NULL,
   pos_sep="_", pos_ids=NULL,
-  reset_timestamps=TRUE) {
+  reset_timestamps=TRUE,
+  verbose=TRUE) {
   
   # Ensure that raw_data is a data.frame
   raw_data <- as.data.frame(raw_data)
   
   # Add mt_id variable
   if (is.null(mt_id_label)) {
-    message("No mt_id_label provided. ",
-            "A new trial identifying variable called mt_id was created.")
+    if (verbose) {
+      message("No mt_id_label provided. ",
+              "A new trial identifying variable called mt_id was created.")
+    }
+    
     # if no column name for ID variable is provided, create one
     ids <- 1:nrow(raw_data)
     # use formatC to add leading 0s
@@ -489,10 +495,13 @@ mt_import_wide <- function(raw_data,
   names(mt_columns) <- names(mt_labels)
 
   if (is.null(pos_ids)){
-    message(
-      "No pos_ids provided. ",
-      "The following variables were found using grep:"
+    if(verbose){
+      message(
+        "No pos_ids provided. ",
+        "The following variables were found using grep:"
       )
+    }
+    
   }
 
   for (mt_var in names(mt_labels)) {
@@ -527,7 +536,9 @@ mt_import_wide <- function(raw_data,
       
       # If variables are found, return them
       if (n_variables_found>0){
-        message(n_variables_found," variables found for ",mt_var,".")
+        if(verbose){
+          message(n_variables_found," variables found for ",mt_var,".") 
+        }
       
       # If no variables are found, ...
       } else {
@@ -558,8 +569,10 @@ mt_import_wide <- function(raw_data,
   
   # If no timestamps are found in the data, create timestamps
   if (!timestamps%in%names(mt_labels)){
-    message("0 variables found for ",timestamps,". ",
-            "Artificial timestamps variable created assuming equidistant time steps.")
+    if(verbose){
+      message("0 variables found for ",timestamps,". ",
+              "Artificial timestamps variable created assuming equidistant time steps.")
+    }
     timestamps_matrix <- matrix(
       0:(dim(trajectories)[3]-1),
       nrow=nrow(trajectories), ncol=dim(trajectories)[3],
@@ -661,7 +674,8 @@ mt_import_long <- function(raw_data,
   xpos_label="xpos", ypos_label="ypos", zpos_label=NULL,
   timestamps_label="timestamps", add_labels=NULL,
   mt_id_label="mt_id", mt_seq_label="mt_seq",
-  reset_timestamps=TRUE) {
+  reset_timestamps=TRUE,
+  verbose=TRUE) {
   
   # Ensure that raw_data is a data.frame
   raw_data <- as.data.frame(raw_data)
@@ -687,10 +701,13 @@ mt_import_long <- function(raw_data,
   
   # Look for mt_seq variable (that indicates the order of the logs)
   if (is.null(mt_seq_label) | (mt_seq_label %in% colnames(raw_data) == FALSE)) {
-    message(
-      "No mt_seq variable found (that indicates the order of the logs). ",
-      "Importing data in sequential order."
-    )
+    if (verbose){
+      message(
+        "No mt_seq variable found (that indicates the order of the logs). ",
+        "Importing data in sequential order."
+      )
+    }
+    
     # Sort dataset according to mt_id
     raw_data <- raw_data[order(raw_data[,"mt_id"]),]
     
@@ -737,8 +754,10 @@ mt_import_long <- function(raw_data,
   
   # If no timestamps are found in the data, create timestamps
   if (!timestamps%in%mt_include){
-    message("No timestamps were found in the data. ",
-            "Artificial timestamps variable created assuming equidistant time steps.")
+    if(verbose){
+      message("No timestamps were found in the data. ",
+              "Artificial timestamps variable created assuming equidistant time steps.")
+    }
     timestamps_matrix <- matrix(
       0:(dim(trajectories)[3]-1),
       nrow=nrow(trajectories), ncol=dim(trajectories)[3],

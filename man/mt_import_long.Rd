@@ -6,7 +6,8 @@
 \usage{
 mt_import_long(raw_data, xpos_label = "xpos", ypos_label = "ypos",
   zpos_label = NULL, timestamps_label = "timestamps", add_labels = NULL,
-  mt_id_label = "mt_id", mt_seq_label = "mt_seq", reset_timestamps = TRUE)
+  mt_id_label = "mt_id", mt_seq_label = "mt_seq", reset_timestamps = TRUE,
+  verbose = TRUE)
 }
 \arguments{
 \item{raw_data}{a data.frame in long format, containing the raw data.}
@@ -43,6 +44,9 @@ in the order in which they were stored in \code{raw_data}.}
 \item{reset_timestamps}{logical indicating if the first timestamp should be 
 subtracted from all timestamps within a trial. Default is \code{TRUE} as it
 is recommended for all following analyses in mousetrap.}
+
+\item{verbose}{logical indicating whether function should report its 
+progress.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}).
