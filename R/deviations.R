@@ -8,14 +8,18 @@
 #' deviation for each position is calclated as the perpendicular deviation of 
 #' the actual trajectory from the idealized trajectory.
 #' 
-#' If a deviation occurs above the direct path, this is denoted by a positive
-#' value. If it occurs below the direct path, this is denoted by a negative
-#' value. This assumes that the complete movement in the trial was from bottom
-#' to top (i.e., the end point has a higher y-position than the start point). In
-#' case the movement was from top to bottom, \code{mt_calculate_deviations}
-#' automatically flips the signs.
+#' If a deviation occurs above the direct path, this is denoted by a positive 
+#' value. If it occurs below the direct path, this is denoted by a negative 
+#' value. This assumes that the complete movement in the trial was from bottom 
+#' to top (i.e., the end point has a higher y-position than the start poins). In
+#' case the movement was from top to bottom, \code{mt_calculate_deviations} 
+#' automatically flips the signs. Note that the second dimension specified in 
+#' \code{dimensions} is used for determining all this.
 #' 
 #' @inheritParams mt_time_normalize
+#' @param dimensions a character vector specifying the two dimensions in the
+#'   trajectory array that contain the mouse positions. By default 
+#'   (\code{c("xpos","ypos")}), the x- and y-positions are used.
 #' @param start_ideal an optional vector specifying the start position (see
 #'   Example). If specified, this position will be used as the starting point of
 #'   the idealized trajectory (instead of the actual starting point).
@@ -25,9 +29,11 @@
 #' @param prefix an optional character string that is added as a prefix to the 
 #'   to be created new trajectory dimensions.
 #'   
-#' @return A mousetrap data object (see \link{mt_example}) with the x- and
-#'   y-positions of the idealized trajectory and the perpendicular deviations of
-#'   the actual trajectory from it added as additional columns to the trajectory
+#' @return A mousetrap data object (see \link{mt_example}) where the positions 
+#'   of the idealized trajectory (by default called \code{xpos_ideal} and 
+#'   \code{ypos_ideal}) and the perpendicular deviations of the actual 
+#'   trajectory from the idealized trajectory (by default called 
+#'   \code{dev_ideal}) have been added as additional columns to the trajectory
 #'   array. If the trajectory array was provided directly as \code{data}, only
 #'   the trajectory array will be returned.
 #'
@@ -51,6 +57,7 @@
 #' @export
 mt_calculate_deviations <- function(data,
   use="trajectories", save_as=use,
+  dimensions=c("xpos","ypos"),
   start_ideal=NULL,end_ideal=NULL,
   prefix="",
   verbose=FALSE,show_progress=NULL) {
@@ -61,54 +68,48 @@ mt_calculate_deviations <- function(data,
     verbose <- show_progress
   }
   
+  if(length(dimensions)!=2){
+    stop("For dimensions, exactly two trajectory dimensions have to be specified.")
+  }
+  
   # Extract trajectories and labels
   trajectories <- extract_data(data=data,use=use)
-  xpos <- mt_variable_labels[["xpos"]]
-  ypos <- mt_variable_labels[["ypos"]]
-  xpos_ideal <- paste0(prefix,mt_variable_labels[["xpos_ideal"]])
-  ypos_ideal <- paste0(prefix,mt_variable_labels[["ypos_ideal"]])
-  dev_ideal <- paste0(prefix,mt_variable_labels[["dev_ideal"]])
-  
+  points_ideal <- paste0(prefix,dimensions,"_ideal")
+  dev_ideal <- paste0(prefix,"dev_ideal")
+
   # Create new array with added columns for the new variables
   deviations <- mt_add_variables(trajectories,
-    variables=c(xpos_ideal,ypos_ideal,dev_ideal))
+    variables=c(points_ideal,dev_ideal))
   
   # Calculate number of logs
-  nlogs <- rowSums(!is.na(deviations[,xpos,,drop=FALSE]))
+  nlogs <- rowSums(!is.na(deviations[,dimensions[[1]],,drop=FALSE]))
   
   
   # Calculate deviations
   for (i in 1:nrow(deviations)){
     
-    current_points <- deviations[i, c(xpos,ypos), 1:nlogs[i]]
-    current_xpos <- deviations[i, xpos, 1:nlogs[i]]
-    current_ypos <- deviations[i, ypos, 1:nlogs[i]]
+    current_points <- deviations[i, dimensions, 1:nlogs[i]]
     
     # Determine straight line (idealized trajectory)
-    current_points_ideal <- points_on_ideal(current_points,
-                                            start=start_ideal,end=end_ideal)
-    current_xpos_ideal <- current_points_ideal[xpos,]
-    current_ypos_ideal <- current_points_ideal[ypos,]
+    current_points_ideal <- points_on_ideal(
+      current_points,start=start_ideal,end=end_ideal)
     
     # Calculate distance of each point on the curve from straight line
     # (cf. Pythagoras, some time ago)
     current_dev_ideal <- sqrt(colSums((current_points_ideal-current_points)^2))
     
-    # Check if end point is above the start point
-    end_above_start <- current_ypos_ideal[length(current_ypos_ideal)] >= current_ypos_ideal[1]
+    # Flip signs for points below the idealized straight line
+    flip_dimension <- 2
+    to_flip_dev_ideal <- current_points_ideal[flip_dimension,]>current_points[flip_dimension,]
+    current_dev_ideal[to_flip_dev_ideal] <- -current_dev_ideal[to_flip_dev_ideal]
     
-    # Flip deviation for points under the idealized straight line
-    if (end_above_start) {
-      current_dev_ideal[current_ypos_ideal > current_ypos] <- 
-        -current_dev_ideal[current_ypos_ideal > current_ypos]
-    } else {
-      current_dev_ideal[current_ypos_ideal < current_ypos] <- 
-        -current_dev_ideal[current_ypos_ideal < current_ypos]
+    # If last point of actual trajectory is below the first point, flip all points
+    if(current_points[flip_dimension,1]>current_points[flip_dimension,nlogs[i]]){
+      current_dev_ideal <- -(current_dev_ideal)
     }
     
     # Add idealized positions and deviations to array
-    deviations[i,xpos_ideal,1:nlogs[i]] <- current_xpos_ideal
-    deviations[i,ypos_ideal,1:nlogs[i]] <- current_ypos_ideal
+    deviations[i,points_ideal,1:nlogs[i]] <- current_points_ideal
     deviations[i,dev_ideal,1:nlogs[i]] <- current_dev_ideal 
     
     if (verbose){

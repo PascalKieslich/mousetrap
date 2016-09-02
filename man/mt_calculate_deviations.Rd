@@ -5,8 +5,8 @@
 \title{Calculate deviations from idealized trajectory.}
 \usage{
 mt_calculate_deviations(data, use = "trajectories", save_as = use,
-  start_ideal = NULL, end_ideal = NULL, prefix = "", verbose = FALSE,
-  show_progress = NULL)
+  dimensions = c("xpos", "ypos"), start_ideal = NULL, end_ideal = NULL,
+  prefix = "", verbose = FALSE, show_progress = NULL)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
@@ -18,6 +18,10 @@ used.}
 
 \item{save_as}{a character string specifying where the resulting trajectory 
 data should be stored.}
+
+\item{dimensions}{a character vector specifying the two dimensions in the
+trajectory array that contain the mouse positions. By default 
+(\code{c("xpos","ypos")}), the x- and y-positions are used.}
 
 \item{start_ideal}{an optional vector specifying the start position (see
 Example). If specified, this position will be used as the starting point of
@@ -36,9 +40,11 @@ progress.}
 \item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 }
 \value{
-A mousetrap data object (see \link{mt_example}) with the x- and
-  y-positions of the idealized trajectory and the perpendicular deviations of
-  the actual trajectory from it added as additional columns to the trajectory
+A mousetrap data object (see \link{mt_example}) where the positions 
+  of the idealized trajectory (by default called \code{xpos_ideal} and 
+  \code{ypos_ideal}) and the perpendicular deviations of the actual 
+  trajectory from the idealized trajectory (by default called 
+  \code{dev_ideal}) have been added as additional columns to the trajectory
   array. If the trajectory array was provided directly as \code{data}, only
   the trajectory array will be returned.
 }
@@ -52,12 +58,13 @@ and end point of the actual trajectory (e.g., Freeman & Ambady, 2010). The
 deviation for each position is calclated as the perpendicular deviation of 
 the actual trajectory from the idealized trajectory.
 
-If a deviation occurs above the direct path, this is denoted by a positive
-value. If it occurs below the direct path, this is denoted by a negative
-value. This assumes that the complete movement in the trial was from bottom
-to top (i.e., the end point has a higher y-position than the start point). In
-case the movement was from top to bottom, \code{mt_calculate_deviations}
-automatically flips the signs.
+If a deviation occurs above the direct path, this is denoted by a positive 
+value. If it occurs below the direct path, this is denoted by a negative 
+value. This assumes that the complete movement in the trial was from bottom 
+to top (i.e., the end point has a higher y-position than the start poins). In
+case the movement was from top to bottom, \code{mt_calculate_deviations} 
+automatically flips the signs. Note that the second dimension specified in 
+\code{dimensions} is used for determining all this.
 }
 \examples{
 # Calculate deviations from idealized trajectory
