@@ -5,6 +5,7 @@
 \title{Calculate mouse-tracking measures.}
 \usage{
 mt_calculate_measures(data, use = "trajectories", save_as = "measures",
+  dimensions = c("xpos", "ypos"), timestamps = "timestamps",
   flip_threshold = 0, verbose = FALSE, show_progress = NULL)
 }
 \arguments{
@@ -18,9 +19,17 @@ used.}
 \item{save_as}{a character string specifying where the calculated measures 
 should be stored.}
 
+\item{dimensions}{a character vector specifying the two dimensions in the 
+trajectory array that contain the mouse positions. Usually (and by 
+default), the first value in the vector corresponds to the x-positions
+(\code{xpos}) and the second to the y-positions (\code{ypos}).}
+
+\item{timestamps}{a character string specifying the trajectory dimension
+containing the timestamps.}
+
 \item{flip_threshold}{a numeric value specifying the distance that needs to 
-be exceeded in one direction so that a change in direction counts as an x- 
-or y-flip.}
+be exceeded in one direction so that a change in direction counts as a
+flip.}
 
 \item{verbose}{logical indicating whether function should report its 
 progress.}
@@ -37,13 +46,15 @@ A mousetrap data object (see \link{mt_example}) where an additional
   was provided directly as \code{data}, only the measures data.frame will be 
   returned.
   
-  The following measures are computed for each trajectory: 
+  The following measures are computed for each trajectory (the labels
+  relating to x- and y-positions will be adapted depending on the values
+  specified in \code{dimensions}):
   \item{mt_id}{Trial ID (can be used for merging measures data.frame with
   other trial-level data)}
-  \item{x_max}{Maximum x-position} 
-  \item{x_min}{Minimum x-position}
-  \item{y_max}{Maximum y-position} 
-  \item{y_min}{Minimum y-position}
+  \item{xpos_max}{Maximum x-position} 
+  \item{xpos_min}{Minimum x-position}
+  \item{ypos_max}{Maximum y-position} 
+  \item{ypos_min}{Minimum y-position}
   \item{MAD}{Maximum absolute deviation from the direct path connecting start
   and end point of the trajectory (straight line)}
   \item{MAD_time}{Time at which the maximum absolute deviation was reached
@@ -58,16 +69,16 @@ A mousetrap data object (see \link{mt_example}) where an additional
   \item{AUC}{Area under curve, the geometric area between the actual
   trajectory and the direct path where areas below the direct path have been
   subtracted}
-  \item{x_flips}{Number of directional changes along x-axis} 
-  \item{y_flips}{Number of directional changes along y-axis} 
-  \item{x_reversals}{Number of crossings of the y-axis} 
-  \item{y_reversals}{Number of crossings of the x-axis}
+  \item{xpos_flips}{Number of directional changes along x-axis} 
+  \item{ypos_flips}{Number of directional changes along y-axis} 
+  \item{xpos_reversals}{Number of crossings of the y-axis} 
+  \item{ypos_reversals}{Number of crossings of the x-axis}
   \item{RT}{Response time, the total time passed until a response was given}
   \item{initiation_time}{Time passed until first mouse movement was 
   initiated}
   \item{idle_time}{Total time without mouse movement across the entirety of
   the trial}
-  \item{xy_dist}{Total distance covered by the trajectory}
+  \item{total_dist}{Total distance covered by the trajectory}
   \item{vel_max}{Maximum velocity}
   \item{vel_max_time}{Time at which maximum velocity occurred first}
   \item{vel_min}{Minimum velocity} 
