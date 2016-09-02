@@ -236,12 +236,14 @@ mt_calculate_measures <- function(data,
   # Iterate over trajectories and calculate measures
   for (i in 1:nrow(trajectories)) {
     
+    current_nlogs <- nlogs[i]
+    
     # Extract variables
-    current_xpos <- trajectories[i, xpos, 1:nlogs[i]]
-    current_ypos <- trajectories[i, ypos, 1:nlogs[i]]
-    current_xpos_ideal <- trajectories[i, xpos_ideal, 1:nlogs[i]]
-    current_ypos_ideal <- trajectories[i, ypos_ideal, 1:nlogs[i]]
-    current_dev_ideal <- trajectories[i, dev_ideal, 1:nlogs[i]]
+    current_xpos <- trajectories[i, xpos, 1:current_nlogs]
+    current_ypos <- trajectories[i, ypos, 1:current_nlogs]
+    current_xpos_ideal <- trajectories[i, xpos_ideal, 1:current_nlogs]
+    current_ypos_ideal <- trajectories[i, ypos_ideal, 1:current_nlogs]
+    current_dev_ideal <- trajectories[i, dev_ideal, 1:current_nlogs]
     
     # Calculate min and max values for x and y
     measures[i,"x_max"] <- max(current_xpos)
@@ -263,29 +265,25 @@ mt_calculate_measures <- function(data,
     # Calculate average deviation from direct path
     measures[i,"AD"] <- mean(current_dev_ideal)
     
-    # Calculate area under curve
-    # Use deviation of actual trajectory as y coordinates
-    # and distance from starting point of the idealized 
-    # trajectory as x coordinate
-    dist_from_start <- sqrt(
-      (current_xpos_ideal-current_xpos_ideal[1])^2 + 
-      (current_ypos_ideal-current_ypos_ideal[1])^2
-    )
     
-    # Flip sign for points below the idealized line
-    if (current_ypos_ideal[length(current_ypos_ideal)] >= current_ypos_ideal[1]){
-      dist_from_start[current_ypos_ideal < current_ypos_ideal[1]] <- 
-        -dist_from_start[current_ypos_ideal < current_ypos_ideal[1]]
-    } else {
-      dist_from_start[current_ypos_ideal > current_ypos_ideal[1]] <- 
-        -dist_from_start[current_ypos_ideal > current_ypos_ideal[1]]
+    # Calculate area under curve
+    # the geometric area between the actual trajectory and the direct path
+    # where areas below the direct path have been subtracted
+    measures[i,"AUC"]<- pracma::polyarea(current_xpos,current_ypos)
+    
+    # Flip sign of AUC depending on direction of trajectory
+    
+    # ... flip if trajectory ended in top-right
+    if (current_ypos[current_nlogs]>current_ypos[1] & 
+        current_xpos[current_nlogs]>current_xpos[1]) {
+      measures[i,"AUC"] <- -(measures[i,"AUC"])
+    
+    # ... flip if trajectory ended in bottom-left
+    } else if (current_ypos[current_nlogs]<current_ypos[1] & 
+        current_xpos[current_nlogs]<current_xpos[1]) {
+      measures[i,"AUC"] <- -(measures[i,"AUC"])
     }
     
-    # Compute the area spanned by the x/y coordinate pairs,
-    # which is now the AUC (the coordinate system has been
-    # rotated so that the x axis corresponds to the direct
-    # path between start and end points)
-    measures[i,"AUC"]<- -pracma::polyarea(dist_from_start,current_dev_ideal)
     
     # Calculate number of x_flips and y_flips
     measures[i,"x_flips"] <- count_changes(current_xpos, threshold=flip_threshold)
