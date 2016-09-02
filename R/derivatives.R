@@ -24,24 +24,29 @@
 #' and add a zero at the beginning.
 #' 
 #' If the distance is calculated across both horizontal and vertical (x and y) 
-#' dimensions, velocity is always positive (or 0). If only one dimension is 
-#' used, increases in x (or y) values result in positive velocity, decreases in 
-#' negative velocity.
+#' dimensions, distance and velocity is always positive (or 0). If only one
+#' dimension is used, increases in x (or y) values result in positive distances
+#' and velocity values, decreases in negative distances and velocity values.
 #' 
 #' @inheritParams mt_time_normalize
-#' @param dimension a character string specifying across which dimension(s) 
-#'   distances, velocity, and acceleration are calculated. By default ("xypos"),
-#'   they are calculated across both x and y dimensions. Alternatively, only the
-#'   x- ("xpos") or the y- ("ypos") dimension can be used.
+#' @param dimensions a character vector specifying across which dimension(s) 
+#'   distances, velocity, and acceleration are calculated. By default 
+#'   (\code{c("xpos","ypos")}), they are calculated across both x and y 
+#'   dimensions. Alternatively, only one dimesion can be specified, e.g., 
+#'   \code{"xpos"} or \code{"ypos"}.
+#' @param timestamps a character string specifying the trajectory dimension
+#'   containing the timestamps.
 #' @param prefix an optional character string that is added as a prefix to the 
 #'   to be created new trajectory dimensions.
 #' @param acc_on_abs_vel logical indicating if acceleration should be calculated
 #'   based on absolute velocity values (ignoring direction). Only relevant if 
 #'   velocity can be negative (see Details).
-#'   
-#' @return A mousetrap data object (see \link{mt_example}) with 
-#'   Euclidian distance, velocity, and acceleration added as additional columns 
-#'   to the trajectory array. If the trajectory array was provided directly as
+#' @param dimension Deprecated. Please use \code{dimensions} instead.
+#' 
+#' @return A mousetrap data object (see \link{mt_example}) with Euclidian 
+#'   distance, velocity, and acceleration added as additional columns to the 
+#'   trajectory array (called \code{dist}, \code{vel}, and  \code{acc}, if no 
+#'   prefix was specified). If the trajectory array was provided directly as 
 #'   \code{data}, only the trajectory array will be returned.
 #'   
 #' @seealso \link{mt_average} for averaging trajectories across constant time
@@ -58,14 +63,15 @@
 #' # Calculate derivatives ony looking at movement
 #' # in x dimension
 #' mt_example <- mt_calculate_derivatives(mt_example,
-#'   dimension="xpos")
+#'   dimensions="xpos")
 #'   
 #' @export
 mt_calculate_derivatives <- function(data,
   use="trajectories", save_as=use,
-  dimension="xypos", prefix="",
-  acc_on_abs_vel=FALSE,
-  verbose=FALSE,show_progress=NULL) {
+  dimensions=c("xpos","ypos"), timestamps="timestamps",
+  prefix="", acc_on_abs_vel=FALSE,
+  verbose=FALSE,
+  show_progress=NULL,dimension=NULL) {
   
   if(is.null(show_progress)==FALSE){
     warning("The argument show_progress is deprecated. ",
@@ -73,14 +79,17 @@ mt_calculate_derivatives <- function(data,
     verbose <- show_progress
   }
   
-  # Extract trajectories and labels
+  if(is.null(dimension)==FALSE){
+    warning("The argument dimension is deprecated. ",
+            "Please use dimensions instead.")
+    dimensions <- ifelse(dimension=="xypos",c("xpos","ypos"),dimension)
+  }
+  
+  # Extract trajectories and create labels
   trajectories <- extract_data(data=data,use=use)
-  timestamps <- mt_variable_labels[["timestamps"]]
-  xpos <- mt_variable_labels[["xpos"]]
-  ypos <- mt_variable_labels[["ypos"]]
-  dist <- paste0(prefix,mt_variable_labels[["dist"]])
-  vel  <- paste0(prefix,mt_variable_labels[["vel"]])
-  acc  <- paste0(prefix,mt_variable_labels[["acc"]])
+  dist <- paste0(prefix,"dist")
+  vel  <- paste0(prefix,"vel")
+  acc  <- paste0(prefix,"acc")
   
   # Create new array with added columns for the new variables
   derivatives <- mt_add_variables(trajectories,
@@ -89,24 +98,21 @@ mt_calculate_derivatives <- function(data,
   # Calculate derivatives
   for (i in 1:nrow(trajectories)){
     
-    # Compute deltas for all available data
-    # (x & y positions and timestamps)
+    # Compute deltas for timestamps
     delta_timestamps <- diff(derivatives[i,timestamps,])
-    delta_xpos <- diff(derivatives[i,xpos,])
-    delta_ypos <- diff(derivatives[i,ypos,])
     
-    if (dimension == "xypos") {
-      # Compute Eucledian distance between measurements 
-      # if both x and y dimension should be used
-      distances <- sqrt(delta_xpos^2 + delta_ypos^2)
-    } else if (dimension == "xpos") {
-      # Otherwise simply compute the distance
-      distances <- delta_xpos
-    } else if (dimension == "ypos") {
-      distances <- delta_ypos
+    
+    # Compute distance depending on the number of dimensions
+    
+    # For one dimension, simply compute the distance
+    if (length(dimensions)==1){
+      distances <- diff(derivatives[i,dimensions,])
+    
+    # For more than one dimension, compute Eucledian distance between measurements
     } else {
-      stop("dimension argument can only be one of the following: xypos, xpos, ypos")
+      distances <- sqrt(rowSums(diff(t(derivatives[i,dimensions,]))^2))
     }
+    
     
     # Compute velocity based on distance and time deltas
     velocities <- distances / delta_timestamps

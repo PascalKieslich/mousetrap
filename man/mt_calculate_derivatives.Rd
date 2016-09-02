@@ -5,8 +5,9 @@
 \title{Calculate distance, velocity, and acceleration.}
 \usage{
 mt_calculate_derivatives(data, use = "trajectories", save_as = use,
-  dimension = "xypos", prefix = "", acc_on_abs_vel = FALSE,
-  verbose = FALSE, show_progress = NULL)
+  dimensions = c("xpos", "ypos"), timestamps = "timestamps", prefix = "",
+  acc_on_abs_vel = FALSE, verbose = FALSE, show_progress = NULL,
+  dimension = NULL)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
@@ -19,10 +20,14 @@ used.}
 \item{save_as}{a character string specifying where the resulting trajectory 
 data should be stored.}
 
-\item{dimension}{a character string specifying across which dimension(s) 
-distances, velocity, and acceleration are calculated. By default ("xypos"),
-they are calculated across both x and y dimensions. Alternatively, only the
-x- ("xpos") or the y- ("ypos") dimension can be used.}
+\item{dimensions}{a character vector specifying across which dimension(s) 
+distances, velocity, and acceleration are calculated. By default 
+(\code{c("xpos","ypos")}), they are calculated across both x and y 
+dimensions. Alternatively, only one dimesion can be specified, e.g., 
+\code{"xpos"} or \code{"ypos"}.}
+
+\item{timestamps}{a character string specifying the trajectory dimension
+containing the timestamps.}
 
 \item{prefix}{an optional character string that is added as a prefix to the 
 to be created new trajectory dimensions.}
@@ -35,11 +40,14 @@ velocity can be negative (see Details).}
 progress.}
 
 \item{show_progress}{Deprecated. Please use \code{verbose} instead.}
+
+\item{dimension}{Deprecated. Please use \code{dimensions} instead.}
 }
 \value{
-A mousetrap data object (see \link{mt_example}) with 
-  Euclidian distance, velocity, and acceleration added as additional columns 
-  to the trajectory array. If the trajectory array was provided directly as
+A mousetrap data object (see \link{mt_example}) with Euclidian 
+  distance, velocity, and acceleration added as additional columns to the 
+  trajectory array (called \code{dist}, \code{vel}, and  \code{acc}, if no 
+  prefix was specified). If the trajectory array was provided directly as 
   \code{data}, only the trajectory array will be returned.
 }
 \description{
@@ -68,9 +76,9 @@ vector with the sampling interval, compute the cumulative sum of the result,
 and add a zero at the beginning.
 
 If the distance is calculated across both horizontal and vertical (x and y) 
-dimensions, velocity is always positive (or 0). If only one dimension is 
-used, increases in x (or y) values result in positive velocity, decreases in 
-negative velocity.
+dimensions, distance and velocity is always positive (or 0). If only one
+dimension is used, increases in x (or y) values result in positive distances
+and velocity values, decreases in negative distances and velocity values.
 }
 \examples{
 # Calculate derivatives looking at movement
@@ -80,7 +88,7 @@ mt_example <- mt_calculate_derivatives(mt_example)
 # Calculate derivatives ony looking at movement
 # in x dimension
 mt_example <- mt_calculate_derivatives(mt_example,
-  dimension="xpos")
+  dimensions="xpos")
   
 }
 \seealso{
