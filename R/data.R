@@ -86,8 +86,8 @@
 #'   \link{mt_average}) add additional trajectory arrays (e.g.,
 #'   \code{tn_trajectories} and \code{av_trajectories}) to the mousetrap data
 #'   object. Other functions modify the existing arrays (e.g.,
-#'   \link{mt_calculate_derivatives} adds distance, velocity, and acceleration
-#'   to an existing dataset). Finally \link{mt_calculate_measures} adds an
+#'   \link{mt_derivatives} adds distance, velocity, and acceleration
+#'   to an existing dataset). Finally \link{mt_measures} adds an
 #'   additional data.frame with mouse-tracking measures to it.
 #'
 "mt_example"

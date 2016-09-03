@@ -10,7 +10,7 @@
 #' the trajectory data as an array (called \code{trajectories}), and all other
 #' data as a data.frame (called \code{data}). This data structure can then be
 #' passed on to other functions within this package, such as
-#' \link{mt_time_normalize} or \link{mt_calculate_measures}.
+#' \link{mt_time_normalize} or \link{mt_measures}.
 #'
 #' When working with mouse-tracking data that were recorded using the mousetrap
 #' plug-ins for OpenSesame, usually only the \code{raw_data} need to be
@@ -353,7 +353,7 @@ mt_import_mousetrap <- function(raw_data,
 #' trajectory data as an array (called \code{trajectories}), and all other data 
 #' as a data.frame (called \code{data}). This data structure can then be passed 
 #' on to other functions within this package, such as \link{mt_time_normalize} 
-#' or \link{mt_calculate_measures}.
+#' or \link{mt_measures}.
 #'
 #' \code{mt_import_wide} is designed to import mouse-tracking data saved in a
 #' wide format. The defaults are set so that usually only the \code{raw_data}
@@ -612,7 +612,7 @@ mt_import_wide <- function(raw_data,
 #' an array (called \code{trajectories}), and all other data as a data.frame
 #' (called \code{data}). This data structure can then be passed on to other
 #' functions within this package, such as \link{mt_time_normalize} or
-#' \link{mt_calculate_measures}. The defaults are set so that no adjustments
+#' \link{mt_measures}. The defaults are set so that no adjustments
 #' have to be made when importing a data.frame that was created using
 #' \link{mt_reshape}.
 #'

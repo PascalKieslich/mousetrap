@@ -71,7 +71,7 @@ Besides, the perpendicular deviation from the direct path at the specified
 percentile is included (\code{IMD}).
 }
 \examples{
-mt_example <- mt_calculate_measures(mt_example)
+mt_example <- mt_measures(mt_example)
 mt_example <- mt_movement_angle(mt_example,
   use="trajectories", save_as="measures",
   ima_percentile=0.20)
@@ -84,7 +84,7 @@ Buetti, S., & Kerzel, D. (2009). Conflicts during response
   Performance, 35}(3), 816-834.
 }
 \seealso{
-\link{mt_calculate_measures} for calculating other mouse-tracking
+\link{mt_measures} for calculating other mouse-tracking
 measures.
 }
 

@@ -409,7 +409,7 @@ mt_reshape <- function(data,
 #' 
 #' 
 #' # Calculate mouse-tracking measures
-#' mt_example <- mt_calculate_measures(mt_example)
+#' mt_example <- mt_measures(mt_example)
 #' 
 #' # Aggregate measures per condition
 #' average_measures <- mt_aggregate(mt_example,
@@ -483,7 +483,7 @@ mt_aggregate <- function(data,
 #' 
 #' 
 #' # Calculate mouse-tracking measures
-#' mt_example <- mt_calculate_measures(mt_example)
+#' mt_example <- mt_measures(mt_example)
 #' 
 #' # Aggregate measures per condition
 #' # separately per subject

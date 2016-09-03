@@ -100,7 +100,7 @@
 #'         
 #' # Plot velocity profiles based on the averaged trajectories
 #' # varying the color depending on the condition
-#' mt_example <- mt_calculate_derivatives(mt_example)
+#' mt_example <- mt_derivatives(mt_example)
 #' mt_example <- mt_average(mt_example, interval_size = 100)
 #' mt_plot(mt_example, use="av_trajectories",
 #'   x="timestamps", y="vel", color="Condition")

@@ -12,7 +12,7 @@
 #' value. If it occurs below the direct path, this is denoted by a negative 
 #' value. This assumes that the complete movement in the trial was from bottom 
 #' to top (i.e., the end point has a higher y-position than the start poins). In
-#' case the movement was from top to bottom, \code{mt_calculate_deviations} 
+#' case the movement was from top to bottom, \code{mt_deviations} 
 #' automatically flips the signs. Note that the second dimension specified in 
 #' \code{dimensions} is used for determining all this.
 #' 
@@ -41,21 +41,23 @@
 #'   studying real-time mental processing using a computer mouse-tracking
 #'   method. \emph{Behavior Research Methods, 42}(1), 226-241.
 #'   
-#' @seealso \link{mt_calculate_measures} for calculating per-trial
+#' @seealso \link{mt_measures} for calculating per-trial
 #'   mouse-tracking measures.
 #'   
 #' @examples
 #' # Calculate deviations from idealized trajectory
 #' # (straight line connecting the start and end point of each trial)
-#' mt_example <- mt_calculate_deviations(mt_example)
+#' mt_example <- mt_deviations(mt_example)
 #'   
 #' # Calculate deviations from idealized trajectory with
 #' # constant start and end points across trials
-#' mt_example <- mt_calculate_deviations(mt_example,
+#' mt_example <- mt_deviations(mt_example,
 #'   start_ideal=c(xpos=0,ypos=0), end_ideal=c(xpos=-665,ypos=974))
 #' 
+#' @describeIn mt_deviations Calculate deviations from idealized trajectory
 #' @export
-mt_calculate_deviations <- function(data,
+mt_deviations <- function(
+  data,
   use="trajectories", save_as=use,
   dimensions=c("xpos","ypos"),
   start_ideal=NULL,end_ideal=NULL,
@@ -122,5 +124,30 @@ mt_calculate_deviations <- function(data,
   }
   
   return(create_results(data=data, results=deviations, use=use, save_as=save_as))
+  
+}
+
+
+#' @describeIn mt_deviations Deprecated
+#' @export
+mt_calculate_deviations <- function(
+  data,
+  use="trajectories", save_as=use,
+  dimensions=c("xpos","ypos"),
+  start_ideal=NULL,end_ideal=NULL,
+  prefix="",
+  verbose=FALSE,show_progress=NULL) {
+  
+  .Deprecated("mt_deviations")
+  
+  return(
+    mt_deviations(
+      data=data,use=use,save_as=save_as,
+      dimensions=dimensions,
+      start_ideal=start_ideal,end_ideal=end_ideal,
+      prefix=prefix,
+      verbose=verbose,show_progress=show_progress
+    )
+  )
   
 }

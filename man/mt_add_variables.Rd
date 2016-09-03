@@ -36,7 +36,7 @@ A mousetrap data object (see \link{mt_example}) where the new
 \description{
 Add new variables to the trajectory array (and remove potentially existing 
 variables of the same name). This is mostly a helper function used by other 
-functions in this package (e.g., \link{mt_calculate_deviations}). However, it
+functions in this package (e.g., \link{mt_deviations}). However, it
 can also be helpful if the user has calculated new variables for each logged 
 coordinate and wants to add them to an existing trajectory array.
 }

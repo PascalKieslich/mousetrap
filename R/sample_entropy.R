@@ -58,14 +58,14 @@
 #' analytic techniques for enhancing psychological science. \emph{Group
 #' Processes & Intergroup Relations, 18}(3), 384-401.
 #' 
-#' @seealso \link{mt_calculate_measures} for calculating other mouse-tracking
+#' @seealso \link{mt_measures} for calculating other mouse-tracking
 #' measures.
 #' 
 #' @examples
 #' # Calculate sample entropy based on time-normalized
 #' # trajectories and merge results with other meausres
 #' # derived from raw trajectories
-#' mt_example <- mt_calculate_measures(mt_example)
+#' mt_example <- mt_measures(mt_example)
 #' mt_example <- mt_time_normalize(mt_example,
 #'   save_as="tn_trajectories", nsteps=101)
 #' mt_example <- mt_sample_entropy(mt_example,

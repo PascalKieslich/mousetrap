@@ -87,10 +87,10 @@ should be called before averaging to arrive at equally spaced timestamps. The
 sampling rate can be investigated using \link{mt_check_resolution}.
 
 If average velocity and acceleration are of interest, 
-\link{mt_calculate_derivatives} should be called before averaging.
+\link{mt_derivatives} should be called before averaging.
 }
 \examples{
-mt_example <- mt_calculate_derivatives(mt_example)
+mt_example <- mt_derivatives(mt_example)
 
 # average trajectories across 100 ms intervals
 mt_example <- mt_average(mt_example, save_as="av_trajectories",
@@ -105,7 +105,7 @@ mt_example <- mt_average(mt_example,
 
 }
 \seealso{
-\link{mt_calculate_derivatives} for calculating velocity and 
+\link{mt_derivatives} for calculating velocity and 
   acceleration.
 
 \link{mt_resample} for resampling trajectories using a constant time 

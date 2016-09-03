@@ -63,7 +63,7 @@ package. Specifically, it returns a list that includes the trajectory data as
 an array (called \code{trajectories}), and all other data as a data.frame
 (called \code{data}). This data structure can then be passed on to other
 functions within this package, such as \link{mt_time_normalize} or
-\link{mt_calculate_measures}. The defaults are set so that no adjustments
+\link{mt_measures}. The defaults are set so that no adjustments
 have to be made when importing a data.frame that was created using
 \link{mt_reshape}.
 }

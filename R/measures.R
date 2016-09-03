@@ -3,14 +3,14 @@
 #' Calculate a number of mouse-tracking measures for each trajectory.
 #' 
 #' Note that some measures are only returned if distance, velocity and 
-#' acceleration are calculated using \link{mt_calculate_derivatives} before 
-#' running \code{mt_calculate_measures}. Besides, the meaning of these measures
-#' depends on the values of the arguments in \link{mt_calculate_derivatives}.
+#' acceleration are calculated using \link{mt_derivatives} before 
+#' running \code{mt_measures}. Besides, the meaning of these measures
+#' depends on the values of the arguments in \link{mt_derivatives}.
 #'   
 #' If the deviations from the idealized response trajectory have been calculated
-#' using \link{mt_calculate_deviations} before running
-#' \code{mt_calculate_measures}, the corresponding data in the trajectory array
-#' will be used. If not, \code{mt_calculate_measures} will calculate these
+#' using \link{mt_deviations} before running
+#' \code{mt_measures}, the corresponding data in the trajectory array
+#' will be used. If not, \code{mt_measures} will calculate these
 #' deviations automatically.
 #' 
 #' The calculation of most measures can be deduced directly from their 
@@ -24,7 +24,7 @@
 #' below the direct path, this is denoted by a negative value. This assumes that
 #' the complete movement in the trial was from bottom to top (i.e., the end
 #' point has a higher y-position than the start point). In case the movement was
-#' from top to bottom, \code{mt_calculate_measures} automatically flips the
+#' from top to bottom, \code{mt_measures} automatically flips the
 #' signs. Both \code{MD_above} and  \code{MD_below} are also reported
 #' separately. The \strong{average deviation} (\code{AD}) is the average of all
 #' deviations across the trial.
@@ -123,9 +123,9 @@
 #' \link{merge} for merging data.
 #' 
 #' @examples
-#' mt_example <- mt_calculate_derivatives(mt_example)
-#' mt_example <- mt_calculate_deviations(mt_example)
-#' mt_example <- mt_calculate_measures(mt_example)
+#' mt_example <- mt_derivatives(mt_example)
+#' mt_example <- mt_deviations(mt_example)
+#' mt_example <- mt_measures(mt_example)
 #' 
 #' # Merge measures with trial data (adding "_raw"
 #' # to columns already existing in the trial data)
@@ -133,8 +133,10 @@
 #'   mt_example$data, mt_example$measures,
 #'   by="mt_id",suffixes=c("_raw",""))
 #'   
+#' @describeIn mt_measures Calculate mouse-tracking measures
 #' @export
-mt_calculate_measures <- function(data,
+mt_measures <- function(
+  data,
   use="trajectories", save_as="measures",
   dimensions=c("xpos","ypos"), timestamps="timestamps",
   flip_threshold=0,
@@ -170,7 +172,7 @@ mt_calculate_measures <- function(data,
     if (verbose) {
       message("Start calculating deviations of actual from idealized response trajectory.")
     }
-    trajectories <- mt_calculate_deviations(
+    trajectories <- mt_deviations(
       data=trajectories, verbose=verbose
     )
     if (verbose) {
@@ -373,7 +375,7 @@ mt_calculate_measures <- function(data,
       vel_max_pos <- which.max(trajectories[i,vel,])
       
       # Interpolate timestamp of maximum velocity
-      # (see mt_calculate_derivatives for logic of velocity timestamps)
+      # (see mt_derivatives for logic of velocity timestamps)
       vel_max_pos <- ifelse(vel_max_pos==1, 1, c(vel_max_pos-1, vel_max_pos))
       measures[i,"vel_max_time"] <- mean(trajectories[i,timestamps,vel_max_pos])
       
@@ -381,7 +383,7 @@ mt_calculate_measures <- function(data,
       measures[i,"vel_min"] <- min(trajectories[i,vel,], na.rm=TRUE)
       vel_min_pos <- which.min(trajectories[i,vel,])
       
-      # average timestamps (see mt_calculate_derivatives for logic of velocity timestamps)
+      # average timestamps (see mt_derivatives for logic of velocity timestamps)
       vel_min_pos <- ifelse(
         vel_min_pos == 1,
         1, c(vel_min_pos-1, vel_min_pos)
@@ -411,5 +413,28 @@ mt_calculate_measures <- function(data,
   return(create_results(
     data=data, results=measures, use=use, save_as=save_as,
     ids=rownames(trajectories), overwrite=TRUE))
+  
+}
+
+
+#' @describeIn mt_measures Deprecated
+#' @export
+mt_calculate_measures <- function(
+  data,
+  use="trajectories", save_as="measures",
+  dimensions=c("xpos","ypos"), timestamps="timestamps",
+  flip_threshold=0,
+  verbose=FALSE,show_progress=NULL) {
+  
+  .Deprecated("mt_measures")
+  
+  return(
+    mt_measures(
+      data=data,use=use,save_as=save_as,
+      dimensions=dimensions,timestamps=timestamps,
+      flip_threshold=flip_threshold,
+      verbose=verbose,show_progress=show_progress
+    )
+  )
   
 }

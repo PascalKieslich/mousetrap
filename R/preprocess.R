@@ -261,7 +261,7 @@ mt_remap_symmetric <- function(
 #'   was provided directly as \code{data}, only the trajectory array will be
 #'   returned.
 #'   
-#' @seealso \link{mt_calculate_measures} for calculating the initiation time.
+#' @seealso \link{mt_measures} for calculating the initiation time.
 #' 
 #' @examples
 #' mt_example <- mt_exclude_initiation(mt_example,
@@ -653,7 +653,7 @@ mt_resample <- function(data,
 #' sampling rate can be investigated using \link{mt_check_resolution}.
 #' 
 #' If average velocity and acceleration are of interest, 
-#' \link{mt_calculate_derivatives} should be called before averaging.
+#' \link{mt_derivatives} should be called before averaging.
 #' 
 #' @inheritParams mt_time_normalize
 #' @param dimensions a character vector specifying the dimensions in the 
@@ -685,14 +685,14 @@ mt_resample <- function(data,
 #'   value does not necessarily correspond to the empirical mean of the
 #'   dimension values in the interval.
 #'   
-#' @seealso \link{mt_calculate_derivatives} for calculating velocity and 
+#' @seealso \link{mt_derivatives} for calculating velocity and 
 #'   acceleration.
 #' 
 #' \link{mt_resample} for resampling trajectories using a constant time 
 #' interval.
 #' 
 #' @examples
-#' mt_example <- mt_calculate_derivatives(mt_example)
+#' mt_example <- mt_derivatives(mt_example)
 #' 
 #' # average trajectories across 100 ms intervals
 #' mt_example <- mt_average(mt_example, save_as="av_trajectories",
@@ -885,7 +885,7 @@ mt_average <- function(data,
 #' mt_example_atypical <- mt_subset(mt_example, Condition=="Atypical")
 #' 
 #' # Subset based on mouse-tracking measure (MAD)
-#' mt_example <- mt_calculate_measures(mt_example)
+#' mt_example <- mt_measures(mt_example)
 #' mt_example_mad_sub <- mt_subset(mt_example, MAD<400, check="measures")
 #' 
 #' @export
@@ -923,7 +923,7 @@ mt_subset <- function(data,subset,check="data"){
 #' 
 #' Add new variables to the trajectory array (and remove potentially existing 
 #' variables of the same name). This is mostly a helper function used by other 
-#' functions in this package (e.g., \link{mt_calculate_deviations}). However, it
+#' functions in this package (e.g., \link{mt_deviations}). However, it
 #' can also be helpful if the user has calculated new variables for each logged 
 #' coordinate and wants to add them to an existing trajectory array.
 #' 

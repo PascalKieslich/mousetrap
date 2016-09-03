@@ -47,11 +47,11 @@
 #'   stimulation. \emph{Journal of Experimental Psychology: Human Perception and
 #'   Performance, 35}(3), 816-834.
 #' 
-#' @seealso \link{mt_calculate_measures} for calculating other mouse-tracking
+#' @seealso \link{mt_measures} for calculating other mouse-tracking
 #' measures.
 #' 
 #' @examples
-#' mt_example <- mt_calculate_measures(mt_example)
+#' mt_example <- mt_measures(mt_example)
 #' mt_example <- mt_movement_angle(mt_example,
 #'   use="trajectories", save_as="measures",
 #'   ima_percentile=0.20)

@@ -66,6 +66,6 @@ mt_example <- mt_exclude_initiation(mt_example,
   
 }
 \seealso{
-\link{mt_calculate_measures} for calculating the initiation time.
+\link{mt_measures} for calculating the initiation time.
 }
 
