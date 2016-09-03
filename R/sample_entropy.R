@@ -30,11 +30,11 @@
 #' @inheritParams mt_time_normalize
 #' @param save_as a character string specifying where the calculated measures
 #'   should be stored.
-#' @param method a character string specifying the method used for calculating
-#'   sample entropy (see Details).
 #' @param dimension a character string specifying the dimension based on which
 #'   sample entropy should be calculated. By default (xpos), the x-positions are
 #'   used.
+#' @param method a character string specifying the method used for calculating
+#'   sample entropy (see Details).
 #' @param lag an integer passed on to the sample entropy function (see Details).
 #' @param r a numeric value passed on to the sample entropy function (see
 #'   Details).
@@ -75,7 +75,7 @@
 #' @export
 mt_sample_entropy <- function(data,
   use="tn_trajectories", save_as="measures",
-  method="pracma", dimension="xpos", lag=3, r=NULL,
+  dimension="xpos", method="pracma", lag=3, r=NULL,
   verbose=FALSE,show_progress=NULL) {
   
   if(is.null(show_progress)==FALSE){

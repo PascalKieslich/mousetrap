@@ -5,7 +5,7 @@
 \title{Calculate sample entropy.}
 \usage{
 mt_sample_entropy(data, use = "tn_trajectories", save_as = "measures",
-  method = "pracma", dimension = "xpos", lag = 3, r = NULL,
+  dimension = "xpos", method = "pracma", lag = 3, r = NULL,
   verbose = FALSE, show_progress = NULL)
 }
 \arguments{
@@ -19,12 +19,12 @@ used.}
 \item{save_as}{a character string specifying where the calculated measures
 should be stored.}
 
-\item{method}{a character string specifying the method used for calculating
-sample entropy (see Details).}
-
 \item{dimension}{a character string specifying the dimension based on which
 sample entropy should be calculated. By default (xpos), the x-positions are
 used.}
+
+\item{method}{a character string specifying the method used for calculating
+sample entropy (see Details).}
 
 \item{lag}{an integer passed on to the sample entropy function (see Details).}
 
