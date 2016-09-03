@@ -1,9 +1,10 @@
 #' Time normalize trajectories.
 #' 
 #' Compute time-normalized trajectories using a constant number of equally sized
-#' time steps. Time normalization is performed separately for the x- and 
-#' y-positions using linear interpolation based on the timestamps. By default, 
-#' 101 time steps are used (following Spivey et al., 2005).
+#' time steps. Time normalization is performed separately for all specified
+#' trajectory dimensions (by default, the x- and y-positions) using linear
+#' interpolation based on the timestamps. By default, 101 time steps are used
+#' (following Spivey et al., 2005).
 #' 
 #' Time-normalization is often performed if the number of recorded x- and 
 #' y-positions varies across trajectories, which typically occurs when 
@@ -24,6 +25,11 @@
 #'   used.
 #' @param save_as a character string specifying where the resulting trajectory 
 #'   data should be stored.
+#' @param dimensions a character vector specifying the dimensions in the 
+#'   trajectory array that should be time-normalized. If \code{"all"}, all
+#'   trajectory dimensions except the timestamps will be time-normalized.
+#' @param timestamps a character string specifying the trajectory dimension
+#'   containing the timestamps.
 #' @param nsteps an integer specifying the number of equally sized time steps.
 #' @param verbose logical indicating whether function should report its 
 #'   progress.
@@ -54,6 +60,7 @@
 #' @export
 mt_time_normalize <- function(data,
                               use="trajectories", save_as="tn_trajectories",
+                              dimensions=c("xpos","ypos"), timestamps="timestamps",
                               nsteps=101,
                               verbose=FALSE,show_progress=NULL) {
   
@@ -63,18 +70,21 @@ mt_time_normalize <- function(data,
     verbose <- show_progress
   }
   
+  if (length(dimensions)==1 & dimensions[[1]]=="all"){
+    dimensions <- colnames(trajectories)
+    dimensions <- dimensions[dimensions!=timestamps]
+  }
+  
   # Preparation
   trajectories <- extract_data(data=data,use=use)
-  timestamps <- mt_variable_labels[["timestamps"]]
-  xpos <- mt_variable_labels[["xpos"]]
-  ypos <- mt_variable_labels[["ypos"]]
+  
   
   # Create empty array for output
   tn_trajectories <- array(
-    dim=c(nrow(trajectories), 4, nsteps),
+    dim=c(nrow(trajectories), 2+length(dimensions), nsteps),
     dimnames=list(
       dimnames(trajectories)[[1]],
-      c(timestamps, xpos, ypos, "steps"),
+      c(timestamps, dimensions, "steps"),
       NULL
     )
   )
@@ -88,12 +98,12 @@ mt_time_normalize <- function(data,
     tn_trajectories[i,timestamps,] <- stats::approx(
       trajectories[i,timestamps,], trajectories[i,timestamps,], n=nsteps)$y
     
-    # X and Y coordinates
-    tn_trajectories[i,xpos,] <- stats::approx(
-      trajectories[i,timestamps,], trajectories[i,xpos,], n=nsteps)$y
-    tn_trajectories[i,ypos,] <- stats::approx(
-      trajectories[i,timestamps,], trajectories[i,ypos,], n=nsteps)$y
-    
+    # Specified trajectory dimensions
+    for (dimension in dimensions){
+      tn_trajectories[i,dimension,] <- stats::approx(
+        trajectories[i,timestamps,], trajectories[i,dimension,], n=nsteps)$y
+    }
+
     # Label steps as such
     tn_trajectories[i,"steps",] <- 1:nsteps
     
@@ -236,6 +246,8 @@ mt_remap_symmetric <- function(data,
 #' this function.
 #' 
 #' @inheritParams mt_time_normalize
+#' @param dimensions a character vector specifying the dimensions in the 
+#'   trajectory array that contain the mouse positions.
 #' @param reset_timestamps logical indicating whether the timestamps should be 
 #'   reset after removing the initial phase without movement (see Details).
 #'   
@@ -253,6 +265,7 @@ mt_remap_symmetric <- function(data,
 #' @export
 mt_exclude_initiation <- function(data,
   use="trajectories", save_as=use,
+  dimensions=c("xpos","ypos"), timestamps="timestamps",
   reset_timestamps=TRUE,
   verbose=FALSE,show_progress=NULL) {
   
@@ -264,23 +277,25 @@ mt_exclude_initiation <- function(data,
   
   # Gather necessary data
   trajectories <- extract_data(data=data,use=use)
-  timestamps <- mt_variable_labels[["timestamps"]]
-  xpos <- mt_variable_labels[["xpos"]]
-  ypos <- mt_variable_labels[["ypos"]]
   
+  # Only keep relevant dimensions
+  trajectories <- trajectories[,c(timestamps,dimensions),,drop=FALSE]
+
   # Calculate number of logs
   nlogs <- rowSums(!is.na(trajectories[, timestamps, , drop=FALSE]))
   
   # Exclude phase where mouse stayed on start coordinates
   for (i in 1:nrow(trajectories)){ 
+    
+    # Extract trajectory data
+    current_trajectories <- trajectories[i, , 1:nlogs[i]]
+    
     # Iterate over trajectories 
-    current_timestamps <- trajectories[i, timestamps, 1:nlogs[i]]
-    current_xpos <- trajectories[i, xpos, 1:nlogs[i]]
-    current_ypos <- trajectories[i, ypos, 1:nlogs[i]]
+    current_timestamps <- current_trajectories[timestamps,]
+    current_points <- current_trajectories[dimensions,,drop=FALSE]
     
     # Vector indicating if mouse has not left the starting point
-    on_start <- cumsum(abs(current_xpos - current_xpos[1])) == 0 & # x-axis
-      cumsum(abs(current_ypos - current_ypos[1])) == 0 # y-axis
+    on_start <- cumsum(colSums(abs(current_points - current_points[,1]))) == 0
     
     # Change last element where mouse is still on starting point so that this 
     # point is included in the calculations
@@ -288,16 +303,14 @@ mt_exclude_initiation <- function(data,
     
     # Exclude data without movements
     current_timestamps <- current_timestamps[!on_start]
-    current_xpos <- current_xpos[!on_start]
-    current_ypos <- current_ypos[!on_start]
+    current_points <- current_points[,!on_start]
         
     # Clear data in array
     trajectories[i,,] <- NA
     
     # Add data to array
     trajectories[i, timestamps, 1:length(current_timestamps)] <- current_timestamps
-    trajectories[i, xpos, 1:length(current_xpos)] <- current_xpos
-    trajectories[i, ypos, 1:length(current_ypos)] <- current_ypos
+    trajectories[i, dimensions, 1:length(current_timestamps)] <- current_points
     
     if (verbose){
       if (i %% 100 == 0) message(paste(i, "trials finished")) 
@@ -476,6 +489,9 @@ mt_align_start <- function(data,
 #' this, \link{mt_average} can be used.
 #' 
 #' @inheritParams mt_time_normalize
+#' @param dimensions a character vector specifying the dimensions in the 
+#'   trajectory array that should be resampled. If \code{"all"}, all trajectory
+#'   dimensions except the timestamps will be resampled.
 #' @param step_size an integer specifying the size of the constant time 
 #'   interval. The unit corresponds to the unit of the timestamps.
 #' @param exact_last_timestamp logical indicating if the last timestamp should 
@@ -502,6 +518,7 @@ mt_align_start <- function(data,
 #' @export
 mt_resample <- function(data,
   use="trajectories", save_as="rs_trajectories",
+  dimensions=c("xpos","ypos"), timestamps="timestamps",
   step_size=10, exact_last_timestamp=TRUE,
   verbose=FALSE,show_progress=NULL) {
   
@@ -511,12 +528,15 @@ mt_resample <- function(data,
     verbose <- show_progress
   }
   
+  if (length(dimensions)==1 & dimensions[[1]]=="all"){
+    dimensions <- colnames(trajectories)
+    dimensions <- dimensions[dimensions!=timestamps]
+  }
+  
+  
   # Preparation
   trajectories <- extract_data(data=data,use=use)
-  timestamps <- mt_variable_labels[["timestamps"]]
-  xpos <- mt_variable_labels[["xpos"]]
-  ypos <- mt_variable_labels[["ypos"]]
-  
+
   # Calculate the number of steps after resampling
   max_steps <- ceiling(
     max(trajectories[,timestamps,], na.rm=TRUE) / step_size
@@ -524,13 +544,14 @@ mt_resample <- function(data,
   
   # Create an empty output array
   rs_trajectories <- array(
-    dim=c(nrow(trajectories), 3, max_steps),
+    dim=c(nrow(trajectories), 1+length(dimensions), max_steps),
     dimnames=list(
       dimnames(trajectories)[[1]],
-      c(timestamps,xpos,ypos),
+      c(timestamps, dimensions),
       NULL
     )
   )
+  
   
   # Check if there are trajectories where first timestamp is > 0:
   if (max(trajectories[,timestamps,1]) > 0){
@@ -542,21 +563,20 @@ mt_resample <- function(data,
   
   # Perform downsampling
   for (i in 1:nrow(trajectories)){
-    current_timestamps <- trajectories[i, timestamps, ]
+    current_trajectories <- trajectories[i,,]
+    current_timestamps <- current_trajectories[timestamps, ]
     nlogs <- sum(!is.na(current_timestamps))
-    current_timestamps <- current_timestamps[1:nlogs]
-    current_xpos <- trajectories[i, xpos, 1:nlogs]
-    current_ypos <- trajectories[i, ypos, 1:nlogs]
     
     # If first timestamp is > 0, add another with
     # a timestamp of zero and the first recorded position
     if (current_timestamps[1] > 0){
       current_timestamps <- c(0, current_timestamps)
-      current_xpos <- c(current_xpos[1], current_xpos)
-      current_ypos <- c(current_ypos[1], current_ypos)
+      current_trajectories <- cbind(current_trajectories[,1], current_trajectories)
       nlogs <- nlogs + 1
     }
     
+    current_timestamps <- current_timestamps[1:nlogs]
+    current_trajectories <- current_trajectories[,1:nlogs]
     max_time <- current_timestamps[nlogs]
     
     # Generate new timestamps
@@ -569,13 +589,13 @@ mt_resample <- function(data,
       
     # Perform linear interpolation using custom steps
     int_timestamps <- stats::approx(current_timestamps, current_timestamps, xout=custom_timesteps)$y
-    int_xpos <- stats::approx(current_timestamps, current_xpos, xout=custom_timesteps)$y
-    int_ypos <- stats::approx(current_timestamps, current_ypos, xout=custom_timesteps)$y
-      
-    # append data
     rs_trajectories[i,timestamps,1:length(int_timestamps)] <- int_timestamps
-    rs_trajectories[i,xpos,1:length(int_xpos)] <- int_xpos
-    rs_trajectories[i,ypos,1:length(int_ypos)] <- int_ypos
+    
+    # Perform linear interpolation for specified trajectory dimensions
+    for (dimension in dimensions){
+      rs_trajectories[i,dimension,1:length(int_timestamps)] <- stats::approx(
+        current_timestamps, current_trajectories[dimension,], xout=custom_timesteps)$y
+    }
     
     if (verbose){
       if (i %% 100 == 0) message(paste(i, "trials finished")) 
@@ -592,11 +612,11 @@ mt_resample <- function(data,
 
 #' Average trajectories across intervals.
 #' 
-#' Average trajectory data across specified intervals (e.g., constant time
-#' intervals). For every variable that was recorded and stored in the trajectory
-#' array (x- and y-position, possibly also velocity and acceleration etc.), the
-#' mean value for the respective interval is calculated (see Details for
-#' information regarding the exact averaging procedure).
+#' Average trajectory data across specified intervals (e.g., constant time 
+#' intervals). For every specified dimension in the trajectory array (by
+#' default, every dimension, i.e., x- and y-position, possibly also velocity and
+#' acceleration etc.), the mean value for the respective interval is calculated
+#' (see Details for information regarding the exact averaging procedure).
 #' 
 #' For each interval, it is first determined which of the values lie within the
 #' respective interval of the dimension used for averaging (e.g., timestamps).
@@ -606,10 +626,9 @@ mt_resample <- function(data,
 #' interval 1200-1300). Then, all values for which the corresponding average
 #' dimension values lie within the interval are averaged.
 #' 
-#' In case the last interval is not fully covered (e.g., if 
-#' the last timestamp has the value 1250), values for the corresponding interval
-#' (1200-1300) will be computed based on the average of the values up to the 
-#' last existing value.
+#' In case the last interval is not fully covered (e.g., if the last timestamp
+#' has the value 1250), values for the corresponding interval (1200-1300) will
+#' be computed based on the average of the values up to the last existing value.
 #' 
 #' Note that \code{mt_average} assumes that the trajectory variables are 
 #' recorded with a constant sampling rate (i.e., with a constant difference in 
@@ -621,8 +640,12 @@ mt_resample <- function(data,
 #' \link{mt_calculate_derivatives} should be called before averaging.
 #' 
 #' @inheritParams mt_time_normalize
-#' @param dimension a character string specifying which values should be used
-#'   for determining the intervals for averaging ("timestamps" by default).
+#' @param dimensions a character vector specifying the dimensions in the 
+#'   trajectory array that should be averaged. By default (\code{"all"}), all 
+#'   trajectory dimensions will be averaged.
+#' @param av_dimension a character string specifying which values should be used
+#'   for determining the intervals for averaging (\code{"timestamps"} by
+#'   default).
 #' @param intervals an optional numeric vector. If specified, these values are 
 #'   taken as the borders of the intervals (\code{interval_size} and 
 #'   \code{max_interval} are ignored).
@@ -633,16 +656,18 @@ mt_resample <- function(data,
 #'   of the \code{interval_size}). If specified, only values will be used for
 #'   averaging where the dimension values are smaller than \code{max_interval}.
 #'   If unspecified (the default), all values will be included.
+#' @param dimension Deprecated. Please use \code{av_dimension} instead.
 #'   
 #' @return A mousetrap data object (see \link{mt_example}) with an additional 
 #'   array (by default called \code{av_trajectories}) that contains the average 
 #'   trajectory data per dimension interval. If a trajectory array was provided 
 #'   directly as \code{data}, only the average trajectories will be returned.
 #'   
-#'   For the dimension values, the mid point of the respective interval is 
-#'   reported, which is helpful for plotting the trajectory data later on. 
-#'   However, this value does not necessarily correspond to the empirical mean 
-#'   of the dimension values in the interval.
+#'   For the dimension values used for averaging (specified in
+#'   \code{av_dimension}), the mid point of the respective interval is reported,
+#'   which is helpful for plotting the trajectory data later on. However, this
+#'   value does not necessarily correspond to the empirical mean of the
+#'   dimension values in the interval.
 #'   
 #' @seealso \link{mt_calculate_derivatives} for calculating velocity and 
 #'   acceleration.
@@ -662,14 +687,15 @@ mt_resample <- function(data,
 #' mt_example <- mt_time_normalize(mt_example)
 #' mt_example <- mt_average(mt_example,
 #'   use="tn_trajectories", save_as="av_tn_trajectories",
-#'   dimension = "steps", intervals = c(0.5,33.5,67.5,101.5))
+#'   av_dimension = "steps", intervals = c(0.5,33.5,67.5,101.5))
 #' 
 #' @export
 mt_average <- function(data,
   use="trajectories", save_as="av_trajectories",
-  dimension="timestamps", intervals=NULL,
-  interval_size=100, max_interval=NULL,
-  verbose=FALSE,show_progress=NULL) {
+  dimensions="all", av_dimension="timestamps",
+  intervals=NULL, interval_size=100, max_interval=NULL,
+  verbose=FALSE,
+  dimension=NULL,show_progress=NULL) {
   
   if(is.null(show_progress)==FALSE){
     warning("The argument show_progress is deprecated. ",
@@ -677,9 +703,21 @@ mt_average <- function(data,
     verbose <- show_progress
   }
   
+  if(is.null(dimension)==FALSE){
+    warning("The argument dimension is deprecated. ",
+            "Please use av_dimension instead.")
+    av_dimension <- dimension
+  }
+  
   trajectories <- extract_data(data=data,use=use)
-  if (!dimension %in% dimnames(trajectories)[[2]]){
-    stop("Dimesion '",dimension,"' not found in trajectory array.")
+  
+  if (!av_dimension %in% dimnames(trajectories)[[2]]){
+    stop("Dimension '",av_dimension,"' not found in trajectory array.")
+  }
+  
+  if (length(dimensions)==1 & dimensions[[1]]=="all"){
+    dimensions <- colnames(trajectories)
+    dimensions <- dimensions[dimensions!=av_dimension]
   }
   
   
@@ -690,7 +728,7 @@ mt_average <- function(data,
       # Determine this number automatically based on
       # the given interval size
       max_n_intervals <- ceiling(
-        max(trajectories[,dimension,], na.rm=TRUE) / interval_size
+        max(trajectories[,av_dimension,], na.rm=TRUE) / interval_size
       )
     } else {
       # If trajectories are truncated at max_interval,
@@ -709,18 +747,18 @@ mt_average <- function(data,
   
   # Create an empty output array
   av_trajectories <- array(
-    dim=c(nrow(trajectories), ncol(trajectories), max_n_intervals),
+    dim=c(nrow(trajectories), 1+length(dimensions), max_n_intervals),
     dimnames=list(
       dimnames(trajectories)[[1]],
-      dimnames(trajectories)[[2]],
+      c(av_dimension,dimensions),
       NULL
     )
   )
   
   # Check if there are trajectories where first timestamp is > 0:
-  if (is.null(intervals) & max(trajectories[,dimension,1]) > 0){
+  if (is.null(intervals) & max(trajectories[,av_dimension,1]) > 0){
     warning(
-      "Trajectories detected where first ",dimension," value ",
+      "Trajectories detected where first ",av_dimension," value ",
       "is greater than 0. Please check the trajectory data."
     )  
   }
@@ -728,7 +766,7 @@ mt_average <- function(data,
   
   for (i in 1:nrow(trajectories)){
     
-    current_av_values <- trajectories[i,dimension,]
+    current_av_values <- trajectories[i,av_dimension,]
     nlogs <- sum(!is.na(current_av_values))
     current_av_values <- current_av_values[1:nlogs]
     
@@ -753,25 +791,23 @@ mt_average <- function(data,
     nintervals <- length(lower_borders)
     
     if (is.null(intervals)){
-      av_trajectories[i,dimension,1:nintervals] <- lower_borders + interval_size / 2
+      av_trajectories[i,av_dimension,1:nintervals] <- lower_borders + interval_size / 2
     } else {
-      av_trajectories[i,dimension,1:nintervals] <- intervals[1:nintervals]+diff(intervals[1:(nintervals+1)])/2
+      av_trajectories[i,av_dimension,1:nintervals] <- intervals[1:nintervals]+diff(intervals[1:(nintervals+1)])/2
     }
     
-    for (var in colnames(trajectories)){
+    for (var in dimensions){
       
-      # Manipulate any variable except for dimension
-      if (var != dimension){
-        current_measures <- trajectories[i, var, 1:nlogs]
-        
-        # Perform averaging
-        av_measures <- sapply(lower_borders, function(lb){
-          in_interval <- current_av_values > lb & current_av_values <= (lb + interval_size)
-          return(mean(current_measures[in_interval], na.rm=TRUE))
-        })
-        
-        av_trajectories[i,var,1:nintervals] <- av_measures
-      }
+      # Manipulate specified variables
+      current_measures <- trajectories[i, var, 1:nlogs]
+      
+      # Perform averaging
+      av_measures <- sapply(lower_borders, function(lb){
+        in_interval <- current_av_values > lb & current_av_values <= (lb + interval_size)
+        return(mean(current_measures[in_interval], na.rm=TRUE))
+      })
+      
+      av_trajectories[i,var,1:nintervals] <- av_measures
       
     }
     

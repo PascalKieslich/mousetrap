@@ -5,6 +5,7 @@
 \title{Exclude initial phase without mouse movement.}
 \usage{
 mt_exclude_initiation(data, use = "trajectories", save_as = use,
+  dimensions = c("xpos", "ypos"), timestamps = "timestamps",
   reset_timestamps = TRUE, verbose = FALSE, show_progress = NULL)
 }
 \arguments{
@@ -17,6 +18,12 @@ used.}
 
 \item{save_as}{a character string specifying where the resulting trajectory 
 data should be stored.}
+
+\item{dimensions}{a character vector specifying the dimensions in the 
+trajectory array that contain the mouse positions.}
+
+\item{timestamps}{a character string specifying the trajectory dimension
+containing the timestamps.}
 
 \item{reset_timestamps}{logical indicating whether the timestamps should be 
 reset after removing the initial phase without movement (see Details).}

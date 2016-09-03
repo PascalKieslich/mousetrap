@@ -5,8 +5,9 @@
 \title{Average trajectories across intervals.}
 \usage{
 mt_average(data, use = "trajectories", save_as = "av_trajectories",
-  dimension = "timestamps", intervals = NULL, interval_size = 100,
-  max_interval = NULL, verbose = FALSE, show_progress = NULL)
+  dimensions = "all", av_dimension = "timestamps", intervals = NULL,
+  interval_size = 100, max_interval = NULL, verbose = FALSE,
+  dimension = NULL, show_progress = NULL)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
@@ -19,8 +20,13 @@ used.}
 \item{save_as}{a character string specifying where the resulting trajectory 
 data should be stored.}
 
-\item{dimension}{a character string specifying which values should be used
-for determining the intervals for averaging ("timestamps" by default).}
+\item{dimensions}{a character vector specifying the dimensions in the 
+trajectory array that should be averaged. By default (\code{"all"}), all 
+trajectory dimensions will be averaged.}
+
+\item{av_dimension}{a character string specifying which values should be used
+for determining the intervals for averaging (\code{"timestamps"} by
+default).}
 
 \item{intervals}{an optional numeric vector. If specified, these values are 
 taken as the borders of the intervals (\code{interval_size} and 
@@ -38,6 +44,8 @@ If unspecified (the default), all values will be included.}
 \item{verbose}{logical indicating whether function should report its 
 progress.}
 
+\item{dimension}{Deprecated. Please use \code{av_dimension} instead.}
+
 \item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 }
 \value{
@@ -46,17 +54,18 @@ A mousetrap data object (see \link{mt_example}) with an additional
   trajectory data per dimension interval. If a trajectory array was provided 
   directly as \code{data}, only the average trajectories will be returned.
   
-  For the dimension values, the mid point of the respective interval is 
-  reported, which is helpful for plotting the trajectory data later on. 
-  However, this value does not necessarily correspond to the empirical mean 
-  of the dimension values in the interval.
+  For the dimension values used for averaging (specified in
+  \code{av_dimension}), the mid point of the respective interval is reported,
+  which is helpful for plotting the trajectory data later on. However, this
+  value does not necessarily correspond to the empirical mean of the
+  dimension values in the interval.
 }
 \description{
-Average trajectory data across specified intervals (e.g., constant time
-intervals). For every variable that was recorded and stored in the trajectory
-array (x- and y-position, possibly also velocity and acceleration etc.), the
-mean value for the respective interval is calculated (see Details for
-information regarding the exact averaging procedure).
+Average trajectory data across specified intervals (e.g., constant time 
+intervals). For every specified dimension in the trajectory array (by
+default, every dimension, i.e., x- and y-position, possibly also velocity and
+acceleration etc.), the mean value for the respective interval is calculated
+(see Details for information regarding the exact averaging procedure).
 }
 \details{
 For each interval, it is first determined which of the values lie within the
@@ -67,10 +76,9 @@ interval 1100-1200 while a timestamp of 1300 would be included in the
 interval 1200-1300). Then, all values for which the corresponding average
 dimension values lie within the interval are averaged.
 
-In case the last interval is not fully covered (e.g., if 
-the last timestamp has the value 1250), values for the corresponding interval
-(1200-1300) will be computed based on the average of the values up to the 
-last existing value.
+In case the last interval is not fully covered (e.g., if the last timestamp
+has the value 1250), values for the corresponding interval (1200-1300) will
+be computed based on the average of the values up to the last existing value.
 
 Note that \code{mt_average} assumes that the trajectory variables are 
 recorded with a constant sampling rate (i.e., with a constant difference in 
@@ -93,7 +101,7 @@ mt_example <- mt_average(mt_example, save_as="av_trajectories",
 mt_example <- mt_time_normalize(mt_example)
 mt_example <- mt_average(mt_example,
   use="tn_trajectories", save_as="av_tn_trajectories",
-  dimension = "steps", intervals = c(0.5,33.5,67.5,101.5))
+  av_dimension = "steps", intervals = c(0.5,33.5,67.5,101.5))
 
 }
 \seealso{
