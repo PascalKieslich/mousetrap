@@ -77,13 +77,15 @@ mt_derivatives <- function(
   
   if(is.null(show_progress)==FALSE){
     warning("The argument show_progress is deprecated. ",
-            "Please use verbose instead.")
+            "Please use verbose instead.",
+            call. = FALSE)
     verbose <- show_progress
   }
   
   if(is.null(dimension)==FALSE){
     warning("The argument dimension is deprecated. ",
-            "Please use dimensions instead.")
+            "Please use dimensions instead.",
+            call. = FALSE)
     dimensions <- ifelse(dimension=="xypos",c("xpos","ypos"),dimension)
   }
   

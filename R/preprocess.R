@@ -66,7 +66,8 @@ mt_time_normalize <- function(data,
   
   if(is.null(show_progress)==FALSE){
     warning("The argument show_progress is deprecated. ",
-            "Please use verbose instead.")
+            "Please use verbose instead.",
+            call. = FALSE)
     verbose <- show_progress
   }
   
@@ -276,7 +277,8 @@ mt_exclude_initiation <- function(data,
   
   if(is.null(show_progress)==FALSE){
     warning("The argument show_progress is deprecated. ",
-            "Please use verbose instead.")
+            "Please use verbose instead.",
+            call. = FALSE)
     verbose <- show_progress
   }
   
@@ -391,19 +393,22 @@ mt_space_normalize <- function(
   
   if(is.null(show_progress)==FALSE){
     warning("The argument show_progress is deprecated. ",
-            "Please use verbose instead.")
+            "Please use verbose instead.",
+            call. = FALSE)
     verbose <- show_progress
   }
   
   if(is.null(xpos_start)==FALSE & is.null(ypos_start)==FALSE){
     warning("The arguments xpos_start and ypos_start have been deprecated. ",
-            "Please use start instead.")
+            "Please use start instead.",
+            call. = FALSE)
     start <- c(xpos_start,ypos_start)
   }
   
   if(is.null(xpos_end)==FALSE & is.null(ypos_end)==FALSE){
     warning("The arguments xpos_end and ypos_end have been deprecated. ",
-            "Please use end instead.")
+            "Please use end instead.",
+            call. = FALSE)
     end <- c(xpos_end,ypos_end)
   }
   
@@ -540,7 +545,8 @@ mt_resample <- function(data,
   
   if(is.null(show_progress)==FALSE){
     warning("The argument show_progress is deprecated. ",
-            "Please use verbose instead.")
+            "Please use verbose instead.",
+            call. = FALSE)
     verbose <- show_progress
   }
   
@@ -715,13 +721,15 @@ mt_average <- function(data,
   
   if(is.null(show_progress)==FALSE){
     warning("The argument show_progress is deprecated. ",
-            "Please use verbose instead.")
+            "Please use verbose instead.",
+            call. = FALSE)
     verbose <- show_progress
   }
   
   if(is.null(dimension)==FALSE){
     warning("The argument dimension is deprecated. ",
-            "Please use av_dimension instead.")
+            "Please use av_dimension instead.",
+            call. = FALSE)
     av_dimension <- dimension
   }
   

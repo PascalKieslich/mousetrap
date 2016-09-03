@@ -97,7 +97,8 @@ mt_import_mousetrap <- function(raw_data,
   
   if(is.null(show_progress)==FALSE){
     warning("The argument show_progress is deprecated. ",
-            "Please use verbose instead.")
+            "Please use verbose instead.",
+            call. = FALSE)
     verbose <- show_progress
   }
   

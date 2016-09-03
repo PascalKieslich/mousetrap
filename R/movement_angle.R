@@ -65,7 +65,8 @@ mt_movement_angle <- function(data,
   
   if(is.null(show_progress)==FALSE){
     warning("The argument show_progress is deprecated. ",
-            "Please use verbose instead.")
+            "Please use verbose instead.",
+            call. = FALSE)
     verbose <- show_progress
   }
   
