@@ -143,6 +143,9 @@ mt_time_normalize <- function(data,
 #' are symmetric, in that they all are equally distant from the screen center.
 #' 
 #' @inheritParams mt_time_normalize
+#' @param dimensions a character vector specifying the two dimensions in the 
+#'   trajectory array that contain the mouse positions, the first value
+#'   corresponding to the x-positions, the second to the y-positions.
 #' @param remap_xpos character string indicating the direction in which to remap
 #'   values on the x axis. If set to "left" (as per default), trajectories with 
 #'   an endpoint on the right (i.e. with a positive x-value) will be remapped to
@@ -171,14 +174,16 @@ mt_time_normalize <- function(data,
 #'   remap_xpos="no", remap_ypos="up")
 #'   
 #' @export
-mt_remap_symmetric <- function(data,
+mt_remap_symmetric <- function(
+  data,
   use="trajectories", save_as=use,
+  dimensions=c("xpos","ypos"),
   remap_xpos='left', remap_ypos='up') {
   
   # Data setup
   trajectories <- extract_data(data=data,use=use)
-  xpos <- mt_variable_labels[["xpos"]]
-  ypos <- mt_variable_labels[["ypos"]]
+  xpos <- dimensions[[1]]
+  ypos <- dimensions[[2]]
   
   # Argument checking
   if (!(remap_xpos %in% c('left', 'right', 'no'))) {

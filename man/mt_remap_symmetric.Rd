@@ -5,7 +5,7 @@
 \title{Remap mouse trajectories.}
 \usage{
 mt_remap_symmetric(data, use = "trajectories", save_as = use,
-  remap_xpos = "left", remap_ypos = "up")
+  dimensions = c("xpos", "ypos"), remap_xpos = "left", remap_ypos = "up")
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
@@ -17,6 +17,10 @@ used.}
 
 \item{save_as}{a character string specifying where the resulting trajectory 
 data should be stored.}
+
+\item{dimensions}{a character vector specifying the two dimensions in the 
+trajectory array that contain the mouse positions, the first value
+corresponding to the x-positions, the second to the y-positions.}
 
 \item{remap_xpos}{character string indicating the direction in which to remap
 values on the x axis. If set to "left" (as per default), trajectories with 
