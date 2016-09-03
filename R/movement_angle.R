@@ -23,6 +23,9 @@
 #' percentile is included (\code{IMD}).
 #' 
 #' @inheritParams mt_time_normalize
+#' @param dimensions a character vector specifying the two dimensions in the 
+#'   trajectory array that contain the mouse positions, the first value
+#'   corresponding to the x-positions, the second to the y-positions.
 #' @param save_as a character string specifying where the calculated measures
 #'   should be stored.
 #' @param ima_percentile a decimal value. The initial movement angle will be
@@ -56,6 +59,7 @@
 #' @export
 mt_movement_angle <- function(data,
                               use="trajectories", save_as="measures",
+                              dimensions=c("xpos","ypos"),timestamps="timestamps",
                               ima_percentile=0.2,
                               verbose=FALSE,show_progress=NULL) {
   
@@ -68,9 +72,8 @@ mt_movement_angle <- function(data,
 
   # Prepare data
   trajectories <- extract_data(data=data, use=use)
-  timestamps <- mt_variable_labels[["timestamps"]]
-  xpos <- mt_variable_labels[["xpos"]]
-  ypos <- mt_variable_labels[["ypos"]]
+  xpos <- dimensions[[1]]
+  ypos <- dimensions[[2]]
   
   # Calculate number of logs
   nlogs <- rowSums(!is.na(trajectories[,xpos,,drop=FALSE]))

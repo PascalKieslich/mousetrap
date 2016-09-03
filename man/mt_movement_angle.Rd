@@ -5,6 +5,7 @@
 \title{Calculate initial movement angle.}
 \usage{
 mt_movement_angle(data, use = "trajectories", save_as = "measures",
+  dimensions = c("xpos", "ypos"), timestamps = "timestamps",
   ima_percentile = 0.2, verbose = FALSE, show_progress = NULL)
 }
 \arguments{
@@ -17,6 +18,13 @@ used.}
 
 \item{save_as}{a character string specifying where the calculated measures
 should be stored.}
+
+\item{dimensions}{a character vector specifying the two dimensions in the 
+trajectory array that contain the mouse positions, the first value
+corresponding to the x-positions, the second to the y-positions.}
+
+\item{timestamps}{a character string specifying the trajectory dimension
+containing the timestamps.}
 
 \item{ima_percentile}{a decimal value. The initial movement angle will be
 calculated at the respective percentile .}
