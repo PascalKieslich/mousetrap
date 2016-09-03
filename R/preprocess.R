@@ -339,21 +339,25 @@ mt_exclude_initiation <- function(data,
 #' they have the same start position.
 #' 
 #' @inheritParams mt_time_normalize
-#' @param xpos_start an integer specifying the value the first x-position should
-#'   have in each trial.
-#' @param xpos_end an integer specifying the value the last x-position should
-#'   have in each trial. If \code{NULL}, trajectories are only adjusted so that
-#'   they have the same start position.
-#' @param ypos_start an integer specifying the value the first y-position should
-#'   have in each trial.
-#' @param ypos_end an integer specifying the value the last y-position should
-#'   have in each trial. If  \code{NULL}, trajectories are only adjusted so that
-#'   they have the same start position.
+#' @param dimensions a character vector specifying the dimensions in the 
+#'   trajectory array that should be space-normalized.
+#' @param start a numeric vector specifying the start values for each dimension,
+#'   i.e., the values the first recorded position should have in every trial.
+#' @param end a numeric vector specifying the end values for each dimension, 
+#'   i.e., the values the last recorded position should have in every trial. If 
+#'   \code{NULL}, trajectories are only adjusted so that they have the same 
+#'   start position.
+#' @param xpos_start Deprecated. Please use \code{start} instead.
+#' @param xpos_end Deprecated. Please use \code{end} instead.
+#' @param ypos_start Deprecated. Please use \code{start} instead.
+#' @param ypos_end Deprecated. Please use \code{end} instead.
 #'   
-#' @return A mousetrap data object (see \link{mt_example}) with an additional
+#' @return A mousetrap data object (see \link{mt_example}) with an additional 
 #'   array (by default called \code{sn_trajectories}) containing the 
-#'   space-normalized trajectories. If a trajectory array was provided directly
-#'   as \code{data}, only the space-normalized trajectories will be returned.
+#'   space-normalized trajectories. All other trajectory dimensions not
+#'   specified in \code{dimensions} (e.g., timestamps) will be kept as is in the
+#'   resulting trajectory array. If a trajectory array was provided directly as
+#'   \code{data}, only the space-normalized trajectories will be returned.
 #'   
 #' @references Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor
 #'   responses in the time course of categorizing atypical exemplars.
@@ -367,15 +371,18 @@ mt_exclude_initiation <- function(data,
 #' @examples
 #' mt_example <- mt_space_normalize(mt_example,
 #'   save_as ="sn_trajectories",
-#'   xpos_start=0, xpos_end=-1,
-#'   ypos_start=0, ypos_end=1)
+#'   start=c(0,0), end=c(-1,1))
 #' 
 #' @export
-mt_space_normalize <- function(data,
-                               use="trajectories", save_as="sn_trajectories",
-                               xpos_start = 0, xpos_end = NULL,
-                               ypos_start = 0, ypos_end = NULL,
-                               verbose=FALSE,show_progress=NULL) {
+mt_space_normalize <- function(
+  data,
+  use="trajectories", save_as="sn_trajectories",
+  dimensions=c("xpos","ypos"),
+  start=c(0,0), end=NULL,
+  verbose=FALSE,
+  xpos_start = NULL, xpos_end = NULL,
+  ypos_start = NULL, ypos_end = NULL,
+  show_progress=NULL) {
   
   if(is.null(show_progress)==FALSE){
     warning("The argument show_progress is deprecated. ",
@@ -383,38 +390,38 @@ mt_space_normalize <- function(data,
     verbose <- show_progress
   }
   
+  if(is.null(xpos_start)==FALSE & is.null(ypos_start)==FALSE){
+    warning("The arguments xpos_start and ypos_start have been deprecated. ",
+            "Please use start instead.")
+    start <- c(xpos_start,ypos_start)
+  }
+  
+  if(is.null(xpos_end)==FALSE & is.null(ypos_end)==FALSE){
+    warning("The arguments xpos_end and ypos_end have been deprecated. ",
+            "Please use end instead.")
+    end <- c(xpos_end,ypos_end)
+  }
+  
+  
   # Preparation
   trajectories <- extract_data(data=data,use=use)
-  timestamps <- mt_variable_labels[["timestamps"]]
-  xpos <- mt_variable_labels[["xpos"]]
-  ypos <- mt_variable_labels[["ypos"]]
-  
-  # Remove potentially existing other trajectory information in original data
-  trajectories <- trajectories[
-    ,
-    dimnames(trajectories)[[2]] %in% c(timestamps,xpos,ypos),
-    , drop=FALSE]
   
   # Perform space normalization
   for (i in 1:nrow(trajectories)){ 
     
-    current_xpos <- trajectories[i, xpos, ]
-    current_ypos <- trajectories[i, ypos, ]
-    nlogs <- sum(!is.na(current_xpos))
-    
-    current_xpos <- current_xpos - current_xpos[1]
-    if (!is.null(xpos_end)){
-      current_xpos <- current_xpos/(current_xpos[nlogs]-current_xpos[1])
-      current_xpos <- current_xpos * (xpos_end-xpos_start)
+    for (j in 1:length(dimensions)){
+      
+      current_positions <- trajectories[i, dimensions[[j]], ]
+      nlogs <- sum(!is.na(current_positions))
+      
+      current_positions <- current_positions - current_positions[1]
+      if (!is.null(end)){
+        current_positions <- current_positions/(current_positions[nlogs]-current_positions[1])
+        current_positions <- current_positions * (end[[j]]-start[[j]])
+      }
+      trajectories[i, dimensions[[j]], ] <-  current_positions + start[[j]]
+      
     }
-    trajectories[i, xpos, ] <-  current_xpos + xpos_start
-    
-    current_ypos <- current_ypos - current_ypos[1]
-    if (!is.null(ypos_end)){
-      current_ypos <- current_ypos/(current_ypos[nlogs]-current_ypos[1])
-      current_ypos <- current_ypos * (ypos_end-ypos_start)
-    }
-    trajectories[i, ypos, ] <-  current_ypos + ypos_start
     
     if (verbose){
       if (i %% 100 == 0) message(paste(i, "trials finished")) 
@@ -446,19 +453,23 @@ mt_space_normalize <- function(data,
 #' 
 #' @examples
 #' mt_example <- mt_align_start(mt_example,
-#'   xpos_start=0, ypos_start=0)
+#'   start=c(0,0))
 #' 
 #' @export
-mt_align_start <- function(data,
-                           use="trajectories", save_as="trajectories",
-                           xpos_start = 0, ypos_start = 0,
-                           verbose=FALSE,show_progress=NULL) {
+mt_align_start <- function(
+  data,
+  use="trajectories", save_as="trajectories",
+  dimensions=c("xpos","ypos"), start=c(0,0),
+  verbose=FALSE,
+  xpos_start=NULL, ypos_start=NULL,
+  show_progress=NULL) {
   
  
-  return(mt_space_normalize(data=data, use=use, save_as=save_as,
-                            xpos_start=xpos_start, xpos_end=NULL,
-                            ypos_start=xpos_start, ypos_end=NULL,
-                            verbose=verbose, show_progress=show_progress))
+  return(mt_space_normalize(
+    data=data, use=use, save_as=save_as,
+    start=start,end=NULL,
+    xpos_start=xpos_start,ypos_start=ypos_start,
+    verbose=verbose, show_progress=show_progress))
 
 }
 

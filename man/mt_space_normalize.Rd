@@ -5,8 +5,9 @@
 \title{Space normalize trajectories.}
 \usage{
 mt_space_normalize(data, use = "trajectories", save_as = "sn_trajectories",
-  xpos_start = 0, xpos_end = NULL, ypos_start = 0, ypos_end = NULL,
-  verbose = FALSE, show_progress = NULL)
+  dimensions = c("xpos", "ypos"), start = c(0, 0), end = NULL,
+  verbose = FALSE, xpos_start = NULL, xpos_end = NULL,
+  ypos_start = NULL, ypos_end = NULL, show_progress = NULL)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
@@ -19,30 +20,37 @@ used.}
 \item{save_as}{a character string specifying where the resulting trajectory 
 data should be stored.}
 
-\item{xpos_start}{an integer specifying the value the first x-position should
-have in each trial.}
+\item{dimensions}{a character vector specifying the dimensions in the 
+trajectory array that should be space-normalized.}
 
-\item{xpos_end}{an integer specifying the value the last x-position should
-have in each trial. If \code{NULL}, trajectories are only adjusted so that
-they have the same start position.}
+\item{start}{a numeric vector specifying the start values for each dimension,
+i.e., the values the first recorded position should have in every trial.}
 
-\item{ypos_start}{an integer specifying the value the first y-position should
-have in each trial.}
-
-\item{ypos_end}{an integer specifying the value the last y-position should
-have in each trial. If  \code{NULL}, trajectories are only adjusted so that
-they have the same start position.}
+\item{end}{a numeric vector specifying the end values for each dimension, 
+i.e., the values the last recorded position should have in every trial. If 
+\code{NULL}, trajectories are only adjusted so that they have the same 
+start position.}
 
 \item{verbose}{logical indicating whether function should report its 
 progress.}
 
+\item{xpos_start}{Deprecated. Please use \code{start} instead.}
+
+\item{xpos_end}{Deprecated. Please use \code{end} instead.}
+
+\item{ypos_start}{Deprecated. Please use \code{start} instead.}
+
+\item{ypos_end}{Deprecated. Please use \code{end} instead.}
+
 \item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 }
 \value{
-A mousetrap data object (see \link{mt_example}) with an additional
+A mousetrap data object (see \link{mt_example}) with an additional 
   array (by default called \code{sn_trajectories}) containing the 
-  space-normalized trajectories. If a trajectory array was provided directly
-  as \code{data}, only the space-normalized trajectories will be returned.
+  space-normalized trajectories. All other trajectory dimensions not
+  specified in \code{dimensions} (e.g., timestamps) will be kept as is in the
+  resulting trajectory array. If a trajectory array was provided directly as
+  \code{data}, only the space-normalized trajectories will be returned.
 }
 \description{
 Adjust trajectories so that all trajectories have an identical start and end
@@ -52,8 +60,7 @@ they have the same start position.
 \examples{
 mt_example <- mt_space_normalize(mt_example,
   save_as ="sn_trajectories",
-  xpos_start=0, xpos_end=-1,
-  ypos_start=0, ypos_end=1)
+  start=c(0,0), end=c(-1,1))
 
 }
 \references{

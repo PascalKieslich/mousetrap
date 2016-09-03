@@ -5,7 +5,8 @@
 \title{Align start position of trajectories.}
 \usage{
 mt_align_start(data, use = "trajectories", save_as = "trajectories",
-  xpos_start = 0, ypos_start = 0, verbose = FALSE, show_progress = NULL)
+  dimensions = c("xpos", "ypos"), start = c(0, 0), verbose = FALSE,
+  xpos_start = NULL, ypos_start = NULL, show_progress = NULL)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
@@ -18,14 +19,18 @@ used.}
 \item{save_as}{a character string specifying where the resulting trajectory 
 data should be stored.}
 
-\item{xpos_start}{an integer specifying the value the first x-position should
-have in each trial.}
+\item{dimensions}{a character vector specifying the dimensions in the 
+trajectory array that should be space-normalized.}
 
-\item{ypos_start}{an integer specifying the value the first y-position should
-have in each trial.}
+\item{start}{a numeric vector specifying the start values for each dimension,
+i.e., the values the first recorded position should have in every trial.}
 
 \item{verbose}{logical indicating whether function should report its 
 progress.}
+
+\item{xpos_start}{Deprecated. Please use \code{start} instead.}
+
+\item{ypos_start}{Deprecated. Please use \code{start} instead.}
 
 \item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 }
@@ -39,7 +44,7 @@ Adjust trajectories so that all trajectories have the same start position.
 }
 \examples{
 mt_example <- mt_align_start(mt_example,
-  xpos_start=0, ypos_start=0)
+  start=c(0,0))
 
 }
 \seealso{
