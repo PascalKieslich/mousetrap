@@ -17,6 +17,8 @@
   * Vectorized function `point_to_line` for time speed up in `mt_deviations` (closes #2, thanks to @sbrockhaus).
   * Allow for flexible dimension labels also in `mt_measures` and rename all measures columns relating only to x- or y-positions depending on the values in dimensions (e.g., `x_max` becomes `xpos_max`, `x_flips` becomes `xpos_flips`). Change column label `xy_dist` to `total_dist`.
   * Simplify AUC calculation in `mt_measures` using the actual x- and y-positions . New AUC values correlate to 1.00 with old values in mt_example, but in some cases extremely small differences are possible (maximum difference of 2.328e-10 in mt_example).
+  * New arguments `xlim` and `ylim` for specifying the axes limits explicitly in `mt_plot_per_trajectory`.
+  * New arguments `rect`, `color`, and `fill` for plotting rectangles (usually representing the response buttons) in `mt_plot_per_trajectory`.
 * New functions
   * `mt_add_variables`: add new variables to trajectory array.
 

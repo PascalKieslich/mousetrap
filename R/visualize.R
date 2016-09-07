@@ -291,13 +291,26 @@ mt_plot_add_rect <- function(rect,
 #' inserted, this function can also be used for plotting velocity and
 #' acceleration profiles.
 #' 
-#' \code{mt_plot_per_trajectory} creates a pdf using \link{pdf}. Next, it plots 
+#' \code{mt_plot_per_trajectory} creates a PDF using \link{pdf}. Next, it plots 
 #' all trajectories individually using \link{mt_plot}. Every plot is labeled 
 #' using the \link{rownames} of the trajectories.
 #' 
 #' @inheritParams mt_plot
 #' @param file a character string specifying the name of the pdf file. Passed on
 #'   to \link{pdf}.
+#' @param xlim optional argument specifying the limits for the x axis (passed on
+#'   to \link[ggplot2]{coord_cartesian}). If not specified (the default), 
+#'   sensible axis limits will be computed.
+#' @param ylim optional argument specifying the limits for the y axis (passed on
+#'   to \link[ggplot2]{coord_cartesian}). If not specified (the default), 
+#'   sensible axis limits will be computed.
+#' @param rect optional argument passed on to \link{mt_plot_add_rect}. If
+#'   specified, rectangles (usually representing the response buttons) will be
+#'   plotted for each trajectory plot.
+#' @param color optional argument passed on to \link{mt_plot_add_rect}. Only
+#'   relevant if \code{rect} is specified.
+#' @param fill optional argument passed on to \link{mt_plot_add_rect}. Only
+#'   relevant if \code{rect} is specified.
 #' @param verbose logical indicating whether function should report its 
 #'   progress.
 #' @param show_progress Deprecated. Please use \code{verbose} instead.
@@ -316,6 +329,8 @@ mt_plot_add_rect <- function(rect,
 #' @export
 mt_plot_per_trajectory <- function(file,
   data, use="trajectories", x="xpos", y="ypos",
+  xlim=NULL, ylim=NULL,
+  rect=NULL, color="black", fill=NA,
   verbose=FALSE,show_progress=NULL,...) {
   
   if(is.null(show_progress)==FALSE){
@@ -325,16 +340,20 @@ mt_plot_per_trajectory <- function(file,
     verbose <- show_progress
   }
   
-  # Define axis limits across all plots
-  xlim <- range(data[[use]][,x,], na.rm=TRUE)
-  xoffset <- .05 * (xlim[2]-xlim[1])
-  xlim[1] <- xlim[1] - xoffset
-  xlim[2] <- xlim[2] + xoffset
+  # Define axis limits across all plots (if they have not been defined)
+  if(is.null(xlim)){
+    xlim <- range(data[[use]][,x,], na.rm=TRUE)
+    xoffset <- .05 * (xlim[2]-xlim[1])
+    xlim[1] <- xlim[1] - xoffset
+    xlim[2] <- xlim[2] + xoffset
+  }
   
-  ylim <- range(data[[use]][,y,], na.rm=TRUE)
-  yoffset <- .05 * (ylim[2]-ylim[1])
-  ylim[1] <- ylim[1] - yoffset
-  ylim[2] <- ylim[2] + yoffset
+  if(is.null(ylim)){
+    ylim <- range(data[[use]][,y,], na.rm=TRUE)
+    yoffset <- .05 * (ylim[2]-ylim[1])
+    ylim[1] <- ylim[1] - yoffset
+    ylim[2] <- ylim[2] + yoffset
+  }
   
   # Create plots
   grDevices::pdf(file, ...)
@@ -347,6 +366,14 @@ mt_plot_per_trajectory <- function(file,
       data=data, use=use, x=x, y=y,
       use2=data[["data"]][current_id,]
     )
+    
+    
+    # Add rectangles to plot
+    # if they are specified
+    if (is.null(rect)==FALSE){
+      current_plot <- current_plot +
+        mt_plot_add_rect(rect=rect, color=color, fill=fill) 
+    }
     
     # Output plot
     print(
