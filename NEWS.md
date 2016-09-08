@@ -19,6 +19,7 @@
   * Simplify AUC calculation in `mt_measures` using the actual x- and y-positions . New AUC values correlate to 1.00 with old values in mt_example, but in some cases extremely small differences are possible (maximum difference of 2.328e-10 in mt_example).
   * New arguments `xlim` and `ylim` for specifying the axes limits explicitly in `mt_plot_per_trajectory`.
   * New arguments `rect`, `color`, and `fill` for plotting rectangles (usually representing the response buttons) in `mt_plot_per_trajectory`.
+  * New argument `points` in all mt_plot functions allows for plotting points
 * New functions
   * `mt_add_variables`: add new variables to trajectory array.
 

@@ -45,6 +45,8 @@
 #' @param linetype an optional character string specifying which variable in 
 #'   \code{data[[use2]]} should be used for varying the linetype of the 
 #'   trajectories.
+#' @param points logical. If \code{TRUE}, points will be added to the plot using
+#'   \link[ggplot2]{geom_point}.
 #' @param only_ggplot logical. If \code{TRUE}, only the ggplot object without
 #'   geoms is returned. If \code{FALSE} (the default), the trajectories are
 #'   plotted using \link[ggplot2]{geom_path}.
@@ -95,8 +97,8 @@
 #'         
 #' # ... adding points for each position to the plot
 #' mt_plot_aggregate(mt_example, use="tn_trajectories",
-#'   x="xpos", y="ypos", color="Condition")+
-#'   geom_point()                   
+#'   x="xpos", y="ypos", color="Condition",
+#'   points=TRUE)                   
 #'         
 #' # Plot velocity profiles based on the averaged trajectories
 #' # varying the color depending on the condition
@@ -118,7 +120,8 @@
 mt_plot <- function(data,
   use="trajectories", use2="data",
   x="xpos", y="ypos",
-  color=NULL, linetype=NULL, 
+  color=NULL, linetype=NULL,
+  points=FALSE,
   only_ggplot=FALSE, mt_id="mt_id", ...) {
   
   # Extract plotting options from metadata
@@ -150,8 +153,19 @@ mt_plot <- function(data,
     # Return empty plot object
     return(current_plot)
   } else {
+    
     # Add path geom to plot
-    return(current_plot+ggplot2::geom_path())
+    current_plot <- current_plot +
+      ggplot2::geom_path()
+    
+    # Add points to plot (optional)
+    if (points) {
+      current_plot <- current_plot + 
+        ggplot2::geom_point()
+    }
+    
+    return(current_plot)
+    
   }
   
 }
@@ -162,6 +176,7 @@ mt_plot <- function(data,
 mt_plot_aggregate <- function(data,
   use="trajectories", use2="data",
   x="xpos", y="ypos", color=NULL, linetype=NULL,
+  points=FALSE,
   only_ggplot=FALSE, subject_id=NULL, ...) {
 
   # Extract plotting options from metadata
@@ -192,8 +207,19 @@ mt_plot_aggregate <- function(data,
     # Return empty plot object
     return(current_plot)
   } else {
+    
     # Add path geom to plot
-    return(current_plot + ggplot2::geom_path())
+    current_plot <- current_plot +
+      ggplot2::geom_path()
+    
+    # Add points to plot (optional)
+    if (points) {
+      current_plot <- current_plot + 
+        ggplot2::geom_point()
+    }
+    
+    return(current_plot)
+    
   }
   
 }
@@ -330,6 +356,7 @@ mt_plot_add_rect <- function(rect,
 mt_plot_per_trajectory <- function(file,
   data, use="trajectories", x="xpos", y="ypos",
   xlim=NULL, ylim=NULL,
+  points=FALSE,
   rect=NULL, color="black", fill=NA,
   verbose=FALSE,show_progress=NULL,...) {
   
@@ -364,9 +391,9 @@ mt_plot_per_trajectory <- function(file,
     # Build plot
     current_plot <- mt_plot(
       data=data, use=use, x=x, y=y,
-      use2=data[["data"]][current_id,]
+      use2=data[["data"]][current_id,],
+      points=points
     )
-    
     
     # Add rectangles to plot
     # if they are specified

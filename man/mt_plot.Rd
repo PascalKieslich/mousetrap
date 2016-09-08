@@ -6,12 +6,12 @@
 \title{Plot trajectory data.}
 \usage{
 mt_plot(data, use = "trajectories", use2 = "data", x = "xpos",
-  y = "ypos", color = NULL, linetype = NULL, only_ggplot = FALSE,
-  mt_id = "mt_id", ...)
+  y = "ypos", color = NULL, linetype = NULL, points = FALSE,
+  only_ggplot = FALSE, mt_id = "mt_id", ...)
 
 mt_plot_aggregate(data, use = "trajectories", use2 = "data", x = "xpos",
-  y = "ypos", color = NULL, linetype = NULL, only_ggplot = FALSE,
-  subject_id = NULL, ...)
+  y = "ypos", color = NULL, linetype = NULL, points = FALSE,
+  only_ggplot = FALSE, subject_id = NULL, ...)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
@@ -41,6 +41,9 @@ array should be displayed on the y-axis (defaults to ypos).}
 \item{linetype}{an optional character string specifying which variable in 
 \code{data[[use2]]} should be used for varying the linetype of the 
 trajectories.}
+
+\item{points}{logical. If \code{TRUE}, points will be added to the plot using
+\link[ggplot2]{geom_point}.}
 
 \item{only_ggplot}{logical. If \code{TRUE}, only the ggplot object without
 geoms is returned. If \code{FALSE} (the default), the trajectories are
@@ -119,8 +122,8 @@ mt_plot_aggregate(mt_example, use="tn_trajectories",
         
 # ... adding points for each position to the plot
 mt_plot_aggregate(mt_example, use="tn_trajectories",
-  x="xpos", y="ypos", color="Condition")+
-  geom_point()                   
+  x="xpos", y="ypos", color="Condition",
+  points=TRUE)                   
         
 # Plot velocity profiles based on the averaged trajectories
 # varying the color depending on the condition

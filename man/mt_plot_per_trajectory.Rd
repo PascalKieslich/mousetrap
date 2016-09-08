@@ -5,8 +5,9 @@
 \title{Create pdf with separate plots per trajectory.}
 \usage{
 mt_plot_per_trajectory(file, data, use = "trajectories", x = "xpos",
-  y = "ypos", xlim = NULL, ylim = NULL, rect = NULL, color = "black",
-  fill = NA, verbose = FALSE, show_progress = NULL, ...)
+  y = "ypos", xlim = NULL, ylim = NULL, points = FALSE, rect = NULL,
+  color = "black", fill = NA, verbose = FALSE, show_progress = NULL,
+  ...)
 }
 \arguments{
 \item{file}{a character string specifying the name of the pdf file. Passed on
@@ -35,6 +36,9 @@ sensible axis limits will be computed.}
 \item{ylim}{optional argument specifying the limits for the y axis (passed on
 to \link[ggplot2]{coord_cartesian}). If not specified (the default), 
 sensible axis limits will be computed.}
+
+\item{points}{logical. If \code{TRUE}, points will be added to the plot using
+\link[ggplot2]{geom_point}.}
 
 \item{rect}{optional argument passed on to \link{mt_plot_add_rect}. If
 specified, rectangles (usually representing the response buttons) will be
