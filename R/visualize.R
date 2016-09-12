@@ -330,6 +330,9 @@ mt_plot_add_rect <- function(rect,
 #' @param ylim optional argument specifying the limits for the y axis (passed on
 #'   to \link[ggplot2]{coord_cartesian}). If not specified (the default), 
 #'   sensible axis limits will be computed.
+#' @param axes_exact logical. If \code{TRUE}, axes will be set without offset
+#'   exactly at the limits of the x and y axes (which can be specified using
+#'   \code{xlim} and \code{ylim}]).
 #' @param rect optional argument passed on to \link{mt_plot_add_rect}. If
 #'   specified, rectangles (usually representing the response buttons) will be
 #'   plotted for each trajectory plot.
@@ -355,7 +358,7 @@ mt_plot_add_rect <- function(rect,
 #' @export
 mt_plot_per_trajectory <- function(file,
   data, use="trajectories", x="xpos", y="ypos",
-  xlim=NULL, ylim=NULL,
+  xlim=NULL, ylim=NULL, axes_exact=FALSE,
   points=FALSE,
   rect=NULL, color="black", fill=NA,
   verbose=FALSE,show_progress=NULL,...) {
@@ -400,6 +403,13 @@ mt_plot_per_trajectory <- function(file,
     if (is.null(rect)==FALSE){
       current_plot <- current_plot +
         mt_plot_add_rect(rect=rect, color=color, fill=fill) 
+    }
+    
+    # Remove whitespace for axes (if specified)
+    if (axes_exact){
+      current_plot <- current_plot + 
+        ggplot2::scale_x_continuous(expand=c(0,0))+
+        ggplot2::scale_y_continuous(expand=c(0,0))
     }
     
     # Output plot
