@@ -8,18 +8,18 @@
   * Removed "calculate" from all mt_calculate functions: `mt_calculate_measures`, `mt_calculate_derivatives`, `mt_calculate_deviations` are now called `mt_measures`, `mt_derivatives`, `mt_deviations`.
   * Introduction of internal utils function `create_results` (that simplifies including the newly created trajectories or measures in the existing mousetrap data object).
 * Changes in specific functions
-  * Allow specifying several variables for the trial identifier in `mt_id_label` (in all mt_import functions). A a new ID variable will be created by combining the values of each variable.
-  * Enable `mt_import_long` and `mt_import_wide` to import any number of additional variables using `add_labels` (closes #4).
-  * Timestamps are no longer used for ordering in `mt_import_long` if `mt_seq_label` is not provided. Instead, data will be imported in the order in which they were stored in `raw_data`.
-  * Improved speed of `mt_import_long`.
-  * Introduction of `dimensions` argument in `mt_space_normalize` and `mt_align_start` and the corresponding arguments `start` and `end` (deprecate xpos/ypos_start/end). This also fixes the internal bug that in `mt_align_start` `xpos_start` was passed on as `ypos_start` to `mt_space_normalize` (instead of `ypos_start`).
-  * Allow `mt_derivatives` to work with an arbitrary number of dimensions and rename `dimension` argument to `dimensions`.
-  * Vectorized function `point_to_line` for time speed up in `mt_deviations` (closes #2, thanks to @sbrockhaus).
-  * Allow for flexible dimension labels also in `mt_measures` and rename all measures columns relating only to x- or y-positions depending on the values in dimensions (e.g., `x_max` becomes `xpos_max`, `x_flips` becomes `xpos_flips`). Change column label `xy_dist` to `total_dist`.
-  * Simplify AUC calculation in `mt_measures` using the actual x- and y-positions . New AUC values correlate to 1.00 with old values in mt_example, but in some cases extremely small differences are possible (maximum difference of 2.328e-10 in mt_example).
-  * New arguments `xlim` and `ylim` for specifying the axes limits explicitly in `mt_plot_per_trajectory`.
-  * New arguments `rect`, `color`, and `fill` for plotting rectangles (usually representing the response buttons) in `mt_plot_per_trajectory`.
-  * New argument `points` in all mt_plot functions allows for plotting points
+  * `mt_import_mousetrap`, `mt_import_long`, `mt_import_wide`: Allow specifying several variables for the trial identifier in `mt_id_label`. A a new ID variable will be created by combining the values of each variable.
+  * `mt_import_long`, `mt_import_wide`: Import any number of additional variables using `add_labels` (closes #4).
+  * `mt_import_long`: Timestamps are no longer used for ordering if `mt_seq_label` is not provided. Instead, data will be imported in the order in which they were stored in `raw_data`.
+  * `mt_import_long`: Improved speed.
+  * `mt_space_normalize`, `mt_align_start`: Introduction of `dimensions` argument and the corresponding arguments `start` and `end` (deprecate `xpos_start`/`xpos_end`/`ypos_start`/`ypos_end`). This also fixes the internal bug that in `mt_align_start` `xpos_start` was passed on as `ypos_start` to `mt_space_normalize` (instead of `ypos_start`).
+  * `mt_derivatives`: Rename `dimension` argument to `dimensions`, enable function  to work with an arbitrary number of dimensions.
+  * `mt_deviations`: Vectorized function `point_to_line` for time speed up (closes #2, thanks to @sbrockhaus).
+  * `mt_measures`: Allow for flexible dimension labels and rename all measures columns relating only to x- or y-positions depending on the values in dimensions (e.g., `x_max` becomes `xpos_max`, `x_flips` becomes `xpos_flips`). Change column label `xy_dist` to `total_dist`.
+  * `mt_measures`: Simplify AUC calculation using the actual x- and y-positions . New AUC values correlate to 1.00 with old values in `mt_example`, but in some cases extremely small differences are possible (maximum difference of 2.328e-10 in mt_example).
+  * `mt_plot_per_trajectory`: New arguments `xlim` and `ylim` for specifying the axes limits explicitly and `axes_exact` for plotting exact axes.
+  * `mt_plot_per_trajectory`: New arguments `rect`, `color`, and `fill` for plotting rectangles (usually representing the response buttons).
+  * `mt_plot` (and related functions): New argument `points` allows for plotting points.
 * New functions
   * `mt_add_variables`: add new variables to trajectory array.
 
