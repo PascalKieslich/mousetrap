@@ -744,7 +744,6 @@ mt_average <- function(data,
     dimensions <- dimensions[dimensions!=av_dimension]
   }
   
-  
   if (is.null(intervals)) {
     
     # Compute the maximum number of possible intervals
@@ -754,6 +753,7 @@ mt_average <- function(data,
       max_n_intervals <- ceiling(
         max(trajectories[,av_dimension,], na.rm=TRUE) / interval_size
       )
+      
     } else {
       # If trajectories are truncated at max_interval,
       # calculate the number of steps up to this point
@@ -761,11 +761,16 @@ mt_average <- function(data,
         warning("max_interval is not a multiple of interval_size.")
       }
       max_n_intervals <- ceiling(max_interval / interval_size)
+      
     }
+    
+    interval_sizes <- rep(interval_size,max_n_intervals)
+    
     
   } else {
     max_n_intervals <- length(intervals)-1
     max_interval <- intervals[length(intervals)]
+    interval_sizes <- diff(intervals)
   }
   
   
@@ -826,8 +831,8 @@ mt_average <- function(data,
       current_measures <- trajectories[i, var, 1:nlogs]
       
       # Perform averaging
-      av_measures <- sapply(lower_borders, function(lb){
-        in_interval <- current_av_values > lb & current_av_values <= (lb + interval_size)
+      av_measures <- sapply(1:nintervals, function(j){
+        in_interval <- current_av_values > lower_borders[j] & current_av_values <= (lower_borders[j] + interval_sizes[j])
         return(mean(current_measures[in_interval], na.rm=TRUE))
       })
       
