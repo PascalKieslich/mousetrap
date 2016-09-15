@@ -784,14 +784,6 @@ mt_average <- function(data,
     )
   )
   
-  # Check if there are trajectories where first timestamp is > 0:
-  if (is.null(intervals) & max(trajectories[,av_dimension,1]) > 0){
-    warning(
-      "Trajectories detected where first ",av_dimension," value ",
-      "is greater than 0. Please check the trajectory data."
-    )  
-  }
-  
   
   for (i in 1:nrow(trajectories)){
     
