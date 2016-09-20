@@ -248,7 +248,7 @@ mt_import_mousetrap <- function(raw_data,
       for (j in names(mt_labels)) {
         mt_l <- columns[mt_labels[j]]
         if(length(data_list[i,][[mt_l]] != 0)){ ## no data in that variable  
-          trajectories[i, mt_variable_labels[j], 1:length(data_list[i,][[mt_l]])] <- data_list[i,][[mt_l]]
+          trajectories[i, j, 1:length(data_list[i,][[mt_l]])] <- data_list[i,][[mt_l]]
         } 
       }
     # Special case (only one trajectory or equal number of logs)
