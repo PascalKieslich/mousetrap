@@ -30,11 +30,11 @@
 #' @inheritParams mt_time_normalize
 #' @param save_as a character string specifying where the calculated measures
 #'   should be stored.
-#' @param method a character string specifying the method used for calculating
-#'   sample entropy (see Details).
 #' @param dimension a character string specifying the dimension based on which
 #'   sample entropy should be calculated. By default (xpos), the x-positions are
 #'   used.
+#' @param method a character string specifying the method used for calculating
+#'   sample entropy (see Details).
 #' @param lag an integer passed on to the sample entropy function (see Details).
 #' @param r a numeric value passed on to the sample entropy function (see
 #'   Details).
@@ -43,7 +43,7 @@
 #'   
 #'   If a data.frame with label specified in \code{save_as} (by default
 #'   "measures") already exists, the sample entropy values are added as
-#'   additional column(s) (by merging them using the \link{mt_id} variable).
+#'   additional column(s).
 #'   
 #'   If not, an additional \link{data.frame} will be added.
 #'   
@@ -58,14 +58,14 @@
 #' analytic techniques for enhancing psychological science. \emph{Group
 #' Processes & Intergroup Relations, 18}(3), 384-401.
 #' 
-#' @seealso \link{mt_calculate_measures} for calculating other mouse-tracking
+#' @seealso \link{mt_measures} for calculating other mouse-tracking
 #' measures.
 #' 
 #' @examples
 #' # Calculate sample entropy based on time-normalized
 #' # trajectories and merge results with other meausres
 #' # derived from raw trajectories
-#' mt_example <- mt_calculate_measures(mt_example)
+#' mt_example <- mt_measures(mt_example)
 #' mt_example <- mt_time_normalize(mt_example,
 #'   save_as="tn_trajectories", nsteps=101)
 #' mt_example <- mt_sample_entropy(mt_example,
@@ -75,8 +75,15 @@
 #' @export
 mt_sample_entropy <- function(data,
   use="tn_trajectories", save_as="measures",
-  method="pracma", dimension="xpos", lag=3, r=NULL,
-  show_progress=TRUE) {
+  dimension="xpos", method="pracma", lag=3, r=NULL,
+  verbose=FALSE,show_progress=NULL) {
+  
+  if(is.null(show_progress)==FALSE){
+    warning("The argument show_progress is deprecated. ",
+            "Please use verbose instead.",
+            call. = FALSE)
+    verbose <- show_progress
+  }
   
   # Function to calculate sample entropy
   # based on Hehman et al. (2015)
@@ -197,31 +204,17 @@ mt_sample_entropy <- function(data,
       measures[i,"sample_entropy_hehman"] <- se_hehman
     }
 
-    if (show_progress) {
+    if (verbose) {
       if (i %% 100 == 0) message(paste(i, "trials finished"))
     }
   }
   
-  if (show_progress) {
+  if (verbose) {
     message(paste("all", i, "trials finished"))
   }
   
-  results <- data.frame(row.names(trajectories))
-  colnames(results) <- mt_id
-  rownames(results) <- results[,mt_id]
-  results <- cbind(results,data.frame(measures))
-  
-  
-  if (is_mousetrap_data(data)){
-    if (save_as %in% names(data)) {
-      data[[save_as]] <- merge(data[[save_as]], results, by=mt_id)
-    } else {
-      data[[save_as]] <- results
-    }
-    return(data)
-    
-  }else{
-    return(results)
-  }
+  return(create_results(
+    data=data, results=measures, use=use, save_as=save_as,
+    ids=rownames(trajectories), overwrite=FALSE))
   
 }

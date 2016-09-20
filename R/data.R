@@ -65,27 +65,29 @@
 #' @format A mousetrap data object is a \link{list} containing  at least the
 #'   following objects:
 #'   \itemize{
-#'     \item{\code{data}: \link{data.frame} containing the trial data (from
-#'     which the mouse-tracking data columns have been removed). More
-#'     information about the content of the trial data in \code{mt_example} can
-#'     be found in \link{mt_example_raw}.}
-#'     \item{\code{trajectories}: \link{array} containing raw mouse-tracking
-#'     trajectories. The first dimension represents the different trials. It
-#'     uses the ID of the trial as names (this ID is by default logged under
-#'     \link{mt_id} in \code{data}). The second dimension corresponds to the
-#'     different variables (timestamps, x-positions, y-positions) with the names
-#'     as specified in \link{mt_variable_labels} (by default: \code{timestamps},
-#'     \code{xpos}, \code{ypos}). The third dimension corresponds to the samples
-#'     taken over time, which are included in chronological order and carry
-#'     successive integers as labels.}
+#'     \item{\code{data}: a \link{data.frame} containing the trial data (from 
+#'     which the mouse-tracking data columns have been removed). More 
+#'     information about the content of the trial data in \code{mt_example} can 
+#'     be found in \link{mt_example_raw}. The \link{rownames} of \code{data} 
+#'     correspond to the trial identifier. For convenience, the trial identifier
+#'     is also stored in an additional column called "mt_id".}
+#'     \item{\code{trajectories}: an \link{array} containing the raw 
+#'     mouse-tracking trajectories. The first dimension represents the different
+#'     trials and the dimension names (which can be assessed using 
+#'     \link{rownames}) correspond to the trial identifier (the same identifier 
+#'     that is used as the \code{rownames} in \code{data}). The second dimension
+#'     corresponds to the different mouse-tracking variables (timestamps, 
+#'     x-positions, y-positions) which are usually called \code{timestamps}, 
+#'     \code{xpos}, and \code{ypos}. The third dimension corresponds to the 
+#'     samples taken over time which are included in chronological order.}
 #'   }
 #'
 #'   Some functions in this package (e.g., \link{mt_time_normalize} and
 #'   \link{mt_average}) add additional trajectory arrays (e.g.,
 #'   \code{tn_trajectories} and \code{av_trajectories}) to the mousetrap data
 #'   object. Other functions modify the existing arrays (e.g.,
-#'   \link{mt_calculate_derivatives} adds distance, velocity, and acceleration
-#'   to an existing dataset). Finally \link{mt_calculate_measures} adds an
+#'   \link{mt_derivatives} adds distance, velocity, and acceleration
+#'   to an existing dataset). Finally \link{mt_measures} adds an
 #'   additional data.frame with mouse-tracking measures to it.
 #'
 "mt_example"

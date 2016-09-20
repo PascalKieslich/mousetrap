@@ -50,19 +50,22 @@
 #'   \link{mt_subset}	filters mouse-tracking data by trials, such that are only
 #'   those meeting defined criteria are included.
 #'   
+#'   \link{mt_add_variables} adds new, self created variables to a trajectory 
+#'   array.
+#'   
 #' @section Analysis functions:
 #'   
 #'   A number of different analysis procedures and summary statistics for mouse 
 #'   trajectories have been established in the existing literature. The following 
 #'   functions implement many of these approaches.
 #'   
-#'   \link{mt_calculate_derivatives} calculates distance, velocity, and 
+#'   \link{mt_derivatives} calculates distance, velocity, and 
 #'   acceleration for trajectories.
 #'   
-#'   \link{mt_calculate_deviations} calculates the deviations from an idealized
+#'   \link{mt_deviations} calculates the deviations from an idealized
 #'   trajectory (straight line).
 #'   
-#'   \link{mt_calculate_measures}	calculates a set of mouse-tracking measures.
+#'   \link{mt_measures}	calculates a set of mouse-tracking measures.
 #'   
 #'   \link{mt_sample_entropy}	calculates sample entropy.
 #'   
@@ -123,9 +126,9 @@
 #' mt_example <- mt_remap_symmetric(mt_example)
 #' mt_example <- mt_align_start(mt_example)
 #' mt_example <- mt_time_normalize(mt_example)
-#' mt_example <- mt_calculate_derivatives(mt_example)
-#' mt_example <- mt_calculate_deviations(mt_example)
-#' mt_example <- mt_calculate_measures(mt_example)
+#' mt_example <- mt_derivatives(mt_example)
+#' mt_example <- mt_deviations(mt_example)
+#' mt_example <- mt_measures(mt_example)
 #' 
 #' average_measures <- mt_aggregate(
 #'   mt_example, use="measures",

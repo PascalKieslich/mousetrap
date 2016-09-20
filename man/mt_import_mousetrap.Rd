@@ -7,8 +7,8 @@ OpenSesame.}
 \usage{
 mt_import_mousetrap(raw_data, xpos_label = "xpos", ypos_label = "ypos",
   timestamps_label = "timestamps", mt_id_label = NULL, split = ",",
-  duplicates = "remove_first", reset_timestamps = TRUE,
-  show_progress = TRUE)
+  duplicates = "remove_first", reset_timestamps = TRUE, verbose = FALSE,
+  show_progress = NULL)
 }
 \arguments{
 \item{raw_data}{a data.frame containing the raw data.}
@@ -22,22 +22,29 @@ which the y-positions are stored (see Details).}
 \item{timestamps_label}{a character string specifying the name of the column(s)
 in which the timestamps are stored (see Details).}
 
-\item{mt_id_label}{an optional character string specifying the name of the
-column that provides a unique ID for every trial in the raw data. If
-unspecified, an ID variable will be generated.}
+\item{mt_id_label}{an optional character string (or vector) specifying the 
+name of the column that provides a unique ID for every trial (the trial 
+identifier). If unspecified (the default), an ID variable will be 
+generated. If more than one variable name is provided, a new ID variable 
+will be created by combining the values of each variable. The trial 
+identifier will be set as the \link{rownames} of the resulting trajectories
+and trial data, and additionally be stored in the column "mt_id" in the 
+trial data.}
 
-\item{split}{a character string indicating how the different timestamps (and
-coordinates) within a trial are separated.}
+\item{split}{a character string indicating how the different timestamps and 
+coordinates within a trial are separated.}
 
 \item{duplicates}{a character string indicating how duplicate timestamps
 within a trial are handled (see Details).}
 
-\item{reset_timestamps}{logical indicating if the first timestamp should be
-subtracted from all timestamps within a trial. Default is TRUE as it is
-recommended for all following analyses in mousetrap.}
+\item{reset_timestamps}{logical indicating if the first timestamp should be 
+subtracted from all timestamps within a trial. Default is \code{TRUE} as it
+is recommended for all following analyses in mousetrap.}
 
-\item{show_progress}{logical indicating whether function should report its
+\item{verbose}{logical indicating whether function should report its 
 progress.}
+
+\item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}).
@@ -46,16 +53,16 @@ A mousetrap data object (see \link{mt_example}).
   OpenSesame, the unit of the timestamps is milliseconds.
 }
 \description{
-\code{mt_import_mousetrap} accepts a data.frame of (merged) raw data from a
-mouse-tracking experiment implemented in OpenSesame using one of the
-\href{https://github.com/pascalkieslich/mousetrap-os}{mousetrap plug-ins}.
-From this data.frame, \code{mt_import_mousetrap} creates a mousetrap data
+\code{mt_import_mousetrap} accepts a data.frame of (merged) raw data from a 
+mouse-tracking experiment implemented in OpenSesame using one of the 
+\href{https://github.com/pascalkieslich/mousetrap-os}{mousetrap plug-ins}. 
+From this data.frame, \code{mt_import_mousetrap} creates a mousetrap data 
 object containing the trajectories and additional data for further processing
-within the mousetrap package. \code{mt_import_mousetrap} returns a list,
-which includes the trajectory data as an array, and all other data as a
-data.frame. This data structure can then be passed on to other functions
-within this package, such as \link{mt_time_normalize} or
-\link{mt_calculate_measures}.
+within the mousetrap package. Specifically, it returns a list that includes
+the trajectory data as an array (called \code{trajectories}), and all other
+data as a data.frame (called \code{data}). This data structure can then be
+passed on to other functions within this package, such as
+\link{mt_time_normalize} or \link{mt_measures}.
 }
 \details{
 When working with mouse-tracking data that were recorded using the mousetrap
@@ -89,7 +96,7 @@ corresponding x-/y-positions are removed (the default).}
 removed.} \item{\code{ignore}: Duplicates are kept.} }
 }
 \examples{
-mt_example <- mt_import_mousetrap(mt_example_raw)
+mt_data <- mt_import_mousetrap(mt_example_raw)
 
 }
 \references{

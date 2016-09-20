@@ -6,9 +6,12 @@
 #' additional (wrapper) functions for more specific purposes (cf. "See Also")
 #' are available.
 #' 
-#' \code{mt_reshape} uses the \link{mt_id} variable for merging the trajectories
-#' / measures (in \code{data[[use]]}) and the trial data (in
-#' \code{data[[use2]]}).
+#' \code{mt_reshape} uses the \link{rownames} of \code{data[[use]]} and 
+#' \code{data[[use2]]} for merging the trajectories / measures and the trial 
+#' data. For convenience (and for trajectories in long format also of 
+#' necessity), an additional column (labelled as specified in the \code{mt_id}
+#' argument) is added to the reshaped data containing the rownames as trial
+#' identifier.
 #' 
 #' The main purpose of this function is to reshape the trajectory data into a 
 #' two-dimensional data.frame, as this format is required for many further
@@ -80,10 +83,14 @@
 #'   by adding an integer to the corresponding label (e.g., \code{xpos_1}, 
 #'   \code{xpos_2}, ...). Only relevant if \code{data[[use]]} contains 
 #'   trajectories.
+#' @param mt_id a character string specifying the name of the column that will 
+#'   contain the trial identifier in the reshaped data. The values for the trial
+#'   identifier correspond to the \code{rownames} of \code{data[[use]]} and 
+#'   \code{data[[use2]]}.
 #' @param mt_seq a character string specifying the name of the column that will 
 #'   contain the integers indicating the order of the mouse positions per 
-#'   trajectory. Only relevant if \code{data[[use]]} contains trajectories and 
-#'   \code{trajectories_long==TRUE}.
+#'   trajectory in the reshaped data. Only relevant if \code{data[[use]]}
+#'   contains trajectories and \code{trajectories_long==TRUE}.
 #'   
 #' @return A \link{data.frame} containing the reshaped data.
 #' 
@@ -130,7 +137,8 @@ mt_reshape <- function(data,
   subset=NULL, subject_id=NULL,
   aggregate=FALSE, aggregate_subjects_only=FALSE,
   aggregation_function=mean,
-  trajectories_long=TRUE, mt_seq="mt_seq") {
+  trajectories_long=TRUE,
+  mt_id="mt_id", mt_seq="mt_seq") {
   
   # Use substitute to allow that arguments in subset
   # can be specified like the arguments in the subset function
@@ -172,6 +180,9 @@ mt_reshape <- function(data,
     # Extract trajectory measures data
     dataset <- extract_data(data=data,use=use)
     
+    # Add mt_id column based on the rownames
+    dataset[,mt_id] <- rownames(dataset) 
+    
     # Select variables
     if (!is.null(use_variables)){
       dataset <- dataset[,c(mt_id,use_variables)]
@@ -198,6 +209,9 @@ mt_reshape <- function(data,
   } else {
     data <- use2
   }
+  
+  # Add mt_id column to data based on rownames
+  data[,mt_id] <- rownames(data)
   
   # Filter data (optional)
   if (is.null(subset) == FALSE) {
@@ -395,7 +409,7 @@ mt_reshape <- function(data,
 #' 
 #' 
 #' # Calculate mouse-tracking measures
-#' mt_example <- mt_calculate_measures(mt_example)
+#' mt_example <- mt_measures(mt_example)
 #' 
 #' # Aggregate measures per condition
 #' average_measures <- mt_aggregate(mt_example,
@@ -469,7 +483,7 @@ mt_aggregate <- function(data,
 #' 
 #' 
 #' # Calculate mouse-tracking measures
-#' mt_example <- mt_calculate_measures(mt_example)
+#' mt_example <- mt_measures(mt_example)
 #' 
 #' # Aggregate measures per condition
 #' # separately per subject

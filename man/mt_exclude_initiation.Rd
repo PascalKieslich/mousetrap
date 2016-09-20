@@ -5,7 +5,8 @@
 \title{Exclude initial phase without mouse movement.}
 \usage{
 mt_exclude_initiation(data, use = "trajectories", save_as = use,
-  reset_timestamps = TRUE, show_progress = TRUE)
+  dimensions = c("xpos", "ypos"), timestamps = "timestamps",
+  reset_timestamps = TRUE, verbose = FALSE, show_progress = NULL)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
@@ -18,11 +19,19 @@ used.}
 \item{save_as}{a character string specifying where the resulting trajectory 
 data should be stored.}
 
+\item{dimensions}{a character vector specifying the dimensions in the 
+trajectory array that contain the mouse positions.}
+
+\item{timestamps}{a character string specifying the trajectory dimension
+containing the timestamps.}
+
 \item{reset_timestamps}{logical indicating whether the timestamps should be 
 reset after removing the initial phase without movement (see Details).}
 
-\item{show_progress}{logical indicating whether function should report on its
+\item{verbose}{logical indicating whether function should report its 
 progress.}
+
+\item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) from which the 
@@ -57,6 +66,6 @@ mt_example <- mt_exclude_initiation(mt_example,
   
 }
 \seealso{
-\link{mt_calculate_measures} for calculating the initiation time.
+\link{mt_measures} for calculating the initiation time.
 }
 

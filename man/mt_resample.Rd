@@ -5,7 +5,9 @@
 \title{Resample trajectories using a constant time interval.}
 \usage{
 mt_resample(data, use = "trajectories", save_as = "rs_trajectories",
-  step_size = 10, exact_last_timestamp = TRUE, show_progress = TRUE)
+  dimensions = c("xpos", "ypos"), timestamps = "timestamps",
+  step_size = 10, exact_last_timestamp = TRUE, verbose = FALSE,
+  show_progress = NULL)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
@@ -18,6 +20,13 @@ used.}
 \item{save_as}{a character string specifying where the resulting trajectory 
 data should be stored.}
 
+\item{dimensions}{a character vector specifying the dimensions in the 
+trajectory array that should be resampled. If \code{"all"}, all trajectory
+dimensions except the timestamps will be resampled.}
+
+\item{timestamps}{a character string specifying the trajectory dimension
+containing the timestamps.}
+
 \item{step_size}{an integer specifying the size of the constant time 
 interval. The unit corresponds to the unit of the timestamps.}
 
@@ -25,8 +34,10 @@ interval. The unit corresponds to the unit of the timestamps.}
 always be appended (which is the case by default). If \code{FALSE}, the
 last timestamp is only appended if it is a multiple of the step_size.}
 
-\item{show_progress}{logical indicating whether function should report on its
+\item{verbose}{logical indicating whether function should report its 
 progress.}
+
+\item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) with an additional 

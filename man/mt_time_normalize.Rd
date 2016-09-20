@@ -5,7 +5,8 @@
 \title{Time normalize trajectories.}
 \usage{
 mt_time_normalize(data, use = "trajectories", save_as = "tn_trajectories",
-  nsteps = 101, show_progress = TRUE)
+  dimensions = c("xpos", "ypos"), timestamps = "timestamps", nsteps = 101,
+  verbose = FALSE, show_progress = NULL)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
@@ -18,10 +19,19 @@ used.}
 \item{save_as}{a character string specifying where the resulting trajectory 
 data should be stored.}
 
+\item{dimensions}{a character vector specifying the dimensions in the 
+trajectory array that should be time-normalized. If \code{"all"}, all
+trajectory dimensions except the timestamps will be time-normalized.}
+
+\item{timestamps}{a character string specifying the trajectory dimension
+containing the timestamps.}
+
 \item{nsteps}{an integer specifying the number of equally sized time steps.}
 
-\item{show_progress}{logical indicating whether function should report on its
+\item{verbose}{logical indicating whether function should report its 
 progress.}
+
+\item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) with an additional
@@ -33,9 +43,10 @@ A mousetrap data object (see \link{mt_example}) with an additional
 }
 \description{
 Compute time-normalized trajectories using a constant number of equally sized
-time steps. Time normalization is performed separately for the x- and 
-y-positions using linear interpolation based on the timestamps. By default, 
-101 time steps are used (following Spivey et al., 2005).
+time steps. Time normalization is performed separately for all specified
+trajectory dimensions (by default, the x- and y-positions) using linear
+interpolation based on the timestamps. By default, 101 time steps are used
+(following Spivey et al., 2005).
 }
 \details{
 Time-normalization is often performed if the number of recorded x- and 

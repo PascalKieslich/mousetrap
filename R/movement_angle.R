@@ -23,6 +23,9 @@
 #' percentile is included (\code{IMD}).
 #' 
 #' @inheritParams mt_time_normalize
+#' @param dimensions a character vector specifying the two dimensions in the 
+#'   trajectory array that contain the mouse positions, the first value
+#'   corresponding to the x-positions, the second to the y-positions.
 #' @param save_as a character string specifying where the calculated measures
 #'   should be stored.
 #' @param ima_percentile a decimal value. The initial movement angle will be
@@ -32,8 +35,7 @@
 #'   
 #'   If a data.frame with label specified in \code{save_as} (by default 
 #'   "measures") already exists, the \code{IMA}, \code{IMA_time}, and \code{IMD}
-#'   values (see Details) are added as additional columns (by merging them using
-#'   the \link{mt_id} variable).
+#'   values (see Details) are added as additional columns.
 #'   
 #'   If not, an additional \link{data.frame} will be added.
 #'   
@@ -45,11 +47,11 @@
 #'   stimulation. \emph{Journal of Experimental Psychology: Human Perception and
 #'   Performance, 35}(3), 816-834.
 #' 
-#' @seealso \link{mt_calculate_measures} for calculating other mouse-tracking
+#' @seealso \link{mt_measures} for calculating other mouse-tracking
 #' measures.
 #' 
 #' @examples
-#' mt_example <- mt_calculate_measures(mt_example)
+#' mt_example <- mt_measures(mt_example)
 #' mt_example <- mt_movement_angle(mt_example,
 #'   use="trajectories", save_as="measures",
 #'   ima_percentile=0.20)
@@ -57,15 +59,22 @@
 #' @export
 mt_movement_angle <- function(data,
                               use="trajectories", save_as="measures",
+                              dimensions=c("xpos","ypos"),timestamps="timestamps",
                               ima_percentile=0.2,
-                              show_progress=TRUE) {
+                              verbose=FALSE,show_progress=NULL) {
+  
+  if(is.null(show_progress)==FALSE){
+    warning("The argument show_progress is deprecated. ",
+            "Please use verbose instead.",
+            call. = FALSE)
+    verbose <- show_progress
+  }
   
 
   # Prepare data
   trajectories <- extract_data(data=data, use=use)
-  timestamps <- mt_variable_labels[["timestamps"]]
-  xpos <- mt_variable_labels[["xpos"]]
-  ypos <- mt_variable_labels[["ypos"]]
+  xpos <- dimensions[[1]]
+  ypos <- dimensions[[2]]
   
   # Calculate number of logs
   nlogs <- rowSums(!is.na(trajectories[,xpos,,drop=FALSE]))
@@ -75,7 +84,7 @@ mt_movement_angle <- function(data,
     nrow=nrow(trajectories),
     ncol=3,
     dimnames=list(
-      row.names(trajectories),
+      rownames(trajectories),
       c("IMA","IMA_time","IMD")
     )
   )
@@ -153,31 +162,17 @@ mt_movement_angle <- function(data,
     measures[i,"IMA_time"] <- ima_timestamps[2]
     measures[i,"IMD"] <- imd
     
-    if (show_progress) {
+    if (verbose) {
       if (i %% 100 == 0) message(paste(i, "trials finished"))
     }
   }
   
-  if (show_progress) {
+  if (verbose) {
     message(paste("all", i, "trials finished"))
   }
   
-  results <- data.frame(row.names(trajectories))
-  colnames(results) <- mt_id
-  rownames(results) <- results[,mt_id]
-  results <- cbind(results,data.frame(measures))
-  
-  
-  if (is_mousetrap_data(data)){
-    if (save_as %in% names(data)) {
-      data[[save_as]] <- merge(data[[save_as]], results, by=mt_id)
-    } else {
-      data[[save_as]] <- results
-    }
-    return(data)
+  return(create_results(
+    data=data, results=measures, use=use, save_as=save_as,
+    ids=rownames(trajectories), overwrite=FALSE))
     
-  }else{
-    return(results)
-  }
-  
 }

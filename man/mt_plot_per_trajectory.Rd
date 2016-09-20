@@ -5,7 +5,9 @@
 \title{Create pdf with separate plots per trajectory.}
 \usage{
 mt_plot_per_trajectory(file, data, use = "trajectories", x = "xpos",
-  y = "ypos", show_progress = TRUE, ...)
+  y = "ypos", xlim = NULL, ylim = NULL, axes_exact = FALSE,
+  points = FALSE, rect = NULL, color = "black", fill = NA,
+  verbose = FALSE, show_progress = NULL, ...)
 }
 \arguments{
 \item{file}{a character string specifying the name of the pdf file. Passed on
@@ -27,8 +29,35 @@ array should be displayed on the x-axis (defaults to xpos).}
 \item{y}{a character string specifying which dimension in the trajectory 
 array should be displayed on the y-axis (defaults to ypos).}
 
-\item{show_progress}{logical indicating whether function should report its 
+\item{xlim}{optional argument specifying the limits for the x axis (passed on
+to \link[ggplot2]{coord_cartesian}). If not specified (the default), 
+sensible axis limits will be computed.}
+
+\item{ylim}{optional argument specifying the limits for the y axis (passed on
+to \link[ggplot2]{coord_cartesian}). If not specified (the default), 
+sensible axis limits will be computed.}
+
+\item{axes_exact}{logical. If \code{TRUE}, axes will be set without offset
+exactly at the limits of the x and y axes (which can be specified using
+\code{xlim} and \code{ylim}]).}
+
+\item{points}{logical. If \code{TRUE}, points will be added to the plot using
+\link[ggplot2]{geom_point}.}
+
+\item{rect}{optional argument passed on to \link{mt_plot_add_rect}. If
+specified, rectangles (usually representing the response buttons) will be
+plotted for each trajectory plot.}
+
+\item{color}{optional argument passed on to \link{mt_plot_add_rect}. Only
+relevant if \code{rect} is specified.}
+
+\item{fill}{optional argument passed on to \link{mt_plot_add_rect}. Only
+relevant if \code{rect} is specified.}
+
+\item{verbose}{logical indicating whether function should report its 
 progress.}
+
+\item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 
 \item{...}{additional arguments passed on to \link{pdf}.}
 }
@@ -41,9 +70,9 @@ inserted, this function can also be used for plotting velocity and
 acceleration profiles.
 }
 \details{
-\code{mt_plot_per_trajectory} creates a pdf using \link{pdf}. Next, it plots 
+\code{mt_plot_per_trajectory} creates a PDF using \link{pdf}. Next, it plots 
 all trajectories individually using \link{mt_plot}. Every plot is labeled 
-using the \link{mt_id} variable.
+using the \link{rownames} of the trajectories.
 }
 \examples{
 \dontrun{

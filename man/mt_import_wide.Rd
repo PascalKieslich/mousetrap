@@ -5,9 +5,9 @@
 \title{Import mouse-tracking data saved in wide format.}
 \usage{
 mt_import_wide(raw_data, xpos_label = "X", ypos_label = "Y",
-  timestamps_label = NULL, dist_label = NULL, vel_label = NULL,
-  acc_label = NULL, mt_id_label = NULL, pos_sep = "_", pos_ids = NULL,
-  reset_timestamps = TRUE)
+  zpos_label = NULL, timestamps_label = "T", add_labels = NULL,
+  mt_id_label = NULL, pos_sep = "_", pos_ids = NULL,
+  reset_timestamps = TRUE, verbose = TRUE)
 }
 \arguments{
 \item{raw_data}{a data.frame containing the raw data.}
@@ -18,48 +18,57 @@ containing the x-positions (e.g., "X" for "X_1", "X_2", ...).}
 \item{ypos_label}{a character string specifying the core of the column labels
 containing the y-positions (e.g., "Y" for "Y_1", "Y_2", ...).}
 
-\item{timestamps_label}{an optional character string specifying the core of
-the column labels containing the timestamps.}
+\item{zpos_label}{a character string specifying the core of the column labels
+containing the z-positions.}
 
-\item{dist_label}{an optional character string specifying the core of the
-column labels containing the distance traveled.}
+\item{timestamps_label}{an optional character string specifying the core of 
+the column labels containing the timestamps. If no timestamps are found in
+the data, a timestamps variable with increasing integers will be created
+(assuming equidistant time steps).}
 
-\item{vel_label}{an optional character string specifying the core of the
-column labels containing the velocity.}
+\item{add_labels}{a character vector specifying the core of columns
+containing additional mouse-tracking variables.}
 
-\item{acc_label}{an optional character string specifying the core of the
-column labels containing the acceleration.}
-
-\item{mt_id_label}{an optional character string specifying the name of the
-column that provides a unique ID for every trial. If unspecified, an ID
-variable will be generated.}
+\item{mt_id_label}{an optional character string (or vector) specifying the 
+name of the column that provides a unique ID for every trial (the trial 
+identifier). If unspecified (the default), an ID variable will be 
+generated. If more than one variable name is provided, a new ID variable 
+will be created by combining the values of each variable. The trial 
+identifier will be set as the \link{rownames} of the resulting trajectories
+and trial data, and additionally be stored in the column "mt_id" in the 
+trial data.}
 
 \item{pos_sep}{a character string indicating the character that connects the
 core label and the position, (e.g., "_" for "X_1", "Y_1", ...).}
 
-\item{pos_ids}{the vector of IDs used for indexing the x-coordinates,
-y-coordinates etc. (e.g., 1:101 for time-normalized trajectories from
-MouseTracker). If unspecified, column labels for the respective variable
-will be extracted using grep (see Details).}
+\item{pos_ids}{the vector of IDs used for indexing the x-coordinates, 
+y-coordinates etc. (e.g., 1:101 for time-normalized trajectories from 
+MouseTracker). If unspecified (the default), column labels for the
+respective variable will be extracted using grep (see Details).}
 
-\item{reset_timestamps}{logical indicating if the first timestamp should be
-subtracted from all timestamps within a trial. Default is TRUE as it is
-recommended for all following analyses in mousetrap.}
+\item{reset_timestamps}{logical indicating if the first timestamp should be 
+subtracted from all timestamps within a trial. Default is \code{TRUE} as it
+is recommended for all following analyses in mousetrap.}
+
+\item{verbose}{logical indicating whether function should report its 
+progress.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}).
 }
 \description{
-\code{mt_import_wide} receives a data.frame where mouse-tracking data are
+\code{mt_import_wide} receives a data.frame where mouse-tracking data are 
 stored in wide format, i.e., where one row contains the data of one trial and
-every recorded mouse position is saved in a separate variable. This is, e.g.,
-the case when exporting trajectories from MouseTracker (Freeman & Ambady,
-2010). From this data.frame, \code{mt_import_wide} creates a mousetrap data
-object containing the trajectories and additional data for further processing
-within the mousetrap package. \code{mt_import_wide} returns a list, which
-includes the trajectory data as an array, and all other data as a data.frame.
-This data structure can then be passed on to other functions within this
-package, such as \link{mt_time_normalize} or \link{mt_calculate_measures}.
+every recorded mouse position and variable is saved in a separate variable 
+(e.g., X_1, X_2, ..., Y_1, Y_2, ...). This is, e.g., the case when exporting 
+trajectories from MouseTracker (Freeman & Ambady, 2010). From this 
+data.frame, \code{mt_import_wide} creates a mousetrap data object containing 
+the trajectories and additional data for further processing within the 
+mousetrap package. Specifically, it returns a list that includes the 
+trajectory data as an array (called \code{trajectories}), and all other data 
+as a data.frame (called \code{data}). This data structure can then be passed 
+on to other functions within this package, such as \link{mt_time_normalize} 
+or \link{mt_measures}.
 }
 \details{
 \code{mt_import_wide} is designed to import mouse-tracking data saved in a
@@ -68,20 +77,27 @@ and \code{pos_ids} need to be provided when importing trajectory data that
 stem from a "time normalized analysis" in MouseTracker (Freeman & Ambady,
 2010).
 
-If no \code{pos_ids} are provided, column labels for the respective variable
-(e.g., x-positions) are extracted using \link{grep} returning all variables
-that start with the respective character string (e.g. "X" for x-positions).
-This is, e.g., useful when importing trajectory data that stem from a "raw
-time analysis" in MouseTracker (Freeman & Ambady, 2010).
+If no \code{pos_ids} are provided, column labels for the respective variable 
+(e.g., x-positions) are extracted using \link{grep} returning all variables 
+that start with the respective character string (e.g., "X_" if
+\code{xpos_label="ypos"} and \code{pos_sep="_"}). This is, e.g., useful when 
+importing trajectory data that stem from a "raw time analysis" in 
+MouseTracker (Freeman & Ambady, 2010).
 
-If no timestamps are provided, \code{mt_import_wide} automatically assumes
-equally spaced sampling intervals and creates a timestamp variable with
-increasing integers (starting with 0).
-
-If labels for distance, velocity, and acceleration are provided, these are
-included in the trajectory array.
+If no timestamps are found in the data, \code{mt_import_wide} automatically 
+creates a timestamps variable with increasing integers (starting with 0) 
+assuming equally spaced sampling intervals.
 }
 \examples{
+# Create data in wide format for test purposes
+mt_data_wide <- mt_reshape(mt_example, use2_variables="Condition",
+  trajectories_long=FALSE)
+
+# Import the data using mt_import_wide
+mt_data <- mt_import_wide(mt_data_wide,
+  xpos_label="xpos", ypos_label="ypos", timestamps="timestamps")
+
+
 \dontrun{
 
 # Data from "time normalized analysis" in MouseTracker
@@ -103,7 +119,7 @@ studying real-time mental processing using a computer mouse-tracking method.
 \link{read_mousetracker} for reading data into R that were exported
 from MouseTracker (Freeman & Ambady, 2010).
 
-\link{mt_import_mousetrap} and \link{mt_import_long} for importing
-mouse-tracking data from other sources.
+\link{mt_import_mousetrap} and \link{mt_import_long} for importing 
+mouse-tracking data in other formats.
 }
 

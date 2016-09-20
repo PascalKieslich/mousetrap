@@ -98,7 +98,7 @@ bimodality_coefficient <- function(x, na.rm=FALSE) {
 #'   functions (see \link{mt_example} for details).
 #' @param use a character string specifying which data should be used. By
 #'   default, points to the \code{measures} data.frame created using
-#'   \link{mt_calculate_measures}.
+#'   \link{mt_measures}.
 #' @param use_variables a vector specifying for which mouse-tracking measures
 #'   bimodality should be assessed.
 #' @param methods a character string (or vector) specifying which methods should
@@ -139,7 +139,7 @@ bimodality_coefficient <- function(x, na.rm=FALSE) {
 #' 
 #' @examples
 #' # Calculate measures
-#' mt_example <- mt_calculate_measures(mt_example)
+#' mt_example <- mt_measures(mt_example)
 #' 
 #' # Assess bimodality for untransformed variables
 #' mt_check_bimodality(mt_example,

@@ -9,11 +9,12 @@
 #' 
 #' \code{mt_plot} internally uses \link{mt_reshape} for reshaping trajectories 
 #' into a long format. Next, it creates a ggplot object using the 
-#' \link[ggplot2]{ggplot} function of the \code{ggplot2} package. The
-#' \link[ggplot2]{aes} mappings are taken from the function arguments for x, y
-#' etc.; in addition, the group mapping is set to \link{mt_id}. If
-#' \code{return_ggplot=FALSE}, the trajectories are plotted using the
-#' \link[ggplot2]{geom_path} function of the \code{ggplot2} package.
+#' \link[ggplot2]{ggplot} function of the \code{ggplot2} package. The 
+#' \link[ggplot2]{aes} mappings are taken from the function arguments for x, y 
+#' etc.; in addition, the group mapping is set to the internal trial identifier
+#' (by default called "mt_id"). If \code{return_ggplot=FALSE}, the trajectories
+#' are plotted using the \link[ggplot2]{geom_path} function of the
+#' \code{ggplot2} package.
 #' 
 #' \code{mt_plot_aggregate} works similarly, but uses \link{mt_aggregate} for 
 #' reshaping and aggregating trajectories prior to plotting.
@@ -44,9 +45,14 @@
 #' @param linetype an optional character string specifying which variable in 
 #'   \code{data[[use2]]} should be used for varying the linetype of the 
 #'   trajectories.
+#' @param points logical. If \code{TRUE}, points will be added to the plot using
+#'   \link[ggplot2]{geom_point}.
 #' @param only_ggplot logical. If \code{TRUE}, only the ggplot object without
 #'   geoms is returned. If \code{FALSE} (the default), the trajectories are
 #'   plotted using \link[ggplot2]{geom_path}.
+#' @param mt_id a character string specifying the internal label used for the 
+#'   trial identifier (passed on to the group aesthetic). Only relevant for
+#'   \code{mt_plot}.
 #' @param subject_id a character string specifying which column contains the 
 #'   subject identifier. Only relevant for \code{mt_plot_aggregate}. If 
 #'   specified, aggregation will be performed within subjects first. Note that 
@@ -91,12 +97,12 @@
 #'         
 #' # ... adding points for each position to the plot
 #' mt_plot_aggregate(mt_example, use="tn_trajectories",
-#'   x="xpos", y="ypos", color="Condition")+
-#'   geom_point()                   
+#'   x="xpos", y="ypos", color="Condition",
+#'   points=TRUE)                   
 #'         
 #' # Plot velocity profiles based on the averaged trajectories
 #' # varying the color depending on the condition
-#' mt_example <- mt_calculate_derivatives(mt_example)
+#' mt_example <- mt_derivatives(mt_example)
 #' mt_example <- mt_average(mt_example, interval_size = 100)
 #' mt_plot(mt_example, use="av_trajectories",
 #'   x="timestamps", y="vel", color="Condition")
@@ -114,8 +120,9 @@
 mt_plot <- function(data,
   use="trajectories", use2="data",
   x="xpos", y="ypos",
-  color=NULL, linetype=NULL, 
-  only_ggplot=FALSE, ...) {
+  color=NULL, linetype=NULL,
+  points=FALSE,
+  only_ggplot=FALSE, mt_id="mt_id", ...) {
   
   # Extract plotting options from metadata
   use2_variables <- c(color, linetype)
@@ -129,7 +136,7 @@ mt_plot <- function(data,
   # and reshape it into long format
   trajectories <- mt_reshape(data=data,
     use=use, use2=use2, use2_variables=use2_variables,
-    aggregate=FALSE, ...)
+    aggregate=FALSE,mt_id=mt_id, ...)
   
   # Build plot
   current_plot <- ggplot2::ggplot(
@@ -146,8 +153,19 @@ mt_plot <- function(data,
     # Return empty plot object
     return(current_plot)
   } else {
+    
     # Add path geom to plot
-    return(current_plot+ggplot2::geom_path())
+    current_plot <- current_plot +
+      ggplot2::geom_path()
+    
+    # Add points to plot (optional)
+    if (points) {
+      current_plot <- current_plot + 
+        ggplot2::geom_point()
+    }
+    
+    return(current_plot)
+    
   }
   
 }
@@ -158,6 +176,7 @@ mt_plot <- function(data,
 mt_plot_aggregate <- function(data,
   use="trajectories", use2="data",
   x="xpos", y="ypos", color=NULL, linetype=NULL,
+  points=FALSE,
   only_ggplot=FALSE, subject_id=NULL, ...) {
 
   # Extract plotting options from metadata
@@ -188,8 +207,19 @@ mt_plot_aggregate <- function(data,
     # Return empty plot object
     return(current_plot)
   } else {
+    
     # Add path geom to plot
-    return(current_plot + ggplot2::geom_path())
+    current_plot <- current_plot +
+      ggplot2::geom_path()
+    
+    # Add points to plot (optional)
+    if (points) {
+      current_plot <- current_plot + 
+        ggplot2::geom_point()
+    }
+    
+    return(current_plot)
+    
   }
   
 }
@@ -287,15 +317,32 @@ mt_plot_add_rect <- function(rect,
 #' inserted, this function can also be used for plotting velocity and
 #' acceleration profiles.
 #' 
-#' \code{mt_plot_per_trajectory} creates a pdf using \link{pdf}. Next, it plots 
+#' \code{mt_plot_per_trajectory} creates a PDF using \link{pdf}. Next, it plots 
 #' all trajectories individually using \link{mt_plot}. Every plot is labeled 
-#' using the \link{mt_id} variable.
+#' using the \link{rownames} of the trajectories.
 #' 
 #' @inheritParams mt_plot
 #' @param file a character string specifying the name of the pdf file. Passed on
 #'   to \link{pdf}.
-#' @param show_progress logical indicating whether function should report its 
+#' @param xlim optional argument specifying the limits for the x axis (passed on
+#'   to \link[ggplot2]{coord_cartesian}). If not specified (the default), 
+#'   sensible axis limits will be computed.
+#' @param ylim optional argument specifying the limits for the y axis (passed on
+#'   to \link[ggplot2]{coord_cartesian}). If not specified (the default), 
+#'   sensible axis limits will be computed.
+#' @param axes_exact logical. If \code{TRUE}, axes will be set without offset
+#'   exactly at the limits of the x and y axes (which can be specified using
+#'   \code{xlim} and \code{ylim}]).
+#' @param rect optional argument passed on to \link{mt_plot_add_rect}. If
+#'   specified, rectangles (usually representing the response buttons) will be
+#'   plotted for each trajectory plot.
+#' @param color optional argument passed on to \link{mt_plot_add_rect}. Only
+#'   relevant if \code{rect} is specified.
+#' @param fill optional argument passed on to \link{mt_plot_add_rect}. Only
+#'   relevant if \code{rect} is specified.
+#' @param verbose logical indicating whether function should report its 
 #'   progress.
+#' @param show_progress Deprecated. Please use \code{verbose} instead.
 #' @param ... additional arguments passed on to \link{pdf}.
 #' 
 #' @seealso
@@ -311,18 +358,32 @@ mt_plot_add_rect <- function(rect,
 #' @export
 mt_plot_per_trajectory <- function(file,
   data, use="trajectories", x="xpos", y="ypos",
-  show_progress=TRUE, ...) {
+  xlim=NULL, ylim=NULL, axes_exact=FALSE,
+  points=FALSE,
+  rect=NULL, color="black", fill=NA,
+  verbose=FALSE,show_progress=NULL,...) {
   
-  # Define axis limits across all plots
-  xlim <- range(data[[use]][,x,], na.rm=TRUE)
-  xoffset <- .05 * (xlim[2]-xlim[1])
-  xlim[1] <- xlim[1] - xoffset
-  xlim[2] <- xlim[2] + xoffset
+  if(is.null(show_progress)==FALSE){
+    warning("The argument show_progress is deprecated. ",
+            "Please use verbose instead.",
+            call. = FALSE)
+    verbose <- show_progress
+  }
   
-  ylim <- range(data[[use]][,y,], na.rm=TRUE)
-  yoffset <- .05 * (ylim[2]-ylim[1])
-  ylim[1] <- ylim[1] - yoffset
-  ylim[2] <- ylim[2] + yoffset
+  # Define axis limits across all plots (if they have not been defined)
+  if(is.null(xlim)){
+    xlim <- range(data[[use]][,x,], na.rm=TRUE)
+    xoffset <- .05 * (xlim[2]-xlim[1])
+    xlim[1] <- xlim[1] - xoffset
+    xlim[2] <- xlim[2] + xoffset
+  }
+  
+  if(is.null(ylim)){
+    ylim <- range(data[[use]][,y,], na.rm=TRUE)
+    yoffset <- .05 * (ylim[2]-ylim[1])
+    ylim[1] <- ylim[1] - yoffset
+    ylim[2] <- ylim[2] + yoffset
+  }
   
   # Create plots
   grDevices::pdf(file, ...)
@@ -333,8 +394,23 @@ mt_plot_per_trajectory <- function(file,
     # Build plot
     current_plot <- mt_plot(
       data=data, use=use, x=x, y=y,
-      use2=subset(data[["data"]], mt_id==current_id)
+      use2=data[["data"]][current_id,],
+      points=points
     )
+    
+    # Add rectangles to plot
+    # if they are specified
+    if (is.null(rect)==FALSE){
+      current_plot <- current_plot +
+        mt_plot_add_rect(rect=rect, color=color, fill=fill) 
+    }
+    
+    # Remove whitespace for axes (if specified)
+    if (axes_exact){
+      current_plot <- current_plot + 
+        ggplot2::scale_x_continuous(expand=c(0,0))+
+        ggplot2::scale_y_continuous(expand=c(0,0))
+    }
     
     # Output plot
     print(
@@ -344,7 +420,7 @@ mt_plot_per_trajectory <- function(file,
     )
     
     # Display progress, if desired
-    if (show_progress) {
+    if (verbose) {
       message("trajectory ", current_id, " plotted")
     }
   }

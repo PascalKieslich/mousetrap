@@ -5,7 +5,8 @@
 \title{Calculate initial movement angle.}
 \usage{
 mt_movement_angle(data, use = "trajectories", save_as = "measures",
-  ima_percentile = 0.2, show_progress = TRUE)
+  dimensions = c("xpos", "ypos"), timestamps = "timestamps",
+  ima_percentile = 0.2, verbose = FALSE, show_progress = NULL)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
@@ -18,19 +19,27 @@ used.}
 \item{save_as}{a character string specifying where the calculated measures
 should be stored.}
 
+\item{dimensions}{a character vector specifying the two dimensions in the 
+trajectory array that contain the mouse positions, the first value
+corresponding to the x-positions, the second to the y-positions.}
+
+\item{timestamps}{a character string specifying the trajectory dimension
+containing the timestamps.}
+
 \item{ima_percentile}{a decimal value. The initial movement angle will be
 calculated at the respective percentile .}
 
-\item{show_progress}{logical indicating whether function should report on its
+\item{verbose}{logical indicating whether function should report its 
 progress.}
+
+\item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}).
   
   If a data.frame with label specified in \code{save_as} (by default 
   "measures") already exists, the \code{IMA}, \code{IMA_time}, and \code{IMD}
-  values (see Details) are added as additional columns (by merging them using
-  the \link{mt_id} variable).
+  values (see Details) are added as additional columns.
   
   If not, an additional \link{data.frame} will be added.
   
@@ -62,7 +71,7 @@ Besides, the perpendicular deviation from the direct path at the specified
 percentile is included (\code{IMD}).
 }
 \examples{
-mt_example <- mt_calculate_measures(mt_example)
+mt_example <- mt_measures(mt_example)
 mt_example <- mt_movement_angle(mt_example,
   use="trajectories", save_as="measures",
   ima_percentile=0.20)
@@ -75,7 +84,7 @@ Buetti, S., & Kerzel, D. (2009). Conflicts during response
   Performance, 35}(3), 816-834.
 }
 \seealso{
-\link{mt_calculate_measures} for calculating other mouse-tracking
+\link{mt_measures} for calculating other mouse-tracking
 measures.
 }
 

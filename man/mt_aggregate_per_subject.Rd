@@ -75,7 +75,7 @@ average_trajectories <- mt_aggregate_per_subject(
 
 
 # Calculate mouse-tracking measures
-mt_example <- mt_calculate_measures(mt_example)
+mt_example <- mt_measures(mt_example)
 
 # Aggregate measures per condition
 # separately per subject

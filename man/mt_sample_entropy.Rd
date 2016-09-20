@@ -5,8 +5,8 @@
 \title{Calculate sample entropy.}
 \usage{
 mt_sample_entropy(data, use = "tn_trajectories", save_as = "measures",
-  method = "pracma", dimension = "xpos", lag = 3, r = NULL,
-  show_progress = TRUE)
+  dimension = "xpos", method = "pracma", lag = 3, r = NULL,
+  verbose = FALSE, show_progress = NULL)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
@@ -19,27 +19,29 @@ used.}
 \item{save_as}{a character string specifying where the calculated measures
 should be stored.}
 
-\item{method}{a character string specifying the method used for calculating
-sample entropy (see Details).}
-
 \item{dimension}{a character string specifying the dimension based on which
 sample entropy should be calculated. By default (xpos), the x-positions are
 used.}
+
+\item{method}{a character string specifying the method used for calculating
+sample entropy (see Details).}
 
 \item{lag}{an integer passed on to the sample entropy function (see Details).}
 
 \item{r}{a numeric value passed on to the sample entropy function (see
 Details).}
 
-\item{show_progress}{logical indicating whether function should report on its
+\item{verbose}{logical indicating whether function should report its 
 progress.}
+
+\item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}).
   
   If a data.frame with label specified in \code{save_as} (by default
   "measures") already exists, the sample entropy values are added as
-  additional column(s) (by merging them using the \link{mt_id} variable).
+  additional column(s).
   
   If not, an additional \link{data.frame} will be added.
   
@@ -79,7 +81,7 @@ calculate sample_entropy values using both functions ("both").
 # Calculate sample entropy based on time-normalized
 # trajectories and merge results with other meausres
 # derived from raw trajectories
-mt_example <- mt_calculate_measures(mt_example)
+mt_example <- mt_measures(mt_example)
 mt_example <- mt_time_normalize(mt_example,
   save_as="tn_trajectories", nsteps=101)
 mt_example <- mt_sample_entropy(mt_example,
@@ -97,7 +99,7 @@ analytic techniques for enhancing psychological science. \emph{Group
 Processes & Intergroup Relations, 18}(3), 384-401.
 }
 \seealso{
-\link{mt_calculate_measures} for calculating other mouse-tracking
+\link{mt_measures} for calculating other mouse-tracking
 measures.
 }
 

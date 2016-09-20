@@ -1,16 +1,16 @@
 #' Import mouse-tracking data recorded using the mousetrap plug-ins in
 #' OpenSesame.
 #'
-#' \code{mt_import_mousetrap} accepts a data.frame of (merged) raw data from a
-#' mouse-tracking experiment implemented in OpenSesame using one of the
-#' \href{https://github.com/pascalkieslich/mousetrap-os}{mousetrap plug-ins}.
-#' From this data.frame, \code{mt_import_mousetrap} creates a mousetrap data
+#' \code{mt_import_mousetrap} accepts a data.frame of (merged) raw data from a 
+#' mouse-tracking experiment implemented in OpenSesame using one of the 
+#' \href{https://github.com/pascalkieslich/mousetrap-os}{mousetrap plug-ins}. 
+#' From this data.frame, \code{mt_import_mousetrap} creates a mousetrap data 
 #' object containing the trajectories and additional data for further processing
-#' within the mousetrap package. \code{mt_import_mousetrap} returns a list,
-#' which includes the trajectory data as an array, and all other data as a
-#' data.frame. This data structure can then be passed on to other functions
-#' within this package, such as \link{mt_time_normalize} or
-#' \link{mt_calculate_measures}.
+#' within the mousetrap package. Specifically, it returns a list that includes
+#' the trajectory data as an array (called \code{trajectories}), and all other
+#' data as a data.frame (called \code{data}). This data structure can then be
+#' passed on to other functions within this package, such as
+#' \link{mt_time_normalize} or \link{mt_measures}.
 #'
 #' When working with mouse-tracking data that were recorded using the mousetrap
 #' plug-ins for OpenSesame, usually only the \code{raw_data} need to be
@@ -49,18 +49,24 @@
 #'   which the y-positions are stored (see Details).
 #' @param timestamps_label a character string specifying the name of the column(s)
 #'   in which the timestamps are stored (see Details).
-#' @param mt_id_label an optional character string specifying the name of the
-#'   column that provides a unique ID for every trial in the raw data. If
-#'   unspecified, an ID variable will be generated.
-#' @param split a character string indicating how the different timestamps (and
-#'   coordinates) within a trial are separated.
+#' @param mt_id_label an optional character string (or vector) specifying the 
+#'   name of the column that provides a unique ID for every trial (the trial 
+#'   identifier). If unspecified (the default), an ID variable will be 
+#'   generated. If more than one variable name is provided, a new ID variable 
+#'   will be created by combining the values of each variable. The trial 
+#'   identifier will be set as the \link{rownames} of the resulting trajectories
+#'   and trial data, and additionally be stored in the column "mt_id" in the 
+#'   trial data.
+#' @param split a character string indicating how the different timestamps and 
+#'   coordinates within a trial are separated.
 #' @param duplicates a character string indicating how duplicate timestamps
 #'   within a trial are handled (see Details).
-#' @param reset_timestamps logical indicating if the first timestamp should be
-#'   subtracted from all timestamps within a trial. Default is TRUE as it is
-#'   recommended for all following analyses in mousetrap.
-#' @param show_progress logical indicating whether function should report its
+#' @param reset_timestamps logical indicating if the first timestamp should be 
+#'   subtracted from all timestamps within a trial. Default is \code{TRUE} as it
+#'   is recommended for all following analyses in mousetrap.
+#' @param verbose logical indicating whether function should report its 
 #'   progress.
+#' @param show_progress Deprecated. Please use \code{verbose} instead.
 #'
 #' @return A mousetrap data object (see \link{mt_example}).
 #'
@@ -78,7 +84,7 @@
 #' data from other sources.
 #'
 #' @examples
-#' mt_example <- mt_import_mousetrap(mt_example_raw)
+#' mt_data <- mt_import_mousetrap(mt_example_raw)
 #'
 #' @export
 mt_import_mousetrap <- function(raw_data,
@@ -87,30 +93,63 @@ mt_import_mousetrap <- function(raw_data,
   mt_id_label=NULL,
   split=",", duplicates="remove_first",
   reset_timestamps=TRUE,
-  show_progress=TRUE) {
-
+  verbose=FALSE, show_progress=NULL) {
+  
+  if(is.null(show_progress)==FALSE){
+    warning("The argument show_progress is deprecated. ",
+            "Please use verbose instead.",
+            call. = FALSE)
+    verbose <- show_progress
+  }
+  
+  # Set labels
+  timestamps <- "timestamps"
+  xpos <- "xpos"
+  ypos <- "ypos"
+  
+  # Ensure that raw_data is a data.frame
+  raw_data <- as.data.frame(raw_data)
+  
   # Add mt_id variable
   if (is.null(mt_id_label)) {
+    if (verbose) {
+      message("No mt_id_label provided. ",
+              "A new trial identifying variable called mt_id was created.")
+    }
+    
     # if no column name for ID variable is provided create one
     ids <- 1:nrow(raw_data)
     # use formatC to add leading 0s
-    raw_data[,mt_id] <- paste(
+    raw_data[,"mt_id"] <- paste(
       "id",
       formatC(ids, width=trunc(log10(nrow(raw_data))) + 1, flag="0"),
       sep=""
     )
   } else {
-    if(anyDuplicated(raw_data[,mt_id_label]) > 0){
-      stop(
-        "Values in specified mt_id variable - ",
-        mt_id_label,
-        " - are not unique."
-      )
+    
+    # Extract values of mt_id variable (and convert them to character)
+    ids <- as.character(raw_data[,mt_id_label[[1]]])
+    
+    # If more than one trial identifying variable is specified,
+    # combine them into one unique identifier.
+    if(length(mt_id_label)>1){
+      for(var in mt_id_label[-1]){
+        ids <- paste0(ids,'_',raw_data[,var])
+      }
     }
-    raw_data[,mt_id] <- raw_data[,mt_id_label]
+    
+    # Add mt_id column to raw_data
+    raw_data[,"mt_id"] <- ids
+    
+    
+    if(anyDuplicated(ids) > 0) {
+      stop("Values in specified mt_id_label variable are not unique.")
+    }
+    
   }
 
-  rownames(raw_data) <- raw_data[,mt_id]
+  # Set rownames of raw_data to trial identifier
+  rownames(raw_data) <- raw_data[,"mt_id"]
   
   # Get length of label variables
   n_labels <- c(length(xpos_label),length(ypos_label),length(timestamps_label))
@@ -133,7 +172,8 @@ mt_import_mousetrap <- function(raw_data,
     raw_data[,xpos_label[1]] <- join_data(raw_data[,xpos_label,drop=FALSE])  
     raw_data[,ypos_label[1]] <- join_data(raw_data[,ypos_label,drop=FALSE])  
     
-    mt_labels <- c(timestamps=timestamps_label[1], xpos=xpos_label[1], ypos=ypos_label[1])
+    mt_labels <- c(timestamps_label[1], xpos_label[1], ypos_label[1])
+    names(mt_labels) <- c(timestamps, xpos, ypos)
     columns <- mt_labels
     names(columns) <- mt_labels
     
@@ -162,7 +202,8 @@ mt_import_mousetrap <- function(raw_data,
       }
     }
     
-    mt_labels <- c(timestamps=timestamps_label, xpos=xpos_label, ypos=ypos_label)
+    mt_labels <- c(timestamps_label, xpos_label, ypos_label)
+    names(mt_labels) <- c(timestamps, xpos, ypos)
     columns <- sapply(mt_labels, check_columns)
     names(columns) <- mt_labels
     
@@ -194,16 +235,11 @@ mt_import_mousetrap <- function(raw_data,
   } else {
     max_logs <- dim(data_list)[1]
   }
-
-  # Extract labels for trajectory array
-  timestamps <- mt_variable_labels[["timestamps"]]
-  xpos <- mt_variable_labels[["xpos"]]
-  ypos <- mt_variable_labels[["ypos"]]
-
+  
   # Create array with raw MT data
   trajectories <- array(
     dim=c(nrow(raw_data), 3, max_logs),
-    dimnames=list(raw_data[,mt_id], c(timestamps,xpos,ypos), NULL)
+    dimnames=list(raw_data[,"mt_id"], c(timestamps,xpos,ypos), NULL)
   )
 
   for (i in 1:dim(trajectories)[1]) {
@@ -260,12 +296,12 @@ mt_import_mousetrap <- function(raw_data,
 
     }
 
-    if (show_progress && i %% 100 == 0) {
+    if (verbose && i %% 100 == 0) {
       message(paste(i, "trials finished"))
     }
   }
 
-  if (show_progress) {
+  if (verbose) {
     message(paste("all", i, "trials finished"))
   }
 
@@ -309,16 +345,18 @@ mt_import_mousetrap <- function(raw_data,
 
 #' Import mouse-tracking data saved in wide format.
 #'
-#' \code{mt_import_wide} receives a data.frame where mouse-tracking data are
+#' \code{mt_import_wide} receives a data.frame where mouse-tracking data are 
 #' stored in wide format, i.e., where one row contains the data of one trial and
-#' every recorded mouse position is saved in a separate variable. This is, e.g.,
-#' the case when exporting trajectories from MouseTracker (Freeman & Ambady,
-#' 2010). From this data.frame, \code{mt_import_wide} creates a mousetrap data
-#' object containing the trajectories and additional data for further processing
-#' within the mousetrap package. \code{mt_import_wide} returns a list, which
-#' includes the trajectory data as an array, and all other data as a data.frame.
-#' This data structure can then be passed on to other functions within this
-#' package, such as \link{mt_time_normalize} or \link{mt_calculate_measures}.
+#' every recorded mouse position and variable is saved in a separate variable 
+#' (e.g., X_1, X_2, ..., Y_1, Y_2, ...). This is, e.g., the case when exporting 
+#' trajectories from MouseTracker (Freeman & Ambady, 2010). From this 
+#' data.frame, \code{mt_import_wide} creates a mousetrap data object containing 
+#' the trajectories and additional data for further processing within the 
+#' mousetrap package. Specifically, it returns a list that includes the 
+#' trajectory data as an array (called \code{trajectories}), and all other data 
+#' as a data.frame (called \code{data}). This data structure can then be passed 
+#' on to other functions within this package, such as \link{mt_time_normalize} 
+#' or \link{mt_measures}.
 #'
 #' \code{mt_import_wide} is designed to import mouse-tracking data saved in a
 #' wide format. The defaults are set so that usually only the \code{raw_data}
@@ -326,44 +364,37 @@ mt_import_mousetrap <- function(raw_data,
 #' stem from a "time normalized analysis" in MouseTracker (Freeman & Ambady,
 #' 2010).
 #'
-#' If no \code{pos_ids} are provided, column labels for the respective variable
-#' (e.g., x-positions) are extracted using \link{grep} returning all variables
-#' that start with the respective character string (e.g. "X" for x-positions).
-#' This is, e.g., useful when importing trajectory data that stem from a "raw
-#' time analysis" in MouseTracker (Freeman & Ambady, 2010).
-#'
-#' If no timestamps are provided, \code{mt_import_wide} automatically assumes
-#' equally spaced sampling intervals and creates a timestamp variable with
-#' increasing integers (starting with 0).
-#'
-#' If labels for distance, velocity, and acceleration are provided, these are
-#' included in the trajectory array.
-#'
+#' If no \code{pos_ids} are provided, column labels for the respective variable 
+#' (e.g., x-positions) are extracted using \link{grep} returning all variables 
+#' that start with the respective character string (e.g., "X_" if
+#' \code{xpos_label="ypos"} and \code{pos_sep="_"}). This is, e.g., useful when 
+#' importing trajectory data that stem from a "raw time analysis" in 
+#' MouseTracker (Freeman & Ambady, 2010).
+#' 
+#' If no timestamps are found in the data, \code{mt_import_wide} automatically 
+#' creates a timestamps variable with increasing integers (starting with 0) 
+#' assuming equally spaced sampling intervals.
+#' 
+#' @inheritParams mt_import_mousetrap
 #' @param raw_data a data.frame containing the raw data.
 #' @param xpos_label a character string specifying the core of the column labels
 #'   containing the x-positions (e.g., "X" for "X_1", "X_2", ...).
 #' @param ypos_label a character string specifying the core of the column labels
 #'   containing the y-positions (e.g., "Y" for "Y_1", "Y_2", ...).
-#' @param timestamps_label an optional character string specifying the core of
-#'   the column labels containing the timestamps.
-#' @param dist_label an optional character string specifying the core of the
-#'   column labels containing the distance traveled.
-#' @param vel_label an optional character string specifying the core of the
-#'   column labels containing the velocity.
-#' @param acc_label an optional character string specifying the core of the
-#'   column labels containing the acceleration.
-#' @param mt_id_label an optional character string specifying the name of the
-#'   column that provides a unique ID for every trial. If unspecified, an ID
-#'   variable will be generated.
+#' @param zpos_label a character string specifying the core of the column labels
+#'   containing the z-positions.
+#' @param timestamps_label an optional character string specifying the core of 
+#'   the column labels containing the timestamps. If no timestamps are found in
+#'   the data, a timestamps variable with increasing integers will be created
+#'   (assuming equidistant time steps).
+#' @param add_labels a character vector specifying the core of columns
+#'   containing additional mouse-tracking variables.
 #' @param pos_sep a character string indicating the character that connects the
 #'   core label and the position, (e.g., "_" for "X_1", "Y_1", ...).
-#' @param pos_ids the vector of IDs used for indexing the x-coordinates,
-#'   y-coordinates etc. (e.g., 1:101 for time-normalized trajectories from
-#'   MouseTracker). If unspecified, column labels for the respective variable
-#'   will be extracted using grep (see Details).
-#' @param reset_timestamps logical indicating if the first timestamp should be
-#'   subtracted from all timestamps within a trial. Default is TRUE as it is
-#'   recommended for all following analyses in mousetrap.
+#' @param pos_ids the vector of IDs used for indexing the x-coordinates, 
+#'   y-coordinates etc. (e.g., 1:101 for time-normalized trajectories from 
+#'   MouseTracker). If unspecified (the default), column labels for the
+#'   respective variable will be extracted using grep (see Details).
 #'
 #' @return A mousetrap data object (see \link{mt_example}).
 #'
@@ -374,10 +405,19 @@ mt_import_mousetrap <- function(raw_data,
 #' @seealso \link{read_mousetracker} for reading data into R that were exported
 #' from MouseTracker (Freeman & Ambady, 2010).
 #'
-#' \link{mt_import_mousetrap} and \link{mt_import_long} for importing
-#' mouse-tracking data from other sources.
+#' \link{mt_import_mousetrap} and \link{mt_import_long} for importing 
+#' mouse-tracking data in other formats.
 #'
 #' @examples
+#' # Create data in wide format for test purposes
+#' mt_data_wide <- mt_reshape(mt_example, use2_variables="Condition",
+#'   trajectories_long=FALSE)
+#' 
+#' # Import the data using mt_import_wide
+#' mt_data <- mt_import_wide(mt_data_wide,
+#'   xpos_label="xpos", ypos_label="ypos", timestamps="timestamps")
+#' 
+#' 
 #' \dontrun{
 #'
 #' # Data from "time normalized analysis" in MouseTracker
@@ -391,114 +431,171 @@ mt_import_mousetrap <- function(raw_data,
 #' }
 #' @export
 mt_import_wide <- function(raw_data,
-  xpos_label="X", ypos_label="Y",
-  timestamps_label=NULL,
-  dist_label=NULL, vel_label=NULL, acc_label=NULL,
+  xpos_label="X", ypos_label="Y", zpos_label=NULL,
+  timestamps_label="T",
+  add_labels=NULL,
   mt_id_label=NULL,
   pos_sep="_", pos_ids=NULL,
-  reset_timestamps=TRUE) {
-
+  reset_timestamps=TRUE,
+  verbose=TRUE) {
+  
+  # Ensure that raw_data is a data.frame
+  raw_data <- as.data.frame(raw_data)
+  
   # Add mt_id variable
   if (is.null(mt_id_label)) {
-    # if no column name for ID variable is provided create one
+    if (verbose) {
+      message("No mt_id_label provided. ",
+              "A new trial identifying variable called mt_id was created.")
+    }
+    
+    # if no column name for ID variable is provided, create one
     ids <- 1:nrow(raw_data)
     # use formatC to add leading 0s
-    raw_data[,mt_id] <- paste(
+    raw_data[,"mt_id"] <- paste(
       "id",
       formatC(ids, width=trunc(log10(nrow(raw_data)))+1, flag="0"),
       sep=""
       )
   } else {
-    if(anyDuplicated(raw_data[,mt_id_label]) > 0) {
-      stop(paste(
-        "Values in specified mt_id variable -",
-        mt_id_label, "- are not unique."
-      ))
+    
+    # Extract values of mt_id variable (and convert them to character)
+    ids <- as.character(raw_data[,mt_id_label[[1]]])
+    
+    # If more than one trial identifying variable is specified,
+    # combine them into one unique identifier.
+    if(length(mt_id_label)>1){
+      for(var in mt_id_label[-1]){
+        ids <- paste0(ids,'_',raw_data[,var])
+      }
     }
-    raw_data[,mt_id] <- raw_data[,mt_id_label]
+    
+    # Add mt_id column to raw_data
+    raw_data[,"mt_id"] <- ids
+    
+    
+    if(anyDuplicated(ids) > 0) {
+      stop("Values in specified mt_id_label variable are not unique.")
+    }
+    
   }
-
-  rownames(raw_data) <- raw_data[,mt_id]
-
-  # Extract timestamps from mt_variable_labels
-  timestamps <- mt_variable_labels[["timestamps"]]
-  xpos <- mt_variable_labels[["xpos"]]
-
-  # Create list with variables
-  mt_variable_labels <- list(
-    xpos = list("label"=xpos_label, "name"=mt_variable_labels[["xpos"]]),
-    ypos = list("label"=ypos_label, "name"=mt_variable_labels[["ypos"]]),
-    timestamps = list("label"=timestamps_label, "name"=mt_variable_labels[["timestamps"]]),
-    dist = list("label"=dist_label, "name"=mt_variable_labels[["dist"]]),
-    vel = list("label"=vel_label, "name"=mt_variable_labels[["vel"]]),
-    acc = list("label"=acc_label, "name"=mt_variable_labels[["acc"]])
-  )
+  
+  # Set rownames of raw_data to trial identifier
+  rownames(raw_data) <- raw_data[,"mt_id"]
+  
+  
+  # Collect and rename variables
+  timestamps <- "timestamps"
+  mt_labels = c(timestamps=timestamps_label,
+                xpos=xpos_label, ypos=ypos_label, zpos=zpos_label)
+  if(is.null(add_labels)==FALSE){
+    names(add_labels) <- add_labels
+    mt_labels <- c(mt_labels, add_labels)
+  }
+  
+  # Create an empty list for storing the column names of each variable
+  mt_columns <- vector("list", length=length(mt_labels))
+  names(mt_columns) <- names(mt_labels)
 
   if (is.null(pos_ids)){
-    message(
-      "No pos_ids provided. ",
-      "The following variables were extracting using grep:"
+    if(verbose){
+      message(
+        "No pos_ids provided. ",
+        "The following variables were found using grep:"
       )
+    }
+    
   }
 
-  for (i in names(mt_variable_labels)) {
-
-    if(!is.null(mt_variable_labels[[i]][["label"]])) {
-
-      # Create column names if pos_ids are specified
-      if (!is.null(pos_ids)) {
-        mt_variable_labels[[i]][["cols"]] <- paste(
-          mt_variable_labels[[i]][["label"]],
-          pos_ids, sep=pos_sep
-        )
-
-      # Extract column names using grep otherwise
+  for (mt_var in names(mt_labels)) {
+    
+    # Create specific column names if pos_ids are provided
+    if (!is.null(pos_ids)) {
+      mt_columns[[mt_var]] <- paste(
+        mt_labels[[mt_var]],
+        pos_ids, sep=pos_sep
+      )
+      
+      # Check if columns exist and, if not, ...
+      if (all(mt_columns[[mt_var]] %in% colnames(raw_data))==FALSE){
+        # ... tolerate it for timestamps (and add them later)
+        if (mt_var==timestamps){
+          mt_labels <- mt_labels[names(mt_labels)!=timestamps]
+          # ... return an error for all other variables
+        } else {
+          stop("No variables found for ",mt_var,".")  
+        }
+      }
+      
+    # Extract column names using grep otherwise
+    } else {
+      mt_columns[[mt_var]] <-  grep(
+        paste0("^", mt_labels[[mt_var]],pos_sep),
+        colnames(raw_data),
+        value=TRUE
+      )
+      
+      n_variables_found <- length(mt_columns[[mt_var]])
+      
+      # If variables are found, return them
+      if (n_variables_found>0){
+        if(verbose){
+          message(n_variables_found," variables found for ",mt_var,".") 
+        }
+      
+      # If no variables are found, ...
       } else {
-        mt_variable_labels[[i]][["cols"]] <- grep(
-          paste0("^", mt_variable_labels[[i]][["label"]]),
-          colnames(raw_data),
-          value=TRUE
-        )
-        message(paste0(i, ":"))
-        message(paste(mt_variable_labels[[i]][["cols"]], collapse=","))
-      }
-
-    } else {
-      if (i != "timestamps") {
-        mt_variable_labels[[i]] <- NULL
+        # ... tolerate it for timestamps (and add them later)
+        if (mt_var==timestamps){
+          mt_labels <- mt_labels[names(mt_labels)!=timestamps]
+        # ... return an error for all other variables
+        } else {
+          stop("No variables found for ",mt_var,".")  
+        }
       }
     }
+
   }
-
-  max_logs <- max(sapply(mt_variable_labels, function(x){length(x[["cols"]])}))
-
+  
   # Create array with MT data & drop raw data columns in original data.frame
+  max_logs <- max(sapply(mt_columns,length))
+  
   trajectories  <- array(
-    dim=c(nrow(raw_data), length(mt_variable_labels), max_logs),
-    dimnames=list(raw_data[,mt_id], as.vector(sapply(mt_variable_labels, function(x){x[["name"]]})), NULL))
+    dim=c(nrow(raw_data), length(mt_labels), max_logs),
+    dimnames=list(raw_data[,"mt_id"], names(mt_labels), NULL))
 
-  for (mt_var in mt_variable_labels) {
-    if (!is.null(mt_var[["label"]])) {
-      trajectories[,mt_var[["name"]],] <- as.matrix(raw_data[,mt_var[["cols"]]])
-      raw_data <- raw_data[, !colnames(raw_data) %in% mt_var[["cols"]], drop=FALSE]
-
-    # If no timestamp label is provided, create timestamps
-    } else {
-      trajectories[,timestamps,] <- matrix(
-        0:(max_logs-1),
-        nrow=nrow(trajectories), ncol=max_logs,
-        byrow=TRUE
-      )
-      # add NAs for timestamps (corresponding to NAs for xpos)
-      trajectories[,timestamps,][is.na(trajectories[,xpos,])] <- NA
+  for (mt_var in names(mt_labels)) {
+    trajectories[,mt_var,] <- as.matrix(raw_data[,mt_columns[[mt_var]]])
+    raw_data <- raw_data[, !colnames(raw_data) %in% mt_columns[[mt_var]], drop=FALSE]
+  }
+  
+  
+  # If no timestamps are found in the data, create timestamps
+  if (!timestamps%in%names(mt_labels)){
+    if(verbose){
+      message("0 variables found for ",timestamps,". ",
+              "Artificial timestamps variable created assuming equidistant time steps.")
+    }
+    timestamps_matrix <- matrix(
+      0:(dim(trajectories)[3]-1),
+      nrow=nrow(trajectories), ncol=dim(trajectories)[3],
+      byrow=TRUE
+    )
+    # Add NAs for timestamps (corresponding to NAs for first dimension)
+    timestamps_matrix[is.na(trajectories[,1,])] <- NA
+    
+    # Add timestamps to trajectories
+    trajectories <- mt_add_variables(trajectories, variables=list(timestamps=timestamps_matrix))
+    
+    
+  # Subtract first timestamp for each trial 
+  # if real timestamps are provided and option was selected
+  } else {
+    if (reset_timestamps) {
+      trajectories[,timestamps,] <- trajectories[,timestamps,] - trajectories[,timestamps,1]
     }
   }
 
-  # Subtract first timestamp for each trial
-  if (reset_timestamps) {
-    trajectories[,timestamps,] <- trajectories[,timestamps,] -
-      trajectories[,timestamps,1]
-  }
 
   return(c(list("data"=raw_data, "trajectories"=trajectories)))
 
@@ -507,133 +604,202 @@ mt_import_wide <- function(raw_data,
 
 #' Import mouse-tracking data saved in long format.
 #'
-#' \code{mt_import_long} receives a data.frame in which mouse-tracking data are
-#' stored in long format, i.e., where one row contains the logging data
-#' (timestamp, x- and y-position etc.) at one specific point in the trial. This
-#' is, for example, the case when exporting the trajectory data from the
-#' mousetrap package using \link{mt_reshape}. From this data.frame,
-#' \code{mt_import_long} creates a mousetrap data object containing the
-#' trajectories and additional data for further processing within the mousetrap
-#' package. \code{mt_import_long} returns a list, which includes the trajectory
-#' data as an array, and all other data as a data.frame. This data structure can
-#' then be passed on to other functions within this package, such as
-#' \link{mt_time_normalize} or \link{mt_calculate_measures}. The defaults are
-#' set so that no adjustments have to be made when importing a data.frame that
-#' was created using \link{mt_reshape}.
+#' \code{mt_import_long} receives a data.frame in which mouse-tracking data are 
+#' stored in long format, i.e., where one row contains the logging data 
+#' (timestamp, x- and y-position etc.) at one specific point in the trial. This 
+#' is, for example, the case when exporting the trajectory data from the 
+#' mousetrap package using \link{mt_reshape}. From this data.frame, 
+#' \code{mt_import_long} creates a mousetrap data object containing the 
+#' trajectories and additional data for further processing within the mousetrap 
+#' package. Specifically, it returns a list that includes the trajectory data as
+#' an array (called \code{trajectories}), and all other data as a data.frame
+#' (called \code{data}). This data structure can then be passed on to other
+#' functions within this package, such as \link{mt_time_normalize} or
+#' \link{mt_measures}. The defaults are set so that no adjustments
+#' have to be made when importing a data.frame that was created using
+#' \link{mt_reshape}.
 #'
 #' The coordinates are ordered according to the values in the column provided in
-#' the \code{mt_seq_label} parameter (\code{mt_seq} by default). If the
-#' corresponding column does not exist, the coordinates will be ordered
-#' according to their timestamps (drawn from the \code{timestamps} column by
-#' default).
+#' the \code{mt_seq_label} parameter (\code{mt_seq} by default). If the 
+#' corresponding column does not exist, the coordinates will be imported in the
+#' order in which they were stored in the raw_data.
+#' 
+#' If no timestamps are found in the data, \code{mt_import_long} automatically
+#' creates a timestamps variable with increasing integers (starting with 0)
+#' assuming equally spaced sampling intervals.
 #'
+#' @inheritParams mt_import_mousetrap
 #' @param raw_data a data.frame in long format, containing the raw data.
 #' @param xpos_label a character string specifying the column containing the
 #'   x-positions.
 #' @param ypos_label a character string specifying the column containing the
 #'   y-positions.
-#' @param timestamps_label a character string specifying the column containing
-#'   the timestamps.
-#' @param dist_label a character string specifying the column containing the
-#'   distance traveled.
-#' @param vel_label a character string specifying the column containing the
-#'   velocity.
-#' @param acc_label a character string specifying the column containing the
-#'   acceleration.
-#' @param mt_id_label a character string specifying the column that provides a
-#'   unique ID for every trial.
-#' @param mt_seq_label a character string specifying the column that indicactes
-#'   the order of the logged coordinates within a trial. If unspecified, the
-#'   coordinates will be ordered according to their timestamps.
-#' @param reset_timestamps logical indicating if the first timestamp should be
-#'   subtracted from all timestamps within a trial. Default is TRUE as it is
-#'   recommended for all following analyses in mousetrap.
+#' @param zpos_label an optional character string specifying the column containing the
+#'   z-positions.
+#' @param timestamps_label a character string specifying the column containing 
+#'   the timestamps. If no timestamps are found in the data, a timestamps 
+#'   variable with increasing integers will be created (assuming equidistant 
+#'   time steps).
+#' @param add_labels a character vector specifying columns containing additional
+#'   mouse-tracking variables.
+#' @param mt_id_label a character string (or vector) specifying the name of the
+#'   column that provides a unique ID for every trial (the trial identifier). If
+#'   more than one variable name is provided, a new ID variable will be created
+#'   by combining the values of each variable. The trial identifier will be set
+#'   as the \link{rownames} of the resulting trajectories and trial data, and
+#'   additionally be stored in the column "mt_id" in the trial data.
+#' @param mt_seq_label a character string specifying the column that indicates 
+#'   the order of the logged coordinates within a trial. If no column of the 
+#'   specified name is found in the data.frame, the coordinates will be imported
+#'   in the order in which they were stored in \code{raw_data}.
 #'
 #' @return  A mousetrap data object (see \link{mt_example}).
 #'
-#' @seealso \link{mt_import_mousetrap} and \link{mt_import_wide} for importing
-#' mouse-tracking data from other sources.
+#' @seealso \link{mt_import_mousetrap} and \link{mt_import_wide} for importing 
+#'   mouse-tracking data in other formats.
 #'
 #' @examples
+#' # Create data in long format for test purposes
+#' mt_data_long <- mt_reshape(mt_example, use2_variables="Condition")
+#' 
+#' # Import the data using mt_import_long
+#' mt_data <- mt_import_long(mt_data_long)
+#' 
+#' 
 #' \dontrun{
-#' exp_data <- read.csv("exp_data.csv")
-#' data <- mt_import_long(exp_data)
+#' # Import a hypothetical dataset that contains the
+#' # custom mouse-tracking variables angle and velocity
+#' mt_data <- mt_import_long(exp_data,
+#'   add_labels= c("angle", "velocity"))
 #' }
 #' @export
 mt_import_long <- function(raw_data,
-  xpos_label="xpos", ypos_label="ypos",
-  timestamps_label="timestamps",
-  dist_label="dist", vel_label="vel", acc_label="acc",
-  mt_id_label=mt_id, mt_seq_label="mt_seq",
-  reset_timestamps=TRUE) {
+  xpos_label="xpos", ypos_label="ypos", zpos_label=NULL,
+  timestamps_label="timestamps", add_labels=NULL,
+  mt_id_label="mt_id", mt_seq_label="mt_seq",
+  reset_timestamps=TRUE,
+  verbose=TRUE) {
+  
+  # Ensure that raw_data is a data.frame
+  raw_data <- as.data.frame(raw_data)
+  
+  
+  # Extract values of mt_id variable (and convert them to character)
+  ids <- as.character(raw_data[,mt_id_label[[1]]])
+  
+  # If more than one trial identifying variable is specified,
+  # combine them into one unique identifier.
+  if(length(mt_id_label)>1){
+    for(var in mt_id_label[-1]){
+      ids <- paste0(ids,'_',raw_data[,var])
+    }
+  }
+  
+  # Add mt_id column to raw_data
+  raw_data[,"mt_id"] <- ids
 
+  # Get order of ids (to preserve original order)
+  ids <- unique(ids)
+  
+  
   # Look for mt_seq variable (that indicates the order of the logs)
   if (is.null(mt_seq_label) | (mt_seq_label %in% colnames(raw_data) == FALSE)) {
-    message(
-      "No mt_seq variable found (that indicates the order of the logs). ",
-      "Automatically created variable based on the timestamps."
-    )
-    mt_seq_label <- "mt_seq"
-    raw_data[,"mt_seq"] <- 0
-
-    # Sort dataset according to mt_id and timestamps
-    raw_data <- raw_data[order(raw_data[,mt_id_label], raw_data[,timestamps_label]),]
-
-    # Add mt_seq
-    for (current_id in unique(raw_data[,mt_id_label])) {
-      raw_data[raw_data[,mt_id_label] == current_id,mt_seq_label] <-
-        1:sum(raw_data[,mt_id_label] == current_id)
+    if (verbose){
+      message(
+        "No mt_seq variable found (that indicates the order of the logs). ",
+        "Importing data in sequential order."
+      )
     }
+    
+    # Sort dataset according to mt_id
+    raw_data <- raw_data[order(raw_data[,"mt_id"]),]
+    
+  } else {
+    # Sort dataset according to mt_id and mt_seq
+    raw_data <- raw_data[order(raw_data[,"mt_id"], raw_data[,mt_seq_label]),]
   }
 
-  # Sort dataset according to mt_id and mt_seq
-  raw_data <- raw_data[order(raw_data[,mt_id_label], raw_data[,mt_seq_label]),]
 
-  # Rename and collect variables
-  mt_labels <- c(
-    timestamps=timestamps_label,
-    xpos=xpos_label, ypos=ypos_label,
-    dist=dist_label, vel=vel_label, acc=acc_label
-  )
+  # Collect and rename variables
+  timestamps <- "timestamps"
+  mt_labels = c(timestamps=timestamps_label,
+                xpos=xpos_label, ypos=ypos_label, zpos=zpos_label)
+  if(is.null(add_labels)==FALSE){
+    names(add_labels) <- add_labels
+    mt_labels <- c(mt_labels, add_labels)
+  }
   mt_include <- c()
-  timestamps <- mt_variable_labels[["timestamps"]]
-
   for (var in names(mt_labels)) {
-    label <- mt_labels[var]
+    label <- mt_labels[[var]]
     if (label %in% colnames(raw_data)) {
-      colnames(raw_data)[colnames(raw_data) == label] <- mt_variable_labels[[var]]
-      mt_include <- c(mt_include, mt_variable_labels[[var]])
+      colnames(raw_data)[colnames(raw_data) == label] <- var
+      mt_include <- c(mt_include, var)
+    } else if (var!=timestamps){
+      stop("Variable '", label, "' not found in the raw data.")
     }
   }
-
+  
+  
   # Create array for selected variables
-  trajectories <- reshape2::melt(raw_data,
-    measure.vars=mt_include, variable.name="mt_variable")
-  custom.formula <- stats::as.formula(paste(
-    mt_id, "mt_variable", mt_seq_label, sep="~"
-  ))
-  trajectories <- reshape2::acast(trajectories,
-    custom.formula, value.var="value")
-
-  # Remove dimnames for logs
-  dimnames(trajectories)[[3]] <- NULL
-
-  # Subtract first timestamp for each trial
-  if (reset_timestamps) {
-    trajectories[,timestamps,] <- trajectories[,timestamps,] - trajectories[,timestamps,1]
+  n_logs <- plyr::ddply(raw_data,"mt_id",nrow)
+  n_max <- max(n_logs$V1)
+  
+  trajectories <- array(
+    dim = c(nrow(n_logs),length(mt_include), n_max),
+    dimnames = list(n_logs$mt_id, mt_include, NULL))
+  
+  for(var in mt_include){
+    tmp_list <- plyr::dlply(raw_data,"mt_id",function(x) c(x[,var],rep(NA,n_max-nrow(x))))
+    tmp_mat  <- do.call(rbind,tmp_list)
+    trajectories[,var,] <- tmp_mat
   }
-
+  
+  
+  # If no timestamps are found in the data, create timestamps
+  if (!timestamps%in%mt_include){
+    if(verbose){
+      message("No timestamps were found in the data. ",
+              "Artificial timestamps variable created assuming equidistant time steps.")
+    }
+    timestamps_matrix <- matrix(
+      0:(dim(trajectories)[3]-1),
+      nrow=nrow(trajectories), ncol=dim(trajectories)[3],
+      byrow=TRUE
+    )
+    # Add NAs for timestamps (corresponding to NAs for first dimension)
+    timestamps_matrix[is.na(trajectories[,1,])] <- NA
+    
+    # Add timestamps to trajectories
+    trajectories <- mt_add_variables(trajectories, variables=list(timestamps=timestamps_matrix))
+  
+  
+  # Subtract first timestamp for each trial 
+  # if real timestamps are provided and option was selected
+  } else {
+    if (reset_timestamps) {
+      trajectories[,timestamps,] <- trajectories[,timestamps,] - trajectories[,timestamps,1]
+    }
+  }
+  
+  # Order trajectories
+  trajectories <- trajectories[ids,,]
+  
   # Create data.frame from leftover variables
-  raw_data <- raw_data[,!colnames(raw_data) %in% c(mt_include, mt_seq_label), drop=FALSE]
-  raw_data <- unique(raw_data)
-  # Rename mt_id column
-  colnames(raw_data)[colnames(raw_data) == mt_id_label] <- mt_id
-  # Issue warning if more than one line per mt_id remains
-  if (max(table(raw_data[,mt_id])) > 1) {
+  raw_data <- plyr::ddply(raw_data,"mt_id",function(x) unique(x[,!names(x)%in%c(mt_include,mt_seq_label)]))
+  
+  if (max(table(raw_data[,"mt_id"])) > 1) {
+    # Issue warning if more than one line per mt_id remains
     warning(
       "After removing trajectory data, ",
       "more than one unique row per mt_id remains."
     )
+    
+  } else {
+    
+    # Set rownames of raw_data to trial identifier
+    rownames(raw_data) <- raw_data[,"mt_id"]
+    # Ensure order of raw_data
+    raw_data <- raw_data[ids,]
   }
 
   return(list("data"=raw_data, "trajectories"=trajectories))

@@ -109,7 +109,7 @@ scale_within <-function(data,
 #'   functions (see \link{mt_example} for details).
 #' @param use a character string specifying which data should be used. By
 #'   default points to the \code{measures} data.frame created using
-#'   \link{mt_calculate_measures}.
+#'   \link{mt_measures}.
 #' @param use_variables a vector specifying which variables should be
 #'   standardized. If unspecified, all variables will be standardized.
 #' @param within a character string specifying one or more variables in
@@ -132,7 +132,7 @@ scale_within <-function(data,
 #' \link{scale} for the R base scale function.
 #'
 #' @examples
-#' mt_example <- mt_calculate_measures(mt_example)
+#' mt_example <- mt_measures(mt_example)
 #'
 #' # Standardize MAD and AD per subject
 #' mt_example <- mt_standardize(mt_example,
@@ -150,9 +150,9 @@ mt_standardize <-function(data, use="measures",
   prefix="z_", center=TRUE, scale=TRUE) {
 
   data[[use]] <- extract_data(data=data,use=use)
-
+  
   # Extract within variable values
-  within <- data$data[, within, drop=FALSE]
+  within <- data$data[rownames(data[[use]]), within, drop=FALSE]
 
   # Combine within variable values to one
   # vector coding each combination of values

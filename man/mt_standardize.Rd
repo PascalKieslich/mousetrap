@@ -13,7 +13,7 @@ functions (see \link{mt_example} for details).}
 
 \item{use}{a character string specifying which data should be used. By
 default points to the \code{measures} data.frame created using
-\link{mt_calculate_measures}.}
+\link{mt_measures}.}
 
 \item{use_variables}{a vector specifying which variables should be
 standardized. If unspecified, all variables will be standardized.}
@@ -43,7 +43,7 @@ around \link{scale_within}, focussed on mouse-tracking data stored in a
 mousetrap data object.
 }
 \examples{
-mt_example <- mt_calculate_measures(mt_example)
+mt_example <- mt_measures(mt_example)
 
 # Standardize MAD and AD per subject
 mt_example <- mt_standardize(mt_example,
