@@ -20,4 +20,4 @@ Installation
 Acknowledgments
 ---------------
 
-We thank Johanna Hepp for helpful comments on the documentation of this package and Monika Wiegelmann for testing a development version.
+We thank Johanna Hepp for helpful comments on the documentation of this package and Monika Wiegelmann for testing a development version. This work was supported by the University of Mannheim’s Graduate School of Economic and Social Sciences, which is funded by the German Research Foundation.
