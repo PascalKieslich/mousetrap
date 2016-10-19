@@ -120,18 +120,18 @@
 #' \link{mt_aggregate} and \link{mt_aggregate_per_subject} for aggregating the
 #' measures.
 #' 
-#' \link{merge} for merging data.
+#' \link[dplyr]{inner_join} for merging data using the \code{dplyr} package.
+#' 
 #' 
 #' @examples
 #' mt_example <- mt_derivatives(mt_example)
 #' mt_example <- mt_deviations(mt_example)
 #' mt_example <- mt_measures(mt_example)
 #' 
-#' # Merge measures with trial data (adding "_raw"
-#' # to columns already existing in the trial data)
-#' mt_example_results <- merge(
+#' # Merge measures with trial data
+#' mt_example_results <- dplyr::inner_join(
 #'   mt_example$data, mt_example$measures,
-#'   by="mt_id",suffixes=c("_raw",""))
+#'   by="mt_id")
 #'   
 #' @describeIn mt_measures Calculate mouse-tracking measures
 #' @export

@@ -56,12 +56,15 @@ create_results <- function(data,results,use,save_as,ids=NULL,overwrite=TRUE){
     # Return results depending on type of data and overwrite setting
     if (is_mousetrap_data(data)){
       if (save_as %in% names(data) & overwrite==FALSE) {
+        # ensure id column is present
+        data[[save_as]][,"mt_id"] <- rownames(data[[save_as]])
+        results[,"mt_id"] <- rownames(results)
         # merge by rownames
-        data[[save_as]] <- merge(data[[save_as]], results, by=0)
+        data[[save_as]] <- dplyr::inner_join(data[[save_as]], results, by="mt_id")
         # set rownames again
         rownames(data[[save_as]]) <- data[[save_as]][,1]
         # sort data and remove row.names column
-        data[[save_as]] <- data[[save_as]][ids,-1]
+        data[[save_as]] <- data[[save_as]][ids,]
       } else {
         data[[save_as]] <- cbind(mt_id=ids,results)
       }
