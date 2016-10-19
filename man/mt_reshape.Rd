@@ -7,8 +7,8 @@
 mt_reshape(data, use = "trajectories", use_variables = NULL,
   use2 = "data", use2_variables = NULL, subset = NULL,
   subject_id = NULL, aggregate = FALSE, aggregate_subjects_only = FALSE,
-  aggregation_function = mean, trajectories_long = TRUE, mt_id = "mt_id",
-  mt_seq = "mt_seq")
+  .funs = "mean", trajectories_long = TRUE, mt_id = "mt_id",
+  mt_seq = "mt_seq", aggregation_function = NULL)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
@@ -36,7 +36,7 @@ directly.}
 (in \code{data[[use2]]}) that should be merged with the data. If 
 \code{aggregate==TRUE}, the trajectories / measures will be aggregated 
 separately for each of the levels of these variables using 
-\link[reshape2]{dcast}.}
+\link[dplyr]{summarize_at}.}
 
 \item{subset}{a logical expression (passed on to \link{subset}) indicating 
 elements or rows to keep. If specified, \code{data[[use2]]} will be 
@@ -56,8 +56,8 @@ separately for each of the levels of the \code{use2_variables}.}
 aggregated per subject (if \code{subject_id} is specified and 
 \code{aggregate==TRUE}).}
 
-\item{aggregation_function}{the aggregation function passed on to 
-\link[reshape2]{dcast}. By default, the \link{mean} is calculated.}
+\item{.funs}{the aggregation function(s) passed on to 
+\link[dplyr]{summarize_at}. By default, the \link{mean} is calculated.}
 
 \item{trajectories_long}{logical indicating if the reshaped trajectories 
 should be returned in long or wide format. If \code{TRUE}, every recorded 
@@ -77,6 +77,8 @@ identifier correspond to the \code{rownames} of \code{data[[use]]} and
 contain the integers indicating the order of the mouse positions per 
 trajectory in the reshaped data. Only relevant if \code{data[[use]]}
 contains trajectories and \code{trajectories_long==TRUE}.}
+
+\item{aggregation_function}{Deprecated. Please use \code{.funs} instead.}
 }
 \value{
 A \link{data.frame} containing the reshaped data.
@@ -116,8 +118,8 @@ functions are described in the section "See Also".
 
 Note also that many merging, reshaping, and aggregation procedures can be 
 performed directly by using some of the basic R functions, e.g., \link{merge}
-and \link{aggregate}, or through the R packages \code{reshape2} or 
-\code{dplyr}, if desired.
+and \link{aggregate}, or through the R packages \code{dplyr} or 
+\code{reshape2}, if desired.
 }
 \examples{
 # Time-normalize trajectories
@@ -145,15 +147,8 @@ trajectories_wide <- mt_reshape(mt_example,
 
 \link{mt_aggregate_per_subject} for aggregating mouse-tracking measures and
 trajectories per subject.
-
-\link{merge} for merging data in R.
-
-\link{aggregate} for aggregating data in R.
-
-\link[reshape2]{dcast} for reshaping and aggregating data using the
-\code{reshape2} package.
-
-Regarding the dangers of using \code{mt_reshape}, please consider the
-following limerick before applying the function:
+ 
+\link[dplyr]{inner_join} for merging data and \link[dplyr]{summarize_at} for
+aggregating data using the \code{dplyr} package.
 }
 

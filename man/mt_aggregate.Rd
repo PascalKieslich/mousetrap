@@ -31,7 +31,7 @@ Alternatively, a data.frame can be provided directly.}
 \item{use2_variables}{a character string (or vector) specifying the variables
 (in \code{data[[use2]]}) across which the trajectories / measures will be 
 aggregated. For each combination of levels of the grouping variable(s), 
-aggregation will be performed separately using \link[reshape2]{dcast}.}
+aggregation will be performed separately using \link[dplyr]{summarize_at}.}
 
 \item{subject_id}{a character string specifying which column contains the 
 subject identifier. If specified, aggregation will be performed within 
@@ -65,10 +65,10 @@ a wrapper function for \link{mt_reshape}.
 mt_example <- mt_time_normalize(mt_example)
    
 # Aggregate time-normalized trajectories per condition
-  average_trajectories <-  mt_aggregate(mt_example,
-    use="tn_trajectories",
-    use2_variables="Condition"
-  )
+average_trajectories <-  mt_aggregate(mt_example,
+  use="tn_trajectories",
+  use2_variables="Condition"
+)
 
 
 # Calculate mouse-tracking measures
@@ -76,26 +76,24 @@ mt_example <- mt_measures(mt_example)
 
 # Aggregate measures per condition
 average_measures <- mt_aggregate(mt_example,
-    use="measures", use_variables=c("MAD", "AD"),
-    use2_variables="Condition"
-  )
+  use="measures", use_variables=c("MAD", "AD"),
+  use2_variables="Condition"
+)
       
 # Aggregate measures per condition
 # first within subjects and then across subjects
 average_measures <- mt_aggregate(mt_example,
-    use="measures", use_variables=c("MAD", "AD"),
-    use2_variables="Condition",
-    subject_id="subject_nr"
-  )
+  use="measures", use_variables=c("MAD", "AD"),
+  use2_variables="Condition",
+  subject_id="subject_nr"
+)
 
 }
 \seealso{
 \link{mt_aggregate_per_subject} for aggregating mouse-tracking measures and
 trajectories per subject.
 
-\link{aggregate} for aggregating data in R.
-
-\link[reshape2]{dcast} for reshaping and aggregating data using the
-\code{reshape2} package.
+\link[dplyr]{summarize_at} for aggregating data using the \code{dplyr} 
+package.
 }
 

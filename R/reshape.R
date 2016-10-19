@@ -33,8 +33,8 @@
 #' 
 #' Note also that many merging, reshaping, and aggregation procedures can be 
 #' performed directly by using some of the basic R functions, e.g., \link{merge}
-#' and \link{aggregate}, or through the R packages \code{reshape2} or 
-#' \code{dplyr}, if desired.
+#' and \link{aggregate}, or through the R packages \code{dplyr} or 
+#' \code{reshape2}, if desired.
 #' 
 #' 
 #' @param data a mousetrap data object created using one of the mt_import 
@@ -58,7 +58,7 @@
 #'   (in \code{data[[use2]]}) that should be merged with the data. If 
 #'   \code{aggregate==TRUE}, the trajectories / measures will be aggregated 
 #'   separately for each of the levels of these variables using 
-#'   \link[reshape2]{dcast}.
+#'   \link[dplyr]{summarize_at}.
 #' @param subset a logical expression (passed on to \link{subset}) indicating 
 #'   elements or rows to keep. If specified, \code{data[[use2]]} will be 
 #'   subsetted using this expression, and, afterwards, \code{data[[use]]} will 
@@ -73,8 +73,8 @@
 #' @param aggregate_subjects_only logical indicating whether data should only be
 #'   aggregated per subject (if \code{subject_id} is specified and 
 #'   \code{aggregate==TRUE}).
-#' @param aggregation_function the aggregation function passed on to 
-#'   \link[reshape2]{dcast}. By default, the \link{mean} is calculated.
+#' @param .funs the aggregation function(s) passed on to 
+#'   \link[dplyr]{summarize_at}. By default, the \link{mean} is calculated.
 #' @param trajectories_long logical indicating if the reshaped trajectories 
 #'   should be returned in long or wide format. If \code{TRUE}, every recorded 
 #'   position in a trajectory is placed in another row (whereby the order of the
@@ -91,6 +91,7 @@
 #'   contain the integers indicating the order of the mouse positions per 
 #'   trajectory in the reshaped data. Only relevant if \code{data[[use]]}
 #'   contains trajectories and \code{trajectories_long==TRUE}.
+#' @param aggregation_function Deprecated. Please use \code{.funs} instead.
 #'   
 #' @return A \link{data.frame} containing the reshaped data.
 #' 
@@ -99,16 +100,10 @@
 #' 
 #' \link{mt_aggregate_per_subject} for aggregating mouse-tracking measures and
 #' trajectories per subject.
+#'  
+#' \link[dplyr]{inner_join} for merging data and \link[dplyr]{summarize_at} for
+#' aggregating data using the \code{dplyr} package.
 #' 
-#' \link{merge} for merging data in R.
-#' 
-#' \link{aggregate} for aggregating data in R.
-#' 
-#' \link[reshape2]{dcast} for reshaping and aggregating data using the
-#' \code{reshape2} package.
-#' 
-#' Regarding the dangers of using \code{mt_reshape}, please consider the
-#' following limerick before applying the function:
 #' 
 #' @examples
 #' # Time-normalize trajectories
@@ -136,21 +131,20 @@ mt_reshape <- function(data,
   use2="data", use2_variables=NULL,
   subset=NULL, subject_id=NULL,
   aggregate=FALSE, aggregate_subjects_only=FALSE,
-  aggregation_function=mean,
+  .funs="mean",
   trajectories_long=TRUE,
-  mt_id="mt_id", mt_seq="mt_seq") {
+  mt_id="mt_id", mt_seq="mt_seq",
+  aggregation_function=NULL) {
   
   # Use substitute to allow that arguments in subset
   # can be specified like the arguments in the subset function
   subset <- substitute(subset)
   
-  # Collect variables
-  selected_variables <- c(mt_id)
-  if (is.null(subject_id) == FALSE) {
-    selected_variables <- c(selected_variables, subject_id)
-  }
-  if (is.null(use2_variables) == FALSE) {
-    selected_variables <- c(selected_variables, use2_variables)
+  if(is.null(aggregation_function)==FALSE){
+    warning("The argument aggregation_function is deprecated. ",
+            "Please use .funs instead and consult the function documentation for its enhanced functionality.",
+            call. = FALSE)
+    .funs <- aggregation_function
   }
   
   # Assume trajectories are provided in case class is an array
@@ -158,21 +152,39 @@ mt_reshape <- function(data,
   
   # Extract relevant data for trajectories
   if (type_trajectories) {
+    
     # Extract trajectory data
     dataset <- extract_data(data=data,use=use)
     
-    # Melt trajectory data
-    dataset <- reshape2::melt(dataset, 
-      varnames=c(mt_id, "mt_variable", mt_seq),
-      na.rm=TRUE
-    )
+    # Select all variables if use_variables is not specified
+    if (is.null(use_variables)) {
+      use_variables <- dimnames(dataset)[[2]]
     
-    # Select variables
-    if (!is.null(use_variables)) {
-      dataset <- dataset[dataset[,"mt_variable"] %in% use_variables,]
+    # Otherwise select relevant dimensions
+    } else{
+      dataset <- dataset[,use_variables,,drop=FALSE]
     }
     
-    use_variables <- as.character(unique(dataset[,"mt_variable"]))
+    # Get dim variables
+    dim_count <- dim(dataset)
+    dim_names <- dimnames(dataset)
+    
+    # Reshape array into long format
+    dataset <- aperm(dataset,c(3,1,2))
+    dim(dataset) <- c(dim_count[1]*dim_count[3],dim_count[2])
+    
+    # Create data.frame adding mt_id and mt_seq columns
+    dataset <- data.frame(
+      rep(dim_names[[1]],each=dim_count[3]),  #mt_id
+      rep(1:dim_count[3],times=dim_count[1]), #mt_seq
+      dataset,
+      stringsAsFactors=FALSE
+    )
+    colnames(dataset) <- c(mt_id,mt_seq,dim_names[[2]])
+    
+    # Remove columns that only contain NAs
+    dataset <- dataset[rowSums(is.na(dataset[,use_variables,drop=FALSE]))<length(use_variables),,drop=FALSE]
+    
     
   # Extract relevant data for measures
   } else {
@@ -183,85 +195,64 @@ mt_reshape <- function(data,
     # Add mt_id column based on the rownames
     dataset[,mt_id] <- rownames(dataset) 
     
-    # Select variables
-    if (!is.null(use_variables)){
-      dataset <- dataset[,c(mt_id,use_variables)]
+    # Select all variables if use_variables is not specified
+    if (is.null(use_variables)) {
+      use_variables <- colnames(dataset)
+      use_variables <- use_variables[use_variables!=mt_id]
     }
-    
-    # Melt measures data
-    dataset <- reshape2::melt(dataset,
-      id.vars=mt_id,
-      variable.name="mt_variable",
-      na.rm=TRUE
-    )
+    dataset <- dataset[,c(mt_id,use_variables),drop=FALSE]
     
     # Set mt_seq to NULL as it is only required for trajectories
-    # (simplifies formula specification later on)
+    # (simplifies grouping_variables specification later on)
     mt_seq <- NULL
     
   }
   
   
-  # Retrieve data for filtering and merging
-  # and merge it with trajectory data
-  if(class(use2) == "character") {
-    data <- extract_data(data=data,use=use2)
-  } else {
-    data <- use2
-  }
-  
-  # Add mt_id column to data based on rownames
-  data[,mt_id] <- rownames(data)
-  
-  # Filter data (optional)
-  if (is.null(subset) == FALSE) {
-    data <- base::subset(data, subset=eval(subset))
-  }
-  
-  # Select relevant columns
-  data <- data[,selected_variables,drop=FALSE]
-  
-  # Merge data (== perform filtering for dataset)
-  # check first if all IDs from data are included in the dataset
-  # and if not, return a warning
-  if (all(data[,mt_id] %in% dataset[,mt_id]) == FALSE) {
-    warning(
-      "For some trials in the filtered dataset in data[[use2]], ",
-      "no corresponding trials in data[[use]] were found."
-    )
-  }
-  dataset <- merge(data, dataset, by=mt_id, all=FALSE)
-  
-  
-  # Case: no aggregation desired
-  if (aggregate == FALSE) {
+  # If subset or additional variables are specified, look at data[[use2]]
+  if (is.null(use2_variables)==FALSE | is.null(subset) == FALSE | is.null(subject_id)==FALSE) {
     
-    # If no data variables should be included
-    # simply return formatted trajectory data
-    if (length(selected_variables) == 1) {
-      custom_formula <- paste(c(mt_id, mt_seq), collapse="+")  
-      
-    # If variables are specified
-    # include variables when reshaping the data
-    } else {  
-      custom_formula <- paste(c(mt_id, mt_seq, selected_variables[-1]), collapse="+")
+    # Retrieve data for filtering and merging
+    # and merge it with trajectory data
+    if(class(use2) == "character") {
+      data <- extract_data(data=data,use=use2)
+    } else {
+      data <- use2
     }
     
-    custom_formula <- stats::as.formula(paste(custom_formula, "mt_variable", sep="~"))
-    dataset <- reshape2::dcast(
-      dataset,
-      custom_formula,
-      fun.aggregate=aggregation_function,
-      value.var="value"
-    )
+    # Add mt_id column to data based on rownames
+    data[,mt_id] <- rownames(data)
     
+    # Filter data (optional)
+    if (is.null(subset) == FALSE) {
+      data <- base::subset(data, subset=eval(subset))
+    }
     
-  # Case: Aggregation desired  
-  } else {
+    # Select relevant columns
+    data <- data[,c(mt_id,subject_id,use2_variables),drop=FALSE]
     
+    # Merge data (== perform filtering for dataset)
+    # check first if all IDs from data are included in the dataset
+    # and if not, return a warning
+    if (all(data[,mt_id] %in% dataset[,mt_id]) == FALSE) {
+      warning(
+        "For some trials in data[[use2]], ",
+        "no corresponding trials in data[[use]] were found."
+      )
+    }
+    
+    # Merge datasets
+    dataset <- dplyr::inner_join(data, dataset, by=mt_id)
+    
+  }
+  
+  
+  # Perform (optional) aggregation
+  if (aggregate) {
+    
+    # For trajectories, check number of obervations per trajectory
     if (type_trajectories) {
-      # Check number of obervations per trajectory
-      if (length(table(table(dataset$mt_id))) > 1) {
+      if (length(table(table(dataset[,mt_id]))) > 1) {
         warning(
           "Trajectories differ in the number of logs. ",
           "Aggregate trajectory data may be incorrect."
@@ -272,27 +263,17 @@ mt_reshape <- function(data,
     # If subject variable is specified, always aggregate within subjects first
     if (is.null(subject_id) == FALSE) {
       
-      # Adjust aggregation procedure depending on whether aggregation
-      # should only be performed within subjects
-      if (aggregate_subjects_only) {
-        custom_formula <- paste(c(subject_id, use2_variables, mt_seq), collapse="+")
-        custom_formula <- stats::as.formula(paste(custom_formula, "mt_variable", sep="~"))
-        dataset <- reshape2::dcast(dataset, 
-          custom_formula,
-          fun.aggregate=aggregation_function,
-          value.var="value"
-        )
+      grouping_variables <- c(subject_id, use2_variables, mt_seq)
       
-      # ... or also across subjects afterwards
-      } else {
-        custom_formula <- paste(c(subject_id, use2_variables, mt_seq, "mt_variable"), collapse="+")
-        custom_formula <- stats::as.formula(paste(custom_formula, ".", sep="~"))
-        dataset <- reshape2::dcast(dataset,
-          custom_formula,
-          fun.aggregate=aggregation_function,
-          value.var="value"
-        )
-        colnames(dataset)[ncol(dataset)] <- "value"  
+      dataset <- dplyr::group_by_(dataset,.dots=grouping_variables)
+      dataset <- dplyr::summarize_at(dataset,.funs=.funs, .cols=use_variables)
+      
+      if (aggregate_subjects_only == FALSE){
+        if(length(.funs)>1){
+          stop("More than one function was passed on to .funs. ",
+               "This does not work if aggregation should be performed ",
+               "both first within and then across subjects.")
+        }
       }
       
     }
@@ -301,54 +282,32 @@ mt_reshape <- function(data,
     # Aggregate trajectories per group (if this is desired)
     if (aggregate_subjects_only == FALSE | is.null(subject_id)){
       
-      # Case aggregation should be performed across all trials
-      if (is.null(use2_variables)){
-        if (type_trajectories){
-          custom_formula <- mt_seq  
-        } else {
-          custom_formula <- "."
-        }
-      
-      # Case aggregation should be performed separately for each level of use_variables2
-      } else {
-        custom_formula <- paste(c(use2_variables,mt_seq),collapse="+")
+      # Optionally group data
+      grouping_variables <- c(use2_variables,mt_seq)
+      if(is.null(grouping_variables)==FALSE){
+        dataset <- dplyr::group_by_(dataset,.dots=grouping_variables)
       }
       
       # Perform aggregation
-      custom_formula <- stats::as.formula(paste(custom_formula, "mt_variable", sep="~"))
-      dataset <- reshape2::dcast(dataset,
-        custom_formula,
-        fun.aggregate=aggregation_function,
-        value.var="value"
-      )  
+      dataset <- dplyr::summarize_at(dataset, .funs=.funs, .cols=use_variables)
       
-      # Remove empty first column in case formula ".~mt_variable" was used
-      if (is.null(use2_variables) & type_trajectories == FALSE) {
-        dataset <- dataset[,-1]
-      }
     }
     
   }
   
-  if (trajectories_long) {
-    dataset[is.na(dataset)] <- NA
-    return(dataset)
-  } else {
-    dataset <- reshape2::melt(dataset,
-      measure.vars=use_variables,
-      variable.name = "mt_variable"
-    )
-    custom_formula_rows <- paste(colnames(dataset)[!colnames(dataset) %in% c("mt_variable", "value", mt_seq)], collapse="+")
-    custom_formula_cols <- paste(c("mt_variable", mt_seq), collapse="+")
-    custom_formula <- stats::as.formula(paste(custom_formula_rows, custom_formula_cols, sep="~"))
-    dataset <- reshape2::dcast(dataset,
-      custom_formula,
-      fun.aggregate=aggregation_function,
-      value.var="value"
-    )  
-    dataset[is.na(dataset)] <- NA
-    return(dataset)
+  # Convert to wide format if specified
+  if (trajectories_long==FALSE) {
+    
+    dataset <- tidyr::gather_(dataset, key_col="key", value_col="val", gather_cols=use_variables)
+    dataset <- tidyr::unite_(dataset, col="key", from=c("key",mt_seq),sep="_")
+    # convert to factor to insure correct column order
+    dataset$key <- factor(dataset$key,levels=unique(dataset$key))
+    dataset <- tidyr::spread_(dataset, key_col="key", value_col="val")
+   
   }
+  
+  return(dataset)
+  
 }
 
 #' Aggregate mouse-tracking data per condition.
@@ -377,7 +336,7 @@ mt_reshape <- function(data,
 #' @param use2_variables a character string (or vector) specifying the variables
 #'   (in \code{data[[use2]]}) across which the trajectories / measures will be 
 #'   aggregated. For each combination of levels of the grouping variable(s), 
-#'   aggregation will be performed separately using \link[reshape2]{dcast}.
+#'   aggregation will be performed separately using \link[dplyr]{summarize_at}.
 #' @param subject_id a character string specifying which column contains the 
 #'   subject identifier. If specified, aggregation will be performed within 
 #'   subjects first (that is, within subjects for all available values of the 
@@ -392,20 +351,18 @@ mt_reshape <- function(data,
 #' \link{mt_aggregate_per_subject} for aggregating mouse-tracking measures and
 #' trajectories per subject.
 #' 
-#' \link{aggregate} for aggregating data in R.
-#' 
-#' \link[reshape2]{dcast} for reshaping and aggregating data using the
-#' \code{reshape2} package.
+#' \link[dplyr]{summarize_at} for aggregating data using the \code{dplyr} 
+#' package.
 #' 
 #' @examples
 #' # Time-normalize trajectories
 #' mt_example <- mt_time_normalize(mt_example)
 #'    
 #' # Aggregate time-normalized trajectories per condition
-#'   average_trajectories <-  mt_aggregate(mt_example,
-#'     use="tn_trajectories",
-#'     use2_variables="Condition"
-#'   )
+#' average_trajectories <-  mt_aggregate(mt_example,
+#'   use="tn_trajectories",
+#'   use2_variables="Condition"
+#' )
 #' 
 #' 
 #' # Calculate mouse-tracking measures
@@ -413,17 +370,17 @@ mt_reshape <- function(data,
 #' 
 #' # Aggregate measures per condition
 #' average_measures <- mt_aggregate(mt_example,
-#'     use="measures", use_variables=c("MAD", "AD"),
-#'     use2_variables="Condition"
-#'   )
+#'   use="measures", use_variables=c("MAD", "AD"),
+#'   use2_variables="Condition"
+#' )
 #'       
 #' # Aggregate measures per condition
 #' # first within subjects and then across subjects
 #' average_measures <- mt_aggregate(mt_example,
-#'     use="measures", use_variables=c("MAD", "AD"),
-#'     use2_variables="Condition",
-#'     subject_id="subject_nr"
-#'   )
+#'   use="measures", use_variables=c("MAD", "AD"),
+#'   use2_variables="Condition",
+#'   subject_id="subject_nr"
+#' )
 #' 
 #' @export
 mt_aggregate <- function(data,
@@ -463,10 +420,8 @@ mt_aggregate <- function(data,
 #' \link{mt_aggregate} for aggregating mouse-tracking measures and trajectories
 #' per condition.
 #' 
-#' \link{aggregate} for aggregating data in R.
-#' 
-#' \link[reshape2]{dcast} for reshaping and aggregating data using the
-#' \code{reshape2} package.
+#' \link[dplyr]{summarize_at} for aggregating data using the \code{dplyr}
+#' package.
 #' 
 #' @examples
 #' # Time-normalize trajectories
