@@ -27,14 +27,14 @@ Imports:
     pracma,
     dplyr (>= 0.5.0),
     tidyr,
+    magrittr,
     graphics,
     grDevices,
     ggplot2,
     scales,
     psych (>= 1.2.4),
     diptest,
-    RColorBrewer,
-    plyr
+    RColorBrewer
 Suggests:
     readbulk,
     testthat
