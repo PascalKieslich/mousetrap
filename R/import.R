@@ -699,7 +699,8 @@ mt_import_long <- function(raw_data,
   
   # Add mt_id column to raw_data
   raw_data[,"mt_id"] <- ids
-
+  mt_id <- "mt_id"
+  
   # Get order of ids (to preserve original order)
   ids <- unique(ids)
   
@@ -719,8 +720,17 @@ mt_import_long <- function(raw_data,
   } else {
     # Sort dataset according to mt_id and mt_seq
     raw_data <- raw_data[order(raw_data[,"mt_id"], raw_data[,mt_seq_label]),]
+    
+    # Remove mt_seq_label
+    raw_data <- raw_data[,colnames(raw_data)!=mt_seq_label]
   }
-
+  
+  
+  # Create mt_seq variable
+  raw_data <- raw_data %>%
+    dplyr::group_by(mt_id) %>%
+    dplyr::mutate_(.dots = stats::setNames(list("row_number()"), "mt_seq")) %>%
+    dplyr::ungroup()
 
   # Collect and rename variables
   timestamps <- "timestamps"
@@ -743,18 +753,20 @@ mt_import_long <- function(raw_data,
   
   
   # Create array for selected variables
-  n_logs <- plyr::ddply(raw_data,"mt_id",nrow)
-  n_max <- max(n_logs$V1)
+  n_logs <- dplyr::count(raw_data,mt_id)
+  n_max <- max(n_logs$n)
   
   trajectories <- array(
     dim = c(nrow(n_logs),length(mt_include), n_max),
     dimnames = list(n_logs$mt_id, mt_include, NULL))
   
   for(var in mt_include){
-    tmp_list <- plyr::dlply(raw_data,"mt_id",function(x) c(x[,var],rep(NA,n_max-nrow(x))))
-    tmp_mat  <- do.call(rbind,tmp_list)
-    trajectories[,var,] <- tmp_mat
-  }
+    reshaped_data <- raw_data %>%
+      dplyr::select_(.dots=c("mt_id","mt_seq",var)) %>%
+      tidyr::spread_("mt_seq",var)
+    trajectories[,var,] <- as.matrix(reshaped_data[,-1])
+      
+    }
   
   
   # If no timestamps are found in the data, create timestamps
@@ -787,7 +799,7 @@ mt_import_long <- function(raw_data,
   trajectories <- trajectories[ids,,]
   
   # Create data.frame from leftover variables
-  raw_data <- plyr::ddply(raw_data,"mt_id",function(x) unique(x[,!names(x)%in%c(mt_include,mt_seq_label)]))
+  raw_data <- as.data.frame(unique(raw_data[,!colnames(raw_data)%in%c(mt_include,"mt_seq")]))
   
   if (max(table(raw_data[,"mt_id"])) > 1) {
     # Issue warning if more than one line per mt_id remains
