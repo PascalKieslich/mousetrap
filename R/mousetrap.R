@@ -27,8 +27,8 @@
 #'   A number of functions are available that perform preprocessing operations 
 #'   typically used before analyzing mouse-tracking data.
 #'   
-#'   \link{mt_remap_symmetric} remaps mouse trajectories so that they share a 
-#'   common direction.
+#'   \link{mt_remap_symmetric} remaps mouse trajectories to one side (or one
+#'   quadrant) of the coordinate system.
 #'   
 #'   \link{mt_exclude_initiation}	excludes the initial phase of a trial without 
 #'   mouse movement.
@@ -81,7 +81,7 @@
 #'   \link{mt_check_resolution}	checks the (temporal) logging resolution of raw
 #'   trajectories.
 #'   
-#' @section Reshaping and aggregation functions:
+#' @section Reshaping, aggregation, and export functions:
 #'   
 #'   A number of helper functions are provided for aggregating, plotting, and 
 #'   exporting the multi-dimensional mouse trajectory arrays.
@@ -93,6 +93,10 @@
 #'   
 #'   \link{mt_aggregate_per_subject}	aggregates mouse-tracking data per 
 #'   (within subjects-) condition separately for each subject.
+#'   
+#'   \link{mt_export_long} exports mouse-tracking data in long format.
+#' 
+#'   \link{mt_export_wide} exports mouse-tracking data in wide format.
 #'   
 #' @section Visualization functions:
 #'   

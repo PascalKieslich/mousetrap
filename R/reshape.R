@@ -50,12 +50,12 @@
 #'   data.frame with mouse-tracking measures is provided. Corresponds to the 
 #'   labels of the array dimensions in case a trajectory array is provided. If 
 #'   unspecified, all variables will be reshaped.
-#' @param use2 a character string specifying where the other trial data can be 
-#'   found. Defaults to "data" as \code{data[["data"]]} usually contains all non
-#'   mouse-tracking trial data. Alternatively, a data.frame can be provided 
-#'   directly.
-#' @param use2_variables a character string (or vector) specifying the variables
-#'   (in \code{data[[use2]]}) that should be merged with the data. If 
+#' @param use2 an optional character string specifying where the other trial
+#'   data can be found. Defaults to "data" as \code{data[["data"]]} usually
+#'   contains all non mouse-tracking trial data. Alternatively, a data.frame can
+#'   be provided directly.
+#' @param use2_variables an optional character string (or vector) specifying the
+#'   variables (in \code{data[[use2]]}) that should be merged with the data. If 
 #'   \code{aggregate==TRUE}, the trajectories / measures will be aggregated 
 #'   separately for each of the levels of these variables using 
 #'   \link[dplyr]{summarize_at}.
@@ -100,6 +100,10 @@
 #' 
 #' \link{mt_aggregate_per_subject} for aggregating mouse-tracking measures and
 #' trajectories per subject.
+#' 
+#' \link{mt_export_long} for exporting mouse-tracking data in long format.
+#' 
+#' \link{mt_export_wide} for exporting mouse-tracking data in wide format.
 #'  
 #' \link[dplyr]{inner_join} for merging data and \link[dplyr]{summarize_at} for
 #' aggregating data using the \code{dplyr} package.
