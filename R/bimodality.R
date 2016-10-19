@@ -207,7 +207,7 @@ mt_check_bimodality <- function(data,
       use=use, use_variables=use_variables,
       use2_variables=grouping_variables,
       aggregate=TRUE,
-      aggregation_function=aggregation_function,
+      .funs=aggregation_function,
       ...
     )
   }
