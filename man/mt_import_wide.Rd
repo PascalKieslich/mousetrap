@@ -90,8 +90,8 @@ assuming equally spaced sampling intervals.
 }
 \examples{
 # Create data in wide format for test purposes
-mt_data_wide <- mt_reshape(mt_example, use2_variables="Condition",
-  trajectories_long=FALSE)
+mt_data_wide <- mt_export_wide(mt_example,
+  use2_variables=c("subject_nr","Condition"))
 
 # Import the data using mt_import_wide
 mt_data <- mt_import_wide(mt_data_wide,

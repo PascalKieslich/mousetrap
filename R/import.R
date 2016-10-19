@@ -412,8 +412,8 @@ mt_import_mousetrap <- function(raw_data,
 #'
 #' @examples
 #' # Create data in wide format for test purposes
-#' mt_data_wide <- mt_reshape(mt_example, use2_variables="Condition",
-#'   trajectories_long=FALSE)
+#' mt_data_wide <- mt_export_wide(mt_example,
+#'   use2_variables=c("subject_nr","Condition"))
 #' 
 #' # Import the data using mt_import_wide
 #' mt_data <- mt_import_wide(mt_data_wide,
@@ -662,7 +662,8 @@ mt_import_wide <- function(raw_data,
 #'
 #' @examples
 #' # Create data in long format for test purposes
-#' mt_data_long <- mt_reshape(mt_example, use2_variables="Condition")
+#' mt_data_long <- mt_export_long(mt_example,
+#'   use2_variables=c("subject_nr","Condition"))
 #' 
 #' # Import the data using mt_import_long
 #' mt_data <- mt_import_long(mt_data_long)
