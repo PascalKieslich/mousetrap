@@ -7,7 +7,7 @@
   * As a consequence of the previous changes: Removal of the internal variables `mt_variable_labels` and `mt_id`.
   * Removed "calculate" from all mt_calculate functions: `mt_calculate_measures`, `mt_calculate_derivatives`, `mt_calculate_deviations` are now called `mt_measures`, `mt_derivatives`, `mt_deviations`.
   * Introduction of internal utils function `create_results` (that simplifies including the newly created trajectories or measures in the existing mousetrap data object).
-  * Performance improvement of reshaping, aggregation, and visualization functions through internal changes in `mt_reshape`: `base::merge` and `reshape2` functions are replaced with functions from the `tidyr` and `dplyr` package (and custom functions). Package dependencies were adjusted accordingly.
+  * Performance improvement of reshaping, aggregation, and visualization functions through internal changes in `mt_reshape`: `base::merge` and `reshape2` functions are replaced with functions from the `tidyr` and `dplyr` packages (and custom functions). Package dependencies were adjusted accordingly. As the `dplyr` functions may introduce additional classes for the reshaped data (such as `grouped_df` and `tbl_df`), a new argument (`convert_df`) is introduced that converts the reshaped data to "pure" data.frames by default (thereby dropping additional classes).
 * Changes in specific functions
   * `mt_import_mousetrap`, `mt_import_long`, `mt_import_wide`: Allow specifying several variables for the trial identifier in `mt_id_label`. A a new ID variable will be created by combining the values of each variable.
   * `mt_import_mousetrap`: Make import more robust against variables with empty logs (warning message is returned in the end) (closes #5, thanks to @sbrockhaus).
@@ -19,7 +19,7 @@
   * `mt_deviations`: Vectorized function `point_to_line` for time speed up (closes #2, thanks to @sbrockhaus).
   * `mt_measures`: Allow for flexible dimension labels and rename all measures columns relating only to x- or y-positions depending on the values in dimensions (e.g., `x_max` becomes `xpos_max`, `x_flips` becomes `xpos_flips`). Change column label `xy_dist` to `total_dist`.
   * `mt_measures`: Simplify AUC calculation using the actual x- and y-positions . New AUC values correlate to 1.00 with old values in `mt_example`, but in some cases extremely small differences are possible (maximum difference of 2.328e-10 in mt_example).
-  * `mt_reshape`, `mt_aggregate`, `mt_aggregate_per_subject`: Replace `aggregation_function` argument with `.funs`, which is passed on to the aggregation function(`summarize_at`). `.funs` also allows for specifying several aggregation functions
+  * `mt_reshape`, `mt_aggregate`, `mt_aggregate_per_subject`: Replace `aggregation_function` argument with `.funs`, which is passed on to the aggregation function(`summarize_at`). `.funs` also allows for specifying several aggregation functions.
   * `mt_plot_per_trajectory`: New arguments `xlim` and `ylim` for specifying the axes limits explicitly and `axes_exact` for plotting exact axes.
   * `mt_plot_per_trajectory`: New arguments `rect`, `color`, and `fill` for plotting rectangles (usually representing the response buttons).
   * `mt_plot` (and related functions): New argument `points` allows for plotting points.

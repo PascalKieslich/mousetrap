@@ -7,8 +7,8 @@
 mt_reshape(data, use = "trajectories", use_variables = NULL,
   use2 = "data", use2_variables = NULL, subset = NULL,
   subject_id = NULL, aggregate = FALSE, aggregate_subjects_only = FALSE,
-  .funs = "mean", trajectories_long = TRUE, mt_id = "mt_id",
-  mt_seq = "mt_seq", aggregation_function = NULL)
+  .funs = "mean", trajectories_long = TRUE, convert_df = TRUE,
+  mt_id = "mt_id", mt_seq = "mt_seq", aggregation_function = NULL)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 
@@ -67,6 +67,14 @@ trajectory is saved in wide format and the respective positions are indexed
 by adding an integer to the corresponding label (e.g., \code{xpos_1}, 
 \code{xpos_2}, ...). Only relevant if \code{data[[use]]} contains 
 trajectories.}
+
+\item{convert_df}{logical indicating if the reshaped data should be converted
+to a \link{data.frame} using \link{as.data.frame}. This will drop 
+potentially existing additional classes (such as \link[dplyr]{tbl_df}) that
+result from the internally used \code{dplyr} functions for data grouping 
+and aggregation. As these additional classes might - on rare occasions - 
+cause problems with functions from other packages, the reshaped data are
+converted to "pure" data.frames by default.}
 
 \item{mt_id}{a character string specifying the name of the column that will 
 contain the trial identifier in the reshaped data. The values for the trial

@@ -83,6 +83,13 @@
 #'   by adding an integer to the corresponding label (e.g., \code{xpos_1}, 
 #'   \code{xpos_2}, ...). Only relevant if \code{data[[use]]} contains 
 #'   trajectories.
+#' @param convert_df logical indicating if the reshaped data should be converted
+#'   to a \link{data.frame} using \link{as.data.frame}. This will drop 
+#'   potentially existing additional classes (such as \link[dplyr]{tbl_df}) that
+#'   result from the internally used \code{dplyr} functions for data grouping 
+#'   and aggregation. As these additional classes might - on rare occasions - 
+#'   cause problems with functions from other packages, the reshaped data are
+#'   converted to "pure" data.frames by default.
 #' @param mt_id a character string specifying the name of the column that will 
 #'   contain the trial identifier in the reshaped data. The values for the trial
 #'   identifier correspond to the \code{rownames} of \code{data[[use]]} and 
@@ -136,7 +143,7 @@ mt_reshape <- function(data,
   subset=NULL, subject_id=NULL,
   aggregate=FALSE, aggregate_subjects_only=FALSE,
   .funs="mean",
-  trajectories_long=TRUE,
+  trajectories_long=TRUE, convert_df=TRUE,
   mt_id="mt_id", mt_seq="mt_seq",
   aggregation_function=NULL) {
   
@@ -310,6 +317,10 @@ mt_reshape <- function(data,
    
   }
   
-  return(dataset)
+  if(convert_df){
+    return(as.data.frame(dataset))
+  } else {
+    return(dataset) 
+  }
   
 }
