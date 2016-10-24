@@ -25,10 +25,10 @@
 #'   (in \code{data[[use2]]}) across which the trajectories / measures will be 
 #'   aggregated. For each combination of levels of the grouping variable(s), 
 #'   aggregation will be performed separately using \link[dplyr]{summarize_at}.
-#' @param subject_id a character string specifying which column contains the 
-#'   subject identifier. If specified, aggregation will be performed within 
-#'   subjects first (that is, within subjects for all available values of the 
-#'   grouping variables specified in \code{use2_variables}).
+#' @param subject_id an optional character string specifying which column
+#'   contains the subject identifier. If specified, aggregation will be
+#'   performed within subjects first (i.e., within subjects for all available
+#'   values of the grouping variables specified in \code{use2_variables}).
 #' @param ... additional arguments passed on to \link{mt_reshape} (such as 
 #'   \code{subset}).
 #' 

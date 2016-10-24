@@ -63,8 +63,8 @@
 #'   elements or rows to keep. If specified, \code{data[[use2]]} will be 
 #'   subsetted using this expression, and, afterwards, \code{data[[use]]} will 
 #'   be filtered accordingly.
-#' @param subject_id a character string specifying which column contains the 
-#'   subject identifier in \code{data[[use2]]}. If specified and 
+#' @param subject_id an optional character string specifying which column
+#'   contains the subject identifier in \code{data[[use2]]}. If specified and 
 #'   \code{aggregate==TRUE}, aggregation will be performed within subjects 
 #'   first.
 #' @param aggregate logical indicating whether data should be aggregated. If 

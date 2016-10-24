@@ -43,8 +43,8 @@ elements or rows to keep. If specified, \code{data[[use2]]} will be
 subsetted using this expression, and, afterwards, \code{data[[use]]} will 
 be filtered accordingly.}
 
-\item{subject_id}{a character string specifying which column contains the 
-subject identifier in \code{data[[use2]]}. If specified and 
+\item{subject_id}{an optional character string specifying which column
+contains the subject identifier in \code{data[[use2]]}. If specified and 
 \code{aggregate==TRUE}, aggregation will be performed within subjects 
 first.}
 

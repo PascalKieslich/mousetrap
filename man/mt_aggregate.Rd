@@ -33,10 +33,10 @@ Alternatively, a data.frame can be provided directly.}
 aggregated. For each combination of levels of the grouping variable(s), 
 aggregation will be performed separately using \link[dplyr]{summarize_at}.}
 
-\item{subject_id}{a character string specifying which column contains the 
-subject identifier. If specified, aggregation will be performed within 
-subjects first (that is, within subjects for all available values of the 
-grouping variables specified in \code{use2_variables}).}
+\item{subject_id}{an optional character string specifying which column
+contains the subject identifier. If specified, aggregation will be
+performed within subjects first (i.e., within subjects for all available
+values of the grouping variables specified in \code{use2_variables}).}
 
 \item{trajectories_long}{logical indicating if the reshaped trajectories 
 should be returned in long or wide format. If \code{TRUE}, every recorded 

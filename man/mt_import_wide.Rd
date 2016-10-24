@@ -67,8 +67,8 @@ the trajectories and additional data for further processing within the
 mousetrap package. Specifically, it returns a list that includes the 
 trajectory data as an array (called \code{trajectories}), and all other data 
 as a data.frame (called \code{data}). This data structure can then be passed 
-on to other functions within this package, such as \link{mt_time_normalize} 
-or \link{mt_measures}.
+on to other functions within this package (see \link{mousetrap} for an 
+overview).
 }
 \details{
 \code{mt_import_wide} is designed to import mouse-tracking data saved in a

@@ -60,12 +60,11 @@ mousetrap package using \link{mt_reshape}. From this data.frame,
 \code{mt_import_long} creates a mousetrap data object containing the 
 trajectories and additional data for further processing within the mousetrap 
 package. Specifically, it returns a list that includes the trajectory data as
-an array (called \code{trajectories}), and all other data as a data.frame
-(called \code{data}). This data structure can then be passed on to other
-functions within this package, such as \link{mt_time_normalize} or
-\link{mt_measures}. The defaults are set so that no adjustments
-have to be made when importing a data.frame that was created using
-\link{mt_reshape}.
+an array (called \code{trajectories}), and all other data as a data.frame 
+(called \code{data}). This data structure can then be passed on to other 
+functions within this package (see \link{mousetrap} for an overview). The
+defaults are set so that no adjustments have to be made when importing a
+data.frame that was created using \link{mt_reshape}.
 }
 \details{
 The coordinates are ordered according to the values in the column provided in

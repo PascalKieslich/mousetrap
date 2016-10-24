@@ -32,10 +32,10 @@ The original data.frame including the centered and / or scaled
   variables.
 }
 \description{
-\code{scale_within} centers and/or scales variables in a data.frame (using
-\link{scale}) depending on the levels of one or more other variables By
-default, variables are standardized (i.e., centered and scaled). A typical
-application is the within-subject standardization of variables in a repeated
+\code{scale_within} centers and/or scales variables in a data.frame (using 
+\link{scale}) depending on the levels of one or more other variables. By 
+default, variables are standardized (i.e., centered and scaled). A typical 
+application is the within-subject standardization of variables in a repeated 
 measures design.
 }
 \examples{
