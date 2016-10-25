@@ -1,4 +1,4 @@
-# mousetrap 2.0.0 (under development)
+# mousetrap 2.0.0
 * General changes to all existing functions
   * Renamed `show_progress` argument to `verbose` (+ set default to `FALSE`).
   * Introduced `dimensions` argument to explicitly specify the names of the columns in the trajectory array that contain the mouse positions. In most cases, the default is `c("xpos","ypos")` as the x- and y-positions should be used. Note that in some functions (as specified in the documentation) the order of the labels matters, the first value will be taken as the label of the x-positions, the second as the label of the y-positions.

@@ -13,7 +13,7 @@
 #'   "tn_trajectories" or "measures", depending on whether the time-normalized
 #'   trajectories or derived measures should be aggregated.
 #' @param use_variables a character vector specifying the mouse-tracking 
-#'   variables to aggregated. If a data.frame with mouse-tracking measures is
+#'   variables to aggregate. If a data.frame with mouse-tracking measures is
 #'   provided as \code{data}, this corresponds to the column names. If a
 #'   trajectory array is provided, this argument should specify the labels of
 #'   respective array dimensions. If unspecified, all variables will be

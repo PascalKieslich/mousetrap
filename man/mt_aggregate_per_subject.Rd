@@ -19,7 +19,7 @@ The corresponding data are selected from \code{data} using
 trajectories or derived measures should be aggregated.}
 
 \item{use_variables}{a character vector specifying the mouse-tracking 
-variables to aggregated. If a data.frame with mouse-tracking measures is
+variables to aggregate. If a data.frame with mouse-tracking measures is
 provided as \code{data}, this corresponds to the column names. If a
 trajectory array is provided, this argument should specify the labels of
 respective array dimensions. If unspecified, all variables will be

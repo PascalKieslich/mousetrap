@@ -2,5 +2,5 @@
   packageStartupMessage("Welcome to mousetrap 2.0.0!")
   packageStartupMessage("If you have used previous versions of mousetrap,\nplease note that some function and argument names have changed.")
   packageStartupMessage("Your old code should still work, but you might get deprecation warnings at some points.")
-  packageStartupMessage("All changes are summarized in the package news which are available \nat https://cran.r-project.org/web/packages/mousetrap/news.html")
+  packageStartupMessage("All changes are summarized in the package news which are available at \nhttps://cran.r-project.org/web/packages/mousetrap/news.html")
 }
