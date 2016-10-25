@@ -1,5 +1,4 @@
 #' @importFrom magrittr %>%
-#' @export
 magrittr::`%>%`
 
 # Check that data is a mousetrap object
