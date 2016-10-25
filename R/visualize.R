@@ -408,8 +408,8 @@ mt_plot_per_trajectory <- function(file,
     # Remove whitespace for axes (if specified)
     if (axes_exact){
       current_plot <- current_plot + 
-        ggplot2::scale_x_continuous(expand=c(0,0))+
-        ggplot2::scale_y_continuous(expand=c(0,0))
+        ggplot2::scale_x_continuous(expand=c(0, 0)) +
+        ggplot2::scale_y_continuous(expand=c(0, 0))
     }
     
     # Output plot

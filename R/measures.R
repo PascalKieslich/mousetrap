@@ -143,7 +143,7 @@ mt_measures <- function(
   use="trajectories", save_as="measures",
   dimensions=c("xpos","ypos"), timestamps="timestamps",
   flip_threshold=0,
-  verbose=FALSE,show_progress=NULL) {
+  verbose=FALSE, show_progress=NULL) {
   
   if(is.null(show_progress)==FALSE){
     warning("The argument show_progress is deprecated. ",

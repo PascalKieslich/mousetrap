@@ -1,5 +1,5 @@
 # mousetrap 2.0.0 (under development)
-* General changes in existing functions
+* General changes to all existing functions
   * Renamed `show_progress` argument to `verbose` (+ set default to `FALSE`).
   * Introduced `dimensions` argument to explicitly specify the names of the columns in the trajectory array that contain the mouse positions. In most cases, the default is `c("xpos","ypos")` as the x- and y-positions should be used. Note that in some functions (as specified in the documentation) the order of the labels matters, the first value will be taken as the label of the x-positions, the second as the label of the y-positions.
   * Introduced `timestamps` argument to explicitly specify the dimension in the trajectory array containing the timestamps.
@@ -46,7 +46,7 @@
 * Improved preprocessing of mouse-tracking raw data for `mt_import_mousetrap`
 * Change of default scale for fill in `mt_plot_riverbed`
 * Custom x and y axis labels for `mt_plot_riverbed` can no longer be set via `x_label` and `y_label` (but can be added using the `ggplot2` functions `xlab()` and `ylab()`, see Examples)
-* Minor fix in package documentation (#1) (thanks to @sbrockhaus) 
+* Minor fix in package documentation (#1) (thanks to @sbrockhaus)
 * Minor fix in documentation of x/y reversals (thanks to Barnabás Szászi)
 
 # mousetrap 1.0.0
