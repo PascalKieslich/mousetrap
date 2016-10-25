@@ -94,7 +94,10 @@ A mousetrap data object (see \link{mt_example}) where an additional
   \item{acc_min_time}{Time where minimum acceleration occurred first}
 }
 \description{
-Calculate a number of mouse-tracking measures for each trajectory.
+Calculate a number of mouse-tracking measures for each trajectory, such as 
+minima, maxima, and flips for each dimension, and different measures for 
+curvature (e.g., \code{MAD}, \code{AD}, and \code{AUC}). More information on
+the different measures can be found in the Details and Values sections.
 }
 \details{
 Note that some measures are only returned if distance, velocity and 
