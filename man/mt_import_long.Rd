@@ -18,12 +18,12 @@ x-positions.}
 \item{ypos_label}{a character string specifying the column containing the
 y-positions.}
 
-\item{zpos_label}{an optional character string specifying the column containing the
-z-positions.}
+\item{zpos_label}{an optional character string specifying the column
+containing the z-positions.}
 
-\item{timestamps_label}{a character string specifying the column containing 
-the timestamps. If no timestamps are found in the data, a timestamps 
-variable with increasing integers will be created (assuming equidistant 
+\item{timestamps_label}{a character string specifying the column containing
+the timestamps. If no timestamps are found in the data, a timestamps
+variable with increasing integers will be created (assuming equidistant
 time steps).}
 
 \item{add_labels}{a character vector specifying columns containing additional
@@ -36,39 +36,39 @@ by combining the values of each variable. The trial identifier will be set
 as the \link{rownames} of the resulting trajectories and trial data, and
 additionally be stored in the column "mt_id" in the trial data.}
 
-\item{mt_seq_label}{a character string specifying the column that indicates 
-the order of the logged coordinates within a trial. If no column of the 
+\item{mt_seq_label}{a character string specifying the column that indicates
+the order of the logged coordinates within a trial. If no column of the
 specified name is found in the data.frame, the coordinates will be imported
 in the order in which they were stored in \code{raw_data}.}
 
-\item{reset_timestamps}{logical indicating if the first timestamp should be 
+\item{reset_timestamps}{logical indicating if the first timestamp should be
 subtracted from all timestamps within a trial. Default is \code{TRUE} as it
 is recommended for all following analyses in mousetrap.}
 
-\item{verbose}{logical indicating whether function should report its 
+\item{verbose}{logical indicating whether function should report its
 progress.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}).
 }
 \description{
-\code{mt_import_long} receives a data.frame in which mouse-tracking data are 
-stored in long format, i.e., where one row contains the logging data 
-(timestamp, x- and y-position etc.) at one specific point in the trial. This 
-is, for example, the case when exporting the trajectory data from the 
-mousetrap package using \link{mt_reshape}. From this data.frame, 
-\code{mt_import_long} creates a mousetrap data object containing the 
-trajectories and additional data for further processing within the mousetrap 
+\code{mt_import_long} receives a data.frame in which mouse-tracking data are
+stored in long format, i.e., where one row contains the logging data
+(timestamp, x- and y-position etc.) at one specific point in the trial. This
+is, for example, the case when exporting the trajectory data from the
+mousetrap package using \link{mt_reshape}. From this data.frame,
+\code{mt_import_long} creates a mousetrap data object containing the
+trajectories and additional data for further processing within the mousetrap
 package. Specifically, it returns a list that includes the trajectory data as
-an array (called \code{trajectories}), and all other data as a data.frame 
-(called \code{data}). This data structure can then be passed on to other 
+an array (called \code{trajectories}), and all other data as a data.frame
+(called \code{data}). This data structure can then be passed on to other
 functions within this package (see \link{mousetrap} for an overview). The
 defaults are set so that no adjustments have to be made when importing a
 data.frame that was created using \link{mt_reshape}.
 }
 \details{
 The coordinates are ordered according to the values in the column provided in
-the \code{mt_seq_label} parameter (\code{mt_seq} by default). If the 
+the \code{mt_seq_label} parameter (\code{mt_seq} by default). If the
 corresponding column does not exist, the coordinates will be imported in the
 order in which they were stored in the raw_data.
 
@@ -93,7 +93,7 @@ mt_data <- mt_import_long(exp_data,
 }
 }
 \seealso{
-\link{mt_import_mousetrap} and \link{mt_import_wide} for importing 
+\link{mt_import_mousetrap} and \link{mt_import_wide} for importing
   mouse-tracking data in other formats.
 }
 

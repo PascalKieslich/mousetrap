@@ -8,52 +8,52 @@ mt_remap_symmetric(data, use = "trajectories", save_as = use,
   dimensions = c("xpos", "ypos"), remap_xpos = "left", remap_ypos = "up")
 }
 \arguments{
-\item{data}{a mousetrap data object created using one of the mt_import 
-functions (see \link{mt_example} for details). Alternatively, a trajectory 
+\item{data}{a mousetrap data object created using one of the mt_import
+functions (see \link{mt_example} for details). Alternatively, a trajectory
 array can be provided directly (in this case \code{use} will be ignored).}
 
-\item{use}{a character string specifying which trajectory data should be 
+\item{use}{a character string specifying which trajectory data should be
 used.}
 
-\item{save_as}{a character string specifying where the resulting trajectory 
+\item{save_as}{a character string specifying where the resulting trajectory
 data should be stored.}
 
-\item{dimensions}{a character vector specifying the two dimensions in the 
+\item{dimensions}{a character vector specifying the two dimensions in the
 trajectory array that contain the mouse positions, the first value
 corresponding to the x-positions, the second to the y-positions.}
 
 \item{remap_xpos}{character string indicating the direction in which to remap
-values on the x axis. If set to "left" (as per default), trajectories with 
+values on the x axis. If set to "left" (as per default), trajectories with
 an endpoint on the right (i.e. with a positive x-value) will be remapped to
-the left. The alternatives are "right" which has the reverse effect, and 
+the left. The alternatives are "right" which has the reverse effect, and
 "no", which disables remapping on the horizontal dimension.}
 
 \item{remap_ypos}{character string defining whether tracks directed downwards
-on the y axis should be remapped so that they end with a positive y value. 
-This will be performed if this parameter is set to "up" (which is the 
-default), and the reverse occurs if the parameter is set to "down". If it 
+on the y axis should be remapped so that they end with a positive y value.
+This will be performed if this parameter is set to "up" (which is the
+default), and the reverse occurs if the parameter is set to "down". If it
 is set to "no", y-values remain untouched.}
 }
 \value{
-A mousetrap data object (see \link{mt_example}) with remapped 
+A mousetrap data object (see \link{mt_example}) with remapped
   trajectories. If the trajectory array was provided directly as \code{data},
   only the trajectory array will be returned.
 }
 \description{
-Remap all trajectories to one side (or one quadrant) of the coordinate 
-system. In doing so, \code{mt_remap_symmetric} assumes a centered coordinate 
+Remap all trajectories to one side (or one quadrant) of the coordinate
+system. In doing so, \code{mt_remap_symmetric} assumes a centered coordinate
 system and a symmetric design of the response buttons (see Details).
 }
 \details{
-When mouse trajectories are compared across different conditions, it is 
-typically desirable that the endpoints of the trajectories share the same 
-direction (e.g., diagonally up and left). This way, the trajectories can be 
+When mouse trajectories are compared across different conditions, it is
+typically desirable that the endpoints of the trajectories share the same
+direction (e.g., diagonally up and left). This way, the trajectories can be
 compared regardless of the button they were directed at.
 
-\code{mt_remap_symmetric} can be used to achieve this provided that two 
+\code{mt_remap_symmetric} can be used to achieve this provided that two
 assumptions hold:
 
-First, this function assumes a centered coordinate system, i.e. the 
+First, this function assumes a centered coordinate system, i.e. the
 coordinate system is centered on the screen center. This is the case when the
 data is produced by the mousetrap plug-ins in OpenSesame.
 
@@ -71,6 +71,6 @@ mt_example <- mt_remap_symmetric(mt_example)
 mt_example <- mt_import_mousetrap(mt_example_raw)
 mt_example <- mt_remap_symmetric(mt_example,
   remap_xpos="no", remap_ypos="up")
-  
+
 }
 

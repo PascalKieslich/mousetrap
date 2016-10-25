@@ -11,20 +11,20 @@ mt_reshape(data, use = "trajectories", use_variables = NULL,
   mt_id = "mt_id", mt_seq = "mt_seq", aggregation_function = NULL)
 }
 \arguments{
-\item{data}{a mousetrap data object created using one of the mt_import 
+\item{data}{a mousetrap data object created using one of the mt_import
 functions (see \link{mt_example} for details).}
 
-\item{use}{a character string specifying which data should be reshaped. The 
-corresponding data are selected from data using \code{data[[use]]}. 
-Usually, this value corresponds to either "trajectories", 
-"tn_trajectories", or "measures", depending on whether the analysis 
-concerns raw trajectories, time-normalized trajectories, or derived 
+\item{use}{a character string specifying which data should be reshaped. The
+corresponding data are selected from data using \code{data[[use]]}.
+Usually, this value corresponds to either "trajectories",
+"tn_trajectories", or "measures", depending on whether the analysis
+concerns raw trajectories, time-normalized trajectories, or derived
 measures.}
 
-\item{use_variables}{a character vector specifying which mouse-tracking 
-variables should be reshaped. Corresponds to the column names in case a 
-data.frame with mouse-tracking measures is provided. Corresponds to the 
-labels of the array dimensions in case a trajectory array is provided. If 
+\item{use_variables}{a character vector specifying which mouse-tracking
+variables should be reshaped. Corresponds to the column names in case a
+data.frame with mouse-tracking measures is provided. Corresponds to the
+labels of the array dimensions in case a trajectory array is provided. If
 unspecified, all variables will be reshaped.}
 
 \item{use2}{an optional character string specifying where the other trial
@@ -33,87 +33,89 @@ contains all non mouse-tracking trial data. Alternatively, a data.frame can
 be provided directly.}
 
 \item{use2_variables}{an optional character string (or vector) specifying the
-variables (in \code{data[[use2]]}) that should be merged with the data. If 
-\code{aggregate==TRUE}, the trajectories / measures will be aggregated 
-separately for each of the levels of these variables using 
+variables (in \code{data[[use2]]}) that should be merged with the data. If
+\code{aggregate==TRUE}, the trajectories / measures will be aggregated
+separately for each of the levels of these variables using
 \link[dplyr]{summarize_at}.}
 
-\item{subset}{a logical expression (passed on to \link{subset}) indicating 
-elements or rows to keep. If specified, \code{data[[use2]]} will be 
-subsetted using this expression, and, afterwards, \code{data[[use]]} will 
+\item{subset}{a logical expression (passed on to \link{subset}) indicating
+elements or rows to keep. If specified, \code{data[[use2]]} will be
+subsetted using this expression, and, afterwards, \code{data[[use]]} will
 be filtered accordingly.}
 
 \item{subject_id}{an optional character string specifying which column
-contains the subject identifier in \code{data[[use2]]}. If specified and 
-\code{aggregate==TRUE}, aggregation will be performed within subjects 
+contains the subject identifier in \code{data[[use2]]}. If specified and
+\code{aggregate==TRUE}, aggregation will be performed within subjects
 first.}
 
-\item{aggregate}{logical indicating whether data should be aggregated. If 
-\code{use2_variables} are specified, aggregation will be performed 
+\item{aggregate}{logical indicating whether data should be aggregated. If
+\code{use2_variables} are specified, aggregation will be performed
 separately for each of the levels of the \code{use2_variables}.}
 
 \item{aggregate_subjects_only}{logical indicating whether data should only be
-aggregated per subject (if \code{subject_id} is specified and 
+aggregated per subject (if \code{subject_id} is specified and
 \code{aggregate==TRUE}).}
 
-\item{.funs}{the aggregation function(s) passed on to 
-\link[dplyr]{summarize_at}. By default, the \link{mean} is calculated.}
+\item{.funs}{the aggregation function(s) passed on to
+\code{\link[dplyr]{summarize_at}}. By default, the \code{\link{mean}} is
+calculated.}
 
-\item{trajectories_long}{logical indicating if the reshaped trajectories 
-should be returned in long or wide format. If \code{TRUE}, every recorded 
+\item{trajectories_long}{logical indicating if the reshaped trajectories
+should be returned in long or wide format. If \code{TRUE}, every recorded
 position in a trajectory is placed in another row (whereby the order of the
-positions is logged in the variable \code{mt_seq}). If \code{FALSE}, every 
+positions is logged in the variable \code{mt_seq}). If \code{FALSE}, every
 trajectory is saved in wide format and the respective positions are indexed
-by adding an integer to the corresponding label (e.g., \code{xpos_1}, 
-\code{xpos_2}, ...). Only relevant if \code{data[[use]]} contains 
+by adding an integer to the corresponding label (e.g., \code{xpos_1},
+\code{xpos_2}, ...). Only relevant if \code{data[[use]]} contains
 trajectories.}
 
 \item{convert_df}{logical indicating if the reshaped data should be converted
-to a \link{data.frame} using \link{as.data.frame}. This will drop 
-potentially existing additional classes (such as \link[dplyr]{tbl_df}) that
-result from the internally used \code{dplyr} functions for data grouping 
-and aggregation. As these additional classes might - on rare occasions - 
-cause problems with functions from other packages, the reshaped data are
-converted to "pure" data.frames by default.}
+to a \code{\link{data.frame}} using \code{\link{as.data.frame}}. This will
+drop potentially existing additional classes (such as
+\code{\link[dplyr]{tbl_df}}) that result from the internally used
+\code{dplyr} functions for data grouping and aggregation. As these
+additional classes might - on rare occasions - cause problems with
+functions from other packages, the reshaped data are converted to "pure"
+data.frames by default.}
 
-\item{mt_id}{a character string specifying the name of the column that will 
+\item{mt_id}{a character string specifying the name of the column that will
 contain the trial identifier in the reshaped data. The values for the trial
-identifier correspond to the \code{rownames} of \code{data[[use]]} and 
+identifier correspond to the \code{rownames} of \code{data[[use]]} and
 \code{data[[use2]]}.}
 
-\item{mt_seq}{a character string specifying the name of the column that will 
-contain the integers indicating the order of the mouse positions per 
+\item{mt_seq}{a character string specifying the name of the column that will
+contain the integers indicating the order of the mouse positions per
 trajectory in the reshaped data. Only relevant if \code{data[[use]]}
 contains trajectories and \code{trajectories_long==TRUE}.}
 
 \item{aggregation_function}{Deprecated. Please use \code{.funs} instead.}
 }
 \value{
-A \link{data.frame} containing the reshaped data.
+A \code{\link{data.frame}} containing the reshaped data.
 }
 \description{
-\code{mt_reshape} is the general function used in the \code{mousetrap} 
-package for filtering, merging, reshaping, and aggregating mouse-tracking 
+\code{mt_reshape} is the general function used in the \code{mousetrap}
+package for filtering, merging, reshaping, and aggregating mouse-tracking
 measures or trajectories in combination with other trial data. Several
 additional (wrapper) functions for more specific purposes (cf. "See Also")
 are available.
 }
 \details{
-\code{mt_reshape} uses the \link{rownames} of \code{data[[use]]} and 
-\code{data[[use2]]} for merging the trajectories / measures and the trial 
-data. For convenience (and for trajectories in long format also of 
+\code{mt_reshape} uses the \link{rownames} of \code{data[[use]]} and
+\code{data[[use2]]} for merging the trajectories / measures and the trial
+data. For convenience (and for trajectories in long format also of
 necessity), an additional column (labelled as specified in the \code{mt_id}
 argument) is added to the reshaped data containing the rownames as trial
 identifier.
 
-The main purpose of this function is to reshape the trajectory data into a 
+The main purpose of this function is to reshape the trajectory data into a
 two-dimensional data.frame, as this format is required for many further
 analyses and plots in R.
 
 Besides, it should aid the user in combining data contained in different
-parts of the mousetrap data object, e.g., a condition variable stored in 
-\code{data[["data"]]} with trajectory data stored in 
-\code{data[["trajectories"]]} (or mouse-tracking measures stored in 
+parts of the mousetrap data object, e.g., a condition variable stored in
+\code{data[["data"]]} with trajectory data stored in
+\code{data[["trajectories"]]} (or mouse-tracking measures stored in
 \code{data[["measures"]]}).
 
 Finally, it offers the possibility to aggregate trajectories and measures for
@@ -124,22 +126,22 @@ serve specific purposes. They are often easier to use, and thus recommended
 over \code{mt_reshape} unless the utmost flexibility is required. These
 functions are described in the section "See Also".
 
-Note also that many merging, reshaping, and aggregation procedures can be 
+Note also that many merging, reshaping, and aggregation procedures can be
 performed directly by using some of the basic R functions, e.g., \link{merge}
-and \link{aggregate}, or through the R packages \code{dplyr} or 
+and \link{aggregate}, or through the R packages \code{dplyr} or
 \code{reshape2}, if desired.
 }
 \examples{
 # Time-normalize trajectories
 mt_example <- mt_time_normalize(mt_example)
-  
+
 # Reshape time-normalized trajectories data into long format
 # adding Condition variable
-trajectories_long <- mt_reshape(mt_example, 
+trajectories_long <- mt_reshape(mt_example,
  use="tn_trajectories",
  use2_variables="Condition"
  )
-                                
+
 # Reshape time-normalized trajectories data into wide format
 # only keeping xpos and ypos
 # and adding Condition variable
@@ -148,7 +150,7 @@ trajectories_wide <- mt_reshape(mt_example,
   use2_variables = "Condition",
   trajectories_long = FALSE
   )
-  
+
 }
 \seealso{
 \link{mt_aggregate} for aggregating mouse-tracking measures and trajectories.
@@ -159,8 +161,9 @@ trajectories per subject.
 \link{mt_export_long} for exporting mouse-tracking data in long format.
 
 \link{mt_export_wide} for exporting mouse-tracking data in wide format.
- 
-\link[dplyr]{inner_join} for merging data and \link[dplyr]{summarize_at} for
-aggregating data using the \code{dplyr} package.
+
+\link[dplyr]{inner_join} for merging data and
+\code{\link[dplyr]{summarize_at}} for aggregating data using the \code{dplyr}
+package.
 }
 

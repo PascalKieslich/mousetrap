@@ -9,17 +9,17 @@ mt_time_normalize(data, use = "trajectories", save_as = "tn_trajectories",
   verbose = FALSE, show_progress = NULL)
 }
 \arguments{
-\item{data}{a mousetrap data object created using one of the mt_import 
-functions (see \link{mt_example} for details). Alternatively, a trajectory 
+\item{data}{a mousetrap data object created using one of the mt_import
+functions (see \link{mt_example} for details). Alternatively, a trajectory
 array can be provided directly (in this case \code{use} will be ignored).}
 
-\item{use}{a character string specifying which trajectory data should be 
+\item{use}{a character string specifying which trajectory data should be
 used.}
 
-\item{save_as}{a character string specifying where the resulting trajectory 
+\item{save_as}{a character string specifying where the resulting trajectory
 data should be stored.}
 
-\item{dimensions}{a character vector specifying the dimensions in the 
+\item{dimensions}{a character vector specifying the dimensions in the
 trajectory array that should be time-normalized. If \code{"all"}, all
 trajectory dimensions except the timestamps will be time-normalized.}
 
@@ -28,16 +28,16 @@ containing the timestamps.}
 
 \item{nsteps}{an integer specifying the number of equally sized time steps.}
 
-\item{verbose}{logical indicating whether function should report its 
+\item{verbose}{logical indicating whether function should report its
 progress.}
 
 \item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) with an additional
-  array (by default called \code{tn_trajectories}) containing the 
-  time-normalized trajectories. In this array, another dimension (called 
-  \code{steps}) has been added with increasing integer values indexing the 
+  array (by default called \code{tn_trajectories}) containing the
+  time-normalized trajectories. In this array, another dimension (called
+  \code{steps}) has been added with increasing integer values indexing the
   time-normalized position. If a trajectory array was provided directly as
   \code{data}, only the time-normalized trajectories will be returned.
 }
@@ -49,22 +49,22 @@ interpolation based on the timestamps. By default, 101 time steps are used
 (following Spivey et al., 2005).
 }
 \details{
-Time-normalization is often performed if the number of recorded x- and 
-y-positions varies across trajectories, which typically occurs when 
-trajectories vary in their response time. After time-normalization, all 
-trajectories have the same number of recorded positions (which is specified 
-using \code{nsteps}) and the positions at different relative time points can 
+Time-normalization is often performed if the number of recorded x- and
+y-positions varies across trajectories, which typically occurs when
+trajectories vary in their response time. After time-normalization, all
+trajectories have the same number of recorded positions (which is specified
+using \code{nsteps}) and the positions at different relative time points can
 be compared across trajectories.
 
-For example, time normalized trajectories can be compared across conditions 
-that differed in their overall response time, as the timestamps are now 
-relative to the overall trial duration. This is also helpful for creating 
+For example, time normalized trajectories can be compared across conditions
+that differed in their overall response time, as the timestamps are now
+relative to the overall trial duration. This is also helpful for creating
 average trajectories, which are often used in plots.
 }
 \examples{
 mt_example <- mt_time_normalize(mt_example,
   save_as="tn_trajectories", nsteps=101)
-  
+
 }
 \references{
 Spivey, M. J., Grosjean, M., & Knoblich, G. (2005). Continuous

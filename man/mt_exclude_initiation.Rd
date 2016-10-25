@@ -9,44 +9,44 @@ mt_exclude_initiation(data, use = "trajectories", save_as = use,
   reset_timestamps = TRUE, verbose = FALSE, show_progress = NULL)
 }
 \arguments{
-\item{data}{a mousetrap data object created using one of the mt_import 
-functions (see \link{mt_example} for details). Alternatively, a trajectory 
+\item{data}{a mousetrap data object created using one of the mt_import
+functions (see \link{mt_example} for details). Alternatively, a trajectory
 array can be provided directly (in this case \code{use} will be ignored).}
 
-\item{use}{a character string specifying which trajectory data should be 
+\item{use}{a character string specifying which trajectory data should be
 used.}
 
-\item{save_as}{a character string specifying where the resulting trajectory 
+\item{save_as}{a character string specifying where the resulting trajectory
 data should be stored.}
 
-\item{dimensions}{a character vector specifying the dimensions in the 
+\item{dimensions}{a character vector specifying the dimensions in the
 trajectory array that contain the mouse positions.}
 
 \item{timestamps}{a character string specifying the trajectory dimension
 containing the timestamps.}
 
-\item{reset_timestamps}{logical indicating whether the timestamps should be 
+\item{reset_timestamps}{logical indicating whether the timestamps should be
 reset after removing the initial phase without movement (see Details).}
 
-\item{verbose}{logical indicating whether function should report its 
+\item{verbose}{logical indicating whether function should report its
 progress.}
 
 \item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 }
 \value{
-A mousetrap data object (see \link{mt_example}) from which the 
+A mousetrap data object (see \link{mt_example}) from which the
   initial phase without mouse movement was removed. If the trajectory array
   was provided directly as \code{data}, only the trajectory array will be
   returned.
 }
 \description{
-Exclude the initial phase in a trial where the mouse was not moved. The 
-corresponding samples (x- and y-positions and timestamps) in the trajectory 
+Exclude the initial phase in a trial where the mouse was not moved. The
+corresponding samples (x- and y-positions and timestamps) in the trajectory
 data will be removed.
 }
 \details{
-\code{mt_exclude_initiation} removes all samples (x- and y-positions as well 
-as timestamps) at the beginning of the trial during which the mouse was not 
+\code{mt_exclude_initiation} removes all samples (x- and y-positions as well
+as timestamps) at the beginning of the trial during which the mouse was not
 moved from its initial position. The last unchanged sample is retained in the
 data.
 
@@ -55,15 +55,15 @@ timestamp before a movement occurs from all timestamps , so that the series
 of timestamps once more begin with zero. If the argument is set to
 \code{FALSE}, the values of the timestamps are unchanged.
 
-Please note that resetting the timestamps will result in changes in several 
-mouse-tracking measures, notably those which report timestamps (e.g., 
+Please note that resetting the timestamps will result in changes in several
+mouse-tracking measures, notably those which report timestamps (e.g.,
 \code{MAD_time}). Typically, however, these changes are desired when using
 this function.
 }
 \examples{
 mt_example <- mt_exclude_initiation(mt_example,
   save_as="mod_trajectories")
-  
+
 }
 \seealso{
 \link{mt_measures} for calculating the initiation time.

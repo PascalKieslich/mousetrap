@@ -9,23 +9,23 @@ mt_align_start(data, use = "trajectories", save_as = "trajectories",
   xpos_start = NULL, ypos_start = NULL, show_progress = NULL)
 }
 \arguments{
-\item{data}{a mousetrap data object created using one of the mt_import 
-functions (see \link{mt_example} for details). Alternatively, a trajectory 
+\item{data}{a mousetrap data object created using one of the mt_import
+functions (see \link{mt_example} for details). Alternatively, a trajectory
 array can be provided directly (in this case \code{use} will be ignored).}
 
-\item{use}{a character string specifying which trajectory data should be 
+\item{use}{a character string specifying which trajectory data should be
 used.}
 
-\item{save_as}{a character string specifying where the resulting trajectory 
+\item{save_as}{a character string specifying where the resulting trajectory
 data should be stored.}
 
-\item{dimensions}{a character vector specifying the dimensions in the 
+\item{dimensions}{a character vector specifying the dimensions in the
 trajectory array that should be space-normalized.}
 
 \item{start}{a numeric vector specifying the start values for each dimension,
 i.e., the values the first recorded position should have in every trial.}
 
-\item{verbose}{logical indicating whether function should report its 
+\item{verbose}{logical indicating whether function should report its
 progress.}
 
 \item{xpos_start}{Deprecated. Please use \code{start} instead.}
@@ -35,7 +35,7 @@ progress.}
 \item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 }
 \value{
-A mousetrap data object (see \link{mt_example}) with aligned 
+A mousetrap data object (see \link{mt_example}) with aligned
   trajectories. If the trajectory array was provided directly as \code{data},
   only the trajectory array will be returned.
 }

@@ -10,28 +10,28 @@ mt_space_normalize(data, use = "trajectories", save_as = "sn_trajectories",
   ypos_start = NULL, ypos_end = NULL, show_progress = NULL)
 }
 \arguments{
-\item{data}{a mousetrap data object created using one of the mt_import 
-functions (see \link{mt_example} for details). Alternatively, a trajectory 
+\item{data}{a mousetrap data object created using one of the mt_import
+functions (see \link{mt_example} for details). Alternatively, a trajectory
 array can be provided directly (in this case \code{use} will be ignored).}
 
-\item{use}{a character string specifying which trajectory data should be 
+\item{use}{a character string specifying which trajectory data should be
 used.}
 
-\item{save_as}{a character string specifying where the resulting trajectory 
+\item{save_as}{a character string specifying where the resulting trajectory
 data should be stored.}
 
-\item{dimensions}{a character vector specifying the dimensions in the 
+\item{dimensions}{a character vector specifying the dimensions in the
 trajectory array that should be space-normalized.}
 
 \item{start}{a numeric vector specifying the start values for each dimension,
 i.e., the values the first recorded position should have in every trial.}
 
-\item{end}{a numeric vector specifying the end values for each dimension, 
-i.e., the values the last recorded position should have in every trial. If 
-\code{NULL}, trajectories are only adjusted so that they have the same 
+\item{end}{a numeric vector specifying the end values for each dimension,
+i.e., the values the last recorded position should have in every trial. If
+\code{NULL}, trajectories are only adjusted so that they have the same
 start position.}
 
-\item{verbose}{logical indicating whether function should report its 
+\item{verbose}{logical indicating whether function should report its
 progress.}
 
 \item{xpos_start}{Deprecated. Please use \code{start} instead.}
@@ -45,8 +45,8 @@ progress.}
 \item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 }
 \value{
-A mousetrap data object (see \link{mt_example}) with an additional 
-  array (by default called \code{sn_trajectories}) containing the 
+A mousetrap data object (see \link{mt_example}) with an additional
+  array (by default called \code{sn_trajectories}) containing the
   space-normalized trajectories. All other trajectory dimensions not
   specified in \code{dimensions} (e.g., timestamps) will be kept as is in the
   resulting trajectory array. If a trajectory array was provided directly as
@@ -71,7 +71,7 @@ Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor
 \seealso{
 \link{mt_align_start} for aligning the start position of
   trajectories.
-  
+
   \link{mt_remap_symmetric} for remapping trajectories.
 }
 

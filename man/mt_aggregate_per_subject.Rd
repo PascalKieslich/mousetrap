@@ -9,44 +9,45 @@ mt_aggregate_per_subject(data, use = "measures", use_variables = NULL,
   trajectories_long = TRUE, ...)
 }
 \arguments{
-\item{data}{a mousetrap data object created using one of the mt_import 
+\item{data}{a mousetrap data object created using one of the mt_import
 functions (see \link{mt_example} for details).}
 
-\item{use}{a character string specifying which data should be aggregated. The
-corresponding data are selected from data using \code{data[[use]]}. 
-Usually, this value corresponds to either "tn_trajectories" or "measures", 
-depending on whether the time-normalized trajectories or derived measures 
-should be aggregated.}
+\item{use}{a character string specifying which dataset should be aggregated.
+The corresponding data are selected from \code{data} using
+\code{data[[use]]}. Usually, this value corresponds to either
+"tn_trajectories" or "measures", depending on whether the time-normalized
+trajectories or derived measures should be aggregated.}
 
-\item{use_variables}{a character vector specifying which mouse-tracking 
-variables should be aggregated. Corresponds to the column names in case a 
-data.frame with mouse-tracking measures is provided. Corresponds to the 
-labels of the array dimensions in case a trajectory array is provided. If 
-unspecified, all variables will be aggregated.}
+\item{use_variables}{a character vector specifying the mouse-tracking 
+variables to aggregated. If a data.frame with mouse-tracking measures is
+provided as \code{data}, this corresponds to the column names. If a
+trajectory array is provided, this argument should specify the labels of
+respective array dimensions. If unspecified, all variables will be
+aggregated.}
 
-\item{use2}{a character string specifying where the data containing the 
-condition information can be found. Defaults to "data" as 
-\code{data[["data"]]} usually contains all non mouse-tracking trial data. 
+\item{use2}{a character string specifying where the data containing the
+condition information can be found. Defaults to "data" as
+\code{data[["data"]]} usually contains all non mouse-tracking trial data.
 Alternatively, a data.frame can be provided directly.}
 
 \item{use2_variables}{a character string (or vector) specifying the variables
-(in \code{data[[use2]]}) across which the trajectories / measures will be 
-aggregated. For each combination of levels of the grouping variable(s), 
+(in \code{data[[use2]]}) across which the trajectories / measures will be
+aggregated. For each combination of levels of the grouping variable(s),
 aggregation will be performed separately using \link[dplyr]{summarize_at}.}
 
-\item{subject_id}{a character string specifying which column contains the 
+\item{subject_id}{a character string specifying which column contains the
 subject identifier.}
 
-\item{trajectories_long}{logical indicating if the reshaped trajectories 
-should be returned in long or wide format. If \code{TRUE}, every recorded 
+\item{trajectories_long}{logical indicating if the reshaped trajectories
+should be returned in long or wide format. If \code{TRUE}, every recorded
 position in a trajectory is placed in another row (whereby the order of the
-positions is logged in the variable \code{mt_seq}). If \code{FALSE}, every 
+positions is logged in the variable \code{mt_seq}). If \code{FALSE}, every
 trajectory is saved in wide format and the respective positions are indexed
-by adding an integer to the corresponding label (e.g., \code{xpos_1}, 
-\code{xpos_2}, ...). Only relevant if \code{data[[use]]} contains 
+by adding an integer to the corresponding label (e.g., \code{xpos_1},
+\code{xpos_2}, ...). Only relevant if \code{data[[use]]} contains
 trajectories.}
 
-\item{...}{additional arguments passed on to \link{mt_reshape} (such as 
+\item{...}{additional arguments passed on to \link{mt_reshape} (such as
 \code{subset}).}
 }
 \value{
@@ -55,7 +56,7 @@ A \link{data.frame} containing the aggregated data.
 \description{
 \code{mt_aggregate_per_subject} can be used for aggregating mouse-tracking
 measures (or trajectories) per condition separately for each subject. One or
-several condition variables can be specified using \code{use2_variables}. 
+more condition variables can be specified using \code{use2_variables}.
 Aggregation will be performed separately for each level of the condition
 variables. \code{mt_aggregate_per_subject} is a wrapper function for
 \link{mt_reshape}.
@@ -63,7 +64,7 @@ variables. \code{mt_aggregate_per_subject} is a wrapper function for
 \examples{
 # Time-normalize trajectories
 mt_example <- mt_time_normalize(mt_example)
-  
+
 # Aggregate time-normalized trajectories per condition
 # separately per subject
 average_trajectories <- mt_aggregate_per_subject(

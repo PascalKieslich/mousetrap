@@ -16,33 +16,33 @@ mt_calculate_derivatives(data, use = "trajectories", save_as = use,
   dimension = NULL)
 }
 \arguments{
-\item{data}{a mousetrap data object created using one of the mt_import 
-functions (see \link{mt_example} for details). Alternatively, a trajectory 
+\item{data}{a mousetrap data object created using one of the mt_import
+functions (see \link{mt_example} for details). Alternatively, a trajectory
 array can be provided directly (in this case \code{use} will be ignored).}
 
-\item{use}{a character string specifying which trajectory data should be 
+\item{use}{a character string specifying which trajectory data should be
 used.}
 
-\item{save_as}{a character string specifying where the resulting trajectory 
+\item{save_as}{a character string specifying where the resulting trajectory
 data should be stored.}
 
-\item{dimensions}{a character vector specifying across which dimension(s) 
-distances, velocity, and acceleration are calculated. By default 
-(\code{c("xpos","ypos")}), they are calculated across both x and y 
-dimensions. Alternatively, only one dimesion can be specified, e.g., 
+\item{dimensions}{a character vector specifying across which dimension(s)
+distances, velocity, and acceleration are calculated. By default
+(\code{c("xpos","ypos")}), they are calculated across both x and y
+dimensions. Alternatively, only one dimesion can be specified, e.g.,
 \code{"xpos"} or \code{"ypos"}.}
 
 \item{timestamps}{a character string specifying the trajectory dimension
 containing the timestamps.}
 
-\item{prefix}{an optional character string that is added as a prefix to the 
+\item{prefix}{an optional character string that is added as a prefix to the
 to be created new trajectory dimensions.}
 
 \item{acc_on_abs_vel}{logical indicating if acceleration should be calculated
-based on absolute velocity values (ignoring direction). Only relevant if 
+based on absolute velocity values (ignoring direction). Only relevant if
 velocity can be negative (see Details).}
 
-\item{verbose}{logical indicating whether function should report its 
+\item{verbose}{logical indicating whether function should report its
 progress.}
 
 \item{show_progress}{Deprecated. Please use \code{verbose} instead.}
@@ -50,38 +50,38 @@ progress.}
 \item{dimension}{Deprecated. Please use \code{dimensions} instead.}
 }
 \value{
-A mousetrap data object (see \link{mt_example}) with Euclidian 
-  distance, velocity, and acceleration added as additional columns to the 
-  trajectory array (called \code{dist}, \code{vel}, and  \code{acc}, if no 
-  prefix was specified). If the trajectory array was provided directly as 
+A mousetrap data object (see \link{mt_example}) with Euclidian
+  distance, velocity, and acceleration added as additional columns to the
+  trajectory array (called \code{dist}, \code{vel}, and  \code{acc}, if no
+  prefix was specified). If the trajectory array was provided directly as
   \code{data}, only the trajectory array will be returned.
 }
 \description{
-Calculate distance traveled, velocity, and acceleration for each logged 
+Calculate distance traveled, velocity, and acceleration for each logged
 position. Distance is calculated as the Euclidean distance between successive
-coordinates, and velocity as distance covered per time interval. The 
+coordinates, and velocity as distance covered per time interval. The
 acceleration denotes the difference in velocity, again normalized per time.
 }
 \details{
 Distances, velocities and acceleration are computed as follows:
 
-The first entry in each respective vector is always zero. Each subsequent 
-entry thus represents the Euclidean distance traveled since the previous 
-recorded set of coordinates and the velocity with which the movement between 
-both samples took place. Thus, both distance and velocity represent the 
-intervening period between the previous sample and the one with which the 
+The first entry in each respective vector is always zero. Each subsequent
+entry thus represents the Euclidean distance traveled since the previous
+recorded set of coordinates and the velocity with which the movement between
+both samples took place. Thus, both distance and velocity represent the
+intervening period between the previous sample and the one with which the
 numeric value is saved.
 
-The acceleration, by contrast, denotes the change in velocity between two 
-adjacent periods. Because of this, it is shifted forward to best match the 
-actual time point at which the acceleration was measured. Because there will 
-always be one less value computed for acceleration than for velocity, the 
-final value in the acceleration vector has been padded with an NA. To 
-reconstruct the velocity from the acceleration, multiply the acceleration 
-vector with the sampling interval, compute the cumulative sum of the result, 
+The acceleration, by contrast, denotes the change in velocity between two
+adjacent periods. Because of this, it is shifted forward to best match the
+actual time point at which the acceleration was measured. Because there will
+always be one less value computed for acceleration than for velocity, the
+final value in the acceleration vector has been padded with an NA. To
+reconstruct the velocity from the acceleration, multiply the acceleration
+vector with the sampling interval, compute the cumulative sum of the result,
 and add a zero at the beginning.
 
-If the distance is calculated across both horizontal and vertical (x and y) 
+If the distance is calculated across both horizontal and vertical (x and y)
 dimensions, distance and velocity is always positive (or 0). If only one
 dimension is used, increases in x (or y) values result in positive distances
 and velocity values, decreases in negative distances and velocity values.
@@ -101,7 +101,7 @@ mt_example <- mt_derivatives(mt_example)
 # in x dimension
 mt_example <- mt_derivatives(mt_example,
   dimensions="xpos")
-  
+
 }
 \seealso{
 \link{mt_average} for averaging trajectories across constant time

@@ -10,50 +10,50 @@ mt_resample(data, use = "trajectories", save_as = "rs_trajectories",
   show_progress = NULL)
 }
 \arguments{
-\item{data}{a mousetrap data object created using one of the mt_import 
-functions (see \link{mt_example} for details). Alternatively, a trajectory 
+\item{data}{a mousetrap data object created using one of the mt_import
+functions (see \link{mt_example} for details). Alternatively, a trajectory
 array can be provided directly (in this case \code{use} will be ignored).}
 
-\item{use}{a character string specifying which trajectory data should be 
+\item{use}{a character string specifying which trajectory data should be
 used.}
 
-\item{save_as}{a character string specifying where the resulting trajectory 
+\item{save_as}{a character string specifying where the resulting trajectory
 data should be stored.}
 
-\item{dimensions}{a character vector specifying the dimensions in the 
+\item{dimensions}{a character vector specifying the dimensions in the
 trajectory array that should be resampled. If \code{"all"}, all trajectory
 dimensions except the timestamps will be resampled.}
 
 \item{timestamps}{a character string specifying the trajectory dimension
 containing the timestamps.}
 
-\item{step_size}{an integer specifying the size of the constant time 
+\item{step_size}{an integer specifying the size of the constant time
 interval. The unit corresponds to the unit of the timestamps.}
 
-\item{exact_last_timestamp}{logical indicating if the last timestamp should 
+\item{exact_last_timestamp}{logical indicating if the last timestamp should
 always be appended (which is the case by default). If \code{FALSE}, the
 last timestamp is only appended if it is a multiple of the step_size.}
 
-\item{verbose}{logical indicating whether function should report its 
+\item{verbose}{logical indicating whether function should report its
 progress.}
 
 \item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 }
 \value{
-A mousetrap data object (see \link{mt_example}) with an additional 
-  array (by default called \code{rs_trajectories}) containing the resampled 
+A mousetrap data object (see \link{mt_example}) with an additional
+  array (by default called \code{rs_trajectories}) containing the resampled
   trajectories. If a trajectory array was provided directly as \code{data},
   only the resampled trajectories will be returned.
 }
 \description{
 Resample trajectory positions using a constant time interval. If no timestamp
-that represents an exact multiple of this time interval is found, linear 
+that represents an exact multiple of this time interval is found, linear
 interpolation is performed using the two adjacent timestamps.
 }
 \details{
-\code{mt_resample} can be used if the number of logged positions in a trial 
-should be reduced. \code{mt_resample} achieves this by artificially 
-decreasing the resolution with which the positions were recorded. For 
+\code{mt_resample} can be used if the number of logged positions in a trial
+should be reduced. \code{mt_resample} achieves this by artificially
+decreasing the resolution with which the positions were recorded. For
 example, if mouse positions were recorded every 10 ms in an experiment, but
 one was only interested in the exact mouse position every 50 ms,
 \code{mt_resample} with \code{step_size=50} could be used. In this case, only
@@ -66,18 +66,18 @@ interest). In case that a trial does not contain samples at the specified
 timestamps, linear interpolation is performed using the two adjacent
 timestamps.
 
-Note that \code{mt_resample} does not average across time intervals. For 
+Note that \code{mt_resample} does not average across time intervals. For
 this, \link{mt_average} can be used.
 }
 \examples{
 mt_example <- mt_resample(mt_example,
   save_as="rs_trajectories",
   step_size=50)
-  
+
 }
 \seealso{
-\link[stats]{approx} for information about the function used for linear
-interpolation.
+\link[stats]{approx} for information about the function used for
+linear interpolation.
 
 \link{mt_average} for averaging trajectories across constant time intervals.
 

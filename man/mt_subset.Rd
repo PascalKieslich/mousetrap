@@ -7,13 +7,13 @@
 mt_subset(data, subset, check = "data")
 }
 \arguments{
-\item{data}{a mousetrap data object created using one of the mt_import 
+\item{data}{a mousetrap data object created using one of the mt_import
 functions (see \link{mt_example} for details).}
 
-\item{subset}{a logical expression (passed on to \link{subset}) indicating 
+\item{subset}{a logical expression (passed on to \link{subset}) indicating
 the rows to keep. Missing values are taken as \code{FALSE}.}
 
-\item{check}{a character string specifying which data should be used for 
+\item{check}{a character string specifying which data should be used for
 checking the subset condition.}
 }
 \value{
@@ -21,26 +21,26 @@ A mousetrap data object (see \link{mt_example}) with filtered
   data and trajectories.
 }
 \description{
-Return a subset of the mousetrap data including only the trial data and 
-corresponding trajectories that meet the conditions specified in the 
+Return a subset of the mousetrap data including only the trial data and
+corresponding trajectories that meet the conditions specified in the
 arguments.
 }
 \details{
-\code{mt_subset} is helpful when trials should be removed from all analyses. 
-By default, \code{check} is set to "data" meaning that the subset condition 
-is evaluated based on the trial data (stored in \code{data[["data"]]}). 
-However, it might also be of interest to only include trials based on 
+\code{mt_subset} is helpful when trials should be removed from all analyses.
+By default, \code{check} is set to "data" meaning that the subset condition
+is evaluated based on the trial data (stored in \code{data[["data"]]}).
+However, it might also be of interest to only include trials based on
 specific mouse-tracking measures (e.g., all trials with an \code{MAD} smaller
-than 200). In this case, \code{check} needs to be set to the respective name 
+than 200). In this case, \code{check} needs to be set to the respective name
 of the data.frame (e.g., "measures").
 
-Note that if specific trials should be removed from all analyses based on a 
+Note that if specific trials should be removed from all analyses based on a
 condition known a priori (e.g., practice trials), it is more efficient to use
-the \link{subset} function on the raw data before importing the trajectories 
+the \link{subset} function on the raw data before importing the trajectories
 using one of the mt_import functions (such as \link{mt_import_mousetrap}).
 
-Besides, if trials should only be removed from some analyses or for specific 
-plots, note that other mousetrap functions (e.g., \link{mt_reshape}, 
+Besides, if trials should only be removed from some analyses or for specific
+plots, note that other mousetrap functions (e.g., \link{mt_reshape},
 \link{mt_aggregate}, and \link{mt_plot}) also allow for subsetting.
 }
 \examples{

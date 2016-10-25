@@ -14,14 +14,14 @@ mt_calculate_deviations(data, use = "trajectories", save_as = use,
   prefix = "", verbose = FALSE, show_progress = NULL)
 }
 \arguments{
-\item{data}{a mousetrap data object created using one of the mt_import 
-functions (see \link{mt_example} for details). Alternatively, a trajectory 
+\item{data}{a mousetrap data object created using one of the mt_import
+functions (see \link{mt_example} for details). Alternatively, a trajectory
 array can be provided directly (in this case \code{use} will be ignored).}
 
-\item{use}{a character string specifying which trajectory data should be 
+\item{use}{a character string specifying which trajectory data should be
 used.}
 
-\item{save_as}{a character string specifying where the resulting trajectory 
+\item{save_as}{a character string specifying where the resulting trajectory
 data should be stored.}
 
 \item{dimensions}{a character vector specifying the two dimensions in the
@@ -39,7 +39,7 @@ idealized trajectory (instead of the actual end point).}
 \item{prefix}{an optional character string that is added as a prefix to the 
 to be created new trajectory dimensions.}
 
-\item{verbose}{logical indicating whether function should report its 
+\item{verbose}{logical indicating whether function should report its
 progress.}
 
 \item{show_progress}{Deprecated. Please use \code{verbose} instead.}

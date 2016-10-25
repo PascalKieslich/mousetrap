@@ -12,7 +12,7 @@ mt_export_wide(data, use = "trajectories", use_variables = NULL,
   use2 = "data", use2_variables = NULL, ...)
 }
 \arguments{
-\item{data}{a mousetrap data object created using one of the mt_import 
+\item{data}{a mousetrap data object created using one of the mt_import
 functions (see \link{mt_example} for details).}
 
 \item{use}{a character string specifying which data should be exported. The 

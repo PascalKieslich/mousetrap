@@ -9,11 +9,11 @@ mt_movement_angle(data, use = "trajectories", save_as = "measures",
   ima_percentile = 0.2, verbose = FALSE, show_progress = NULL)
 }
 \arguments{
-\item{data}{a mousetrap data object created using one of the mt_import 
-functions (see \link{mt_example} for details). Alternatively, a trajectory 
+\item{data}{a mousetrap data object created using one of the mt_import
+functions (see \link{mt_example} for details). Alternatively, a trajectory
 array can be provided directly (in this case \code{use} will be ignored).}
 
-\item{use}{a character string specifying which trajectory data should be 
+\item{use}{a character string specifying which trajectory data should be
 used.}
 
 \item{save_as}{a character string specifying where the calculated measures
@@ -29,7 +29,7 @@ containing the timestamps.}
 \item{ima_percentile}{a decimal value. The initial movement angle will be
 calculated at the respective percentile .}
 
-\item{verbose}{logical indicating whether function should report its 
+\item{verbose}{logical indicating whether function should report its
 progress.}
 
 \item{show_progress}{Deprecated. Please use \code{verbose} instead.}

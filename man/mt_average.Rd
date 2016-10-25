@@ -10,26 +10,26 @@ mt_average(data, use = "trajectories", save_as = "av_trajectories",
   dimension = NULL, show_progress = NULL)
 }
 \arguments{
-\item{data}{a mousetrap data object created using one of the mt_import 
-functions (see \link{mt_example} for details). Alternatively, a trajectory 
+\item{data}{a mousetrap data object created using one of the mt_import
+functions (see \link{mt_example} for details). Alternatively, a trajectory
 array can be provided directly (in this case \code{use} will be ignored).}
 
-\item{use}{a character string specifying which trajectory data should be 
+\item{use}{a character string specifying which trajectory data should be
 used.}
 
-\item{save_as}{a character string specifying where the resulting trajectory 
+\item{save_as}{a character string specifying where the resulting trajectory
 data should be stored.}
 
-\item{dimensions}{a character vector specifying the dimensions in the 
-trajectory array that should be averaged. By default (\code{"all"}), all 
+\item{dimensions}{a character vector specifying the dimensions in the
+trajectory array that should be averaged. By default (\code{"all"}), all
 trajectory dimensions will be averaged.}
 
 \item{av_dimension}{a character string specifying which values should be used
 for determining the intervals for averaging (\code{"timestamps"} by
 default).}
 
-\item{intervals}{an optional numeric vector. If specified, these values are 
-taken as the borders of the intervals (\code{interval_size} and 
+\item{intervals}{an optional numeric vector. If specified, these values are
+taken as the borders of the intervals (\code{interval_size} and
 \code{max_interval} are ignored).}
 
 \item{interval_size}{an integer specifying the size of the constant dimension
@@ -41,7 +41,7 @@ of the \code{interval_size}). If specified, only values will be used for
 averaging where the dimension values are smaller than \code{max_interval}.
 If unspecified (the default), all values will be included.}
 
-\item{verbose}{logical indicating whether function should report its 
+\item{verbose}{logical indicating whether function should report its
 progress.}
 
 \item{dimension}{Deprecated. Please use \code{av_dimension} instead.}
@@ -49,11 +49,11 @@ progress.}
 \item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 }
 \value{
-A mousetrap data object (see \link{mt_example}) with an additional 
-  array (by default called \code{av_trajectories}) that contains the average 
-  trajectory data per dimension interval. If a trajectory array was provided 
+A mousetrap data object (see \link{mt_example}) with an additional
+  array (by default called \code{av_trajectories}) that contains the average
+  trajectory data per dimension interval. If a trajectory array was provided
   directly as \code{data}, only the average trajectories will be returned.
-  
+
   For the dimension values used for averaging (specified in
   \code{av_dimension}), the mid point of the respective interval is reported,
   which is helpful for plotting the trajectory data later on. However, this
@@ -61,7 +61,7 @@ A mousetrap data object (see \link{mt_example}) with an additional
   dimension values in the interval.
 }
 \description{
-Average trajectory data across specified intervals (e.g., constant time 
+Average trajectory data across specified intervals (e.g., constant time
 intervals). For every specified dimension in the trajectory array (by
 default, every dimension, i.e., x- and y-position, possibly also velocity and
 acceleration etc.), the mean value for the respective interval is calculated
@@ -80,13 +80,13 @@ In case the last interval is not fully covered (e.g., if the last timestamp
 has the value 1250), values for the corresponding interval (1200-1300) will
 be computed based on the average of the values up to the last existing value.
 
-Note that \code{mt_average} assumes that the trajectory variables are 
-recorded with a constant sampling rate (i.e., with a constant difference in 
+Note that \code{mt_average} assumes that the trajectory variables are
+recorded with a constant sampling rate (i.e., with a constant difference in
 the timestamps). If the sampling rate varies considerably, \link{mt_resample}
 should be called before averaging to arrive at equally spaced timestamps. The
 sampling rate can be investigated using \link{mt_check_resolution}.
 
-If average velocity and acceleration are of interest, 
+If average velocity and acceleration are of interest,
 \link{mt_derivatives} should be called before averaging.
 }
 \examples{
@@ -95,7 +95,7 @@ mt_example <- mt_derivatives(mt_example)
 # average trajectories across 100 ms intervals
 mt_example <- mt_average(mt_example, save_as="av_trajectories",
   interval_size=100)
-  
+
 # average time-normalized trajectories across specific intervals
 # of the time steps
 mt_example <- mt_time_normalize(mt_example)
@@ -105,10 +105,10 @@ mt_example <- mt_average(mt_example,
 
 }
 \seealso{
-\link{mt_derivatives} for calculating velocity and 
+\link{mt_derivatives} for calculating velocity and
   acceleration.
 
-\link{mt_resample} for resampling trajectories using a constant time 
+\link{mt_resample} for resampling trajectories using a constant time
 interval.
 }
 

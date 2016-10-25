@@ -22,26 +22,26 @@ which the y-positions are stored (see Details).}
 \item{timestamps_label}{a character string specifying the name of the column(s)
 in which the timestamps are stored (see Details).}
 
-\item{mt_id_label}{an optional character string (or vector) specifying the 
-name of the column that provides a unique ID for every trial (the trial 
-identifier). If unspecified (the default), an ID variable will be 
-generated. If more than one variable name is provided, a new ID variable 
-will be created by combining the values of each variable. The trial 
+\item{mt_id_label}{an optional character string (or vector) specifying the
+name of the column that provides a unique ID for every trial (the trial
+identifier). If unspecified (the default), an ID variable will be
+generated. If more than one variable name is provided, a new ID variable
+will be created by combining the values of each variable. The trial
 identifier will be set as the \link{rownames} of the resulting trajectories
-and trial data, and additionally be stored in the column "mt_id" in the 
+and trial data, and additionally be stored in the column "mt_id" in the
 trial data.}
 
-\item{split}{a character string indicating how the different timestamps and 
+\item{split}{a character string indicating how the different timestamps and
 coordinates within a trial are separated.}
 
 \item{duplicates}{a character string indicating how duplicate timestamps
 within a trial are handled (see Details).}
 
-\item{reset_timestamps}{logical indicating if the first timestamp should be 
+\item{reset_timestamps}{logical indicating if the first timestamp should be
 subtracted from all timestamps within a trial. Default is \code{TRUE} as it
 is recommended for all following analyses in mousetrap.}
 
-\item{verbose}{logical indicating whether function should report its 
+\item{verbose}{logical indicating whether function should report its
 progress.}
 
 \item{show_progress}{Deprecated. Please use \code{verbose} instead.}
@@ -53,15 +53,15 @@ A mousetrap data object (see \link{mt_example}).
   OpenSesame, the unit of the timestamps is milliseconds.
 }
 \description{
-\code{mt_import_mousetrap} accepts a data.frame of (merged) raw data from a 
-mouse-tracking experiment implemented in OpenSesame using the 
+\code{mt_import_mousetrap} accepts a data.frame of (merged) raw data from a
+mouse-tracking experiment implemented in OpenSesame using the
 \href{https://github.com/pascalkieslich/mousetrap-os}{mousetrap plugin}. From
-this data.frame, \code{mt_import_mousetrap} creates a mousetrap data object 
+this data.frame, \code{mt_import_mousetrap} creates a mousetrap data object
 containing the trajectories and additional data for further processing within
-the mousetrap package. Specifically, it returns a list that includes the 
-trajectory data as an array (called \code{trajectories}), and all other data 
-as a data.frame (called \code{data}). This data structure can then be passed 
-on to other functions within this package (see \link{mousetrap} for an 
+the mousetrap package. Specifically, it returns a list that includes the
+trajectory data as an array (called \code{trajectories}), and all other data
+as a data.frame (called \code{data}). This data structure can then be passed
+on to other functions within this package (see \link{mousetrap} for an
 overview).
 }
 \details{
@@ -69,24 +69,24 @@ When working with mouse-tracking data that were recorded using the mousetrap
 plug-ins for OpenSesame, usually only the \code{raw_data} need to be
 provided. All other arguments have sensible defaults.
 
-If the relevant timestamps, x-positions, and y-positions are each stored in 
-one variable, a character string specifying (parts of) the respective column 
+If the relevant timestamps, x-positions, and y-positions are each stored in
+one variable, a character string specifying (parts of) the respective column
 name needs to be provided. In this case, the column names are extracted using
-\link{grep} to find the column that starts with the respective character 
+\link{grep} to find the column that starts with the respective character
 string (in OpenSesame these will typically contain the name of the item that
 was used to record them, such as \code{xpos_get_response}). This means that
-the exact column names do not have to be provided - as long as only one 
-column starts with the respective character string (otherwise, the exact 
+the exact column names do not have to be provided - as long as only one
+column starts with the respective character string (otherwise, the exact
 column names have to be provided).
 
-If several variables contain the timestamps, x-positions, and y-positions 
-within a trial (e.g., \code{xpos_part1} and \code{xpos_part2}), a vector of 
-the exact column names has to be provided (e.g., 
-\code{xpos_label=c("xpos_part1","xpos_part2"))}. \code{mt_import_mousetrap} 
+If several variables contain the timestamps, x-positions, and y-positions
+within a trial (e.g., \code{xpos_part1} and \code{xpos_part2}), a vector of
+the exact column names has to be provided (e.g.,
+\code{xpos_label=c("xpos_part1","xpos_part2"))}. \code{mt_import_mousetrap}
 will then merge all raw data in the order with which the variable labels have
-been specified. If one variable contains NAs or an empty string in a trial, 
-these cases will be ignored (this covers the special case that, e.g., 
-\code{xpos_part2} is only relevant for some trials and contains NAs in the 
+been specified. If one variable contains NAs or an empty string in a trial,
+these cases will be ignored (this covers the special case that, e.g.,
+\code{xpos_part2} is only relevant for some trials and contains NAs in the
 other trials).
 
 \code{duplicates} allows for different options to handle duplicate timestamps
