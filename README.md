@@ -17,6 +17,18 @@ Installation
 -   The current stable version is available on CRAN and can be installed via `install.packages("mousetrap")`.
 -   To install the latest development version from GitHub, you need the `devtools` package . The development version can be installed via `devtools::install_github("pascalkieslich/mousetrap@master")`.
 
+Mailing list
+------------
+
+If you would like to receive information about new releases, you can add your email to the [mailing list](http://eepurl.com/co1AqX).
+
+Citation
+--------
+
+If you use the `mousetrap` package in your published research, we kindly ask that you cite it as follows:
+
+Kieslich, P. J., & Henninger, F. (2016). Mousetrap: An R package for processing and analyzing mouse-tracking data (Version 2.0.0). doi: [10.5281/zenodo.163241](https://doi.org/10.5281/zenodo.163241)
+
 Acknowledgments
 ---------------
 
