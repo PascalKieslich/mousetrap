@@ -157,10 +157,12 @@ mt_plot_riverbed <- function(data, use='tn_trajectories',
     }
   }
   
+  # Remove zero frequencies (coded in alpha)
+  riverbed <- riverbed[riverbed[,"alpha"]==TRUE,]
   
   # Create plot output
   output <- ggplot2::ggplot(ggplot2::aes_string(x='value_x', y='value_y', 
-      fill='frequency', alpha='alpha'), data=riverbed) +
+      fill='frequency'), data=riverbed) +
     ggplot2::geom_raster() +
     ggplot2::scale_fill_gradientn(colours=rev(RColorBrewer::brewer.pal(9, "YlOrRd")),
       name='Frequency', trans='log', labels=scales::percent) +
