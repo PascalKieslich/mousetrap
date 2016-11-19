@@ -300,9 +300,9 @@ mt_plot_add_rect <- function(rect,
       ggplot2::aes_string(
         xmin="x", ymin="y", 
         xmax="x2", ymax="y2",
-        x=NULL, y=NULL, 
         color=NULL, linetype=NULL
       ),
+      inherit.aes = FALSE,
       color=color, fill=fill, ...
     )
   )
