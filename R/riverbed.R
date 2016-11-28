@@ -49,13 +49,13 @@
 #' # Create riverbed plot for all trials
 #' mt_plot_riverbed(mt_example)
 #' 
+#' # Create separate plots for typical and atypical trials
+#' mt_plot_riverbed(mt_example, facet_col="Condition")
+#' 
 #' \dontrun{
 #' # Create riverbed plot for all trials with custom x and y axis labels
 #' mt_plot_riverbed(mt_example) +
 #'   ggplot2::xlab("Time step") + ggplot2::ylab("X coordinate")
-#' 
-#' # Create separate plots for typical and atypical trials
-#' mt_plot_riverbed(mt_example, facet_col="Condition")
 #' 
 #' # Note that it is also possible to replace the
 #' # default scale for fill with a custom scale

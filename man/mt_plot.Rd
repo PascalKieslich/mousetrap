@@ -109,7 +109,7 @@ mt_plot(mt_example, use="tn_trajectories",
 # ... with custom colors
 mt_plot(mt_example, use="tn_trajectories",
   x="xpos", y="ypos", color="Condition") +
-  scale_color_brewer(type="qual")
+  ggplot2::scale_color_brewer(type="qual")
    
 # Plot aggregated time-normalized trajectories per condition
 mt_plot_aggregate(mt_example, use="tn_trajectories",

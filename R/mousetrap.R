@@ -1,4 +1,4 @@
-#' mousetrap: Process and Analyze Mouse-Tracking Data
+#' Process and analyze mouse-tracking data
 #' 
 #' The mousetrap package provides functions for importing, preprocessing, 
 #' analyzing, aggregating, and visualizing mouse-tracking data. In the 
@@ -12,15 +12,13 @@
 #'   \link{mt_example}.
 #'   
 #'   \link{mt_import_mousetrap} imports mouse-tracking data that were recorded
-#'   using the \href{https://github.com/pascalkieslich/mousetrap-os}{mousetrap
-#'   plug-ins} for OpenSesame.
+#'   using the mousetrap plugin for OpenSesame.
 #'   
 #'   \link{mt_import_wide} imports mouse-tracking data saved in a wide format 
 #'   (e.g., data exported from MouseTracker).
 #'   
 #'   \link{mt_import_long} imports mouse-tracking data saved in a long format. 
-#'   (e.g., trajectories exported using the mt_reshape function from this 
-#'   package).
+#'   (e.g., trajectories exported using \link{mt_export_long}).
 #'   
 #' @section Preprocessing functions:
 #'   
@@ -72,8 +70,7 @@
 #'   \link{mt_movement_angle}	calculates the initial movement angle.
 #'   
 #'   \link{mt_standardize} standardizes mouse-tracking measures onto a common 
-#'   scale (individually for subsets of the data, e.g. z-scaled data per
-#'   participant).
+#'   scale (separately for subsets of the data, e.g., per participant).
 #'   
 #'   \link{mt_check_bimodality}	assesses the bimodality of mouse-tracking
 #'   measure distributions.
@@ -134,7 +131,7 @@
 #' mt_example <- mt_deviations(mt_example)
 #' mt_example <- mt_measures(mt_example)
 #' 
-#' average_measures <- mt_aggregate(
+#' mt_aggregate(
 #'   mt_example, use="measures",
 #'   use_variables=c("MAD", "AD"),
 #'   use2_variables="Condition"

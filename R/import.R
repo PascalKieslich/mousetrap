@@ -1,16 +1,14 @@
-#' Import mouse-tracking data recorded using the mousetrap plug-ins in
-#' OpenSesame.
+#' Import mouse-tracking data recorded using the mousetrap plug-ins in OpenSesame.
 #'
-#' \code{mt_import_mousetrap} accepts a data.frame of (merged) raw data from a
-#' mouse-tracking experiment implemented in OpenSesame using the
-#' \href{https://github.com/pascalkieslich/mousetrap-os}{mousetrap plugin}. From
-#' this data.frame, \code{mt_import_mousetrap} creates a mousetrap data object
-#' containing the trajectories and additional data for further processing within
-#' the mousetrap package. Specifically, it returns a list that includes the
-#' trajectory data as an array (called \code{trajectories}), and all other data
-#' as a data.frame (called \code{data}). This data structure can then be passed
-#' on to other functions within this package (see \link{mousetrap} for an
-#' overview).
+#' \code{mt_import_mousetrap} accepts a data.frame of (merged) raw data from a 
+#' mouse-tracking experiment implemented in OpenSesame using the mousetrap
+#' plugin. From this data.frame, \code{mt_import_mousetrap} creates a mousetrap
+#' data object containing the trajectories and additional data for further
+#' processing within the mousetrap package. Specifically, it returns a list that
+#' includes the trajectory data as an array (called \code{trajectories}), and
+#' all other data as a data.frame (called \code{data}). This data structure can
+#' then be passed on to other functions within this package (see
+#' \link{mousetrap} for an overview).
 #'
 #' When working with mouse-tracking data that were recorded using the mousetrap
 #' plug-ins for OpenSesame, usually only the \code{raw_data} need to be
@@ -73,7 +71,7 @@
 #'   If mouse-tracking data were recorded using the mousetrap plug-ins for
 #'   OpenSesame, the unit of the timestamps is milliseconds.
 #'
-#' @references Mousetrap plug-ins for OpenSesame
+#' @references Mousetrap plugin for OpenSesame
 #'   (\url{https://github.com/pascalkieslich/mousetrap-os})
 #'
 #' @seealso \link[readbulk]{read_opensesame} from the \code{readbulk} library
@@ -606,15 +604,16 @@ mt_import_wide <- function(raw_data,
 #' stored in long format, i.e., where one row contains the logging data
 #' (timestamp, x- and y-position etc.) at one specific point in the trial. This
 #' is, for example, the case when exporting the trajectory data from the
-#' mousetrap package using \link{mt_reshape}. From this data.frame,
+#' mousetrap package using \link{mt_export_long}. From this data.frame,
 #' \code{mt_import_long} creates a mousetrap data object containing the
 #' trajectories and additional data for further processing within the mousetrap
 #' package. Specifically, it returns a list that includes the trajectory data as
 #' an array (called \code{trajectories}), and all other data as a data.frame
 #' (called \code{data}). This data structure can then be passed on to other
-#' functions within this package (see \link{mousetrap} for an overview). The
-#' defaults are set so that no adjustments have to be made when importing a
-#' data.frame that was created using \link{mt_reshape}.
+#' functions within this package (see \link{mousetrap} for an overview).
+#' 
+#' The default arguments are set so that no adjustments have to be made when
+#' importing a data.frame that was created using \link{mt_export_long}.
 #'
 #' The coordinates are ordered according to the values in the column provided in
 #' the \code{mt_seq_label} parameter (\code{mt_seq} by default). If the

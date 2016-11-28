@@ -2,7 +2,7 @@
 % Please edit documentation in R/visualize.R
 \name{mt_plot_per_trajectory}
 \alias{mt_plot_per_trajectory}
-\title{Create pdf with separate plots per trajectory.}
+\title{Create PDF with separate plots per trajectory.}
 \usage{
 mt_plot_per_trajectory(file, data, use = "trajectories", x = "xpos",
   y = "ypos", xlim = NULL, ylim = NULL, axes_exact = FALSE,
@@ -10,8 +10,8 @@ mt_plot_per_trajectory(file, data, use = "trajectories", x = "xpos",
   verbose = FALSE, show_progress = NULL, ...)
 }
 \arguments{
-\item{file}{a character string specifying the name of the pdf file. Passed on
-to \link{pdf}.}
+\item{file}{a character string specifying the name of the PDF file. Passed on
+to \link[grDevices]{pdf}.}
 
 \item{data}{a mousetrap data object created using one of the mt_import 
 functions (e.g., \link{mt_import_mousetrap}).}
@@ -59,7 +59,7 @@ progress.}
 
 \item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 
-\item{...}{additional arguments passed on to \link{pdf}.}
+\item{...}{additional arguments passed on to \link[grDevices]{pdf}.}
 }
 \description{
 \code{mt_plot_per_trajectory} creates a PDF file with separate plots per 
@@ -70,9 +70,9 @@ inserted, this function can also be used for plotting velocity and
 acceleration profiles.
 }
 \details{
-\code{mt_plot_per_trajectory} creates a PDF using \link{pdf}. Next, it plots 
-all trajectories individually using \link{mt_plot}. Every plot is labeled 
-using the \link{rownames} of the trajectories.
+\code{mt_plot_per_trajectory} creates a PDF using \link[grDevices]{pdf}.
+Next, it plots all trajectories individually using \link{mt_plot}. Every plot
+is labeled using the \link{rownames} of the trajectories.
 }
 \examples{
 \dontrun{

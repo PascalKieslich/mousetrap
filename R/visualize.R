@@ -84,7 +84,7 @@
 #' # ... with custom colors
 #' mt_plot(mt_example, use="tn_trajectories",
 #'   x="xpos", y="ypos", color="Condition") +
-#'   scale_color_brewer(type="qual")
+#'   ggplot2::scale_color_brewer(type="qual")
 #'    
 #' # Plot aggregated time-normalized trajectories per condition
 #' mt_plot_aggregate(mt_example, use="tn_trajectories",
@@ -229,7 +229,7 @@ mt_plot_aggregate <- function(data,
 #' \code{mt_plot_add_rect} adds one or several rectangles to a mousetrap plot. 
 #' These buttons usually correspond to the borders of the buttons in the 
 #' mouse-tracking experiment. It is specifically designed so that the arguments
-#' from the \code{mousetrap_response} plug-in in OpenSesame can be used.
+#' from the \code{mousetrap_response} plugin in OpenSesame can be used.
 #' 
 #' \code{mt_plot_add_rect} internally uses \link[ggplot2]{geom_rect} of the
 #' \code{ggplot2} package for plotting.
@@ -308,7 +308,7 @@ mt_plot_add_rect <- function(rect,
   )
 }
 
-#' Create pdf with separate plots per trajectory.
+#' Create PDF with separate plots per trajectory.
 #' 
 #' \code{mt_plot_per_trajectory} creates a PDF file with separate plots per 
 #' trajectory. This PDF can be used for inspecting individual trajectories. Note
@@ -317,13 +317,13 @@ mt_plot_add_rect <- function(rect,
 #' inserted, this function can also be used for plotting velocity and
 #' acceleration profiles.
 #' 
-#' \code{mt_plot_per_trajectory} creates a PDF using \link{pdf}. Next, it plots 
-#' all trajectories individually using \link{mt_plot}. Every plot is labeled 
-#' using the \link{rownames} of the trajectories.
+#' \code{mt_plot_per_trajectory} creates a PDF using \link[grDevices]{pdf}.
+#' Next, it plots all trajectories individually using \link{mt_plot}. Every plot
+#' is labeled using the \link{rownames} of the trajectories.
 #' 
 #' @inheritParams mt_plot
-#' @param file a character string specifying the name of the pdf file. Passed on
-#'   to \link{pdf}.
+#' @param file a character string specifying the name of the PDF file. Passed on
+#'   to \link[grDevices]{pdf}.
 #' @param xlim optional argument specifying the limits for the x axis (passed on
 #'   to \link[ggplot2]{coord_cartesian}). If not specified (the default), 
 #'   sensible axis limits will be computed.
@@ -343,7 +343,7 @@ mt_plot_add_rect <- function(rect,
 #' @param verbose logical indicating whether function should report its 
 #'   progress.
 #' @param show_progress Deprecated. Please use \code{verbose} instead.
-#' @param ... additional arguments passed on to \link{pdf}.
+#' @param ... additional arguments passed on to \link[grDevices]{pdf}.
 #' 
 #' @seealso
 #' \link{mt_plot} for plotting trajectory data.

@@ -25,7 +25,7 @@ rectangles are unfilled.}
 \code{mt_plot_add_rect} adds one or several rectangles to a mousetrap plot. 
 These buttons usually correspond to the borders of the buttons in the 
 mouse-tracking experiment. It is specifically designed so that the arguments
-from the \code{mousetrap_response} plug-in in OpenSesame can be used.
+from the \code{mousetrap_response} plugin in OpenSesame can be used.
 }
 \details{
 \code{mt_plot_add_rect} internally uses \link[ggplot2]{geom_rect} of the
