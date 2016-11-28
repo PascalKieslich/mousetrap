@@ -6,9 +6,9 @@
 * Introduced `timestamps` argument to explicitly specify the dimension in the trajectory array containing the timestamps.
 * Perform merging of trial and trajectory data (e.g., in `mt_subset` and `mt_reshape`) based on the `rownames`. Therefore, the `mt_id` column in data.frames is not needed anymore - but is kept for the convenience of the user. The column is called `"mt_id"` in import and measures functions. `mt_reshape` allows the user to specify the label of the `mt_id` column explicitly.
 * As a consequence of the previous changes: Removal of the internal variables `mt_variable_labels` and `mt_id`.
-* Removed "calculate" from all mt_calculate functions: `mt_calculate_measures`, `mt_calculate_derivatives`, `mt_calculate_deviations` are now called `mt_measures`, `mt_derivatives`, `mt_deviations`.
+* Removed `calculate` from all mt_calculate functions: `mt_calculate_measures`, `mt_calculate_derivatives`, `mt_calculate_deviations` are now called `mt_measures`, `mt_derivatives`, `mt_deviations`.
 * Introduction of internal utils function `create_results` (that simplifies including the newly created trajectories or measures in the existing mousetrap data object).
-* Performance improvement of reshaping, aggregation, and visualization functions through internal changes in `mt_reshape`: `base::merge` and `reshape2` functions are replaced with functions from the `tidyr` and `dplyr` packages (and custom functions). Package dependencies were adjusted accordingly. As the `dplyr` functions may introduce additional classes for the reshaped data (such as `grouped_df` and `tbl_df`), a new argument (`convert_df`) is introduced that converts the reshaped data to "pure" data.frames by default (thereby dropping additional classes).
+* Performance improvement of reshaping, aggregation, and visualization functions through internal changes in `mt_reshape`: `base::merge` and `reshape2` functions are replaced with functions from the `tidyr` and `dplyr` packages (and custom functions). Package dependencies were adjusted accordingly. As the `dplyr` functions may introduce additional classes for the reshaped data (such as `grouped_df` and `tbl_df`), a new argument (`convert_df`) is introduced that converts the reshaped data to pure data.frames by default (thereby dropping additional classes).
 
 ## Changes in specific functions
 * `mt_import_mousetrap`, `mt_import_long`, `mt_import_wide`: Allow specifying several variables for the trial identifier in `mt_id_label`. A a new ID variable will be created by combining the values of each variable.
@@ -51,7 +51,7 @@
 * Change of default scale for fill in `mt_plot_riverbed`
 * Custom x and y axis labels for `mt_plot_riverbed` can no longer be set via `x_label` and `y_label` (but can be added using the `ggplot2` functions `xlab()` and `ylab()`, see Examples)
 * Minor fix in package documentation (#1) (thanks to @sbrockhaus)
-* Minor fix in documentation of x/y reversals (thanks to Barnabás Szászi)
+* Minor fix in documentation of x/y reversals (thanks to Barnabas Szaszi)
 
 # mousetrap 1.0.0
 * First release
