@@ -1,0 +1,34 @@
+reference:
+  - title: Overview
+    desc:
+     The mousetrap package provides functions for importing, preprocessing, 
+     analyzing, aggregating, and visualizing mouse-tracking data.
+     A structured overview is given in the general package documentation
+     which can be accessed through one of the following links.
+    contents:
+    - mousetrap
+  - title: Mousetrap functions
+    desc:
+      Below you find all mousetrap functions in alphabetical order.
+    contents:
+    - starts_with("mt_")
+  - title: Helper functions
+    desc:
+     A number of additional helper functions are provided.
+    contents:
+    - bimodality_coefficient
+    - scale_within
+    - read_mousetracker
+navbar:
+  title: ~
+  type: default
+  left:
+  - text: Overview
+    href: reference/mousetrap.html
+  - text: Reference
+    href: reference/index.html
+  - text: News
+    href: news/index.html
+  right:
+  - icon: fa-github fa-lg
+    href: https://github.com/pascalkieslich/mousetrap
