@@ -47,6 +47,18 @@
 #' calculated using the \link[pracma]{polyarea} function from the pracma
 #' package.
 #' 
+#' Note that all \strong{time} related measures (except \code{idle_time}) are 
+#' reported using the timestamp metric as present in the data. To interpret the 
+#' timestamp values as time since tracking start, the assumption has to be made 
+#' that for each trajectory the tracking started at timestamp 0 and that all 
+#' timestamps indicate the time passed since tracking start. Therefore, all 
+#' timestamps should be reset during data import by subtracting the value of the
+#' first timestamp from all timestamps within a trial (assuming that the first 
+#' timestamp corresponds to the time when tracking started). Timestamps are 
+#' reset by default when importing the data using one of the mt_import fuctions 
+#' (e.g., \link{mt_import_mousetrap}).
+#' 
+#' 
 #' 
 #' @inheritParams mt_time_normalize
 #' @param save_as a character string specifying where the calculated measures 
@@ -70,9 +82,11 @@
 #'   was provided directly as \code{data}, only the measures data.frame will be 
 #'   returned.
 #'   
-#'   The following measures are computed for each trajectory (the labels
-#'   relating to x- and y-positions will be adapted depending on the values
-#'   specified in \code{dimensions}):
+#'   The following measures are computed for each trajectory (the labels 
+#'   relating to x- and y-positions will be adapted depending on the values 
+#'   specified in \code{dimensions}). Please note that additional information is
+#'   provided in the Details section.
+#'   
 #'   \item{mt_id}{Trial ID (can be used for merging measures data.frame with
 #'   other trial-level data)}
 #'   \item{xpos_max}{Maximum x-position} 
@@ -97,9 +111,8 @@
 #'   \item{ypos_flips}{Number of directional changes along y-axis} 
 #'   \item{xpos_reversals}{Number of crossings of the y-axis} 
 #'   \item{ypos_reversals}{Number of crossings of the x-axis}
-#'   \item{RT}{Response time, the total time passed until a response was given}
-#'   \item{initiation_time}{Time passed until first mouse movement was 
-#'   initiated}
+#'   \item{RT}{Response time, time at which tracking stopped}
+#'   \item{initiation_time}{Time at which first mouse movement was initiated}
 #'   \item{idle_time}{Total time without mouse movement across the entirety of
 #'   the trial}
 #'   \item{total_dist}{Total distance covered by the trajectory}
@@ -110,7 +123,7 @@
 #'   \item{acc_max}{Maximum acceleration}
 #'   \item{acc_max_time}{Time at which maximum acceleration occurred first}
 #'   \item{acc_min}{Minimum acceleration} 
-#'   \item{acc_min_time}{Time where minimum acceleration occurred first} 
+#'   \item{acc_min_time}{Time at which minimum acceleration occurred first} 
 #'   
 #' @references Mousetrap
 #'   
@@ -210,7 +223,8 @@ mt_measures <- function(
     if (max(trajectories[,timestamps,1]) > 0) {
       message(
         "Trajectories detected where first timestamp is greater than 0. ",
-        "Assuming period without movement starting at timestamp 0."
+        "Please see Details section of mt_measures documentation ",
+        "for interpretation of time related measures."
       )
       # only affects _time variables
     } else if (min(trajectories[,timestamps,1]) < 0) {
@@ -333,16 +347,7 @@ mt_measures <- function(
       
       current_timestamps <- trajectories[i,timestamps,1:nlogs[i]]
       
-      # If first timestamp > 0, add another with 0 to indicate phase without movement
-      if (current_timestamps[1] > 0) {
-        current_timestamps <- c(0, current_timestamps)
-        current_dim1 <- c(current_dim1[1], current_dim1)
-        current_dim2 <- c(current_dim2[1], current_dim2)
-        current_dev_ideal <- c(current_dev_ideal[1], current_dev_ideal)
-        nlogs[i] <- nlogs[i] + 1
-      }
-
-      measures[i,"RT"] <- max(current_timestamps)
+      measures[i,"RT"] <- current_timestamps[nlogs[i]]
       
       # Calculate variables for phases with and without movement
       time_diffs <- diff(current_timestamps)
@@ -351,8 +356,8 @@ mt_measures <- function(
 
       if (all(pos_constant == FALSE)) {
         # Continuous movement
-        measures[i,"initiation_time"] <- 0
-        measures[i,"idle_time"] <- 0
+        measures[i,"initiation_time"] <- current_timestamps[1]
+        measures[i,"idle_time"] <- current_timestamps[1]
       } else if (all(pos_constant == TRUE)) {
         # No movement at all
         measures[i,"initiation_time"] <- measures[i,"RT"]
@@ -361,8 +366,8 @@ mt_measures <- function(
         # Intermittent movement
         measures[i,"initiation_time"] <- ifelse(
           !pos_constant[1],
-          0,
-          sum(time_diffs[1:(which(pos_constant == FALSE)[1]-1)])
+          current_timestamps[1],
+          current_timestamps[1]+sum(time_diffs[1:(which(pos_constant == FALSE)[1]-1)])
         )
         measures[i,"idle_time"] <- sum(time_diffs[pos_constant])
       }
