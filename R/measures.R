@@ -22,15 +22,24 @@
 #' 
 #' The \strong{maximum absolute deviation} (\code{MAD}) is the maximum 
 #' perpendicular deviation from the straight path connecting start and end point
-#' of the trajectory (e.g., Freeman & Ambady, 2010). If the \code{MAD} occurs
-#' above the direct path, this is denoted by a positive value. If it occurs
+#' of the trajectory (e.g., Freeman & Ambady, 2010). If the \code{MAD} occurs 
+#' above the direct path, this is denoted by a positive value. If it occurs 
 #' below the direct path, this is denoted by a negative value. This assumes that
-#' the complete movement in the trial was from bottom to top (i.e., the end
+#' the complete movement in the trial was from bottom to top (i.e., the end 
 #' point has a higher y-position than the start point). In case the movement was
-#' from top to bottom, \code{mt_measures} automatically flips the
-#' signs. Both \code{MD_above} and  \code{MD_below} are also reported
-#' separately. The \strong{average deviation} (\code{AD}) is the average of all
-#' deviations across the trial.
+#' from top to bottom, \code{mt_measures} automatically flips the signs. Both
+#' \code{MD_above} and  \code{MD_below} are also reported separately.
+#' 
+#' The \strong{average deviation} (\code{AD}) is the average of all deviations 
+#' across the trial. Note that \code{AD} ignores the timestamps when calculating
+#' this average. This implicitly assumes that the time passed between each 
+#' recording of the mouse is the same within each individual trajectory. If the 
+#' \code{AD} is calculated using raw data that were obtained with an 
+#' approximately constant logging resolution (sampling rate), this assumption is
+#' usually justified (\link{mt_check_resolution} can be used to check this). 
+#' Alternatively, the \code{AD} can be calculated based on time-normalized 
+#' trajectories; these can be computed using \link{mt_time_normalize} which 
+#' creates equidistant time steps within each trajectory.
 #' 
 #' The \code{AUC} represents the \strong{area under curve}, i.e., the geometric
 #' area between the actual trajectory and the direct path. Areas above the
