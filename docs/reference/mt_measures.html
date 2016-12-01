@@ -136,9 +136,10 @@ progress.</dd>
   the data.frame corresponds to one of the measures. If a trajectory array 
   was provided directly as <code>data</code>, only the measures data.frame will be 
   returned.</p>
-    <p>The following measures are computed for each trajectory (the labels
-  relating to x- and y-positions will be adapted depending on the values
-  specified in <code>dimensions</code>):</p>
+    <p>The following measures are computed for each trajectory (the labels 
+  relating to x- and y-positions will be adapted depending on the values 
+  specified in <code>dimensions</code>). Please note that additional information is
+  provided in the Details section.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
@@ -156,20 +157,38 @@ definition (see Value). For several more complex measures, a few details are
 provided in the following.</p>
     <p>The <strong>maximum absolute deviation</strong> (<code>MAD</code>) is the maximum 
 perpendicular deviation from the straight path connecting start and end point
-of the trajectory (e.g., Freeman &amp; Ambady, 2010). If the <code>MAD</code> occurs
-above the direct path, this is denoted by a positive value. If it occurs
+of the trajectory (e.g., Freeman &amp; Ambady, 2010). If the <code>MAD</code> occurs 
+above the direct path, this is denoted by a positive value. If it occurs 
 below the direct path, this is denoted by a negative value. This assumes that
-the complete movement in the trial was from bottom to top (i.e., the end
+the complete movement in the trial was from bottom to top (i.e., the end 
 point has a higher y-position than the start point). In case the movement was
-from top to bottom, <code>mt_measures</code> automatically flips the
-signs. Both <code>MD_above</code> and  <code>MD_below</code> are also reported
-separately. The <strong>average deviation</strong> (<code>AD</code>) is the average of all
-deviations across the trial.</p>
+from top to bottom, <code>mt_measures</code> automatically flips the signs. Both
+<code>MD_above</code> and  <code>MD_below</code> are also reported separately.</p>
+    <p>The <strong>average deviation</strong> (<code>AD</code>) is the average of all deviations 
+across the trial. Note that <code>AD</code> ignores the timestamps when calculating
+this average. This implicitly assumes that the time passed between each 
+recording of the mouse is the same within each individual trajectory. If the 
+<code>AD</code> is calculated using raw data that were obtained with an 
+approximately constant logging resolution (sampling rate), this assumption is
+usually justified (<a href='mt_check_resolution.html'>mt_check_resolution</a> can be used to check this). 
+Alternatively, the <code>AD</code> can be calculated based on time-normalized 
+trajectories; these can be computed using <a href='mt_time_normalize.html'>mt_time_normalize</a> which 
+creates equidistant time steps within each trajectory.</p>
     <p>The <code>AUC</code> represents the <strong>area under curve</strong>, i.e., the geometric
 area between the actual trajectory and the direct path. Areas above the
 direct path are added and areas below are subtracted. The <code>AUC</code> is
 calculated using the <a href='http://www.rdocumentation.org/packages/pracma/topics/polyarea'>polyarea</a> function from the pracma
 package.</p>
+    <p>Note that all <strong>time</strong> related measures (except <code>idle_time</code>) are 
+reported using the timestamp metric as present in the data. To interpret the 
+timestamp values as time since tracking start, the assumption has to be made 
+that for each trajectory the tracking started at timestamp 0 and that all 
+timestamps indicate the time passed since tracking start. Therefore, all 
+timestamps should be reset during data import by subtracting the value of the
+first timestamp from all timestamps within a trial (assuming that the first 
+timestamp corresponds to the time when tracking started). Timestamps are 
+reset by default when importing the data using one of the mt_import fuctions 
+(e.g., <a href='mt_import_mousetrap.html'>mt_import_mousetrap</a>).</p>
     
     <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
 
