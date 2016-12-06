@@ -519,6 +519,8 @@ mt_align_start <- function(
 #' @param exact_last_timestamp logical indicating if the last timestamp should
 #'   always be appended (which is the case by default). If \code{FALSE}, the
 #'   last timestamp is only appended if it is a multiple of the step_size.
+#' @param method defaults to "linear" for linear interpolation, can be set to 
+#'   "constant" for constant interpolation. 
 #'
 #' @return A mousetrap data object (see \link{mt_example}) with an additional
 #'   array (by default called \code{rs_trajectories}) containing the resampled
@@ -542,7 +544,7 @@ mt_resample <- function(data,
   use="trajectories", save_as="rs_trajectories",
   dimensions=c("xpos", "ypos"), timestamps="timestamps",
   step_size=10, exact_last_timestamp=TRUE,
-  verbose=FALSE, show_progress=NULL) {
+  verbose=FALSE, show_progress=NULL, method = "linear") {
 
   if(is.null(show_progress) == FALSE) {
     warning(
@@ -617,7 +619,7 @@ mt_resample <- function(data,
     # Perform linear interpolation for specified trajectory dimensions
     for (dimension in dimensions) {
       rs_trajectories[i,dimension,1:length(int_timestamps)] <- stats::approx(
-        current_timestamps, current_trajectories[dimension,], xout=custom_timesteps)$y
+        current_timestamps, current_trajectories[dimension,], xout=custom_timesteps, method = method)$y
     }
 
     if (verbose) {
