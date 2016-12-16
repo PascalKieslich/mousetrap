@@ -38,7 +38,8 @@
 #'
 #'
 #' @param data a mousetrap data object created using one of the mt_import
-#'   functions (see \link{mt_example} for details).
+#'   functions (see \link{mt_example} for details). Alternatively, a trajectory
+#'   array can be provided directly (in this case \code{use} will be ignored).
 #' @param use a character string specifying which data should be reshaped. The
 #'   corresponding data are selected from data using \code{data[[use]]}.
 #'   Usually, this value corresponds to either "trajectories",
@@ -161,6 +162,17 @@ mt_reshape <- function(data,
       call.=FALSE
     )
     .funs <- aggregation_function
+  }
+  
+  
+  # If data is not a mousetrap object, create one
+  # (this allows that trajectories can be reshaped directly)
+  if(is_mousetrap_data(data)==FALSE){
+    data <- list(data=data.frame(mt_id=rownames(data),row.names = rownames(data)),
+                 use=data)
+    names(data) <- c(use2,use)
+    class(data) <- "mousetrap"
+    use2_variables <- NULL
   }
 
   # Assume trajectories are provided in case class is an array

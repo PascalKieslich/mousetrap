@@ -22,8 +22,8 @@ rectangles are unfilled.}
 \item{...}{additional arguments passed on to \link[ggplot2]{geom_rect}.}
 }
 \description{
-\code{mt_plot_add_rect} adds one or several rectangles to a mousetrap plot. 
-These buttons usually correspond to the borders of the buttons in the 
+\code{mt_plot_add_rect} adds one or several rectangles to a mousetrap plot.
+These buttons usually correspond to the borders of the buttons in the
 mouse-tracking experiment. It is specifically designed so that the arguments
 from the \code{mousetrap_response} plugin in OpenSesame can be used.
 }
@@ -43,8 +43,8 @@ mt_example <- mt_time_normalize(mt_example)
 # Create rectangles matrix
 rectangles <- matrix(
   # (The matrix is n x 4, and contains
-  # all relevant data for every button, 
-  # (i.e. x, y, width and height values) 
+  # all relevant data for every button,
+  # (i.e. x, y, width and height values)
   # in separate rows)
   c(
    -840, 525,  350, -170,
@@ -55,10 +55,10 @@ rectangles <- matrix(
 # Plot all time-normalized trajectories
 # varying the color depending on the condition
 # and add rectangles
-mt_plot(mt_example, 
+mt_plot(mt_example,
   use="trajectories",
   x="xpos", y="ypos", color="Condition"
-) + mt_plot_add_rect(rect=rectangles)   
+) + mt_plot_add_rect(rect=rectangles)
 
 
 }

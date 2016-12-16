@@ -13,28 +13,29 @@ mt_plot_per_trajectory(file, data, use = "trajectories", x = "xpos",
 \item{file}{a character string specifying the name of the PDF file. Passed on
 to \link[grDevices]{pdf}.}
 
-\item{data}{a mousetrap data object created using one of the mt_import 
-functions (e.g., \link{mt_import_mousetrap}).}
+\item{data}{a mousetrap data object created using one of the mt_import
+functions (see \link{mt_example} for details). Alternatively, a trajectory
+array can be provided directly (in this case \code{use} will be ignored).}
 
-\item{use}{a character string specifying which trajectories should be 
-plotted. The corresponding trajectories are selected from data using 
-\code{data[[use]]}. Usually, this value corresponds to either 
-"trajectories", "tn_trajectories" or "av_trajectories", depending on 
-whether the raw, time-normalized or averaged trajectories should be 
+\item{use}{a character string specifying which trajectories should be
+plotted. The corresponding trajectories are selected from data using
+\code{data[[use]]}. Usually, this value corresponds to either
+"trajectories", "tn_trajectories" or "av_trajectories", depending on
+whether the raw, time-normalized or averaged trajectories should be
 plotted.}
 
-\item{x}{a character string specifying which dimension in the trajectory 
+\item{x}{a character string specifying which dimension in the trajectory
 array should be displayed on the x-axis (defaults to xpos).}
 
-\item{y}{a character string specifying which dimension in the trajectory 
+\item{y}{a character string specifying which dimension in the trajectory
 array should be displayed on the y-axis (defaults to ypos).}
 
 \item{xlim}{optional argument specifying the limits for the x axis (passed on
-to \link[ggplot2]{coord_cartesian}). If not specified (the default), 
+to \link[ggplot2]{coord_cartesian}). If not specified (the default),
 sensible axis limits will be computed.}
 
 \item{ylim}{optional argument specifying the limits for the y axis (passed on
-to \link[ggplot2]{coord_cartesian}). If not specified (the default), 
+to \link[ggplot2]{coord_cartesian}). If not specified (the default),
 sensible axis limits will be computed.}
 
 \item{axes_exact}{logical. If \code{TRUE}, axes will be set without offset
@@ -54,7 +55,7 @@ relevant if \code{rect} is specified.}
 \item{fill}{optional argument passed on to \link{mt_plot_add_rect}. Only
 relevant if \code{rect} is specified.}
 
-\item{verbose}{logical indicating whether function should report its 
+\item{verbose}{logical indicating whether function should report its
 progress.}
 
 \item{show_progress}{Deprecated. Please use \code{verbose} instead.}
@@ -62,9 +63,9 @@ progress.}
 \item{...}{additional arguments passed on to \link[grDevices]{pdf}.}
 }
 \description{
-\code{mt_plot_per_trajectory} creates a PDF file with separate plots per 
+\code{mt_plot_per_trajectory} creates a PDF file with separate plots per
 trajectory. This PDF can be used for inspecting individual trajectories. Note
-that plotting all trajectories can be time-consuming, especially for raw 
+that plotting all trajectories can be time-consuming, especially for raw
 trajectories. If the appropriate \code{x} and \code{y} arguments are
 inserted, this function can also be used for plotting velocity and
 acceleration profiles.

@@ -12,7 +12,8 @@ mt_reshape(data, use = "trajectories", use_variables = NULL,
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import
-functions (see \link{mt_example} for details).}
+functions (see \link{mt_example} for details). Alternatively, a trajectory
+array can be provided directly (in this case \code{use} will be ignored).}
 
 \item{use}{a character string specifying which data should be reshaped. The
 corresponding data are selected from data using \code{data[[use]]}.

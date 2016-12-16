@@ -14,32 +14,33 @@ mt_plot_aggregate(data, use = "trajectories", use2 = "data", x = "xpos",
   only_ggplot = FALSE, subject_id = NULL, ...)
 }
 \arguments{
-\item{data}{a mousetrap data object created using one of the mt_import 
-functions (e.g., \link{mt_import_mousetrap}).}
+\item{data}{a mousetrap data object created using one of the mt_import
+functions (see \link{mt_example} for details). Alternatively, a trajectory
+array can be provided directly (in this case \code{use} will be ignored).}
 
-\item{use}{a character string specifying which trajectories should be 
-plotted. The corresponding trajectories are selected from data using 
-\code{data[[use]]}. Usually, this value corresponds to either 
-"trajectories", "tn_trajectories" or "av_trajectories", depending on 
-whether the raw, time-normalized or averaged trajectories should be 
+\item{use}{a character string specifying which trajectories should be
+plotted. The corresponding trajectories are selected from data using
+\code{data[[use]]}. Usually, this value corresponds to either
+"trajectories", "tn_trajectories" or "av_trajectories", depending on
+whether the raw, time-normalized or averaged trajectories should be
 plotted.}
 
-\item{use2}{a character string specifying where the data that contain the 
-variables used for determining the \code{color} and \code{linetype} can be 
-found (in case these arguments are specified). Defaults to "data" as 
+\item{use2}{a character string specifying where the data that contain the
+variables used for determining the \code{color} and \code{linetype} can be
+found (in case these arguments are specified). Defaults to "data" as
 \code{data[["data"]]} usually contains all non mouse-tracking trial data.}
 
-\item{x}{a character string specifying which dimension in the trajectory 
+\item{x}{a character string specifying which dimension in the trajectory
 array should be displayed on the x-axis (defaults to xpos).}
 
-\item{y}{a character string specifying which dimension in the trajectory 
+\item{y}{a character string specifying which dimension in the trajectory
 array should be displayed on the y-axis (defaults to ypos).}
 
-\item{color}{an optional character string specifying which variable in 
+\item{color}{an optional character string specifying which variable in
 \code{data[[use2]]} should be used for coloring the trajectories.}
 
-\item{linetype}{an optional character string specifying which variable in 
-\code{data[[use2]]} should be used for varying the linetype of the 
+\item{linetype}{an optional character string specifying which variable in
+\code{data[[use2]]} should be used for varying the linetype of the
 trajectories.}
 
 \item{points}{logical. If \code{TRUE}, points will be added to the plot using
@@ -49,43 +50,43 @@ trajectories.}
 geoms is returned. If \code{FALSE} (the default), the trajectories are
 plotted using \link[ggplot2]{geom_path}.}
 
-\item{mt_id}{a character string specifying the internal label used for the 
+\item{mt_id}{a character string specifying the internal label used for the
 trial identifier (passed on to the group aesthetic). Only relevant for
 \code{mt_plot}.}
 
-\item{...}{additional arguments passed on to \link{mt_reshape} (such as 
+\item{...}{additional arguments passed on to \link{mt_reshape} (such as
 \code{subset}).}
 
-\item{subject_id}{a character string specifying which column contains the 
-subject identifier. Only relevant for \code{mt_plot_aggregate}. If 
-specified, aggregation will be performed within subjects first. Note that 
-aggregation will be performed separately for each level, including all 
+\item{subject_id}{a character string specifying which column contains the
+subject identifier. Only relevant for \code{mt_plot_aggregate}. If
+specified, aggregation will be performed within subjects first. Note that
+aggregation will be performed separately for each level, including all
 subjects for whom data are available.}
 }
 \description{
-\code{mt_plot} can be used for plotting a number of individual trajectories. 
-\code{mt_plot_aggregate} can be used for plotting aggregated trajectories. 
-The color and linetype can be varied depending on a set of condition 
-variables using the \code{color} and \code{linetype} arguments. If the 
-\code{x} and \code{y} arguments are varied, this function can also be used 
+\code{mt_plot} can be used for plotting a number of individual trajectories.
+\code{mt_plot_aggregate} can be used for plotting aggregated trajectories.
+The color and linetype can be varied depending on a set of condition
+variables using the \code{color} and \code{linetype} arguments. If the
+\code{x} and \code{y} arguments are varied, this function can also be used
 for plotting velocity and acceleration profiles.
 }
 \details{
-\code{mt_plot} internally uses \link{mt_reshape} for reshaping trajectories 
-into a long format. Next, it creates a ggplot object using the 
-\link[ggplot2]{ggplot} function of the \code{ggplot2} package. The 
-\link[ggplot2]{aes} mappings are taken from the function arguments for x, y 
+\code{mt_plot} internally uses \link{mt_reshape} for reshaping trajectories
+into a long format. Next, it creates a ggplot object using the
+\link[ggplot2]{ggplot} function of the \code{ggplot2} package. The
+\link[ggplot2]{aes} mappings are taken from the function arguments for x, y
 etc.; in addition, the group mapping is set to the internal trial identifier
 (by default called "mt_id"). If \code{return_ggplot=FALSE}, the trajectories
 are plotted using the \link[ggplot2]{geom_path} function of the
 \code{ggplot2} package.
 
-\code{mt_plot_aggregate} works similarly, but uses \link{mt_aggregate} for 
+\code{mt_plot_aggregate} works similarly, but uses \link{mt_aggregate} for
 reshaping and aggregating trajectories prior to plotting.
 
-Please note that this function is intended as a quick and easy solution for 
+Please note that this function is intended as a quick and easy solution for
 visualizing mouse trajectories. For additional flexibility, we recommend that
-\link{mt_reshape} or \link{mt_aggregate} be used in conjunction with 
+\link{mt_reshape} or \link{mt_aggregate} be used in conjunction with
 \link[ggplot2]{ggplot} to create custom visualizations.
 }
 \section{Functions}{
@@ -100,31 +101,31 @@ library(ggplot2)
 
 # Time-normalize trajectories
 mt_example <- mt_time_normalize(mt_example)
-  
+
 # Plot all time-normalized trajectories
 # varying the color depending on the condition
 mt_plot(mt_example, use="tn_trajectories",
   x="xpos", y="ypos", color="Condition")
-        
+
 # ... with custom colors
 mt_plot(mt_example, use="tn_trajectories",
   x="xpos", y="ypos", color="Condition") +
   ggplot2::scale_color_brewer(type="qual")
-   
+
 # Plot aggregated time-normalized trajectories per condition
 mt_plot_aggregate(mt_example, use="tn_trajectories",
   x="xpos", y="ypos", color="Condition")
-                  
+
 # ... first aggregating trajectories within subjects
 mt_plot_aggregate(mt_example, use="tn_trajectories",
   x="xpos", y="ypos", color="Condition",
   subject_id="subject_nr")
-        
+
 # ... adding points for each position to the plot
 mt_plot_aggregate(mt_example, use="tn_trajectories",
   x="xpos", y="ypos", color="Condition",
-  points=TRUE)                   
-        
+  points=TRUE)
+
 # Plot velocity profiles based on the averaged trajectories
 # varying the color depending on the condition
 mt_example <- mt_derivatives(mt_example)
@@ -132,7 +133,7 @@ mt_example <- mt_average(mt_example, interval_size = 100)
 mt_plot(mt_example, use="av_trajectories",
   x="timestamps", y="vel", color="Condition")
 
- 
+
 # Use only_ggplot option to return a ggplot object without geoms
 mt_avg_plot <- mt_plot_aggregate(mt_example, use="tn_trajectories",
   x="xpos", y="ypos", color="Condition", only_ggplot=TRUE)
