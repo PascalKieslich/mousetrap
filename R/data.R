@@ -24,11 +24,11 @@
 #' @references Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor
 #'   responses in the time course of categorizing atypical exemplars.
 #'   \emph{Memory & Cognition, 35}(1), 15-28.
-#'   
+#'
 #'   Mousetrap
 #'
-#' @format A \link{data.frame} with 38 rows and 19 variables. The data.frame is 
-#'   based on the combined raw data that were created using 
+#' @format A \link{data.frame} with 38 rows and 19 variables. The data.frame is
+#'   based on the combined raw data that were created using
 #'   \link[readbulk]{read_opensesame} from the \code{readbulk} library. For ease
 #'   of use, unnecessary columns were excluded.
 #'
@@ -54,11 +54,11 @@
 
 #' A mousetrap data object.
 #'
-#' A mousetrap data object with example data created by importing
+#' A data object of class "mousetrap" with example data created by importing 
 #' \link{mt_example_raw} and applying basic post-processing.
 #'
-#' The raw data set was imported using \link{mt_import_mousetrap}. Trajectories 
-#' were then remapped using \link{mt_remap_symmetric} so that all trajectories 
+#' The raw data set was imported using \link{mt_import_mousetrap}. Trajectories
+#' were then remapped using \link{mt_remap_symmetric} so that all trajectories
 #' end in the top-left corner and their starting point was aligned using
 #' \link{mt_align_start} to a common value (0,0).
 #'
@@ -70,16 +70,16 @@
 #'     information about the content of the trial data in \code{mt_example} can 
 #'     be found in \link{mt_example_raw}. The \link{rownames} of \code{data} 
 #'     correspond to the trial identifier. For convenience, the trial identifier
-#'     is also stored in an additional column called "mt_id".}
+#'     is also stored in an additional column called "mt_id".} 
 #'     \item{\code{trajectories}: an \link{array} containing the raw 
 #'     mouse-tracking trajectories. The first dimension represents the different
 #'     trials and the dimension names (which can be assessed using 
 #'     \link{rownames}) correspond to the trial identifier (the same identifier 
 #'     that is used as the \code{rownames} in \code{data}). The second dimension
-#'     corresponds to the different mouse-tracking variables (timestamps, 
-#'     x-positions, y-positions) which are usually called \code{timestamps}, 
-#'     \code{xpos}, and \code{ypos}. The third dimension corresponds to the 
-#'     samples taken over time which are included in chronological order.}
+#'     corresponds to the samples taken over time which are included in
+#'     chronological order. The third dimension corresponds to the different
+#'     mouse-tracking variables (timestamps, x-positions, y-positions) which are
+#'     usually called \code{timestamps}, \code{xpos}, and \code{ypos}. }
 #'   }
 #'
 #'   Some functions in this package (e.g., \link{mt_time_normalize} and
