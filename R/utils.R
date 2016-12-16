@@ -4,7 +4,7 @@ magrittr::`%>%`
 # Check that data is a mousetrap object
 is_mousetrap_data <- function(data){
 
-  return(class(data)=="list")
+  return(class(data)=="mousetrap")
 
 }
 
@@ -20,9 +20,14 @@ extract_data <- function(data, use) {
     }
     return(extracted)
 
-  } else {
+  } else if (is.array(data)){
 
     return(data)
+    
+  } else {
+    
+    stop("Data can either be of class mousetrap or array.")
+    
   }
 
 }

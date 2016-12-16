@@ -334,8 +334,11 @@ mt_import_mousetrap <- function(raw_data,
   } else {
     raw_data <- raw_data[, !colnames(raw_data) %in% columns]
   }
+  
+  result <- c(list("data"=raw_data, "trajectories"=trajectories))
+  class(result) <- "mousetrap"
 
-  return(c(list("data"=raw_data, "trajectories"=trajectories)))
+  return(result)
 }
 
 
@@ -579,10 +582,12 @@ mt_import_wide <- function(raw_data,
       trajectories[,timestamps,] <- trajectories[,timestamps,] - trajectories[,timestamps,1]
     }
   }
-
-
-  return(c(list("data"=raw_data, "trajectories"=trajectories)))
-
+  
+  result <- c(list("data"=raw_data, "trajectories"=trajectories))
+  class(result) <- "mousetrap"
+  
+  return(result)
+  
 }
 
 
@@ -800,6 +805,9 @@ mt_import_long <- function(raw_data,
     # Ensure order of raw_data
     raw_data <- raw_data[ids,]
   }
-
-  return(list("data"=raw_data, "trajectories"=trajectories))
+  
+  result <- c(list("data"=raw_data, "trajectories"=trajectories))
+  class(result) <- "mousetrap"
+  
+  return(result)
 }
