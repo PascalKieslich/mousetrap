@@ -111,17 +111,17 @@ mt_derivatives <- function(
   for (i in 1:nrow(trajectories)) {
 
     # Compute deltas for timestamps
-    delta_timestamps <- diff(derivatives[i,timestamps,])
+    delta_timestamps <- diff(derivatives[i,,timestamps])
 
     # Compute distance depending on the number of dimensions
 
     # For one dimension, simply compute the distance
     if (length(dimensions) == 1) {
-      distances <- diff(derivatives[i,dimensions,])
+      distances <- diff(derivatives[i,,dimensions])
 
     # For more than one dimension, compute Eucledian distance between measurements
     } else {
-      distances <- sqrt(rowSums(diff(t(derivatives[i,dimensions,]))^2))
+      distances <- sqrt(rowSums(diff(derivatives[i,,dimensions])^2))
     }
 
     # Compute velocity based on distance and time deltas
@@ -138,9 +138,9 @@ mt_derivatives <- function(
     accelerations <- c(accelerations, NA)
 
     # Add derivatives to array (adding a ceiling so they have the same length)
-    derivatives[i,dist,] <- c(0, distances)
-    derivatives[i,vel,] <- c(0, velocities)
-    derivatives[i,acc,] <- c(0, accelerations)
+    derivatives[i,,dist] <- c(0, distances)
+    derivatives[i,,vel] <- c(0, velocities)
+    derivatives[i,,acc] <- c(0, accelerations)
 
     if (verbose) {
       if (i %% 100 == 0) message(paste(i, "trials finished"))

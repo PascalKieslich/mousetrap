@@ -233,8 +233,8 @@ mt_import_mousetrap <- function(raw_data,
 
   # Create array with raw MT data
   trajectories <- array(
-    dim=c(nrow(raw_data), 3, max_logs),
-    dimnames=list(raw_data[,"mt_id"], c(timestamps,xpos,ypos), NULL)
+    dim=c(nrow(raw_data), max_logs, 3),
+    dimnames=list(raw_data[,"mt_id"], NULL, c(timestamps,xpos,ypos))
   )
 
   for (i in 1:dim(trajectories)[1]) {
@@ -244,21 +244,21 @@ mt_import_mousetrap <- function(raw_data,
         mt_l <- columns[mt_labels[j]]
 
         if(length(data_list[i,][[mt_l]]) > 0){ ## only extract if there is data
-          trajectories[i, j, 1:length(data_list[i,][[mt_l]])] <- data_list[i,][[mt_l]]
+          trajectories[i, 1:length(data_list[i,][[mt_l]]), j] <- data_list[i,][[mt_l]]
         }
 
       }
     # Special case (only one trajectory or equal number of logs)
     } else {
-      trajectories[i,timestamps,] <- data_list[,i,columns[timestamps_label]]
-      trajectories[i,xpos,] <- data_list[,i,columns[xpos_label]]
-      trajectories[i,ypos,] <- data_list[,i,columns[ypos_label]]
+      trajectories[i,,timestamps] <- data_list[,i,columns[timestamps_label]]
+      trajectories[i,,xpos] <- data_list[,i,columns[xpos_label]]
+      trajectories[i,,ypos] <- data_list[,i,columns[ypos_label]]
     }
 
     # Check timestamps
 
     # Extract timestamps
-    current_timestamps <- trajectories[i,timestamps,]
+    current_timestamps <- trajectories[i,,timestamps]
     current_timestamps <- current_timestamps[1:sum(!is.na(current_timestamps))]
 
     # Check that timestamps are monotonically increasing
@@ -273,15 +273,15 @@ mt_import_mousetrap <- function(raw_data,
       if (duplicates %in% c("remove_first", "remove_last")) {
 
         if (anyDuplicated(current_timestamps) > 0) {
-          current_xpos <- trajectories[i, xpos, 1:length(current_timestamps)]
-          current_ypos <- trajectories[i, ypos, 1:length(current_timestamps)]
+          current_xpos <- trajectories[i, 1:length(current_timestamps), xpos]
+          current_ypos <- trajectories[i, 1:length(current_timestamps), ypos]
           trajectories[i,,] <- NA
 
           keep <- !duplicated(current_timestamps, fromLast = duplicates=="remove_first")
           current_timestamps <- current_timestamps[keep]
-          trajectories[i,timestamps,1:length(current_timestamps)] <- current_timestamps
-          trajectories[i,xpos,1:length(current_timestamps)] <- current_xpos[keep]
-          trajectories[i,ypos,1:length(current_timestamps)] <- current_ypos[keep]
+          trajectories[i,1:length(current_timestamps),timestamps] <- current_timestamps
+          trajectories[i,1:length(current_timestamps),xpos] <- current_xpos[keep]
+          trajectories[i,1:length(current_timestamps),ypos] <- current_ypos[keep]
         }
 
       } else {
@@ -303,8 +303,8 @@ mt_import_mousetrap <- function(raw_data,
   }
 
   # Check if there are trials with no logs
-  if (any(is.na(trajectories[,,1]))) {
-    na_trials <- rowSums(is.na(trajectories[,,1,drop=FALSE]))
+  if (any(is.na(trajectories[,1,]))) {
+    na_trials <- rowSums(is.na(trajectories[,1,,drop=FALSE]))
     warning(paste(
       "The following trials do not contain any logging data for at least one variable:",
       paste(names(na_trials[na_trials>0]), collapse=", ")
@@ -312,7 +312,7 @@ mt_import_mousetrap <- function(raw_data,
   }
 
   # Check for each trial, if the number of logs is the same for every variale
-  nlogs <- apply(trajectories, c(1,2), function(x) {sum(!is.na(x))})
+  nlogs <- apply(trajectories, c(1,3), function(x) {sum(!is.na(x))})
   nlogs_sd <- apply(nlogs, 1, stats::sd)
   if (any(nlogs_sd > 0)) {
     warning(paste(
@@ -324,7 +324,7 @@ mt_import_mousetrap <- function(raw_data,
 
   # Subtract first timestamp for each trial
   if (reset_timestamps) {
-    trajectories[,timestamps,] <- trajectories[,timestamps,] - trajectories[,timestamps,1]
+    trajectories[,,timestamps] <- trajectories[,,timestamps] - trajectories[,1,timestamps]
   }
 
   # Drop raw data columns
@@ -413,9 +413,9 @@ mt_import_mousetrap <- function(raw_data,
 #'
 #' # Import the data using mt_import_wide
 #' mt_data <- mt_import_wide(mt_data_wide,
-#'   xpos_label="xpos", ypos_label="ypos", timestamps="timestamps")
-#'
-#'
+#'   xpos_label="xpos", ypos_label="ypos",
+#'   timestamps_label="timestamps")
+#' 
 #' @export
 mt_import_wide <- function(raw_data,
   xpos_label="X", ypos_label="Y", zpos_label=NULL,
@@ -547,11 +547,11 @@ mt_import_wide <- function(raw_data,
   max_logs <- max(sapply(mt_columns,length))
 
   trajectories <- array(
-    dim=c(nrow(raw_data), length(mt_labels), max_logs),
-    dimnames=list(raw_data[,"mt_id"], names(mt_labels), NULL))
+    dim=c(nrow(raw_data), max_logs, length(mt_labels)),
+    dimnames=list(raw_data[,"mt_id"], NULL, names(mt_labels)))
 
   for (mt_var in names(mt_labels)) {
-    trajectories[,mt_var,] <- as.matrix(raw_data[,mt_columns[[mt_var]]])
+    trajectories[,,mt_var] <- as.matrix(raw_data[,mt_columns[[mt_var]]])
     raw_data <- raw_data[, !colnames(raw_data) %in% mt_columns[[mt_var]], drop=FALSE]
   }
 
@@ -564,12 +564,12 @@ mt_import_wide <- function(raw_data,
       )
     }
     timestamps_matrix <- matrix(
-      0:(dim(trajectories)[3]-1),
-      nrow=nrow(trajectories), ncol=dim(trajectories)[3],
+      0:(dim(trajectories)[2]-1),
+      nrow=nrow(trajectories), ncol=dim(trajectories)[2],
       byrow=TRUE
     )
     # Add NAs for timestamps (corresponding to NAs for first dimension)
-    timestamps_matrix[is.na(trajectories[,1,])] <- NA
+    timestamps_matrix[is.na(trajectories[,,1])] <- NA
 
     # Add timestamps to trajectories
     trajectories <- mt_add_variables(trajectories, variables=list(timestamps=timestamps_matrix))
@@ -579,7 +579,7 @@ mt_import_wide <- function(raw_data,
   # if real timestamps are provided and option was selected
   } else {
     if (reset_timestamps) {
-      trajectories[,timestamps,] <- trajectories[,timestamps,] - trajectories[,timestamps,1]
+      trajectories[,,timestamps] <- trajectories[,,timestamps] - trajectories[,1,timestamps]
     }
   }
   
@@ -745,14 +745,14 @@ mt_import_long <- function(raw_data,
   n_max <- max(n_logs$n)
 
   trajectories <- array(
-    dim = c(nrow(n_logs),length(mt_include), n_max),
-    dimnames = list(n_logs$mt_id, mt_include, NULL))
+    dim = c(nrow(n_logs),n_max, length(mt_include)),
+    dimnames = list(n_logs$mt_id, NULL, mt_include))
 
   for (var in mt_include) {
     reshaped_data <- raw_data %>%
       dplyr::select_(.dots=c("mt_id", "mt_seq", var)) %>%
       tidyr::spread_("mt_seq", var)
-    trajectories[,var,] <- as.matrix(reshaped_data[,-1])
+    trajectories[,,var] <- as.matrix(reshaped_data[,-1])
     }
 
   # If no timestamps are found in the data, create timestamps
@@ -765,12 +765,12 @@ mt_import_long <- function(raw_data,
     }
 
     timestamps_matrix <- matrix(
-      0:(dim(trajectories)[3]-1),
-      nrow=nrow(trajectories), ncol=dim(trajectories)[3],
+      0:(dim(trajectories)[2]-1),
+      nrow=nrow(trajectories), ncol=dim(trajectories)[2],
       byrow=TRUE
     )
     # Add NAs for timestamps (corresponding to NAs for first dimension)
-    timestamps_matrix[is.na(trajectories[,1,])] <- NA
+    timestamps_matrix[is.na(trajectories[,,1])] <- NA
 
     # Add timestamps to trajectories
     trajectories <- mt_add_variables(trajectories, variables=list(timestamps=timestamps_matrix))
@@ -779,7 +779,7 @@ mt_import_long <- function(raw_data,
   # if real timestamps are provided and option was selected
   } else {
     if (reset_timestamps) {
-      trajectories[,timestamps,] <- trajectories[,timestamps,] - trajectories[,timestamps,1]
+      trajectories[,,timestamps] <- trajectories[,,timestamps] - trajectories[,1,timestamps]
     }
   }
 

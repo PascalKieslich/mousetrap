@@ -131,20 +131,20 @@ mt_sample_entropy <- function(data,
   
   # Prepare data
   trajectories <- extract_data(data=data, use=use)
-  if (!(dimension %in% colnames(trajectories))) {
+  if (!(dimension %in% dimnames(trajectories)[[3]])) {
     stop(paste("Dimension", dimension, "not found in trajectory array."))
   }
   
   # Calculate number of logs
-  nlogs <- rowSums(!is.na(trajectories[,dimension,,drop=FALSE]))
+  nlogs <- rowSums(!is.na(trajectories[,,dimension,drop=FALSE]))
   
   # Set r for sample entropy function
   # cf. Dale et al., 2007, p. 20
   if (is.null(r)) {
     if (length(nlogs) == 1) {
-      r <- .2 * stats::sd(diff(trajectories[,dimension,]), na.rm=TRUE)
+      r <- .2 * stats::sd(diff(trajectories[,,dimension]), na.rm=TRUE)
     } else {
-      r <- .2 * stats::sd(diff(t(trajectories[,dimension,])), na.rm=TRUE)
+      r <- .2 * stats::sd(diff(t(trajectories[,,dimension])), na.rm=TRUE)
     }
   }
     
@@ -169,7 +169,7 @@ mt_sample_entropy <- function(data,
   # Calculate measures
   for (i in 1:nrow(trajectories)){
     
-    current_values <- trajectories[i, dimension, 1:nlogs[i]]
+    current_values <- trajectories[i, 1:nlogs[i], dimension]
 
     # Calculate sample entropy
     

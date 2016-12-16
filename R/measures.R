@@ -189,10 +189,10 @@ mt_measures <- function(
   dim2_ideal <- paste0(dim2,"_ideal")
   
   # Calculate number of logs
-  nlogs <- rowSums(!is.na(trajectories[,dim1,,drop=FALSE]))
+  nlogs <- rowSums(!is.na(trajectories[,,dim1,drop=FALSE]))
   
   # Calculate deviations if no deviations were found in the data
-  if (!all(c(dev_ideal,dim1_ideal,dim2_ideal) %in% dimnames(trajectories)[[2]])) {
+  if (!all(c(dev_ideal,dim1_ideal,dim2_ideal) %in% dimnames(trajectories)[[3]])) {
     if (verbose) {
       message("Start calculating deviations of actual from idealized response trajectory.")
     }
@@ -205,7 +205,7 @@ mt_measures <- function(
   }
 
   # Setup variable matrix depending on whether timestamps are provided or not
-  if (timestamps %in% dimnames(trajectories)[[2]]) {
+  if (timestamps %in% dimnames(trajectories)[[3]]) {
     mt_measures <- c(
       paste0(dim1,c("_max","_min")),paste0(dim2,c("_max","_min")),
       "MAD", "MAD_time",
@@ -218,14 +218,13 @@ mt_measures <- function(
     )
     
     # Check if there are trajectories where first timestamp is > 0:
-    if (max(trajectories[,timestamps,1]) > 0) {
+    if (max(trajectories[,1,timestamps]) > 0) {
       message(
         "Trajectories detected where first timestamp is greater than 0. ",
         "Please see Details section of mt_measures documentation ",
         "for interpretation of time related measures."
       )
-      # only affects _time variables
-    } else if (min(trajectories[,timestamps,1]) < 0) {
+    } else if (min(trajectories[,1,timestamps]) < 0) {
       stop(
         "Trajectories detected where first timestamp is smaller than 0. ",
         "Please check that trajectories were logged/imported correctly."
@@ -248,16 +247,16 @@ mt_measures <- function(
   
   # Add distance, velocity and acceleration-based measures
   # if the derivatives were precomputed
-  if (dist %in% dimnames(trajectories)[[2]]) {
+  if (dist %in% dimnames(trajectories)[[3]]) {
     mt_measures <- c(mt_measures, "total_dist")
   }
   
-  if (vel %in% dimnames(trajectories)[[2]] & timestamps %in% dimnames(trajectories)[[2]]) {
+  if (vel %in% dimnames(trajectories)[[3]] & timestamps %in% dimnames(trajectories)[[3]]) {
     mt_measures <- c(mt_measures, 
       "vel_max", "vel_max_time", "vel_min", "vel_min_time")
   }
   
-  if (acc %in% dimnames(trajectories)[[2]] & timestamps %in% dimnames(trajectories)[[2]]) {
+  if (acc %in% dimnames(trajectories)[[3]] & timestamps %in% dimnames(trajectories)[[3]]) {
     mt_measures <- c(mt_measures, 
       "acc_max", "acc_max_time", "acc_min", "acc_min_time")
   }
@@ -279,11 +278,11 @@ mt_measures <- function(
     current_nlogs <- nlogs[i]
     
     # Extract variables
-    current_dim1 <- trajectories[i, dim1, 1:current_nlogs]
-    current_dim2 <- trajectories[i, dim2, 1:current_nlogs]
-    current_dim1_ideal <- trajectories[i, dim1_ideal, 1:current_nlogs]
-    current_dim2_ideal <- trajectories[i, dim2_ideal, 1:current_nlogs]
-    current_dev_ideal <- trajectories[i, dev_ideal, 1:current_nlogs]
+    current_dim1 <- trajectories[i, 1:current_nlogs, dim1]
+    current_dim2 <- trajectories[i, 1:current_nlogs, dim2]
+    current_dim1_ideal <- trajectories[i, 1:current_nlogs, dim1_ideal]
+    current_dim2_ideal <- trajectories[i, 1:current_nlogs, dim2_ideal]
+    current_dev_ideal <- trajectories[i, 1:current_nlogs, dev_ideal]
     
     # Calculate min and max values for x and y
     measures[i,paste0(dim1,"_max")] <- max(current_dim1)
@@ -341,11 +340,11 @@ mt_measures <- function(
     
     # Check if timestamps are included and if so,
     # retrieve timestamps and calculate corresponding measures
-    if (timestamps %in% dimnames(trajectories)[[2]]) {
+    if (timestamps %in% dimnames(trajectories)[[3]]) {
       
-      current_timestamps <- trajectories[i,timestamps,1:nlogs[i]]
+      current_timestamps <- trajectories[i,1:current_nlogs,timestamps]
       
-      measures[i,"RT"] <- current_timestamps[nlogs[i]]
+      measures[i,"RT"] <- current_timestamps[current_nlogs]
       
       # Calculate variables for phases with and without movement
       time_diffs <- diff(current_timestamps)
@@ -379,42 +378,42 @@ mt_measures <- function(
     }
     
     # Compute total distance covered
-    if (dist %in% dimnames(trajectories)[[2]]) {
-      measures[i,"total_dist"] <- sum(abs(trajectories[i,dist,]), na.rm=TRUE)
+    if (dist %in% dimnames(trajectories)[[3]]) {
+      measures[i,"total_dist"] <- sum(abs(trajectories[i,,dist]), na.rm=TRUE)
     }
     
     # Velocity-based measures
-    if (vel %in% dimnames(trajectories)[[2]] & timestamps %in% dimnames(trajectories)[[2]]) {
+    if (vel %in% dimnames(trajectories)[[3]] & timestamps %in% dimnames(trajectories)[[3]]) {
 
       # Maximum velocity
-      measures[i,"vel_max"] <- max(trajectories[i,vel,], na.rm=TRUE)
-      vel_max_pos <- which.max(trajectories[i,vel,])
+      measures[i,"vel_max"] <- max(trajectories[i,,vel], na.rm=TRUE)
+      vel_max_pos <- which.max(trajectories[i,,vel])
       
       # Interpolate timestamp of maximum velocity
       # (see mt_derivatives for logic of velocity timestamps)
       vel_max_pos <- ifelse(vel_max_pos==1, 1, c(vel_max_pos-1, vel_max_pos))
-      measures[i,"vel_max_time"] <- mean(trajectories[i,timestamps,vel_max_pos])
+      measures[i,"vel_max_time"] <- mean(trajectories[i,vel_max_pos,timestamps])
       
       # Minimum velocity (which is treated analogously)
-      measures[i,"vel_min"] <- min(trajectories[i,vel,], na.rm=TRUE)
-      vel_min_pos <- which.min(trajectories[i,vel,])
+      measures[i,"vel_min"] <- min(trajectories[i,,vel], na.rm=TRUE)
+      vel_min_pos <- which.min(trajectories[i,,vel])
       
       # average timestamps (see mt_derivatives for logic of velocity timestamps)
       vel_min_pos <- ifelse(
         vel_min_pos == 1,
         1, c(vel_min_pos-1, vel_min_pos)
       )
-      measures[i,"vel_min_time"] <- mean(trajectories[i,timestamps,vel_min_pos])
+      measures[i,"vel_min_time"] <- mean(trajectories[i,vel_min_pos,timestamps])
     }
 
-    if (acc %in% dimnames(trajectories)[[2]] & timestamps %in% dimnames(trajectories)[[2]]) {
+    if (acc %in% dimnames(trajectories)[[3]] & timestamps %in% dimnames(trajectories)[[3]]) {
       # Maximum acceleration
-      measures[i,"acc_max"] <- max(trajectories[i,acc,], na.rm=TRUE)
-      measures[i,"acc_max_time"] <- trajectories[i,timestamps,which.max(trajectories[i,acc,])]
+      measures[i,"acc_max"] <- max(trajectories[i,,acc], na.rm=TRUE)
+      measures[i,"acc_max_time"] <- trajectories[i,which.max(trajectories[i,,acc]),timestamps]
       
       # Minimum acceleration
-      measures[i,"acc_min"] <- min(trajectories[i,acc,], na.rm=TRUE)
-      measures[i,"acc_min_time"] <- trajectories[i,timestamps,which.min(trajectories[i,acc,])]
+      measures[i,"acc_min"] <- min(trajectories[i,,acc], na.rm=TRUE)
+      measures[i,"acc_min_time"] <- trajectories[i,which.min(trajectories[i,,acc]),timestamps]
     }
 
     if (verbose & i %% 100 == 0) {

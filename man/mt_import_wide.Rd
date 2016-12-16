@@ -95,7 +95,8 @@ mt_data_wide <- mt_export_wide(mt_example,
 
 # Import the data using mt_import_wide
 mt_data <- mt_import_wide(mt_data_wide,
-  xpos_label="xpos", ypos_label="ypos", timestamps="timestamps")
+  xpos_label="xpos", ypos_label="ypos",
+  timestamps_label="timestamps")
 
 }
 \references{

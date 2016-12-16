@@ -74,7 +74,7 @@ mt_time_normalize <- function(data,
   }
 
   if (length(dimensions) == 1 & dimensions[[1]] == "all") {
-    dimensions <- colnames(trajectories)
+    dimensions <- dimnames(trajectories)[[3]]
     dimensions <- dimensions[dimensions!=timestamps]
   }
 
@@ -83,11 +83,11 @@ mt_time_normalize <- function(data,
 
   # Create empty array for output
   tn_trajectories <- array(
-    dim=c(nrow(trajectories), 2+length(dimensions), nsteps),
+    dim=c(nrow(trajectories), nsteps, 2+length(dimensions)),
     dimnames=list(
       dimnames(trajectories)[[1]],
-      c(timestamps, dimensions, "steps"),
-      NULL
+      NULL,
+      c(timestamps, dimensions, "steps")
     )
   )
 
@@ -97,17 +97,17 @@ mt_time_normalize <- function(data,
     # for coordinates.
 
     # Timestamps
-    tn_trajectories[i,timestamps,] <- stats::approx(
-      trajectories[i,timestamps,], trajectories[i,timestamps,], n=nsteps)$y
+    tn_trajectories[i,,timestamps] <- stats::approx(
+      trajectories[i,,timestamps], trajectories[i,,timestamps], n=nsteps)$y
 
     # Specified trajectory dimensions
     for (dimension in dimensions) {
-      tn_trajectories[i,dimension,] <- stats::approx(
-        trajectories[i,timestamps,], trajectories[i,dimension,], n=nsteps)$y
+      tn_trajectories[i,,dimension] <- stats::approx(
+        trajectories[i,,timestamps], trajectories[i,,dimension], n=nsteps)$y
     }
 
     # Label steps as such
-    tn_trajectories[i,"steps",] <- 1:nsteps
+    tn_trajectories[i,,"steps"] <- 1:nsteps
 
     if (verbose) {
       if (i %% 100 == 0) message(paste(i, "trials finished"))
@@ -197,28 +197,28 @@ mt_remap_symmetric <- function(
   # Remap values
   for (i in 1:nrow(trajectories)) {
     # Determine the length (in samples) of all trajectories
-    nlogs <- sum(!is.na(trajectories[i, xpos, ]))
+    nlogs <- sum(!is.na(trajectories[i, , xpos]))
 
     # Remap x values (if desired)
     if (remap_xpos != 'no') {
       if (
         # Remap tracks that are headed in the undesired
         # direction (as measured by their endpoint) ...
-        (remap_xpos == 'left'  & trajectories[i, xpos, nlogs] > 0) |
-        (remap_xpos == 'right' & trajectories[i, xpos, nlogs] < 0)
+        (remap_xpos == 'left'  & trajectories[i, nlogs, xpos] > 0) |
+        (remap_xpos == 'right' & trajectories[i, nlogs, xpos] < 0)
       ) {
         # ... by reversing the x coordinate
-        trajectories[i,xpos,] <- (-trajectories[i, xpos, ])
+        trajectories[i, , xpos] <- (-trajectories[i, , xpos])
       }
     }
 
     # Do likewise for y values
     if (remap_ypos != 'no') {
       if (
-        (remap_ypos == 'up'   & trajectories[i, ypos, nlogs] < 0) |
-        (remap_ypos == 'down' & trajectories[i, ypos, nlogs] > 0)
+        (remap_ypos == 'up'   & trajectories[i, nlogs, ypos] < 0) |
+        (remap_ypos == 'down' & trajectories[i, nlogs, ypos] > 0)
       ) {
-        trajectories[i, ypos, ] <- (-trajectories[i, ypos, ])
+        trajectories[i, , ypos] <- (-trajectories[i, , ypos])
       }
     }
 
@@ -286,23 +286,23 @@ mt_exclude_initiation <- function(data,
   trajectories <- extract_data(data=data, use=use)
 
   # Only keep relevant dimensions
-  trajectories <- trajectories[,c(timestamps, dimensions),,drop=FALSE]
+  trajectories <- trajectories[,,c(timestamps, dimensions),drop=FALSE]
 
   # Calculate number of logs
-  nlogs <- rowSums(!is.na(trajectories[, timestamps, , drop=FALSE]))
+  nlogs <- rowSums(!is.na(trajectories[, ,timestamps , drop=FALSE]))
 
   # Exclude phase where mouse stayed on start coordinates
   for (i in 1:nrow(trajectories)) {
 
     # Extract trajectory data
-    current_trajectories <- trajectories[i, , 1:nlogs[i]]
+    current_trajectories <- trajectories[i, 1:nlogs[i],]
 
     # Iterate over trajectories
-    current_timestamps <- current_trajectories[timestamps,]
-    current_points <- current_trajectories[dimensions,,drop=FALSE]
+    current_timestamps <- current_trajectories[,timestamps]
+    current_points <- current_trajectories[,dimensions,drop=FALSE]
 
     # Vector indicating if mouse has not left the starting point
-    on_start <- cumsum(colSums(abs(current_points - current_points[,1]))) == 0
+    on_start <- cumsum(rowSums(abs(current_points - current_points[1,]))) == 0
 
     # Change last element where mouse is still on starting point so that this
     # point is included in the calculations
@@ -310,14 +310,14 @@ mt_exclude_initiation <- function(data,
 
     # Exclude data without movements
     current_timestamps <- current_timestamps[!on_start]
-    current_points <- current_points[,!on_start]
+    current_points <- current_points[!on_start,]
 
     # Clear data in array
     trajectories[i,,] <- NA
 
     # Add data to array
-    trajectories[i, timestamps, 1:length(current_timestamps)] <- current_timestamps
-    trajectories[i, dimensions, 1:length(current_timestamps)] <- current_points
+    trajectories[i, 1:length(current_timestamps), timestamps] <- current_timestamps
+    trajectories[i, 1:length(current_timestamps), dimensions] <- current_points
 
     if (verbose) {
       if (i %% 100 == 0) message(paste(i, "trials finished"))
@@ -330,7 +330,7 @@ mt_exclude_initiation <- function(data,
 
   # Reset timestamps (optional)
   if (reset_timestamps) {
-    trajectories[,timestamps,] <- trajectories[, timestamps, ] - trajectories[, timestamps, 1]
+    trajectories[,,timestamps] <- trajectories[, , timestamps] - trajectories[, 1, timestamps]
   }
 
   return(create_results(data=data, results=trajectories, use=use, save_as=save_as))
@@ -423,7 +423,7 @@ mt_space_normalize <- function(
   for (i in 1:nrow(trajectories)) {
     for (j in 1:length(dimensions)) {
 
-      current_positions <- trajectories[i, dimensions[[j]], ]
+      current_positions <- trajectories[i, , dimensions[[j]]]
       nlogs <- sum(!is.na(current_positions))
 
       current_positions <- current_positions - current_positions[1]
@@ -431,7 +431,7 @@ mt_space_normalize <- function(
         current_positions <- current_positions / (current_positions[nlogs] - current_positions[1])
         current_positions <- current_positions * (end[[j]]-start[[j]])
       }
-      trajectories[i, dimensions[[j]], ] <-  current_positions + start[[j]]
+      trajectories[i, , dimensions[[j]]] <-  current_positions + start[[j]]
 
     }
 
@@ -554,7 +554,7 @@ mt_resample <- function(data,
   }
 
   if (length(dimensions) == 1 & dimensions[[1]] == "all") {
-    dimensions <- colnames(trajectories)
+    dimensions <- dimnames(trajectories)[[3]]
     dimensions <- dimensions[dimensions != timestamps]
   }
 
@@ -563,21 +563,21 @@ mt_resample <- function(data,
 
   # Calculate the number of steps after resampling
   max_steps <- ceiling(
-    max(trajectories[,timestamps,], na.rm=TRUE) / step_size
+    max(trajectories[,,timestamps], na.rm=TRUE) / step_size
   ) + 1
 
   # Create an empty output array
   rs_trajectories <- array(
-    dim=c(nrow(trajectories), 1+length(dimensions), max_steps),
+    dim=c(nrow(trajectories), max_steps, 1+length(dimensions)),
     dimnames=list(
       dimnames(trajectories)[[1]],
-      c(timestamps, dimensions),
-      NULL
+      NULL,
+      c(timestamps, dimensions)
     )
   )
 
   # Check if there are trajectories where first timestamp is > 0:
-  if (max(trajectories[,timestamps,1]) > 0) {
+  if (max(trajectories[,1,timestamps]) > 0) {
     message(
       "Trajectories detected where first timestamp is greater than 0. ",
       "Assuming period without movement starting at timestamp 0."
@@ -587,19 +587,19 @@ mt_resample <- function(data,
   # Perform downsampling
   for (i in 1:nrow(trajectories)) {
     current_trajectories <- trajectories[i,,]
-    current_timestamps <- current_trajectories[timestamps, ]
+    current_timestamps <- current_trajectories[,timestamps]
     nlogs <- sum(!is.na(current_timestamps))
 
     # If first timestamp is > 0, add another with
     # a timestamp of zero and the first recorded position
     if (current_timestamps[1] > 0) {
       current_timestamps <- c(0, current_timestamps)
-      current_trajectories <- cbind(current_trajectories[,1], current_trajectories)
+      current_trajectories <- rbind(current_trajectories[1,], current_trajectories)
       nlogs <- nlogs + 1
     }
 
     current_timestamps <- current_timestamps[1:nlogs]
-    current_trajectories <- current_trajectories[,1:nlogs]
+    current_trajectories <- current_trajectories[1:nlogs,]
     max_time <- current_timestamps[nlogs]
 
     # Generate new timestamps
@@ -612,12 +612,12 @@ mt_resample <- function(data,
 
     # Perform linear interpolation using custom steps
     int_timestamps <- stats::approx(current_timestamps, current_timestamps, xout=custom_timesteps)$y
-    rs_trajectories[i,timestamps,1:length(int_timestamps)] <- int_timestamps
+    rs_trajectories[i,1:length(int_timestamps),timestamps] <- int_timestamps
 
     # Perform linear interpolation for specified trajectory dimensions
     for (dimension in dimensions) {
-      rs_trajectories[i,dimension,1:length(int_timestamps)] <- stats::approx(
-        current_timestamps, current_trajectories[dimension,], xout=custom_timesteps)$y
+      rs_trajectories[i,1:length(int_timestamps),dimension] <- stats::approx(
+        current_timestamps, current_trajectories[,dimension], xout=custom_timesteps)$y
     }
 
     if (verbose) {
@@ -739,12 +739,12 @@ mt_average <- function(data,
 
   trajectories <- extract_data(data=data,use=use)
 
-  if (!av_dimension %in% dimnames(trajectories)[[2]]) {
+  if (!av_dimension %in% dimnames(trajectories)[[3]]) {
     stop("Dimension '",av_dimension,"' not found in trajectory array.")
   }
 
   if (length(dimensions) == 1 & dimensions[[1]] == "all") {
-    dimensions <- colnames(trajectories)
+    dimensions <- dimnames(trajectories)[[3]]
     dimensions <- dimensions[dimensions!=av_dimension]
   }
 
@@ -754,7 +754,7 @@ mt_average <- function(data,
       # Determine this number automatically based on
       # the given interval size
       max_n_intervals <- ceiling(
-        max(trajectories[,av_dimension,], na.rm=TRUE) / interval_size
+        max(trajectories[,,av_dimension], na.rm=TRUE) / interval_size
       )
 
     } else {
@@ -777,17 +777,17 @@ mt_average <- function(data,
 
   # Create an empty output array
   av_trajectories <- array(
-    dim=c(nrow(trajectories), 1+length(dimensions), max_n_intervals),
+    dim=c(nrow(trajectories), max_n_intervals, 1+length(dimensions)),
     dimnames=list(
       dimnames(trajectories)[[1]],
-      c(av_dimension,dimensions),
-      NULL
+      NULL,
+      c(av_dimension,dimensions)
     )
   )
 
   for (i in 1:nrow(trajectories)) {
 
-    current_av_values <- trajectories[i,av_dimension,]
+    current_av_values <- trajectories[i,,av_dimension]
     nlogs <- sum(!is.na(current_av_values))
     current_av_values <- current_av_values[1:nlogs]
 
@@ -811,14 +811,14 @@ mt_average <- function(data,
     nintervals <- length(lower_borders)
 
     if (is.null(intervals)) {
-      av_trajectories[i,av_dimension,1:nintervals] <- lower_borders + interval_size / 2
+      av_trajectories[i,1:nintervals,av_dimension] <- lower_borders + interval_size / 2
     } else {
-      av_trajectories[i,av_dimension,1:nintervals] <- intervals[1:nintervals] + diff(intervals[1:(nintervals+1)]) / 2
+      av_trajectories[i,1:nintervals,av_dimension] <- intervals[1:nintervals] + diff(intervals[1:(nintervals+1)]) / 2
     }
 
     for (var in dimensions) {
       # Manipulate specified variables
-      current_measures <- trajectories[i, var, 1:nlogs]
+      current_measures <- trajectories[i, 1:nlogs, var]
 
       # Perform averaging
       av_measures <- sapply(1:nintervals, function(j) {
@@ -827,7 +827,7 @@ mt_average <- function(data,
         return(mean(current_measures[in_interval], na.rm=TRUE))
       })
 
-      av_trajectories[i,var,1:nintervals] <- av_measures
+      av_trajectories[i,1:nintervals,var] <- av_measures
     }
 
     if (verbose) {
@@ -944,9 +944,9 @@ mt_subset <- function(data, subset, check="data") {
 #' @examples
 #' # Calculate new (arbitrary) variables for this example
 #' # ... the sum of the x- and y-positions
-#' xy_sum <- mt_example$trajectories[,"xpos",] + mt_example$trajectories[,"ypos",]
+#' xy_sum <- mt_example$trajectories[,,"xpos"] + mt_example$trajectories[,,"ypos"]
 #' # ... the product of the x- and y-positions
-#' xy_prod <- mt_example$trajectories[,"xpos",] * mt_example$trajectories[,"ypos",]
+#' xy_prod <- mt_example$trajectories[,,"xpos"] * mt_example$trajectories[,,"ypos"]
 #'
 #' # Add the new variables to the trajectory array
 #' mt_example <- mt_add_variables(mt_example,
@@ -974,30 +974,32 @@ mt_add_variables <- function(data,
   # Remove potentially existing variables in original array
   trajectories <- trajectories[
     ,
-    !dimnames(trajectories)[[2]] %in% variables,
-    , drop=FALSE]
+    ,
+    !dimnames(trajectories)[[3]] %in% variables,
+    drop=FALSE]
 
   # Setup new array
   trajectories_ext <- array(
-    dim=dim(trajectories) + c(0, length(variables), 0),
+    dim=dim(trajectories) + c(0, 0, length(variables)),
     dimnames=list(
       dimnames(trajectories)[[1]],
+      dimnames(trajectories)[[2]],
       c(
-        dimnames(trajectories)[[2]],
+        dimnames(trajectories)[[3]],
         variables
-      ),
-      dimnames(trajectories)[[3]]
+      )
+
     )
   )
 
   # Fill it with existing data
-  trajectories_ext[,dimnames(trajectories)[[2]],] <-
-    trajectories[,dimnames(trajectories)[[2]],]
+  trajectories_ext[,,dimnames(trajectories)[[3]]] <-
+    trajectories[,,dimnames(trajectories)[[3]]]
 
   # Add new data if new data was provided
   if (is.null(data_list) == FALSE) {
     for (var in variables) {
-      trajectories_ext[,var,] <- data_list[[var]]
+      trajectories_ext[,,var] <- data_list[[var]]
     }
   }
 

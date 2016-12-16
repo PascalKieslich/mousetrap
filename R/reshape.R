@@ -170,15 +170,15 @@ mt_reshape <- function(data,
   if (type_trajectories) {
 
     # Extract trajectory data
-    dataset <- extract_data(data=data,use=use)
+    dataset <- extract_data(data=data, use=use)
 
     # Select all variables if use_variables is not specified
     if (is.null(use_variables)) {
-      use_variables <- dimnames(dataset)[[2]]
+      use_variables <- dimnames(dataset)[[3]]
 
     # Otherwise select relevant dimensions
     } else{
-      dataset <- dataset[,use_variables,,drop=FALSE]
+      dataset <- dataset[,,use_variables,drop=FALSE]
     }
 
     # Get dim variables
@@ -186,17 +186,17 @@ mt_reshape <- function(data,
     dim_names <- dimnames(dataset)
 
     # Reshape array into long format
-    dataset <- aperm(dataset, c(3, 1, 2))
-    dim(dataset) <- c(dim_count[1] * dim_count[3], dim_count[2])
+    dataset <- aperm(dataset, c(2, 1, 3))
+    dim(dataset) <- c(dim_count[1] * dim_count[2], dim_count[3])
 
     # Create data.frame adding mt_id and mt_seq columns
     dataset <- data.frame(
-      rep(dim_names[[1]], each=dim_count[3]),  #mt_id
-      rep(1:dim_count[3], times=dim_count[1]), #mt_seq
+      rep(dim_names[[1]], each=dim_count[2]),  #mt_id
+      rep(1:dim_count[2], times=dim_count[1]), #mt_seq
       dataset,
       stringsAsFactors=FALSE
     )
-    colnames(dataset) <- c(mt_id, mt_seq, dim_names[[2]])
+    colnames(dataset) <- c(mt_id, mt_seq, dim_names[[3]])
 
     # Remove columns that only contain NAs
     dataset <- dataset[

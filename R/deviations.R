@@ -85,13 +85,13 @@ mt_deviations <- function(
     variables=c(points_ideal,dev_ideal))
   
   # Calculate number of logs
-  nlogs <- rowSums(!is.na(deviations[,dimensions[[1]],,drop=FALSE]))
+  nlogs <- rowSums(!is.na(deviations[,,dimensions[[1]],drop=FALSE]))
   
   
   # Calculate deviations
   for (i in 1:nrow(deviations)){
     
-    current_points <- deviations[i, dimensions, 1:nlogs[i]]
+    current_points <- deviations[i, 1:nlogs[i], dimensions]
     
     # Determine straight line (idealized trajectory)
     current_points_ideal <- points_on_ideal(
@@ -99,21 +99,21 @@ mt_deviations <- function(
     
     # Calculate distance of each point on the curve from straight line
     # (cf. Pythagoras, some time ago)
-    current_dev_ideal <- sqrt(colSums((current_points_ideal-current_points)^2))
+    current_dev_ideal <- sqrt(rowSums((current_points_ideal-current_points)^2))
     
     # Flip signs for points below the idealized straight line
     flip_dimension <- 2
-    to_flip_dev_ideal <- current_points_ideal[flip_dimension,]>current_points[flip_dimension,]
+    to_flip_dev_ideal <- current_points_ideal[,flip_dimension]>current_points[,flip_dimension]
     current_dev_ideal[to_flip_dev_ideal] <- -current_dev_ideal[to_flip_dev_ideal]
     
     # If last point of actual trajectory is below the first point, flip all points
-    if(current_points[flip_dimension,1]>current_points[flip_dimension,nlogs[i]]){
+    if(current_points[1,flip_dimension]>current_points[nlogs[i],flip_dimension]){
       current_dev_ideal <- -(current_dev_ideal)
     }
     
     # Add idealized positions and deviations to array
-    deviations[i,points_ideal,1:nlogs[i]] <- current_points_ideal
-    deviations[i,dev_ideal,1:nlogs[i]] <- current_dev_ideal 
+    deviations[i,1:nlogs[i],points_ideal] <- current_points_ideal
+    deviations[i,1:nlogs[i],dev_ideal] <- current_dev_ideal 
     
     if (verbose){
       if (i %% 100 == 0) message(paste(i,"trials finished"))

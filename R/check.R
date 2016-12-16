@@ -36,9 +36,9 @@ mt_check_resolution <- function(data, use="trajectories",
 
   # Compute steps in the timestamps
   if(dim( trajectories )[1] == 1) {
-    log_diffs <- diff(trajectories[, timestamps, ])
+    log_diffs <- diff(trajectories[, , timestamps])
   } else {
-    log_diffs <- diff(t(trajectories[, timestamps, ]))
+    log_diffs <- diff(t(trajectories[, , timestamps]))
   }
   
   # Clean data type and remove empty values

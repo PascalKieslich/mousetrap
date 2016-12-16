@@ -75,7 +75,7 @@ mt_plot_riverbed <- function(data, use='tn_trajectories',
   # Calculate range of values on y axis,
   # if not specified explicitly
   if (is.null(y_range)) {
-    y_range <- range(trajectories[,y,])
+    y_range <- range(trajectories[,,y])
   }
   
   # Compute breaks based on the number of bins required
@@ -85,7 +85,7 @@ mt_plot_riverbed <- function(data, use='tn_trajectories',
   y_bins <- y_breaks[1:(length(y_breaks) - 1)] + diff(y_breaks) / 2
   
   # Extract number of steps on x axis
-  steps <- dim(trajectories)[3]
+  steps <- dim(trajectories)[2]
   
   # Prepare optional facet variables
   if (!is.null(facet_row)){
@@ -120,7 +120,7 @@ mt_plot_riverbed <- function(data, use='tn_trajectories',
       for (step in 1:steps) {
         
         # Extract data for current step
-        step_data <- trajectories[facet_row_value==facet_row_values & facet_col_values==facet_col_value,,step]
+        step_data <- trajectories[facet_row_value==facet_row_values & facet_col_values==facet_col_value,step,]
         
         # Calculate histogram based on this data
         step_hist <- graphics::hist(

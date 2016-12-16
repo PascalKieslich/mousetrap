@@ -94,17 +94,17 @@ create_results <- function(data, results, use, save_as, ids=NULL, overwrite=TRUE
 # The function expects P0 to be a matrix of points.
 point_to_line <- function(P0, P1, P2){
 
-  u <- ( (P0[1,]-P1[1]) * (P2[1]-P1[1]) +
-           (P0[2,]-P1[2]) * (P2[2]-P1[2]) ) /
+  u <- ( (P0[,1]-P1[1]) * (P2[1]-P1[1]) +
+           (P0[,2]-P1[2]) * (P2[2]-P1[2]) ) /
     ( (P2[1]-P1[1])^2 + (P2[2]-P1[2])^2 )
 
   P <- matrix(c(
     P1[1] + u * (P2[1] - P1[1]),
     P1[2] + u * (P2[2] - P1[2])),
-    nrow = 2, byrow = TRUE
+    ncol = 2, byrow = FALSE
   )
 
-  rownames(P) <- rownames(P0)
+  colnames(P) <- colnames(P0)
 
   return(P)
 }
@@ -117,10 +117,10 @@ points_on_ideal <- function(points, start=NULL, end=NULL) {
 
   # Fill start and end values if otherwise unspecified
   if (is.null(start)) {
-    start <- points[,1]
+    start <- points[1,]
   }
   if (is.null(end)) {
-    end <- points[,ncol(points)]
+    end <- points[nrow(points),]
   }
 
   if (all(start == end)) {
@@ -133,8 +133,8 @@ points_on_ideal <- function(points, start=NULL, end=NULL) {
       "This might lead to strange results for some measures (e.g., MAD)."
     )
     result <- points
-    result[1,] <- start[1]
-    result[2,] <- start[2]
+    result[,1] <- start[1]
+    result[,2] <- start[2]
   } else {
     # compute the projection onto the idealized straight line for all points
     result <- point_to_line(P0 = points, P1 = start, P2 = end)
