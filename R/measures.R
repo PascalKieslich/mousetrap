@@ -135,8 +135,6 @@
 #'   
 #' @seealso \link{mt_sample_entropy} for calculating sample entropy.
 #' 
-#' \link{mt_movement_angle} for calculating the initial movement angle.
-#' 
 #' \link{mt_standardize} for standardizing the measures per subject.
 #' 
 #' \link{mt_check_bimodality} for checking bimodality of the measures using

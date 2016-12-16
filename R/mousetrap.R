@@ -67,8 +67,6 @@
 #'   
 #'   \link{mt_sample_entropy}	calculates sample entropy.
 #'   
-#'   \link{mt_movement_angle}	calculates the initial movement angle.
-#'   
 #'   \link{mt_standardize} standardizes mouse-tracking measures onto a common 
 #'   scale (separately for subsets of the data, e.g., per participant).
 #'   
