@@ -398,9 +398,8 @@ mt_import_mousetrap <- function(raw_data,
 #' studying real-time mental processing using a computer mouse-tracking method.
 #' \emph{Behavior Research Methods, 42}(1), 226-241.
 #'
-#' @seealso \link{read_mousetracker} for reading data into R that were exported
-#' from MouseTracker (Freeman & Ambady, 2010).
-#'
+#' @seealso
+#' 
 #' \link{mt_import_mousetrap} and \link{mt_import_long} for importing
 #' mouse-tracking data in other formats.
 #'
@@ -414,17 +413,6 @@ mt_import_mousetrap <- function(raw_data,
 #'   xpos_label="xpos", ypos_label="ypos", timestamps="timestamps")
 #'
 #'
-#' \dontrun{
-#'
-#' # Data from "time normalized analysis" in MouseTracker
-#' raw_data <- read_mousetracker("tn_data_exported.csv")
-#' data <- mt_import_wide(raw_data, pos_ids=1:101)
-#'
-#' # Data from "raw time analysis" in MouseTracker
-#' raw_data <- read_mousetracker("raw_data_exported.csv", last_lines_to_rm=2*8)
-#' data <- mt_import_wide(raw_data)
-#'
-#' }
 #' @export
 mt_import_wide <- function(raw_data,
   xpos_label="X", ypos_label="Y", zpos_label=NULL,

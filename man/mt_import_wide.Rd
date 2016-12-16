@@ -97,18 +97,6 @@ mt_data_wide <- mt_export_wide(mt_example,
 mt_data <- mt_import_wide(mt_data_wide,
   xpos_label="xpos", ypos_label="ypos", timestamps="timestamps")
 
-
-\dontrun{
-
-# Data from "time normalized analysis" in MouseTracker
-raw_data <- read_mousetracker("tn_data_exported.csv")
-data <- mt_import_wide(raw_data, pos_ids=1:101)
-
-# Data from "raw time analysis" in MouseTracker
-raw_data <- read_mousetracker("raw_data_exported.csv", last_lines_to_rm=2*8)
-data <- mt_import_wide(raw_data)
-
-}
 }
 \references{
 Freeman, J. B., & Ambady, N. (2010). MouseTracker: Software for
@@ -116,9 +104,6 @@ studying real-time mental processing using a computer mouse-tracking method.
 \emph{Behavior Research Methods, 42}(1), 226-241.
 }
 \seealso{
-\link{read_mousetracker} for reading data into R that were exported
-from MouseTracker (Freeman & Ambady, 2010).
-
 \link{mt_import_mousetrap} and \link{mt_import_long} for importing
 mouse-tracking data in other formats.
 }

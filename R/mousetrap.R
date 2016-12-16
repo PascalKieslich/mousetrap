@@ -119,8 +119,6 @@
 #'   \link{scale_within} scales and centers variables within the levels of 
 #'   another variable.
 #'   
-#'   \link{read_mousetracker} reads data that was exported from MouseTracker.
-#'   
 #'   
 #' @examples
 #' mt_example <- mt_import_mousetrap(mt_example_raw)
