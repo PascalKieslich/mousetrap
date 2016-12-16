@@ -904,9 +904,23 @@ mt_subset <- function(data, subset, check="data") {
   for (use in names(data)) {
 
     if (length(dim(data[[use]])) == 2) {
-      data[[use]] <- data[[use]][
-        rownames(data[[use]]) %in% rownames(data[[check]]),,drop=FALSE
-        ]
+      
+      # for special case of square matrices (e.g., distmat) remove both columns and rows
+      if(class(data[[use]])[1]=="matrix" & dim(data[[use]])[1]==dim(data[[use]])[2]){
+        data[[use]] <- data[[use]][
+          rownames(data[[use]]) %in% rownames(data[[check]]),
+          rownames(data[[use]]) %in% rownames(data[[check]]),
+          drop=FALSE
+          ]
+        
+      # otherwise, only remove rows
+      } else {
+        data[[use]] <- data[[use]][
+          rownames(data[[use]]) %in% rownames(data[[check]]),,drop=FALSE
+          ]
+      }
+      
+      
     } else {
       data[[use]] <- data[[use]][
         rownames(data[[use]]) %in% rownames(data[[check]]),,,drop=FALSE
