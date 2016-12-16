@@ -54,7 +54,6 @@
 #' mt_example <- mt_deviations(mt_example,
 #'   start_ideal=c(xpos=0,ypos=0), end_ideal=c(xpos=-665,ypos=974))
 #' 
-#' @describeIn mt_deviations Calculate deviations from idealized trajectory
 #' @export
 mt_deviations <- function(
   data,
@@ -62,14 +61,8 @@ mt_deviations <- function(
   dimensions=c("xpos","ypos"),
   start_ideal=NULL,end_ideal=NULL,
   prefix="",
-  verbose=FALSE,show_progress=NULL) {
+  verbose=FALSE) {
   
-  if(is.null(show_progress)==FALSE){
-    warning("The argument show_progress is deprecated. ",
-            "Please use verbose instead.",
-            call. = FALSE)
-    verbose <- show_progress
-  }
   
   if(length(dimensions)!=2){
     stop("For dimensions, exactly two trajectory dimensions have to be specified.")
@@ -125,30 +118,5 @@ mt_deviations <- function(
   }
   
   return(create_results(data=data, results=deviations, use=use, save_as=save_as))
-  
-}
-
-
-#' @describeIn mt_deviations Deprecated
-#' @export
-mt_calculate_deviations <- function(
-  data,
-  use="trajectories", save_as=use,
-  dimensions=c("xpos","ypos"),
-  start_ideal=NULL,end_ideal=NULL,
-  prefix="",
-  verbose=FALSE,show_progress=NULL) {
-  
-  .Deprecated("mt_deviations")
-  
-  return(
-    mt_deviations(
-      data=data,use=use,save_as=save_as,
-      dimensions=dimensions,
-      start_ideal=start_ideal,end_ideal=end_ideal,
-      prefix=prefix,
-      verbose=verbose,show_progress=show_progress
-    )
-  )
   
 }

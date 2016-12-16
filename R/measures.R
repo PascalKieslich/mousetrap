@@ -156,21 +156,13 @@
 #'   mt_example$data, mt_example$measures,
 #'   by="mt_id")
 #'   
-#' @describeIn mt_measures Calculate mouse-tracking measures
 #' @export
 mt_measures <- function(
   data,
   use="trajectories", save_as="measures",
   dimensions=c("xpos","ypos"), timestamps="timestamps",
   flip_threshold=0,
-  verbose=FALSE, show_progress=NULL) {
-  
-  if(is.null(show_progress)==FALSE){
-    warning("The argument show_progress is deprecated. ",
-            "Please use verbose instead.",
-            call. = FALSE)
-    verbose <- show_progress
-  }
+  verbose=FALSE) {
   
   if(length(dimensions)!=2){
     stop("For dimensions, exactly two trajectory dimensions have to be specified.")
@@ -428,28 +420,5 @@ mt_measures <- function(
   return(create_results(
     data=data, results=measures, use=use, save_as=save_as,
     ids=rownames(trajectories), overwrite=TRUE))
-  
-}
-
-
-#' @describeIn mt_measures Deprecated
-#' @export
-mt_calculate_measures <- function(
-  data,
-  use="trajectories", save_as="measures",
-  dimensions=c("xpos","ypos"), timestamps="timestamps",
-  flip_threshold=0,
-  verbose=FALSE,show_progress=NULL) {
-  
-  .Deprecated("mt_measures")
-  
-  return(
-    mt_measures(
-      data=data,use=use,save_as=save_as,
-      dimensions=dimensions,timestamps=timestamps,
-      flip_threshold=flip_threshold,
-      verbose=verbose,show_progress=show_progress
-    )
-  )
   
 }

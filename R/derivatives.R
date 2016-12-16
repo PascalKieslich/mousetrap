@@ -41,7 +41,6 @@
 #' @param acc_on_abs_vel logical indicating if acceleration should be calculated
 #'   based on absolute velocity values (ignoring direction). Only relevant if
 #'   velocity can be negative (see Details).
-#' @param dimension Deprecated. Please use \code{dimensions} instead.
 #'
 #' @return A mousetrap data object (see \link{mt_example}) with Euclidian
 #'   distance, velocity, and acceleration added as additional columns to the
@@ -65,38 +64,15 @@
 #' mt_example <- mt_derivatives(mt_example,
 #'   dimensions="xpos")
 #'
-#' @describeIn mt_derivatives Calculate distance, velocity, and acceleration
 #' @export
 mt_derivatives <- function(
   data,
   use="trajectories", save_as=use,
   dimensions=c("xpos","ypos"), timestamps="timestamps",
   prefix="", acc_on_abs_vel=FALSE,
-  verbose=FALSE,
-  show_progress=NULL, dimension=NULL) {
-
-  if(is.null(show_progress) == FALSE) {
-    warning(
-      "The argument show_progress is deprecated. ",
-      "Please use verbose instead.",
-      call. = FALSE
-    )
-    verbose <- show_progress
-  }
-
-  if (is.null(dimension) == FALSE) {
-    warning(
-      "The argument dimension is deprecated. ",
-      "Please use dimensions instead.",
-      call. = FALSE
-    )
-    dimensions <- ifelse(
-      dimension == "xypos",
-      c("xpos","ypos"),
-      dimension
-      )
-  }
-
+  verbose=FALSE) {
+  
+  
   # Extract trajectories and create labels
   trajectories <- extract_data(data=data, use=use)
   dist <- paste0(prefix, "dist")
@@ -155,28 +131,4 @@ mt_derivatives <- function(
     data=data, results=derivatives,
     use=use, save_as=save_as
   ))
-}
-
-
-#' @describeIn mt_derivatives Deprecated
-#' @export
-mt_calculate_derivatives <- function(
-  data,
-  use="trajectories", save_as=use,
-  dimensions=c("xpos", "ypos"), timestamps="timestamps",
-  prefix="", acc_on_abs_vel=FALSE,
-  verbose=FALSE,
-  show_progress=NULL, dimension=NULL) {
-
-  .Deprecated("mt_derivatives")
-
-  return(
-    mt_derivatives(
-      data=data,use=use, save_as=save_as,
-      dimensions=dimensions, timestamps=timestamps,
-      prefix=prefix, acc_on_abs_vel=acc_on_abs_vel,
-      verbose=verbose, show_progress=show_progress,
-      dimension=dimension
-    )
-  )
 }

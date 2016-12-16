@@ -7,7 +7,7 @@
 mt_average(data, use = "trajectories", save_as = "av_trajectories",
   dimensions = "all", av_dimension = "timestamps", intervals = NULL,
   interval_size = 100, max_interval = NULL, verbose = FALSE,
-  dimension = NULL, show_progress = NULL)
+  dimension = NULL)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import
@@ -45,8 +45,6 @@ If unspecified (the default), all values will be included.}
 progress.}
 
 \item{dimension}{Deprecated. Please use \code{av_dimension} instead.}
-
-\item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) with an additional

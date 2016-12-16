@@ -6,8 +6,7 @@
 \usage{
 mt_import_mousetrap(raw_data, xpos_label = "xpos", ypos_label = "ypos",
   timestamps_label = "timestamps", mt_id_label = NULL, split = ",",
-  duplicates = "remove_first", reset_timestamps = TRUE, verbose = FALSE,
-  show_progress = NULL)
+  duplicates = "remove_first", reset_timestamps = TRUE, verbose = FALSE)
 }
 \arguments{
 \item{raw_data}{a data.frame containing the raw data.}
@@ -42,8 +41,6 @@ is recommended for all following analyses in mousetrap.}
 
 \item{verbose}{logical indicating whether function should report its
 progress.}
-
-\item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}).

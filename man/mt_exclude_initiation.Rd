@@ -6,7 +6,7 @@
 \usage{
 mt_exclude_initiation(data, use = "trajectories", save_as = use,
   dimensions = c("xpos", "ypos"), timestamps = "timestamps",
-  reset_timestamps = TRUE, verbose = FALSE, show_progress = NULL)
+  reset_timestamps = TRUE, verbose = FALSE)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import
@@ -30,8 +30,6 @@ reset after removing the initial phase without movement (see Details).}
 
 \item{verbose}{logical indicating whether function should report its
 progress.}
-
-\item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) from which the

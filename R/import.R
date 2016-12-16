@@ -64,7 +64,6 @@
 #'   is recommended for all following analyses in mousetrap.
 #' @param verbose logical indicating whether function should report its
 #'   progress.
-#' @param show_progress Deprecated. Please use \code{verbose} instead.
 #'
 #' @return A mousetrap data object (see \link{mt_example}).
 #'
@@ -91,17 +90,8 @@ mt_import_mousetrap <- function(raw_data,
   mt_id_label=NULL,
   split=",", duplicates="remove_first",
   reset_timestamps=TRUE,
-  verbose=FALSE, show_progress=NULL) {
-
-  if(is.null(show_progress) == FALSE) {
-    warning(
-      "The argument show_progress is deprecated. ",
-      "Please use verbose instead.",
-      call.=FALSE
-    )
-    verbose <- show_progress
-  }
-
+  verbose=FALSE) {
+  
   # Set labels
   timestamps <- "timestamps"
   xpos <- "xpos"

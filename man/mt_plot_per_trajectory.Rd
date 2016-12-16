@@ -7,7 +7,7 @@
 mt_plot_per_trajectory(file, data, use = "trajectories", x = "xpos",
   y = "ypos", xlim = NULL, ylim = NULL, axes_exact = FALSE,
   points = FALSE, rect = NULL, color = "black", fill = NA,
-  verbose = FALSE, show_progress = NULL, ...)
+  verbose = FALSE, ...)
 }
 \arguments{
 \item{file}{a character string specifying the name of the PDF file. Passed on
@@ -57,8 +57,6 @@ relevant if \code{rect} is specified.}
 
 \item{verbose}{logical indicating whether function should report its
 progress.}
-
-\item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 
 \item{...}{additional arguments passed on to \link[grDevices]{pdf}.}
 }

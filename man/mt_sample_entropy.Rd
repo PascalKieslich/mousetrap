@@ -6,7 +6,7 @@
 \usage{
 mt_sample_entropy(data, use = "tn_trajectories", save_as = "measures",
   dimension = "xpos", method = "pracma", lag = 3, r = NULL,
-  verbose = FALSE, show_progress = NULL)
+  verbose = FALSE)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import
@@ -33,8 +33,6 @@ Details).}
 
 \item{verbose}{logical indicating whether function should report its
 progress.}
-
-\item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}).

@@ -33,7 +33,6 @@
 #' @param nsteps an integer specifying the number of equally sized time steps.
 #' @param verbose logical indicating whether function should report its
 #'   progress.
-#' @param show_progress Deprecated. Please use \code{verbose} instead.
 #'
 #' @return A mousetrap data object (see \link{mt_example}) with an additional
 #'   array (by default called \code{tn_trajectories}) containing the
@@ -62,17 +61,8 @@ mt_time_normalize <- function(data,
                               use="trajectories", save_as="tn_trajectories",
                               dimensions=c("xpos","ypos"), timestamps="timestamps",
                               nsteps=101,
-                              verbose=FALSE,show_progress=NULL) {
-
-  if (is.null(show_progress) == FALSE) {
-    warning(
-      "The argument show_progress is deprecated. ",
-      "Please use verbose instead.",
-      call. = FALSE
-    )
-    verbose <- show_progress
-  }
-
+                              verbose=FALSE) {
+  
   if (length(dimensions) == 1 & dimensions[[1]] == "all") {
     dimensions <- dimnames(trajectories)[[3]]
     dimensions <- dimensions[dimensions!=timestamps]
@@ -271,17 +261,8 @@ mt_exclude_initiation <- function(data,
   use="trajectories", save_as=use,
   dimensions=c("xpos","ypos"), timestamps="timestamps",
   reset_timestamps=TRUE,
-  verbose=FALSE, show_progress=NULL) {
-
-  if(is.null(show_progress) == FALSE) {
-    warning(
-      "The argument show_progress is deprecated. ",
-      "Please use verbose instead.",
-      call. = FALSE
-    )
-    verbose <- show_progress
-  }
-
+  verbose=FALSE) {
+  
   # Gather necessary data
   trajectories <- extract_data(data=data, use=use)
 
@@ -352,10 +333,6 @@ mt_exclude_initiation <- function(data,
 #'   i.e., the values the last recorded position should have in every trial. If
 #'   \code{NULL}, trajectories are only adjusted so that they have the same
 #'   start position.
-#' @param xpos_start Deprecated. Please use \code{start} instead.
-#' @param xpos_end Deprecated. Please use \code{end} instead.
-#' @param ypos_start Deprecated. Please use \code{start} instead.
-#' @param ypos_end Deprecated. Please use \code{end} instead.
 #'
 #' @return A mousetrap data object (see \link{mt_example}) with an additional
 #'   array (by default called \code{sn_trajectories}) containing the
@@ -384,38 +361,8 @@ mt_space_normalize <- function(
   use="trajectories", save_as="sn_trajectories",
   dimensions=c("xpos", "ypos"),
   start=c(0, 0), end=NULL,
-  verbose=FALSE,
-  xpos_start = NULL, xpos_end = NULL,
-  ypos_start = NULL, ypos_end = NULL,
-  show_progress=NULL) {
-
-  if (is.null(show_progress) == FALSE) {
-    warning(
-      "The argument show_progress is deprecated. ",
-      "Please use verbose instead.",
-      call. = FALSE
-    )
-    verbose <- show_progress
-  }
-
-  if (is.null(xpos_start) == FALSE & is.null(ypos_start) == FALSE) {
-    warning(
-      "The arguments xpos_start and ypos_start have been deprecated. ",
-      "Please use start instead.",
-      call. = FALSE
-    )
-    start <- c(xpos_start, ypos_start)
-  }
-
-  if (is.null(xpos_end) == FALSE & is.null(ypos_end) == FALSE) {
-    warning(
-      "The arguments xpos_end and ypos_end have been deprecated. ",
-      "Please use end instead.",
-      call. = FALSE
-    )
-    end <- c(xpos_end, ypos_end)
-  }
-
+  verbose=FALSE) {
+  
   # Preparation
   trajectories <- extract_data(data=data,use=use)
 
@@ -471,16 +418,13 @@ mt_align_start <- function(
   data,
   use="trajectories", save_as="trajectories",
   dimensions=c("xpos","ypos"), start=c(0,0),
-  verbose=FALSE,
-  xpos_start=NULL, ypos_start=NULL,
-  show_progress=NULL) {
+  verbose=FALSE) {
 
   return(
     mt_space_normalize(
       data=data, use=use, save_as=save_as,
       start=start, end=NULL,
-      xpos_start=xpos_start, ypos_start=ypos_start,
-      verbose=verbose, show_progress=show_progress
+      verbose=verbose
     )
   )
 }
@@ -542,17 +486,8 @@ mt_resample <- function(data,
   use="trajectories", save_as="rs_trajectories",
   dimensions=c("xpos", "ypos"), timestamps="timestamps",
   step_size=10, exact_last_timestamp=TRUE,
-  verbose=FALSE, show_progress=NULL) {
-
-  if(is.null(show_progress) == FALSE) {
-    warning(
-      "The argument show_progress is deprecated. ",
-      "Please use verbose instead.",
-      call. = FALSE
-    )
-    verbose <- show_progress
-  }
-
+  verbose=FALSE) {
+  
   if (length(dimensions) == 1 & dimensions[[1]] == "all") {
     dimensions <- dimnames(trajectories)[[3]]
     dimensions <- dimensions[dimensions != timestamps]
@@ -717,17 +652,8 @@ mt_average <- function(data,
   dimensions="all", av_dimension="timestamps",
   intervals=NULL, interval_size=100, max_interval=NULL,
   verbose=FALSE,
-  dimension=NULL, show_progress=NULL) {
-
-  if (is.null(show_progress) == FALSE) {
-    warning(
-      "The argument show_progress is deprecated. ",
-      "Please use verbose instead.",
-      call.=FALSE
-    )
-    verbose <- show_progress
-  }
-
+  dimension=NULL) {
+  
   if (is.null(dimension) == FALSE) {
     warning(
       "The argument dimension is deprecated. ",

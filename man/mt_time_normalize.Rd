@@ -6,7 +6,7 @@
 \usage{
 mt_time_normalize(data, use = "trajectories", save_as = "tn_trajectories",
   dimensions = c("xpos", "ypos"), timestamps = "timestamps", nsteps = 101,
-  verbose = FALSE, show_progress = NULL)
+  verbose = FALSE)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import
@@ -30,8 +30,6 @@ containing the timestamps.}
 
 \item{verbose}{logical indicating whether function should report its
 progress.}
-
-\item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) with an additional

@@ -6,8 +6,7 @@
 \usage{
 mt_space_normalize(data, use = "trajectories", save_as = "sn_trajectories",
   dimensions = c("xpos", "ypos"), start = c(0, 0), end = NULL,
-  verbose = FALSE, xpos_start = NULL, xpos_end = NULL,
-  ypos_start = NULL, ypos_end = NULL, show_progress = NULL)
+  verbose = FALSE)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import
@@ -33,16 +32,6 @@ start position.}
 
 \item{verbose}{logical indicating whether function should report its
 progress.}
-
-\item{xpos_start}{Deprecated. Please use \code{start} instead.}
-
-\item{xpos_end}{Deprecated. Please use \code{end} instead.}
-
-\item{ypos_start}{Deprecated. Please use \code{start} instead.}
-
-\item{ypos_end}{Deprecated. Please use \code{end} instead.}
-
-\item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) with an additional

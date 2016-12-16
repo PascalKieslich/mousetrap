@@ -6,8 +6,7 @@
 \usage{
 mt_resample(data, use = "trajectories", save_as = "rs_trajectories",
   dimensions = c("xpos", "ypos"), timestamps = "timestamps",
-  step_size = 10, exact_last_timestamp = TRUE, verbose = FALSE,
-  show_progress = NULL)
+  step_size = 10, exact_last_timestamp = TRUE, verbose = FALSE)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import
@@ -36,8 +35,6 @@ last timestamp is only appended if it is a multiple of the step_size.}
 
 \item{verbose}{logical indicating whether function should report its
 progress.}
-
-\item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) with an additional

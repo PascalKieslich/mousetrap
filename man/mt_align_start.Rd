@@ -5,8 +5,7 @@
 \title{Align start position of trajectories.}
 \usage{
 mt_align_start(data, use = "trajectories", save_as = "trajectories",
-  dimensions = c("xpos", "ypos"), start = c(0, 0), verbose = FALSE,
-  xpos_start = NULL, ypos_start = NULL, show_progress = NULL)
+  dimensions = c("xpos", "ypos"), start = c(0, 0), verbose = FALSE)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import
@@ -27,12 +26,6 @@ i.e., the values the first recorded position should have in every trial.}
 
 \item{verbose}{logical indicating whether function should report its
 progress.}
-
-\item{xpos_start}{Deprecated. Please use \code{start} instead.}
-
-\item{ypos_start}{Deprecated. Please use \code{start} instead.}
-
-\item{show_progress}{Deprecated. Please use \code{verbose} instead.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) with aligned

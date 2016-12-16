@@ -345,7 +345,6 @@ mt_plot_add_rect <- function(rect,
 #'   relevant if \code{rect} is specified.
 #' @param verbose logical indicating whether function should report its
 #'   progress.
-#' @param show_progress Deprecated. Please use \code{verbose} instead.
 #' @param ... additional arguments passed on to \link[grDevices]{pdf}.
 #'
 #' @seealso
@@ -364,15 +363,8 @@ mt_plot_per_trajectory <- function(file,
   xlim=NULL, ylim=NULL, axes_exact=FALSE,
   points=FALSE,
   rect=NULL, color="black", fill=NA,
-  verbose=FALSE,show_progress=NULL,...) {
-
-  if(is.null(show_progress)==FALSE){
-    warning("The argument show_progress is deprecated. ",
-            "Please use verbose instead.",
-            call. = FALSE)
-    verbose <- show_progress
-  }
-
+  verbose=FALSE,...) {
+  
   # Define axis limits across all plots (if they have not been defined)
   if(is.null(xlim)){
     xlim <- range(data[[use]][,x,], na.rm=TRUE)
