@@ -1,7 +1,7 @@
 Package: mousetrap
 Type: Package
-Version: 2.0.0
-Date: 2016-10-25
+Version: 3.0.0.9000
+Date: 2016-12-16
 Title: Process and Analyze Mouse-Tracking Data
 Description: Mouse-tracking, the analysis of mouse movements in computerized
     experiments, is a method that is becoming increasingly popular in the
@@ -11,9 +11,12 @@ Maintainer: Pascal J. Kieslich <kieslich@psychologie.uni-mannheim.de>
 Authors@R: c(
     person(c("Pascal","J."), "Kieslich", role= c("aut", "cre"),
             email= "kieslich@psychologie.uni-mannheim.de"),
+    person(c("Dirk","U."), "Wulff", role = "aut",
+    		email = "dirk.wulff@gmail.com"),
     person("Felix", "Henninger", role = "aut",
             email= "mailbox@felixhenninger.com"),
-    person(c("Dirk","U."), "Wulff", role = "ctb"),
+    person(c("Jonas","M. B."), "Haslbeck", role = "aut",
+    		email = "jonas.haslbeck@googlemail.com"),
     person("Sarah", "Brockhaus", role = "ctb")
     )
 URL: https://github.com/pascalkieslich/mousetrap
