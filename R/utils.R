@@ -63,6 +63,12 @@ create_results <- function(data, results, use, save_as, ids=NULL, overwrite=TRUE
     # Return results depending on type of data and overwrite setting
     if (is_mousetrap_data(data)){
       if (save_as %in% names(data) & overwrite == FALSE) {
+        # check if columns already exist in data[[save_as]]
+        if (colnames(results)%in%colnames(data[[save_as]])){
+          # if so, remove them and issue warning
+          data[[save_as]] <- data[[save_as]][,colnames(data[[save_as]])[!colnames(data[[save_as]])%in%colnames(results)]]
+          warning("Columns of same name already exist and have been removed.")
+        }
         # ensure id column is present
         data[[save_as]][,"mt_id"] <- rownames(data[[save_as]])
         results[,"mt_id"] <- rownames(results)
