@@ -42,6 +42,11 @@
 #' mt_data_wide <- mt_export_wide(mt_example,
 #'   use2_variables=c("subject_nr","Condition"))
 #' 
+#' @author
+#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' 
+#' Felix Henninger
+#' 
 #' @describeIn mt_export_long Export mouse-tracking data in long format
 #' @export
 mt_export_long <- function(data,

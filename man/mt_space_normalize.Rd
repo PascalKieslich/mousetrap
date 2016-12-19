@@ -50,7 +50,12 @@ they have the same start position.
 mt_example <- mt_space_normalize(mt_example,
   save_as ="sn_trajectories",
   start=c(0,0), end=c(-1,1))
+  
+}
+\author{
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
 
+Felix Henninger
 }
 \references{
 Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor

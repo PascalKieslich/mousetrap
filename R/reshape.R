@@ -140,6 +140,11 @@
 #'   trajectories_long = FALSE
 #'   )
 #'
+#' @author
+#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' 
+#' Felix Henninger
+#' 
 #' @export
 mt_reshape <- function(data,
   use="trajectories", use_variables=NULL,

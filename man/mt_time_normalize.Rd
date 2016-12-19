@@ -64,6 +64,11 @@ mt_example <- mt_time_normalize(mt_example,
   save_as="tn_trajectories", nsteps=101)
 
 }
+\author{
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
+
+Felix Henninger
+}
 \references{
 Spivey, M. J., Grosjean, M., & Knoblich, G. (2005). Continuous
   attraction toward phonological competitors. \emph{Proceedings of the

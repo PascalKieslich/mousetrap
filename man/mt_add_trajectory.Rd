@@ -48,4 +48,9 @@ new_trajectory <- cbind(
  )
 
 }
+\author{
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
+
+Felix Henninger
+}
 

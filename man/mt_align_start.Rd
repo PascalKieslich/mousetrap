@@ -40,6 +40,11 @@ mt_example <- mt_align_start(mt_example,
   start=c(0,0))
 
 }
+\author{
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
+
+Felix Henninger
+}
 \seealso{
 \link{mt_space_normalize} for space normalizing trajectories.
 

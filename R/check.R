@@ -28,6 +28,11 @@
 #' @examples
 #' mt_check_resolution(mt_example)
 #' 
+#' @author
+#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' 
+#' Felix Henninger
+#' 
 #' @export
 mt_check_resolution <- function(data, use="trajectories",
   timestamps="timestamps", desired=NULL) {

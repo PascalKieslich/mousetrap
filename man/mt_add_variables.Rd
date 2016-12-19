@@ -52,4 +52,9 @@ mt_example <- mt_add_variables(mt_example,
   variables=list(xy_sum=xy_sum, xy_prod=xy_prod))
 
 }
+\author{
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
+
+Felix Henninger
+}
 

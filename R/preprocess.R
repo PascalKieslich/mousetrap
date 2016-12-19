@@ -56,6 +56,11 @@
 #' mt_example <- mt_time_normalize(mt_example,
 #'   save_as="tn_trajectories", nsteps=101)
 #'
+#' @author
+#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' 
+#' Felix Henninger
+#' 
 #' @export
 mt_time_normalize <- function(data,
                               use="trajectories", save_as="tn_trajectories",
@@ -163,6 +168,11 @@ mt_time_normalize <- function(data,
 #' mt_example <- mt_import_mousetrap(mt_example_raw)
 #' mt_example <- mt_remap_symmetric(mt_example,
 #'   remap_xpos="no", remap_ypos="up")
+#'   
+#' @author
+#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' 
+#' Felix Henninger
 #'
 #' @export
 mt_remap_symmetric <- function(
@@ -256,6 +266,11 @@ mt_remap_symmetric <- function(
 #' mt_example <- mt_exclude_initiation(mt_example,
 #'   save_as="mod_trajectories")
 #'
+#' @author
+#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' 
+#' Felix Henninger
+#' 
 #' @export
 mt_exclude_initiation <- function(data,
   use="trajectories", save_as=use,
@@ -354,6 +369,11 @@ mt_exclude_initiation <- function(data,
 #' mt_example <- mt_space_normalize(mt_example,
 #'   save_as ="sn_trajectories",
 #'   start=c(0,0), end=c(-1,1))
+#'   
+#' @author
+#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' 
+#' Felix Henninger
 #'
 #' @export
 mt_space_normalize <- function(
@@ -413,6 +433,11 @@ mt_space_normalize <- function(
 #' mt_example <- mt_align_start(mt_example,
 #'   start=c(0,0))
 #'
+#' @author
+#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' 
+#' Felix Henninger
+#' 
 #' @export
 mt_align_start <- function(
   data,
@@ -481,6 +506,11 @@ mt_align_start <- function(
 #'   save_as="rs_trajectories",
 #'   step_size=50)
 #'
+#' @author
+#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' 
+#' Felix Henninger
+#' 
 #' @export
 mt_resample <- function(data,
   use="trajectories", save_as="rs_trajectories",
@@ -631,6 +661,11 @@ mt_resample <- function(data,
 #'
 #' \link{mt_resample} for resampling trajectories using a constant time
 #' interval.
+#' 
+#' @author
+#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' 
+#' Felix Henninger
 #'
 #' @examples
 #' mt_example <- mt_derivatives(mt_example)
@@ -815,6 +850,11 @@ mt_average <- function(data,
 #' mt_example <- mt_measures(mt_example)
 #' mt_example_mad_sub <- mt_subset(mt_example, MAD<400, check="measures")
 #'
+#' @author
+#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' 
+#' Felix Henninger
+#' 
 #' @export
 mt_subset <- function(data, subset, check="data") {
 
@@ -892,6 +932,11 @@ mt_subset <- function(data, subset, check="data") {
 #' mt_example <- mt_add_variables(mt_example,
 #'   variables=list(xy_sum=xy_sum, xy_prod=xy_prod))
 #'
+#' @author
+#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' 
+#' Felix Henninger
+#' 
 #' @export
 mt_add_variables <- function(data,
                              use="trajectories", save_as=use,

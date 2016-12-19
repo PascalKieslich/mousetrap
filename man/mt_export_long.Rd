@@ -66,6 +66,11 @@ mt_data_wide <- mt_export_wide(mt_example,
   use2_variables=c("subject_nr","Condition"))
 
 }
+\author{
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
+
+Felix Henninger
+}
 \seealso{
 \link{mt_import_long} for importing mouse-tracking data saved in a long
 format.

@@ -55,6 +55,12 @@ mt_example <- mt_standardize(mt_example,
   use_variables=c("MAD", "AD"),
   within=c("subject_nr", "Condition"),
   prefix="z_")
+  
+}
+\author{
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
+
+Felix Henninger
 }
 \seealso{
 \link{scale_within} which is called by \code{mt_standardize}.

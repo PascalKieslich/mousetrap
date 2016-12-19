@@ -42,6 +42,12 @@ measures design.
 ChickWeight_scaled <-  scale_within(
  ChickWeight, variables="weight",
  within="Chick", prefix="z_")
+ 
+}
+\author{
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
+
+Felix Henninger
 }
 \seealso{
 \link{scale} for the R base scale function.

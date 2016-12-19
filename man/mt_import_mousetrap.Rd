@@ -94,6 +94,11 @@ removed.} \item{\code{ignore}: Duplicates are kept.} }
 mt_data <- mt_import_mousetrap(mt_example_raw)
 
 }
+\author{
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
+
+Felix Henninger
+}
 \references{
 Mousetrap plugin for OpenSesame
   (\url{https://github.com/pascalkieslich/mousetrap-os})

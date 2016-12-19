@@ -72,6 +72,11 @@
 #'   use="tn_trajectories", save_as="measures",
 #'   method="pracma", dimension="xpos", lag=3)
 #' 
+#' @author
+#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' 
+#' Felix Henninger
+#' 
 #' @export
 mt_sample_entropy <- function(data,
   use="tn_trajectories", save_as="measures",

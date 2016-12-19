@@ -32,6 +32,12 @@
 #' ChickWeight_scaled <-  scale_within(
 #'  ChickWeight, variables="weight",
 #'  within="Chick", prefix="z_")
+#'  
+#' @author
+#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' 
+#' Felix Henninger
+#' 
 #' @export
 scale_within <-function(data,
   variables=NULL, within=NULL,
@@ -144,6 +150,12 @@ scale_within <-function(data,
 #'   use_variables=c("MAD", "AD"),
 #'   within=c("subject_nr", "Condition"),
 #'   prefix="z_")
+#'   
+#' @author
+#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' 
+#' Felix Henninger
+#'   
 #' @export
 mt_standardize <-function(data, use="measures",
   use_variables=NULL, within="subject_nr",

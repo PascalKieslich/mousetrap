@@ -71,6 +71,11 @@
 #'   subject_id="subject_nr"
 #' )
 #'
+#' @author
+#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' 
+#' Felix Henninger
+#' 
 #' @export
 mt_aggregate <- function(data,
                          use="measures", use_variables=NULL,
@@ -139,6 +144,11 @@ mt_aggregate <- function(data,
 #'   subject_id="subject_nr"
 #' )
 #'
+#' @author
+#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' 
+#' Felix Henninger
+#' 
 #' @export
 mt_aggregate_per_subject <- function(data,
                                      use="measures", use_variables=NULL,

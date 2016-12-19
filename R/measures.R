@@ -156,6 +156,11 @@
 #'   mt_example$data, mt_example$measures,
 #'   by="mt_id")
 #'   
+#' @author
+#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' 
+#' Felix Henninger
+#' 
 #' @export
 mt_measures <- function(
   data,

@@ -99,6 +99,11 @@ mt_check_bimodality(mt_example,
   grouping_variables="Condition")
                     
 }
+\author{
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
+
+Felix Henninger
+}
 \references{
 Freeman, J. B., & Ambady, N. (2010). MouseTracker: Software for studying
 real-time mental processing using a computer mouse-tracking method.

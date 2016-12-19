@@ -153,6 +153,11 @@ trajectories_wide <- mt_reshape(mt_example,
   )
 
 }
+\author{
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
+
+Felix Henninger
+}
 \seealso{
 \link{mt_aggregate} for aggregating mouse-tracking measures and trajectories.
 

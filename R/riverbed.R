@@ -64,6 +64,11 @@
 #'     name="Frequency", trans="log", labels=scales::percent)
 #' }
 #' 
+#' @author
+#' Felix Henninger (\email{mailbox@@felixhenninger.com})
+#' 
+#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' 
 #' @export
 mt_plot_riverbed <- function(data, use='tn_trajectories', 
                              y='xpos', y_range=NULL, y_bins=250,

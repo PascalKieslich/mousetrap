@@ -158,6 +158,11 @@ mt_avg_plot <- mt_plot_aggregate(mt_example, use="tn_trajectories",
 mt_avg_plot + geom_path(size=1.5, alpha=0.5)
 
 }
+\author{
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
+
+Felix Henninger
+}
 \seealso{
 \link{mt_plot_add_rect} for adding rectangles representing the
 response buttons to the plot.

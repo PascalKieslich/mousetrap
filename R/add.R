@@ -24,6 +24,11 @@
 #'    mt_example, xypos=new_trajectory, id = "test_traj"
 #'  )
 #'
+#' @author
+#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' 
+#' Felix Henninger
+#' 
 #' @export
 mt_add_trajectory <- function(
   data,
@@ -94,6 +99,12 @@ mt_add_trajectory <- function(
 #'   mt_prototypes
 #' )
 #' }
+#' 
+#' @author
+#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' 
+#' Felix Henninger
+#' 
 #' @export
 mt_bind <- function(
   trajectories1,

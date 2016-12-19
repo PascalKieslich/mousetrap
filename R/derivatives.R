@@ -64,6 +64,11 @@
 #' mt_example <- mt_derivatives(mt_example,
 #'   dimensions="xpos")
 #'
+#' @author
+#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' 
+#' Felix Henninger
+#' 
 #' @export
 mt_derivatives <- function(
   data,

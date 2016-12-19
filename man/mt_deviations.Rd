@@ -75,6 +75,11 @@ mt_example <- mt_deviations(mt_example,
   start_ideal=c(xpos=0,ypos=0), end_ideal=c(xpos=-665,ypos=974))
 
 }
+\author{
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
+
+Felix Henninger
+}
 \references{
 Freeman, J. B., & Ambady, N. (2010). MouseTracker: Software for
   studying real-time mental processing using a computer mouse-tracking

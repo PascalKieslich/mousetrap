@@ -28,5 +28,11 @@ trajectories_combined <- mt_bind(
   mt_prototypes
 )
 }
+
+}
+\author{
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
+
+Felix Henninger
 }
 

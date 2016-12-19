@@ -83,6 +83,11 @@
 #' @examples
 #' mt_data <- mt_import_mousetrap(mt_example_raw)
 #'
+#' @author
+#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' 
+#' Felix Henninger
+#' 
 #' @export
 mt_import_mousetrap <- function(raw_data,
   xpos_label="xpos", ypos_label="ypos",
@@ -406,6 +411,11 @@ mt_import_mousetrap <- function(raw_data,
 #'   xpos_label="xpos", ypos_label="ypos",
 #'   timestamps_label="timestamps")
 #' 
+#' @author
+#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' 
+#' Felix Henninger
+#' 
 #' @export
 mt_import_wide <- function(raw_data,
   xpos_label="X", ypos_label="Y", zpos_label=NULL,
@@ -652,6 +662,12 @@ mt_import_wide <- function(raw_data,
 #' mt_data <- mt_import_long(exp_data,
 #'   add_labels= c("angle", "velocity"))
 #' }
+#' 
+#' @author
+#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' 
+#' Felix Henninger
+#' 
 #' @export
 mt_import_long <- function(raw_data,
   xpos_label="xpos", ypos_label="ypos", zpos_label=NULL,

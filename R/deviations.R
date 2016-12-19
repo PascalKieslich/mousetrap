@@ -54,6 +54,11 @@
 #' mt_example <- mt_deviations(mt_example,
 #'   start_ideal=c(xpos=0,ypos=0), end_ideal=c(xpos=-665,ypos=974))
 #' 
+#' @author
+#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' 
+#' Felix Henninger
+#' 
 #' @export
 mt_deviations <- function(
   data,

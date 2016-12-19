@@ -128,6 +128,11 @@
 #' # and semitransparent lines (by specifying alpha < 1)
 #' mt_avg_plot + geom_path(size=1.5, alpha=0.5)
 #'
+#' @author
+#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' 
+#' Felix Henninger
+#' 
 #' @describeIn mt_plot Plot individual trajectory data
 #' @export
 mt_plot <- function(data,
@@ -281,6 +286,11 @@ mt_plot_aggregate <- function(data,
 #' @seealso
 #' \link{mt_plot} for plotting trajectory data.
 #'
+#' @author
+#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' 
+#' Felix Henninger
+#' 
 #' @examples
 #' # Load ggplot2
 #' library(ggplot2)
@@ -387,6 +397,11 @@ mt_plot_add_rect <- function(rect,
 #'   use="trajectories")
 #' }
 #'
+#' @author
+#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' 
+#' Felix Henninger
+#' 
 #' @export
 mt_plot_per_trajectory <- function(file,
   data, use="trajectories", x="xpos", y="ypos",

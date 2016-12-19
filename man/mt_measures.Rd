@@ -158,6 +158,11 @@ mt_example_results <- dplyr::inner_join(
   by="mt_id")
   
 }
+\author{
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
+
+Felix Henninger
+}
 \references{
 Mousetrap
   

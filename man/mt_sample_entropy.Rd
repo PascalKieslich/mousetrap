@@ -87,6 +87,11 @@ mt_example <- mt_sample_entropy(mt_example,
   method="pracma", dimension="xpos", lag=3)
 
 }
+\author{
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
+
+Felix Henninger
+}
 \references{
 Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor
   responses in the time course of categorizing atypical exemplars.

@@ -32,6 +32,12 @@
 #' bimodality_coefficient(pfister_data_a) #.34
 #' pfister_data_b <- rep(1:11, times=c(2,26,14,6,2,0,2,6,14,26,2))
 #' bimodality_coefficient(pfister_data_b) #.79
+#' 
+#' @author
+#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' 
+#' Felix Henninger
+#' 
 #' @export
 bimodality_coefficient <- function(x, na.rm=FALSE) {
   
@@ -163,6 +169,11 @@ bimodality_coefficient <- function(x, na.rm=FALSE) {
 #'   use_variables=c("z_MAD", "z_AD"),
 #'   grouping_variables="Condition")
 #'                     
+#' @author
+#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' 
+#' Felix Henninger
+#' 
 #' @export
 mt_check_bimodality <- function(data,
   use="measures", use_variables=NULL,

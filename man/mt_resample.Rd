@@ -72,6 +72,11 @@ mt_example <- mt_resample(mt_example,
   step_size=50)
 
 }
+\author{
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
+
+Felix Henninger
+}
 \seealso{
 \link[stats]{approx} for information about the function used for
 linear interpolation.

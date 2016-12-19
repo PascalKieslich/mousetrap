@@ -71,6 +71,11 @@ mt_example <- mt_remap_symmetric(mt_example)
 mt_example <- mt_import_mousetrap(mt_example_raw)
 mt_example <- mt_remap_symmetric(mt_example,
   remap_xpos="no", remap_ypos="up")
+  
+}
+\author{
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
 
+Felix Henninger
 }
 

@@ -92,6 +92,12 @@ mt_data <- mt_import_long(mt_data_long)
 mt_data <- mt_import_long(exp_data,
   add_labels= c("angle", "velocity"))
 }
+
+}
+\author{
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
+
+Felix Henninger
 }
 \seealso{
 \link{mt_import_mousetrap} and \link{mt_import_wide} for importing
