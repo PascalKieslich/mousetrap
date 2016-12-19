@@ -46,6 +46,10 @@
 #' @param linetype an optional character string specifying which variable in
 #'   \code{data[[use2]]} should be used for varying the linetype of the
 #'   trajectories.
+#' @param facet_row an optional character string specifying a variable in 
+#'   \code{data[[use2]]} that should be used for (row-wise) faceting.
+#' @param facet_col an optional character string specifying a variable in 
+#'   \code{data[[use2]]} that should be used for (column-wise) faceting.
 #' @param points logical. If \code{TRUE}, points will be added to the plot using
 #'   \link[ggplot2]{geom_point}.
 #' @param only_ggplot logical. If \code{TRUE}, only the ggplot object without
@@ -122,11 +126,12 @@ mt_plot <- function(data,
   use="trajectories", use2="data",
   x="xpos", y="ypos",
   color=NULL, linetype=NULL,
+  facet_row=NULL, facet_col=NULL,
   points=FALSE,
   only_ggplot=FALSE, mt_id="mt_id", ...) {
 
   # Extract plotting options from metadata
-  use2_variables <- c(color, linetype)
+  use2_variables <- c(color, linetype, facet_row, facet_col)
 
   # Merge tracking data with metadata
   # and reshape it into long format
@@ -151,6 +156,14 @@ mt_plot <- function(data,
       linetype=linetype
       )
     )
+  
+  # Add facets (optional)
+  if(!is.null(facet_row) | !is.null(facet_col)) {
+    facet_row <- ifelse(is.null(facet_row),".",facet_row)
+    facet_col <- ifelse(is.null(facet_col),".",facet_col)
+    facet_formula <- stats::as.formula(paste(facet_row,facet_col,sep="~"))
+    current_plot <- current_plot + ggplot2::facet_grid(facet_formula)
+  }
 
   if (only_ggplot == TRUE) {
     # Return empty plot object
@@ -179,11 +192,12 @@ mt_plot <- function(data,
 mt_plot_aggregate <- function(data,
   use="trajectories", use2="data",
   x="xpos", y="ypos", color=NULL, linetype=NULL,
+  facet_row=NULL, facet_col=NULL,
   points=FALSE,
   only_ggplot=FALSE, subject_id=NULL, ...) {
 
   # Extract plotting options from metadata
-  use2_variables <- c(color, linetype)
+  use2_variables <- c(color, linetype, facet_row, facet_col)
   if (is.null(use2_variables) == FALSE){
     for (var in use2_variables){
       data[[use2]][,var] <- factor(data[[use2]][,var])
@@ -205,6 +219,14 @@ mt_plot_aggregate <- function(data,
       color=color, linetype=linetype
     )
   )
+  
+  # Add facets (optional)
+  if(!is.null(facet_row) | !is.null(facet_col)) {
+    facet_row <- ifelse(is.null(facet_row),".",facet_row)
+    facet_col <- ifelse(is.null(facet_col),".",facet_col)
+    facet_formula <- stats::as.formula(paste(facet_row,facet_col,sep="~"))
+    current_plot <- current_plot + ggplot2::facet_grid(facet_formula)
+  }
 
   if (only_ggplot == TRUE) {
     # Return empty plot object

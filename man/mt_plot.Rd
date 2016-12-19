@@ -6,12 +6,14 @@
 \title{Plot trajectory data.}
 \usage{
 mt_plot(data, use = "trajectories", use2 = "data", x = "xpos",
-  y = "ypos", color = NULL, linetype = NULL, points = FALSE,
-  only_ggplot = FALSE, mt_id = "mt_id", ...)
+  y = "ypos", color = NULL, linetype = NULL, facet_row = NULL,
+  facet_col = NULL, points = FALSE, only_ggplot = FALSE,
+  mt_id = "mt_id", ...)
 
 mt_plot_aggregate(data, use = "trajectories", use2 = "data", x = "xpos",
-  y = "ypos", color = NULL, linetype = NULL, points = FALSE,
-  only_ggplot = FALSE, subject_id = NULL, ...)
+  y = "ypos", color = NULL, linetype = NULL, facet_row = NULL,
+  facet_col = NULL, points = FALSE, only_ggplot = FALSE,
+  subject_id = NULL, ...)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import
@@ -42,6 +44,12 @@ array should be displayed on the y-axis (defaults to ypos).}
 \item{linetype}{an optional character string specifying which variable in
 \code{data[[use2]]} should be used for varying the linetype of the
 trajectories.}
+
+\item{facet_row}{an optional character string specifying a variable in 
+\code{data[[use2]]} that should be used for (row-wise) faceting.}
+
+\item{facet_col}{an optional character string specifying a variable in 
+\code{data[[use2]]} that should be used for (column-wise) faceting.}
 
 \item{points}{logical. If \code{TRUE}, points will be added to the plot using
 \link[ggplot2]{geom_point}.}
