@@ -12,9 +12,14 @@
 #' \link[ggplot2]{ggplot} function of the \code{ggplot2} package. The
 #' \link[ggplot2]{aes} mappings are taken from the function arguments for x, y
 #' etc.; in addition, the group mapping is set to the internal trial identifier
-#' (by default called "mt_id"). If \code{return_ggplot=FALSE}, the trajectories
-#' are plotted using the \link[ggplot2]{geom_path} function of the
-#' \code{ggplot2} package.
+#' (by default called "mt_id").
+#' 
+#' If \code{only_ggplot==FALSE}, the trajectories are plotted using the 
+#' \link[ggplot2]{geom_path} function of the \code{ggplot2} package. If 
+#' \code{only_ggplot==TRUE}, the ggplot object is returned without layers, which
+#' can be used to further customize the plot, e.g., to specify a custom size for
+#' the lines or to create semitransparent lines by specifying an alpha level < 1
+#' (see Examples).
 #'
 #' \code{mt_plot_aggregate} works similarly, but uses \link{mt_aggregate} for
 #' reshaping and aggregating trajectories prior to plotting.
@@ -84,26 +89,28 @@
 #' # Plot all time-normalized trajectories
 #' # varying the color depending on the condition
 #' mt_plot(mt_example, use="tn_trajectories",
-#'   x="xpos", y="ypos", color="Condition")
+#'   color="Condition")
 #'
 #' # ... with custom colors
 #' mt_plot(mt_example, use="tn_trajectories",
-#'   x="xpos", y="ypos", color="Condition") +
+#'   color="Condition") +
 #'   ggplot2::scale_color_brewer(type="qual")
+#'   
+#' # Create separate plots per Condition
+#' mt_plot(mt_example, use="tn_trajectories",
+#'   facet_col="Condition")
 #'
 #' # Plot aggregated time-normalized trajectories per condition
 #' mt_plot_aggregate(mt_example, use="tn_trajectories",
-#'   x="xpos", y="ypos", color="Condition")
+#'   color="Condition")
 #'
 #' # ... first aggregating trajectories within subjects
 #' mt_plot_aggregate(mt_example, use="tn_trajectories",
-#'   x="xpos", y="ypos", color="Condition",
-#'   subject_id="subject_nr")
+#'   color="Condition", subject_id="subject_nr")
 #'
 #' # ... adding points for each position to the plot
 #' mt_plot_aggregate(mt_example, use="tn_trajectories",
-#'   x="xpos", y="ypos", color="Condition",
-#'   points=TRUE)
+#'   color="Condition", points=TRUE)
 #'
 #' # Plot velocity profiles based on the averaged trajectories
 #' # varying the color depending on the condition
@@ -115,10 +122,11 @@
 #'
 #' # Use only_ggplot option to return a ggplot object without geoms
 #' mt_avg_plot <- mt_plot_aggregate(mt_example, use="tn_trajectories",
-#'   x="xpos", y="ypos", color="Condition", only_ggplot=TRUE)
+#'   color="Condition", only_ggplot=TRUE)
 #'
 #' # ... and add a geom to it with a custom line width
-#' mt_avg_plot + geom_path(size=1.5)
+#' # and semitransparent lines (by specifying alpha < 1)
+#' mt_avg_plot + geom_path(size=1.5, alpha=0.5)
 #'
 #' @describeIn mt_plot Plot individual trajectory data
 #' @export
