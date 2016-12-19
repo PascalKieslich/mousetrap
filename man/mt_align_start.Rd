@@ -4,7 +4,7 @@
 \alias{mt_align_start}
 \title{Align start position of trajectories.}
 \usage{
-mt_align_start(data, use = "trajectories", save_as = "trajectories",
+mt_align_start(data, use = "trajectories", save_as = use,
   dimensions = c("xpos", "ypos"), start = c(0, 0), verbose = FALSE)
 }
 \arguments{

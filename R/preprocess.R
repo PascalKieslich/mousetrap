@@ -416,7 +416,7 @@ mt_space_normalize <- function(
 #' @export
 mt_align_start <- function(
   data,
-  use="trajectories", save_as="trajectories",
+  use="trajectories", save_as=use,
   dimensions=c("xpos","ypos"), start=c(0,0),
   verbose=FALSE) {
 
