@@ -54,9 +54,10 @@ create_results <- function(data, results, use, save_as, ids=NULL, overwrite=TRUE
       if (is.null(rownames(results))) {
         stop("No ids for create_results function provided.")
       } else {
-        ids <- rownames(results)
+        ids <- as.character(rownames(results))
       }
     } else {
+      ids <- as.character(ids)
       rownames(results) <- ids
     }
 
@@ -64,27 +65,27 @@ create_results <- function(data, results, use, save_as, ids=NULL, overwrite=TRUE
     if (is_mousetrap_data(data)){
       if (save_as %in% names(data) & overwrite == FALSE) {
         # check if columns already exist in data[[save_as]]
-        if (colnames(results)%in%colnames(data[[save_as]])){
+        if (any(colnames(results)%in%colnames(data[[save_as]]))){
           # if so, remove them and issue warning
-          data[[save_as]] <- data[[save_as]][,colnames(data[[save_as]])[!colnames(data[[save_as]])%in%colnames(results)]]
+          data[[save_as]] <- data[[save_as]][,colnames(data[[save_as]])[!colnames(data[[save_as]])%in%colnames(results)],drop=FALSE]
           warning("Columns of same name already exist and have been removed.")
         }
         # ensure id column is present
-        data[[save_as]][,"mt_id"] <- rownames(data[[save_as]])
-        results[,"mt_id"] <- rownames(results)
+        data[[save_as]][,"mt_id"] <- as.character(rownames(data[[save_as]]))
+        results[,"mt_id"] <- as.character(rownames(results))
         # merge by rownames
         data[[save_as]] <- dplyr::inner_join(data[[save_as]], results, by="mt_id")
         # set rownames again
-        rownames(data[[save_as]]) <- data[[save_as]][,1]
-        # sort data and remove row.names column
+        rownames(data[[save_as]]) <- data[[save_as]][,"mt_id"]
+        # sort data
         data[[save_as]] <- data[[save_as]][ids,]
       } else {
         data[[save_as]] <- cbind(mt_id=ids, results)
       }
-      # ensure rownames are just characters
-      data[[save_as]][,1] <- as.character(data[[save_as]][,1])
+      # ensure rownames are characters
+      data[[save_as]][,"mt_id"] <- as.character(data[[save_as]][,"mt_id"])
       return(data)
-      #
+      
     } else {
       return(cbind(mt_id=ids, results))
     }
