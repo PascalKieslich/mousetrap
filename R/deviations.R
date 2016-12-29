@@ -5,7 +5,7 @@
 #' 
 #' The idealized trajectory is defined as the straight line connecting the start
 #' and end point of the actual trajectory (e.g., Freeman & Ambady, 2010). The 
-#' deviation for each position is calclated as the perpendicular deviation of 
+#' deviation for each position is calculated as the perpendicular deviation of 
 #' the actual trajectory from the idealized trajectory.
 #' 
 #' If a deviation occurs above the direct path, this is denoted by a positive 
@@ -33,8 +33,8 @@
 #'   of the idealized trajectory (by default called \code{xpos_ideal} and 
 #'   \code{ypos_ideal}) and the perpendicular deviations of the actual 
 #'   trajectory from the idealized trajectory (by default called 
-#'   \code{dev_ideal}) have been added as additional columns to the trajectory
-#'   array. If the trajectory array was provided directly as \code{data}, only
+#'   \code{dev_ideal}) have been added as additional variables to the trajectory
+#'   array. If the trajectory array was provided directly as \code{data}, only 
 #'   the trajectory array will be returned.
 #'
 #' @references Freeman, J. B., & Ambady, N. (2010). MouseTracker: Software for
@@ -52,7 +52,7 @@
 #' # Calculate deviations from idealized trajectory with
 #' # constant start and end points across trials
 #' mt_example <- mt_deviations(mt_example,
-#'   start_ideal=c(xpos=0,ypos=0), end_ideal=c(xpos=-665,ypos=974))
+#'   start_ideal=c(0,0), end_ideal=c(-665,974))
 #' 
 #' @author
 #' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})

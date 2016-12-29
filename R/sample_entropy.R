@@ -1,6 +1,7 @@
 #' Calculate sample entropy.
 #'
-#' Calculate sample entropy for each trajectory.
+#' Calculate sample entropy for each trajectory as a measure of the complexity
+#' of movements along one specific dimension.
 #' 
 #' \code{mt_sample_entropy} calculates the sample entropy for each trajectory as
 #' a measure of its complexity. Hehman et al (2015) provide details on how 

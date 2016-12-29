@@ -42,10 +42,10 @@
 #'   based on absolute velocity values (ignoring direction). Only relevant if
 #'   velocity can be negative (see Details).
 #'
-#' @return A mousetrap data object (see \link{mt_example}) with Euclidian
-#'   distance, velocity, and acceleration added as additional columns to the
-#'   trajectory array (called \code{dist}, \code{vel}, and  \code{acc}, if no
-#'   prefix was specified). If the trajectory array was provided directly as
+#' @return A mousetrap data object (see \link{mt_example}) with Euclidian 
+#'   distance, velocity, and acceleration added as additional variables to the 
+#'   trajectory array (called \code{dist}, \code{vel}, and  \code{acc}, if no 
+#'   prefix was specified). If the trajectory array was provided directly as 
 #'   \code{data}, only the trajectory array will be returned.
 #'
 #' @seealso \link{mt_average} for averaging trajectories across constant time

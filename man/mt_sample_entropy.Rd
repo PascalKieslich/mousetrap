@@ -47,7 +47,8 @@ A mousetrap data object (see \link{mt_example}).
   data.frame will be returned.
 }
 \description{
-Calculate sample entropy for each trajectory.
+Calculate sample entropy for each trajectory as a measure of the complexity
+of movements along one specific dimension.
 }
 \details{
 \code{mt_sample_entropy} calculates the sample entropy for each trajectory as
