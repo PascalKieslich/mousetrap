@@ -410,16 +410,19 @@ mt_plot_per_trajectory <- function(file,
   rect=NULL, color="black", fill=NA,
   verbose=FALSE,...) {
   
+  # Extract trajectory data
+  trajectories <- extract_data(data=data,use=use)
+  
   # Define axis limits across all plots (if they have not been defined)
   if(is.null(xlim)){
-    xlim <- range(data[[use]][,x,], na.rm=TRUE)
+    xlim <- range(trajectories[,,x], na.rm=TRUE)
     xoffset <- .05 * (xlim[2]-xlim[1])
     xlim[1] <- xlim[1] - xoffset
     xlim[2] <- xlim[2] + xoffset
   }
 
   if(is.null(ylim)){
-    ylim <- range(data[[use]][,y,], na.rm=TRUE)
+    ylim <- range(trajectories[,,y], na.rm=TRUE)
     yoffset <- .05 * (ylim[2]-ylim[1])
     ylim[1] <- ylim[1] - yoffset
     ylim[2] <- ylim[2] + yoffset
@@ -430,11 +433,10 @@ mt_plot_per_trajectory <- function(file,
 
   # Plot each trajectory individually
   # (as a separate page in the PDF file)
-  for (current_id in row.names(data[[use]])) {
+  for (current_id in row.names(trajectories)) {
     # Build plot
     current_plot <- mt_plot(
-      data=data, use=use, x=x, y=y,
-      use2=data[["data"]][current_id,],
+      data=trajectories[current_id,,,drop=FALSE], x=x, y=y,
       points=points
     )
 
