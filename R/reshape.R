@@ -173,9 +173,16 @@ mt_reshape <- function(data,
   # If data is not a mousetrap object, create one
   # (this allows that trajectories can be reshaped directly)
   if(is_mousetrap_data(data)==FALSE){
-    data <- list(data=data.frame(mt_id=rownames(data),row.names = rownames(data)),
-                 use=data)
-    names(data) <- c(use2,use)
+    
+    if(class(use2) %in% c("NULL","character")) {
+      data_use2 <- data.frame(mt_id=rownames(data),row.names = rownames(data))
+    } else {
+      data_use2 <- use2
+    }
+    use <- "trajectories"
+    use2 <- "data"
+    data <- list(data=data_use2,
+                 trajectories=data)
     class(data) <- "mousetrap"
     use2_variables <- NULL
   }
@@ -333,7 +340,7 @@ mt_reshape <- function(data,
 
     dataset <- tidyr::gather_(dataset, key_col="key", value_col="val", gather_cols=use_variables)
     dataset <- tidyr::unite_(dataset, col="key", from=c("key", mt_seq), sep="_")
-    # convert to factor to insure correct column order
+    # convert to factor to ensure correct column order
     dataset$key <- factor(dataset$key, levels=unique(dataset$key))
     dataset <- tidyr::spread_(dataset, key_col="key", value_col="val")
 
