@@ -180,11 +180,10 @@ mt_reshape <- function(data,
       data_use2 <- use2
     }
     use <- "trajectories"
-    use2 <- "data"
-    data <- list(data=data_use2,
+    use2 <- "use2"
+    data <- list(use2=data_use2,
                  trajectories=data)
     class(data) <- "mousetrap"
-    use2_variables <- NULL
   }
 
   # Assume trajectories are provided in case class is an array
