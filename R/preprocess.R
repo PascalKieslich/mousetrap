@@ -335,9 +335,11 @@ mt_exclude_initiation <- function(data,
 
 #' Space normalize trajectories.
 #'
-#' Adjust trajectories so that all trajectories have an identical start and end
-#' point. If no end points are provided, trajectories are only adjusted so that
-#' they have the same start position.
+#' Adjust trajectories so that all trajectories have an identical start and end 
+#' point. If no end points are provided, trajectories are only adjusted so that 
+#' they have the same start position. Please note that this function is 
+#' \strong{deprecated} and that \link{mt_align_start_end} should be used
+#' instead, which provides the same (and additional) functionality.
 #'
 #' @inheritParams mt_time_normalize
 #' @param dimensions a character vector specifying the dimensions in the
@@ -366,9 +368,11 @@ mt_exclude_initiation <- function(data,
 #'   \link{mt_remap_symmetric} for remapping trajectories.
 #'
 #' @examples
+#' \dontrun{
 #' mt_example <- mt_space_normalize(mt_example,
 #'   save_as ="sn_trajectories",
 #'   start=c(0,0), end=c(-1,1))
+#' }
 #'   
 #' @author
 #' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
@@ -383,33 +387,39 @@ mt_space_normalize <- function(
   start=c(0, 0), end=NULL,
   verbose=FALSE) {
   
+  .Deprecated("mt_align_start_end")
+  
   # Preparation
   trajectories <- extract_data(data=data,use=use)
-
-  # Perform space normalization
+  
+  # Perform alignment
   for (i in 1:nrow(trajectories)) {
     for (j in 1:length(dimensions)) {
-
+      
       current_positions <- trajectories[i, , dimensions[[j]]]
       nlogs <- sum(!is.na(current_positions))
-
+      
       current_positions <- current_positions - current_positions[1]
       if (!is.null(end)) {
         current_positions <- current_positions / (current_positions[nlogs] - current_positions[1])
         current_positions <- current_positions * (end[[j]]-start[[j]])
       }
       trajectories[i, , dimensions[[j]]] <-  current_positions + start[[j]]
-
+      
     }
-
+    
     if (verbose) {
       if (i %% 100 == 0) message(paste(i, "trials finished"))
     }
   }
-
+  
   if (verbose) {
     message(paste("all", i, "trials finished"))
   }
+  
+  return(create_results(data=data, results=trajectories, use=use, save_as=save_as))
+}
+
 
 #' Align start and end position of trajectories.
 #'

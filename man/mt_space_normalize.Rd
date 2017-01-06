@@ -42,14 +42,18 @@ A mousetrap data object (see \link{mt_example}) with an additional
   \code{data}, only the space-normalized trajectories will be returned.
 }
 \description{
-Adjust trajectories so that all trajectories have an identical start and end
-point. If no end points are provided, trajectories are only adjusted so that
-they have the same start position.
+Adjust trajectories so that all trajectories have an identical start and end 
+point. If no end points are provided, trajectories are only adjusted so that 
+they have the same start position. Please note that this function is 
+\strong{deprecated} and that \link{mt_align_start_end} should be used
+instead, which provides the same (and additional) functionality.
 }
 \examples{
+\dontrun{
 mt_example <- mt_space_normalize(mt_example,
   save_as ="sn_trajectories",
   start=c(0,0), end=c(-1,1))
+}
   
 }
 \author{
