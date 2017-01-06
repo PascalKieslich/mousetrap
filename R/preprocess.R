@@ -990,3 +990,59 @@ mt_add_variables <- function(data,
 
   return(create_results(data=data, results=trajectories_ext, use=use, save_as=save_as))
 }
+
+
+#' Count number of observations.
+#'
+#' Count number of observations per trial for a specified dimension (or several)
+#' in the trajectory array. This is mostly a helper function used by other
+#' functions in this package.
+#'
+#' @inheritParams mt_time_normalize
+#' @param dimensions a character vector specifying the name of the dimension(s)
+#'   that should be used for counting the number of observations. If several
+#'   dimensions are specified, the number of complete observations are reported.
+#' @return A mousetrap data object (see \link{mt_example}).
+#'   
+#'   If a data.frame with label specified in \code{save_as} (by default 
+#'   "measures") already exists, the number of obervations (called \code{nobs})
+#'   are added as additional column. If not, an additional \link{data.frame}
+#'   will be added.
+#'   
+#'   If a trajectory array was provided directly as \code{data}, only a named
+#'   character vector will be returned.
+#'
+#' @examples
+#' # Retrieve vector that counts number of observations
+#' mt_count(mt_example$trajectories)
+#'
+#' @author
+#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' 
+#' @export
+mt_count <- function(data,
+                     use="trajectories", save_as="measures",
+                     dimensions="xpos") {
+  
+  # Extract trajectories
+  trajectories <- extract_data(data=data,use=use)
+  
+  # Count number of observations
+  if(length(dimensions)==1){
+    nobs <- rowSums(!is.na(trajectories[,,dimensions,drop=FALSE]))
+  } else {
+    nobs <- apply(trajectories[,,dimensions,drop=FALSE],1,function(x){
+      sum(rowSums(is.na(x))==0)
+    })
+  }
+  
+  # Return results
+  if(is_mousetrap_data(data)==FALSE){
+    return(nobs)
+  } else{
+    return(create_results(
+      data=data, results=data.frame(nobs), use=use, save_as=save_as,
+      ids=rownames(trajectories), overwrite=FALSE))
+  }
+  
+}
