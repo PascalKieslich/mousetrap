@@ -42,9 +42,10 @@ following, a brief overview of the functions in this package is given.
   
   \link{mt_align_start} aligns the start position of trajectories.
   
-  \link{mt_space_normalize} performs space-normalization by remapping all
-  trajectories so that they share a common initial and final coordinate.
-  
+  \link{mt_align_start_end} aligns all trajectories so that they share a 
+  common initial and final coordinate (in some papers also referred to as 
+  "space-normalization").
+     
   \link{mt_time_normalize}	performs time-normalization, resulting in an
   identical number of samples for all trajectories.
   
@@ -86,6 +87,8 @@ following, a brief overview of the functions in this package is given.
   
   \link{mt_check_resolution}	checks the (temporal) logging resolution of raw
   trajectories.
+  
+  \link{mt_count} counts number of observations for each trajectory.
 }
 
 \section{Reshaping, aggregation, and export functions}{
