@@ -411,7 +411,110 @@ mt_space_normalize <- function(
     message(paste("all", i, "trials finished"))
   }
 
+#' Align start and end position of trajectories.
+#'
+#' Adjust trajectories so that all trajectories have an identical start and end 
+#' point. In some articles, this is also referred to as space-normalization
+#' (e.g. Dale et al., 2007).
+#'
+#' @inheritParams mt_time_normalize
+#' @param dimensions a character vector specifying the dimensions in the
+#'   trajectory array that should be aligned.
+#' @param start a numeric vector specifying the start values for each dimension,
+#'   i.e., the values the first recorded position should have in every trial. If
+#'   \code{NULL}, trajectories are aligned to the mean first position across all
+#'   trials.
+#' @param end a numeric vector specifying the end values for each dimension, 
+#'   i.e., the values the last recorded position should have in every trial. If 
+#'   \code{NULL}, trajectories are aligned to the mean last position across all 
+#'   trials. Note that in this case trajectories should be remapped to one side 
+#'   before alignment (e.g., using \link{mt_remap_symmetric}) so that the mean
+#'   last position is meaningful.
+#'
+#' @return A mousetrap data object (see \link{mt_example}) with aligned 
+#'   trajectories. All other trajectory dimensions not specified in
+#'   \code{dimensions} (e.g., timestamps) will be kept as is in the resulting
+#'   trajectory array. If the trajectory array was provided directly as
+#'   \code{data}, only the trajectory array will be returned.
+#'
+#' @references Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor
+#'   responses in the time course of categorizing atypical exemplars.
+#'   \emph{Memory & Cognition, 35}(1), 15-28.
+#'
+#' @seealso \link{mt_align_start} for aligning the start position of 
+#'   trajectories.
+#'   
+#'   \link{mt_remap_symmetric} for remapping trajectories.
+#'
+#' @examples
+#' # Align start and end positions to specific coordinates
+#' mt_example <- mt_align_start_end(mt_example,
+#'   start=c(0,0), end=c(-1,1))
+#'   
+#'   
+#' # Import raw trajectories for demonstration
+#' mt_example <- mt_import_mousetrap(mt_example_raw)
+#' 
+#' # Remap trajectories
+#' mt_example <- mt_remap_symmetric(mt_example)
+#' 
+#' # Align trajectories to mean first and last coordinates
+#' mt_example <- mt_align_start_end(mt_example,
+#'   start=NULL, end=NULL)
+#' 
+#'   
+#' @author
+#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' 
+#' Felix Henninger
+#'
+#' @export
+mt_align_start_end <- function(
+  data,
+  use="trajectories", save_as=use,
+  dimensions=c("xpos", "ypos"),
+  start=c(0, 0), end=c(-1,1),
+  verbose=FALSE) {
+  
+  # Preparation
+  trajectories <- extract_data(data=data,use=use)
+  
+  # Get end points
+  trajectories_last <-
+    t(apply(trajectories[,,dimensions,drop=FALSE],1,
+          function(x) x[max(which(rowSums(is.na(x))==0)),]))
+  
+  # If no start coordinates are provided, compute them
+  if(is.null(start)){
+    start <- colMeans(trajectories[,1,dimensions,drop=FALSE])
+    if(verbose) {
+      message("No start coordinates were provided. ",
+              "Aligning to: ",paste(start,collapse=","))
+    }
+  }
+  
+  # If no start coordinates are provided, compute them
+  if(is.null(end)){
+    end <- colMeans(trajectories_last)
+    if(verbose) {
+      message("No end coordinates were provided. ",
+              "Aligning to: ",paste(end,collapse=","))
+    }
+  }
+  
+  
+  # Perform alignment
+  for (j in 1:length(dimensions)) {
+    
+    trajectories[, , dimensions[[j]]] <- 
+      ((trajectories[, , dimensions[[j]]] - trajectories[, 1, dimensions[[j]]])/
+        (trajectories_last[,dimensions[[j]]] - trajectories[, 1, dimensions[[j]]]))*
+           (end[[j]]-start[[j]]) + start[[j]]
+    
+  }
+  
   return(create_results(data=data, results=trajectories, use=use, save_as=save_as))
+  
 }
 
 
