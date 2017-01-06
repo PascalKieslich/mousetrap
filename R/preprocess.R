@@ -532,20 +532,35 @@ mt_align_start_end <- function(
 #'
 #' Adjust trajectories so that all trajectories have the same start position.
 #'
-#' @inheritParams mt_space_normalize
+#' @inheritParams mt_align_start_end
 #'
-#' @return A mousetrap data object (see \link{mt_example}) with aligned
-#'   trajectories. If the trajectory array was provided directly as \code{data},
-#'   only the trajectory array will be returned.
+#' @return A mousetrap data object (see \link{mt_example}) with aligned 
+#'   trajectories. All other trajectory dimensions not specified in
+#'   \code{dimensions} (e.g., timestamps) will be kept as is in the resulting
+#'   trajectory array. If the trajectory array was provided directly as
+#'   \code{data}, only the trajectory array will be returned.
 #'
-#' @seealso \link{mt_space_normalize} for space normalizing trajectories.
+#' @seealso \link{mt_align_start_end}  for aligning the start and end position
+#'   of trajectories.
 #'
 #' \link{mt_remap_symmetric} for remapping trajectories.
 #'
 #' @examples
+#' # Import raw trajectories for demonstration
+#' mt_example <- mt_import_mousetrap(mt_example_raw)
+#' 
+#' # Align trajectories to start coordinates (0,0)
 #' mt_example <- mt_align_start(mt_example,
 #'   start=c(0,0))
+#'   
 #'
+#' # Import raw trajectories for demonstration
+#' mt_example <- mt_import_mousetrap(mt_example_raw)
+#' 
+#' # Align trajectories to mean first coordinates
+#' mt_example <- mt_align_start(mt_example,
+#'   start=NULL)
+#'   
 #' @author
 #' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
 #' 
@@ -558,13 +573,28 @@ mt_align_start <- function(
   dimensions=c("xpos","ypos"), start=c(0,0),
   verbose=FALSE) {
 
-  return(
-    mt_space_normalize(
-      data=data, use=use, save_as=save_as,
-      start=start, end=NULL,
-      verbose=verbose
-    )
-  )
+  # Preparation
+  trajectories <- extract_data(data=data,use=use)
+  
+  # If no start coordinates are provided, compute them
+  if(is.null(start)){
+    start <- colMeans(trajectories[,1,dimensions,drop=FALSE])
+    if(verbose) {
+      message("No start coordinates were provided. ",
+              "Aligning to: ",paste(start,collapse=","))
+    }
+  }
+  
+  # Perform start alignment
+  for (j in 1:length(dimensions)) {
+    
+    trajectories[, , dimensions[[j]]] <- trajectories[, , dimensions[[j]]] - 
+      trajectories[, 1, dimensions[[j]]] + start[[j]]
+    
+  }
+  
+  return(create_results(data=data, results=trajectories, use=use, save_as=save_as))
+  
 }
 
 

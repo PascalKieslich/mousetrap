@@ -19,26 +19,42 @@ used.}
 data should be stored.}
 
 \item{dimensions}{a character vector specifying the dimensions in the
-trajectory array that should be space-normalized.}
+trajectory array that should be aligned.}
 
 \item{start}{a numeric vector specifying the start values for each dimension,
-i.e., the values the first recorded position should have in every trial.}
+i.e., the values the first recorded position should have in every trial. If
+\code{NULL}, trajectories are aligned to the mean first position across all
+trials.}
 
 \item{verbose}{logical indicating whether function should report its
 progress.}
 }
 \value{
-A mousetrap data object (see \link{mt_example}) with aligned
-  trajectories. If the trajectory array was provided directly as \code{data},
-  only the trajectory array will be returned.
+A mousetrap data object (see \link{mt_example}) with aligned 
+  trajectories. All other trajectory dimensions not specified in
+  \code{dimensions} (e.g., timestamps) will be kept as is in the resulting
+  trajectory array. If the trajectory array was provided directly as
+  \code{data}, only the trajectory array will be returned.
 }
 \description{
 Adjust trajectories so that all trajectories have the same start position.
 }
 \examples{
+# Import raw trajectories for demonstration
+mt_example <- mt_import_mousetrap(mt_example_raw)
+
+# Align trajectories to start coordinates (0,0)
 mt_example <- mt_align_start(mt_example,
   start=c(0,0))
+  
 
+# Import raw trajectories for demonstration
+mt_example <- mt_import_mousetrap(mt_example_raw)
+
+# Align trajectories to mean first coordinates
+mt_example <- mt_align_start(mt_example,
+  start=NULL)
+  
 }
 \author{
 Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
@@ -46,7 +62,8 @@ Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
 Felix Henninger
 }
 \seealso{
-\link{mt_space_normalize} for space normalizing trajectories.
+\link{mt_align_start_end}  for aligning the start and end position
+  of trajectories.
 
 \link{mt_remap_symmetric} for remapping trajectories.
 }
