@@ -1,6 +1,6 @@
 #' Add new trajectory to trajectory array.
 #'
-#' Add new trajectory to trajectory array.
+#' Add a single new trajectory to trajectory array.
 #'
 #' @inheritParams mt_time_normalize
 #' @param xpos a vector of x positions. Ignored, if \code{xypos} is provided.
@@ -83,7 +83,9 @@ mt_add_trajectory <- function(
 
 #' Join two trajectory arrays
 #' 
-#' Join two trajectory arrays.
+#' Join two trajectory arrays. This function is mainly used internally, but can 
+#' be helpful in those (relatively rare) occasions where addional processed 
+#' trajectory data should be added to another trajectory array.
 #' 
 #' @inheritParams mt_time_normalize
 #' @param trajectories1 a trajectory array (see \link{mt_example}).

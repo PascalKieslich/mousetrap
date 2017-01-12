@@ -35,7 +35,7 @@ A mousetrap data object (see \link{mt_example}) where the new
   trajectory array will be returned.
 }
 \description{
-Add new trajectory to trajectory array.
+Add a single new trajectory to trajectory array.
 }
 \examples{
 new_trajectory <- cbind(
