@@ -83,7 +83,7 @@ mt_deviations <- function(
     variables=c(points_ideal,dev_ideal))
   
   # Calculate number of logs
-  nlogs <- rowSums(!is.na(deviations[,,dimensions[[1]],drop=FALSE]))
+  nlogs <- mt_count(deviations,dimensions=dimensions[[1]])
   
   
   # Calculate deviations

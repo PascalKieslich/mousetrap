@@ -135,7 +135,7 @@ mt_sample_entropy <- function(data,
   }
   
   # Calculate number of logs
-  nlogs <- rowSums(!is.na(trajectories[,,dimension,drop=FALSE]))
+  nlogs <- mt_count(trajectories,dimensions=dimension)
   
   # Set r for sample entropy function
   # cf. Dale et al., 2007, p. 20

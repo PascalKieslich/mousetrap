@@ -186,7 +186,8 @@ mt_measures <- function(
   dim2_ideal <- paste0(dim2,"_ideal")
   
   # Calculate number of logs
-  nlogs <- rowSums(!is.na(trajectories[,,dim1,drop=FALSE]))
+  nlogs <- mt_count(trajectories,dimensions=dim1)
+  
   
   # Calculate deviations if no deviations were found in the data
   if (!all(c(dev_ideal,dim1_ideal,dim2_ideal) %in% dimnames(trajectories)[[3]])) {

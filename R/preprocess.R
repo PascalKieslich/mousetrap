@@ -285,7 +285,7 @@ mt_exclude_initiation <- function(data,
   trajectories <- trajectories[,,c(timestamps, dimensions),drop=FALSE]
 
   # Calculate number of logs
-  nlogs <- rowSums(!is.na(trajectories[, ,timestamps , drop=FALSE]))
+  nlogs <- mt_count(trajectories, dimensions = timestamps)
 
   # Exclude phase where mouse stayed on start coordinates
   for (i in 1:nrow(trajectories)) {
