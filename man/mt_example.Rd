@@ -15,7 +15,7 @@
     is also stored in an additional column called "mt_id".} 
     \item{\code{trajectories}: an \link{array} containing the raw 
     mouse-tracking trajectories. The first dimension represents the different
-    trials and the dimension names (which can be assessed using 
+    trials and the dimension names (which can be accessed using 
     \link{rownames}) correspond to the trial identifier (the same identifier 
     that is used as the \code{rownames} in \code{data}). The second dimension
     corresponds to the samples taken over time which are included in
