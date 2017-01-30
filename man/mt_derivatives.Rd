@@ -6,7 +6,7 @@
 \usage{
 mt_derivatives(data, use = "trajectories", save_as = use,
   dimensions = c("xpos", "ypos"), timestamps = "timestamps", prefix = "",
-  acc_on_abs_vel = FALSE, verbose = FALSE)
+  acc_on_abs_vel = FALSE, return_delta_time = FALSE, verbose = FALSE)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import
@@ -34,6 +34,9 @@ to be created new trajectory dimensions.}
 \item{acc_on_abs_vel}{logical indicating if acceleration should be calculated
 based on absolute velocity values (ignoring direction). Only relevant if
 velocity can be negative (see Details).}
+
+\item{return_delta_time}{logical indicating if the timestamp differences 
+should be returned as well (as "delta_time").}
 
 \item{verbose}{logical indicating whether function should report its
 progress.}

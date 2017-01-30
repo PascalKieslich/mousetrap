@@ -41,6 +41,8 @@
 #' @param acc_on_abs_vel logical indicating if acceleration should be calculated
 #'   based on absolute velocity values (ignoring direction). Only relevant if
 #'   velocity can be negative (see Details).
+#' @param return_delta_time logical indicating if the timestamp differences 
+#'   should be returned as well (as "delta_time").
 #'
 #' @return A mousetrap data object (see \link{mt_example}) with Euclidian 
 #'   distance, velocity, and acceleration added as additional variables to the 
@@ -74,7 +76,8 @@ mt_derivatives <- function(
   data,
   use="trajectories", save_as=use,
   dimensions=c("xpos","ypos"), timestamps="timestamps",
-  prefix="", acc_on_abs_vel=FALSE,
+  prefix="",
+  acc_on_abs_vel=FALSE, return_delta_time=FALSE,
   verbose=FALSE) {
   
   
@@ -83,10 +86,16 @@ mt_derivatives <- function(
   dist <- paste0(prefix, "dist")
   vel  <- paste0(prefix, "vel")
   acc  <- paste0(prefix, "acc")
+  delta_time <-  paste0(prefix, "delta_time")
 
   # Create new array with added columns for the new variables
   derivatives <- mt_add_variables(trajectories,
     variables=c(dist,vel,acc))
+  
+  if (return_delta_time){
+    derivatives <- mt_add_variables(derivatives,
+                                    variables=c(delta_time))
+  }
 
   # Calculate derivatives
   for (i in 1:nrow(trajectories)) {
@@ -122,6 +131,10 @@ mt_derivatives <- function(
     derivatives[i,,dist] <- c(0, distances)
     derivatives[i,,vel] <- c(0, velocities)
     derivatives[i,,acc] <- c(0, accelerations)
+    
+    if (return_delta_time){
+      derivatives[i,,delta_time] <- c(0, delta_timestamps)
+    }
 
     if (verbose) {
       if (i %% 100 == 0) message(paste(i, "trials finished"))
