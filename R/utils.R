@@ -158,7 +158,7 @@ count_changes <- function(pos, threshold=0, zero_threshold=0) {
   # (pos is a one-dimensional vector)
   changes <- diff(pos, lag=1)
 
-  # Exclude logs without changes (above zero_threshold)
+  # Only keep logs with changes (above zero_threshold)
   changes <- changes[abs(changes) > zero_threshold]
 
   # Initialize variables
@@ -197,7 +197,7 @@ count_changes <- function(pos, threshold=0, zero_threshold=0) {
 
   } else {
     # If a threshold is set,
-    # exclude changes below threshold
+    # only keep changes above threshold
     cum_changes <- cum_changes[abs(cum_changes) > abs(threshold)]
 
     # Count changes in sign

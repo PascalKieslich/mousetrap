@@ -107,8 +107,10 @@
 #'   \item{AUC}{Area under curve, the geometric area between the actual
 #'   trajectory and the direct path where areas below the direct path have been
 #'   subtracted}
-#'   \item{xpos_flips}{Number of directional changes along x-axis} 
-#'   \item{ypos_flips}{Number of directional changes along y-axis} 
+#'   \item{xpos_flips}{Number of directional changes along x-axis (exceeding the
+#'   distance specified in \code{flip_threshold})}
+#'   \item{ypos_flips}{Number of directional changes along y-axis (exceeding the
+#'   distance specified in \code{flip_threshold})}
 #'   \item{xpos_reversals}{Number of crossings of the y-axis} 
 #'   \item{ypos_reversals}{Number of crossings of the x-axis}
 #'   \item{RT}{Response time, time at which tracking stopped}
