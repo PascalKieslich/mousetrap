@@ -6,7 +6,8 @@
 \usage{
 mt_resample(data, use = "trajectories", save_as = "rs_trajectories",
   dimensions = c("xpos", "ypos"), timestamps = "timestamps",
-  step_size = 10, exact_last_timestamp = TRUE, verbose = FALSE)
+  step_size = 10, exact_last_timestamp = TRUE,
+  constant_interpolation = NULL, verbose = FALSE)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import
@@ -32,6 +33,12 @@ interval. The unit corresponds to the unit of the timestamps.}
 \item{exact_last_timestamp}{logical indicating if the last timestamp should
 always be appended (which is the case by default). If \code{FALSE}, the
 last timestamp is only appended if it is a multiple of the step_size.}
+
+\item{constant_interpolation}{an optional integer. If specified, constant 
+instead of linear interpolation will be performed for all adjacent 
+timestamps whose difference exceeds the number specified for
+\code{constant_interpolation}. The unit corresponds to the unit of the
+timestamps.}
 
 \item{verbose}{logical indicating whether function should report its
 progress.}
@@ -62,6 +69,12 @@ the mouse exactly 250 ms and 500 ms after onset of the trial are of
 interest). In case that a trial does not contain samples at the specified
 timestamps, linear interpolation is performed using the two adjacent
 timestamps.
+
+If a number is specified for \code{constant_interpolation}, constant instead 
+of linear interpolation will be performed for all adjacent timestamps whose 
+difference exceeds this number. Specifically, a period without mouse movement
+will be assumed starting at the respective timestamp until the next timestamp
+- 1.
 
 Note that \code{mt_resample} does not average across time intervals. For
 this, \link{mt_average} can be used.

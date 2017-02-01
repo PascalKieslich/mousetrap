@@ -618,6 +618,12 @@ mt_align_start <- function(
 #' interest). In case that a trial does not contain samples at the specified
 #' timestamps, linear interpolation is performed using the two adjacent
 #' timestamps.
+#' 
+#' If a number is specified for \code{constant_interpolation}, constant instead 
+#' of linear interpolation will be performed for all adjacent timestamps whose 
+#' difference exceeds this number. Specifically, a period without mouse movement
+#' will be assumed starting at the respective timestamp until the next timestamp
+#' - 1.
 #'
 #' Note that \code{mt_resample} does not average across time intervals. For
 #' this, \link{mt_average} can be used.
@@ -631,6 +637,11 @@ mt_align_start <- function(
 #' @param exact_last_timestamp logical indicating if the last timestamp should
 #'   always be appended (which is the case by default). If \code{FALSE}, the
 #'   last timestamp is only appended if it is a multiple of the step_size.
+#' @param constant_interpolation an optional integer. If specified, constant 
+#'   instead of linear interpolation will be performed for all adjacent 
+#'   timestamps whose difference exceeds the number specified for
+#'   \code{constant_interpolation}. The unit corresponds to the unit of the
+#'   timestamps.
 #'
 #' @return A mousetrap data object (see \link{mt_example}) with an additional
 #'   array (by default called \code{rs_trajectories}) containing the resampled
@@ -659,6 +670,7 @@ mt_resample <- function(data,
   use="trajectories", save_as="rs_trajectories",
   dimensions=c("xpos", "ypos"), timestamps="timestamps",
   step_size=10, exact_last_timestamp=TRUE,
+  constant_interpolation = NULL,
   verbose=FALSE) {
   
   if (length(dimensions) == 1 & dimensions[[1]] == "all") {
@@ -694,6 +706,7 @@ mt_resample <- function(data,
 
   # Perform downsampling
   for (i in 1:nrow(trajectories)) {
+    
     current_trajectories <- trajectories[i,,]
     current_timestamps <- current_trajectories[,timestamps]
     nlogs <- sum(!is.na(current_timestamps))
@@ -704,6 +717,24 @@ mt_resample <- function(data,
       current_timestamps <- c(0, current_timestamps)
       current_trajectories <- rbind(current_trajectories[1,], current_trajectories)
       nlogs <- nlogs + 1
+    }
+    
+    # If a threshold for constant interpolation is specified,
+    # add end positions for timestamp periods that exceed threshold
+    # (end timestamp is next timestamp - 1)
+    if (is.null(constant_interpolation)==FALSE){
+      diff_current_timestamps <- diff(current_timestamps)
+      j <- 1
+      while (j<nlogs){
+        if(diff_current_timestamps[j]>constant_interpolation){
+          diff_current_timestamps <- diff_current_timestamps[c(1:j,j:(nlogs-1))]
+          current_timestamps <- c(current_timestamps[1:j],current_timestamps[j+1]-1,current_timestamps[(j+1):nlogs])
+          current_trajectories <- current_trajectories[c(1:j,j:nlogs),]
+          nlogs <- nlogs + 1
+          j <- j+1
+        }
+        j <- j+1
+      }
     }
 
     current_timestamps <- current_timestamps[1:nlogs]
