@@ -623,7 +623,7 @@ mt_align_start <- function(
 #' of linear interpolation will be performed for all adjacent timestamps whose 
 #' difference exceeds this number. Specifically, a period without mouse movement
 #' will be assumed starting at the respective timestamp until the next timestamp
-#' - 1.
+#' - \code{constant_interpolation/2}.
 #'
 #' Note that \code{mt_resample} does not average across time intervals. For
 #' this, \link{mt_average} can be used.
@@ -721,14 +721,14 @@ mt_resample <- function(data,
     
     # If a threshold for constant interpolation is specified,
     # add end positions for timestamp periods that exceed threshold
-    # (end timestamp is next timestamp - 1)
+    # (end timestamp is next timestamp - constant_interpolation/2)
     if (is.null(constant_interpolation)==FALSE){
       diff_current_timestamps <- diff(current_timestamps)
       j <- 1
       while (j<nlogs){
         if(diff_current_timestamps[j]>constant_interpolation){
           diff_current_timestamps <- diff_current_timestamps[c(1:j,j:(nlogs-1))]
-          current_timestamps <- c(current_timestamps[1:j],current_timestamps[j+1]-1,current_timestamps[(j+1):nlogs])
+          current_timestamps <- c(current_timestamps[1:j],current_timestamps[j+1]-constant_interpolation/2,current_timestamps[(j+1):nlogs])
           current_trajectories <- current_trajectories[c(1:j,j:nlogs),]
           nlogs <- nlogs + 1
           j <- j+1

@@ -74,7 +74,7 @@ If a number is specified for \code{constant_interpolation}, constant instead
 of linear interpolation will be performed for all adjacent timestamps whose 
 difference exceeds this number. Specifically, a period without mouse movement
 will be assumed starting at the respective timestamp until the next timestamp
-- 1.
+- \code{constant_interpolation/2}.
 
 Note that \code{mt_resample} does not average across time intervals. For
 this, \link{mt_average} can be used.
