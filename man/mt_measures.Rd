@@ -82,6 +82,8 @@ A mousetrap data object (see \link{mt_example}) where an additional
   \item{initiation_time}{Time at which first mouse movement was initiated}
   \item{idle_time}{Total time without mouse movement across the entirety of
   the trial}
+  \item{hover_time}{Total time of all periods without movement in a trial 
+  (whose duration exceeds the value specified in \code{hover_threshold})} 
   \item{hovers}{Number of periods without movement in a trial (whose duration
   exceeds the value specified in \code{hover_threshold})}
   \item{total_dist}{Total distance covered by the trajectory}
@@ -143,16 +145,16 @@ direct path are added and areas below are subtracted. The \code{AUC} is
 calculated using the \link[pracma]{polyarea} function from the pracma
 package.
 
-Note that all \strong{time} related measures (except \code{idle_time}) are 
-reported using the timestamp metric as present in the data. To interpret the 
-timestamp values as time since tracking start, the assumption has to be made 
-that for each trajectory the tracking started at timestamp 0 and that all 
-timestamps indicate the time passed since tracking start. Therefore, all 
-timestamps should be reset during data import by subtracting the value of the
-first timestamp from all timestamps within a trial (assuming that the first 
-timestamp corresponds to the time when tracking started). Timestamps are 
-reset by default when importing the data using one of the mt_import fuctions 
-(e.g., \link{mt_import_mousetrap}).
+Note that all \strong{time} related measures (except \code{idle_time} and
+\code{hover_time}) are reported using the timestamp metric as present in the
+data. To interpret the timestamp values as time since tracking start, the
+assumption has to be made that for each trajectory the tracking started at
+timestamp 0 and that all timestamps indicate the time passed since tracking
+start. Therefore, all timestamps should be reset during data import by
+subtracting the value of the first timestamp from all timestamps within a
+trial (assuming that the first timestamp corresponds to the time when
+tracking started). Timestamps are reset by default when importing the data
+using one of the mt_import fuctions (e.g., \link{mt_import_mousetrap}).
 }
 \examples{
 mt_example <- mt_derivatives(mt_example)

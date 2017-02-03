@@ -47,16 +47,16 @@
 #' calculated using the \link[pracma]{polyarea} function from the pracma
 #' package.
 #' 
-#' Note that all \strong{time} related measures (except \code{idle_time}) are 
-#' reported using the timestamp metric as present in the data. To interpret the 
-#' timestamp values as time since tracking start, the assumption has to be made 
-#' that for each trajectory the tracking started at timestamp 0 and that all 
-#' timestamps indicate the time passed since tracking start. Therefore, all 
-#' timestamps should be reset during data import by subtracting the value of the
-#' first timestamp from all timestamps within a trial (assuming that the first 
-#' timestamp corresponds to the time when tracking started). Timestamps are 
-#' reset by default when importing the data using one of the mt_import fuctions 
-#' (e.g., \link{mt_import_mousetrap}).
+#' Note that all \strong{time} related measures (except \code{idle_time} and
+#' \code{hover_time}) are reported using the timestamp metric as present in the
+#' data. To interpret the timestamp values as time since tracking start, the
+#' assumption has to be made that for each trajectory the tracking started at
+#' timestamp 0 and that all timestamps indicate the time passed since tracking
+#' start. Therefore, all timestamps should be reset during data import by
+#' subtracting the value of the first timestamp from all timestamps within a
+#' trial (assuming that the first timestamp corresponds to the time when
+#' tracking started). Timestamps are reset by default when importing the data
+#' using one of the mt_import fuctions (e.g., \link{mt_import_mousetrap}).
 #' 
 #' 
 #' 
@@ -119,6 +119,8 @@
 #'   \item{initiation_time}{Time at which first mouse movement was initiated}
 #'   \item{idle_time}{Total time without mouse movement across the entirety of
 #'   the trial}
+#'   \item{hover_time}{Total time of all periods without movement in a trial 
+#'   (whose duration exceeds the value specified in \code{hover_threshold})} 
 #'   \item{hovers}{Number of periods without movement in a trial (whose duration
 #'   exceeds the value specified in \code{hover_threshold})}
 #'   \item{total_dist}{Total distance covered by the trajectory}
@@ -218,7 +220,7 @@ mt_measures <- function(
       "AD", "AUC",
       paste0(dimensions,"_flips"),
       paste0(dimensions,"_reversals"),
-      "RT", "initiation_time", "idle_time", "hovers"
+      "RT", "initiation_time", "idle_time", "hover_time", "hovers"
     )
     
     # Check if there are trajectories where first timestamp is > 0:
@@ -359,12 +361,14 @@ mt_measures <- function(
         # Continuous movement
         measures[i,"initiation_time"] <- current_timestamps[1]
         measures[i,"idle_time"] <- current_timestamps[1]
+        measures[i,"hover_time"] <- ifelse(current_timestamps[1]>hover_threshold,current_timestamps[1],0)
         measures[i,"hovers"] <- 0
       } else if (all(pos_constant == TRUE)) {
         # No movement at all
         measures[i,"initiation_time"] <- measures[i,"RT"]
         measures[i,"idle_time"] <- measures[i,"RT"]
-        measures[i,"hovers"] <- 1
+        measures[i,"hover_time"] <- ifelse(measures[i,"RT"]>hover_threshold,measures[i,"RT"],0)
+        measures[i,"hovers"] <- ifelse(measures[i,"RT"]>hover_threshold,1,0)
       } else {
         # Intermittent movement
         measures[i,"initiation_time"] <- ifelse(
@@ -388,7 +392,8 @@ mt_measures <- function(
           time_diffs <- c(time_diffs[1],diff(time_diffs))
         }
         
-        # Calculated number of periods without movement that exceed the threshold
+        # Calculate number of periods without movement that exceed the threshold and their total time
+        measures[i,"hover_time"] <-  sum(time_diffs[time_diffs>hover_threshold])
         measures[i,"hovers"] <-  sum(time_diffs>hover_threshold)
         
       }
