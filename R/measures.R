@@ -230,7 +230,10 @@ mt_measures <- function(
         "Please see Details section of mt_measures documentation ",
         "for interpretation of time related measures."
       )
-    } else if (min(trajectories[,1,timestamps]) < 0) {
+    } 
+    
+    # Check if there are trajectories where first timestamp is < 0:
+    if (min(trajectories[,1,timestamps]) < 0) {
       stop(
         "Trajectories detected where first timestamp is smaller than 0. ",
         "Please check that trajectories were logged/imported correctly."
