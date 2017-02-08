@@ -6,7 +6,7 @@
 \usage{
 mt_measures(data, use = "trajectories", save_as = "measures",
   dimensions = c("xpos", "ypos"), timestamps = "timestamps",
-  flip_threshold = 0, hover_threshold = 0, verbose = FALSE)
+  flip_threshold = 0, hover_threshold = NULL, verbose = FALSE)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import
@@ -31,8 +31,10 @@ containing the timestamps.}
 be exceeded in one direction so that a change in direction counts as a
 flip.}
 
-\item{hover_threshold}{a numeric value specifying the duration that needs to 
-be exceeded for a period without mouse movement to count as a hover.}
+\item{hover_threshold}{an optional numeric value. If specified, \code{hovers}
+(and \code{hover_time})  will be calculated as the number (and total time)
+of periods without movement in a trial (whose duration exceeds the value
+specified in \code{hover_threshold}).}
 
 \item{verbose}{logical indicating whether function should report its
 progress.}

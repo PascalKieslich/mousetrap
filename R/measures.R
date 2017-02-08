@@ -72,8 +72,10 @@
 #' @param flip_threshold a numeric value specifying the distance that needs to 
 #'   be exceeded in one direction so that a change in direction counts as a
 #'   flip.
-#' @param hover_threshold a numeric value specifying the duration that needs to 
-#'   be exceeded for a period without mouse movement to count as a hover.
+#' @param hover_threshold an optional numeric value. If specified, \code{hovers}
+#'   (and \code{hover_time})  will be calculated as the number (and total time)
+#'   of periods without movement in a trial (whose duration exceeds the value
+#'   specified in \code{hover_threshold}).
 #'   
 #' @return A mousetrap data object (see \link{mt_example}) where an additional 
 #'   \link{data.frame} has been added (by default called "measures") containing 
@@ -174,7 +176,7 @@ mt_measures <- function(
   data,
   use="trajectories", save_as="measures",
   dimensions=c("xpos","ypos"), timestamps="timestamps",
-  flip_threshold=0, hover_threshold=0,
+  flip_threshold=0, hover_threshold=NULL,
   verbose=FALSE) {
   
   if(length(dimensions)!=2){
@@ -220,8 +222,12 @@ mt_measures <- function(
       "AD", "AUC",
       paste0(dimensions,"_flips"),
       paste0(dimensions,"_reversals"),
-      "RT", "initiation_time", "idle_time", "hover_time", "hovers"
+      "RT", "initiation_time", "idle_time"
     )
+    
+    if(!is.null(hover_threshold)){
+      mt_measures <- c(mt_measures, "hover_time", "hovers")
+    }
     
     # Check if there are trajectories where first timestamp is > 0:
     if (max(trajectories[,1,timestamps]) > 0) {
@@ -364,14 +370,20 @@ mt_measures <- function(
         # Continuous movement
         measures[i,"initiation_time"] <- current_timestamps[1]
         measures[i,"idle_time"] <- current_timestamps[1]
-        measures[i,"hover_time"] <- ifelse(current_timestamps[1]>hover_threshold,current_timestamps[1],0)
-        measures[i,"hovers"] <- 0
+        if (!is.null(hover_threshold)){
+          measures[i,"hover_time"] <- ifelse(current_timestamps[1]>hover_threshold,current_timestamps[1],0)
+          measures[i,"hovers"] <- 0
+        }
+        
       } else if (all(pos_constant == TRUE)) {
         # No movement at all
         measures[i,"initiation_time"] <- measures[i,"RT"]
         measures[i,"idle_time"] <- measures[i,"RT"]
-        measures[i,"hover_time"] <- ifelse(measures[i,"RT"]>hover_threshold,measures[i,"RT"],0)
-        measures[i,"hovers"] <- ifelse(measures[i,"RT"]>hover_threshold,1,0)
+        if (!is.null(hover_threshold)){
+          measures[i,"hover_time"] <- ifelse(measures[i,"RT"]>hover_threshold,measures[i,"RT"],0)
+          measures[i,"hovers"] <- ifelse(measures[i,"RT"]>hover_threshold,1,0)
+        }
+        
       } else {
         # Intermittent movement
         measures[i,"initiation_time"] <- ifelse(
@@ -382,23 +394,25 @@ mt_measures <- function(
         measures[i,"idle_time"] <- sum(time_diffs[pos_constant])
         
         
-        # Calculate hovers
-        
-        # Set time diffs for periods with movement to 0
-        time_diffs[!pos_constant] <- 0
-        
-        # Retrieve for each period without movement the last cumulated timestamp
-        time_diffs <- cumsum(time_diffs)[c(diff(pos_constant)==(-1),pos_constant[length(pos_constant)])]
-        
-        # Calculate the duration for each period as the difference of timestamps
-        if(length(time_diffs)>1) {
-          time_diffs <- c(time_diffs[1],diff(time_diffs))
+        if (!is.null(hover_threshold)){
+          # Calculate hovers
+          
+          # Set time diffs for periods with movement to 0
+          time_diffs[!pos_constant] <- 0
+          
+          # Retrieve for each period without movement the last cumulated timestamp
+          time_diffs <- cumsum(time_diffs)[c(diff(pos_constant)==(-1),pos_constant[length(pos_constant)])]
+          
+          # Calculate the duration for each period as the difference of timestamps
+          if(length(time_diffs)>1) {
+            time_diffs <- c(time_diffs[1],diff(time_diffs))
+          }
+          
+          # Calculate number of periods without movement that exceed the threshold and their total time
+          measures[i,"hover_time"] <-  sum(time_diffs[time_diffs>hover_threshold])
+          measures[i,"hovers"] <-  sum(time_diffs>hover_threshold)
         }
-        
-        # Calculate number of periods without movement that exceed the threshold and their total time
-        measures[i,"hover_time"] <-  sum(time_diffs[time_diffs>hover_threshold])
-        measures[i,"hovers"] <-  sum(time_diffs>hover_threshold)
-        
+      
       }
       
       # notes: timestamps (e.g., for MAD) always correspond
