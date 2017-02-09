@@ -2,3 +2,8 @@
 .Rhistory
 .RData
 .Ruserdata
+/src/*.o
+/src/*.o-*
+/src/*.d
+/src/*.so
+*.dll
