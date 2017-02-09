@@ -43,7 +43,6 @@ NumericMatrix distMat(NumericMatrix x,
   return dist;
   }
 
-
 // [[Rcpp::export]]
 NumericMatrix distMatV(NumericMatrix x,
                       NumericMatrix y,
@@ -88,7 +87,6 @@ NumericMatrix distMatV(NumericMatrix x,
   }
   return dist;
 }
-
 
 // [[Rcpp::export]]
 NumericMatrix distMat3d(NumericMatrix x,
