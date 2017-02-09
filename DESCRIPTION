@@ -36,6 +36,7 @@ Imports:
     ggplot2,
     scales,
     psych (>= 1.2.4),
+    Rcpp (>= 0.11.4),
     diptest,
     RColorBrewer
 Suggests:
