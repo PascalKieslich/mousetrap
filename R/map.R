@@ -64,7 +64,8 @@
 #' # Map trajectories onto reduced prototype set
 #' mt_example <- mt_map(mt_example,
 #'   use="sp_trajectories",
-#'   prototypes=mt_prototypes[c("straight","curved","cCoM"),,])
+#'   prototypes=mt_prototypes[c("straight","curved","cCoM"),,],
+#'   save_as="prototyping_red")
 #' 
 #' 
 #' # Map trajectories onto extended prototype set
@@ -79,7 +80,8 @@
 #' 
 #' # Map trajectories
 #' mt_example <- mt_map(mt_example,
-#'   use="sp_trajectories", prototypes=mt_prototypes_ext)
+#'   use="sp_trajectories", prototypes=mt_prototypes_ext,
+#'   save_as="prototyping_ext")
 #' 
 #'
 #' @author
@@ -140,6 +142,6 @@ mt_map = function(
   return(create_results(
     data=data, results=data.frame(prototype,prototype_label,min_dist), 
     use=use, save_as=save_as,
-    ids=rownames(trajectories), overwrite=TRUE))
+    ids=rownames(trajectories), overwrite=FALSE))
   
 }

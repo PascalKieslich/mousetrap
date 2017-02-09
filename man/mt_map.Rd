@@ -92,7 +92,8 @@ mt_plot(mt_example,use2="prototyping",facet_col="prototype_label")
 # Map trajectories onto reduced prototype set
 mt_example <- mt_map(mt_example,
   use="sp_trajectories",
-  prototypes=mt_prototypes[c("straight","curved","cCoM"),,])
+  prototypes=mt_prototypes[c("straight","curved","cCoM"),,],
+  save_as="prototyping_red")
 
 
 # Map trajectories onto extended prototype set
@@ -107,7 +108,8 @@ mt_prototypes_ext <- mt_add_trajectory(mt_prototypes_ext,
 
 # Map trajectories
 mt_example <- mt_map(mt_example,
-  use="sp_trajectories", prototypes=mt_prototypes_ext)
+  use="sp_trajectories", prototypes=mt_prototypes_ext,
+  save_as="prototyping_ext")
 
 
 }
