@@ -1,4 +1,4 @@
-#' Detect number of clusters k.
+#' Estimate optimal number of clusters.
 #' 
 #' Estimates the optimal number of clusters (\code{k}) using various methods.
 #' 
@@ -15,13 +15,20 @@
 #' The remaining three methods select \code{k} as the value that minimizes some 
 #' distance metric measured for objects within and between clusters. See the 
 #' references below.
+#' 
+#' Clustering trajectories requires that the endpoints of all trajectories share
+#' the same direction, e.g., that all trajectories end in the top-left corner of
+#' the coordinate system (\link{mt_remap_symmetric} or \link{mt_align} can be
+#' used to achieve this). Furthermore, it is recommended to use spatialized
+#' trajectories (see \link{mt_spatialize}; Haslbeck, Wulff, Kieslich, Henninger,
+#' & Schulte-Mecklenbeck, 2017).
 #'   
 #' @inheritParams mt_cluster
 #' @param kseq a numeric vector specifying set of candidates for k. Defaults to 
 #'   2:15, implying that all values of k within that range are compared using 
 #'   the metrics specified in \code{compute}.
 #' @param compute character vector specifying the to be computed measures. Can 
-#'   be any subset of \code{c('stability','gap','jump','slope')}.
+#'   be any subset of \code{c("stability","gap","jump","slope")}.
 #' @param method character string specifiying the type of clustering procedure 
 #'   for the stability-based method. Either \code{hclust} or \code{kmeans}.
 #' @param n_bootstrap an integer specifying the number of bootstrap comparisons 

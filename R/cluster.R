@@ -26,6 +26,13 @@
 #' to \link[stats]{kmeans}, the other implemented clustering method, and other 
 #' linkage criteria, this setup handles the skewed distribution cluster sizes 
 #' and trajectory outliers found in the majority of datasets best.
+#' 
+#' Clustering trajectories requires that the endpoints of all trajectories share
+#' the same direction, e.g., that all trajectories end in the top-left corner of
+#' the coordinate system (\link{mt_remap_symmetric} or \link{mt_align} can be
+#' used to achieve this). Furthermore, it is recommended to use spatialized
+#' trajectories (see \link{mt_spatialize}; Haslbeck, Wulff, Kieslich, Henninger,
+#' & Schulte-Mecklenbeck, 2017).
 #'
 #' @inheritParams mt_time_normalize
 #' @param save_as a character string specifying where the resulting data should
@@ -56,7 +63,7 @@
 #'   on to the \code{nstart} argument of \link[stats]{kmeans}. Only relevant if 
 #'   \code{method} is "kmeans".
 #' @param cluster_output logical. If \code{FALSE} (the default), the mousetrap 
-#'   data object with the cluster assignments (see Value) is returned. If 
+#'   data object with the cluster assignments is returned (see Value). If 
 #'   \code{TRUE}, the output of the cluster method (\code{kmeans} or 
 #'   \code{hclust}) is returned directly.
 #'
@@ -79,7 +86,7 @@
 #' \link{mt_distmat} for more information about how the distance matrix is 
 #' computed when the hclust method is used.
 #' 
-#' \link{mt_cluster_k} for detecting the number of clusters.
+#' \link{mt_cluster_k} for estimating the optimal number of clusters.
 #'
 #' @examples
 #' # Spatialize trajectories

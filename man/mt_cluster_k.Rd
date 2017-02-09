@@ -2,7 +2,7 @@
 % Please edit documentation in R/cluster_k.R
 \name{mt_cluster_k}
 \alias{mt_cluster_k}
-\title{Detect number of clusters k.}
+\title{Estimate optimal number of clusters.}
 \usage{
 mt_cluster_k(data, use = "sp_trajetcories", dimensions = c("xpos", "ypos"),
   kseq = 2:15, compute = c("stability", "gap", "jump", "slope"),
@@ -27,7 +27,7 @@ three-dimensional trajectories respectively.}
 the metrics specified in \code{compute}.}
 
 \item{compute}{character vector specifying the to be computed measures. Can 
-be any subset of \code{c('stability','gap','jump','slope')}.}
+be any subset of \code{c("stability","gap","jump","slope")}.}
 
 \item{method}{character string specifiying the type of clustering procedure 
 for the stability-based method. Either \code{hclust} or \code{kmeans}.}
@@ -93,6 +93,13 @@ developed by Haslbeck & Wulff (2016). See references.
 The remaining three methods select \code{k} as the value that minimizes some 
 distance metric measured for objects within and between clusters. See the 
 references below.
+
+Clustering trajectories requires that the endpoints of all trajectories share
+the same direction, e.g., that all trajectories end in the top-left corner of
+the coordinate system (\link{mt_remap_symmetric} or \link{mt_align} can be
+used to achieve this). Furthermore, it is recommended to use spatialized
+trajectories (see \link{mt_spatialize}; Haslbeck, Wulff, Kieslich, Henninger,
+& Schulte-Mecklenbeck, 2017).
 }
 \examples{
 # Spatialize trajectories
