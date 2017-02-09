@@ -208,3 +208,132 @@ count_changes <- function(pos, threshold=0, zero_threshold=0) {
 
   return(n)
 }
+
+
+
+
+
+#subsample
+subsample = function(data, use = c('trajectories'), n, seed = 1){
+  set.seed(seed)
+  if(is.array(data) | is.data.frame(data) | is.matrix(data)){
+    total_cases = dim(data)[1]
+    if(n <= total_cases){
+      select      = sample(1:total_cases,n)
+      if(length(dim(data)) == 2){
+        data = data[select,]
+      }
+      if(length(dim(data)) == 3){
+        data = data[select,,]
+      }
+      if(length(dim(data)) == 1 | length(dim(data)) > 3){
+        stop('Unexpected number of dimensions')
+      }
+    }
+  }
+  if(is.list(data)){
+    if(mean(use %in% names(data)) != 1) stop('Objects specified in use do not exist')
+    total_cases = dim(data[[use[1]]])[1]
+    if(n <= total_cases){
+      select      = sample(1:total_cases,n)
+      for(i in use){
+        if(is.array(data[[i]]) | is.data.frame(data[[i]]) | is.matrix(data[[i]])){
+          if(length(dim(data[[i]])) == 2){
+            data[[i]] = data[[i]][select,]
+          }
+          if(length(dim(data[[i]])) == 3){
+            data[[i]] = data[[i]][select,,]
+          }
+        } else {
+          stop('Objects in use cannot be subsetted')
+        }
+      }
+    }
+  }
+  return(data)
+}
+
+
+
+
+# group
+
+group = function(x,n,type = 'extreme'){
+  minx = min(x)
+  maxx = max(x)
+  x = (x - minx) / (.0000001 + (maxx - minx))
+  if(type == 'extreme') x = round((x * n) - .5) / (n - 1)
+  if(type == 'mid') x = round((x * n) - .5) / n + (1/(2*n))
+  x = x * (maxx - minx)
+  x = x + minx
+  return(x)
+}
+
+
+# colormixer
+
+colormixer = function(col1,col2,weight,format = 'rgb'){
+  
+  if(ifelse(is.matrix(col1),nrow(col1),length(col1)) != length(weight) &
+     length(col1) != 1){
+    stop('Length of col1 must be either 1 or matching the length of weight')
+  }
+  if(ifelse(is.matrix(col2),nrow(col2),length(col2)) != length(weight) &
+     length(col2) != 1){
+    stop('Length of col1 must be either 1 or matching the length of weight')
+  }
+  if(length(weight) == 1){
+    if(ifelse(is.matrix(col1),nrow(col1),length(col1)) !=
+       ifelse(is.matrix(col2),nrow(col2),length(col2))){
+      stop('If length of weight = 1, number of colors in col1 and col2 must match')
+    }
+  }
+  
+  nrows = max(c(ifelse(is.matrix(col1),nrow(col1),length(col1)),
+                ifelse(is.matrix(col2),nrow(col2),length(col2)),
+                length(weight)))
+  
+  if(is.character(col1)){
+    if(length(col1) == 1){
+      col1 = col2rgb(col1)
+      col1 = matrix(c(col1),ncol=3,nrow=nrows,byrow=T)
+    } else {
+      col1 = t(sapply(col1,col2rgb))
+    }
+  } else{
+    col1 = matrix(c(col1),ncol=3,nrow=nrows,byrow=F)
+  }
+  if(is.character(col2)){
+    if(length(col2) == 1){
+      col2 = col2rgb(col2)
+      col2 = matrix(c(col2),ncol=3,nrow=nrows,byrow=T)
+    } else {
+      col2 = t(sapply(col2,col2rgb))
+    }
+  } else{
+    col2 = matrix(c(col2),ncol=3,nrow=nrows,byrow=F)
+  }
+  
+  
+  col = col1 * (1-weight) + col2 * weight
+  
+  if(format == 'rgb') return(col)
+  if(format == 'hex') return(rgb(data.frame(col),maxColorValue = 255))
+  if(!format %in% c('rgb','hex')) stop('Choose either "rgb" or "hex" as format')
+  
+}
+
+
+# round even
+round_even = function(x){
+  rx = round(x)
+  test = rx %% 2
+  ifelse(test == 0,rx,
+         ifelse( x < 0,
+                 ifelse(x <  rx,floor(x),ceiling(x)),
+                 ifelse(x >= rx,ceiling(x),floor(x))))
+}
+
+
+
+
