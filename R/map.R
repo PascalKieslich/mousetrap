@@ -9,7 +9,7 @@
 #' Haslbeck, Schulte-Mecklenbeck, 2017; Haslbeck, Wulff, Kieslich, Henninger, & 
 #' Schulte-Mecklenbeck, 2017). Common trajectory types are linear trajectories,
 #' mildly and strongly curved trajctories, and single and multiple
-#' change-of-mind trials (see also \link{mt_com}). \code{mt_map} allows to map
+#' change-of-mind trials. \code{mt_map} allows to map
 #' trajectories to a predefined set of trajectory types.
 #' 
 #' \code{mt_map} first adjusts prototypes to match the coordinate system of the 
@@ -22,7 +22,7 @@
 #' prototypes) are aligned to end in the top-left corner of the coordinate
 #' system (see \link{mt_remap_symmetric} and \code{mt_align}). Furthermore it is
 #' recommended to use spatialized trajectories (see \link{mt_spatialize};
-#' Haslbeck, Wulff, Kieslich, Henninger, & Schulte-Mecklenbeck, 2017}).
+#' Haslbeck, Wulff, Kieslich, Henninger, & Schulte-Mecklenbeck, 2017).
 #' 
 #' @inheritParams mt_distmat
 #' @param prototypes a trajectory array containing the prototypes the 

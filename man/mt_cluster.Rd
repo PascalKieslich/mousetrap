@@ -81,7 +81,7 @@ Mouse trajectories often occur in distinct, qualitative types (see Wulff,
 Haslbeck, Schulte-Mecklenbeck, 2017; Haslbeck, Wulff, Kieslich, Henninger, &
 Schulte-Mecklenbeck, 2017). Common trajectory types are linear trajectories,
 mildly and strongly curved trajctories, and single and multiple
-change-of-mind trials (see also \link{mt_com} & \link{mt_map}).
+change-of-mind trials (see also \link{mt_map}).
 \code{mt_cluster} can tease these types apart.
 
 \code{mt_cluster} computes distances between each pair of mouse trajectories
@@ -120,6 +120,6 @@ preparation.
 \link{mt_distmat} for more information about how the distance matrix is
 computed when the hclust method is used.
 
-\link{mt_detectclusters} for detecting the number of clusters.
+\link{mt_cluster_k} for detecting the number of clusters.
 }
 

@@ -39,13 +39,13 @@ Re-represent each trajectory spatially using a constant number of points so
 that adjacent points on the trajectory become equidistant to each other.
 }
 \details{
-\code{mt_spatialize} is used to emphasize the trajectories' shape.
-Usually, the vast majority of points of a time-normalized raw or a time-normalized
-trajectory lie close to the start and end point. \code{mt_spatialize} re-distributes
-these points so that the spatial distribution is uniform across the entire trajectory.
-\code{mt_spatialize} is mainly used to improve the results of clustering,
-in particular \link{mt_cluster}, and visualization, in particular
-\link{mt_heatmap}.
+\code{mt_spatialize} is used to emphasize the trajectories' shape. Usually,
+the vast majority of points of a time-normalized raw or a time-normalized 
+trajectory lie close to the start and end point. \code{mt_spatialize}
+re-distributes these points so that the spatial distribution is uniform
+across the entire trajectory. \code{mt_spatialize} is mainly used to improve
+the results of clustering (in particular \link{mt_cluster}) and
+visualization.
 }
 \examples{
 mt_example <- mt_spatialize(data=mt_example,

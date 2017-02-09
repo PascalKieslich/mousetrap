@@ -54,6 +54,26 @@ trajectories. It first computes distances between the trajectories and each
 of the supplied trajectory types and then assigns each trajectory to the 
 prototype that produced the smallest distance.
 }
+\details{
+Mouse trajectories often occur in distinct, qualitative types (see Wulff, 
+Haslbeck, Schulte-Mecklenbeck, 2017; Haslbeck, Wulff, Kieslich, Henninger, & 
+Schulte-Mecklenbeck, 2017). Common trajectory types are linear trajectories,
+mildly and strongly curved trajctories, and single and multiple
+change-of-mind trials. \code{mt_map} allows to map
+trajectories to a predefined set of trajectory types.
+
+\code{mt_map} first adjusts prototypes to match the coordinate system of the 
+trajectories specified by \code{use}. Then \code{mt_map} computes the
+distances between each trajectory and each of the supplied prototypes (see 
+\link{mt_distmat}) and then assigns each trajectory to the prototype that 
+produced the smallest distance.
+
+Mapping trajectories to prototypes requires that trajectories (and added
+prototypes) are aligned to end in the top-left corner of the coordinate
+system (see \link{mt_remap_symmetric} and \code{mt_align}). Furthermore it is
+recommended to use spatialized trajectories (see \link{mt_spatialize};
+Haslbeck, Wulff, Kieslich, Henninger, & Schulte-Mecklenbeck, 2017).
+}
 \examples{
 # Spatialize trajectories
 mt_example <- mt_spatialize(mt_example)
