@@ -34,11 +34,12 @@
 #'
 #' @return A mousetrap data object (see \link{mt_example}) with an additional 
 #'   \link{data.frame} (by default called \code{prototyping}) that contains the 
-#'   best fitting prototype for each trajectory (in the "prototype" column the 
-#'   number of the prototype is specified, in the "prototype_label" the ID of 
-#'   the respective prototype) and the distance of the trajectory to the closest
-#'   prototype. If a trajectory array was provided directly as \code{data}, only
-#'   the data.frame containing the results will be returned.
+#'   best fitting prototype for each trajectory (the number of the prototype is 
+#'   specified under \code{prototype}, the label of the prototype under 
+#'   \code{prototype_label}) and the distance of the trajectory to the best 
+#'   fitting prototype (\code{min_dist}). If a trajectory array was provided
+#'   directly as \code{data}, only the data.frame containing the results will be
+#'   returned.
 #'
 #' @references Wulff, D. U., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. 
 #'   (2017). Measuring the (dis-)continuous mind. Manuscript in preparation.
