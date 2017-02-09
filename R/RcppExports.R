@@ -17,3 +17,19 @@ distMat3dV <- function(x, y, z, power = 2L) {
     .Call('mousetrap_distMat3dV', PACKAGE = 'mousetrap', x, y, z, power)
 }
 
+getAngleP <- function(x, y) {
+    .Call('mousetrap_getAngleP', PACKAGE = 'mousetrap', x, y)
+}
+
+getAngleV <- function(x, y) {
+    .Call('mousetrap_getAngleV', PACKAGE = 'mousetrap', x, y)
+}
+
+getAnglesP <- function(xs, ys) {
+    .Call('mousetrap_getAnglesP', PACKAGE = 'mousetrap', xs, ys)
+}
+
+getAnglesV <- function(xs, ys) {
+    .Call('mousetrap_getAnglesV', PACKAGE = 'mousetrap', xs, ys)
+}
+

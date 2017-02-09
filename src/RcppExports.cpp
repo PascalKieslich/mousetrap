@@ -59,3 +59,51 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// getAngleP
+NumericVector getAngleP(NumericVector x, NumericVector y);
+RcppExport SEXP mousetrap_getAngleP(SEXP xSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    rcpp_result_gen = Rcpp::wrap(getAngleP(x, y));
+    return rcpp_result_gen;
+END_RCPP
+}
+// getAngleV
+NumericVector getAngleV(NumericVector x, NumericVector y);
+RcppExport SEXP mousetrap_getAngleV(SEXP xSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    rcpp_result_gen = Rcpp::wrap(getAngleV(x, y));
+    return rcpp_result_gen;
+END_RCPP
+}
+// getAnglesP
+NumericMatrix getAnglesP(NumericMatrix xs, NumericMatrix ys);
+RcppExport SEXP mousetrap_getAnglesP(SEXP xsSEXP, SEXP ysSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type xs(xsSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type ys(ysSEXP);
+    rcpp_result_gen = Rcpp::wrap(getAnglesP(xs, ys));
+    return rcpp_result_gen;
+END_RCPP
+}
+// getAnglesV
+NumericMatrix getAnglesV(NumericMatrix xs, NumericMatrix ys);
+RcppExport SEXP mousetrap_getAnglesV(SEXP xsSEXP, SEXP ysSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type xs(xsSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type ys(ysSEXP);
+    rcpp_result_gen = Rcpp::wrap(getAnglesV(xs, ys));
+    return rcpp_result_gen;
+END_RCPP
+}
