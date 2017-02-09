@@ -38,10 +38,13 @@
 #'   prototype. If a trajectory array was provided directly as \code{data}, only
 #'   the data.frame containing the results will be returned.
 #'
-#' @references Haslbeck, J. M. B., Wulff,D. U., Kieslich, P. J., Henninger, F., 
-#'   & Schulte-Mecklenbeck, M. (2017). Advanced mouse- and hand-tracking 
-#'   analysis: Detecting and visualizing clusters in movement trajectories. 
-#'   Manuscript in preparation.
+#' @references Wulff, D. U., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. 
+#'   (2017). Measuring the (dis-)continuous mind. Manuscript in preparation.
+#'   
+#'   Haslbeck, J. M. B., Wulff, D. U., Kieslich, P. J., Henninger, F., & 
+#'   Schulte-Mecklenbeck, M. (2017). Advanced mouse- and hand-tracking analysis:
+#'   Detecting and visualizing clusters in movement trajectories. Manuscript in 
+#'   preparation.
 #'         
 #' @examples
 #' # Spatialize trajectories

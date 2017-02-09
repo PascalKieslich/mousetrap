@@ -64,8 +64,8 @@
 #'   directly as \code{data}, only the clustering \code{data.frame} will be
 #'   returned.
 #'
-#' @references Wulff, D. U., Haslbeck, J. M. B., Schulte-Mecklenbeck (2017).
-#' Measuring the (dis-)continuous mind. Manuscript in preparation.
+#' @references Wulff, D. U., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M.
+#'   (2017). Measuring the (dis-)continuous mind. Manuscript in preparation.
 #' 
 #' Haslbeck, J. M. B., Wulff, D. U., Kieslich, P. J., Henninger, F., & 
 #' Schulte-Mecklenbeck, M. (2017). Advanced mouse- and hand-tracking analysis: 
