@@ -38,7 +38,9 @@ Imports:
     psych (>= 1.2.4),
     Rcpp (>= 0.11.4),
     diptest,
-    RColorBrewer
+    RColorBrewer,
+    cstab,
+    fastcluster
 Suggests:
     readbulk,
     testthat
