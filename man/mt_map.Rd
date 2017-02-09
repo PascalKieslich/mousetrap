@@ -5,8 +5,8 @@
 \title{Map trajectories.}
 \usage{
 mt_map(data, use = "trajectories", save_as = "prototyping",
-  dimensions = c("xpos", "ypos"), prototypes = mt_prototypes,
-  pointwise = TRUE, minkowski_p = 2)
+  dimensions = c("xpos", "ypos"), prototypes, pointwise = TRUE,
+  minkowski_p = 2)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import
@@ -23,9 +23,9 @@ data should be stored.}
 should be used. Can be of length 2 or 3 for two-dimensional or
 three-dimensional trajectories respectively.}
 
-\item{prototypes}{a trajectory array containing the prototypes the
-trajectories are mapped to. By default, the trajectories stored in
-\link{mt_prototypes} are used. See Details and Examples for selecting
+\item{prototypes}{a trajectory array containing the prototypes the 
+trajectories are mapped to. As a starting point, the trajectories stored in
+\link{mt_prototypes} can be used. See Details and Examples for selecting 
 prototypes and creating new ones.}
 
 \item{pointwise}{boolean specifying the way dissimilarity between the 

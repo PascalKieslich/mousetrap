@@ -25,9 +25,9 @@
 #' Haslbeck, Wulff, Kieslich, Henninger, & Schulte-Mecklenbeck, 2017}).
 #' 
 #' @inheritParams mt_distmat
-#' @param prototypes a trajectory array containing the prototypes the
-#'   trajectories are mapped to. By default, the trajectories stored in
-#'   \link{mt_prototypes} are used. See Details and Examples for selecting
+#' @param prototypes a trajectory array containing the prototypes the 
+#'   trajectories are mapped to. As a starting point, the trajectories stored in
+#'   \link{mt_prototypes} can be used. See Details and Examples for selecting 
 #'   prototypes and creating new ones.
 #'
 #' @return A mousetrap data object (see \link{mt_example}) with an additional 
@@ -78,7 +78,7 @@ mt_map = function(
   dimensions = c('xpos','ypos'),
   
   # prototype arguments
-  prototypes = mt_prototypes,
+  prototypes,
 
   # distance arguments
   pointwise = TRUE,
