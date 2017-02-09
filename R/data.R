@@ -91,3 +91,9 @@
 #'   additional data.frame with mouse-tracking measures to it.
 #'
 "mt_example"
+
+#' Mouse trajectory prototypes.
+#'
+"mt_prototypes"
+NULL
+
