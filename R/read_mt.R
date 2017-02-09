@@ -1,37 +1,37 @@
 #' Read MouseTracker raw data.
-#'
-#' \code{read_mt} reads raw data that was collected using MouseTracker (Freeman
-#' & Ambady, 2010) and stored as a file in the ".mt" format. If multiple files
-#' should be read into R, \code{read_mt} can be used in combination with the
-#' \link[readbulk]{read_bulk} functon from the \code{readbulk} package (see
-#' Examples). After reading the data into R, \link{mt_import_wide} can be used
-#' to prepare the trajectory data for analyses using the mousetrap library. The
+#' 
+#' \code{read_mt} reads raw data that was collected using MouseTracker (Freeman 
+#' & Ambady, 2010) and stored as a file in the ".mt" format. If multiple files 
+#' should be read into R, \code{read_mt} can be used in combination with the 
+#' \link[readbulk]{read_bulk} functon from the \code{readbulk} package (see 
+#' Examples). After reading the data into R, \link{mt_import_wide} can be used 
+#' to prepare the trajectory data for analyses using the mousetrap library. The 
 #' current version of \code{read_mt} has been tested with data from MouseTracker
 #' Version 2.82 but please be sure to double-check.
-#'
+#' 
 #' @param file a character string specifying the filename of the .mt file.
-#' @param columns either 'all' or a character vector specifying the to be
-#'   extracted variables Defaults to 'all' in which case all existing variables
+#' @param columns either 'all' or a character vector specifying the to be 
+#'   extracted variables Defaults to 'all' in which case all existing variables 
 #'   will be extracted.
 #' @param add_trialid boolean specifying whether an additional column containing
 #'   the trial number should be added.
-#' @param add_filename boolean specifying whether an additional column
+#' @param add_filename boolean specifying whether an additional column 
 #'   containing the file name should be added.
-#'
-#' @return A data frame with one row per trial. Variables are ordered according
+#'   
+#' @return A data frame with one row per trial. Variables are ordered according 
 #'   to columns, x-coordinates, y-coordinates, and timestamps.
-#'
-#' @references Freeman, J. B., & Ambady, N. (2010). MouseTracker: Software for
-#' studying real-time mental processing using a computer mouse-tracking method.
-#' \emph{Behavior Research Methods, 42}(1), 226-241.
+#'   
+#' @references Freeman, J. B., & Ambady, N. (2010). MouseTracker: Software for 
+#'   studying real-time mental processing using a computer mouse-tracking
+#'   method. \emph{Behavior Research Methods, 42}(1), 226-241.
 #'
 #' @seealso
-#'
-#' \link[readbulk]{read_bulk} from the \code{readbulk} package for reading and
+#' 
+#' \link[readbulk]{read_bulk} from the \code{readbulk} package for reading and 
 #' combining mutliple raw data files.
-#'
+#' 
 #' \link{mt_import_wide} to prepare the imported data for analyses in mousetrap.
-#'
+#' 
 #' @examples
 #' \dontrun{
 #' # Read a single raw data file from MouseTracker

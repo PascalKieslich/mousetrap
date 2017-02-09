@@ -1,60 +1,61 @@
 #' Cluster trajectories.
-#'
+#' 
 #' Performs trajectory clustering. It first computes distances between each pair
-#' of trajectories and then applies off-the-shelf clustering tools to explain
+#' of trajectories and then applies off-the-shelf clustering tools to explain 
 #' the resulting dissimiliarity matrix using a predefined number of clusters.
-#'
-#' \code{mt_cluster} uses off-the-shelf clustering tools, i.e.,
-#' \link[fastcluster]{hclust} and \link[stats]{kmeans}, for cluster estimation.
-#' Cluster estimation using \link[fastcluster]{hclust} relies on distances
+#' 
+#' \code{mt_cluster} uses off-the-shelf clustering tools, i.e., 
+#' \link[fastcluster]{hclust} and \link[stats]{kmeans}, for cluster estimation. 
+#' Cluster estimation using \link[fastcluster]{hclust} relies on distances 
 #' computed by \link{mt_distmat}.
-#'
-#' Mouse trajectories often occur in distinct, qualitative types (see Wulff,
-#' Haslbeck, Schulte-Mecklenbeck, 2017; Haslbeck, Wulff, Kieslich, Henninger, &
-#' Schulte-Mecklenbeck, 2017). Common trajectory types are linear trajectories,
-#' mildly and strongly curved trajctories, and single and multiple
-#' change-of-mind trials (see also \link{mt_map}).
-#' \code{mt_cluster} can tease these types apart.
-#'
-#' \code{mt_cluster} computes distances between each pair of mouse trajectories
-#' (see \link{mt_distmat}) and applies \link[fastcluster]{hclust} or
-#' \link[stats]{kmeans} to explain the resulting dissimiliarity matrix using a
+#' 
+#' Mouse trajectories often occur in distinct, qualitative types (see Wulff, 
+#' Haslbeck, Schulte-Mecklenbeck, 2017; Haslbeck, Wulff, Kieslich, Henninger, & 
+#' Schulte-Mecklenbeck, 2017). Common trajectory types are linear trajectories, 
+#' mildly and strongly curved trajctories, and single and multiple 
+#' change-of-mind trials (see also \link{mt_map}). \code{mt_cluster} can tease
+#' these types apart.
+#' 
+#' \code{mt_cluster} computes distances between each pair of mouse trajectories 
+#' (see \link{mt_distmat}) and applies \link[fastcluster]{hclust} or 
+#' \link[stats]{kmeans} to explain the resulting dissimiliarity matrix using a 
 #' predefined number of clusters.
-#'
-#' We recommend setting \code{method} to \link[fastcluster]{hclust} using
-#' \code{ward.D} as the linkage criterion (via \code{hclust_method}). Relative
-#' to \link[stats]{kmeans}, the other implemented clustering method, and other
-#' linkage criteria, this setup handles the skewed distribution cluster sizes
+#' 
+#' We recommend setting \code{method} to \link[fastcluster]{hclust} using 
+#' \code{ward.D} as the linkage criterion (via \code{hclust_method}). Relative 
+#' to \link[stats]{kmeans}, the other implemented clustering method, and other 
+#' linkage criteria, this setup handles the skewed distribution cluster sizes 
 #' and trajectory outliers found in the majority of datasets best.
 #'
 #' @inheritParams mt_time_normalize
-#' @param dimensions a character vector specifying which trajectory variables
-#'   should be used. Can be of length 2 or 3, for two-dimensional or
+#' @param dimensions a character vector specifying which trajectory variables 
+#'   should be used. Can be of length 2 or 3, for two-dimensional or 
 #'   three-dimensional trajectories respectively.
 #' @param n_cluster an integer specifying the number of clusters to estimate.
-#' @param method character string specifiying the clustering procedure.
-#'   Either \link[fastcluster]{hclust} (the default) or \link[stats]{kmeans}.
-#' @param pointwise boolean specifying the way in which dissimilarity between the
-#'   trajectories is measured. If \code{TRUE} (the default), \code{mt_distmat}
-#'   measures the average dissimilarity and then sums the results. If
-#'   \code{FALSE}, \code{mt_distmat}  measures dissimilarity once (by treating
-#'   the various points as independent dimensions). This is only relevant if
+#' @param method character string specifiying the clustering procedure. Either
+#'   \link[fastcluster]{hclust} (the default) or \link[stats]{kmeans}.
+#' @param pointwise boolean specifying the way in which dissimilarity between
+#'   the trajectories is measured. If \code{TRUE} (the default),
+#'   \code{mt_distmat} measures the average dissimilarity and then sums the
+#'   results. If \code{FALSE}, \code{mt_distmat}  measures dissimilarity once
+#'   (by treating the various points as independent dimensions). This is only
+#'   relevant if \code{method} is "hclust". See \link{mt_distmat} for further
+#'   details.
+#' @param minkowski_p an integer specifying the distance metric for the cluster
+#'   solution. \code{minkowski_p = 1} computes the city-block distance,
+#'   \code{minkowski_p = 2} (the default) computes the Euclidian distance,
+#'   \code{minkowski_p = 3} the cubic distance, etc. Only relevant if
 #'   \code{method} is "hclust". See \link{mt_distmat} for further details.
-#' @param minkowski_p an integer specifying the distance metric for the cluster solution.
-#'   \code{minkowski_p = 1} computes the city-block distance, \code{minkowski_p
-#'   = 2} (the default) computes the Euclidian distance, \code{minkowski_p = 3}
-#'   the cubic distance, etc. Only relevant if \code{method} is "hclust". See
-#'   \link{mt_distmat} for further details.
-#' @param hclust_method character string specifying the linkage criterion used.
+#' @param hclust_method character string specifying the linkage criterion used. 
 #'   Passed on to the \code{method} argument of \link[stats]{hclust}. Default is
 #'   set to \code{ward.D}. Only relevant if \code{method} is "hclust".
-#' @param kmeans_nstart integer specifying the number of reruns of the kmeans
+#' @param kmeans_nstart integer specifying the number of reruns of the kmeans 
 #'   procedure. Larger numbers minimize the risk of finding local minima. Passed
-#'   on to the \code{nstart} argument of \link[stats]{kmeans}. Only relevant if
+#'   on to the \code{nstart} argument of \link[stats]{kmeans}. Only relevant if 
 #'   \code{method} is "kmeans".
-#' @param cluster_output logical. If \code{FALSE} (the default), the mousetrap
-#'   data object with the cluster assignments (see Value) is returned. If
-#'   \code{TRUE}, the output of the cluster method (\code{kmeans} or
+#' @param cluster_output logical. If \code{FALSE} (the default), the mousetrap 
+#'   data object with the cluster assignments (see Value) is returned. If 
+#'   \code{TRUE}, the output of the cluster method (\code{kmeans} or 
 #'   \code{hclust}) is returned directly.
 #'
 #' @return A mousetrap data object (see \link{mt_example}) with an additional
@@ -63,19 +64,19 @@
 #'   directly as \code{data}, only the clustering \code{data.frame} will be
 #'   returned.
 #'
-#' @references
-#' Wulff, D. U., Haslbeck, J. M. B., Schulte-Mecklenbeck (2017). Measuring the
-#' (dis-)continuous mind. Manuscript in preparation.
-#' Haslbeck, J. M. B., Wulff, D. U., Kieslich, P. J., Henninger, F., &
-#' Schulte-Mecklenbeck, M. (2017). Advanced mouse- and hand-tracking analysis:
-#' Detecting and visualizing clusters in movement trajectories. Manuscript in
+#' @references Wulff, D. U., Haslbeck, J. M. B., Schulte-Mecklenbeck (2017).
+#' Measuring the (dis-)continuous mind. Manuscript in preparation.
+#' 
+#' Haslbeck, J. M. B., Wulff, D. U., Kieslich, P. J., Henninger, F., & 
+#' Schulte-Mecklenbeck, M. (2017). Advanced mouse- and hand-tracking analysis: 
+#' Detecting and visualizing clusters in movement trajectories. Manuscript in 
 #' preparation.
 #'
 #' @seealso
-#'
-#' \link{mt_distmat} for more information about how the distance matrix is
+#' 
+#' \link{mt_distmat} for more information about how the distance matrix is 
 #' computed when the hclust method is used.
-#'
+#' 
 #' \link{mt_cluster_k} for detecting the number of clusters.
 #'
 #' @examples

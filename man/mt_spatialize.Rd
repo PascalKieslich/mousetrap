@@ -15,36 +15,36 @@ array can be provided directly (in this case \code{use} will be ignored).}
 \item{use}{a character string specifying which trajectory data should be
 used.}
 
-\item{dimensions}{a character string specifying which trajectory variables
-should be used. Can be of length 2 or 3 for two-dimensional or
+\item{dimensions}{a character string specifying which trajectory variables 
+should be used. Can be of length 2 or 3 for two-dimensional or 
 three-dimensional data.}
 
 \item{save_as}{a character string specifying where the resulting trajectory
 data should be stored.}
 
-\item{n_points}{an integer or vector of integers specifying the number of
-points used to represent the spatially rescaled trajectories. If a single
-integer is provided, the number of points will be constant across
+\item{n_points}{an integer or vector of integers specifying the number of 
+points used to represent the spatially rescaled trajectories. If a single 
+integer is provided, the number of points will be constant across 
 trajectories. Alternatively, a vector if integers can provided that specify
 the number of points for each trajectory individually.}
 }
 \value{
-A mousetrap data object (see \link{mt_example}) with an additional
+A mousetrap data object (see \link{mt_example}) with an additional 
   array (by default called \code{sp_trajectories}) containing the spatialized
-  trajectories. If a trajectory array was provided directly as \code{data},
+  trajectories. If a trajectory array was provided directly as \code{data}, 
   only the spatialized trajectories will be returned.
 }
 \description{
-Re-represent each trajectory spatially using a constant number of points so
+Re-represent each trajectory spatially using a constant number of points so 
 that adjacent points on the trajectory become equidistant to each other.
 }
 \details{
-\code{mt_spatialize} is used to emphasize the trajectories' shape. Usually,
+\code{mt_spatialize} is used to emphasize the trajectories' shape. Usually, 
 the vast majority of points of a time-normalized raw or a time-normalized 
-trajectory lie close to the start and end point. \code{mt_spatialize}
-re-distributes these points so that the spatial distribution is uniform
-across the entire trajectory. \code{mt_spatialize} is mainly used to improve
-the results of clustering (in particular \link{mt_cluster}) and
+trajectory lie close to the start and end point. \code{mt_spatialize} 
+re-distributes these points so that the spatial distribution is uniform 
+across the entire trajectory. \code{mt_spatialize} is mainly used to improve 
+the results of clustering (in particular \link{mt_cluster}) and 
 visualization.
 }
 \examples{

@@ -1,35 +1,35 @@
 #' Compute distance matrix.
-#'
-#' Computes the point- or vector-wise dissimilarity between each pair of
+#' 
+#' Computes the point- or vector-wise dissimilarity between each pair of 
 #' trajectories.
-#'
-#' \code{mt_distmat} computes point- or vector-wise dissimilarities between
-#' pairs of trajectories. Point-wise dissimilarity refers to computing the
-#' distance metric defined by \code{minkowski_p} for every point of the
-#' trajectory and then summing the results. That is, if \code{minkowski_p = 2}
-#' the point-wise dissimilarity between two trajectories, each defined by a set
-#' of x and y cooridnates, is calculated as \code{sum(sqrt(x^2 + y^2))}.
+#' 
+#' \code{mt_distmat} computes point- or vector-wise dissimilarities between 
+#' pairs of trajectories. Point-wise dissimilarity refers to computing the 
+#' distance metric defined by \code{minkowski_p} for every point of the 
+#' trajectory and then summing the results. That is, if \code{minkowski_p = 2} 
+#' the point-wise dissimilarity between two trajectories, each defined by a set 
+#' of x and y cooridnates, is calculated as \code{sum(sqrt(x^2 + y^2))}. 
 #' Vector-wise dissimilarity, on the other hand refers to computing the distance
-#' metric once for the entire trajectory. That is, vector-wise dissimilarity is
+#' metric once for the entire trajectory. That is, vector-wise dissimilarity is 
 #' computed as \code{sqrt(sum(x^2 + y^2))}.
-#'
+#' 
 #' @inheritParams mt_time_normalize
 #' @param dimensions a character vector specifying which trajectory variables 
-#'   should be used. Can be of length 2 or 3 for two-dimensional or
+#'   should be used. Can be of length 2 or 3 for two-dimensional or 
 #'   three-dimensional trajectories respectively.
 #' @param pointwise boolean specifying the way dissimilarity between the 
-#'   trajectories is measured (see Details). If \code{TRUE} (the default),
-#'   \code{mt_distmat} measures the average dissimilarity and then sums the
-#'   results. If \code{FALSE}, \code{mt_distmat}  measures dissimilarity once
+#'   trajectories is measured (see Details). If \code{TRUE} (the default), 
+#'   \code{mt_distmat} measures the average dissimilarity and then sums the 
+#'   results. If \code{FALSE}, \code{mt_distmat}  measures dissimilarity once 
 #'   (by treating the various points as independent dimensions).
 #' @param minkowski_p an integer specifying the distance metric. 
 #'   \code{minkowski_p = 1} computes the city-block distance, \code{minkowski_p 
 #'   = 2} (the default) computes the Euclidian distance, \code{minkowski_p = 3} 
 #'   the cubic distance, etc.
-#'
+#'   
 #' @return A mousetrap data object (see \link{mt_example}) with an additional 
-#'   object added (by default called \code{distmat}) containing the distance
-#'   matrix. If a trajectory array was provided directly as \code{data}, only
+#'   object added (by default called \code{distmat}) containing the distance 
+#'   matrix. If a trajectory array was provided directly as \code{data}, only 
 #'   the distance matrix will be returned.
 #'
 #' @examples

@@ -1,42 +1,42 @@
-#' Detect number of clusters \code{k}.
-#'
+#' Detect number of clusters k.
+#' 
 #' Estimates the optimal number of clusters (\code{k}) using various methods.
 #' 
-#' \code{mt_cluster_k} estimates the number of clusters (\code{k}) using four
-#' commonly used k-selection methods (spcified via \code{compute}): cluster
-#' stability (\code{stability}), the gap statistic (\code{gap}), the jump
+#' \code{mt_cluster_k} estimates the number of clusters (\code{k}) using four 
+#' commonly used k-selection methods (spcified via \code{compute}): cluster 
+#' stability (\code{stability}), the gap statistic (\code{gap}), the jump 
 #' statistic (\code{jump}), and the slope statistic (\code{slope}).
 #' 
 #' Cluster stability methods select \code{k} as the number of clusters for which
-#' the assignment of objects to clusters is most stable across bootstrap
-#' samples. This function implements the model-based and model-free methods
+#' the assignment of objects to clusters is most stable across bootstrap 
+#' samples. This function implements the model-based and model-free methods 
 #' developed by Haslbeck & Wulff (2016). See references.
 #' 
-#' The remaining three methods select \code{k} as the value that minimizes some
-#' distance metric measured for objects within and between clusters. See the
+#' The remaining three methods select \code{k} as the value that minimizes some 
+#' distance metric measured for objects within and between clusters. See the 
 #' references below.
 #'   
 #' @inheritParams mt_cluster
-#' @param kseq a numeric vector specifying set of candidates for k. Defaults to
-#'   2:15, implying that all values of k within that range are compared using
+#' @param kseq a numeric vector specifying set of candidates for k. Defaults to 
+#'   2:15, implying that all values of k within that range are compared using 
 #'   the metrics specified in \code{compute}.
-#' @param compute character vector specifying the to be computed measures. Can
+#' @param compute character vector specifying the to be computed measures. Can 
 #'   be any subset of \code{c('stability','gap','jump','slope')}.
-#' @param method character string specifiying the type of clustering procedure
+#' @param method character string specifiying the type of clustering procedure 
 #'   for the stability-based method. Either \code{hclust} or \code{kmeans}.
-#' @param n_bootstrap an integer specifying the number of bootstrap comparisons
+#' @param n_bootstrap an integer specifying the number of bootstrap comparisons 
 #'   used by \code{stability}. See \link[cstab]{cStability}.
-#' @param model_based boolean specifying whether the model-based or the model-free
-#'    should be used by \code{stability}, when method is \code{kmeans}. See 
-#'    \link[cstab]{cStability} and Haslbeck & Wulff (2016).
-#' @param n_gap integer specifying the number of simulated datasets used by
-#'    \code{gap}. See Tibshirani et al. (2001).
+#' @param model_based boolean specifying whether the model-based or the
+#'   model-free should be used by \code{stability}, when method is
+#'   \code{kmeans}. See \link[cstab]{cStability} and Haslbeck & Wulff (2016).
+#' @param n_gap integer specifying the number of simulated datasets used by 
+#'   \code{gap}. See Tibshirani et al. (2001).
 #'
-#' @return A list containing two lists that store the results of the different
-#'   methods. \code{kopt} contains the estimated \code{k} for each of the
-#'   methods specified in \code{compute}. \code{paths} contains the values for
-#'   each \code{k} in \code{kseq} as computed by each of the methods specified
-#'   in \code{compute}. The values in \code{kopt} are optima for each of the
+#' @return A list containing two lists that store the results of the different 
+#'   methods. \code{kopt} contains the estimated \code{k} for each of the 
+#'   methods specified in \code{compute}. \code{paths} contains the values for 
+#'   each \code{k} in \code{kseq} as computed by each of the methods specified 
+#'   in \code{compute}. The values in \code{kopt} are optima for each of the 
 #'   vectors in \code{paths}.
 #' 
 #' @seealso
@@ -44,7 +44,7 @@
 #' \link{mt_distmat} for more information about how the distance matrix is 
 #' computed when the hclust method is used.
 #' 
-#' \link{mt_cluster} for performing trajectory clustering with a specified
+#' \link{mt_cluster} for performing trajectory clustering with a specified 
 #' number of clusters.
 #'
 #' @examples
@@ -63,20 +63,20 @@
 #' 
 #' Jonas M. B. Haslbeck (\email{jonas.haslbeck@@gmail.com})
 #'
-#' @references 
-#' Haslbeck, J., & Wulff, D. U. (2016). Estimating the Number of Clusters via
-#' Normalized Cluster Instability. \emph{arXiv preprint} arXiv:1608.07494.
+#' @references Haslbeck, J., & Wulff, D. U. (2016). Estimating the Number of
+#' Clusters via Normalized Cluster Instability. \emph{arXiv preprint}
+#' arXiv:1608.07494.
 #' 
 #' Tibshirani, R., Walther, G., & Hastie, T. (2001). Estimating the number of 
 #' clusters in a data set via the gap statistic. \emph{Journal of the Royal 
 #' Statistical Society: Series B (Statistical Methodology), 63}(2), 411-423.
 #' 
-#' Sugar, C. A., & James, G. M. (2013). Finding the number of clusters in a
-#' dataset. \emph{Journal of the American Statistical Association, 98}(463),
+#' Sugar, C. A., & James, G. M. (2013). Finding the number of clusters in a 
+#' dataset. \emph{Journal of the American Statistical Association, 98}(463), 
 #' 750-763.
 #' 
-#' Fujita, A., Takahashi, D. Y., & Patriota, A. G. (2014). A non-parametric
-#' method to estimate the number of clusters. \emph{Computational Statistics &
+#' Fujita, A., Takahashi, D. Y., & Patriota, A. G. (2014). A non-parametric 
+#' method to estimate the number of clusters. \emph{Computational Statistics & 
 #' Data Analysis, 73}, 27-39.
 #'    
 #' @export

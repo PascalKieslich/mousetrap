@@ -20,7 +20,7 @@ used.}
 data should be stored.}
 
 \item{dimensions}{a character vector specifying which trajectory variables 
-should be used. Can be of length 2 or 3 for two-dimensional or
+should be used. Can be of length 2 or 3 for two-dimensional or 
 three-dimensional trajectories respectively.}
 
 \item{prototypes}{a trajectory array containing the prototypes the 
@@ -29,9 +29,9 @@ trajectories are mapped to. As a starting point, the trajectories stored in
 prototypes and creating new ones.}
 
 \item{pointwise}{boolean specifying the way dissimilarity between the 
-trajectories is measured (see Details). If \code{TRUE} (the default),
-\code{mt_distmat} measures the average dissimilarity and then sums the
-results. If \code{FALSE}, \code{mt_distmat}  measures dissimilarity once
+trajectories is measured (see Details). If \code{TRUE} (the default), 
+\code{mt_distmat} measures the average dissimilarity and then sums the 
+results. If \code{FALSE}, \code{mt_distmat}  measures dissimilarity once 
 (by treating the various points as independent dimensions).}
 
 \item{minkowski_p}{an integer specifying the distance metric. 
@@ -50,28 +50,28 @@ A mousetrap data object (see \link{mt_example}) with an additional
 }
 \description{
 \code{mt_map} maps trajectories onto a predefined set of prototype 
-trajectories. It first computes distances between the trajectories and each
+trajectories. It first computes distances between the trajectories and each 
 of the supplied trajectory types and then assigns each trajectory to the 
 prototype that produced the smallest distance.
 }
 \details{
 Mouse trajectories often occur in distinct, qualitative types (see Wulff, 
 Haslbeck, Schulte-Mecklenbeck, 2017; Haslbeck, Wulff, Kieslich, Henninger, & 
-Schulte-Mecklenbeck, 2017). Common trajectory types are linear trajectories,
-mildly and strongly curved trajctories, and single and multiple
-change-of-mind trials. \code{mt_map} allows to map
-trajectories to a predefined set of trajectory types.
+Schulte-Mecklenbeck, 2017). Common trajectory types are linear trajectories, 
+mildly and strongly curved trajctories, and single and multiple 
+change-of-mind trials. \code{mt_map} allows to map trajectories to a
+predefined set of trajectory types.
 
 \code{mt_map} first adjusts prototypes to match the coordinate system of the 
-trajectories specified by \code{use}. Then \code{mt_map} computes the
+trajectories specified by \code{use}. Then \code{mt_map} computes the 
 distances between each trajectory and each of the supplied prototypes (see 
 \link{mt_distmat}) and then assigns each trajectory to the prototype that 
 produced the smallest distance.
 
-Mapping trajectories to prototypes requires that trajectories (and added
-prototypes) are aligned to end in the top-left corner of the coordinate
+Mapping trajectories to prototypes requires that trajectories (and added 
+prototypes) are aligned to end in the top-left corner of the coordinate 
 system (see \link{mt_remap_symmetric} and \code{mt_align}). Furthermore it is
-recommended to use spatialized trajectories (see \link{mt_spatialize};
+recommended to use spatialized trajectories (see \link{mt_spatialize}; 
 Haslbeck, Wulff, Kieslich, Henninger, & Schulte-Mecklenbeck, 2017).
 }
 \examples{
@@ -103,9 +103,9 @@ Dirk U. Wulff (\email{dirk.wulff@gmail.com})
 Jonas M. B. Haslbeck (\email{jonas.haslbeck@gmail.com})
 }
 \references{
-Haslbeck, J. M. B., Wulff,D. U., Kieslich, P. J., Henninger, F.,
-  & Schulte-Mecklenbeck, M. (2017). Advanced mouse- and hand-tracking
-  analysis: Detecting and visualizing clusters in movement trajectories.
+Haslbeck, J. M. B., Wulff,D. U., Kieslich, P. J., Henninger, F., 
+  & Schulte-Mecklenbeck, M. (2017). Advanced mouse- and hand-tracking 
+  analysis: Detecting and visualizing clusters in movement trajectories. 
   Manuscript in preparation.
 }
 
