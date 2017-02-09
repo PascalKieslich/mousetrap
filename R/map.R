@@ -1,4 +1,4 @@
-#' Map trajectories.
+#' Map trajectories to prototypes.
 #'
 #' \code{mt_map} maps trajectories onto a predefined set of prototype 
 #' trajectories. It first computes distances between the trajectories and each 
@@ -12,17 +12,19 @@
 #' change-of-mind trials. \code{mt_map} allows to map trajectories to a
 #' predefined set of trajectory types.
 #' 
-#' \code{mt_map} first adjusts prototypes to match the coordinate system of the 
-#' trajectories specified by \code{use}. Then \code{mt_map} computes the 
+#' First, \code{mt_map} adjusts prototypes to match the coordinate system of the 
+#' trajectories specified by \code{use}. Next, \code{mt_map} computes the 
 #' distances between each trajectory and each of the supplied prototypes (see 
 #' \link{mt_distmat}) and then assigns each trajectory to the prototype that 
 #' produced the smallest distance.
 #' 
-#' Mapping trajectories to prototypes requires that trajectories (and added 
-#' prototypes) are aligned to end in the top-left corner of the coordinate 
-#' system (see \link{mt_remap_symmetric} and \code{mt_align}). Furthermore it is
-#' recommended to use spatialized trajectories (see \link{mt_spatialize}; 
-#' Haslbeck, Wulff, Kieslich, Henninger, & Schulte-Mecklenbeck, 2017).
+#' Mapping trajectories to prototypes requires that the endpoints of all
+#' trajectories (and added prototypes) share the same direction, i.e., that all
+#' trajectories end in the top-left corner of the coordinate system
+#' (\link{mt_remap_symmetric} or \link{mt_align} can be used to achieve this).
+#' Furthermore, it is recommended to use spatialized trajectories (see
+#' \link{mt_spatialize}; Haslbeck, Wulff, Kieslich, Henninger, &
+#' Schulte-Mecklenbeck, 2017).
 #' 
 #' @inheritParams mt_distmat
 #' @param prototypes a trajectory array containing the prototypes the 
@@ -50,10 +52,21 @@
 #' # Spatialize trajectories
 #' mt_example <- mt_spatialize(mt_example)
 #' 
-#' # Map trajectories onto standard cluster set
+#' # Map trajectories onto standard prototype set
 #' mt_example <- mt_map(mt_example,
 #'   use="sp_trajectories", prototypes=mt_prototypes)
 #'   
+#' # Plot trajectories per cluster
+#' mt_plot(mt_example,use2="prototyping",facet_col="prototype_label")
+#' 
+#'     
+#' # Map trajectories onto reduced prototype set
+#' mt_example <- mt_map(mt_example,
+#'   use="sp_trajectories",
+#'   prototypes=mt_prototypes[c("straight","curved","cCoM"),,])
+#' 
+#' 
+#' # Map trajectories onto extended prototype set
 #' 
 #' # Add additional prototypes
 #' mt_prototypes_ext <- mt_add_trajectory(mt_prototypes,
@@ -63,7 +76,7 @@
 #'    xpos = c(0,0,-1), ypos = c(0,1.5,1.5), id = "neutral"
 #' )
 #' 
-#' # Map trajectories onto extended cluster set
+#' # Map trajectories
 #' mt_example <- mt_map(mt_example,
 #'   use="sp_trajectories", prototypes=mt_prototypes_ext)
 #' 
