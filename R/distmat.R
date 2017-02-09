@@ -87,7 +87,7 @@ mt_distmat = function(data,
           dmat <- distMat3dV(data[[use]][,,dimensions[1]],
                             data[[use]][,,dimensions[2]],
                             data[[use]][,,dimensions[3]],
-                            minkowski_p = power)
+                            power = minkowski_p)
       }
     }
   
