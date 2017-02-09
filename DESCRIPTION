@@ -41,5 +41,6 @@ Imports:
 Suggests:
     readbulk,
     testthat
+LinkingTo: Rcpp
 LazyData: TRUE
 RoxygenNote: 5.0.1
