@@ -7,7 +7,7 @@
 #' Examples). After reading the data into R, \link{mt_import_wide} can be used 
 #' to prepare the trajectory data for analyses using the mousetrap library. The 
 #' current version of \code{read_mt} has been tested with data from MouseTracker
-#' Version 2.82 but please be sure to double-check.
+#' Version 2.84 but please be sure to double-check.
 #' 
 #' @param file a character string specifying the filename of the .mt file.
 #' @param columns either 'all' or a character vector specifying the to be 
