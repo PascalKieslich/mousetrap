@@ -28,6 +28,8 @@
 #' and trajectory outliers found in the majority of datasets best.
 #'
 #' @inheritParams mt_time_normalize
+#' @param save_as a character string specifying where the resulting data should
+#'   be stored.
 #' @param dimensions a character vector specifying which trajectory variables 
 #'   should be used. Can be of length 2 or 3, for two-dimensional or 
 #'   three-dimensional trajectories respectively.

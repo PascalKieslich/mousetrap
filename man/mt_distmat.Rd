@@ -15,8 +15,8 @@ array can be provided directly (in this case \code{use} will be ignored).}
 \item{use}{a character string specifying which trajectory data should be
 used.}
 
-\item{save_as}{a character string specifying where the resulting trajectory
-data should be stored.}
+\item{save_as}{a character string specifying where the resulting data should
+be stored.}
 
 \item{dimensions}{a character vector specifying which trajectory variables 
 should be used. Can be of length 2 or 3 for two-dimensional or 

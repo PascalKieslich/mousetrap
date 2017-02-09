@@ -14,6 +14,8 @@
 #' computed as \code{sqrt(sum(x^2 + y^2))}.
 #' 
 #' @inheritParams mt_time_normalize
+#' @param save_as a character string specifying where the resulting data should
+#'   be stored.
 #' @param dimensions a character vector specifying which trajectory variables 
 #'   should be used. Can be of length 2 or 3 for two-dimensional or 
 #'   three-dimensional trajectories respectively.
