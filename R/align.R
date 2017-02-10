@@ -15,8 +15,8 @@
 #' completely independently of one another, i.e., one can align only end points,
 #' only start points, none, or both. 
 #' 
-#' Note that if the end points of trajectories are not aligned coordinates refer
-#' to the hypothetical case where all trajectories are mapped to one side.
+#' Note that if the end points of trajectories are not aligned, coordinates
+#' refer to the hypothetical case where all trajectories are mapped to one side.
 #'    
 #' If \code{align_start} is set to \code{"left"} or \code{"right"} trajectories 
 #' will be flipped to the lower or upper spectrum of the first dimensions, 
@@ -58,8 +58,15 @@
 #'   align_start = TRUE, align_end = TRUE,
 #'   coordinates = 'mt')
 #' 
-#' @seealso 
-#' \link{}...
+#' @seealso \link{mt_align_start} for aligning all trajectories to a common
+#'   start position.
+#'   
+#'   \link{mt_align_start_end} for aligning all trajectories so that they share
+#'   a common initial and final coordinate.
+#'   
+#'   \link{mt_remap_symmetric} for remapping trajectories to one side (or one 
+#'   quadrant) of the coordinate system.
+#'   
 #' 
 #' @author
 #' Dirk U. Wulff (\email{dirk.wulff@@gmail.com})
