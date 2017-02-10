@@ -204,43 +204,18 @@ number of clusters.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Spatialize trajectories</span>
-<span class='no'>mt_example</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_spatialize.html'>mt_spatialize</a></span>(<span class='no'>mt_example</span>)
-
-<span class='co'># Find k</span>
-<span class='no'>results</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_cluster_k</span>(<span class='no'>mt_example</span>, <span class='kw'>use</span><span class='kw'>=</span><span class='st'>"sp_trajectories"</span>)</div><div class='output co'>#&gt; <span class='message'>Calculating stability-based k-selection methods.</span></div><div class='output co'>#&gt; <span class='message'>Calculating distance-based k-selection methods.</span></div><div class='input'>
-<span class='co'># Retrieve results</span>
-<span class='no'>results</span>$<span class='no'>kopt</span></div><div class='output co'>#&gt; $stab_kopt
-#&gt; [1] 10
-#&gt; 
-#&gt; $gap_kopt
-#&gt; [1] 15
-#&gt; 
-#&gt; $jump_kopt
-#&gt; [1] 15
-#&gt; 
-#&gt; $slope_kopt
-#&gt; [1] 2
-#&gt; </div><div class='input'><span class='no'>results</span>$<span class='no'>paths</span></div><div class='output co'>#&gt; $stab_seq
-#&gt;  [1] 0.3092173 0.4630689 0.5232922 0.5258430 0.5631069 0.4379431 0.3650518
-#&gt;  [8] 0.3181252 0.2932499 0.3913911 0.3496483 0.3196023 0.3846730 0.3773408
-#&gt; 
-#&gt; $gap_seq
-#&gt;  [1] 0.0000000 0.3223609 0.4134665 0.4920965 0.5726087 0.6411352 0.6966381
-#&gt;  [8] 0.7492765 0.8012258 0.8524453 0.9106994 0.9657277 1.0153418 1.0552686
-#&gt; [15] 1.0987849
-#&gt; 
-#&gt; $jump_seq
-#&gt;  [1] 1.210616e-121 1.572455e-114 7.601414e-113 7.329719e-110 1.325769e-107
-#&gt;  [6] 4.184328e-106 3.202674e-104 2.346159e-103 5.315282e-102 3.133823e-100
-#&gt; [11]  3.141242e-98  1.889889e-96  1.289998e-94  1.457715e-93  2.650593e-92
-#&gt; 
-#&gt; $slope_seq
-#&gt;  [1] -0.3635929766  0.0904567446 -0.0070709022 -0.0113201835  0.0160955880
-#&gt;  [6]  0.0028470583  0.0189955616 -0.0100370776 -0.0024249902 -0.0008544116
-#&gt; [11] -0.0037449475  0.0012730749  0.0069221274 -0.0043132418
-#&gt; </div><div class='input'>
-</div></pre>
+    <pre class="examples"><div class='input'>
+<span class='co'>## Not run: ------------------------------------</span>
+<span class='co'># # Spatialize trajectories</span>
+<span class='co'># mt_example &lt;- mt_spatialize(mt_example)</span>
+<span class='co'>#  </span>
+<span class='co'># # Find k</span>
+<span class='co'># results &lt;- mt_cluster_k(mt_example, use="sp_trajectories")</span>
+<span class='co'># </span>
+<span class='co'># # Retrieve results</span>
+<span class='co'># results$kopt</span>
+<span class='co'># results$paths</span>
+<span class='co'>## ---------------------------------------------</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

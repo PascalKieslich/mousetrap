@@ -82,6 +82,105 @@
     </div>
 
     <div class="contents">
+    <div id="mousetrap-3-0-0" class="section level1">
+<h1 class="hasAnchor">
+<a href="#mousetrap-3-0-0" class="anchor"> </a>mousetrap 3.0.0</h1>
+<div id="general-announcements" class="section level2">
+<h2 class="hasAnchor">
+<a href="#general-announcements" class="anchor"> </a>General announcements</h2>
+<ul>
+<li>We are delighted that Dirk Wulff and Jonas Haslbeck have joined the <code>mousetrap</code> team! They are contributing a number of new functions, particularly for clustering and visualization (see function specific author tags).</li>
+<li>The documentation of the <code>mousetrap</code> package can now also be found online at <a href="http://pascalkieslich.github.io/mousetrap/" class="uri">http://pascalkieslich.github.io/mousetrap/</a>
+</li>
+</ul>
+</div>
+<div id="general-changes-to-existing-functions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#general-changes-to-existing-functions" class="anchor"> </a>General changes to existing functions</h2>
+<ul>
+<li>Introduced <code>mousetrap</code> class for mousetrap data objects (such as <code>mt_example</code>). This facilitates, among other things, checking of the data class.</li>
+<li>The dimension order for all trajectory arrays was changed. The old order was 1) trials, 2) variables, 3) samples. The new order is 1) trials, 2) samples, 3) variables. All functions and example data were modified accordingly.</li>
+<li>Many reshape, aggregation, export, and plotting functions now accept a trajectory array as direct input to <code>data</code>.</li>
+<li>In case an analysis functions adds measures to an existing data.frame, existing columns of the same name are now replaced and a warning is displayed (instead of merging the data.frames and adding generic suffixes).</li>
+<li>Arguments that were already deprecated and replaced (e.g., <code>show_progress</code> was replaced with <code>verbose</code>) have been removed.</li>
+</ul>
+</div>
+<div id="changes-in-specific-functions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#changes-in-specific-functions" class="anchor"> </a>Changes in specific functions</h2>
+<ul>
+<li>
+<code>mt_align_start</code>: function is now vectorized and allows for optionally aligning to mean start position across trials; set default for <code>save_as</code> argument to <code>use</code>.</li>
+<li>
+<code>mt_space_normalize</code>: function is deprecated and replaced with <code>mt_align_start_end</code>. It offers similar functionality as mt_space_normalize but is vectorized and allows aligning to mean start/end position across trials.</li>
+<li>
+<code>mt_resample</code>: optionally perform partial constant interpolation. Thanks to @sbrockhaus for the suggestion.</li>
+<li>
+<code>mt_derivatives</code>: optionally return timestamp differences.</li>
+<li>
+<code>mt_measures</code>: optionally determine number and duration of hovers.</li>
+<li>
+<code>mt_plot</code>: introduced <code>facet_row</code> and <code>facet_col</code> arguments for faceting.</li>
+<li>
+<code>mt_plot_add_rect</code>: internal change to avoid warning message (due to changes in ggplot).</li>
+<li>
+<code>mt_plot_riverbed</code>: explicitly remove zero frequencies instead of relying on the alpha parameter.</li>
+</ul>
+</div>
+<div id="new-functions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-functions" class="anchor"> </a>New functions</h2>
+<ul>
+<li>
+<code>read_mt</code>: read MouseTracker raw data (.mt files).</li>
+<li>
+<code>mt_align</code>: general purpose function for aligning and rescaling trajectories. For specific operations, you can rely on the specialized functions <code>mt_align_start</code> and <code>mt_align_start_end</code>.</li>
+<li>
+<code>mt_spatialize</code>: re-represent each trajectory spatially so that adjacent points become equidistant to each other.</li>
+<li>
+<code>mt_add_trajectory</code>: add a new trajectory to a trajectory array.</li>
+<li>
+<code>mt_bind</code>: join two trajectory arrays.</li>
+<li>
+<code>mt_count</code>: count the number of observations for each trajectory.</li>
+<li>
+<code>mt_angles</code>: calculate movement angles for trajectories.</li>
+<li>
+<code>mt_distmat</code>: compute the distance matrix for each pair of trajectories.</li>
+<li>
+<code>mt_cluster</code>: perform trajectory clustering with a specified number of clusters.</li>
+<li>
+<code>mt_cluster_k</code>: estimate the optimal number of clusters using various methods.</li>
+<li>
+<code>mt_map</code>: map trajectories onto a predefined set of prototype trajectories (default set is provided in <code>mt_prototypes</code>).</li>
+</ul>
+</div>
+<div id="bugs-fixed" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bugs-fixed" class="anchor"> </a>Bugs fixed</h2>
+<ul>
+<li>
+<code>mt_measures</code>: Make checks for timestamps &gt; 0 and &lt; 0 independent. Thanks to Regina Köhler for pointing this out.</li>
+<li>
+<code>mt_plot_per_trajectory</code>: fix bug that all trajectories were plotted on each page (introduced through previous change in <code>mt_reshape</code>). Thanks to Bence Palfi for discovering this.</li>
+<li>
+<code>create_results</code> (internal function): Explicitly select mt_id column (instead of assuming that it is the first column - which is, e.g., often not the case in <code>data[["data"]]</code>); ensure for case <code>overwrite=FALSE</code> that this also works when multiple columns are merged and when all columns except mt_id are dropped beforehand.</li>
+</ul>
+</div>
+<div id="removed-functions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#removed-functions" class="anchor"> </a>Removed functions</h2>
+<ul>
+<li>
+<code>read_mousetracker</code>: removed as it is recommended to directly import the MouseTracker raw data using the new function <code>read_mt</code>.</li>
+<li>
+<code>mt_movement_angle</code>: removed as it is replaced with new and more general function <code>mt_angles</code>.</li>
+<li>
+<code>mt_calculate_derivatives</code>, <code>mt_calculate_deviations</code>, <code>mt_calculate_measures</code>: removed as they were previously deprecated and replaced with <code>mt_derivatives</code>, <code>mt_deviations</code>, <code>mt_measures</code>
+</li>
+</ul>
+</div>
+</div>
     <div id="mousetrap-2-0-0" class="section level1">
 <h1 class="hasAnchor">
 <a href="#mousetrap-2-0-0" class="anchor"> </a>mousetrap 2.0.0</h1>
@@ -99,9 +198,9 @@
 <li>Performance improvement of reshaping, aggregation, and visualization functions through internal changes in <code>mt_reshape</code>: <code>base::merge</code> and <code>reshape2</code> functions are replaced with functions from the <code>tidyr</code> and <code>dplyr</code> packages (and custom functions). Package dependencies were adjusted accordingly. As the <code>dplyr</code> functions may introduce additional classes for the reshaped data (such as <code>grouped_df</code> and <code>tbl_df</code>), a new argument (<code>convert_df</code>) is introduced that converts the reshaped data to pure data.frames by default (thereby dropping additional classes).</li>
 </ul>
 </div>
-<div id="changes-in-specific-functions" class="section level2">
+<div id="changes-in-specific-functions-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-in-specific-functions" class="anchor"> </a>Changes in specific functions</h2>
+<a href="#changes-in-specific-functions-1" class="anchor"> </a>Changes in specific functions</h2>
 <ul>
 <li>
 <code>mt_import_mousetrap</code>, <code>mt_import_long</code>, <code>mt_import_wide</code>: Allow specifying several variables for the trial identifier in <code>mt_id_label</code>. A new ID variable will be created by combining the values of each variable.</li>
@@ -133,9 +232,9 @@
 <code>mt_plot</code> (and related functions): New argument <code>points</code> allows for plotting points.</li>
 </ul>
 </div>
-<div id="new-functions" class="section level2">
+<div id="new-functions-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-functions" class="anchor"> </a>New functions</h2>
+<a href="#new-functions-1" class="anchor"> </a>New functions</h2>
 <ul>
 <li>
 <code>mt_add_variables</code>: add new variables to trajectory array.</li>
@@ -145,9 +244,9 @@
 <code>mt_export_wide</code>: export mouse-tracking data in wide format (wrapper for <code>mt_reshape</code>).</li>
 </ul>
 </div>
-<div id="bugs-fixed" class="section level2">
+<div id="bugs-fixed-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bugs-fixed" class="anchor"> </a>Bugs fixed</h2>
+<a href="#bugs-fixed-1" class="anchor"> </a>Bugs fixed</h2>
 <ul>
 <li>
 <code>mt_align_start</code>: Fixed bug that <code>xpos_start</code> (instead of <code>ypos_start</code>) was passed on as <code>ypos_start</code> to <code>mt_space_normalize</code>.</li>
@@ -204,6 +303,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#mousetrap-3-0-0">3.0.0</a></li>
         <li><a href="#mousetrap-2-0-0">2.0.0</a></li>
         <li><a href="#mousetrap-1-2-0">1.2.0</a></li>
         <li><a href="#mousetrap-1-1-0">1.1.0</a></li>

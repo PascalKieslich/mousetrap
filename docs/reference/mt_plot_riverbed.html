@@ -149,9 +149,11 @@ as all trajectories must contain the same number of values.</p>
 
 <span class='co'># Create riverbed plot for all trials</span>
 <span class='fu'>mt_plot_riverbed</span>(<span class='no'>mt_example</span>)</div><img src='mt_plot_riverbed-2.png' alt='' width='540' height='400' /><div class='input'>
-<span class='co'># Create separate plots for typical and atypical trials</span>
-<span class='fu'>mt_plot_riverbed</span>(<span class='no'>mt_example</span>, <span class='kw'>facet_col</span><span class='kw'>=</span><span class='st'>"Condition"</span>)</div><img src='mt_plot_riverbed-4.png' alt='' width='540' height='400' /><div class='input'>
 <span class='co'>## Not run: ------------------------------------</span>
+<span class='co'># # Create separate plots for typical and atypical trials</span>
+<span class='co'># mt_plot_riverbed(mt_example, facet_col="Condition")</span>
+<span class='co'># </span>
+<span class='co'># </span>
 <span class='co'># # Create riverbed plot for all trials with custom x and y axis labels</span>
 <span class='co'># mt_plot_riverbed(mt_example) +</span>
 <span class='co'>#   ggplot2::xlab("Time step") + ggplot2::ylab("X coordinate")</span>
