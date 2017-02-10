@@ -25,7 +25,7 @@ data should be stored.}
 \item{n_points}{an integer or vector of integers specifying the number of 
 points used to represent the spatially rescaled trajectories. If a single 
 integer is provided, the number of points will be constant across 
-trajectories. Alternatively, a vector if integers can provided that specify
+trajectories. Alternatively, a vector of integers can provided that specify
 the number of points for each trajectory individually.}
 }
 \value{
@@ -40,12 +40,11 @@ that adjacent points on the trajectory become equidistant to each other.
 }
 \details{
 \code{mt_spatialize} is used to emphasize the trajectories' shape. Usually, 
-the vast majority of points of a time-normalized raw or a time-normalized 
-trajectory lie close to the start and end point. \code{mt_spatialize} 
-re-distributes these points so that the spatial distribution is uniform 
-across the entire trajectory. \code{mt_spatialize} is mainly used to improve 
-the results of clustering (in particular \link{mt_cluster}) and 
-visualization.
+the vast majority of points of a raw or a time-normalized trajectory lie
+close to the start and end point. \code{mt_spatialize} re-distributes these
+points so that the spatial distribution is uniform across the entire
+trajectory. \code{mt_spatialize} is mainly used to improve the results of
+clustering (in particular \link{mt_cluster}) and visualization.
 }
 \examples{
 mt_example <- mt_spatialize(data=mt_example,
