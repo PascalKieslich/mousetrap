@@ -190,7 +190,6 @@ NumericMatrix spatializeArrayToLong(NumericMatrix xs,
     }
   if(total_pts > std::pow(2,31)-1){
     std::string a = "Error: Matrix bound reached - use smaller resolution!";
-    std::cout << a << '\n';
     return 0;
     };
   NumericMatrix xy(total_pts, 2);
@@ -283,7 +282,6 @@ NumericMatrix spatializeArrayToLong3d(NumericMatrix xs,
     }
   if(total_pts > std::pow(2,31)-1){
     std::string a = "Error: Matrix bound reached - use smaller resolution!";
-    std::cout << a << '\n';
     return 0;
     };
   NumericMatrix xyz(total_pts, 3);
