@@ -1,14 +1,14 @@
 #' Import mouse-tracking data recorded using the mousetrap plug-ins in OpenSesame.
 #'
 #' \code{mt_import_mousetrap} accepts a data.frame of (merged) raw data from a 
-#' mouse-tracking experiment implemented in OpenSesame using the mousetrap
-#' plugin. From this data.frame, \code{mt_import_mousetrap} creates a mousetrap
-#' data object containing the trajectories and additional data for further
-#' processing within the mousetrap package. Specifically, it returns a list that
-#' includes the trajectory data as an array (called \code{trajectories}), and
-#' all other data as a data.frame (called \code{data}). This data structure can
-#' then be passed on to other functions within this package (see
-#' \link{mousetrap} for an overview).
+#' mouse-tracking experiment implemented in OpenSesame using the mousetrap 
+#' plugin (Kieslich & Henninger, 2017). From this data.frame,
+#' \code{mt_import_mousetrap} creates a mousetrap data object containing the
+#' trajectories and additional data for further processing within the mousetrap
+#' package. Specifically, it returns a list that includes the trajectory data as
+#' an array (called \code{trajectories}), and all other data as a data.frame
+#' (called \code{data}). This data structure can then be passed on to other
+#' functions within this package (see \link{mousetrap} for an overview).
 #'
 #' When working with mouse-tracking data that were recorded using the mousetrap
 #' plug-ins for OpenSesame, usually only the \code{raw_data} need to be
@@ -70,8 +70,12 @@
 #'   If mouse-tracking data were recorded using the mousetrap plug-ins for
 #'   OpenSesame, the unit of the timestamps is milliseconds.
 #'
-#' @references Mousetrap plugin for OpenSesame
-#'   (\url{https://github.com/pascalkieslich/mousetrap-os})
+#' @references Kieslich, P. J., & Henninger, F. (2016). Mousetrap: 
+#'   Mouse-tracking plugins for OpenSesame (Version 1.2.1). doi: 
+#'   \url{https://doi.org/10.5281/zenodo.163404}
+#'   
+#'   Kieslich, P. J., & Henninger, F. (2017). Mousetrap: An integrated, 
+#'   open-source mouse-tracking package. Manuscript submitted for publication.
 #'
 #' @seealso \link[readbulk]{read_opensesame} from the \code{readbulk} library
 #'   for reading and combining raw data files that were collected with
@@ -339,31 +343,27 @@ mt_import_mousetrap <- function(raw_data,
 
 #' Import mouse-tracking data saved in wide format.
 #'
-#' \code{mt_import_wide} receives a data.frame where mouse-tracking data are
+#' \code{mt_import_wide} receives a data.frame where mouse-tracking data are 
 #' stored in wide format, i.e., where one row contains the data of one trial and
-#' every recorded mouse position and variable is saved in a separate variable
-#' (e.g., X_1, X_2, ..., Y_1, Y_2, ...). This is, e.g., the case when exporting
-#' trajectories from MouseTracker (Freeman & Ambady, 2010). From this
-#' data.frame, \code{mt_import_wide} creates a mousetrap data object containing
-#' the trajectories and additional data for further processing within the
-#' mousetrap package. Specifically, it returns a list that includes the
-#' trajectory data as an array (called \code{trajectories}), and all other data
-#' as a data.frame (called \code{data}). This data structure can then be passed
-#' on to other functions within this package (see \link{mousetrap} for an
-#' overview).
+#' every recorded mouse position and variable is saved in a separate variable 
+#' (e.g., X_1, X_2, ..., Y_1, Y_2, ...). This is, e.g., the case when collecting
+#' data using MouseTracker (Freeman & Ambady, 2010). From this data.frame,
+#' \code{mt_import_wide} creates a mousetrap data object containing the
+#' trajectories and additional data for further processing within the mousetrap
+#' package. Specifically, it returns a list that includes the trajectory data as
+#' an array (called \code{trajectories}), and all other data as a data.frame
+#' (called \code{data}). This data structure can then be passed on to other
+#' functions within this package (see \link{mousetrap} for an overview).
 #'
-#' \code{mt_import_wide} is designed to import mouse-tracking data saved in a
-#' wide format. The defaults are set so that usually only the \code{raw_data}
-#' and \code{pos_ids} need to be provided when importing trajectory data that
-#' stem from a "time normalized analysis" in MouseTracker (Freeman & Ambady,
-#' 2010).
+#' \code{mt_import_wide} is designed to import mouse-tracking data saved in a 
+#' wide format. The defaults are set so that usually only the \code{raw_data} 
+#' need to be provided when data have been collecting using MouseTracker
+#' (Freeman & Ambady, 2010) and have been read into R using \link{read_mt}.
 #'
-#' If no \code{pos_ids} are provided, column labels for the respective variable
-#' (e.g., x-positions) are extracted using \code{\link{grep}} returning all
-#' variables that start with the respective character string (e.g., "X_" if
-#' \code{xpos_label="X"} and \code{pos_sep="_"}). This is, e.g., useful when
-#' importing trajectory data that stem from a "raw time analysis" in
-#' MouseTracker (Freeman & Ambady, 2010).
+#' If no \code{pos_ids} are provided, column labels for the respective variable 
+#' (e.g., x-positions) are extracted using \code{\link{grep}} returning all 
+#' variables that start with the respective character string (e.g., "X_" if 
+#' \code{xpos_label="X"} and \code{pos_sep="_"}).
 #'
 #' If no timestamps are found in the data, \code{mt_import_wide} automatically
 #' creates a timestamps variable with increasing integers (starting with 0)
@@ -396,7 +396,9 @@ mt_import_mousetrap <- function(raw_data,
 #' studying real-time mental processing using a computer mouse-tracking method.
 #' \emph{Behavior Research Methods, 42}(1), 226-241.
 #'
-#' @seealso
+#' @seealso \link{read_mt} for reading raw data that was collected using
+#'   MouseTracker (Freeman & Ambady, 2010) and stored as a file in the ".mt"
+#'   format.
 #' 
 #' \link{mt_import_mousetrap} and \link{mt_import_long} for importing
 #' mouse-tracking data in other formats.

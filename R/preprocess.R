@@ -454,6 +454,9 @@ mt_space_normalize <- function(
 #' @seealso \link{mt_align_start} for aligning the start position of 
 #'   trajectories.
 #'   
+#'   \link{mt_align} as a general purpose function for aligning and rescaling 
+#'   trajectories.
+#'   
 #'   \link{mt_remap_symmetric} for remapping trajectories.
 #'
 #' @examples
@@ -542,6 +545,9 @@ mt_align_start_end <- function(
 #'
 #' @seealso \link{mt_align_start_end}  for aligning the start and end position
 #'   of trajectories.
+#'   
+#'   \link{mt_align} as a general purpose function for aligning and rescaling 
+#'   trajectories.
 #'
 #' \link{mt_remap_symmetric} for remapping trajectories.
 #'

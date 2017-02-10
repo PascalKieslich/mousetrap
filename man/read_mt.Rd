@@ -10,7 +10,7 @@ read_mt(file, columns = "all", add_trialid = FALSE, add_filename = FALSE)
 \item{file}{a character string specifying the filename of the .mt file.}
 
 \item{columns}{either 'all' or a character vector specifying the to be 
-extracted variables Defaults to 'all' in which case all existing variables 
+extracted variables. Defaults to 'all' in which case all existing variables
 will be extracted.}
 
 \item{add_trialid}{boolean specifying whether an additional column containing
@@ -20,22 +20,23 @@ the trial number should be added.}
 containing the file name should be added.}
 }
 \value{
-A data frame with one row per trial. Variables are ordered according 
-  to columns, x-coordinates, y-coordinates, and timestamps.
+A \link{data.frame} with one row per trial. Variables are ordered
+  according to columns, x-coordinates, y-coordinates, and timestamps.
 }
 \description{
 \code{read_mt} reads raw data that was collected using MouseTracker (Freeman 
 & Ambady, 2010) and stored as a file in the ".mt" format. If multiple files 
 should be read into R, \code{read_mt} can be used in combination with the 
-\link[readbulk]{read_bulk} functon from the \code{readbulk} package (see 
+\link[readbulk]{read_bulk} function from the \code{readbulk} package (see 
 Examples). After reading the data into R, \link{mt_import_wide} can be used 
 to prepare the trajectory data for analyses using the mousetrap library. The 
 current version of \code{read_mt} has been tested with data from MouseTracker
-Version 2.84 but please be sure to double-check.
+Version 2.84 - but please be sure to double-check.
 }
 \examples{
 \dontrun{
 # Read a single raw data file from MouseTracker
+# (stored in the current working directory)
 mt_data_raw <- read_mt("example.mt")
 
 # Use read_bulk to read all raw data files ending with ".mt" that are

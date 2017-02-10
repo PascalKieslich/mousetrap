@@ -1,8 +1,8 @@
 #' Raw mouse-tracking dataset for demonstrations of the mousetrap package
 #'
-#' An exemplary mouse-tracking dataset collected in OpenSesame using the
-#' mousetrap plug-ins. A preprocessed (as opposed to raw) version of the same
-#' data can be found in \link{mt_example}.
+#' An exemplary mouse-tracking dataset collected in OpenSesame using the 
+#' mousetrap plugin (Kieslich & Henninger, 2017). A preprocessed (as opposed to
+#' raw) version of the same data can be found in \link{mt_example}.
 #'
 #' The data stem from a study based on experiment 1 by Dale et al. (2007). In
 #' this experiment, participants have to assign exemplars (e.g., "shark") to one
@@ -25,7 +25,8 @@
 #'   responses in the time course of categorizing atypical exemplars.
 #'   \emph{Memory & Cognition, 35}(1), 15-28.
 #'
-#'   Mousetrap
+#'   Kieslich, P. J., & Henninger, F. (2017). Mousetrap: An integrated, 
+#'   open-source mouse-tracking package. Manuscript submitted for publication.
 #'
 #' @format A \link{data.frame} with 38 rows and 19 variables. The data.frame is
 #'   based on the combined raw data that were created using
@@ -110,8 +111,8 @@
 #' To tailor the set of prototypes to a given study, \code{mt_prototypes} can be
 #' extended using \link{mt_add_trajectory}.
 #' 
-#' @references Wulff, D. U., Haslbeck, J. M. B., Schulte-Mecklenbeck, M. (2017). Measuring the 
-#' (dis-)continuous mind. Manuscript in preparation.
+#' @references Wulff, D. U., Haslbeck, J. M. B., Schulte-Mecklenbeck, M. (2017).
+#'   Measuring the (dis-)continuous mind. Manuscript in preparation.
 #'
 "mt_prototypes"
 NULL

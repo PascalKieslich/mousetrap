@@ -170,7 +170,10 @@ mt_example_results <- dplyr::inner_join(
   
 }
 \references{
-Mousetrap
+Kieslich, P. J., Wulff, D. U., Henninger, F., Haslbeck, J. M. B.,
+  & Schulte-Mecklenbeck, M. (2017). Analyzing mouse- and hand-tracking data:
+  Methodological considerations and an open-source implementation. Manuscript
+  in preparation.
   
   Freeman, J. B., & Ambady, N. (2010). MouseTracker: Software for studying 
   real-time mental processing using a computer mouse-tracking method. 

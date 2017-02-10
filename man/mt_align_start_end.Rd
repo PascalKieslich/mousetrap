@@ -76,6 +76,9 @@ Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor
 \link{mt_align_start} for aligning the start position of 
   trajectories.
   
+  \link{mt_align} as a general purpose function for aligning and rescaling 
+  trajectories.
+  
   \link{mt_remap_symmetric} for remapping trajectories.
 }
 \author{

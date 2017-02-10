@@ -38,7 +38,7 @@ following, a brief overview of the functions in this package is given.
   using the mousetrap plugin for OpenSesame.
   
   \link{mt_import_wide} imports mouse-tracking data saved in a wide format 
-  (e.g., data exported from MouseTracker).
+  (e.g., data collected using MouseTracker).
   
   \link{mt_import_long} imports mouse-tracking data saved in a long format. 
   (e.g., trajectories exported using \link{mt_export_long}).
@@ -55,7 +55,7 @@ following, a brief overview of the functions in this package is given.
   
   \link{mt_align} is a general purpose function for aligning and rescaling 
   trajectories. For specific operations, you can rely on one of the
-  following specific functions.
+  following functions.
   
   \link{mt_align_start} aligns the start position of trajectories.
   

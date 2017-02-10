@@ -90,7 +90,7 @@
 #' Jonas M. B. Haslbeck (\email{jonas.haslbeck@@gmail.com})
 #'
 #' @export
-mt_map = function(
+mt_map <- function(
   data,
   use = 'trajectories',
   save_as = 'prototyping',

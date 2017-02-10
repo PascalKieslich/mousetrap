@@ -47,7 +47,7 @@
 #' Jonas M. B. Haslbeck (\email{jonas.haslbeck@@gmail.com})
 #'
 #' @export
-mt_distmat = function(data,
+mt_distmat <- function(data,
                       use = 'sp_trajectories',
                       save_as = 'distmat',
                       dimensions = c('xpos','ypos'),

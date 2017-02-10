@@ -90,13 +90,10 @@ mt_add_trajectory <- function(
 #' @return A trajectory array.
 #' 
 #' @examples
-#' 
-#' \dontrun{
 #' trajectories_combined <- mt_bind(
 #'   mt_example$trajectories,
 #'   mt_prototypes
 #' )
-#' }
 #' 
 #' @author
 #' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})

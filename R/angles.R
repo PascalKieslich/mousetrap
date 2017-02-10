@@ -7,7 +7,7 @@
 #' 
 #' By default, angles are reported in radians, the alternative is degrees. For 
 #' the first point in a trajectory, the angle values are always not defined 
-#' (\code{NA})
+#' (\code{NA}).
 #' 
 #' For vertical-based angles (\code{angle_v}), positive values indicate a 
 #' movement to the left of the vertical, negative values to the right of the 

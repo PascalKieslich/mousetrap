@@ -27,7 +27,7 @@ To tailor the set of prototypes to a given study, \code{mt_prototypes} can be
 extended using \link{mt_add_trajectory}.
 }
 \references{
-Wulff, D. U., Haslbeck, J. M. B., Schulte-Mecklenbeck, M. (2017). Measuring the 
-(dis-)continuous mind. Manuscript in preparation.
+Wulff, D. U., Haslbeck, J. M. B., Schulte-Mecklenbeck, M. (2017).
+  Measuring the (dis-)continuous mind. Manuscript in preparation.
 }
 \keyword{datasets}

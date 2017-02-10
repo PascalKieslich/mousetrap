@@ -81,7 +81,7 @@ Estimates the optimal number of clusters (\code{k}) using various methods.
 }
 \details{
 \code{mt_cluster_k} estimates the number of clusters (\code{k}) using four 
-commonly used k-selection methods (spcified via \code{compute}): cluster 
+commonly used k-selection methods (specified via \code{compute}): cluster 
 stability (\code{stability}), the gap statistic (\code{gap}), the jump 
 statistic (\code{jump}), and the slope statistic (\code{slope}).
 
@@ -117,21 +117,26 @@ results$paths
 
 }
 \references{
-Haslbeck, J., & Wulff, D. U. (2016). Estimating the Number of
-Clusters via Normalized Cluster Instability. \emph{arXiv preprint}
-arXiv:1608.07494.
-
-Tibshirani, R., Walther, G., & Hastie, T. (2001). Estimating the number of 
-clusters in a data set via the gap statistic. \emph{Journal of the Royal 
-Statistical Society: Series B (Statistical Methodology), 63}(2), 411-423.
-
-Sugar, C. A., & James, G. M. (2013). Finding the number of clusters in a 
-dataset. \emph{Journal of the American Statistical Association, 98}(463), 
-750-763.
-
-Fujita, A., Takahashi, D. Y., & Patriota, A. G. (2014). A non-parametric 
-method to estimate the number of clusters. \emph{Computational Statistics & 
-Data Analysis, 73}, 27-39.
+Haslbeck, J., & Wulff, D. U. (2016). Estimating the Number of 
+  Clusters via Normalized Cluster Instability. \emph{arXiv preprint} 
+  arXiv:1608.07494.
+  
+  Haslbeck, J. M. B., Wulff, D. U., Kieslich, P. J., Henninger, F., & 
+  Schulte-Mecklenbeck, M. (2017). Advanced mouse- and hand-tracking analysis:
+  Detecting and visualizing clusters in movement trajectories. Manuscript in 
+  preparation.
+  
+  Tibshirani, R., Walther, G., & Hastie, T. (2001). Estimating the number of 
+  clusters in a data set via the gap statistic. \emph{Journal of the Royal 
+  Statistical Society: Series B (Statistical Methodology), 63}(2), 411-423.
+  
+  Sugar, C. A., & James, G. M. (2013). Finding the number of clusters in a 
+  dataset. \emph{Journal of the American Statistical Association, 98}(463), 
+  750-763.
+  
+  Fujita, A., Takahashi, D. Y., & Patriota, A. G. (2014). A non-parametric 
+  method to estimate the number of clusters. \emph{Computational Statistics &
+  Data Analysis, 73}, 27-39.
 }
 \seealso{
 \link{mt_distmat} for more information about how the distance matrix is 

@@ -69,7 +69,7 @@
 #' Dirk U. Wulff (\email{dirk.wulff@@gmail.com})
 #' 
 #' @export
-mt_align = function(data,
+mt_align <- function(data,
                     use = 'trajectories',
                     save_as = use,
                     dimensions = c('xpos','ypos'),

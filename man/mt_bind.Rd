@@ -23,13 +23,10 @@ be helpful in those (relatively rare) occasions where addional processed
 trajectory data should be added to another trajectory array.
 }
 \examples{
-
-\dontrun{
 trajectories_combined <- mt_bind(
   mt_example$trajectories,
   mt_prototypes
 )
-}
 
 }
 \author{
