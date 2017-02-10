@@ -55,8 +55,8 @@ NumericMatrix distMatV(NumericMatrix x,
       d = 0;                        //dummy value of final matrix entry
       if(power == 1){
         for(int i = 0; i < ni; i++) { // loop 1:n
-          xd = x(r,i) - x(c,i);
-          yd = y(r,i) - y(c,i);
+          xd = std::abs(x(r,i) - x(c,i));
+          yd = std::abs(y(r,i) - y(c,i));
           d += xd + yd;
         }
       } else if (power == 2){
@@ -67,8 +67,8 @@ NumericMatrix distMatV(NumericMatrix x,
         }
       } else {
         for(int i = 0; i < ni; i++) { // loop 1:n
-          xd = x(r,i) - x(c,i);
-          yd = y(r,i) - y(c,i);
+          xd = std::abs(x(r,i) - x(c,i));
+          yd = std::abs(y(r,i) - y(c,i));
           for(int j = 1; j < power; j++){
             xd *= xd;
             yd *= yd;
@@ -146,9 +146,9 @@ NumericMatrix distMat3dV(NumericMatrix x,
       d = 0;                        //dummy value of final matrix entry
       if(power == 1){
         for(int i = 0; i < ni; i++) { // loop 1:n
-          xd = x(r,i) - x(c,i);
-          yd = y(r,i) - y(c,i);
-          zd = z(r,i) - z(c,i);
+          xd = std::abs(x(r,i) - x(c,i));
+          yd = std::abs(y(r,i) - y(c,i));
+          zd = std::abs(z(r,i) - z(c,i));
           d += xd + yd + zd;
         }
       } else if (power == 2){
@@ -160,9 +160,9 @@ NumericMatrix distMat3dV(NumericMatrix x,
         }
       } else {
         for(int i = 0; i < ni; i++) { // loop 1:n
-          xd = x(r,i) - x(c,i);
-          yd = y(r,i) - y(c,i);
-          zd = z(r,i) - z(c,i);
+          xd = std::abs(x(r,i) - x(c,i));
+          yd = std::abs(y(r,i) - y(c,i));
+          zd = std::abs(z(r,i) - z(c,i));
           for(int j = 1; j < power; j++){
             xd *= xd;
             yd *= yd;
