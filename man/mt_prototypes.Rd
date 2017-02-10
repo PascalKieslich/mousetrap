@@ -9,7 +9,24 @@
 mt_prototypes
 }
 \description{
-Mouse trajectory prototypes.
+A core set of five mouse trajectory prototypes including the 'straight' trajectory,
+the mildly curved trajectory, the continuous change-of-mind trajectory, the discrete
+change-of-mind trajectory, and the double discrete change-of-mind trajectory.
+}
+\details{
+It has been demonstrated that mouse- and hand-trajectories often occur in types 
+(Wulff, Haslbeck, & Schulte-Mecklenbeck, 2017). In such cases, movement trajectory data
+should be analyzed in terms of discrete type assignments. To this end \link{map} 
+maps mouse- or hand-trajectory to the closest of several predefined prototypes. 
+\code{mt_prototypes} provides a core set of prototypes that has been shown to represent well 
+a large fraction of empirical movement trajectories.
+
+To tailor the set of prototypes to a given study mt_prototypes can be extended using 
+\link{mt_add_trajectory}
+}
+\references{
+Wulff, D. U., Haslbeck, J. M. B., Schulte-Mecklenbeck, M. (2017). Measuring the 
+(dis-)continuous mind. Manuscript in preparation.
 }
 \keyword{datasets}
 
