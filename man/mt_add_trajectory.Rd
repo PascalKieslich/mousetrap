@@ -38,14 +38,10 @@ A mousetrap data object (see \link{mt_example}) where the new
 Add a single new trajectory to trajectory array.
 }
 \examples{
-new_trajectory <- cbind(
-  c(0,0.5,1),
-  c(0,1, 2)
- )
- 
- mt_example <- mt_add_trajectory(
-   mt_example, xypos=new_trajectory, id = "test_traj"
- )
+# Add additional prototype to mt_prototypes
+mt_prototypes_ext <- mt_add_trajectory(mt_prototypes,
+   xpos = c(0,1,-1,1,-1), ypos = c(0,1.5,1.5,1.5,1.5), id = "dCoM3"
+)
 
 }
 \author{
