@@ -49,9 +49,6 @@ mt_data <- mt_import_wide(mt_data_raw)
 
 
 }
-\author{
-Dirk U. Wulff (\email{dirk.wulff@gmail.com})
-}
 \references{
 Freeman, J. B., & Ambady, N. (2010). MouseTracker: Software for 
   studying real-time mental processing using a computer mouse-tracking
@@ -63,4 +60,6 @@ combining mutliple raw data files.
 
 \link{mt_import_wide} to prepare the imported data for analyses in mousetrap.
 }
-
+\author{
+Dirk U. Wulff (\email{dirk.wulff@gmail.com})
+}

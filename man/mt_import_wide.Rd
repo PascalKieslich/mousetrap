@@ -99,11 +99,6 @@ mt_data <- mt_import_wide(mt_data_wide,
   timestamps_label="timestamps")
 
 }
-\author{
-Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
-
-Felix Henninger
-}
 \references{
 Freeman, J. B., & Ambady, N. (2010). MouseTracker: Software for
 studying real-time mental processing using a computer mouse-tracking method.
@@ -113,4 +108,8 @@ studying real-time mental processing using a computer mouse-tracking method.
 \link{mt_import_mousetrap} and \link{mt_import_long} for importing
 mouse-tracking data in other formats.
 }
+\author{
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
 
+Felix Henninger
+}

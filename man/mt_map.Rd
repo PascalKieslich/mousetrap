@@ -113,11 +113,6 @@ mt_example <- mt_map(mt_example,
 
 
 }
-\author{
-Dirk U. Wulff (\email{dirk.wulff@gmail.com})
-
-Jonas M. B. Haslbeck (\email{jonas.haslbeck@gmail.com})
-}
 \references{
 Wulff, D. U., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. 
   (2017). Measuring the (dis-)continuous mind. Manuscript in preparation.
@@ -127,4 +122,8 @@ Wulff, D. U., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M.
   Detecting and visualizing clusters in movement trajectories. Manuscript in 
   preparation.
 }
+\author{
+Dirk U. Wulff (\email{dirk.wulff@gmail.com})
 
+Jonas M. B. Haslbeck (\email{jonas.haslbeck@gmail.com})
+}

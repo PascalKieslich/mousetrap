@@ -112,11 +112,6 @@ mt_example <- mt_spatialize(mt_example)
 mt_example <- mt_cluster(mt_example, use="sp_trajectories")
 
 }
-\author{
-Dirk U. Wulff (\email{dirk.wulff@gmail.com})
-
-Jonas M. B. Haslbeck (\email{jonas.haslbeck@gmail.com})
-}
 \references{
 Wulff, D. U., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M.
   (2017). Measuring the (dis-)continuous mind. Manuscript in preparation.
@@ -132,4 +127,8 @@ computed when the hclust method is used.
 
 \link{mt_cluster_k} for estimating the optimal number of clusters.
 }
+\author{
+Dirk U. Wulff (\email{dirk.wulff@gmail.com})
 
+Jonas M. B. Haslbeck (\email{jonas.haslbeck@gmail.com})
+}

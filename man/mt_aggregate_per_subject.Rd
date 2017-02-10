@@ -90,11 +90,6 @@ average_measures <- mt_aggregate_per_subject(
 )
 
 }
-\author{
-Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
-
-Felix Henninger
-}
 \seealso{
 \link{mt_aggregate} for aggregating mouse-tracking measures and trajectories
 per condition.
@@ -102,4 +97,8 @@ per condition.
 \link[dplyr]{summarize_at} for aggregating data using the \code{dplyr}
 package.
 }
+\author{
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
 
+Felix Henninger
+}

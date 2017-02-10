@@ -88,9 +88,6 @@ mt_example <- mt_align(mt_example,
   coordinates = 'mt')
 
 }
-\author{
-Dirk U. Wulff (\email{dirk.wulff@gmail.com})
-}
 \seealso{
 \link{mt_align_start} for aligning all trajectories to a common
   start position.
@@ -101,4 +98,6 @@ Dirk U. Wulff (\email{dirk.wulff@gmail.com})
   \link{mt_remap_symmetric} for remapping trajectories to one side (or one 
   quadrant) of the coordinate system.
 }
-
+\author{
+Dirk U. Wulff (\email{dirk.wulff@gmail.com})
+}

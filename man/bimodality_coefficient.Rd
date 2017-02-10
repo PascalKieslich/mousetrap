@@ -33,11 +33,6 @@ pfister_data_b <- rep(1:11, times=c(2,26,14,6,2,0,2,6,14,26,2))
 bimodality_coefficient(pfister_data_b) #.79
 
 }
-\author{
-Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
-
-Felix Henninger
-}
 \references{
 Pfister, R., Schwarz, K. A., Janczyk, M., Dale, R., & Freeman, J. B. (2013).
 Good things peak in pairs: A note on the bimodality coefficient.
@@ -51,4 +46,8 @@ skewness and kurtosis.
 \link{mt_check_bimodality} for assessing bimodality using several methods in
 a mousetrap data object.
 }
+\author{
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
 
+Felix Henninger
+}

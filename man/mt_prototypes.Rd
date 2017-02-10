@@ -31,4 +31,3 @@ Wulff, D. U., Haslbeck, J. M. B., Schulte-Mecklenbeck, M. (2017). Measuring the
 (dis-)continuous mind. Manuscript in preparation.
 }
 \keyword{datasets}
-

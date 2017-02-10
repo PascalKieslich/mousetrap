@@ -75,11 +75,6 @@ mt_example <- mt_deviations(mt_example,
   start_ideal=c(0,0), end_ideal=c(-665,974))
 
 }
-\author{
-Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
-
-Felix Henninger
-}
 \references{
 Freeman, J. B., & Ambady, N. (2010). MouseTracker: Software for
   studying real-time mental processing using a computer mouse-tracking
@@ -89,4 +84,8 @@ Freeman, J. B., & Ambady, N. (2010). MouseTracker: Software for
 \link{mt_measures} for calculating per-trial
   mouse-tracking measures.
 }
+\author{
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
 
+Felix Henninger
+}

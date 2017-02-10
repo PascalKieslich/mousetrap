@@ -45,4 +45,3 @@ end in the top-left corner and their starting point was aligned using
 \link{mt_align_start} to a common value (0,0).
 }
 \keyword{datasets}
-

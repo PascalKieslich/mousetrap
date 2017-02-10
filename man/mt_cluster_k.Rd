@@ -113,11 +113,6 @@ results$kopt
 results$paths
 
 }
-\author{
-Dirk U. Wulff (\email{dirk.wulff@gmail.com})
-
-Jonas M. B. Haslbeck (\email{jonas.haslbeck@gmail.com})
-}
 \references{
 Haslbeck, J., & Wulff, D. U. (2016). Estimating the Number of
 Clusters via Normalized Cluster Instability. \emph{arXiv preprint}
@@ -142,4 +137,8 @@ computed when the hclust method is used.
 \link{mt_cluster} for performing trajectory clustering with a specified 
 number of clusters.
 }
+\author{
+Dirk U. Wulff (\email{dirk.wulff@gmail.com})
 
+Jonas M. B. Haslbeck (\email{jonas.haslbeck@gmail.com})
+}

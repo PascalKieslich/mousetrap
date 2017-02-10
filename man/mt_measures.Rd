@@ -169,11 +169,6 @@ mt_example_results <- dplyr::inner_join(
   by="mt_id")
   
 }
-\author{
-Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
-
-Felix Henninger
-}
 \references{
 Mousetrap
   
@@ -194,4 +189,8 @@ measures.
 
 \link[dplyr]{inner_join} for merging data using the \code{dplyr} package.
 }
+\author{
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
 
+Felix Henninger
+}

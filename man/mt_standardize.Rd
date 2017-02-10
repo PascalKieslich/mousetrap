@@ -57,14 +57,13 @@ mt_example <- mt_standardize(mt_example,
   prefix="z_")
   
 }
-\author{
-Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
-
-Felix Henninger
-}
 \seealso{
 \link{scale_within} which is called by \code{mt_standardize}.
 
 \link{scale} for the R base scale function.
 }
+\author{
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
 
+Felix Henninger
+}

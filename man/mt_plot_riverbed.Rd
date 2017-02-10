@@ -74,11 +74,6 @@ mt_plot_riverbed(mt_example, facet_col="Condition") +
 }
 
 }
-\author{
-Felix Henninger (\email{mailbox@felixhenninger.com})
-
-Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
-}
 \references{
 Scherbaum, S., Dshemuchadse, M., Fischer, R., & Goschke, T.
   (2010). How decisions evolve: The temporal dynamics of action selection.
@@ -89,4 +84,8 @@ Scherbaum, S., Dshemuchadse, M., Fischer, R., & Goschke, T.
 
 \link{mt_time_normalize} for time-normalizing trajectories.
 }
+\author{
+Felix Henninger (\email{mailbox@felixhenninger.com})
 
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
+}

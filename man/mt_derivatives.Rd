@@ -89,11 +89,6 @@ mt_example <- mt_derivatives(mt_example,
   dimensions="xpos")
 
 }
-\author{
-Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
-
-Felix Henninger
-}
 \seealso{
 \link{mt_average} for averaging trajectories across constant time
 intervals.
@@ -101,4 +96,8 @@ intervals.
 \link{mt_measures} for calculating per-trial mouse-tracking
 measures.
 }
+\author{
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
 
+Felix Henninger
+}

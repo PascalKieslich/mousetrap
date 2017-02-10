@@ -94,11 +94,6 @@ removed.} \item{\code{ignore}: Duplicates are kept.} }
 mt_data <- mt_import_mousetrap(mt_example_raw)
 
 }
-\author{
-Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
-
-Felix Henninger
-}
 \references{
 Mousetrap plugin for OpenSesame
   (\url{https://github.com/pascalkieslich/mousetrap-os})
@@ -111,4 +106,8 @@ Mousetrap plugin for OpenSesame
 \link{mt_import_wide} and \link{mt_import_long} for importing mouse-tracking
 data from other sources.
 }
+\author{
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
 
+Felix Henninger
+}

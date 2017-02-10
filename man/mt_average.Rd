@@ -102,11 +102,6 @@ mt_example <- mt_average(mt_example,
   av_dimension = "steps", intervals = c(0.5,33.5,67.5,101.5))
 
 }
-\author{
-Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
-
-Felix Henninger
-}
 \seealso{
 \link{mt_derivatives} for calculating velocity and
   acceleration.
@@ -114,4 +109,8 @@ Felix Henninger
 \link{mt_resample} for resampling trajectories using a constant time
 interval.
 }
+\author{
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
 
+Felix Henninger
+}

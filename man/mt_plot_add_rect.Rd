@@ -62,12 +62,11 @@ mt_plot(mt_example,
 
 
 }
+\seealso{
+\link{mt_plot} for plotting trajectory data.
+}
 \author{
 Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
 
 Felix Henninger
 }
-\seealso{
-\link{mt_plot} for plotting trajectory data.
-}
-

@@ -94,13 +94,12 @@ mt_data <- mt_import_long(exp_data,
 }
 
 }
+\seealso{
+\link{mt_import_mousetrap} and \link{mt_import_wide} for importing
+  mouse-tracking data in other formats.
+}
 \author{
 Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
 
 Felix Henninger
 }
-\seealso{
-\link{mt_import_mousetrap} and \link{mt_import_wide} for importing
-  mouse-tracking data in other formats.
-}
-

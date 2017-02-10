@@ -79,4 +79,3 @@ mt_example <- mt_angles(mt_example,
 \author{
 Dirk U. Wulff (\email{dirk.wulff@gmail.com})
 }
-

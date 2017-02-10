@@ -51,4 +51,3 @@ Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
 
 Felix Henninger
 }
-

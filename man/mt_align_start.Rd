@@ -56,15 +56,14 @@ mt_example <- mt_align_start(mt_example,
   start=NULL)
   
 }
-\author{
-Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
-
-Felix Henninger
-}
 \seealso{
 \link{mt_align_start_end}  for aligning the start and end position
   of trajectories.
 
 \link{mt_remap_symmetric} for remapping trajectories.
 }
+\author{
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
 
+Felix Henninger
+}

@@ -58,4 +58,3 @@ Dirk U. Wulff (\email{dirk.wulff@gmail.com})
 
 Jonas M. B. Haslbeck (\email{jonas.haslbeck@gmail.com})
 }
-

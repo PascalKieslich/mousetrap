@@ -67,11 +67,6 @@ mt_example <- mt_align_start_end(mt_example,
 
   
 }
-\author{
-Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
-
-Felix Henninger
-}
 \references{
 Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor
   responses in the time course of categorizing atypical exemplars.
@@ -83,4 +78,8 @@ Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor
   
   \link{mt_remap_symmetric} for remapping trajectories.
 }
+\author{
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
 
+Felix Henninger
+}

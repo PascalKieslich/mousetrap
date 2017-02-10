@@ -52,11 +52,6 @@ mt_example <- mt_measures(mt_example)
 mt_example_mad_sub <- mt_subset(mt_example, MAD<400, check="measures")
 
 }
-\author{
-Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
-
-Felix Henninger
-}
 \seealso{
 \link{subset} for the R base subset function for vectors, matrices,
 or data.frames.
@@ -64,4 +59,8 @@ or data.frames.
 \link{mt_reshape} for information about the subset argument in various other
 mousetrap functions.
 }
+\author{
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
 
+Felix Henninger
+}

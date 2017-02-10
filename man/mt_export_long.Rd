@@ -54,6 +54,7 @@ the trajectory data before export. \code{mt_export_long} and
 
 \item \code{mt_export_wide}: Export mouse-tracking data in wide format
 }}
+
 \examples{
 # Export data in long format
 # (and include information about condition and subject_nr)
@@ -66,11 +67,6 @@ mt_data_wide <- mt_export_wide(mt_example,
   use2_variables=c("subject_nr","Condition"))
 
 }
-\author{
-Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
-
-Felix Henninger
-}
 \seealso{
 \link{mt_import_long} for importing mouse-tracking data saved in a long
 format.
@@ -78,4 +74,8 @@ format.
 \link{mt_import_wide} for importing mouse-tracking data saved in a wide
 format.
 }
+\author{
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
 
+Felix Henninger
+}

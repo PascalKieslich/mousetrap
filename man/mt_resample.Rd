@@ -85,11 +85,6 @@ mt_example <- mt_resample(mt_example,
   step_size=50)
 
 }
-\author{
-Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
-
-Felix Henninger
-}
 \seealso{
 \link[stats]{approx} for information about the function used for
 linear interpolation.
@@ -98,4 +93,8 @@ linear interpolation.
 
 \link{mt_time_normalize} for time-normalizing trajectories.
 }
+\author{
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
 
+Felix Henninger
+}

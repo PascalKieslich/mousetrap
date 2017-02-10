@@ -109,7 +109,7 @@ read_mt <- function(file,
 
     # define containers for coordinates and qualifying trial variables
     positions <- list()
-    # the front matrix contains the trial data, which are stored in the first
+    # the front matrix contains the trial data, which are stored in the first
     # columns, whereas the actual coordinates are stored in the later columns
     if (i == 1) front <- matrix(NA, nrow=length(trials), ncol=length(vars))
 

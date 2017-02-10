@@ -199,6 +199,7 @@ following, a brief overview of the functions in this package is given.
   \link{scale_within} scales and centers variables within the levels of 
   another variable.
 }
+
 \examples{
 mt_example <- mt_import_mousetrap(mt_example_raw)
 mt_example <- mt_remap_symmetric(mt_example)
@@ -225,4 +226,3 @@ mt_plot_aggregate(mt_example,
 )
 
 }
-
