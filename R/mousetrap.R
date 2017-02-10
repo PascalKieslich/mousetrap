@@ -131,7 +131,7 @@
 #'   methods.
 #'   
 #'   \link{mt_map} maps trajectories onto a predefined set of prototype 
-#'   trajectories.
+#'   trajectories (a core set is provided in \link{mt_prototypes}).
 #'   
 #'   
 #' @section Reshaping, aggregation, and export functions:

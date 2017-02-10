@@ -89,7 +89,7 @@
 <h2 class="hasAnchor">
 <a href="#general-announcements" class="anchor"> </a>General announcements</h2>
 <ul>
-<li>We are delighted that Dirk Wulff and Jonas Haslbeck have joined the <code>mousetrap</code> team! They are contributing a number of new functions, particularly for clustering and visualization (see function specific author tags).</li>
+<li>We are delighted that Dirk Wulff and Jonas Haslbeck have joined the <code>mousetrap</code> team! They are contributing a number of new functions, particularly for clustering and visualization.</li>
 <li>The documentation of the <code>mousetrap</code> package can now also be found online at <a href="http://pascalkieslich.github.io/mousetrap/" class="uri">http://pascalkieslich.github.io/mousetrap/</a>
 </li>
 </ul>
@@ -98,8 +98,8 @@
 <h2 class="hasAnchor">
 <a href="#general-changes-to-existing-functions" class="anchor"> </a>General changes to existing functions</h2>
 <ul>
-<li>Introduced <code>mousetrap</code> class for mousetrap data objects (such as <code>mt_example</code>). This facilitates, among other things, checking of the data class.</li>
-<li>The dimension order for all trajectory arrays was changed. The old order was 1) trials, 2) variables, 3) samples. The new order is 1) trials, 2) samples, 3) variables. All functions and example data were modified accordingly.</li>
+<li>Introduction of class <code>mousetrap</code> for mousetrap data objects (such as <code>mt_example</code>). This facilitates, among other things, checking of the data class.</li>
+<li>Change of dimension order for all trajectory arrays: The old order was 1) trials, 2) variables, 3) samples. The new order is 1) trials, 2) samples, 3) variables. All functions and example data have been modified accordingly.</li>
 <li>Many reshape, aggregation, export, and plotting functions now accept a trajectory array as direct input to <code>data</code>.</li>
 <li>In case an analysis functions adds measures to an existing data.frame, existing columns of the same name are now replaced and a warning is displayed (instead of merging the data.frames and adding generic suffixes).</li>
 <li>Arguments that were already deprecated and replaced (e.g., <code>show_progress</code> was replaced with <code>verbose</code>) have been removed.</li>
@@ -110,9 +110,9 @@
 <a href="#changes-in-specific-functions" class="anchor"> </a>Changes in specific functions</h2>
 <ul>
 <li>
-<code>mt_align_start</code>: function is now vectorized and allows for optionally aligning to mean start position across trials; set default for <code>save_as</code> argument to <code>use</code>.</li>
+<code>mt_align_start</code>: function is now vectorized and allows for optionally aligning to mean start position across trials; default for <code>save_as</code> argument set to <code>use</code>.</li>
 <li>
-<code>mt_space_normalize</code>: function is deprecated and replaced with <code>mt_align_start_end</code>. It offers similar functionality as mt_space_normalize but is vectorized and allows aligning to mean start/end position across trials.</li>
+<code>mt_space_normalize</code>: function is deprecated and replaced with <code>mt_align_start_end</code>. It offers similar functionality but is vectorized and allows for optionally aligning to mean start/end position across trials.</li>
 <li>
 <code>mt_resample</code>: optionally perform partial constant interpolation. Thanks to @sbrockhaus for the suggestion.</li>
 <li>
@@ -152,7 +152,7 @@
 <li>
 <code>mt_cluster_k</code>: estimate the optimal number of clusters using various methods.</li>
 <li>
-<code>mt_map</code>: map trajectories onto a predefined set of prototype trajectories (default set is provided in <code>mt_prototypes</code>).</li>
+<code>mt_map</code>: map trajectories onto a predefined set of prototype trajectories (a core set is provided in <code>mt_prototypes</code>).</li>
 </ul>
 </div>
 <div id="bugs-fixed" class="section level2">
@@ -160,11 +160,11 @@
 <a href="#bugs-fixed" class="anchor"> </a>Bugs fixed</h2>
 <ul>
 <li>
-<code>mt_measures</code>: Make checks for timestamps &gt; 0 and &lt; 0 independent. Thanks to Regina Köhler for pointing this out.</li>
+<code>mt_measures</code>: make checks for timestamps &gt; 0 and &lt; 0 independent. Thanks to Regina Köhler for pointing this out.</li>
 <li>
 <code>mt_plot_per_trajectory</code>: fix bug that all trajectories were plotted on each page (introduced through previous change in <code>mt_reshape</code>). Thanks to Bence Palfi for discovering this.</li>
 <li>
-<code>create_results</code> (internal function): Explicitly select mt_id column (instead of assuming that it is the first column - which is, e.g., often not the case in <code>data[["data"]]</code>); ensure for case <code>overwrite=FALSE</code> that this also works when multiple columns are merged and when all columns except mt_id are dropped beforehand.</li>
+<code>create_results</code> (internal function): Explicitly select mt_id column (instead of assuming that it is the first column - which is, e.g., often not the case in <code>data[["data"]]</code>); ensure for case <code>overwrite=FALSE</code> that function also works when multiple columns are merged and when all columns except mt_id are dropped beforehand.</li>
 </ul>
 </div>
 <div id="removed-functions" class="section level2">

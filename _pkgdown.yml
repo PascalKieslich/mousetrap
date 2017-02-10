@@ -18,7 +18,7 @@ reference:
     contents:
     - bimodality_coefficient
     - scale_within
-    - read_mousetracker
+    - read_mt
 navbar:
   title: ~
   type: default
