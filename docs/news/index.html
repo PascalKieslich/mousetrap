@@ -85,9 +85,9 @@
     <div id="mousetrap-3-0-0" class="section level1">
 <h1 class="hasAnchor">
 <a href="#mousetrap-3-0-0" class="anchor"> </a>mousetrap 3.0.0</h1>
-<div id="general-announcements" class="section level2">
+<div id="announcements" class="section level2">
 <h2 class="hasAnchor">
-<a href="#general-announcements" class="anchor"> </a>General announcements</h2>
+<a href="#announcements" class="anchor"> </a>Announcements</h2>
 <ul>
 <li>We are delighted that Dirk Wulff and Jonas Haslbeck have joined the <code>mousetrap</code> team! They are contributing a number of new functions, particularly for clustering and visualization.</li>
 <li>The documentation of the <code>mousetrap</code> package can now also be found online at <a href="http://pascalkieslich.github.io/mousetrap/" class="uri">http://pascalkieslich.github.io/mousetrap/</a>
@@ -101,7 +101,7 @@
 <li>Introduction of class <code>mousetrap</code> for mousetrap data objects (such as <code>mt_example</code>). This facilitates, among other things, checking of the data class.</li>
 <li>Change of dimension order for all trajectory arrays: The old order was 1) trials, 2) variables, 3) samples. The new order is 1) trials, 2) samples, 3) variables. All functions and example data have been modified accordingly.</li>
 <li>Many reshape, aggregation, export, and plotting functions now accept a trajectory array as direct input to <code>data</code>.</li>
-<li>In case an analysis functions adds measures to an existing data.frame, existing columns of the same name are now replaced and a warning is displayed (instead of merging the data.frames and adding generic suffixes).</li>
+<li>In case an analysis function adds measures to an existing data.frame, existing columns of the same name are now replaced and a warning is displayed (instead of merging the data.frames and adding generic suffixes).</li>
 <li>Arguments that were already deprecated and replaced (e.g., <code>show_progress</code> was replaced with <code>verbose</code>) have been removed.</li>
 </ul>
 </div>
@@ -110,19 +110,19 @@
 <a href="#changes-in-specific-functions" class="anchor"> </a>Changes in specific functions</h2>
 <ul>
 <li>
-<code>mt_align_start</code>: function is now vectorized and allows for optionally aligning to mean start position across trials; default for <code>save_as</code> argument set to <code>use</code>.</li>
+<code>mt_align_start</code>: function is now vectorized and allows for optionally aligning to mean start position across trials; default for <code>save_as</code> argument is set to <code>use</code>.</li>
 <li>
 <code>mt_space_normalize</code>: function is deprecated and replaced with <code>mt_align_start_end</code>. It offers similar functionality but is vectorized and allows for optionally aligning to mean start/end position across trials.</li>
 <li>
-<code>mt_resample</code>: optionally perform partial constant interpolation. Thanks to @sbrockhaus for the suggestion.</li>
+<code>mt_resample</code>: now provides option to perform partial constant interpolation. Thanks to @sbrockhaus for the suggestion (cf. #7, #9).</li>
 <li>
-<code>mt_derivatives</code>: optionally return timestamp differences.</li>
+<code>mt_derivatives</code>: now provides option to additionally return timestamp differences.</li>
 <li>
-<code>mt_measures</code>: optionally determine number and duration of hovers.</li>
+<code>mt_measures</code>: now optionally determines the number and duration of hovers (cf. #9), improved documentation and report of time measures (cf. #6).</li>
 <li>
 <code>mt_plot</code>: introduced <code>facet_row</code> and <code>facet_col</code> arguments for faceting.</li>
 <li>
-<code>mt_plot_add_rect</code>: internal change to avoid warning message (due to changes in ggplot).</li>
+<code>mt_plot_add_rect</code>: internal change to avoid warning message (due to changes in <code>ggplot2</code>).</li>
 <li>
 <code>mt_plot_riverbed</code>: explicitly remove zero frequencies instead of relying on the alpha parameter.</li>
 </ul>
@@ -176,8 +176,7 @@
 <li>
 <code>mt_movement_angle</code>: removed as it is replaced with new and more general function <code>mt_angles</code>.</li>
 <li>
-<code>mt_calculate_derivatives</code>, <code>mt_calculate_deviations</code>, <code>mt_calculate_measures</code>: removed as they were previously deprecated and replaced with <code>mt_derivatives</code>, <code>mt_deviations</code>, <code>mt_measures</code>
-</li>
+<code>mt_calculate_derivatives</code>, <code>mt_calculate_deviations</code>, <code>mt_calculate_measures</code>: removed as they were previously deprecated and replaced with <code>mt_derivatives</code>, <code>mt_deviations</code>, <code>mt_measures</code>.</li>
 </ul>
 </div>
 </div>

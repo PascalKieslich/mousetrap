@@ -84,11 +84,11 @@
     <p><code>read_mt</code> reads raw data that was collected using MouseTracker (Freeman 
 &amp; Ambady, 2010) and stored as a file in the &quot;.mt&quot; format. If multiple files 
 should be read into R, <code>read_mt</code> can be used in combination with the 
-<a href='http://www.rdocumentation.org/packages/readbulk/topics/read_bulk'>read_bulk</a> functon from the <code>readbulk</code> package (see 
+<a href='http://www.rdocumentation.org/packages/readbulk/topics/read_bulk'>read_bulk</a> function from the <code>readbulk</code> package (see 
 Examples). After reading the data into R, <a href='mt_import_wide.html'>mt_import_wide</a> can be used 
 to prepare the trajectory data for analyses using the mousetrap library. The 
 current version of <code>read_mt</code> has been tested with data from MouseTracker
-Version 2.84 but please be sure to double-check.</p>
+Version 2.84 - but please be sure to double-check.</p>
     
 
     <pre><span class='fu'>read_mt</span>(<span class='no'>file</span>, <span class='kw'>columns</span> <span class='kw'>=</span> <span class='st'>"all"</span>, <span class='kw'>add_trialid</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>add_filename</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
@@ -99,7 +99,7 @@ Version 2.84 but please be sure to double-check.</p>
       <dd>a character string specifying the filename of the .mt file.</dd>
       <dt>columns</dt>
       <dd>either &#39;all&#39; or a character vector specifying the to be 
-extracted variables Defaults to &#39;all&#39; in which case all existing variables 
+extracted variables. Defaults to &#39;all&#39; in which case all existing variables
 will be extracted.</dd>
       <dt>add_trialid</dt>
       <dd>boolean specifying whether an additional column containing
@@ -111,8 +111,8 @@ containing the file name should be added.</dd>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame with one row per trial. Variables are ordered according 
-  to columns, x-coordinates, y-coordinates, and timestamps.</p>
+    <p>A data.frame with one row per trial. Variables are ordered
+  according to columns, x-coordinates, y-coordinates, and timestamps.</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
@@ -130,6 +130,7 @@ combining mutliple raw data files.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
 <span class='co'># # Read a single raw data file from MouseTracker</span>
+<span class='co'># # (stored in the current working directory)</span>
 <span class='co'># mt_data_raw &lt;- read_mt("example.mt")</span>
 <span class='co'># </span>
 <span class='co'># # Use read_bulk to read all raw data files ending with ".mt" that are</span>

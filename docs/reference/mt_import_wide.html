@@ -81,18 +81,17 @@
     </div>
 
     
-    <p><code>mt_import_wide</code> receives a data.frame where mouse-tracking data are
+    <p><code>mt_import_wide</code> receives a data.frame where mouse-tracking data are 
 stored in wide format, i.e., where one row contains the data of one trial and
-every recorded mouse position and variable is saved in a separate variable
-(e.g., X_1, X_2, ..., Y_1, Y_2, ...). This is, e.g., the case when exporting
-trajectories from MouseTracker (Freeman &amp; Ambady, 2010). From this
-data.frame, <code>mt_import_wide</code> creates a mousetrap data object containing
-the trajectories and additional data for further processing within the
-mousetrap package. Specifically, it returns a list that includes the
-trajectory data as an array (called <code>trajectories</code>), and all other data
-as a data.frame (called <code>data</code>). This data structure can then be passed
-on to other functions within this package (see <a href='mousetrap.html'>mousetrap</a> for an
-overview).</p>
+every recorded mouse position and variable is saved in a separate variable 
+(e.g., X_1, X_2, ..., Y_1, Y_2, ...). This is, e.g., the case when collecting
+data using MouseTracker (Freeman &amp; Ambady, 2010). From this data.frame,
+<code>mt_import_wide</code> creates a mousetrap data object containing the
+trajectories and additional data for further processing within the mousetrap
+package. Specifically, it returns a list that includes the trajectory data as
+an array (called <code>trajectories</code>), and all other data as a data.frame
+(called <code>data</code>). This data structure can then be passed on to other
+functions within this package (see <a href='mousetrap.html'>mousetrap</a> for an overview).</p>
     
 
     <pre><span class='fu'>mt_import_wide</span>(<span class='no'>raw_data</span>, <span class='kw'>xpos_label</span> <span class='kw'>=</span> <span class='st'>"X"</span>, <span class='kw'>ypos_label</span> <span class='kw'>=</span> <span class='st'>"Y"</span>,
@@ -153,17 +152,14 @@ progress.</dd>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code>mt_import_wide</code> is designed to import mouse-tracking data saved in a
-wide format. The defaults are set so that usually only the <code>raw_data</code>
-and <code>pos_ids</code> need to be provided when importing trajectory data that
-stem from a &quot;time normalized analysis&quot; in MouseTracker (Freeman &amp; Ambady,
-2010).</p>
-    <p>If no <code>pos_ids</code> are provided, column labels for the respective variable
-(e.g., x-positions) are extracted using <code>grep</code> returning all
-variables that start with the respective character string (e.g., &quot;X_&quot; if
-<code>xpos_label=&quot;X&quot;</code> and <code>pos_sep=&quot;_&quot;</code>). This is, e.g., useful when
-importing trajectory data that stem from a &quot;raw time analysis&quot; in
-MouseTracker (Freeman &amp; Ambady, 2010).</p>
+    <p><code>mt_import_wide</code> is designed to import mouse-tracking data saved in a 
+wide format. The defaults are set so that usually only the <code>raw_data</code> 
+need to be provided when data have been collecting using MouseTracker
+(Freeman &amp; Ambady, 2010) and have been read into R using <a href='read_mt.html'>read_mt</a>.</p>
+    <p>If no <code>pos_ids</code> are provided, column labels for the respective variable 
+(e.g., x-positions) are extracted using <code>grep</code> returning all 
+variables that start with the respective character string (e.g., &quot;X_&quot; if 
+<code>xpos_label=&quot;X&quot;</code> and <code>pos_sep=&quot;_&quot;</code>).</p>
     <p>If no timestamps are found in the data, <code>mt_import_wide</code> automatically
 creates a timestamps variable with increasing integers (starting with 0)
 assuming equally spaced sampling intervals.</p>
@@ -176,6 +172,9 @@ studying real-time mental processing using a computer mouse-tracking method.
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
+    <p><a href='read_mt.html'>read_mt</a> for reading raw data that was collected using
+  MouseTracker (Freeman &amp; Ambady, 2010) and stored as a file in the &quot;.mt&quot;
+  format.</p>
     <p><a href='mt_import_mousetrap.html'>mt_import_mousetrap</a> and <a href='mt_import_long.html'>mt_import_long</a> for importing
 mouse-tracking data in other formats.</p>
     

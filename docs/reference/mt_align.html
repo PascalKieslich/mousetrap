@@ -114,7 +114,7 @@ and dim2, <code>isotropic-norm</code> to set the coordinates to
 and dim2, <code>mt</code> to set coordinates to <code>c(0,0,-1,1.5)</code>, <code>norm</code>
 to set coordinates  to <code>c(0,0,-1,1)</code>, and <code>wide</code> to set 
 coordinates  to <code>c(0,0,-1,1.2)</code>. In the three-dimensional case, 
-coordinates is a vector of length 6.</dd>
+<code>coordinates</code> is a vector of length 6.</dd>
       <dt>align_start</dt>
       <dd>boolean specifying whether the start points of all
 trajectories should be aligned to the position specified in
@@ -145,17 +145,14 @@ progress.</dd>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>If <code>align_start</code> / <code>align_end</code> is <code>FALSE</code>, <code>coordinates</code> 
-define the position of the average start / end point across all trajectories. 
-Note that if both <code>align_start</code> and <code>align_end</code> are <code>FALSE</code> 
-(the default), this completely preserves the relative location of all 
-trajectory points.</p>
+define the position of the average start / end point across all trajectories.</p>
+    <p>Note that if the end points of trajectories are not aligned, coordinates
+refer to the hypothetical case where all trajectories are mapped to one side.</p>
     <p>If <code>align_start</code> / <code>align_end</code> is <code>TRUE</code>, the start / end
 point of each trajectory is set to the exact position specified in
 <code>coordinates</code>. <code>align_start</code> and <code>align_end</code> can be set
 completely independently of one another, i.e., one can align only end points,
 only start points, none, or both.</p>
-    <p>Note that if the end points of trajectories are not aligned, coordinates
-refer to the hypothetical case where all trajectories are mapped to one side.</p>
     <p>If <code>align_start</code> is set to <code>&quot;left&quot;</code> or <code>&quot;right&quot;</code> trajectories 
 will be flipped to the lower or upper spectrum of the first dimensions, 
 respectively. If the first dimension is the x-coordinate this is equivalent

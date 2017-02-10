@@ -82,14 +82,14 @@
 
     
     <p><code>mt_import_mousetrap</code> accepts a data.frame of (merged) raw data from a 
-mouse-tracking experiment implemented in OpenSesame using the mousetrap
-plugin. From this data.frame, <code>mt_import_mousetrap</code> creates a mousetrap
-data object containing the trajectories and additional data for further
-processing within the mousetrap package. Specifically, it returns a list that
-includes the trajectory data as an array (called <code>trajectories</code>), and
-all other data as a data.frame (called <code>data</code>). This data structure can
-then be passed on to other functions within this package (see
-<a href='mousetrap.html'>mousetrap</a> for an overview).</p>
+mouse-tracking experiment implemented in OpenSesame using the mousetrap 
+plugin (Kieslich &amp; Henninger, 2017). From this data.frame,
+<code>mt_import_mousetrap</code> creates a mousetrap data object containing the
+trajectories and additional data for further processing within the mousetrap
+package. Specifically, it returns a list that includes the trajectory data as
+an array (called <code>trajectories</code>), and all other data as a data.frame
+(called <code>data</code>). This data structure can then be passed on to other
+functions within this package (see <a href='mousetrap.html'>mousetrap</a> for an overview).</p>
     
 
     <pre><span class='fu'>mt_import_mousetrap</span>(<span class='no'>raw_data</span>, <span class='kw'>xpos_label</span> <span class='kw'>=</span> <span class='st'>"xpos"</span>, <span class='kw'>ypos_label</span> <span class='kw'>=</span> <span class='st'>"ypos"</span>,
@@ -174,8 +174,11 @@ removed. </li>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Mousetrap plugin for OpenSesame
-  (<a href = 'https://github.com/pascalkieslich/mousetrap-os'>https://github.com/pascalkieslich/mousetrap-os</a>)</p>
+    <p>Kieslich, P. J., &amp; Henninger, F. (2016). Mousetrap: 
+  Mouse-tracking plugins for OpenSesame (Version 1.2.1). doi: 
+  <a href = 'https://doi.org/10.5281/zenodo.163404'>https://doi.org/10.5281/zenodo.163404</a></p>
+    <p>Kieslich, P. J., &amp; Henninger, F. (2017). Mousetrap: An integrated, 
+  open-source mouse-tracking package. Manuscript submitted for publication.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
