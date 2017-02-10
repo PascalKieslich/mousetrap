@@ -1,6 +1,6 @@
 # mousetrap 3.0.0
 
-## General announcements
+## Announcements
 * We are delighted that Dirk Wulff and Jonas Haslbeck have joined the `mousetrap` team! They are contributing a number of new functions, particularly for clustering and visualization.
 * The documentation of the `mousetrap` package can now also be found online at http://pascalkieslich.github.io/mousetrap/
 
@@ -8,18 +8,18 @@
 * Introduction of class `mousetrap` for mousetrap data objects (such as `mt_example`). This facilitates, among other things, checking of the data class.
 * Change of dimension order for all trajectory arrays: The old order was 1) trials, 2) variables, 3) samples. The new order is 1) trials, 2) samples, 3) variables. All functions and example data have been modified accordingly.
 * Many reshape, aggregation, export, and plotting functions now accept a trajectory array as direct input to `data`.
-* In case an analysis functions adds measures to an existing data.frame, existing columns of the same name are now replaced and a warning is displayed (instead of merging the data.frames and adding generic suffixes).
+* In case an analysis function adds measures to an existing data.frame, existing columns of the same name are now replaced and a warning is displayed (instead of merging the data.frames and adding generic suffixes).
 * Arguments that were already deprecated and replaced (e.g., `show_progress` was replaced with `verbose`) have been removed. 
 
 ## Changes in specific functions
 * `mt_align_start`: function is now vectorized and allows for optionally aligning to mean start position across
-trials; default for `save_as` argument set to `use`.
+trials; default for `save_as` argument is set to `use`.
 * `mt_space_normalize`: function is deprecated and replaced with `mt_align_start_end`. It offers similar functionality but is vectorized and allows for optionally aligning to mean start/end position across trials.
-* `mt_resample`: optionally perform partial constant interpolation. Thanks to @sbrockhaus for the suggestion.
-* `mt_derivatives`: optionally return timestamp differences.
-* `mt_measures`: optionally determine number and duration of hovers.
+* `mt_resample`: now provides option to perform partial constant interpolation. Thanks to @sbrockhaus for the suggestion (cf. #7, #9).
+* `mt_derivatives`: now provides option to additionally return timestamp differences.
+* `mt_measures`: now optionally determines the number and duration of hovers (cf. #9), improved documentation and report of time measures (cf. #6).
 * `mt_plot`: introduced  `facet_row` and `facet_col` arguments for faceting.
-* `mt_plot_add_rect`: internal change to avoid warning message (due to changes in ggplot).
+* `mt_plot_add_rect`: internal change to avoid warning message (due to changes in `ggplot2`).
 * `mt_plot_riverbed`: explicitly remove zero frequencies instead of relying on the alpha parameter.
 
 ## New functions
@@ -43,7 +43,7 @@ trials; default for `save_as` argument set to `use`.
 ## Removed functions
 * `read_mousetracker`: removed as it is recommended to directly import the MouseTracker raw data using the new function `read_mt`.
 * `mt_movement_angle`: removed as it is replaced with new and more general function `mt_angles`.
-* `mt_calculate_derivatives`, `mt_calculate_deviations`, `mt_calculate_measures`: removed as they were previously deprecated and replaced with `mt_derivatives`, `mt_deviations`, `mt_measures`
+* `mt_calculate_derivatives`, `mt_calculate_deviations`, `mt_calculate_measures`: removed as they were previously deprecated and replaced with `mt_derivatives`, `mt_deviations`, `mt_measures`.
 
 
 # mousetrap 2.0.0
