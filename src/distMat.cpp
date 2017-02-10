@@ -76,9 +76,9 @@ NumericMatrix distMatV(NumericMatrix x,
           d += xd + yd;
         }
       }
-      if(power == 2){
+	  if(power == 2){
         d = sqrt(d);
-        } else {
+        } else if(power > 2){
         d = exp( log(d) / double(power));
         }
       dist(r,c) = d;   // fill distance matrix
@@ -173,7 +173,7 @@ NumericMatrix distMat3dV(NumericMatrix x,
       }
       if(power == 2){
         d = sqrt(d);
-      } else {
+      } else if(power > 2){
         d = exp( log(d) / double(power));
       }
       dist(r,c) = d;   // fill distance matrix
