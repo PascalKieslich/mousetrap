@@ -54,7 +54,7 @@ following, a brief overview of the functions in this package is given.
   quadrant) of the coordinate system.
   
   \link{mt_align} is a general purpose function for aligning and rescaling 
-  trajectories. For many specific operations, you can rely on one of the
+  trajectories. For specific operations, you can rely on one of the
   following specific functions.
   
   \link{mt_align_start} aligns the start position of trajectories.
@@ -141,7 +141,7 @@ following, a brief overview of the functions in this package is given.
   A number of different functions for clustering trajectories is provided.
   
   \link{mt_distmat} computes the distance matrix for each pair of 
-  trajectories, which is used by the different clustering functions.
+  trajectories.
   
   \link{mt_cluster} performs trajectory clustering with a specified number of
   clusters.
