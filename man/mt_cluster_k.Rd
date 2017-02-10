@@ -94,12 +94,12 @@ The remaining three methods select \code{k} as the value that minimizes some
 distance metric measured for objects within and between clusters. See the 
 references below.
 
-Clustering trajectories requires that the endpoints of all trajectories share
-the same direction, e.g., that all trajectories end in the top-left corner of
-the coordinate system (\link{mt_remap_symmetric} or \link{mt_align} can be
-used to achieve this). Furthermore, it is recommended to use spatialized
-trajectories (see \link{mt_spatialize}; Haslbeck, Wulff, Kieslich, Henninger,
-& Schulte-Mecklenbeck, 2017).
+For clustering trajectories, it is often useful that the endpoints of all
+trajectories share the same direction, e.g., that all trajectories end in the
+top-left corner of the coordinate system (\link{mt_remap_symmetric} or
+\link{mt_align} can be used to achieve this). Furthermore, it is recommended
+to use spatialized trajectories (see \link{mt_spatialize}; Haslbeck, Wulff,
+Kieslich, Henninger, & Schulte-Mecklenbeck, 2017).
 }
 \examples{
 # Spatialize trajectories
