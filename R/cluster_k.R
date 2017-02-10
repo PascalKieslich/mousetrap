@@ -55,6 +55,8 @@
 #' number of clusters.
 #'
 #' @examples
+#' 
+#' \dontrun{
 #' # Spatialize trajectories
 #' mt_example <- mt_spatialize(mt_example)
 #'  
@@ -64,6 +66,7 @@
 #' # Retrieve results
 #' results$kopt
 #' results$paths
+#' }
 #'
 #' @author
 #' Dirk U. Wulff (\email{dirk.wulff@@gmail.com})

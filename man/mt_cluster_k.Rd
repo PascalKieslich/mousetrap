@@ -102,6 +102,8 @@ to use spatialized trajectories (see \link{mt_spatialize}; Haslbeck, Wulff,
 Kieslich, Henninger, & Schulte-Mecklenbeck, 2017).
 }
 \examples{
+
+\dontrun{
 # Spatialize trajectories
 mt_example <- mt_spatialize(mt_example)
  
@@ -111,6 +113,7 @@ results <- mt_cluster_k(mt_example, use="sp_trajectories")
 # Retrieve results
 results$kopt
 results$paths
+}
 
 }
 \references{
