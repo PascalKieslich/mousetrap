@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>mt_add_variables • mousetrap</title>
+<title>Add new variables to trajectory array. � mt_add_variables • mousetrap</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -125,9 +125,9 @@ their values are added as additional columns to the trajectory array.</dd>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Calculate new (arbitrary) variables for this example</span>
 <span class='co'># ... the sum of the x- and y-positions</span>
-<span class='no'>xy_sum</span> <span class='kw'>&lt;-</span> <span class='no'>mt_example</span>$<span class='no'>trajectories</span>[,<span class='st'>"xpos"</span>,] + <span class='no'>mt_example</span>$<span class='no'>trajectories</span>[,<span class='st'>"ypos"</span>,]
+<span class='no'>xy_sum</span> <span class='kw'>&lt;-</span> <span class='no'>mt_example</span>$<span class='no'>trajectories</span>[,,<span class='st'>"xpos"</span>] + <span class='no'>mt_example</span>$<span class='no'>trajectories</span>[,,<span class='st'>"ypos"</span>]
 <span class='co'># ... the product of the x- and y-positions</span>
-<span class='no'>xy_prod</span> <span class='kw'>&lt;-</span> <span class='no'>mt_example</span>$<span class='no'>trajectories</span>[,<span class='st'>"xpos"</span>,] * <span class='no'>mt_example</span>$<span class='no'>trajectories</span>[,<span class='st'>"ypos"</span>,]
+<span class='no'>xy_prod</span> <span class='kw'>&lt;-</span> <span class='no'>mt_example</span>$<span class='no'>trajectories</span>[,,<span class='st'>"xpos"</span>] * <span class='no'>mt_example</span>$<span class='no'>trajectories</span>[,,<span class='st'>"ypos"</span>]
 
 <span class='co'># Add the new variables to the trajectory array</span>
 <span class='no'>mt_example</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_add_variables</span>(<span class='no'>mt_example</span>,
@@ -143,12 +143,18 @@ their values are added as additional columns to the trajectory array.</dd>
       <li><a href="#examples">Examples</a></li>
     </ul>
 
+    <h2>Author</h2>
+    
+Pascal J. Kieslich (<a href='mailto:kieslich@psychologie.uni-mannheim.de'>kieslich@psychologie.uni-mannheim.de</a>)
+
+Felix Henninger
+
   </div>
 </div>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Pascal J. Kieslich, Felix Henninger.</p>
+  <p>Developed by Pascal J. Kieslich, Dirk U. Wulff, Felix Henninger, Jonas M. B. Haslbeck.</p>
 </div>
 
 <div class="pkgdown">

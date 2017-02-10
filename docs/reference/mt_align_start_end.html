@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Space normalize trajectories. — mt_space_normalize â€¢ mousetrap</title>
+<title>Align start and end position of trajectories. — mt_align_start_end â€¢ mousetrap</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -77,19 +77,17 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Space normalize trajectories.</h1>
+    <h1>Align start and end position of trajectories.</h1>
     </div>
 
     
     <p>Adjust trajectories so that all trajectories have an identical start and end 
-point. If no end points are provided, trajectories are only adjusted so that 
-they have the same start position. Please note that this function is 
-<strong>deprecated</strong> and that <a href='mt_align_start_end.html'>mt_align_start_end</a> should be used
-instead, which provides the same (and additional) functionality.</p>
+point. In some articles, this is also referred to as space-normalization
+(e.g. Dale et al., 2007).</p>
     
 
-    <pre><span class='fu'>mt_space_normalize</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='st'>"sn_trajectories"</span>,
-  <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>), <span class='kw'>start</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0</span>, <span class='fl'>0</span>), <span class='kw'>end</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+    <pre><span class='fu'>mt_align_start_end</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='no'>use</span>,
+  <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>), <span class='kw'>start</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0</span>, <span class='fl'>0</span>), <span class='kw'>end</span> <span class='kw'>=</span> <span class='fu'>c</span>(-<span class='fl'>1</span>, <span class='fl'>1</span>),
   <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
@@ -106,15 +104,19 @@ used.</dd>
 data should be stored.</dd>
       <dt>dimensions</dt>
       <dd>a character vector specifying the dimensions in the
-trajectory array that should be space-normalized.</dd>
+trajectory array that should be aligned.</dd>
       <dt>start</dt>
       <dd>a numeric vector specifying the start values for each dimension,
-i.e., the values the first recorded position should have in every trial.</dd>
+i.e., the values the first recorded position should have in every trial. If
+<code>NULL</code>, trajectories are aligned to the mean first position across all
+trials.</dd>
       <dt>end</dt>
-      <dd>a numeric vector specifying the end values for each dimension,
-i.e., the values the last recorded position should have in every trial. If
-<code>NULL</code>, trajectories are only adjusted so that they have the same
-start position.</dd>
+      <dd>a numeric vector specifying the end values for each dimension, 
+i.e., the values the last recorded position should have in every trial. If 
+<code>NULL</code>, trajectories are aligned to the mean last position across all 
+trials. Note that in this case trajectories should be remapped to one side 
+before alignment (e.g., using <a href='mt_remap_symmetric.html'>mt_remap_symmetric</a>) so that the mean
+last position is meaningful.</dd>
       <dt>verbose</dt>
       <dd>logical indicating whether function should report its
 progress.</dd>
@@ -122,12 +124,11 @@ progress.</dd>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A mousetrap data object (see <a href='mt_example.html'>mt_example</a>) with an additional
-  array (by default called <code>sn_trajectories</code>) containing the
-  space-normalized trajectories. All other trajectory dimensions not
-  specified in <code>dimensions</code> (e.g., timestamps) will be kept as is in the
-  resulting trajectory array. If a trajectory array was provided directly as
-  <code>data</code>, only the space-normalized trajectories will be returned.</p>
+    <p>A mousetrap data object (see <a href='mt_example.html'>mt_example</a>) with aligned 
+  trajectories. All other trajectory dimensions not specified in
+  <code>dimensions</code> (e.g., timestamps) will be kept as is in the resulting
+  trajectory array. If the trajectory array was provided directly as
+  <code>data</code>, only the trajectory array will be returned.</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
@@ -137,17 +138,26 @@ progress.</dd>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><a href='mt_align_start.html'>mt_align_start</a> for aligning the start position of
+    <p><a href='mt_align_start.html'>mt_align_start</a> for aligning the start position of 
   trajectories.</p>
     <p><a href='mt_remap_symmetric.html'>mt_remap_symmetric</a> for remapping trajectories.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
-<span class='co'># mt_example &lt;- mt_space_normalize(mt_example,</span>
-<span class='co'>#   save_as ="sn_trajectories",</span>
-<span class='co'>#   start=c(0,0), end=c(-1,1))</span>
-<span class='co'>## ---------------------------------------------</span></div></pre>
+    <pre class="examples"><div class='input'><span class='co'># Align start and end positions to specific coordinates</span>
+<span class='no'>mt_example</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_align_start_end</span>(<span class='no'>mt_example</span>,
+  <span class='kw'>start</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>0</span>,<span class='fl'>0</span>), <span class='kw'>end</span><span class='kw'>=</span><span class='fu'>c</span>(-<span class='fl'>1</span>,<span class='fl'>1</span>))
+
+
+<span class='co'># Import raw trajectories for demonstration</span>
+<span class='no'>mt_example</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_import_mousetrap.html'>mt_import_mousetrap</a></span>(<span class='no'>mt_example_raw</span>)
+
+<span class='co'># Remap trajectories</span>
+<span class='no'>mt_example</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_remap_symmetric.html'>mt_remap_symmetric</a></span>(<span class='no'>mt_example</span>)
+
+<span class='co'># Align trajectories to mean first and last coordinates</span>
+<span class='no'>mt_example</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_align_start_end</span>(<span class='no'>mt_example</span>,
+  <span class='kw'>start</span><span class='kw'>=</span><span class='kw'>NULL</span>, <span class='kw'>end</span><span class='kw'>=</span><span class='kw'>NULL</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Space normalize trajectories. — mt_space_normalize â€¢ mousetrap</title>
+<title>Calculate movement angles. — mt_angles â€¢ mousetrap</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -77,20 +77,18 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Space normalize trajectories.</h1>
+    <h1>Calculate movement angles.</h1>
     </div>
 
     
-    <p>Adjust trajectories so that all trajectories have an identical start and end 
-point. If no end points are provided, trajectories are only adjusted so that 
-they have the same start position. Please note that this function is 
-<strong>deprecated</strong> and that <a href='mt_align_start_end.html'>mt_align_start_end</a> should be used
-instead, which provides the same (and additional) functionality.</p>
+    <p>Calculate point-based and vertical-based angles for the points in the 
+movement trajectory. Point-based angles are the angle defined by three 
+subsequent points on the trajectory. Vertical-based angles are the angles 
+between two subsequent points and the vertical axis.</p>
     
 
-    <pre><span class='fu'>mt_space_normalize</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='st'>"sn_trajectories"</span>,
-  <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>), <span class='kw'>start</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0</span>, <span class='fl'>0</span>), <span class='kw'>end</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre><span class='fu'>mt_angles</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>),
+  <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='no'>use</span>, <span class='kw'>na_replace</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>unit</span> <span class='kw'>=</span> <span class='st'>"radian"</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
@@ -101,20 +99,19 @@ array can be provided directly (in this case <code>use</code> will be ignored).<
       <dt>use</dt>
       <dd>a character string specifying which trajectory data should be
 used.</dd>
+      <dt>dimensions</dt>
+      <dd>a character string specifying which trajectory variables 
+should be used. Must be of length 2.</dd>
       <dt>save_as</dt>
       <dd>a character string specifying where the resulting trajectory
 data should be stored.</dd>
-      <dt>dimensions</dt>
-      <dd>a character vector specifying the dimensions in the
-trajectory array that should be space-normalized.</dd>
-      <dt>start</dt>
-      <dd>a numeric vector specifying the start values for each dimension,
-i.e., the values the first recorded position should have in every trial.</dd>
-      <dt>end</dt>
-      <dd>a numeric vector specifying the end values for each dimension,
-i.e., the values the last recorded position should have in every trial. If
-<code>NULL</code>, trajectories are only adjusted so that they have the same
-start position.</dd>
+      <dt>na_replace</dt>
+      <dd>logical specifying whether <code>NA</code>s in the angle values 
+should be replaced using the next existing angle value (see Details). 
+Defaults to <code>FALSE</code>.</dd>
+      <dt>unit</dt>
+      <dd>character specifying the unit for the angles. Default is 
+&quot;radian&quot;, alternative is &quot;degree&quot;.</dd>
       <dt>verbose</dt>
       <dd>logical indicating whether function should report its
 progress.</dd>
@@ -122,32 +119,42 @@ progress.</dd>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A mousetrap data object (see <a href='mt_example.html'>mt_example</a>) with an additional
-  array (by default called <code>sn_trajectories</code>) containing the
-  space-normalized trajectories. All other trajectory dimensions not
-  specified in <code>dimensions</code> (e.g., timestamps) will be kept as is in the
-  resulting trajectory array. If a trajectory array was provided directly as
-  <code>data</code>, only the space-normalized trajectories will be returned.</p>
+    <p>A mousetrap data object (see <a href='mt_example.html'>mt_example</a>) with point-based and 
+  vertical-based angles added as additional variables to the trajectory array
+  (called <code>angle_p</code> and <code>angle_v</code>). If a trajectory array was 
+  provided directly as <code>data</code>, only the trajectory array will be 
+  returned.</p>
     
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Dale, R., Kehoe, C., &amp; Spivey, M. J. (2007). Graded motor
-  responses in the time course of categorizing atypical exemplars.
-  <em>Memory &amp; Cognition, 35</em>(1), 15-28.</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <p><a href='mt_align_start.html'>mt_align_start</a> for aligning the start position of
-  trajectories.</p>
-    <p><a href='mt_remap_symmetric.html'>mt_remap_symmetric</a> for remapping trajectories.</p>
+    <p>By default, angles are reported in radians, the alternative is degrees. For 
+the first point in a trajectory, the angle values are always not defined 
+(<code>NA</code>)</p>
+    <p>For vertical-based angles (<code>angle_v</code>), positive values indicate a 
+movement to the left of the vertical, negative values to the right of the 
+vertical. If there was no movement across two consecutive points, 
+<code>angle_v</code> is not defined and, by default, <code>NA</code> is returned. If 
+<code>na_replace</code> is <code>TRUE</code>, the next existing angle value is reported 
+instead.</p>
+    <p>For point-based angles (<code>angle_p</code>), angles indicate changes of movement 
+within three consecutive time steps. The reported angle is always the smaller
+one. A value of pi (= 3.14...) (for radians) or 180 (for degrees) indicates a
+constant movement direction, a value of 0 (both for radians and degrees) a 
+complete reversal. If there was no movement across two consecutive points, 
+<code>angle_p</code> is not defined and, by default, <code>NA</code> is returned. If 
+<code>na_replace</code> is <code>TRUE</code>, the next existing angle value is reported 
+instead. <code>angle_p</code> is also not defined for the last point of the 
+trajectory.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
-<span class='co'># mt_example &lt;- mt_space_normalize(mt_example,</span>
-<span class='co'>#   save_as ="sn_trajectories",</span>
-<span class='co'>#   start=c(0,0), end=c(-1,1))</span>
-<span class='co'>## ---------------------------------------------</span></div></pre>
+    <pre class="examples"><div class='input'><span class='co'># Calculate movement angles</span>
+<span class='no'>mt_example</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_angles</span>(<span class='no'>mt_example</span>)
+
+<span class='co'># Calculate movement angles (in degree)</span>
+<span class='co'># and replace NAs with next existing value</span>
+<span class='no'>mt_example</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_angles</span>(<span class='no'>mt_example</span>,
+  <span class='kw'>unit</span><span class='kw'>=</span><span class='st'>"degree"</span>, <span class='kw'>na_replace</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -156,18 +163,14 @@ progress.</dd>
       
       <li><a href="#value">Value</a></li>
 
-      <li><a href="#references">References</a></li>
-
-      <li><a href="#see-also">See also</a></li>
+      <li><a href="#details">Details</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
 
     <h2>Author</h2>
     
-Pascal J. Kieslich (<a href='mailto:kieslich@psychologie.uni-mannheim.de'>kieslich@psychologie.uni-mannheim.de</a>)
-
-Felix Henninger
+Dirk U. Wulff (<a href='mailto:dirk.wulff@gmail.com'>dirk.wulff@gmail.com</a>)
 
   </div>
 </div>

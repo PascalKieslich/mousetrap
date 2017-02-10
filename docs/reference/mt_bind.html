@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Filter mousetrap data. — mt_subset â€¢ mousetrap</title>
+<title>Join two trajectory arrays — mt_bind â€¢ mousetrap</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -77,67 +77,41 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Filter mousetrap data.</h1>
+    <h1>Join two trajectory arrays</h1>
     </div>
 
     
-    <p>Return a subset of the mousetrap data including only the trial data and
-corresponding trajectories that meet the conditions specified in the
-arguments.</p>
+    <p>Join two trajectory arrays. This function is mainly used internally, but can 
+be helpful in those (relatively rare) occasions where addional processed 
+trajectory data should be added to another trajectory array.</p>
     
 
-    <pre><span class='fu'>mt_subset</span>(<span class='no'>data</span>, <span class='no'>subset</span>, <span class='kw'>check</span> <span class='kw'>=</span> <span class='st'>"data"</span>)</pre>
+    <pre><span class='fu'>mt_bind</span>(<span class='no'>trajectories1</span>, <span class='no'>trajectories2</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
-      <dt>data</dt>
-      <dd>a mousetrap data object created using one of the mt_import
-functions (see <a href='mt_example.html'>mt_example</a> for details).</dd>
-      <dt>subset</dt>
-      <dd>a logical expression (passed on to subset) indicating
-the rows to keep. Missing values are taken as <code>FALSE</code>.</dd>
-      <dt>check</dt>
-      <dd>a character string specifying which data should be used for
-checking the subset condition.</dd>
+      <dt>trajectories1</dt>
+      <dd>a trajectory array (see <a href='mt_example.html'>mt_example</a>).</dd>
+      <dt>trajectories2</dt>
+      <dd>a trajectory array (see <a href='mt_example.html'>mt_example</a>).</dd>
+      <dt>verbose</dt>
+      <dd>logical indicating whether function should report its
+progress.</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A mousetrap data object (see <a href='mt_example.html'>mt_example</a>) with filtered
-  data and trajectories.</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p><code>mt_subset</code> is helpful when trials should be removed from all analyses.
-By default, <code>check</code> is set to &quot;data&quot; meaning that the subset condition
-is evaluated based on the trial data (stored in <code>data[[&quot;data&quot;]]</code>).
-However, it might also be of interest to only include trials based on
-specific mouse-tracking measures (e.g., all trials with an <code>MAD</code> smaller
-than 200). In this case, <code>check</code> needs to be set to the respective name
-of the data.frame (e.g., &quot;measures&quot;).</p>
-    <p>Note that if specific trials should be removed from all analyses based on a
-condition known a priori (e.g., practice trials), it is more efficient to use
-the subset function on the raw data before importing the trajectories
-using one of the mt_import functions (such as <a href='mt_import_mousetrap.html'>mt_import_mousetrap</a>).</p>
-    <p>Besides, if trials should only be removed from some analyses or for specific
-plots, note that other mousetrap functions (e.g., <a href='mt_reshape.html'>mt_reshape</a>,
-<a href='mt_aggregate.html'>mt_aggregate</a>, and <a href='mt_plot.html'>mt_plot</a>) also allow for subsetting.</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <p>subset for the R base subset function for vectors, matrices,
-or data.frames.</p>
-    <p><a href='mt_reshape.html'>mt_reshape</a> for information about the subset argument in various other
-mousetrap functions.</p>
+    <p>A trajectory array.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Subset based on trial data</span>
-<span class='no'>mt_example_atypical</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_subset</span>(<span class='no'>mt_example</span>, <span class='no'>Condition</span><span class='kw'>==</span><span class='st'>"Atypical"</span>)
-
-<span class='co'># Subset based on mouse-tracking measure (MAD)</span>
-<span class='no'>mt_example</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_measures.html'>mt_measures</a></span>(<span class='no'>mt_example</span>)
-<span class='no'>mt_example_mad_sub</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_subset</span>(<span class='no'>mt_example</span>, <span class='no'>MAD</span><span class='kw'>&lt;</span><span class='fl'>400</span>, <span class='kw'>check</span><span class='kw'>=</span><span class='st'>"measures"</span>)</div></pre>
+    <pre class="examples"><div class='input'>
+<span class='co'>## Not run: ------------------------------------</span>
+<span class='co'># trajectories_combined &lt;- mt_bind(</span>
+<span class='co'>#   mt_example$trajectories,</span>
+<span class='co'>#   mt_prototypes</span>
+<span class='co'># )</span>
+<span class='co'>## ---------------------------------------------</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -145,10 +119,6 @@ mousetrap functions.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
-
-      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>

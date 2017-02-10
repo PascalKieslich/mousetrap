@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>mt_time_normalize • mousetrap</title>
+<title>Time normalize trajectories. � mt_time_normalize • mousetrap</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -90,7 +90,7 @@ interpolation based on the timestamps. By default, 101 time steps are used
 
     <pre><span class='fu'>mt_time_normalize</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='st'>"tn_trajectories"</span>,
   <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>), <span class='kw'>timestamps</span> <span class='kw'>=</span> <span class='st'>"timestamps"</span>, <span class='kw'>nsteps</span> <span class='kw'>=</span> <span class='fl'>101</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>show_progress</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
@@ -116,8 +116,6 @@ containing the timestamps.</dd>
       <dt>verbose</dt>
       <dd>logical indicating whether function should report its
 progress.</dd>
-      <dt>show_progress</dt>
-      <dd>Deprecated. Please use <code>verbose</code> instead.</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -177,12 +175,18 @@ interval.</p>
       <li><a href="#examples">Examples</a></li>
     </ul>
 
+    <h2>Author</h2>
+    
+Pascal J. Kieslich (<a href='mailto:kieslich@psychologie.uni-mannheim.de'>kieslich@psychologie.uni-mannheim.de</a>)
+
+Felix Henninger
+
   </div>
 </div>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Pascal J. Kieslich, Felix Henninger.</p>
+  <p>Developed by Pascal J. Kieslich, Dirk U. Wulff, Felix Henninger, Jonas M. B. Haslbeck.</p>
 </div>
 
 <div class="pkgdown">

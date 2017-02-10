@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>mt_import_wide • mousetrap</title>
+<title>Import mouse-tracking data saved in wide format. � mt_import_wide • mousetrap</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -176,8 +176,6 @@ studying real-time mental processing using a computer mouse-tracking method.
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><a href='read_mousetracker.html'>read_mousetracker</a> for reading data into R that were exported
-from MouseTracker (Freeman &amp; Ambady, 2010).</p>
     <p><a href='mt_import_mousetrap.html'>mt_import_mousetrap</a> and <a href='mt_import_long.html'>mt_import_long</a> for importing
 mouse-tracking data in other formats.</p>
     
@@ -189,19 +187,9 @@ mouse-tracking data in other formats.</p>
 
 <span class='co'># Import the data using mt_import_wide</span>
 <span class='no'>mt_data</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_import_wide</span>(<span class='no'>mt_data_wide</span>,
-  <span class='kw'>xpos_label</span><span class='kw'>=</span><span class='st'>"xpos"</span>, <span class='kw'>ypos_label</span><span class='kw'>=</span><span class='st'>"ypos"</span>, <span class='kw'>timestamps</span><span class='kw'>=</span><span class='st'>"timestamps"</span>)</div><div class='output co'>#&gt; <span class='message'>No mt_id_label provided. A new trial identifying variable called mt_id was created.</span></div><div class='output co'>#&gt; <span class='message'>No pos_ids provided. The following variables were found using grep:</span></div><div class='output co'>#&gt; <span class='message'>465 variables found for timestamps.</span></div><div class='output co'>#&gt; <span class='message'>465 variables found for xpos.</span></div><div class='output co'>#&gt; <span class='message'>465 variables found for ypos.</span></div><div class='input'>
-
-<span class='co'>## Not run: ------------------------------------</span>
-<span class='co'># </span>
-<span class='co'># # Data from "time normalized analysis" in MouseTracker</span>
-<span class='co'># raw_data &lt;- read_mousetracker("tn_data_exported.csv")</span>
-<span class='co'># data &lt;- mt_import_wide(raw_data, pos_ids=1:101)</span>
-<span class='co'># </span>
-<span class='co'># # Data from "raw time analysis" in MouseTracker</span>
-<span class='co'># raw_data &lt;- read_mousetracker("raw_data_exported.csv", last_lines_to_rm=2*8)</span>
-<span class='co'># data &lt;- mt_import_wide(raw_data)</span>
-<span class='co'># </span>
-<span class='co'>## ---------------------------------------------</span></div></pre>
+  <span class='kw'>xpos_label</span><span class='kw'>=</span><span class='st'>"xpos"</span>, <span class='kw'>ypos_label</span><span class='kw'>=</span><span class='st'>"ypos"</span>,
+  <span class='kw'>timestamps_label</span><span class='kw'>=</span><span class='st'>"timestamps"</span>)</div><div class='output co'>#&gt; <span class='message'>No mt_id_label provided. A new trial identifying variable called mt_id was created.</span></div><div class='output co'>#&gt; <span class='message'>No pos_ids provided. The following variables were found using grep:</span></div><div class='output co'>#&gt; <span class='message'>465 variables found for timestamps.</span></div><div class='output co'>#&gt; <span class='message'>465 variables found for xpos.</span></div><div class='output co'>#&gt; <span class='message'>465 variables found for ypos.</span></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -219,12 +207,18 @@ mouse-tracking data in other formats.</p>
       <li><a href="#examples">Examples</a></li>
     </ul>
 
+    <h2>Author</h2>
+    
+Pascal J. Kieslich (<a href='mailto:kieslich@psychologie.uni-mannheim.de'>kieslich@psychologie.uni-mannheim.de</a>)
+
+Felix Henninger
+
   </div>
 </div>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Pascal J. Kieslich, Felix Henninger.</p>
+  <p>Developed by Pascal J. Kieslich, Dirk U. Wulff, Felix Henninger, Jonas M. B. Haslbeck.</p>
 </div>
 
 <div class="pkgdown">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>mt_derivatives • mousetrap</title>
+<title>Calculate distance, velocity, and acceleration. � mt_derivatives • mousetrap</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -89,13 +89,7 @@ acceleration denotes the difference in velocity, again normalized per time.</p>
 
     <pre><span class='fu'>mt_derivatives</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='no'>use</span>,
   <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>), <span class='kw'>timestamps</span> <span class='kw'>=</span> <span class='st'>"timestamps"</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>acc_on_abs_vel</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>show_progress</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>dimension</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-
-<span class='fu'>mt_calculate_derivatives</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='no'>use</span>,
-  <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>), <span class='kw'>timestamps</span> <span class='kw'>=</span> <span class='st'>"timestamps"</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>acc_on_abs_vel</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>show_progress</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>dimension</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>acc_on_abs_vel</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>return_delta_time</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
@@ -125,21 +119,20 @@ to be created new trajectory dimensions.</dd>
       <dd>logical indicating if acceleration should be calculated
 based on absolute velocity values (ignoring direction). Only relevant if
 velocity can be negative (see Details).</dd>
+      <dt>return_delta_time</dt>
+      <dd>logical indicating if the timestamp differences 
+should be returned as well (as &quot;delta_time&quot;).</dd>
       <dt>verbose</dt>
       <dd>logical indicating whether function should report its
 progress.</dd>
-      <dt>show_progress</dt>
-      <dd>Deprecated. Please use <code>verbose</code> instead.</dd>
-      <dt>dimension</dt>
-      <dd>Deprecated. Please use <code>dimensions</code> instead.</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A mousetrap data object (see <a href='mt_example.html'>mt_example</a>) with Euclidian
-  distance, velocity, and acceleration added as additional columns to the
-  trajectory array (called <code>dist</code>, <code>vel</code>, and  <code>acc</code>, if no
-  prefix was specified). If the trajectory array was provided directly as
+    <p>A mousetrap data object (see <a href='mt_example.html'>mt_example</a>) with Euclidian 
+  distance, velocity, and acceleration added as additional variables to the 
+  trajectory array (called <code>dist</code>, <code>vel</code>, and  <code>acc</code>, if no 
+  prefix was specified). If the trajectory array was provided directly as 
   <code>data</code>, only the trajectory array will be returned.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -163,15 +156,6 @@ and add a zero at the beginning.</p>
 dimensions, distance and velocity is always positive (or 0). If only one
 dimension is used, increases in x (or y) values result in positive distances
 and velocity values, decreases in negative distances and velocity values.</p>
-    
-    <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
-
-    <p><ul>
-<li> <code>mt_derivatives</code>: Calculate distance, velocity, and acceleration</p>
-    <p></li>
-<li> <code>mt_calculate_derivatives</code>: Deprecated
-</li>
-</ul></p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -200,19 +184,23 @@ measures.</p>
 
       <li><a href="#details">Details</a></li>
 
-      <li><a href="#functions">Functions</a></li>
-
       <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
+
+    <h2>Author</h2>
+    
+Pascal J. Kieslich (<a href='mailto:kieslich@psychologie.uni-mannheim.de'>kieslich@psychologie.uni-mannheim.de</a>)
+
+Felix Henninger
 
   </div>
 </div>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Pascal J. Kieslich, Felix Henninger.</p>
+  <p>Developed by Pascal J. Kieslich, Dirk U. Wulff, Felix Henninger, Jonas M. B. Haslbeck.</p>
 </div>
 
 <div class="pkgdown">

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>mt_resample • mousetrap</title>
+<title>Resample trajectories using a constant time interval. � mt_resample • mousetrap</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -88,8 +88,8 @@ interpolation is performed using the two adjacent timestamps.</p>
 
     <pre><span class='fu'>mt_resample</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='st'>"rs_trajectories"</span>,
   <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>), <span class='kw'>timestamps</span> <span class='kw'>=</span> <span class='st'>"timestamps"</span>,
-  <span class='kw'>step_size</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>exact_last_timestamp</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>show_progress</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>step_size</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>exact_last_timestamp</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>constant_interpolation</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
@@ -117,11 +117,15 @@ interval. The unit corresponds to the unit of the timestamps.</dd>
       <dd>logical indicating if the last timestamp should
 always be appended (which is the case by default). If <code>FALSE</code>, the
 last timestamp is only appended if it is a multiple of the step_size.</dd>
+      <dt>constant_interpolation</dt>
+      <dd>an optional integer. If specified, constant 
+instead of linear interpolation will be performed for all adjacent 
+timestamps whose difference exceeds the number specified for
+<code>constant_interpolation</code>. The unit corresponds to the unit of the
+timestamps.</dd>
       <dt>verbose</dt>
       <dd>logical indicating whether function should report its
 progress.</dd>
-      <dt>show_progress</dt>
-      <dd>Deprecated. Please use <code>verbose</code> instead.</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -146,6 +150,11 @@ the mouse exactly 250 ms and 500 ms after onset of the trial are of
 interest). In case that a trial does not contain samples at the specified
 timestamps, linear interpolation is performed using the two adjacent
 timestamps.</p>
+    <p>If a number is specified for <code>constant_interpolation</code>, constant instead 
+of linear interpolation will be performed for all adjacent timestamps whose 
+difference exceeds this number. Specifically, a period without mouse movement
+will be assumed starting at the respective timestamp until the next timestamp
+- <code>constant_interpolation/2</code>.</p>
     <p>Note that <code>mt_resample</code> does not average across time intervals. For
 this, <a href='mt_average.html'>mt_average</a> can be used.</p>
     
@@ -176,12 +185,18 @@ linear interpolation.</p>
       <li><a href="#examples">Examples</a></li>
     </ul>
 
+    <h2>Author</h2>
+    
+Pascal J. Kieslich (<a href='mailto:kieslich@psychologie.uni-mannheim.de'>kieslich@psychologie.uni-mannheim.de</a>)
+
+Felix Henninger
+
   </div>
 </div>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Pascal J. Kieslich, Felix Henninger.</p>
+  <p>Developed by Pascal J. Kieslich, Dirk U. Wulff, Felix Henninger, Jonas M. B. Haslbeck.</p>
 </div>
 
 <div class="pkgdown">

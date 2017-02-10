@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>mt_plot_per_trajectory • mousetrap</title>
+<title>Create PDF with separate plots per trajectory. � mt_plot_per_trajectory • mousetrap</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -81,9 +81,9 @@
     </div>
 
     
-    <p><code>mt_plot_per_trajectory</code> creates a PDF file with separate plots per 
+    <p><code>mt_plot_per_trajectory</code> creates a PDF file with separate plots per
 trajectory. This PDF can be used for inspecting individual trajectories. Note
-that plotting all trajectories can be time-consuming, especially for raw 
+that plotting all trajectories can be time-consuming, especially for raw
 trajectories. If the appropriate <code>x</code> and <code>y</code> arguments are
 inserted, this function can also be used for plotting velocity and
 acceleration profiles.</p>
@@ -92,7 +92,7 @@ acceleration profiles.</p>
     <pre><span class='fu'>mt_plot_per_trajectory</span>(<span class='no'>file</span>, <span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"xpos"</span>,
   <span class='kw'>y</span> <span class='kw'>=</span> <span class='st'>"ypos"</span>, <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>axes_exact</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>points</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>rect</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>show_progress</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
@@ -100,28 +100,29 @@ acceleration profiles.</p>
       <dd>a character string specifying the name of the PDF file. Passed on
 to <a href='http://www.rdocumentation.org/packages/grDevices/topics/pdf'>pdf</a>.</dd>
       <dt>data</dt>
-      <dd>a mousetrap data object created using one of the mt_import 
-functions (e.g., <a href='mt_import_mousetrap.html'>mt_import_mousetrap</a>).</dd>
+      <dd>a mousetrap data object created using one of the mt_import
+functions (see <a href='mt_example.html'>mt_example</a> for details). Alternatively, a trajectory
+array can be provided directly (in this case <code>use</code> will be ignored).</dd>
       <dt>use</dt>
-      <dd>a character string specifying which trajectories should be 
-plotted. The corresponding trajectories are selected from data using 
-<code>data[[use]]</code>. Usually, this value corresponds to either 
-&quot;trajectories&quot;, &quot;tn_trajectories&quot; or &quot;av_trajectories&quot;, depending on 
-whether the raw, time-normalized or averaged trajectories should be 
+      <dd>a character string specifying which trajectories should be
+plotted. The corresponding trajectories are selected from data using
+<code>data[[use]]</code>. Usually, this value corresponds to either
+&quot;trajectories&quot;, &quot;tn_trajectories&quot; or &quot;av_trajectories&quot;, depending on
+whether the raw, time-normalized or averaged trajectories should be
 plotted.</dd>
       <dt>x</dt>
-      <dd>a character string specifying which dimension in the trajectory 
+      <dd>a character string specifying which dimension in the trajectory
 array should be displayed on the x-axis (defaults to xpos).</dd>
       <dt>y</dt>
-      <dd>a character string specifying which dimension in the trajectory 
+      <dd>a character string specifying which dimension in the trajectory
 array should be displayed on the y-axis (defaults to ypos).</dd>
       <dt>xlim</dt>
       <dd>optional argument specifying the limits for the x axis (passed on
-to <a href='http://www.rdocumentation.org/packages/ggplot2/topics/coord_cartesian'>coord_cartesian</a>). If not specified (the default), 
+to <a href='http://www.rdocumentation.org/packages/ggplot2/topics/coord_cartesian'>coord_cartesian</a>). If not specified (the default),
 sensible axis limits will be computed.</dd>
       <dt>ylim</dt>
       <dd>optional argument specifying the limits for the y axis (passed on
-to <a href='http://www.rdocumentation.org/packages/ggplot2/topics/coord_cartesian'>coord_cartesian</a>). If not specified (the default), 
+to <a href='http://www.rdocumentation.org/packages/ggplot2/topics/coord_cartesian'>coord_cartesian</a>). If not specified (the default),
 sensible axis limits will be computed.</dd>
       <dt>axes_exact</dt>
       <dd>logical. If <code>TRUE</code>, axes will be set without offset
@@ -141,10 +142,8 @@ relevant if <code>rect</code> is specified.</dd>
       <dd>optional argument passed on to <a href='mt_plot_add_rect.html'>mt_plot_add_rect</a>. Only
 relevant if <code>rect</code> is specified.</dd>
       <dt>verbose</dt>
-      <dd>logical indicating whether function should report its 
+      <dd>logical indicating whether function should report its
 progress.</dd>
-      <dt>show_progress</dt>
-      <dd>Deprecated. Please use <code>verbose</code> instead.</dd>
       <dt>...</dt>
       <dd>additional arguments passed on to <a href='http://www.rdocumentation.org/packages/grDevices/topics/pdf'>pdf</a>.</dd>
     </dl>
@@ -179,12 +178,18 @@ is labeled using the rownames of the trajectories.</p>
       <li><a href="#examples">Examples</a></li>
     </ul>
 
+    <h2>Author</h2>
+    
+Pascal J. Kieslich (<a href='mailto:kieslich@psychologie.uni-mannheim.de'>kieslich@psychologie.uni-mannheim.de</a>)
+
+Felix Henninger
+
   </div>
 </div>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Pascal J. Kieslich, Felix Henninger.</p>
+  <p>Developed by Pascal J. Kieslich, Dirk U. Wulff, Felix Henninger, Jonas M. B. Haslbeck.</p>
 </div>
 
 <div class="pkgdown">

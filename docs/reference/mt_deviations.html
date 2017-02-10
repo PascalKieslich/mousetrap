@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>mt_deviations • mousetrap</title>
+<title>Calculate deviations from idealized trajectory. � mt_deviations • mousetrap</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -87,11 +87,7 @@ actual trajectory from it for each logged position.</p>
 
     <pre><span class='fu'>mt_deviations</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='no'>use</span>,
   <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>), <span class='kw'>start_ideal</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>end_ideal</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>show_progress</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-
-<span class='fu'>mt_calculate_deviations</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='no'>use</span>,
-  <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>), <span class='kw'>start_ideal</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>end_ideal</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>show_progress</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
@@ -123,8 +119,6 @@ to be created new trajectory dimensions.</dd>
       <dt>verbose</dt>
       <dd>logical indicating whether function should report its
 progress.</dd>
-      <dt>show_progress</dt>
-      <dd>Deprecated. Please use <code>verbose</code> instead.</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -133,15 +127,15 @@ progress.</dd>
   of the idealized trajectory (by default called <code>xpos_ideal</code> and 
   <code>ypos_ideal</code>) and the perpendicular deviations of the actual 
   trajectory from the idealized trajectory (by default called 
-  <code>dev_ideal</code>) have been added as additional columns to the trajectory
-  array. If the trajectory array was provided directly as <code>data</code>, only
+  <code>dev_ideal</code>) have been added as additional variables to the trajectory
+  array. If the trajectory array was provided directly as <code>data</code>, only 
   the trajectory array will be returned.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The idealized trajectory is defined as the straight line connecting the start
 and end point of the actual trajectory (e.g., Freeman &amp; Ambady, 2010). The 
-deviation for each position is calclated as the perpendicular deviation of 
+deviation for each position is calculated as the perpendicular deviation of 
 the actual trajectory from the idealized trajectory.</p>
     <p>If a deviation occurs above the direct path, this is denoted by a positive 
 value. If it occurs below the direct path, this is denoted by a negative 
@@ -150,15 +144,6 @@ to top (i.e., the end point has a higher y-position than the start poins). In
 case the movement was from top to bottom, <code>mt_deviations</code> 
 automatically flips the signs. Note that the second dimension specified in 
 <code>dimensions</code> is used for determining all this.</p>
-    
-    <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
-
-    <p><ul>
-<li> <code>mt_deviations</code>: Calculate deviations from idealized trajectory</p>
-    <p></li>
-<li> <code>mt_calculate_deviations</code>: Deprecated
-</li>
-</ul></p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
@@ -180,7 +165,7 @@ automatically flips the signs. Note that the second dimension specified in
 <span class='co'># Calculate deviations from idealized trajectory with</span>
 <span class='co'># constant start and end points across trials</span>
 <span class='no'>mt_example</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_deviations</span>(<span class='no'>mt_example</span>,
-  <span class='kw'>start_ideal</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='kw'>xpos</span><span class='kw'>=</span><span class='fl'>0</span>,<span class='kw'>ypos</span><span class='kw'>=</span><span class='fl'>0</span>), <span class='kw'>end_ideal</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='kw'>xpos</span><span class='kw'>=</span>-<span class='fl'>665</span>,<span class='kw'>ypos</span><span class='kw'>=</span><span class='fl'>974</span>))</div></pre>
+  <span class='kw'>start_ideal</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>0</span>,<span class='fl'>0</span>), <span class='kw'>end_ideal</span><span class='kw'>=</span><span class='fu'>c</span>(-<span class='fl'>665</span>,<span class='fl'>974</span>))</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -191,8 +176,6 @@ automatically flips the signs. Note that the second dimension specified in
 
       <li><a href="#details">Details</a></li>
 
-      <li><a href="#functions">Functions</a></li>
-
       <li><a href="#references">References</a></li>
 
       <li><a href="#see-also">See also</a></li>
@@ -200,12 +183,18 @@ automatically flips the signs. Note that the second dimension specified in
       <li><a href="#examples">Examples</a></li>
     </ul>
 
+    <h2>Author</h2>
+    
+Pascal J. Kieslich (<a href='mailto:kieslich@psychologie.uni-mannheim.de'>kieslich@psychologie.uni-mannheim.de</a>)
+
+Felix Henninger
+
   </div>
 </div>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Pascal J. Kieslich, Felix Henninger.</p>
+  <p>Developed by Pascal J. Kieslich, Dirk U. Wulff, Felix Henninger, Jonas M. B. Haslbeck.</p>
 </div>
 
 <div class="pkgdown">

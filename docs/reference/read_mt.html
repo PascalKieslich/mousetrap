@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Filter mousetrap data. — mt_subset â€¢ mousetrap</title>
+<title>Read MouseTracker raw data. — read_mt â€¢ mousetrap</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -77,67 +77,69 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Filter mousetrap data.</h1>
+    <h1>Read MouseTracker raw data.</h1>
     </div>
 
     
-    <p>Return a subset of the mousetrap data including only the trial data and
-corresponding trajectories that meet the conditions specified in the
-arguments.</p>
+    <p><code>read_mt</code> reads raw data that was collected using MouseTracker (Freeman 
+&amp; Ambady, 2010) and stored as a file in the &quot;.mt&quot; format. If multiple files 
+should be read into R, <code>read_mt</code> can be used in combination with the 
+<a href='http://www.rdocumentation.org/packages/readbulk/topics/read_bulk'>read_bulk</a> functon from the <code>readbulk</code> package (see 
+Examples). After reading the data into R, <a href='mt_import_wide.html'>mt_import_wide</a> can be used 
+to prepare the trajectory data for analyses using the mousetrap library. The 
+current version of <code>read_mt</code> has been tested with data from MouseTracker
+Version 2.84 but please be sure to double-check.</p>
     
 
-    <pre><span class='fu'>mt_subset</span>(<span class='no'>data</span>, <span class='no'>subset</span>, <span class='kw'>check</span> <span class='kw'>=</span> <span class='st'>"data"</span>)</pre>
+    <pre><span class='fu'>read_mt</span>(<span class='no'>file</span>, <span class='kw'>columns</span> <span class='kw'>=</span> <span class='st'>"all"</span>, <span class='kw'>add_trialid</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>add_filename</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
-      <dt>data</dt>
-      <dd>a mousetrap data object created using one of the mt_import
-functions (see <a href='mt_example.html'>mt_example</a> for details).</dd>
-      <dt>subset</dt>
-      <dd>a logical expression (passed on to subset) indicating
-the rows to keep. Missing values are taken as <code>FALSE</code>.</dd>
-      <dt>check</dt>
-      <dd>a character string specifying which data should be used for
-checking the subset condition.</dd>
+      <dt>file</dt>
+      <dd>a character string specifying the filename of the .mt file.</dd>
+      <dt>columns</dt>
+      <dd>either &#39;all&#39; or a character vector specifying the to be 
+extracted variables Defaults to &#39;all&#39; in which case all existing variables 
+will be extracted.</dd>
+      <dt>add_trialid</dt>
+      <dd>boolean specifying whether an additional column containing
+the trial number should be added.</dd>
+      <dt>add_filename</dt>
+      <dd>boolean specifying whether an additional column 
+containing the file name should be added.</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A mousetrap data object (see <a href='mt_example.html'>mt_example</a>) with filtered
-  data and trajectories.</p>
+    <p>A data frame with one row per trial. Variables are ordered according 
+  to columns, x-coordinates, y-coordinates, and timestamps.</p>
     
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p><code>mt_subset</code> is helpful when trials should be removed from all analyses.
-By default, <code>check</code> is set to &quot;data&quot; meaning that the subset condition
-is evaluated based on the trial data (stored in <code>data[[&quot;data&quot;]]</code>).
-However, it might also be of interest to only include trials based on
-specific mouse-tracking measures (e.g., all trials with an <code>MAD</code> smaller
-than 200). In this case, <code>check</code> needs to be set to the respective name
-of the data.frame (e.g., &quot;measures&quot;).</p>
-    <p>Note that if specific trials should be removed from all analyses based on a
-condition known a priori (e.g., practice trials), it is more efficient to use
-the subset function on the raw data before importing the trajectories
-using one of the mt_import functions (such as <a href='mt_import_mousetrap.html'>mt_import_mousetrap</a>).</p>
-    <p>Besides, if trials should only be removed from some analyses or for specific
-plots, note that other mousetrap functions (e.g., <a href='mt_reshape.html'>mt_reshape</a>,
-<a href='mt_aggregate.html'>mt_aggregate</a>, and <a href='mt_plot.html'>mt_plot</a>) also allow for subsetting.</p>
+    <p>Freeman, J. B., &amp; Ambady, N. (2010). MouseTracker: Software for 
+  studying real-time mental processing using a computer mouse-tracking
+  method. <em>Behavior Research Methods, 42</em>(1), 226-241.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p>subset for the R base subset function for vectors, matrices,
-or data.frames.</p>
-    <p><a href='mt_reshape.html'>mt_reshape</a> for information about the subset argument in various other
-mousetrap functions.</p>
+    <p><a href='http://www.rdocumentation.org/packages/readbulk/topics/read_bulk'>read_bulk</a> from the <code>readbulk</code> package for reading and 
+combining mutliple raw data files.</p>
+    <p><a href='mt_import_wide.html'>mt_import_wide</a> to prepare the imported data for analyses in mousetrap.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Subset based on trial data</span>
-<span class='no'>mt_example_atypical</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_subset</span>(<span class='no'>mt_example</span>, <span class='no'>Condition</span><span class='kw'>==</span><span class='st'>"Atypical"</span>)
-
-<span class='co'># Subset based on mouse-tracking measure (MAD)</span>
-<span class='no'>mt_example</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_measures.html'>mt_measures</a></span>(<span class='no'>mt_example</span>)
-<span class='no'>mt_example_mad_sub</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_subset</span>(<span class='no'>mt_example</span>, <span class='no'>MAD</span><span class='kw'>&lt;</span><span class='fl'>400</span>, <span class='kw'>check</span><span class='kw'>=</span><span class='st'>"measures"</span>)</div></pre>
+    <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
+<span class='co'># # Read a single raw data file from MouseTracker</span>
+<span class='co'># mt_data_raw &lt;- read_mt("example.mt")</span>
+<span class='co'># </span>
+<span class='co'># # Use read_bulk to read all raw data files ending with ".mt" that are</span>
+<span class='co'># # stored in the folder "raw_data" (in the current working directory)</span>
+<span class='co'># library(readbulk)</span>
+<span class='co'># mt_data_raw &lt;- read_bulk("raw_data", fun=read_mt)</span>
+<span class='co'># </span>
+<span class='co'># # Import the data into mousetrap</span>
+<span class='co'># mt_data &lt;- mt_import_wide(mt_data_raw)</span>
+<span class='co'>## ---------------------------------------------</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -146,7 +148,7 @@ mousetrap functions.</p>
       
       <li><a href="#value">Value</a></li>
 
-      <li><a href="#details">Details</a></li>
+      <li><a href="#references">References</a></li>
 
       <li><a href="#see-also">See also</a></li>
       
@@ -155,9 +157,7 @@ mousetrap functions.</p>
 
     <h2>Author</h2>
     
-Pascal J. Kieslich (<a href='mailto:kieslich@psychologie.uni-mannheim.de'>kieslich@psychologie.uni-mannheim.de</a>)
-
-Felix Henninger
+Dirk U. Wulff (<a href='mailto:dirk.wulff@gmail.com'>dirk.wulff@gmail.com</a>)
 
   </div>
 </div>

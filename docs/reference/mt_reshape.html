@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>mt_reshape • mousetrap</title>
+<title>General-purpose reshape and aggregation function for mousetrap data. � mt_reshape • mousetrap</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -98,7 +98,8 @@ are available.</p>
     <dl class="dl-horizontal">
       <dt>data</dt>
       <dd>a mousetrap data object created using one of the mt_import
-functions (see <a href='mt_example.html'>mt_example</a> for details).</dd>
+functions (see <a href='mt_example.html'>mt_example</a> for details). Alternatively, a trajectory
+array can be provided directly (in this case <code>use</code> will be ignored).</dd>
       <dt>use</dt>
       <dd>a character string specifying which data should be reshaped. The
 corresponding data are selected from data using <code>data[[use]]</code>.
@@ -254,12 +255,18 @@ package.</p>
       <li><a href="#examples">Examples</a></li>
     </ul>
 
+    <h2>Author</h2>
+    
+Pascal J. Kieslich (<a href='mailto:kieslich@psychologie.uni-mannheim.de'>kieslich@psychologie.uni-mannheim.de</a>)
+
+Felix Henninger
+
   </div>
 </div>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Pascal J. Kieslich, Felix Henninger.</p>
+  <p>Developed by Pascal J. Kieslich, Dirk U. Wulff, Felix Henninger, Jonas M. B. Haslbeck.</p>
 </div>
 
 <div class="pkgdown">

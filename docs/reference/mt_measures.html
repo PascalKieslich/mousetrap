@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>mt_measures • mousetrap</title>
+<title>Calculate mouse-tracking measures. � mt_measures • mousetrap</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -89,11 +89,7 @@ the different measures can be found in the Details and Values sections.</p>
 
     <pre><span class='fu'>mt_measures</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='st'>"measures"</span>,
   <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>), <span class='kw'>timestamps</span> <span class='kw'>=</span> <span class='st'>"timestamps"</span>,
-  <span class='kw'>flip_threshold</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>show_progress</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
-
-<span class='fu'>mt_calculate_measures</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='st'>"measures"</span>,
-  <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>), <span class='kw'>timestamps</span> <span class='kw'>=</span> <span class='st'>"timestamps"</span>,
-  <span class='kw'>flip_threshold</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>show_progress</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>flip_threshold</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>hover_threshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
@@ -119,11 +115,14 @@ containing the timestamps.</dd>
       <dd>a numeric value specifying the distance that needs to 
 be exceeded in one direction so that a change in direction counts as a
 flip.</dd>
+      <dt>hover_threshold</dt>
+      <dd>an optional numeric value. If specified, <code>hovers</code>
+(and <code>hover_time</code>)  will be calculated as the number (and total time)
+of periods without movement in a trial (whose duration exceeds the value
+specified in <code>hover_threshold</code>).</dd>
       <dt>verbose</dt>
       <dd>logical indicating whether function should report its
 progress.</dd>
-      <dt>show_progress</dt>
-      <dd>Deprecated. Please use <code>verbose</code> instead.</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -179,25 +178,16 @@ area between the actual trajectory and the direct path. Areas above the
 direct path are added and areas below are subtracted. The <code>AUC</code> is
 calculated using the <a href='http://www.rdocumentation.org/packages/pracma/topics/polyarea'>polyarea</a> function from the pracma
 package.</p>
-    <p>Note that all <strong>time</strong> related measures (except <code>idle_time</code>) are 
-reported using the timestamp metric as present in the data. To interpret the 
-timestamp values as time since tracking start, the assumption has to be made 
-that for each trajectory the tracking started at timestamp 0 and that all 
-timestamps indicate the time passed since tracking start. Therefore, all 
-timestamps should be reset during data import by subtracting the value of the
-first timestamp from all timestamps within a trial (assuming that the first 
-timestamp corresponds to the time when tracking started). Timestamps are 
-reset by default when importing the data using one of the mt_import fuctions 
-(e.g., <a href='mt_import_mousetrap.html'>mt_import_mousetrap</a>).</p>
-    
-    <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
-
-    <p><ul>
-<li> <code>mt_measures</code>: Calculate mouse-tracking measures</p>
-    <p></li>
-<li> <code>mt_calculate_measures</code>: Deprecated
-</li>
-</ul></p>
+    <p>Note that all <strong>time</strong> related measures (except <code>idle_time</code> and
+<code>hover_time</code>) are reported using the timestamp metric as present in the
+data. To interpret the timestamp values as time since tracking start, the
+assumption has to be made that for each trajectory the tracking started at
+timestamp 0 and that all timestamps indicate the time passed since tracking
+start. Therefore, all timestamps should be reset during data import by
+subtracting the value of the first timestamp from all timestamps within a
+trial (assuming that the first timestamp corresponds to the time when
+tracking started). Timestamps are reset by default when importing the data
+using one of the mt_import fuctions (e.g., <a href='mt_import_mousetrap.html'>mt_import_mousetrap</a>).</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
@@ -209,7 +199,6 @@ reset by default when importing the data using one of the mt_import fuctions
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p><a href='mt_sample_entropy.html'>mt_sample_entropy</a> for calculating sample entropy.</p>
-    <p><a href='mt_movement_angle.html'>mt_movement_angle</a> for calculating the initial movement angle.</p>
     <p><a href='mt_standardize.html'>mt_standardize</a> for standardizing the measures per subject.</p>
     <p><a href='mt_check_bimodality.html'>mt_check_bimodality</a> for checking bimodality of the measures using
 different methods.</p>
@@ -237,8 +226,6 @@ measures.</p>
 
       <li><a href="#details">Details</a></li>
 
-      <li><a href="#functions">Functions</a></li>
-
       <li><a href="#references">References</a></li>
 
       <li><a href="#see-also">See also</a></li>
@@ -246,12 +233,18 @@ measures.</p>
       <li><a href="#examples">Examples</a></li>
     </ul>
 
+    <h2>Author</h2>
+    
+Pascal J. Kieslich (<a href='mailto:kieslich@psychologie.uni-mannheim.de'>kieslich@psychologie.uni-mannheim.de</a>)
+
+Felix Henninger
+
   </div>
 </div>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Pascal J. Kieslich, Felix Henninger.</p>
+  <p>Developed by Pascal J. Kieslich, Dirk U. Wulff, Felix Henninger, Jonas M. B. Haslbeck.</p>
 </div>
 
 <div class="pkgdown">

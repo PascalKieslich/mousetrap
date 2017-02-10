@@ -11,7 +11,7 @@
 * Performance improvement of reshaping, aggregation, and visualization functions through internal changes in `mt_reshape`: `base::merge` and `reshape2` functions are replaced with functions from the `tidyr` and `dplyr` packages (and custom functions). Package dependencies were adjusted accordingly. As the `dplyr` functions may introduce additional classes for the reshaped data (such as `grouped_df` and `tbl_df`), a new argument (`convert_df`) is introduced that converts the reshaped data to pure data.frames by default (thereby dropping additional classes).
 
 ## Changes in specific functions
-* `mt_import_mousetrap`, `mt_import_long`, `mt_import_wide`: Allow specifying several variables for the trial identifier in `mt_id_label`. A a new ID variable will be created by combining the values of each variable.
+* `mt_import_mousetrap`, `mt_import_long`, `mt_import_wide`: Allow specifying several variables for the trial identifier in `mt_id_label`. A new ID variable will be created by combining the values of each variable.
 * `mt_import_mousetrap`: Make import more robust against variables with empty logs (warning message is returned in the end) (closes #5, thanks to @sbrockhaus).
 * `mt_import_long`, `mt_import_wide`: Import any number of additional variables using `add_labels` (closes #4).
 * `mt_import_long`: Timestamps are no longer used for ordering if `mt_seq_label` is not provided. Instead, data will be imported in the order in which they were stored in `raw_data`.

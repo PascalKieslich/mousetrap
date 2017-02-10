@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Filter mousetrap data. — mt_subset â€¢ mousetrap</title>
+<title>Count number of observations. — mt_count â€¢ mousetrap</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -77,67 +77,56 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Filter mousetrap data.</h1>
+    <h1>Count number of observations.</h1>
     </div>
 
     
-    <p>Return a subset of the mousetrap data including only the trial data and
-corresponding trajectories that meet the conditions specified in the
-arguments.</p>
+    <p>Count number of observations per trial for a specified dimension (or several)
+in the trajectory array. This is mostly a helper function used by other
+functions in this package.</p>
     
 
-    <pre><span class='fu'>mt_subset</span>(<span class='no'>data</span>, <span class='no'>subset</span>, <span class='kw'>check</span> <span class='kw'>=</span> <span class='st'>"data"</span>)</pre>
+    <pre><span class='fu'>mt_count</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='st'>"measures"</span>,
+  <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='st'>"xpos"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <dl class="dl-horizontal">
       <dt>data</dt>
       <dd>a mousetrap data object created using one of the mt_import
-functions (see <a href='mt_example.html'>mt_example</a> for details).</dd>
-      <dt>subset</dt>
-      <dd>a logical expression (passed on to subset) indicating
-the rows to keep. Missing values are taken as <code>FALSE</code>.</dd>
-      <dt>check</dt>
-      <dd>a character string specifying which data should be used for
-checking the subset condition.</dd>
+functions (see <a href='mt_example.html'>mt_example</a> for details). Alternatively, a trajectory
+array can be provided directly (in this case <code>use</code> will be ignored).</dd>
+      <dt>use</dt>
+      <dd>a character string specifying which trajectory data should be
+used.</dd>
+      <dt>save_as</dt>
+      <dd>a character string specifying where the resulting trajectory
+data should be stored.</dd>
+      <dt>dimensions</dt>
+      <dd>a character vector specifying the name of the dimension(s)
+that should be used for counting the number of observations. If several
+dimensions are specified, the number of complete observations are reported.</dd>
     </dl>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A mousetrap data object (see <a href='mt_example.html'>mt_example</a>) with filtered
-  data and trajectories.</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p><code>mt_subset</code> is helpful when trials should be removed from all analyses.
-By default, <code>check</code> is set to &quot;data&quot; meaning that the subset condition
-is evaluated based on the trial data (stored in <code>data[[&quot;data&quot;]]</code>).
-However, it might also be of interest to only include trials based on
-specific mouse-tracking measures (e.g., all trials with an <code>MAD</code> smaller
-than 200). In this case, <code>check</code> needs to be set to the respective name
-of the data.frame (e.g., &quot;measures&quot;).</p>
-    <p>Note that if specific trials should be removed from all analyses based on a
-condition known a priori (e.g., practice trials), it is more efficient to use
-the subset function on the raw data before importing the trajectories
-using one of the mt_import functions (such as <a href='mt_import_mousetrap.html'>mt_import_mousetrap</a>).</p>
-    <p>Besides, if trials should only be removed from some analyses or for specific
-plots, note that other mousetrap functions (e.g., <a href='mt_reshape.html'>mt_reshape</a>,
-<a href='mt_aggregate.html'>mt_aggregate</a>, and <a href='mt_plot.html'>mt_plot</a>) also allow for subsetting.</p>
-    
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <p>subset for the R base subset function for vectors, matrices,
-or data.frames.</p>
-    <p><a href='mt_reshape.html'>mt_reshape</a> for information about the subset argument in various other
-mousetrap functions.</p>
+    <p>A mousetrap data object (see <a href='mt_example.html'>mt_example</a>).</p>
+    <p>If a data.frame with label specified in <code>save_as</code> (by default 
+  &quot;measures&quot;) already exists, the number of obervations (called <code>nobs</code>)
+  are added as additional column. If not, an additional data.frame
+  will be added.</p>
+    <p>If a trajectory array was provided directly as <code>data</code>, only a named
+  character vector will be returned.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Subset based on trial data</span>
-<span class='no'>mt_example_atypical</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_subset</span>(<span class='no'>mt_example</span>, <span class='no'>Condition</span><span class='kw'>==</span><span class='st'>"Atypical"</span>)
-
-<span class='co'># Subset based on mouse-tracking measure (MAD)</span>
-<span class='no'>mt_example</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_measures.html'>mt_measures</a></span>(<span class='no'>mt_example</span>)
-<span class='no'>mt_example_mad_sub</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_subset</span>(<span class='no'>mt_example</span>, <span class='no'>MAD</span><span class='kw'>&lt;</span><span class='fl'>400</span>, <span class='kw'>check</span><span class='kw'>=</span><span class='st'>"measures"</span>)</div></pre>
+    <pre class="examples"><div class='input'><span class='co'># Retrieve vector that counts number of observations</span>
+<span class='fu'>mt_count</span>(<span class='no'>mt_example</span>$<span class='no'>trajectories</span>)</div><div class='output co'>#&gt; id01 id02 id03 id04 id05 id06 id07 id08 id09 id10 id11 id12 id13 id14 id15 id16 
+#&gt;  173  280  153  174  334  311  234  203  250  201  283  355  242  465  219  230 
+#&gt; id17 id18 id19 id20 id21 id22 id23 id24 id25 id26 id27 id28 id29 id30 id31 id32 
+#&gt;  158  355  398  121  145  167  117  102   80   89   85  125  110   81  105   72 
+#&gt; id33 id34 id35 id36 id37 id38 
+#&gt;  210  110  457  157  100  133 </div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -145,10 +134,6 @@ mousetrap functions.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
-
-      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
@@ -156,8 +141,6 @@ mousetrap functions.</p>
     <h2>Author</h2>
     
 Pascal J. Kieslich (<a href='mailto:kieslich@psychologie.uni-mannheim.de'>kieslich@psychologie.uni-mannheim.de</a>)
-
-Felix Henninger
 
   </div>
 </div>
