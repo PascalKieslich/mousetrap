@@ -9,7 +9,7 @@ Mouse-tracking, the analysis of mouse movements in computerized experiments, is 
 General Information
 -------------------
 
-The `mousetrap` package is developed by Pascal Kieslich and Felix Henninger. It is published under the GNU General Public License (version 3).
+The `mousetrap` package is developed by Pascal Kieslich, Dirk Wulff, Felix Henninger, and Jonas Haslbeck. It is published under the GNU General Public License (version 3).
 
 An overview of the functions in this package can be found [online](http://pascalkieslich.github.io/mousetrap/reference/mousetrap.html). It can also be accessed from within R using `package?mousetrap` once the package has been installed. Please see [news](http://pascalkieslich.github.io/mousetrap/news) for a summary of changes in the package.
 
@@ -32,7 +32,7 @@ Citation
 
 If you use the `mousetrap` package in your published research, we kindly ask that you cite it as follows:
 
-Kieslich, P. J., & Henninger, F. (2016). Mousetrap: An R package for processing and analyzing mouse-tracking data (Version 2.0.0). doi: [10.5281/zenodo.163241](https://doi.org/10.5281/zenodo.163241)
+Kieslich, P. J., Wulff, D. U., Henninger, F., & Haslbeck, J. M. B. (2017). Mousetrap: An R package for processing and analyzing mouse-tracking data (Version 3.0.0). doi: [10.5281/zenodo.163241](https://doi.org/10.5281/zenodo.163241)
 
 Acknowledgments
 ---------------

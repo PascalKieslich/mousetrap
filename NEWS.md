@@ -1,7 +1,7 @@
 # mousetrap 3.0.0
 
 ## General announcements
-* We are delighted that Dirk Wulff and Jonas Haslbeck have joined the `mousetrap` team! They have contributed a number of new functions, particularly for clustering and visualization (see function specific author tags).
+* We are delighted that Dirk Wulff and Jonas Haslbeck have joined the `mousetrap` team! They are contributing a number of new functions, particularly for clustering and visualization (see function specific author tags).
 * The documentation of the `mousetrap` package can now also be found online at http://pascalkieslich.github.io/mousetrap/
 
 ## General changes to existing functions
