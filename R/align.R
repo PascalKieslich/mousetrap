@@ -4,19 +4,16 @@
 #' or coordinate system. 
 #' 
 #' If \code{align_start} / \code{align_end} is \code{FALSE}, \code{coordinates} 
-#' define the position of the average start / end point across all trajectories. 
-#' Note that if both \code{align_start} and \code{align_end} are \code{FALSE} 
-#' (the default), this completely preserves the relative location of all 
-#' trajectory points.
+#' define the position of the average start / end point across all trajectories.
+#' 
+#' Note that if the end points of trajectories are not aligned, coordinates
+#' refer to the hypothetical case where all trajectories are mapped to one side.
 #' 
 #' If \code{align_start} / \code{align_end} is \code{TRUE}, the start / end
 #' point of each trajectory is set to the exact position specified in
 #' \code{coordinates}. \code{align_start} and \code{align_end} can be set
 #' completely independently of one another, i.e., one can align only end points,
 #' only start points, none, or both. 
-#' 
-#' Note that if the end points of trajectories are not aligned, coordinates
-#' refer to the hypothetical case where all trajectories are mapped to one side.
 #'    
 #' If \code{align_start} is set to \code{"left"} or \code{"right"} trajectories 
 #' will be flipped to the lower or upper spectrum of the first dimensions, 
@@ -35,7 +32,7 @@
 #'   and dim2, \code{mt} to set coordinates to \code{c(0,0,-1,1.5)}, \code{norm}
 #'   to set coordinates  to \code{c(0,0,-1,1)}, and \code{wide} to set 
 #'   coordinates  to \code{c(0,0,-1,1.2)}. In the three-dimensional case, 
-#'   coordinates is a vector of length 6.
+#'   \code{coordinates} is a vector of length 6.
 #' @param align_start boolean specifying whether the start points of all
 #'   trajectories should be aligned to the position specified in
 #'   \code{coordinates}. See Details.
@@ -97,7 +94,7 @@ mt_align = function(data,
   }
   
   # set flip to true
-  tmp_flip = TRUE
+  tmp_flip <- TRUE
   
   # Set coordinates if they were not provided explicitly
   if(length(coordinates)==1){
@@ -105,7 +102,7 @@ mt_align = function(data,
     if(coordinates %in% c('isotropic', 'isotropic-norm')){
       
       # flip to compute coordinates
-      flips = matrix(NA,ncol = length(dimensions), nrow = dim(trajectories)[1])
+      flips <- matrix(NA,ncol = length(dimensions), nrow = dim(trajectories)[1])
       for(i in 1:length(dimensions)){
         start  <- mean(trajectories[,1,dimensions[i]])
         ends   <- getlast(trajectories[,,dimensions[i]])
@@ -115,11 +112,11 @@ mt_align = function(data,
           flip   <- ends < start
         }
         trajectories[flip,,dimensions[i]] <-  ((trajectories[flip,,dimensions[i]] - start) * -1) + start
-        flips[,i] = flip
+        flips[,i] <- flip
       }
  
       # prevent flipping
-      tmp_flip = FALSE
+      tmp_flip <- FALSE
         
       # start and end points
       m1  <- colMeans(trajectories[,1,dimensions])
@@ -134,14 +131,14 @@ mt_align = function(data,
         
         # compute coordinates
         if(length(dimensions) == 2){
-          d1 = abs(mn[1] - m1[1])
-          d2 = abs(mn[2] - m1[2])
-          coordinates = c(0,0,-1,d2/d1)
+          d1 <- abs(mn[1] - m1[1])
+          d2 <- abs(mn[2] - m1[2])
+          coordinates <- c(0,0,-1,d2/d1)
         } else {
-          d1 = mn[1] - m1[1]
-          d2 = mn[2] - m1[2]
-          d3 = mn[3] - m1[3]  
-          coordinates = c(0,0,0,-1,d2/d1,d3/d1)
+          d1 <- mn[1] - m1[1]
+          d2 <- mn[2] - m1[2]
+          d3 <- mn[3] - m1[3]  
+          coordinates <- c(0,0,0,-1,d2/d1,d3/d1)
         }
         
       }
@@ -177,7 +174,7 @@ mt_align = function(data,
   
   # Flip trajectories
   if(tmp_flip == TRUE){
-    flips = matrix(NA,ncol = length(dimensions), nrow = dim(trajectories)[1])
+    flips <- matrix(NA,ncol = length(dimensions), nrow = dim(trajectories)[1])
     for(i in 1:length(dimensions)){
       start  <- mean(trajectories[,1,dimensions[i]])
       ends   <- getlast(trajectories[,,dimensions[i]])
@@ -187,27 +184,27 @@ mt_align = function(data,
         flip <- ends < start  
       }
       trajectories[flip,,dimensions[i]] <-  ((trajectories[flip,,dimensions[i]] - start) * -1) + start
-      flips[,i] = flip
+      flips[,i] <- flip
     }
   }
   
   # Replace NAs
   reset_NAs <- FALSE
   if(any(is.na(trajectories[,,dimensions]))){ 
-    reset_NAs = TRUE
-    trajectories[,,dimensions][is.na(trajectories[,,dimensions])] =  -3.141592653589793
+    reset_NAs <- TRUE
+    trajectories[,,dimensions][is.na(trajectories[,,dimensions])] <-  -3.141592653589793
   }
   
   # Align data   
   if(length(dimensions) == 2){
     if(length(coordinates) != 4) stop('Coordinates must be a numeric vector of length 4.')
-      al_trajectories = trajAlign(trajectories[,,dimensions[1]],
+      al_trajectories <- trajAlign(trajectories[,,dimensions[1]],
                                   trajectories[,,dimensions[2]],
                                   start = align_start,end = align_end,coordinates = coordinates)
   }
   if(length(dimensions) == 3){
     if(length(coordinates) != 6) stop('Coordinates must be a numeric vector of length 6.')
-    al_trajectories = trajAlign3d(trajectories[,,dimensions[1]],
+    al_trajectories <- trajAlign3d(trajectories[,,dimensions[1]],
                                   trajectories[,,dimensions[2]],
                                   trajectories[,,dimensions[3]],
                                   start = align_start,end = align_end,coordinates = coordinates)
@@ -216,13 +213,13 @@ mt_align = function(data,
   # Reset NAs
   if(reset_NAs){
     for(i in 1:length(dimensions)){
-      al_trajectories[[i]][al_trajectories[[i]] == -3.141592653589793] =  NA
+      al_trajectories[[i]][al_trajectories[[i]] == -3.141592653589793] <-  NA
     }
   }
   
   # Add aligned data
   for(i in 1:length(dimensions)){
-    trajectories[,,dimensions[i]] = al_trajectories[[i]]
+    trajectories[,,dimensions[i]] <- al_trajectories[[i]]
   }
   
   # Reflip trajectories

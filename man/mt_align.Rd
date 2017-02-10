@@ -31,7 +31,7 @@ and dim2, \code{isotropic-norm} to set the coordinates to
 and dim2, \code{mt} to set coordinates to \code{c(0,0,-1,1.5)}, \code{norm}
 to set coordinates  to \code{c(0,0,-1,1)}, and \code{wide} to set 
 coordinates  to \code{c(0,0,-1,1.2)}. In the three-dimensional case, 
-coordinates is a vector of length 6.}
+\code{coordinates} is a vector of length 6.}
 
 \item{align_start}{boolean specifying whether the start points of all
 trajectories should be aligned to the position specified in
@@ -63,19 +63,16 @@ or coordinate system.
 }
 \details{
 If \code{align_start} / \code{align_end} is \code{FALSE}, \code{coordinates} 
-define the position of the average start / end point across all trajectories. 
-Note that if both \code{align_start} and \code{align_end} are \code{FALSE} 
-(the default), this completely preserves the relative location of all 
-trajectory points.
+define the position of the average start / end point across all trajectories.
+
+Note that if the end points of trajectories are not aligned, coordinates
+refer to the hypothetical case where all trajectories are mapped to one side.
 
 If \code{align_start} / \code{align_end} is \code{TRUE}, the start / end
 point of each trajectory is set to the exact position specified in
 \code{coordinates}. \code{align_start} and \code{align_end} can be set
 completely independently of one another, i.e., one can align only end points,
-only start points, none, or both.
-
-Note that if the end points of trajectories are not aligned, coordinates
-refer to the hypothetical case where all trajectories are mapped to one side.
+only start points, none, or both. 
    
 If \code{align_start} is set to \code{"left"} or \code{"right"} trajectories 
 will be flipped to the lower or upper spectrum of the first dimensions, 
