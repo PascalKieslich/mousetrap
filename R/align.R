@@ -1,7 +1,7 @@
 #' Align trajectories.
 #' 
 #' \code{mt_align} aligns trajectories to a common start point, end point, and /
-#' or coordinate system.
+#' or coordinate system. 
 #' 
 #' If \code{align_start} / \code{align_end} is \code{FALSE}, \code{coordinates} 
 #' define the position of the average start / end point across all trajectories. 
@@ -15,6 +15,9 @@
 #' completely independently of one another, i.e., one can align only end points,
 #' only start points, none, or both. 
 #' 
+#' Note that if the end points of trajectories are not aligned coordinates refer
+#' to the hypothetical case where all trajectories are mapped to one side.
+#'    
 #' If \code{align_start} is set to \code{"left"} or \code{"right"} trajectories 
 #' will be flipped to the lower or upper spectrum of the first dimensions, 
 #' respectively. If the first dimension is the x-coordinate this is equivalent
@@ -98,7 +101,7 @@ mt_align = function(data,
       flips = matrix(NA,ncol = length(dimensions), nrow = dim(trajectories)[1])
       for(i in 1:length(dimensions)){
         start  <- mean(trajectories[,1,dimensions[i]])
-        ends   <- mousetrap:::getlast(trajectories[,,dimensions[i]])
+        ends   <- getlast(trajectories[,,dimensions[i]])
         if(i == 1){
           flip   <- ends > start
         } else {
@@ -113,7 +116,7 @@ mt_align = function(data,
         
       # start and end points
       m1  <- colMeans(trajectories[,1,dimensions])
-      mn  <- colMeans(apply(trajectories[,,dimensions],3,mousetrap:::getlast))
+      mn  <- colMeans(apply(trajectories[,,dimensions],3,getlast))
          
       if(coordinates == 'isotropic'){
         
@@ -170,7 +173,7 @@ mt_align = function(data,
     flips = matrix(NA,ncol = length(dimensions), nrow = dim(trajectories)[1])
     for(i in 1:length(dimensions)){
       start  <- mean(trajectories[,1,dimensions[i]])
-      ends   <- mousetrap:::getlast(trajectories[,,dimensions[i]])
+      ends   <- getlast(trajectories[,,dimensions[i]])
       if(coordinates[i] > coordinates[i + length(dimensions)]){
         flip <- ends > start
       } else {
@@ -226,7 +229,7 @@ mt_align = function(data,
   # align to right if required
   if(align_side != 'no'){
     start  <- mean(trajectories[,1,dimensions[1]])
-    ends   <- mousetrap:::getlast(trajectories[,,dimensions[1]])
+    ends   <- getlast(trajectories[,,dimensions[1]])
     if(align_side == 'right'){
       flip   <- ends < start
       } else if (align_side == 'left'){

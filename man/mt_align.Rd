@@ -74,6 +74,9 @@ point of each trajectory is set to the exact position specified in
 completely independently of one another, i.e., one can align only end points,
 only start points, none, or both.
 
+Note that if the end points of trajectories are not aligned coordinates refer
+to the hypothetical case where all trajectories are mapped to one side.
+   
 If \code{align_start} is set to \code{"left"} or \code{"right"} trajectories 
 will be flipped to the lower or upper spectrum of the first dimensions, 
 respectively. If the first dimension is the x-coordinate this is equivalent
