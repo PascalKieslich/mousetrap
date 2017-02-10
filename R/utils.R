@@ -215,11 +215,12 @@ count_changes <- function(pos, threshold=0, zero_threshold=0) {
 
 #subsample
 subsample = function(data, use = c('trajectories'), n, seed = 1){
-  set.seed(seed)
   if(is.array(data) | is.data.frame(data) | is.matrix(data)){
     total_cases = dim(data)[1]
     if(n <= total_cases){
-      select      = sample(1:total_cases,n)
+      set.seed(seed)
+      select = sample(1:total_cases,n)
+      set.seed(NULL)
       if(length(dim(data)) == 2){
         data = data[select,]
       }
@@ -235,7 +236,9 @@ subsample = function(data, use = c('trajectories'), n, seed = 1){
     if(mean(use %in% names(data)) != 1) stop('Objects specified in use do not exist')
     total_cases = dim(data[[use[1]]])[1]
     if(n <= total_cases){
-      select      = sample(1:total_cases,n)
+      set.seed(seed)
+      select = sample(1:total_cases,n)
+      set.seed(NULL)
       for(i in use){
         if(is.array(data[[i]]) | is.data.frame(data[[i]]) | is.matrix(data[[i]])){
           if(length(dim(data[[i]])) == 2){
