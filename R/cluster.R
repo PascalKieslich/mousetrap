@@ -16,10 +16,11 @@
 #' change-of-mind trials (see also \link{mt_map}). \code{mt_cluster} can tease
 #' these types apart.
 #' 
-#' \code{mt_cluster} computes distances between each pair of mouse trajectories 
-#' (see \link{mt_distmat}) and applies \link[fastcluster]{hclust} or 
-#' \link[stats]{kmeans} to explain the resulting dissimiliarity matrix using a 
-#' predefined number of clusters.
+#' \code{mt_cluster} uses \link[fastcluster]{hclust} or \link[stats]{kmeans} to 
+#' explain the distances between every pair of trajectories using a predefined 
+#' number of clusters. If method is "hclust", \code{mt_cluster} computes the 
+#' dissimiliarity matrix for all trajectory pairs using \link{mt_distmat}. If
+#' method is "kmeans", this is done internally by \link[stats]{kmeans}.
 #' 
 #' We recommend setting \code{method} to \link[fastcluster]{hclust} using 
 #' \code{ward.D} as the linkage criterion (via \code{hclust_method}). Relative 
@@ -27,12 +28,12 @@
 #' linkage criteria, this setup handles the skewed distribution cluster sizes 
 #' and trajectory outliers found in the majority of datasets best.
 #' 
-#' Clustering trajectories requires that the endpoints of all trajectories share
-#' the same direction, e.g., that all trajectories end in the top-left corner of
-#' the coordinate system (\link{mt_remap_symmetric} or \link{mt_align} can be
-#' used to achieve this). Furthermore, it is recommended to use spatialized
-#' trajectories (see \link{mt_spatialize}; Haslbeck, Wulff, Kieslich, Henninger,
-#' & Schulte-Mecklenbeck, 2017).
+#' For clustering trajectories, it is often useful that the endpoints of all
+#' trajectories share the same direction, e.g., that all trajectories end in the
+#' top-left corner of the coordinate system (\link{mt_remap_symmetric} or
+#' \link{mt_align} can be used to achieve this). Furthermore, it is recommended
+#' to use spatialized trajectories (see \link{mt_spatialize}; Haslbeck, Wulff,
+#' Kieslich, Henninger, & Schulte-Mecklenbeck, 2017).
 #'
 #' @inheritParams mt_time_normalize
 #' @param save_as a character string specifying where the resulting data should
