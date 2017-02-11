@@ -32,7 +32,7 @@ Citation
 
 If you use the `mousetrap` package in your published research, we kindly ask that you cite it as follows:
 
-Kieslich, P. J., Wulff, D. U., Henninger, F., & Haslbeck, J. M. B. (2017). Mousetrap: An R package for processing and analyzing mouse-tracking data (Version 3.0.0). doi: [10.5281/zenodo.163241](https://doi.org/10.5281/zenodo.163241)
+Kieslich, P. J., Wulff, D. U., Henninger, F., & Haslbeck, J. M. B. (2017). Mousetrap: An R package for processing and analyzing mouse-tracking data (Version 3.0.0). doi: [10.5281/zenodo.290283](https://doi.org/10.5281/zenodo.290283)
 
 Acknowledgments
 ---------------
