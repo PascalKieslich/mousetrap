@@ -63,11 +63,11 @@ mildly and strongly curved trajctories, and single and multiple
 change-of-mind trials. \code{mt_map} allows to map trajectories to a
 predefined set of trajectory types.
 
-First, \code{mt_map} adjusts prototypes to match the coordinate system of the 
+First, \code{mt_map} adjusts prototypes to match the coordinate system of the
 trajectories specified by \code{use}. Next, \code{mt_map} computes the 
 distances between each trajectory and each of the supplied prototypes (see 
-\link{mt_distmat}) and then assigns each trajectory to the prototype that 
-produced the smallest distance.
+\link{mt_distmat}) and then assigns each trajectory to the closest prototype
+(i.e., the prototype that produced the smallest distance).
 
 Mapping trajectories to prototypes requires that the endpoints of all
 trajectories (and added prototypes) share the same direction, i.e., that all
@@ -84,11 +84,16 @@ mt_example <- mt_spatialize(mt_example)
 # Map trajectories onto standard prototype set
 mt_example <- mt_map(mt_example,
   use="sp_trajectories", prototypes=mt_prototypes)
-  
-# Plot trajectories per cluster
+
+
+# Plot prototypes
+mt_plot(mt_prototypes,facet_col="mt_id") + 
+  ggplot2::facet_grid(.~factor(mt_id,levels=unique(mt_id)))
+
+# Plot trajectories per assigned prototype
 mt_plot(mt_example,use2="prototyping",facet_col="prototype_label")
 
-    
+
 # Map trajectories onto reduced prototype set
 mt_example <- mt_map(mt_example,
   use="sp_trajectories",
