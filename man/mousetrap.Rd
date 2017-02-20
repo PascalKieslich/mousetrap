@@ -144,7 +144,7 @@ following, a brief overview of the functions in this package is given.
   
   A number of different functions for clustering trajectories is provided.
   
-  \link{mt_distmat} computes the distance matrix for each pair of 
+  \link{mt_distmat} computes the dissimilarity/distance between each pair of 
   trajectories.
   
   \link{mt_cluster} performs trajectory clustering with a specified number of
