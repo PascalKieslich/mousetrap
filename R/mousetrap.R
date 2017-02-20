@@ -10,13 +10,15 @@
 #'   files into R can be used (e.g., \link[utils]{read.table} or 
 #'   \link[utils]{read.csv}).
 #'   
-#'   If raw data were collected using MouseTracker, the mousetrap package 
+#'   If raw data were collected using
+#'   \href{http://www.mousetracker.org/}{MouseTracker}, the mousetrap package 
 #'   provides the \link{read_mt} function to read files in the ".mt" format.
 #'   
 #'   If several raw data files should be read and merged, the 
-#'   \link[readbulk]{read_bulk} function from the readbulk package can be used
-#'   (or the \link[readbulk]{read_opensesame} function, if data were collected
-#'   using OpenSesame).
+#'   \link[readbulk]{read_bulk} function from the 
+#'   \href{http://pascalkieslich.github.io/readbulk/}{readbulk} package can be
+#'   used (or the \link[readbulk]{read_opensesame} function, if data were 
+#'   collected using \href{http://osdoc.cogsci.nl/}{OpenSesame}).
 #'   
 #' @section Import functions:
 #'   
@@ -25,11 +27,13 @@
 #'   the following functions can be used. A detailed description (and example)
 #'   of the resulting mousetrap data object can be found in \link{mt_example}.
 #'   
-#'   \link{mt_import_mousetrap} imports mouse-tracking data that were recorded
-#'   using the mousetrap plugin for OpenSesame.
+#'   \link{mt_import_mousetrap} imports mouse-tracking data that were recorded 
+#'   using the \href{https://github.com/pascalkieslich/mousetrap-os}{mousetrap
+#'   plugin} for \href{http://osdoc.cogsci.nl/}{OpenSesame}.
 #'   
 #'   \link{mt_import_wide} imports mouse-tracking data saved in a wide format 
-#'   (e.g., data collected using MouseTracker).
+#'   (e.g., data collected using
+#'   \href{http://www.mousetracker.org/}{MouseTracker}).
 #'   
 #'   \link{mt_import_long} imports mouse-tracking data saved in a long format. 
 #'   (e.g., trajectories exported using \link{mt_export_long}).

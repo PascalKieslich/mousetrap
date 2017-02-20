@@ -1,8 +1,10 @@
 #' Raw mouse-tracking dataset for demonstrations of the mousetrap package
 #'
-#' An exemplary mouse-tracking dataset collected in OpenSesame using the 
-#' mousetrap plugin (Kieslich & Henninger, 2017). A preprocessed (as opposed to
-#' raw) version of the same data can be found in \link{mt_example}.
+#' An exemplary mouse-tracking dataset collected 
+#' \href{http://osdoc.cogsci.nl/}{OpenSesame} using the 
+#' \href{https://github.com/pascalkieslich/mousetrap-os}{mousetrap plugin} 
+#' (Kieslich & Henninger, 2017). A preprocessed (as opposed to raw) version of
+#' the same data can be found in \link{mt_example}.
 #'
 #' The data stem from a study based on experiment 1 by Dale et al. (2007). In
 #' this experiment, participants have to assign exemplars (e.g., "shark") to one
@@ -28,10 +30,11 @@
 #'   Kieslich, P. J., & Henninger, F. (2017). Mousetrap: An integrated, 
 #'   open-source mouse-tracking package. Manuscript submitted for publication.
 #'
-#' @format A \link{data.frame} with 38 rows and 19 variables. The data.frame is
-#'   based on the combined raw data that were created using
-#'   \link[readbulk]{read_opensesame} from the \code{readbulk} library. For ease
-#'   of use, unnecessary columns were excluded.
+#' @format A \link{data.frame} with 38 rows and 19 variables. The data.frame is 
+#'   based on the combined raw data that were created using 
+#'   \link[readbulk]{read_opensesame} from the 
+#'   \href{http://pascalkieslich.github.io/readbulk/}{readbulk} library. For 
+#'   ease of use, unnecessary columns were excluded.
 #'
 #'   The variables included relate to the item that was presented
 #'   (\code{Exemplar}), the answer categories (\code{Category1} and

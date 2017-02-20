@@ -61,13 +61,14 @@ A mousetrap data object (see \link{mt_example}).
 stored in wide format, i.e., where one row contains the data of one trial and
 every recorded mouse position and variable is saved in a separate variable 
 (e.g., X_1, X_2, ..., Y_1, Y_2, ...). This is, e.g., the case when collecting
-data using MouseTracker (Freeman & Ambady, 2010). From this data.frame,
-\code{mt_import_wide} creates a mousetrap data object containing the
-trajectories and additional data for further processing within the mousetrap
-package. Specifically, it returns a list that includes the trajectory data as
-an array (called \code{trajectories}), and all other data as a data.frame
-(called \code{data}). This data structure can then be passed on to other
-functions within this package (see \link{mousetrap} for an overview).
+data using \href{http://www.mousetracker.org/}{MouseTracker} (Freeman &
+Ambady, 2010). From this data.frame, \code{mt_import_wide} creates a
+mousetrap data object containing the trajectories and additional data for
+further processing within the mousetrap package. Specifically, it returns a
+list that includes the trajectory data as an array (called
+\code{trajectories}), and all other data as a data.frame (called
+\code{data}). This data structure can then be passed on to other functions
+within this package (see \link{mousetrap} for an overview).
 }
 \details{
 \code{mt_import_wide} is designed to import mouse-tracking data saved in a 

@@ -24,10 +24,12 @@ A \link{data.frame} with one row per trial. Variables are ordered
   according to columns, x-coordinates, y-coordinates, and timestamps.
 }
 \description{
-\code{read_mt} reads raw data that was collected using MouseTracker (Freeman 
-& Ambady, 2010) and stored as a file in the ".mt" format. If multiple files 
-should be read into R, \code{read_mt} can be used in combination with the 
-\link[readbulk]{read_bulk} function from the \code{readbulk} package (see 
+\code{read_mt} reads raw data that was collected using 
+\href{http://www.mousetracker.org/}{MouseTracker} (Freeman & Ambady, 2010) 
+and stored as a file in the ".mt" format. If multiple files should be read 
+into R, \code{read_mt} can be used in combination with the 
+\link[readbulk]{read_bulk} function from the
+\href{http://pascalkieslich.github.io/readbulk/}{readbulk} package (see 
 Examples). After reading the data into R, \link{mt_import_wide} can be used 
 to prepare the trajectory data for analyses using the mousetrap library. The 
 current version of \code{read_mt} has been tested with data from MouseTracker
