@@ -22,14 +22,14 @@ used.}
 should be used. Can be of length 2 or 3, for two-dimensional or 
 three-dimensional trajectories respectively.}
 
-\item{kseq}{a numeric vector specifying set of candidates for k. Defaults to 
-2:15, implying that all values of k within that range are compared using 
+\item{kseq}{a numeric vector specifying set of candidates for k. Defaults to
+2:15, implying that all values of k within that range are compared using
 the metrics specified in \code{compute}.}
 
-\item{compute}{character vector specifying the to be computed measures. Can 
+\item{compute}{character vector specifying the to be computed measures. Can
 be any subset of \code{c("stability","gap","jump","slope")}.}
 
-\item{method}{character string specifiying the type of clustering procedure 
+\item{method}{character string specifiying the type of clustering procedure
 for the stability-based method. Either \code{hclust} or \code{kmeans}.}
 
 \item{pointwise}{boolean specifying the way in which dissimilarity between
@@ -55,44 +55,45 @@ procedure. Larger numbers minimize the risk of finding local minima. Passed
 on to the \code{nstart} argument of \link[stats]{kmeans}. Only relevant if 
 \code{method} is "kmeans".}
 
-\item{n_bootstrap}{an integer specifying the number of bootstrap comparisons 
+\item{n_bootstrap}{an integer specifying the number of bootstrap comparisons
 used by \code{stability}. See \link[cstab]{cStability}.}
 
 \item{model_based}{boolean specifying whether the model-based or the
 model-free should be used by \code{stability}, when method is
 \code{kmeans}. See \link[cstab]{cStability} and Haslbeck & Wulff (2016).}
 
-\item{n_gap}{integer specifying the number of simulated datasets used by 
+\item{n_gap}{integer specifying the number of simulated datasets used by
 \code{gap}. See Tibshirani et al. (2001).}
 
 \item{verbose}{logical indicating whether function should report its
 progress.}
 }
 \value{
-A list containing two lists that store the results of the different 
-  methods. \code{kopt} contains the estimated \code{k} for each of the 
-  methods specified in \code{compute}. \code{paths} contains the values for 
-  each \code{k} in \code{kseq} as computed by each of the methods specified 
-  in \code{compute}. The values in \code{kopt} are optima for each of the 
+A list containing two lists that store the results of the different
+  methods. \code{kopt} contains the estimated \code{k} for each of the
+  methods specified in \code{compute}. \code{paths} contains the values for
+  each \code{k} in \code{kseq} as computed by each of the methods specified
+  in \code{compute}. The values in \code{kopt} are optima for each of the
   vectors in \code{paths}.
 }
 \description{
 Estimates the optimal number of clusters (\code{k}) using various methods.
 }
 \details{
-\code{mt_cluster_k} estimates the number of clusters (\code{k}) using four 
-commonly used k-selection methods (specified via \code{compute}): cluster 
-stability (\code{stability}), the gap statistic (\code{gap}), the jump 
+\code{mt_cluster_k} estimates the number of clusters (\code{k}) using four
+commonly used k-selection methods (specified via \code{compute}): cluster
+stability (\code{stability}), the gap statistic (\code{gap}), the jump
 statistic (\code{jump}), and the slope statistic (\code{slope}).
 
 Cluster stability methods select \code{k} as the number of clusters for which
-the assignment of objects to clusters is most stable across bootstrap 
-samples. This function implements the model-based and model-free methods 
-developed by Haslbeck & Wulff (2016). See references.
+the assignment of objects to clusters is most stable across bootstrap
+samples. This function implements the model-based and model-free methods
+described by Haslbeck & Wulff (2016). See references.
 
-The remaining three methods select \code{k} as the value that minimizes some 
-distance metric measured for objects within and between clusters. See the 
-references below.
+The remaining three methods select \code{k} as the value that optimizes the
+gap statistic (Tibshirani, Walther, & Hastie, 2001), the jump statistic
+(Sugar & James, 2013), and the slope statistic (Fujita, Takahashi, &
+Patriota, 2014), respectively.
 
 For clustering trajectories, it is often useful that the endpoints of all
 trajectories share the same direction, e.g., that all trajectories end in the
@@ -106,7 +107,7 @@ Kieslich, Henninger, & Schulte-Mecklenbeck, 2017).
 \dontrun{
 # Spatialize trajectories
 mt_example <- mt_spatialize(mt_example)
- 
+
 # Find k
 results <- mt_cluster_k(mt_example, use="sp_trajectories")
 
@@ -117,32 +118,32 @@ results$paths
 
 }
 \references{
-Haslbeck, J., & Wulff, D. U. (2016). Estimating the Number of 
-  Clusters via Normalized Cluster Instability. \emph{arXiv preprint} 
+Haslbeck, J., & Wulff, D. U. (2016). Estimating the Number of
+  Clusters via Normalized Cluster Instability. \emph{arXiv preprint}
   arXiv:1608.07494.
-  
-  Haslbeck, J. M. B., Wulff, D. U., Kieslich, P. J., Henninger, F., & 
+
+  Haslbeck, J. M. B., Wulff, D. U., Kieslich, P. J., Henninger, F., &
   Schulte-Mecklenbeck, M. (2017). Advanced mouse- and hand-tracking analysis:
-  Detecting and visualizing clusters in movement trajectories. Manuscript in 
+  Detecting and visualizing clusters in movement trajectories. Manuscript in
   preparation.
-  
-  Tibshirani, R., Walther, G., & Hastie, T. (2001). Estimating the number of 
-  clusters in a data set via the gap statistic. \emph{Journal of the Royal 
+
+  Tibshirani, R., Walther, G., & Hastie, T. (2001). Estimating the number of
+  clusters in a data set via the gap statistic. \emph{Journal of the Royal
   Statistical Society: Series B (Statistical Methodology), 63}(2), 411-423.
-  
-  Sugar, C. A., & James, G. M. (2013). Finding the number of clusters in a 
-  dataset. \emph{Journal of the American Statistical Association, 98}(463), 
+
+  Sugar, C. A., & James, G. M. (2013). Finding the number of clusters in a
+  dataset. \emph{Journal of the American Statistical Association, 98}(463),
   750-763.
-  
-  Fujita, A., Takahashi, D. Y., & Patriota, A. G. (2014). A non-parametric 
+
+  Fujita, A., Takahashi, D. Y., & Patriota, A. G. (2014). A non-parametric
   method to estimate the number of clusters. \emph{Computational Statistics &
   Data Analysis, 73}, 27-39.
 }
 \seealso{
-\link{mt_distmat} for more information about how the distance matrix is 
+\link{mt_distmat} for more information about how the distance matrix is
 computed when the hclust method is used.
 
-\link{mt_cluster} for performing trajectory clustering with a specified 
+\link{mt_cluster} for performing trajectory clustering with a specified
 number of clusters.
 }
 \author{
