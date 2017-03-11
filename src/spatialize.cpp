@@ -178,14 +178,16 @@ NumericMatrix spatializeArrayToLong(NumericMatrix xs,
   int n = xs.nrow();
   NumericVector n_pts_v(n);
   long total_pts = 0;
-  for(int i = 0; i < n_pts.size(); i++){
-      total_pts += n_pts[i];
-      }
+
   if(n_pts.length() != n){
     for(int i = 0; i < n; i++){
+      total_pts += n_pts[0];
       n_pts_v[i] = n_pts[0];
       }
     } else {
+    for(int i = 0; i < n_pts.size(); i++){
+      total_pts += n_pts[i];
+      }
     n_pts_v = n_pts;
     }
   if(total_pts > std::pow(2,31)-1){
@@ -270,14 +272,15 @@ NumericMatrix spatializeArrayToLong3d(NumericMatrix xs,
                                       NumericVector n_pts){
   NumericVector n_pts_v(xs.nrow());
   long total_pts = 0;
-  for(int i = 0; i < n_pts.size(); i++){
-    total_pts += n_pts[i];
-    }
   if(n_pts.length() != xs.nrow()){
     for(int i = 0; i < xs.nrow(); i++){
+      total_pts += n_pts[0];
       n_pts_v[i] = n_pts[0];
       }
     } else {
+    for(int i = 0; i < n_pts.size(); i++){
+      total_pts += n_pts[i];
+      }
     n_pts_v = n_pts;
     }
   if(total_pts > std::pow(2,31)-1){
