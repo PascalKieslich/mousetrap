@@ -158,7 +158,7 @@ mt_animate = function(
   }
   
   # extract trajectories  
-  trajectories = mousetrap:::extract_data(data,use)
+  trajectories = extract_data(data,use)
   
   # check if all dimensions are present
   if (!all(dimensions %in% dimnames(trajectories)[[3]])) {
@@ -238,7 +238,7 @@ mt_animate = function(
   # Determine Dimensions ----------------------------------------------------
   
   # Determine number of resc
-  lengths  = mousetrap:::getLengths(
+  lengths  = getLengths(
     trajectories[,,dimensions[1]],
     trajectories[,,dimensions[2]]
   )
@@ -248,7 +248,7 @@ mt_animate = function(
   n_points = n_points
   
   # blow up trajectories
-  spatialized_trajectories = mousetrap:::mt_spatialize_tolong(
+  spatialized_trajectories = mt_spatialize_tolong(
     trajectories,
     dimensions = c(dimensions,timestamps),
     n_points = n_points
@@ -333,7 +333,7 @@ mt_animate = function(
         # add new trajectories according to pgeom
         if(jitter == TRUE) {
           if(density != 1){
-            nnew = min(rgeom(1,1/density),n_left)
+            nnew = min(stats::rgeom(1,1/density),n_left)
           } else {
             nnew = 1
           }
@@ -423,27 +423,27 @@ mt_animate = function(
       # ----- plot
       
       # create pdf
-      png(paste0(tmp_path,'/',job[[1]],'_',name,'.png'),
+      grDevices::png(paste0(tmp_path,'/',job[[1]],'_',name,'.png'),
           width = max(xs) * upscale,
           height = max(ys) * upscale,
           bg = bg)
       
-      plot.new()
-      par( mar=c(0, 0, 0, 0) )
-      plot.window(xlim=range(xs) + c(-.5, .5),
+      graphics::plot.new()
+      graphics::par( mar=c(0, 0, 0, 0) )
+      graphics::plot.window(xlim=range(xs) + c(-.5, .5),
                   ylim=range(ys) + c(-.5, .5)
       )
-      par(usr = c(range(xs) + c(-.5, .5),range(ys) + c(-.5, .5)))
+      graphics::par(usr = c(range(xs) + c(-.5, .5),range(ys) + c(-.5, .5)))
       
       # plot points
-      rect(
+      graphics::rect(
         img$x - .5, img$y - .5,
         img$x + .5, img$y + .5,
         col = colormixer(col, bg, 1-img$col,format = 'hex'),
         border = NA
       )
       
-      dev.off()
+      grDevices::dev.off()
       
     }
   }
@@ -528,8 +528,6 @@ mt_animate = function(
   Files  = paste0(tmp_path,dir(tmp_path))
   ord    = sapply(Files, function(x) {a = strsplit(x,'/')[[1]]; a = a[length(a)]; as.numeric(strsplit(a,'_')[[1]][1])})
   Files  = Files[order(ord)]
-  
-  #a = 'Dropbox\ (2.0)'
   
   # set IM options
   animation::ani.options(interval = 1/framerate, 
