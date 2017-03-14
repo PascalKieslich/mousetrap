@@ -437,7 +437,7 @@ mt_animate = function(
       
       # ----- plot
       
-      # create pdf
+      # create png
       grDevices::png(paste0(tmp_path,'/',job[[1]],'_',name,'.png'),
           width = max(xs) * upscale,
           height = max(ys) * upscale,
@@ -465,30 +465,31 @@ mt_animate = function(
   
   # Execute plot ----------------------------------------------------
   
+  # create tmp folder name
+  tmp_folder <- paste0("traj_tmp_",format(Sys.time(), "%H%M%S"))
+  
   # get filename and path
   if(grepl('[[:print:]]/[[:alnum:]]+',filename)){
     pos = gregexpr('/',filename)[[1]]
-    path = substr(filename,1,pos[length(pos)])
+    path = paste0(substr(filename,1,pos[length(pos)]),"/")
     name = substr(filename,pos[length(pos)]+1,nchar(filename) - 4)
     
-    # create tmp folder
-    tmp_path = paste0(path,'/trajectory_movie_temporary_folder/')
-    if(!'trajectory_movie_temporary_folder' %in% dir(path)) dir.create(tmp_path)
+    tmp_path = paste0(path,tmp_folder,"/")
+    if(!tmp_folder %in% dir(path)) dir.create(tmp_path)
     
   } else {
     path = ''
     name = substr(filename,1,nchar(filename) - 4)
     
     # create tmp folder
-    tmp_path = paste0(path,'trajectory_movie_temporary_folder/')
-    if(!'trajectory_movie_temporary_folder' %in% dir()) dir.create(tmp_path)
-    
+    tmp_path = paste0(path,tmp_folder,"/")
+    if(!tmp_folder %in% dir()) dir.create(tmp_path)
   }
 
 
   
   # execute jobs in parallel or serial
-  if(parallel == T){
+  if(parallel == TRUE){
     
     # report
     if(verbose == TRUE) cat('Creating frames (in parallel)')
@@ -557,7 +558,7 @@ mt_animate = function(
   animation::im.convert(Files,output = filename)    
   
   # remove images 
-  if(discard_images == TRUE) unlink(tmp_path,recursive = T)
+  if(discard_images == TRUE) unlink(paste0(path,tmp_folder),recursive = TRUE)
   
   # report
   if(verbose == TRUE) cat('\tcompleted in ', round((proc.time()[3] - t), 2), ' s\n', sep='')
