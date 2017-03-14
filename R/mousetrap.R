@@ -172,6 +172,8 @@
 #'   \link{mt_plot_per_trajectory} creates a pdf with separate plots per 
 #'   trajectory.
 #'   
+#'   \link{mt_animate} creates a gif trajectory animation.
+#'   
 #' @section Helper functions:
 #'   
 #'   \link{bimodality_coefficient} calculates the bimodality coefficient.

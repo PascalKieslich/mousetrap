@@ -193,6 +193,8 @@ following, a brief overview of the functions in this package is given.
   
   \link{mt_plot_per_trajectory} creates a pdf with separate plots per 
   trajectory.
+  
+  \link{mt_animate} creates a gif trajectory animation.
 }
 
 \section{Helper functions}{

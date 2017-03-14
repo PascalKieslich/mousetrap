@@ -2,7 +2,7 @@
 % Please edit documentation in R/animate.R
 \name{mt_animate}
 \alias{mt_animate}
-\title{Trajectory animation}
+\title{Create gif trajectory animation.}
 \usage{
 mt_animate(data, use = "trajectories", dimensions = c("xpos", "ypos"),
   timestamps = "timestamps", filename = "trajectory_animation.gif",

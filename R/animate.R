@@ -1,4 +1,4 @@
-#' Trajectory animation
+#' Create gif trajectory animation.
 #' 
 #' \code{mt_animate} animates trajectories using the animation package. Note
 #' that this function is still experimental.
