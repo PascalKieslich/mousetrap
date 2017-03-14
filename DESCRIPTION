@@ -40,7 +40,11 @@ Imports:
     diptest,
     RColorBrewer,
     cstab,
-    fastcluster
+    fastcluster,
+    animation,
+    parallel,
+    snow,
+    snowfall
 Suggests:
     readbulk,
     testthat
