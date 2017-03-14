@@ -13,6 +13,13 @@ mt_animate(data, use = "trajectories", dimensions = c("xpos", "ypos"),
   parallel = FALSE, verbose = FALSE)
 }
 \arguments{
+\item{data}{a mousetrap data object created using one of the mt_import
+functions (see \link{mt_example} for details). Alternatively, a trajectory
+array can be provided directly (in this case \code{use} will be ignored).}
+
+\item{use}{a character string specifying which trajectory data should be
+used.}
+
 \item{dimensions}{a character vector specifying the two dimensions in the 
 trajectory array that contain the mouse positions. Usually (and by 
 default), the first value in the vector corresponds to the x-positions 
@@ -36,7 +43,7 @@ eye.}
 
 \item{speed}{numeric specifying the speed of the trajectories with regard to 
 their original velocity profile. I.e., a value of .5 shows trajectories in 
-half of the origianl velocities, whereas a value of 2 shows trajectories in
+half of the original velocities, whereas a value of 2 shows trajectories in
 double of the original velocities.}
 
 \item{density}{integer specifiying the number of trajectories to be added 
@@ -45,11 +52,12 @@ each frame. I.e., if \code{density = 10}, \code{seconds = 10},
 x 10 x 24 x .5 = 1200 trajectories.}
 
 \item{jitter}{logical specifying whether the density should be jittered. If 
-\code{TRUE} \code{density} varies accordingt to \code{rgeom(1/density)}.}
+\code{TRUE}, \code{density} varies according to
+\link[stats]{rgeom}(\code{1/density}).}
 
 \item{remove}{logical specifying whether trajectories that reached their end 
 points should be removed from the rest of the animation. Defaults to 
-\code{FALSE} implied that all finished trajectories remain seen.}
+\code{FALSE} implying that all finished trajectories remain visible.}
 
 \item{bg}{character string specifying the background color.}
 
@@ -63,74 +71,73 @@ irrespective of how extreme they may be.}
 
 \item{norm}{logical specifying wether the trajectories should be remapped to
 the \emph{mt-space}. See \link{mt_align}. Note that aligning often requires
-that that all trajectories are flipped to one side (see
-\link{mt_align_start}).}
+that that all trajectories are flipped to one side first (see
+\link{mt_remap_symmetric}).}
 
-\item{upscale}{numeric specifying a sclaing factor for the animation
+\item{upscale}{numeric specifying a scaling factor for the animation
 resolution. E.g, \code{upscale = 2} implies that the x-resolution in
-\emph{.gif} file is 2 time \code{xres}.}
+\emph{.gif} file is \code{2*xres}.}
 
-\item{decay}{numeric defining a within-trajectry gradieng of color intensity.
+\item{decay}{numeric defining a within-trajectory gradient of color intensity.
 Specifically, values larger than 1 will give more recent movements higher 
 color intensities than movements that lie longer in the past, and vice
 versa.}
 
-\item{discard_images}{logical specifying whther the temporary folder
-containing the temporary \emph{.png} images should be deleted. Defaults to
-TRUE.}
-
-\item{im_path}{character string specifying the location of ImageMagick's
-\code{convert} function. If \code{NULL} the \code{convert} is expected in 
-\code{'/usr/local/bin/convert'}, the default location for Linux and OSX
-operating systems.}
-
-\item{parallel}{logical specifying whether the temporary \emph{.png} images
-should be created using parallel processing (uses
-\link[snowfall]{sfClusterApplyLB}). Process will be run on the maximum
-number of avaialable cores (as determined by \link[parallel]{detectcores}).}
-
-\item{verbose}{logical indicating whether function should report its 
-progress.}
-
-\item{max_instensity}{numeric specifying the maximum color intensity. A value
+\item{max_intensity}{numeric specifying the maximum color intensity. A value
 of, e.g., 5, implies that color intensity is limited to 5 overlapping
 trajectories. I.e., a point at which 4 trajectories overlap will in that
 case have a smaller color intensity than a point at which 5 trajectories
 overlap, but there will be no difference between the latter and a point at
-which 6 trajectories overlap. If \code{decay} is unequal 1 than this metric
+which 6 trajectories overlap. If \code{decay} is unequal 1, this metric
 refers to the most intense color point within the trajectory.}
+
+\item{discard_images}{logical specifying whether the temporary folder
+containing the temporary \emph{.png} images should be deleted. Defaults to
+TRUE.}
+
+\item{im_path}{character string specifying the location of ImageMagick's 
+\emph{convert} function. If \code{NULL}, the \emph{convert} function is 
+expected in \code{'/usr/local/bin/convert'}, the default location for Linux
+and OSX operating systems. The location has to be specified explicitly for
+Windows (see Details and Examples).}
+
+\item{parallel}{logical specifying whether the temporary \emph{.png} images
+should be created using parallel processing (uses
+\link[snowfall]{sfClusterApplyLB}). Process will be run on the maximum
+number of available cores (as determined by \link[parallel]{detectCores}).}
+
+\item{verbose}{logical indicating whether function should report its 
+progress.}
 }
 \description{
-\code{mt_animate} animates trajectories using the animation package.
+\code{mt_animate} animates trajectories using the animation package. Note
+that this function is still experimental.
 }
 \details{
 \code{mt_animate} produces a .gif file showing a continuous stream of 
 animated trajectories. The function first produces a series of \emph{.png} 
 images, which then are combined into a \emph{.gif} animation using 
-\emph{ImageMagick} (see \link[animate]{im.convert} and 
-https://www.imagemagick.org/script/index.php).
+\emph{ImageMagick} (see \link[animation]{im.convert} and 
+\url{https://www.imagemagick.org/}).
 
-In order to run this function imagemagick must be installed. Download from
-https://www.imagemagick.org/script/index.php. Under Unix systems (Linux and
-Apple's OSX) the function will look for ImageMagick using it's default 
-installation path. Alternatively the location of ImageMagick's 'convert'
-function can be provided using the \code{im_path} argument. Under Windows
-\code{im_path} must always be specified explicitly.
-
-\emph{.png} are created in temporary folder. By default the temporary files.
+In order to run this function, ImageMagick must be installed (download from 
+\url{https://www.imagemagick.org/}). Under Unix systems (Linux and Apple's
+OSX) the function will look for ImageMagick using its default installation
+path. Alternatively, the location of ImageMagick's \emph{convert} function
+can be provided using the \code{im_path} argument. Under Windows, 
+\code{im_path} must always be specified explicitly (e.g., it might look
+something like this \code{im_path = "C:/Program
+Files/ImageMagick-7.0.5-Q16/convert.exe"}).
 
 During the animation trajectories are sampled from the data without
 replacement. The function stops when it reaches the last trajectory contained
 in \code{data}.
 
-By default \code{mt_animate} animates trajectories using the original
-timestamps. By setting \code{timestamps = NULL} the function can also assume
-timestamps to be regualar, i.e., of constant interval, in this case the
-longest duration is set to exactly one second.
-
-Note that filename must not contain spaces.
-
-Timestamps are expected to be expressed in milliseconds.
+By default, \code{mt_animate} animates trajectories using the original 
+timestamps. Timestamps are expected to be expressed in milliseconds. By
+setting \code{timestamps = NULL}, the function can also assume timestamps to
+be regualar, i.e., of constant interval, in this case the longest duration is
+set to exactly one second.
 
 In order to create high-resolution (large) animations in a relatively short
 time increase \code{upscale} in favor of \code{xres}. However, note that this
@@ -138,6 +145,28 @@ will decrease the sharpness of the image.
 
 In order to increase or decrease the overall color intensity decrease or
 increase the \code{max_intensity}, respectively.
+}
+\examples{
+\dontrun{
+# Preprocess trajectory data
+mt_example <- mt_align_start(mt_example)
+mt_example <- mt_remap_symmetric(mt_example) 
+
+# Create animated trajectory gif
+# (under Linux / OSX)
+mt_animate(mt_example,filename = "MyMovie.gif")
+
+# Increase duration and density while decreasing speed
+mt_animate(mt_example, filename = "MyMovie2.gif",
+  seconds = 10, speed = .3, density = 10)
+
+# Create animated trajectory gif
+# (under Windows - ImageMagick version specific example)
+mt_animate(mt_example,filename = "MyMovie.gif",
+  im_path = "C:/Program Files/ImageMagick-7.0.5-Q16/convert.exe")
+
+}
+
 }
 \author{
 Dirk U. Wulff <dirk.wulff@gmail.com>
