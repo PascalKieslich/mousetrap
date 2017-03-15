@@ -23,7 +23,8 @@ URL: https://github.com/pascalkieslich/mousetrap
 BugReports: https://github.com/pascalkieslich/mousetrap/issues
 License: GPL-3
 Depends:
-    R (>= 3.1.0)
+    R (>= 3.1.0),
+    snow
 Imports:
     utils,
     stats,
@@ -41,9 +42,7 @@ Imports:
     RColorBrewer,
     cstab,
     fastcluster,
-    animation,
     parallel,
-    snow,
     snowfall
 Suggests:
     readbulk,

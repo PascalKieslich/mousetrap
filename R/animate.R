@@ -6,8 +6,7 @@
 #' \code{mt_animate} produces a .gif file showing a continuous stream of 
 #' animated trajectories. The function first produces a series of \emph{.png} 
 #' images, which then are combined into a \emph{.gif} animation using 
-#' \emph{ImageMagick} (see \link[animation]{im.convert} and 
-#' \url{https://www.imagemagick.org/}).
+#' \emph{ImageMagick} (see \url{https://www.imagemagick.org/}).
 #' 
 #' In order to run this function, ImageMagick must be installed (download from 
 #' \url{https://www.imagemagick.org/}). Under Unix systems (Linux and Apple's
@@ -152,6 +151,7 @@ mt_animate = function(
   remove    = FALSE,
   bg        = 'black',
   col       = 'white',
+  lwd       = 1,
   
   # background settings
   bounds         = NULL,
@@ -161,15 +161,16 @@ mt_animate = function(
   max_intensity  = 5,
   discard_images = TRUE,
   im_path        = NULL,
-  parallel       = FALSE,
+  parallel       = TRUE,
   verbose        = FALSE){
   
   # constants
-  edge     = 1
+  edge  = 1
+  chars = c(0:9,letters,LETTERS)
   
   # Data checks
-  if (!length(dimensions) == 2) {
-    stop('Dimensions must of length 2!')
+  if (!length(dimensions) %in% c(2,3)) {
+    stop('Dimensions must of length 2 or 3!')
   }
   
   # extract trajectories  
@@ -268,7 +269,7 @@ mt_animate = function(
     dimensions = c(dimensions,timestamps),
     n_points = n_points
   )
-  
+  colnames(spatialized_trajectories) = c(dimensions,timestamps)
   
   # range of pixels plus white space around image
   xs = 0 : (xres_m + margin) + 1
@@ -294,8 +295,8 @@ mt_animate = function(
   trajectory_list = split(data.frame(pts),split_by)
   
   # extract maximum timestamp
-  max_time = sapply(trajectory_list,function(x) max(x[,3]))
-  
+  max_time = sapply(trajectory_list,function(x) max(x[,timestamps]))
+  if(length(dimensions) == 3) max_dim3 = sapply(trajectory_list,function(x) max(x[,dimensions[3]]))
   
   
   # Determine Jobs ----------------------------------------------------
@@ -398,6 +399,7 @@ mt_animate = function(
       
       # reset image
       img_mat = matrix(0, ncol=max(xs), nrow=max(ys))
+      if(length(dimensions) == 3) a_mat = matrix(0, ncol=max(xs), nrow=max(ys))
       
       # identify time
       time = ((floor(job[[1]] / framerate) + (job[[1]] %% framerate / framerate)) * 1000) / (1/speed)
@@ -410,11 +412,16 @@ mt_animate = function(
         traj = active[[j]]
         
         # limit to points in time
-        subs = traj[,3] <= time - spawn_time[j]
+        subs = traj[,'timestamps'] <= time - spawn_time[j]
         traj = traj[subs,]
         
         # add trajetcory piece to image
         img_mat[as.matrix(traj[,2:1])] = img_mat[as.matrix(traj[,2:1])] + seq(0,1,length = nrow(traj))**decay + 1
+        if(length(dimensions) == 3) {
+          a = traj[,dimensions[3]]
+          a = ((1 + a - min(a)) / (1 + max_dim3[job[[2]][j]] - min(a)))
+          a_mat[as.matrix(traj[,2:1])] = select_max(a_mat[as.matrix(traj[,2:1])],a)
+        }
         
         # test if to be removed
         if(mean(subs) == 1) rem = c(rem,j)
@@ -428,8 +435,9 @@ mt_animate = function(
       img_mat = img_mat / max_intensity
       
       # transformt to long
-      img = data.frame(expand.grid(xs,ys),c(t(img_mat)))
-      names(img) = c('x','y','col')
+      img = data.frame(expand.grid(xs,ys),c(t(img_mat)),1)
+      if(length(dimensions) == 3) img[,4] = c(t(a_mat))
+      names(img) = c('x','y','col','lwd')
       
       # reduce to non-zero elements
       img = img[img[,3] > 0,]
@@ -438,7 +446,8 @@ mt_animate = function(
       # ----- plot
       
       # create png
-      grDevices::png(paste0(tmp_path,'/',job[[1]],'_',name,'.png'),
+      image_no = paste0(paste(rep(0,5 - nchar(job[[1]])),collapse=''),job[[1]])
+      grDevices::png(paste0(tmp_path,'/',image_no,'.png'),
           width = max(xs) * upscale,
           height = max(ys) * upscale,
           bg = bg)
@@ -452,8 +461,8 @@ mt_animate = function(
       
       # plot points
       graphics::rect(
-        img$x - .5, img$y - .5,
-        img$x + .5, img$y + .5,
+        img$x - .5 * img$lwd * lwd, img$y - .5 * img$lwd * lwd,
+        img$x + .5 * img$lwd * lwd, img$y + .5 * img$lwd * lwd,
         col = colormixer(col, bg, 1-img$col,format = 'hex'),
         border = NA
       )
@@ -466,27 +475,9 @@ mt_animate = function(
   # Execute plot ----------------------------------------------------
   
   # create tmp folder name
-  tmp_folder <- paste0("traj_tmp_",format(Sys.time(), "%H%M%S"))
-  
-  # get filename and path
-  if(grepl('[[:print:]]/[[:alnum:]]+',filename)){
-    pos = gregexpr('/',filename)[[1]]
-    path = paste0(substr(filename,1,pos[length(pos)]),"/")
-    name = substr(filename,pos[length(pos)]+1,nchar(filename) - 4)
-    
-    tmp_path = paste0(path,tmp_folder,"/")
-    if(!tmp_folder %in% dir(path)) dir.create(tmp_path)
-    
-  } else {
-    path = ''
-    name = substr(filename,1,nchar(filename) - 4)
-    
-    # create tmp folder
-    tmp_path = paste0(path,tmp_folder,"/")
-    if(!tmp_folder %in% dir()) dir.create(tmp_path)
-  }
-
-
+  tmp_char = paste0(sample(chars,5),collapse='')
+  tmp_path = paste0(getwd(),'/',tmp_char)
+  if(!dir.exists(tmp_path)) dir.create(tmp_path)
   
   # execute jobs in parallel or serial
   if(parallel == TRUE){
@@ -501,10 +492,12 @@ mt_animate = function(
     ncores = parallel::detectCores()
     jobs_split = split(jobs,cut(1:length(jobs),ncores * 3))  
     
+    colormixer = colormixer
+    
     # parallel execution
     snowfall::sfInit(T, ncores)
     snowfall::sfExport('framerate','speed','decay','max_intensity','filename',
-             'xs','ys','upscale','bg','tmp_path','name','colormixer')
+             'xs','ys','upscale','bg','tmp_path','colormixer')
     snowfall::sfClusterApplyLB(jobs_split,plot_frame,trajectory_list = trajectory_list)
     snowfall::sfStop()
     
@@ -540,25 +533,24 @@ mt_animate = function(
   # taking the time
   t = proc.time()[3]
   
-  # get ordered list of files
-  Files  = paste0(tmp_path,dir(tmp_path))
-  ord    = sapply(Files, function(x) {a = strsplit(x,'/')[[1]]; a = a[length(a)]; as.numeric(strsplit(a,'_')[[1]][1])})
-  Files  = Files[order(ord)]
-  
-  # set IM options
-  animation::ani.options(interval = 1/framerate, 
-                         ani.width = max(xs), 
-                         ani.height = max(ys), 
-                         convert = im_path)
-  
-  # Execute IM to create gif
+  # add .gif to filename if necessary
   if(substr(filename,nchar(filename)-3,nchar(filename)) != '.gif'){
     filename = paste0(filename,'.gif')
   } 
-  animation::im.convert(Files,output = filename)    
   
+  # setup conversion command
+  command = paste(
+    im_path,
+    '-loop 0',
+    '-delay',1/framerate,
+    paste0(tmp_char,'/*.png'),
+    filename)
+  
+  # convert
+  system(command)
+
   # remove images 
-  if(discard_images == TRUE) unlink(paste0(path,tmp_folder),recursive = TRUE)
+  if(discard_images == TRUE) unlink(tmp_char,recursive = TRUE)
   
   # report
   if(verbose == TRUE) cat('\tcompleted in ', round((proc.time()[3] - t), 2), ' s\n', sep='')

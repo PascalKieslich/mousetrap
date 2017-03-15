@@ -112,8 +112,8 @@ mt_spatialize_tolong <- function(data,
   trajectories <- extract_data(data, use)
 
   # Tests
-  if (!length(dimensions) %in% c(2,3)) {
-    stop('Dimensions must of length 2 or 3.')
+  if (!length(dimensions) %in% c(2,3,4)) {
+    stop('Dimensions must of length 2, 3, or 4.')
   }
   if (!all(dimensions %in% dimnames(trajectories)[[3]])) {
     stop('Not all dimensions exist.')
@@ -145,8 +145,24 @@ mt_spatialize_tolong <- function(data,
     spatialized_trajectories <- spatializeArrayToLong3d(
       dim_1, dim_2, dim_3, n_points
     )
+  } else if (length(dimensions) == 4) {
+    if (nrow(trajectories) == 1) {
+      # Cover special case of single trajectory
+      dim_1 <- matrix(trajectories[,,dimensions[1]],nrow=1)
+      dim_2 <- matrix(trajectories[,,dimensions[2]],nrow=1)
+      dim_3 <- matrix(trajectories[,,dimensions[3]],nrow=1)
+      dim_4 <- matrix(trajectories[,,dimensions[4]],nrow=1)
+    } else {
+      dim_1 <- trajectories[,,dimensions[1]]
+      dim_2 <- trajectories[,,dimensions[2]]
+      dim_3 <- trajectories[,,dimensions[3]]
+      dim_4 <- trajectories[,,dimensions[4]]
+    }
+    spatialized_trajectories <- spatializeArrayToLong4d(
+      dim_1, dim_2, dim_3, dim_4, n_points
+    )
   }
-
+  
   # Return data
   return(spatialized_trajectories)
 }

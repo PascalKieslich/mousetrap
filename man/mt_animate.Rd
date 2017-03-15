@@ -7,10 +7,10 @@
 mt_animate(data, use = "trajectories", dimensions = c("xpos", "ypos"),
   timestamps = "timestamps", filename = "trajectory_animation.gif",
   xres = 1000, seconds = 3, framerate = 24, speed = 0.5, density = 3,
-  jitter = TRUE, remove = FALSE, bg = "black", col = "white",
+  jitter = TRUE, remove = FALSE, bg = "black", col = "white", lwd = 1,
   bounds = NULL, norm = FALSE, upscale = 1, decay = 10,
   max_intensity = 5, discard_images = TRUE, im_path = NULL,
-  parallel = FALSE, verbose = FALSE)
+  parallel = TRUE, verbose = FALSE)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import
@@ -117,8 +117,7 @@ that this function is still experimental.
 \code{mt_animate} produces a .gif file showing a continuous stream of 
 animated trajectories. The function first produces a series of \emph{.png} 
 images, which then are combined into a \emph{.gif} animation using 
-\emph{ImageMagick} (see \link[animation]{im.convert} and 
-\url{https://www.imagemagick.org/}).
+\emph{ImageMagick} (see \url{https://www.imagemagick.org/}).
 
 In order to run this function, ImageMagick must be installed (download from 
 \url{https://www.imagemagick.org/}). Under Unix systems (Linux and Apple's

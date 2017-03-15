@@ -70,6 +70,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// select_max
+NumericVector select_max(NumericVector x, NumericVector y);
+RcppExport SEXP mousetrap_select_max(SEXP xSEXP, SEXP ySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    rcpp_result_gen = Rcpp::wrap(select_max(x, y));
+    return rcpp_result_gen;
+END_RCPP
+}
 // computeNorm
 std::vector<double> computeNorm(double r);
 RcppExport SEXP mousetrap_computeNorm(SEXP rSEXP) {
@@ -312,6 +324,21 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// spatialize4d
+NumericMatrix spatialize4d(NumericVector x, NumericVector y, NumericVector z1, NumericVector z2, int npts);
+RcppExport SEXP mousetrap_spatialize4d(SEXP xSEXP, SEXP ySEXP, SEXP z1SEXP, SEXP z2SEXP, SEXP nptsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type z1(z1SEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type z2(z2SEXP);
+    Rcpp::traits::input_parameter< int >::type npts(nptsSEXP);
+    rcpp_result_gen = Rcpp::wrap(spatialize4d(x, y, z1, z2, npts));
+    return rcpp_result_gen;
+END_RCPP
+}
 // spatializeArray
 GenericVector spatializeArray(NumericMatrix xs, NumericMatrix ys, NumericVector n_pts);
 RcppExport SEXP mousetrap_spatializeArray(SEXP xsSEXP, SEXP ysSEXP, SEXP n_ptsSEXP) {
@@ -363,6 +390,21 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< NumericMatrix >::type zs(zsSEXP);
     Rcpp::traits::input_parameter< NumericVector >::type n_pts(n_ptsSEXP);
     rcpp_result_gen = Rcpp::wrap(spatializeArrayToLong3d(xs, ys, zs, n_pts));
+    return rcpp_result_gen;
+END_RCPP
+}
+// spatializeArrayToLong4d
+NumericMatrix spatializeArrayToLong4d(NumericMatrix xs, NumericMatrix ys, NumericMatrix z1s, NumericMatrix z2s, NumericVector n_pts);
+RcppExport SEXP mousetrap_spatializeArrayToLong4d(SEXP xsSEXP, SEXP ysSEXP, SEXP z1sSEXP, SEXP z2sSEXP, SEXP n_ptsSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type xs(xsSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type ys(ysSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type z1s(z1sSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type z2s(z2sSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type n_pts(n_ptsSEXP);
+    rcpp_result_gen = Rcpp::wrap(spatializeArrayToLong4d(xs, ys, z1s, z2s, n_pts));
     return rcpp_result_gen;
 END_RCPP
 }

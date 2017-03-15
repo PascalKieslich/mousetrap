@@ -43,8 +43,9 @@ NumericMatrix spatialize(NumericVector x, NumericVector y, int npts) {
     if(i != (npts-1) && i != 0){
       w1 = std::abs(double(steps[i]) - double(cumdiffs[ind-1]));
       w2 = std::abs(double(steps[i]) - double(cumdiffs[ind]));
-      xyn(i,0) = double(x[ind-1]) * w2/(w1+w2) + double(x[ind]) * w1/(w1+w2);
-      xyn(i,1) = double(y[ind-1]) * w2/(w1+w2) + double(y[ind]) * w1/(w1+w2);
+      double w  =  w2/(w1+w2);
+      xyn(i,0) = double(x[ind-1]) * w + double(x[ind]) * (1-w);
+      xyn(i,1) = double(y[ind-1]) * w + double(y[ind]) * (1-w);
       }
     else if(i == 0){
       xyn(i,0) = double(x[0]);
@@ -100,9 +101,10 @@ NumericMatrix spatialize3d(NumericVector x, NumericVector y, NumericVector z, in
     if(i != (npts-1) && i != 0){
       w1 = std::abs(double(steps[i]) - double(cumdiffs[ind-1]));
       w2 = std::abs(double(steps[i]) - double(cumdiffs[ind]));
-      xyn(i,0) = double(x[ind-1]) * w2/(w1+w2) + double(x[ind]) * w1/(w1+w2);
-      xyn(i,1) = double(y[ind-1]) * w2/(w1+w2) + double(y[ind]) * w1/(w1+w2);
-      xyn(i,2) = double(z[ind-1]) * w2/(w1+w2) + double(z[ind]) * w1/(w1+w2);
+      double w  =  w2/(w1+w2);
+      xyn(i,0) = double(x[ind-1]) * w + double(x[ind]) * (1-w);
+      xyn(i,1) = double(y[ind-1]) * w + double(y[ind]) * (1-w);
+      xyn(i,2) = double(z[ind-1]) * w + double(z[ind]) * (1-w);
       }
     else if(i == 0){
       xyn(i,0) = double(x[0]);
@@ -118,6 +120,73 @@ NumericMatrix spatialize3d(NumericVector x, NumericVector y, NumericVector z, in
   return xyn;
   }
 
+
+// spatial rescale 4d
+//
+// basic 4D function to rescale trajectories
+// used in all 4D functions below
+
+
+
+// [[Rcpp::export]]
+NumericMatrix spatialize4d(NumericVector x, 
+                           NumericVector y, 
+                           NumericVector z1, 
+                           NumericVector z2, 
+                           int npts) {
+  int ind = 0, n = x.size();
+  for(int i = 0; i < n; i++){
+    if(x[i] == x[i] || y[i] == y[i]) ind++;
+    }
+  n = ind;
+  NumericVector cumdiffs(n), steps(npts);
+  NumericMatrix xyn(npts,4);
+  double step, w1, w2, stepi, cumdiffi;
+  // Calculate cumulative distances between points
+  for(int i = 0; i < n; i++){
+    if(i < 1){
+      cumdiffs[i] = 0.0;
+      } else {
+      cumdiffs[i] = cumdiffs[i-1] + sqrt(pow(x[i] - x[i-1],2) + pow(y[i] - y[i-1],2));
+      }
+    }
+  // Calculate vector with equidistant steps
+  step = double(cumdiffs[n-1]) / double(npts-1);
+  for(double i = 0; i < npts; i++){
+    steps[i] = step * i;
+    }
+  // Loop over number of points for final
+  for(int i = 0; i < npts; i++){
+    ind = 0;
+    for(int j = 0; j < n; j++){
+      stepi    = steps[i];
+      cumdiffi = cumdiffs[j];
+      if(stepi > cumdiffi) ind++;
+      }
+    if(i != (npts-1) && i != 0){
+      w1 = std::abs(double(steps[i]) - double(cumdiffs[ind-1]));
+      w2 = std::abs(double(steps[i]) - double(cumdiffs[ind]));
+      double w  =  w2/(w1+w2);
+      xyn(i,0) = double(x[ind-1]) * w + double(x[ind]) * (1-w);
+      xyn(i,1) = double(y[ind-1]) * w + double(y[ind]) * (1-w);
+      xyn(i,2) = double(z1[ind-1]) * w + double(z1[ind]) * (1-w);
+      xyn(i,3) = double(z2[ind-1]) * w + double(z2[ind]) * (1-w);
+      }
+    else if(i == 0){
+      xyn(i,0) = double(x[0]);
+      xyn(i,1) = double(y[0]);
+      xyn(i,2) = double(z1[0]);
+      xyn(i,3) = double(z2[0]);
+      }
+    else {
+      xyn(i,0) = double(x[n-1]);
+      xyn(i,1) = double(y[n-1]);
+      xyn(i,2) = double(z1[n-1]);
+      xyn(i,3) = double(z2[n-1]);
+      }
+    }
+  return xyn;
+  }
 
 
 // spatial rescale (A)rray
@@ -300,3 +369,48 @@ NumericMatrix spatializeArrayToLong3d(NumericMatrix xs,
   }
   return xyz;
 }
+
+// spatial rescale (A)rray long 4D
+//
+// takes two matrixes as input and returns a Matrix
+// containing the values of the input matrices in one
+// columns each.
+
+// [[Rcpp::export]]
+NumericMatrix spatializeArrayToLong4d(NumericMatrix xs,
+                                      NumericMatrix ys,
+                                      NumericMatrix z1s,
+                                      NumericMatrix z2s,
+                                      NumericVector n_pts){
+  NumericVector n_pts_v(xs.nrow());
+  long total_pts = 0;
+  if(n_pts.length() != xs.nrow()){
+    for(int i = 0; i < xs.nrow(); i++){
+      total_pts += n_pts[0];
+      n_pts_v[i] = n_pts[0];
+      }
+    } else {
+    for(int i = 0; i < n_pts.size(); i++){
+      total_pts += n_pts[i];
+      }
+    n_pts_v = n_pts;
+    }
+  if(total_pts > std::pow(2,31)-1){
+    std::string a = "Error: Matrix bound reached - use smaller resolution!";
+    return 0;
+    };
+  NumericMatrix xyz(total_pts, 4);
+  int ind = 0;
+  for(int i = 0; i < xs.nrow(); i++){
+    NumericMatrix resc_traj = spatialize4d(xs(i,_), ys(i,_), z1s(i,_), z2s(i,_), n_pts_v[i]);
+    for(int j = 0; j < resc_traj.nrow(); j++){
+      xyz(ind, 0) = resc_traj(j,0);
+      xyz(ind, 1) = resc_traj(j,1);
+      xyz(ind, 2) = resc_traj(j,2);
+      xyz(ind, 3) = resc_traj(j,3);
+      ind++;
+    }
+  }
+  return xyz;
+}
+

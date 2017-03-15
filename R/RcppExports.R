@@ -21,6 +21,10 @@ distMat3dV <- function(x, y, z, power = 2L) {
     .Call('mousetrap_distMat3dV', PACKAGE = 'mousetrap', x, y, z, power)
 }
 
+select_max <- function(x, y) {
+    .Call('mousetrap_select_max', PACKAGE = 'mousetrap', x, y)
+}
+
 computeNorm <- function(r) {
     .Call('mousetrap_computeNorm', PACKAGE = 'mousetrap', r)
 }
@@ -97,6 +101,10 @@ spatialize3d <- function(x, y, z, npts) {
     .Call('mousetrap_spatialize3d', PACKAGE = 'mousetrap', x, y, z, npts)
 }
 
+spatialize4d <- function(x, y, z1, z2, npts) {
+    .Call('mousetrap_spatialize4d', PACKAGE = 'mousetrap', x, y, z1, z2, npts)
+}
+
 spatializeArray <- function(xs, ys, n_pts) {
     .Call('mousetrap_spatializeArray', PACKAGE = 'mousetrap', xs, ys, n_pts)
 }
@@ -111,6 +119,10 @@ spatializeArray3d <- function(xs, ys, zs, n_pts) {
 
 spatializeArrayToLong3d <- function(xs, ys, zs, n_pts) {
     .Call('mousetrap_spatializeArrayToLong3d', PACKAGE = 'mousetrap', xs, ys, zs, n_pts)
+}
+
+spatializeArrayToLong4d <- function(xs, ys, z1s, z2s, n_pts) {
+    .Call('mousetrap_spatializeArrayToLong4d', PACKAGE = 'mousetrap', xs, ys, z1s, z2s, n_pts)
 }
 
 tab <- function(v1, v2) {
