@@ -68,6 +68,7 @@
 #' @param bg character string specifying the background color.
 #' @param col character string specifiyng the foreground color, i.e., the color 
 #'   used to draw the trajectories.
+#' @param lwd numeric specifying the line width of the trajectories.
 #' @param bounds numeric vector specifying the xleft, xright, ybottom, and ytop 
 #'   limits of the animation canvas. Defaults to \code{NULL} in which case the 
 #'   animation canvas is set to include all existing trajectory points,
@@ -537,7 +538,7 @@ mt_animate = function(
   if(substr(filename,nchar(filename)-3,nchar(filename)) != '.gif'){
     filename = paste0(filename,'.gif')
   } 
-  
+
   # setup conversion command
   command = paste(
     im_path,
@@ -545,6 +546,13 @@ mt_animate = function(
     '-delay',1/framerate,
     paste0(tmp_char,'/*.png'),
     filename)
+
+  # ff_path = '/usr/local/bin/ffmpeg'
+  # command = paste(
+  #   ff_path,
+  #   '-i',    paste0(tmp_char,'/*.png'),
+  #   filename)    
+  # 
   
   # convert
   system(command)

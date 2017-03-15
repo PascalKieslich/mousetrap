@@ -64,6 +64,8 @@ points should be removed from the rest of the animation. Defaults to
 \item{col}{character string specifiyng the foreground color, i.e., the color 
 used to draw the trajectories.}
 
+\item{lwd}{numeric specifying the line width of the trajectories.}
+
 \item{bounds}{numeric vector specifying the xleft, xright, ybottom, and ytop 
 limits of the animation canvas. Defaults to \code{NULL} in which case the 
 animation canvas is set to include all existing trajectory points,
