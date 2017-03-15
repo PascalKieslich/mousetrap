@@ -491,8 +491,9 @@ mt_animate = function(
 
     # split jobs
     ncores = parallel::detectCores()
-    jobs_split = split(jobs,cut(1:length(jobs),ncores * 3))  
+    jobs_split = split(sample(jobs),cut(1:length(jobs),ncores))  
     
+    # call colormixer so that it is available
     colormixer = colormixer
     
     # parallel execution
@@ -541,7 +542,7 @@ mt_animate = function(
 
   # setup conversion command
   command = paste(
-    im_path,
+    paste0('"',im_path,'"'),
     '-loop 0',
     '-delay',1/framerate,
     paste0(tmp_char,'/*.png'),
