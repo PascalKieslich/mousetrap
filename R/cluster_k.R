@@ -98,7 +98,7 @@
 #' @export
 mt_cluster_k <- function(
   data,
-  use = 'sp_trajetcories',
+  use = 'sp_trajectories',
   dimensions = c('xpos','ypos'),
 
   # k-selection type

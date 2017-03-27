@@ -4,7 +4,7 @@
 \alias{mt_cluster_k}
 \title{Estimate optimal number of clusters.}
 \usage{
-mt_cluster_k(data, use = "sp_trajetcories", dimensions = c("xpos", "ypos"),
+mt_cluster_k(data, use = "sp_trajectories", dimensions = c("xpos", "ypos"),
   kseq = 2:15, compute = c("stability", "gap", "jump", "slope"),
   method = "hclust", pointwise = TRUE, minkowski_p = 2,
   hclust_method = "ward.D", kmeans_nstart = 10, n_bootstrap = 10,

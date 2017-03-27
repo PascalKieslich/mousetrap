@@ -69,6 +69,8 @@
 #' @param col character string specifiyng the foreground color, i.e., the color 
 #'   used to draw the trajectories.
 #' @param lwd numeric specifying the line width of the trajectories.
+#' @param loop logical specifying whether gif should be looped (loop = TRUE) or 
+#'   not. 
 #' @param bounds numeric vector specifying the xleft, xright, ybottom, and ytop 
 #'   limits of the animation canvas. Defaults to \code{NULL} in which case the 
 #'   animation canvas is set to include all existing trajectory points,
@@ -155,6 +157,7 @@ mt_animate = function(
   lwd       = 1,
   
   # background settings
+  loop           = FALSE,
   bounds         = NULL,
   norm           = FALSE,
   upscale        = 1,
@@ -543,7 +546,7 @@ mt_animate = function(
   # setup conversion command
   command = paste(
     paste0('"',im_path,'"'),
-    '-loop 0',
+    ifelse(loop == T,'-loop 0','-loop 1'),
     '-delay',1/framerate,
     paste0(tmp_char,'/*.png'),
     filename)
