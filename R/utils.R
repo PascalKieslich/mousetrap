@@ -338,5 +338,26 @@ round_even = function(x){
 }
 
 
+# Cohens d
+# Computed cohens d
+cohen = function(x,y){
+  
+  nx = length(x)
+  ny = length(y)
+  vx = var(x)
+  vy = var(y)
+  
+  nom = mean(x) - mean(y)
+  den = sqrt(((nx-1)*vx + (ny-1)*vy)/(nx+ny-2))
+  coh = nom / den
+  
+  v_d = sqrt((nx+ny)/(nx*ny) + (coh*coh) / (2 * (nx + ny)))
+  
+  rx = vx/nx
+  ry = vy/ny
+  nu = (rx + ry)**2 / ((rx ** 2 / (rx - 1) + (ry ** 2 / (ry - 1))))
+             
+  return(c(coh,v_d,nu))
+  }
 
 
