@@ -43,7 +43,8 @@ Imports:
     cstab,
     fastcluster,
     parallel,
-    snowfall
+    snowfall,
+    fields
 Suggests:
     readbulk,
     testthat

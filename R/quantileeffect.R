@@ -106,7 +106,7 @@ mt_qeffect = function(
   # loop over quantiles
   res = matrix(NA,nrow = 3, ncol = n_steps)
   for(i in 1:n_steps){
-    lim = quantile(all,quantiles[i])
+    lim = stats::quantile(all,quantiles[i])
     if(direction == 'upward'){
       m1 = measure1[measure1 < lim]
       m2 = measure2[measure2 < lim]
@@ -130,11 +130,11 @@ mt_qeffect = function(
   
   # loop over quantils for comparison
   res_comp = matrix(NA,nrow = 3, ncol = n_steps)
-  sim1 = rnorm(50000, mean(measure1), sd(measure1))
-  sim2 = rnorm(50000, mean(measure2), sd(measure2))
+  sim1 = stats::rnorm(50000, mean(measure1), stats::sd(measure1))
+  sim2 = stats::rnorm(50000, mean(measure2), stats::sd(measure2))
   sim  = c(sim1,sim2)
   for(i in 1:n_steps){
-    lim = quantile(sim,quantiles[i])
+    lim = stats::quantile(sim,quantiles[i])
     if(direction == 'upward'){
       s1 = sim1[sim1 < lim]
       s2 = sim2[sim2 < lim]
@@ -155,27 +155,27 @@ mt_qeffect = function(
     } else {
     
     # plot
-    q = qt(.975,nu[i])
+    q = stats::qt(.975,nu[i])
     xlim = c(.5,n_steps + .5)
     ylim = c(floor(min(effect-se*q)*10)/10,ceiling(max(effect+se*q)*10)/10)
-    plot.new();plot.window(xlim,ylim)
+    graphics::plot.new();graphics::plot.window(xlim,ylim)
     
     # plot chance
-    lines(xlim,c(0,0),col='black',lwd=2)
+    graphics::lines(xlim,c(0,0),col='black',lwd=2)
     
     # lines sim
-    lines(res_comp[1,],lwd=2,col='red',lty=1)
+    graphics::lines(res_comp[1,],lwd=2,col='red',lty=1)
     
     # plot points
-    points(effect,pch=16,...)
+    graphics::points(effect,pch=16,...)
     
     # plot error bars
-    sapply(1:n_steps,function(i) lines(c(i,i),effect[i]+se[i]*c(-q,q)))
+    sapply(1:n_steps,function(i) graphics::lines(c(i,i),effect[i]+se[i]*c(-q,q)))
     
     # axes
-    mtext(round(seq(xlim[1]+.5,xlim[2]-.5,length=10)),at=round(seq(xlim[1]+.5,xlim[2]-.5,length=10)),side=1)
-    mtext(round(seq(ylim[1],ylim[2],length=10),1),at=round(seq(ylim[1],ylim[2],length=10),1),side=2,las=1)
-    mtext(c(paste0(measure,' percentile'),"Cohens'd"),side=c(1,2),line=c(1.5,1.5),cex=1.2)
+    graphics::mtext(round(seq(xlim[1]+.5,xlim[2]-.5,length=10)),at=round(seq(xlim[1]+.5,xlim[2]-.5,length=10)),side=1)
+    graphics::mtext(round(seq(ylim[1],ylim[2],length=10),1),at=round(seq(ylim[1],ylim[2],length=10),1),side=2,las=1)
+    graphics::mtext(c(paste0(measure,' percentile'),"Cohens'd"),side=c(1,2),line=c(1.5,1.5),cex=1.2)
     
     
     }
