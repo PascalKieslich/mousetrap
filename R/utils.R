@@ -344,8 +344,8 @@ cohen = function(x,y){
   
   nx = length(x)
   ny = length(y)
-  vx = var(x)
-  vy = var(y)
+  vx = stats::var(x)
+  vy = stats::var(y)
   
   nom = mean(x) - mean(y)
   den = sqrt(((nx-1)*vx + (ny-1)*vy)/(nx+ny-2))

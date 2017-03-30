@@ -328,7 +328,7 @@ mt_heatmap_raw = function(
       ms = c(ms, abs(mean(abs(img$img-1)**i - 1)));
     }
 
-    enhance = exp(predict(fields::qsreg(ms,log(steps)),mean_image))
+    enhance = exp(stats::predict(fields::qsreg(ms,log(steps)),mean_image))
     if (enhance > max(steps)) enhance = max(steps)
     if (enhance < 0) enhance = 1
     img$img = abs(abs(img$img - 1)**enhance - 1)
@@ -340,7 +340,7 @@ mt_heatmap_raw = function(
       for (i in steps) {
         ms = c(ms, abs(mean(abs(img$a-1)**i - 1)));
       }
-      enhance = exp(predict(fields::qsreg(ms,log(steps)),mean_color))
+      enhance = exp(stats::predict(fields::qsreg(ms,log(steps)),mean_color))
       if (enhance > max(steps)) enhance = max(steps)
       if (enhance < 0) enhance = 1
       img$a = abs(abs(img$a - 1)**enhance - 1)      
@@ -460,21 +460,21 @@ mt_heatmap = function(
   
   # --------- collect device
   if (device == 'pdf') {
-    pdf(
+    grDevices::pdf(
       file,
       width=10 * (max(img$x) / max(img$y)) * upscale,
       height=10 * upscale,
       bg = bg
       )
     } else if(device == 'png') {
-    tiff(
+    grDevices::png(
       file,
       width=max(img$x) * upscale,
       height=max(img$y) * upscale,
       bg = bg
     )
   } else if (device == 'tiff') {
-    tiff(
+    grDevices::tiff(
       file,
       width=max(img$x) * upscale,
       height=max(img$y) * upscale,
@@ -491,16 +491,16 @@ mt_heatmap = function(
   p_img = p_img[img$img>0,]
   
   # set canvas
-  par(bg = bg)
-  plot.new()
-  par( mar=c(0, 0, 0, 0))
-  plot.window(xlim=range_x + c(-.5, .5),
+  graphics::par(bg = bg)
+  graphics::plot.new()
+  graphics::par( mar=c(0, 0, 0, 0))
+  graphics::plot.window(xlim=range_x + c(-.5, .5),
               ylim=range_y + c(-.5, .5)
               )
-  par(usr = c(range_x + c(-.5, .5),range_y + c(-.5, .5)))
+  graphics::par(usr = c(range_x + c(-.5, .5),range_y + c(-.5, .5)))
   
   # plot points
-  rect(
+  graphics::rect(
     p_img$x - .5, p_img$y - .5,
     p_img$x + .5, p_img$y + .5,
     col=p_img$col,
@@ -508,7 +508,7 @@ mt_heatmap = function(
     )
   
   if (!is.null(agg)) {
-    points(agg[1:2],cex=agg$lwd,col=agg$col,pch=16)
+    graphics::points(agg[1:2],cex=agg$lwd,col=agg$col,pch=16)
     }
   
   # plot dimensions
@@ -519,15 +519,15 @@ mt_heatmap = function(
     ypos = range_y[1] + d_y * c(.05,.95)
     cord = round(expand.grid(xpos,ypos))
     if(heatmap$colors[1] == 'black'){
-      text(cord,labels = paste0('(',cord[,1],',',cord[,2],')'),col = 'white')
-      } else {
-      text(cord,labels = paste0('(',cord[,1],',',cord[,2],')'),col = 'black')        
-      }
+      graphics::text(cord,labels = paste0('(',cord[,1],',',cord[,2],')'),col = 'white')
+    } else {
+      graphics::text(cord,labels = paste0('(',cord[,1],',',cord[,2],')'),col = 'black')        
+    }
   }
   
   if(device %in% c('pdf','png','tiff')) {
-    dev.off()
-    }
+    grDevices::dev.off()
+  }
 
   # Finalization ---------------------------------------------------------------
   # Give feedback
@@ -545,7 +545,7 @@ mt_heatmap = function(
 #' @method print mt_heatmap_raw
 #' @export
 print.mt_heatmap_raw = function(x,...){
-  str(x)
+  utils::str(x)
 }
 
 
@@ -695,21 +695,21 @@ mt_diffmap = function(
   cat('creating heatmap: ', max(img$x), 'x', max(img$y), 'px', '\n')
   if (plot == TRUE) {
     if (device == 'pdf') {
-      pdf(
+      grDevices::pdf(
         file,
         width=10 * (max(img$x) / max(img$y)) * upscale,
         height=10 * upscale,
         bg = bg
       )
     } else if(device == 'png') {
-      tiff(
+      grDevices::png(
         file,
         width=max(img$x) * upscale,
         height=max(img$y) * upscale,
         bg = colors[2]
       )
     } else if (device == 'tiff') {
-      tiff(
+      grDevices::tiff(
         file,
         width=max(img$x) * upscale,
         height=max(img$y) * upscale,
@@ -717,18 +717,18 @@ mt_diffmap = function(
       )
     } 
     
-    par(bg = colors[2])
-    plot.new()
-    par(mar=c(0, 0, 0, 0))
-    plot.window(
+    graphics::par(bg = colors[2])
+    graphics::plot.new()
+    graphics::par(mar=c(0, 0, 0, 0))
+    graphics::plot.window(
       xlim=range(img$x) + c(-.5, .5),
       ylim=range(img$y) + c(-.5, .5)
     )
-    par(usr = c(range(img$x) + c(-.5, .5),range(img$y) + c(-.5, .5)))
+    graphics::par(usr = c(range(img$x) + c(-.5, .5),range(img$y) + c(-.5, .5)))
 
     
     # plot points
-    rect(
+    graphics::rect(
       img$x - .5, img$y - .5,
       img$x + .5, img$y + .5,
       col=img$col, border=NA
@@ -737,14 +737,14 @@ mt_diffmap = function(
   
   # plot agg_x
   if (!is.null(agg_x)) {
-    points(agg_x[1:2],cex=agg_x$lwd,col=agg_x$col,pch=16)
+    graphics::points(agg_x[1:2],cex=agg_x$lwd,col=agg_x$col,pch=16)
   }
   # plot agg_y
   if (!is.null(agg_y)) {
-    points(agg_y[1:2],cex=agg_y$lwd,col=agg_y$col,pch=16)
+    graphics::points(agg_y[1:2],cex=agg_y$lwd,col=agg_y$col,pch=16)
   }
   
-  if (device %in% c('pdf','png','tiff') & plot == TRUE) dev.off()
+  if (device %in% c('pdf','png','tiff') & plot == TRUE) grDevices::dev.off()
   if (plot == FALSE) return(img)
 
   if (verbose == T) {
@@ -793,16 +793,16 @@ mt_heatmap_ggplot = function(...) {
       fill=plot_data$col
     ) +
     ggplot2::theme(
-      panel.grid=element_blank(),
-      panel.border=element_blank(),
-      plot.margin=unit(c(0,0,0,0), "lines"),
-      axis.title.x=element_blank(),
-      axis.text.x=element_blank(),
-      axis.ticks.x=element_blank(),
-      axis.title.y=element_blank(),
-      axis.text.y=element_blank(),
-      axis.ticks.y=element_blank()
+      panel.grid=ggplot2::element_blank(),
+      panel.border=ggplot2::element_blank(),
+      plot.margin=ggplot2::unit(c(0,0,0,0), "lines"),
+      axis.title.x=ggplot2::element_blank(),
+      axis.text.x=ggplot2::element_blank(),
+      axis.ticks.x=ggplot2::element_blank(),
+      axis.title.y=ggplot2::element_blank(),
+      axis.text.y=ggplot2::element_blank(),
+      axis.ticks.y=ggplot2::element_blank()
     ) +
-    labs(x=NULL, y=NULL)
+    ggplot2::labs(x=NULL, y=NULL)
   )
 }
