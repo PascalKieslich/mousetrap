@@ -20,8 +20,14 @@ standardized variables. Must be different from \code{""}.}
 \item{center}{logical specifying whether variables should be scaled
 (i.e., \code{sd = 1}).}
 }
+\value{
+A mousetrap data object (see \link{mt_example}) with an additional 
+  variable in the object specified by \code{use} containing the standardized
+  trajectory variable. If a trajectory array was provided directly as \code{data}, 
+  only that array includig now the new variable will be returned.
+}
 \description{
-\code(mt_scale_trajectories) standardizes any trajectory variable to
+\code{mt_scale_trajectories} standardizes any trajectory variable to
 a mean of 0 (if \code{code = TRUE}) and standard deviation 1 (if \code{
 scale = TRUE}).
 }

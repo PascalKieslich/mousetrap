@@ -190,7 +190,7 @@ mt_standardize <-function(data, use="measures",
 
 #' Standardize trajectories
 #' 
-#' \code(mt_scale_trajectories) standardizes any trajectory variable to
+#' \code{mt_scale_trajectories} standardizes any trajectory variable to
 #' a mean of 0 (if \code{code = TRUE}) and standard deviation 1 (if \code{
 #' scale = TRUE}).
 #' 
@@ -213,7 +213,12 @@ mt_standardize <-function(data, use="measures",
 #' 
 #' @author  Dirk U. Wulff (\email{dirk.wulff@@gmail.com})
 #'  
-#' @return
+#' @return A mousetrap data object (see \link{mt_example}) with an additional 
+#'   variable in the object specified by \code{use} containing the standardized
+#'   trajectory variable. If a trajectory array was provided directly as \code{data}, 
+#'   only that array includig now the new variable will be returned.
+#'   
+#' @export 
 mt_scale_trajectories = function(data,
                                  use = 'trajectories',
                                  var_names,
