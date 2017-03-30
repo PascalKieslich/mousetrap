@@ -173,9 +173,9 @@ mt_qeffect = function(
     sapply(1:n_steps,function(i) lines(c(i,i),effect[i]+se[i]*c(-q,q)))
     
     # axes
-    mtext(round(seq(xlim[1]+.5,xlim[2]-.5,length=10)),at=round(seq(xlim[1]+.5,xlim[2]-.5,length=10)),side=1)
+    mtext(round(seq(xlim[1]+.5,xlim[2]-.5,length=10)/100,2),at=round(seq(xlim[1]+.5,xlim[2]-.5,length=10),2),side=1)
     mtext(round(seq(ylim[1],ylim[2],length=10),1),at=round(seq(ylim[1],ylim[2],length=10),1),side=2,las=1)
-    mtext(c(paste0(measure,' percentile'),"Cohens'd"),side=c(1,2),line=c(1.5,1.5),cex=1.2)
+    mtext(c(paste0(measure,' quantile'),"Cohens'd"),side=c(1,2),line=c(1.5,1.5),cex=1.2)
     
     
     }

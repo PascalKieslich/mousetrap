@@ -360,7 +360,16 @@ cohen = function(x,y){
   return(c(coh,v_d,nu))
   }
 
-
+# draws from truncated normal
+trnorm = function(n,m,sd,a,b){
+  v = rnorm(n,m,sd)
+  repeat{
+    sel =  v < a | v > b
+    if(all(!sel)) break
+    v[sel] = rnorm(sum(sel),m,sd)
+  }
+  return(v)
+}
 
 
 

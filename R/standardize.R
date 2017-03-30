@@ -185,3 +185,42 @@ mt_standardize <-function(data, use="measures",
 
   return(data)
 }
+
+
+
+#' Standardize trajectories
+#' 
+#' \code
+mt_scale_trajectories = function(data,
+                                 use = 'trajectories',
+                                 variables,
+                                 prefix="z_", 
+                                 center=TRUE, 
+                                 scale=TRUE){
+  
+  # extract trajectories
+  traj = extract_data(data=data,use=use)
+  
+  # test if variables are in traj
+  if(!all(variables %in% dimenames(traj)[[3]])) stop('Variables not found')
+
+  # store old names
+  nam = dimnames(traj)
+  
+  # standardize all variables and add to traj
+  for(i in 1:length(variables)){
+    var = zstandardize(traj[,,variables[i]],center,scale)
+    traj = mt_add_variables(traj,var)
+    }
+  
+  # add names
+  dimnames(traj) = c(nam[[1]],nam[[2]],c(nam[[3]],paste0('z_',variables)))
+
+  # store
+  if(class(data) == 'mousetrap'){ 
+    data[[use]] = traj
+    return(data)
+    } else {
+    return(traj)
+    }
+}
