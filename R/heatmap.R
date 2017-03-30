@@ -48,13 +48,9 @@
 #'   intensity across the entire image. Defaults to .1.
 #' @param mean_color a numeric between 0 and 1 specifying the average color
 #'   intensity across the entire image. Defaults to .1.
-#' @param bg a character string specifying the background color of the plotting
-#'   canvas. Defaults to the default background color given by \code{par()$bg}.
-#' @param color a character string or numeric vector of length three specifying 
-#'   the color used to plot the third dimension.
-#' @param color_order a character string, either "increasing" or "decreasing"
-#'   specifying the whether large or small values of the third dimension are
-#'   assigned high color values, respectively.
+#' @param colors a character vector specifying two or three colors used to 
+#'   color the background, the foreground (trajectories), and the values of 
+#'   a third dimension if specified.
 #' @param n_trajectories an integer specifying the number of trajectories used
 #'   to create the image. If \code{n_trajectories} is smaller than containes in
 #'   the trajectorie object specified by \code{use} the \code{n_trajectories}
@@ -67,7 +63,7 @@
 #' #SpiveyEtAl2005 = mt_import_long(SpiveyEtAl2005_raw,'x','y',NULL,'t',
 #' #mt_id_label = c('ptp','trial'))
 #' #heatmap = mt_heatmap_raw(SpiveyEtAl2005,xres = 2000)
-#' #mt_heatmap(heatmap,file = NULL)
+#' #mt_heatmap(heatmap,filename = NULL)
 #' 
 #' # compute measures
 #' #SpiveyEtAl2005 = mt_measures(SpiveyEtAl2005)
@@ -206,7 +202,7 @@ mt_heatmap_raw = function(
     agg_l = getLength(agg_x, agg_y)
     spatialized_aggregate = spatialize(
       agg_x, agg_y,
-      round(2 * upscale * n_resc * agg_l / l_diag)
+      round(2 * n_resc * agg_l / l_diag)
     )
   }
 
@@ -393,7 +389,7 @@ mt_heatmap_raw = function(
 #' @inheritParams mt_heatmap_raw
 #' @param x usually an object of class mousetrap. Alternatively a trajectory
 #'   array or an object of class mt_heatmap_raw.
-#' @param file a character string giving the name of the file. If \code{NULL} 
+#' @param filename a character string giving the name of the file. If \code{NULL} 
 #'   the R standard device is used for plotting. Otherwise, the plotting device
 #'   is inferred from the file extension. Only supports devices \code{tiff()},
 #'   \code{png()}, \code{pdf()}.
@@ -410,7 +406,7 @@ mt_heatmap = function(
   x,
   use = 'trajectories',
   dimensions = c('xpos', 'ypos'),
-  file      = 'image.tiff',
+  filename   = 'image.tiff',
   ...,
   upscale = 1,
   plot_dims = FALSE,
@@ -418,11 +414,11 @@ mt_heatmap = function(
 ){
   
   # --------- collect device
-  if (!is.null(file)) {
-    device = strsplit(file, '[.]')[[1]]
+  if (!is.null(filename)) {
+    device = strsplit(filename, '[.]')[[1]]
     device = device[length(device)]
     if (!device[length(device)] %in% c('pdf', 'png', 'tiff')) {
-      stop('File != NULL requires one of .pdf, .png, or .pdf as file extension.')
+      stop('filename != NULL requires one of .pdf, .png, or .pdf as file extension.')
     }
   } else {
     device = 'none'
@@ -461,21 +457,21 @@ mt_heatmap = function(
   # --------- collect device
   if (device == 'pdf') {
     grDevices::pdf(
-      file,
+      filename,
       width=10 * (max(img$x) / max(img$y)) * upscale,
       height=10 * upscale,
       bg = bg
       )
     } else if(device == 'png') {
     grDevices::png(
-      file,
+      filename,
       width=max(img$x) * upscale,
       height=max(img$y) * upscale,
       bg = bg
     )
   } else if (device == 'tiff') {
     grDevices::tiff(
-      file,
+      filename,
       width=max(img$x) * upscale,
       height=max(img$y) * upscale,
       bg = bg
@@ -542,9 +538,11 @@ mt_heatmap = function(
 #'
 #' \code{print.mt_heatmap_raw} shows \code{str()}.
 #'
+#' @param x an object of class mt_heatmap_raw.
+#'
 #' @method print mt_heatmap_raw
 #' @export
-print.mt_heatmap_raw = function(x,...){
+print.mt_heatmap_raw = function(x){
   utils::str(x)
 }
 
@@ -559,13 +557,15 @@ print.mt_heatmap_raw = function(x,...){
 #' constructed analogously to \link{mt_heatmap_raw}.  
 #' 
 #' @inheritParams mt_heatmap_raw
+#' @inheritParams mt_heatmap
 #' @param x an object of class \code{mousetrap}), a trajectory object of class 
 #'   \code{array}, or an object of class \code{mt_heatmap_raw} (as created by
 #'   \link{mt_heatmap_raw}).
 #' @param y an object of class \code{mousetrap}), a trajectory object of class 
 #'   \code{array}, or an object of class \code{mt_heatmap_raw} (as created by
 #'   \link{mt_heatmap_raw}). The class of \code{y} must match the class of 
-#'   \code{x}, unless \code{y} is \code{NULL}.  
+#'   \code{x}, unless \code{y} is \code{NULL}.
+#' @param cond logical vector matching the number of trajectories in \code{use}.  
 #' @param colors a character vector specifying the colors used to color
 #'   cases of \code{image1 > image2, image1 ~ image2, image1 < image2},
 #'   respectively. Note that the colors are used in that specific order.
@@ -574,6 +574,9 @@ print.mt_heatmap_raw = function(x,...){
 #' @param n_shades integer specifying the number of shades for the color
 #'   gradient between the first and second, and the second and third color in
 #'   \code{colors}.
+#' @param plot logical specifying whether resulting image should be plotted 
+#'   (\code{plot = TRUE}) or returned (\code{plot = FALSE}).
+#' @param ... arguments passed to \link{mt_heatmap_raw}.
 #'
 #' @author
 #' Dirk U. Wulff (\email{dirk.wulff@@gmail.com})
@@ -588,7 +591,7 @@ mt_diffmap = function(
   cond = NULL,
   use = 'trajectories',
   dimensions = c('xpos','ypos'),
-  file = 'diff_image.tiff',
+  filename = 'diff_image.tiff',
   bounds = NULL,
   xres = 500,
   upscale = 4,
@@ -604,11 +607,11 @@ mt_diffmap = function(
   t = proc.time()[3]
   
   # --------- collect device
-  if(!is.null(file)){
-    device = strsplit(file,'[.]')[[1]]
+  if(!is.null(filename)){
+    device = strsplit(filename,'[.]')[[1]]
     device = device[length(device)]
     if(!device %in% c('pdf','png','tiff')){
-      stop('File != NULL requires one of .pdf, .png, or .pdf as file extension.')
+      stop('filename != NULL requires one of .pdf, .png, or .pdf as file extension.')
     }
   } else {
     device = 'none'
@@ -660,6 +663,9 @@ mt_diffmap = function(
   img_y = mt_heatmap_raw(y, dimensions = dimensions, bounds = bounds, xres = xres, smooth_radius =  0, aggregate_lwd = 0, verbose = FALSE,...)
   agg_y = img_y$agg ; img_y = img_y$img
   
+  # get bg
+  bg = img_x$colors[1]
+  
   # --------- compute difference
   img = img_x
   img$img = img_x$img - img_y$img
@@ -696,21 +702,21 @@ mt_diffmap = function(
   if (plot == TRUE) {
     if (device == 'pdf') {
       grDevices::pdf(
-        file,
+        filename,
         width=10 * (max(img$x) / max(img$y)) * upscale,
         height=10 * upscale,
         bg = bg
       )
     } else if(device == 'png') {
       grDevices::png(
-        file,
+        filename,
         width=max(img$x) * upscale,
         height=max(img$y) * upscale,
         bg = colors[2]
       )
     } else if (device == 'tiff') {
       grDevices::tiff(
-        file,
+        filename,
         width=max(img$x) * upscale,
         height=max(img$y) * upscale,
         bg = colors[2]
@@ -765,7 +771,9 @@ mt_diffmap = function(
 #' can be extended using ggplot's \code{+} operator.
 #' 
 #' For arguments to \code{mt_heatmap_ggplot} see \link{mt_heatmap}
-#'
+#' 
+#' @param ... arguments passed to \link{mt_heatmap}.
+#' 
 #' @author 
 #' Felix Henninger
 #' Dirk U. Wulff (\email{dirk.wulff@@gmail.com})

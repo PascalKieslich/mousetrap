@@ -3,9 +3,6 @@
 #' 
 #' @inheritParams mt_time_normalize
 #' @param compare either a vector, the label of a variable in , or a mousetrap object.  
-#' @param dimensions a character vector specifying the trajectory variables used
-#'   to create the heatmap. The first two entries are used as x and 
-#'   y-coordinates, the third, if provided, will be added as color information.
 #' @param measure character string specifying the variable used to calculate the
 #'   effect between 
 #'   

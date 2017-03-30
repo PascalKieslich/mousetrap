@@ -190,10 +190,33 @@ mt_standardize <-function(data, use="measures",
 
 #' Standardize trajectories
 #' 
-#' \code
+#' \code(mt_scale_trajectories) standardizes any trajectory variable to
+#' a mean of 0 (if \code{code = TRUE}) and standard deviation 1 (if \code{
+#' scale = TRUE}).
+#' 
+#' The new trajectory is added to the object specified in \code{use}.
+#' 
+#' @inheritParams mt_time_normalue
+#' @param var_names character vector giving the labels of the to be 
+#'   standardized variables.
+#' @param prefix character string added to the names of the new 
+#'   standardized variables. Must be different from \code{""}.
+#' @param center logical specifying whether variables should be centered
+#'   (i.e., \code{mean = 0}).
+#' @param center logical specifying whether variables should be scaled
+#'   (i.e., \code{sd = 1}).
+#' 
+#' @example
+#' # Normalize velocity
+#' mt_example = mt_derivatives(mt_example)
+#' mt_example = mt_scale_trajectories(mt_example,variables = 'vel')
+#' 
+#' @author  Dirk U. Wulff (\email{dirk.wulff@@gmail.com})
+#'  
+#' @return
 mt_scale_trajectories = function(data,
                                  use = 'trajectories',
-                                 variables,
+                                 var_names,
                                  prefix="z_", 
                                  center=TRUE, 
                                  scale=TRUE){
@@ -214,7 +237,7 @@ mt_scale_trajectories = function(data,
     }
   
   # add names
-  dimnames(traj) = c(nam[[1]],nam[[2]],c(nam[[3]],paste0('z_',variables)))
+  dimnames(traj) = c(nam[[1]],nam[[2]],c(nam[[3]],paste0(prefix,variables)))
 
   # store
   if(class(data) == 'mousetrap'){ 

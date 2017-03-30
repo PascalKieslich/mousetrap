@@ -408,6 +408,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// zstandardize
+NumericVector zstandardize(NumericMatrix mat, bool center, bool scale);
+RcppExport SEXP mousetrap_zstandardize(SEXP matSEXP, SEXP centerSEXP, SEXP scaleSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type mat(matSEXP);
+    Rcpp::traits::input_parameter< bool >::type center(centerSEXP);
+    Rcpp::traits::input_parameter< bool >::type scale(scaleSEXP);
+    rcpp_result_gen = Rcpp::wrap(zstandardize(mat, center, scale));
+    return rcpp_result_gen;
+END_RCPP
+}
 // tab
 NumericMatrix tab(std::vector<double> v1, std::vector<double> v2);
 RcppExport SEXP mousetrap_tab(SEXP v1SEXP, SEXP v2SEXP) {

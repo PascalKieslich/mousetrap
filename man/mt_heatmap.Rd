@@ -5,7 +5,7 @@
 \title{Plot trajectory heatmap}
 \usage{
 mt_heatmap(x, use = "trajectories", dimensions = c("xpos", "ypos"),
-  file = "image.tiff", ..., upscale = 1, plot_dims = FALSE,
+  filename = "image.tiff", ..., upscale = 1, plot_dims = FALSE,
   verbose = TRUE)
 }
 \arguments{
@@ -19,7 +19,7 @@ used.}
 trajectory array that should be time-normalized. If \code{"all"}, all
 trajectory dimensions except the timestamps will be time-normalized.}
 
-\item{file}{a character string giving the name of the file. If \code{NULL} 
+\item{filename}{a character string giving the name of the file. If \code{NULL} 
 the R standard device is used for plotting. Otherwise, the plotting device
 is inferred from the file extension. Only supports devices \code{tiff()},
 \code{png()}, \code{pdf()}.}

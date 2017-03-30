@@ -5,10 +5,10 @@
 \title{Creates a difference-heatmap of two trajectory heatmap images}
 \usage{
 mt_diffmap(x, y = NULL, cond = NULL, use = "trajectories",
-  dimensions = c("xpos", "ypos"), file = "diff_image.tiff", bounds = NULL,
-  xres = 500, upscale = 4, smooth_radius = 20, colors = c("#00863F",
-  "#000000", "#FF1900"), n_shades = 1000, plot = TRUE, ...,
-  verbose = TRUE)
+  dimensions = c("xpos", "ypos"), filename = "diff_image.tiff",
+  bounds = NULL, xres = 500, upscale = 4, smooth_radius = 20,
+  colors = c("#00863F", "#000000", "#FF1900"), n_shades = 1000,
+  plot = TRUE, ..., verbose = TRUE)
 }
 \arguments{
 \item{x}{an object of class \code{mousetrap}), a trajectory object of class 
@@ -20,12 +20,19 @@ mt_diffmap(x, y = NULL, cond = NULL, use = "trajectories",
 \link{mt_heatmap_raw}). The class of \code{y} must match the class of 
 \code{x}, unless \code{y} is \code{NULL}.}
 
+\item{cond}{logical vector matching the number of trajectories in \code{use}.}
+
 \item{use}{a character string specifying which trajectory data should be
 used.}
 
 \item{dimensions}{a character vector specifying the trajectory variables used
 to create the heatmap. The first two entries are used as x and 
 y-coordinates, the third, if provided, will be added as color information.}
+
+\item{filename}{a character string giving the name of the file. If \code{NULL} 
+the R standard device is used for plotting. Otherwise, the plotting device
+is inferred from the file extension. Only supports devices \code{tiff()},
+\code{png()}, \code{pdf()}.}
 
 \item{bounds}{numeric vector specifying the corners (xmin, ymin, xmax, ymax)
 of the plot region. For the default \code{bounds = NULL} bounds are
@@ -35,6 +42,10 @@ determined based on the data input.}
 An xres of 1000 implies an 1000xN px, where N is determined so that the
 trajectories aspect ratio is preserved (provided the \code{bounds} are
 unchanged).}
+
+\item{upscale}{a numeric value by which the output resolution of the image is
+increased or decreased. Only applies if \code{device} is one of
+\code{c("tiff", "png", "pdf")}.}
 
 \item{smooth_radius}{a numeric specifying the standard deviation of the
 gaussian smoothing. If zero, smoothing is omitted.}
@@ -48,6 +59,11 @@ a green-black-red color gradient.}
 \item{n_shades}{integer specifying the number of shades for the color
 gradient between the first and second, and the second and third color in
 \code{colors}.}
+
+\item{plot}{logical specifying whether resulting image should be plotted 
+(\code{plot = TRUE}) or returned (\code{plot = FALSE}).}
+
+\item{...}{arguments passed to \link{mt_heatmap_raw}.}
 
 \item{verbose}{boolean specifying whether progress updates should printed.}
 }

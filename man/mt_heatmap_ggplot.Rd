@@ -6,6 +6,9 @@
 \usage{
 mt_heatmap_ggplot(...)
 }
+\arguments{
+\item{...}{arguments passed to \link{mt_heatmap}.}
+}
 \description{
 \code{mt_heatmap_ggplot} plots high resolution raw trajectory maps.
 }

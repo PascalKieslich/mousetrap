@@ -4,7 +4,10 @@
 \alias{print.mt_heatmap_raw}
 \title{Generic print for class mt_heatmap_raw}
 \usage{
-\method{print}{mt_heatmap_raw}(x, ...)
+\method{print}{mt_heatmap_raw}(x)
+}
+\arguments{
+\item{x}{an object of class mt_heatmap_raw.}
 }
 \description{
 \code{print.mt_heatmap_raw} shows \code{str()}.

@@ -18,6 +18,10 @@ format in \link{mt_align}.}
 \item{w}{a numeric giving one more Bezier coefficients that, which 
 controls the pull towards the middle point. Each entry in 
 \code{w} creates one Bezier-curve.}
+
+\item{resol}{numeric the spatial resolution of the bezier curves. 
+E.g., \code{resol = 100} creates bezier curves comprised of 100 
+points each.}
 }
 \description{
 \code{mt_bezier} creates 3-point Bezier-curves using the 

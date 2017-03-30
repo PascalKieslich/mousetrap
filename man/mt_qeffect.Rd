@@ -19,10 +19,6 @@ used.}
 
 \item{measure}{character string specifying the variable used to calculate the
 effect between}
-
-\item{dimensions}{a character vector specifying the trajectory variables used
-to create the heatmap. The first two entries are used as x and 
-y-coordinates, the third, if provided, will be added as color information.}
 }
 \value{
 Nothing, when image is plotted using an external device. Otherwise an

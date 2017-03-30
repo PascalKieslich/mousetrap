@@ -125,6 +125,10 @@ spatializeArrayToLong4d <- function(xs, ys, z1s, z2s, n_pts) {
     .Call('mousetrap_spatializeArrayToLong4d', PACKAGE = 'mousetrap', xs, ys, z1s, z2s, n_pts)
 }
 
+zstandardize <- function(mat, center, scale) {
+    .Call('mousetrap_zstandardize', PACKAGE = 'mousetrap', mat, center, scale)
+}
+
 tab <- function(v1, v2) {
     .Call('mousetrap_tab', PACKAGE = 'mousetrap', v1, v2)
 }

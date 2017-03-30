@@ -52,6 +52,10 @@ intensity across the entire image. Defaults to .1.}
 \item{mean_color}{a numeric between 0 and 1 specifying the average color
 intensity across the entire image. Defaults to .1.}
 
+\item{colors}{a character vector specifying two or three colors used to 
+color the background, the foreground (trajectories), and the values of 
+a third dimension if specified.}
+
 \item{n_trajectories}{an integer specifying the number of trajectories used
 to create the image. If \code{n_trajectories} is smaller than containes in
 the trajectorie object specified by \code{use} the \code{n_trajectories}
@@ -60,16 +64,6 @@ are randomly sampled.}
 \item{seed}{an integer specifying the seed used for the trajectory sampling.}
 
 \item{verbose}{boolean specifying whether progress updates should printed.}
-
-\item{bg}{a character string specifying the background color of the plotting
-canvas. Defaults to the default background color given by \code{par()$bg}.}
-
-\item{color}{a character string or numeric vector of length three specifying 
-the color used to plot the third dimension.}
-
-\item{color_order}{a character string, either "increasing" or "decreasing"
-specifying the whether large or small values of the third dimension are
-assigned high color values, respectively.}
 }
 \value{
 Nothing, when image is plotted using an external device. Otherwise an
@@ -107,7 +101,7 @@ are visible. In order to do this specify a third variable label in
 #SpiveyEtAl2005 = mt_import_long(SpiveyEtAl2005_raw,'x','y',NULL,'t',
 #mt_id_label = c('ptp','trial'))
 #heatmap = mt_heatmap_raw(SpiveyEtAl2005,xres = 2000)
-#mt_heatmap(heatmap,file = NULL)
+#mt_heatmap(heatmap,filename = NULL)
 
 # compute measures
 #SpiveyEtAl2005 = mt_measures(SpiveyEtAl2005)
