@@ -8,6 +8,13 @@ mt_scale_trajectories(data, use = "trajectories", var_names, prefix = "z_",
   center = TRUE, scale = TRUE)
 }
 \arguments{
+\item{data}{a mousetrap data object created using one of the mt_import
+functions (see \link{mt_example} for details). Alternatively, a trajectory
+array can be provided directly (in this case \code{use} will be ignored).}
+
+\item{use}{a character string specifying which trajectory data should be
+used.}
+
 \item{var_names}{character vector giving the labels of the to be 
 standardized variables.}
 
@@ -20,13 +27,19 @@ standardized variables. Must be different from \code{""}.}
 \item{center}{logical specifying whether variables should be scaled
 (i.e., \code{sd = 1}).}
 }
-\description{
-\code(mt_scale_trajectories) standardizes any trajectory variable to
-a mean of 0 (if \code{code = TRUE}) and standard deviation 1 (if \code{
-scale = TRUE}).
+\value{
+ToDo: add description
 }
-\details{
-The new trajectory is added to the object specified in \code{use}.
+\description{
+\code{mt_scale_trajectories} standardizes any trajectory variable to a mean
+of 0 (if \code{code = TRUE}) and standard deviation 1 (if \code{ scale =
+TRUE}).The new trajectory is added to the object specified in \code{use}.
+}
+\examples{
+# Normalize velocity
+mt_example = mt_derivatives(mt_example)
+mt_example = mt_scale_trajectories(mt_example,var_names = 'vel')
+
 }
 \author{
 Dirk U. Wulff (\email{dirk.wulff@gmail.com})

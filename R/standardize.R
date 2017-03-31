@@ -190,13 +190,11 @@ mt_standardize <-function(data, use="measures",
 
 #' Standardize trajectories
 #' 
-#' \code(mt_scale_trajectories) standardizes any trajectory variable to
-#' a mean of 0 (if \code{code = TRUE}) and standard deviation 1 (if \code{
-#' scale = TRUE}).
+#' \code{mt_scale_trajectories} standardizes any trajectory variable to a mean
+#' of 0 (if \code{code = TRUE}) and standard deviation 1 (if \code{ scale =
+#' TRUE}).The new trajectory is added to the object specified in \code{use}.
 #' 
-#' The new trajectory is added to the object specified in \code{use}.
-#' 
-#' @inheritParams mt_time_normalue
+#' @inheritParams mt_time_normalize
 #' @param var_names character vector giving the labels of the to be 
 #'   standardized variables.
 #' @param prefix character string added to the names of the new 
@@ -206,14 +204,16 @@ mt_standardize <-function(data, use="measures",
 #' @param center logical specifying whether variables should be scaled
 #'   (i.e., \code{sd = 1}).
 #' 
-#' @example
-#' # Normalize velocity
-#' mt_example = mt_derivatives(mt_example)
-#' mt_example = mt_scale_trajectories(mt_example,variables = 'vel')
+#' @return ToDo: add description
 #' 
 #' @author  Dirk U. Wulff (\email{dirk.wulff@@gmail.com})
 #'  
-#' @return
+#' @examples
+#' # Normalize velocity
+#' mt_example = mt_derivatives(mt_example)
+#' mt_example = mt_scale_trajectories(mt_example,var_names = 'vel')
+#' 
+#' @export
 mt_scale_trajectories = function(data,
                                  use = 'trajectories',
                                  var_names,
