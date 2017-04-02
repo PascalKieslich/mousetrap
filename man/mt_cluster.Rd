@@ -6,8 +6,9 @@
 \usage{
 mt_cluster(data, use = "sp_trajectories", save_as = "clustering",
   dimensions = c("xpos", "ypos"), n_cluster = 5, method = "hclust",
-  pointwise = TRUE, minkowski_p = 2, hclust_method = "ward.D",
-  kmeans_nstart = 10, cluster_output = FALSE, verbose = FALSE)
+  weights = rep(1, length(dimensions)), pointwise = TRUE, minkowski_p = 2,
+  hclust_method = "ward.D", kmeans_nstart = 10, rm_na = TRUE,
+  cluster_output = FALSE, verbose = FALSE)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import
@@ -28,6 +29,12 @@ three-dimensional trajectories respectively.}
 
 \item{method}{character string specifiying the clustering procedure. Either
 \link[fastcluster]{hclust} (the default) or \link[stats]{kmeans}.}
+
+\item{weights}{numeric vector specifying the relative importance of the 
+variables specified in \code{dimensions}. Defaults to a vector of 1s 
+implying equal importance. Technically variables are rescaled so that their
+standard deviations matches the values in \code{weights}. To use the
+original variables set \code{weights = NULL}.}
 
 \item{pointwise}{boolean specifying the way in which dissimilarity between
 the trajectories is measured. If \code{TRUE} (the default),
@@ -59,6 +66,11 @@ data object with the cluster assignments is returned (see Value). If
 
 \item{verbose}{logical indicating whether function should report its
 progress.}
+
+\item{na_rm}{logical specifying whether trajectory points including NAs should
+be removed. Removal is done column-wise. E.g., if trajectory has NA at 
+trajectory point 10 all trajectory points 10 are removed. This is necessary
+to compute distance between trajectories.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) with an additional

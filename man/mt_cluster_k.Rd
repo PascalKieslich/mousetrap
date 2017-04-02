@@ -6,9 +6,10 @@
 \usage{
 mt_cluster_k(data, use = "sp_trajectories", dimensions = c("xpos", "ypos"),
   kseq = 2:15, compute = c("stability", "gap", "jump", "slope"),
-  method = "hclust", pointwise = TRUE, minkowski_p = 2,
-  hclust_method = "ward.D", kmeans_nstart = 10, n_bootstrap = 10,
-  model_based = FALSE, n_gap = 10, verbose = TRUE)
+  method = "hclust", weights = rep(1, length(dimensions)),
+  pointwise = TRUE, minkowski_p = 2, hclust_method = "ward.D",
+  kmeans_nstart = 10, n_bootstrap = 10, model_based = FALSE, n_gap = 10,
+  na_rm = TRUE, verbose = FALSE)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import
@@ -31,6 +32,12 @@ be any subset of \code{c("stability","gap","jump","slope")}.}
 
 \item{method}{character string specifiying the type of clustering procedure
 for the stability-based method. Either \code{hclust} or \code{kmeans}.}
+
+\item{weights}{numeric vector specifying the relative importance of the 
+variables specified in \code{dimensions}. Defaults to a vector of 1s 
+implying equal importance. Technically variables are rescaled so that their
+standard deviations matches the values in \code{weights}. To use the
+original variables set \code{weights = NULL}.}
 
 \item{pointwise}{boolean specifying the way in which dissimilarity between
 the trajectories is measured. If \code{TRUE} (the default),
@@ -64,6 +71,11 @@ model-free should be used by \code{stability}, when method is
 
 \item{n_gap}{integer specifying the number of simulated datasets used by
 \code{gap}. See Tibshirani et al. (2001).}
+
+\item{na_rm}{logical specifying whether trajectory points including NAs should
+be removed. Removal is done column-wise. E.g., if trajectory has NA at 
+trajectory point 10 all trajectory points 10 are removed. This is necessary
+to compute distance between trajectories.}
 
 \item{verbose}{logical indicating whether function should report its
 progress.}

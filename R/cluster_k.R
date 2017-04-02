@@ -39,6 +39,10 @@
 #'   \code{kmeans}. See \link[cstab]{cStability} and Haslbeck & Wulff (2016).
 #' @param n_gap integer specifying the number of simulated datasets used by
 #'   \code{gap}. See Tibshirani et al. (2001).
+#' @param na_rm logical specifying whether trajectory points including NAs should
+#'   be removed. Removal is done column-wise. E.g., if trajectory has NA at 
+#'   trajectory point 10 all trajectory points 10 are removed. This is necessary
+#'   to compute distance between trajectories.
 #'
 #' @return A list containing two lists that store the results of the different
 #'   methods. \code{kopt} contains the estimated \code{k} for each of the
@@ -107,6 +111,7 @@ mt_cluster_k <- function(
   method  = 'hclust', # or 'kmeans'
 
   # distance arguments
+  weights = rep(1,length(dimensions)),
   pointwise = TRUE, #
   minkowski_p = 2,
 
@@ -119,7 +124,8 @@ mt_cluster_k <- function(
   # arguments distance-based k-selection methods
   n_gap = 10, # simulated datasets for Gap Statistic
 
-  verbose=TRUE
+  na_rm = TRUE,
+  verbose=FALSE
 ){
 
   # Extract data
@@ -135,6 +141,33 @@ mt_cluster_k <- function(
     stop('Model-based instability methods are only available for k-means clustering.')
   }
 
+  # limit trajectories to dimensions
+  trajectories <- trajectories[,,dimensions]
+  
+  # Ensure that there are no NAs
+  include = rep(TRUE,ncol(trajectories))
+  if(na_rm == T){
+    for(dim in dimensions) include = include & colSums(is.na(trajectories[,,dim])) == 0
+    if(sum(include) == 0) stop('No complete case in use')
+    if(mean(include) != 1) warning(paste('Removed',sum(!include),'trajectory points due to NAs'))
+  } else {
+    if(any(is.na(trajectories[,,dimensions]))) {
+      stop("Missing values in trajectories not allowed for mt_distmat ",
+           "as all trajectories must have the same number of observations.")
+    }
+  }
+  
+  # weight variables
+  if(!is.null(weights)){
+    if(length(weights) == length(dimensions)){
+      for(i in 1:length(dimensions)){
+        trajectories[,,dimensions[i]] = trans_mat(trajectories[,,dimensions[i]],scale = weights[i])
+        }
+      } else {
+      stop('weights must match length of dimensions')
+      }
+    }
+  
   # Transform data structure for clustering input
   rearranged_trajectories = cbind(trajectories[,,dimensions[1]],trajectories[,,dimensions[2]])
 
