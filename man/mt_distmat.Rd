@@ -5,7 +5,8 @@
 \title{Compute distance matrix.}
 \usage{
 mt_distmat(data, use = "sp_trajectories", save_as = "distmat",
-  dimensions = c("xpos", "ypos"), pointwise = TRUE, minkowski_p = 2)
+  dimensions = c("xpos", "ypos"), pointwise = TRUE, minkowski_p = 2,
+  na_rm = TRUE)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import
@@ -32,6 +33,11 @@ results. If \code{FALSE}, \code{mt_distmat}  measures dissimilarity once
 \code{minkowski_p = 1} computes the city-block distance, \code{minkowski_p 
 = 2} (the default) computes the Euclidian distance, \code{minkowski_p = 3} 
 the cubic distance, etc.}
+
+\item{na_rm}{logical specifying whether trajectory points including NAs should
+be removed. Removal is done column-wise. E.g., if trajectory has NA at 
+trajectory point 10 all trajectory points 10 are removed. This is necessary
+to compute distance between trajectories.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) with an additional 

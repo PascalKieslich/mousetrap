@@ -28,6 +28,10 @@
 #'   \code{minkowski_p = 1} computes the city-block distance, \code{minkowski_p 
 #'   = 2} (the default) computes the Euclidian distance, \code{minkowski_p = 3} 
 #'   the cubic distance, etc.
+#' @param na_rm logical specifying whether trajectory points including NAs should
+#'   be removed. Removal is done column-wise. E.g., if trajectory has NA at 
+#'   trajectory point 10 all trajectory points 10 are removed. This is necessary
+#'   to compute distance between trajectories.
 #'   
 #' @return A mousetrap data object (see \link{mt_example}) with an additional 
 #'   object added (by default called \code{distmat}) containing the distance 
@@ -48,48 +52,59 @@
 #'
 #' @export
 mt_distmat <- function(data,
-                      use = 'sp_trajectories',
-                      save_as = 'distmat',
-                      dimensions = c('xpos','ypos'),
-                      pointwise = TRUE,
-                      minkowski_p = 2
-                      ){
+                       use = 'sp_trajectories',
+                       save_as = 'distmat',
+                       dimensions = c('xpos','ypos'),
+                       pointwise = TRUE,
+                       minkowski_p = 2,
+                       na_rm = TRUE
+                       ){
   
   # Extract data
-  trajectories <- extract_data(data,use) 
+  trajectories <- extract_data(data,use)
   
   # Tests
   if(!length(dimensions) %in% c(2,3)) stop('Dimensions must be of length 2 or 3.')
   if(!all(dimensions %in% dimnames(trajectories)[[3]])) stop('Not all dimensions exist.')
   
+  # Limit trajectories to dimensions
+  trajectories <- trajectories[,,dimensions]
+  
   # Ensure that there are no NAs
+  include = rep(TRUE,ncol(trajectories))
+  if(na_rm == T){
+    for(dim in dimensions) include = include & colSums(is.na(trajectories[,,dim])) == 0
+    if(sum(include) == 0) stop('No complete case in use')
+    if(mean(include) != 1) warning(paste('Removed',sum(!include),'trajectory points due to NAs'))
+  } else {
   if(any(is.na(trajectories[,,dimensions]))) {
     stop("Missing values in trajectories not allowed for mt_distmat ",
          "as all trajectories must have the same number of observations.")
+    }
   }
-
+  
   # Get distances
   if(length(dimensions) == 2){
     if(pointwise == TRUE){
-        dmat <- distMat(trajectories[,,dimensions[1]],
-                       trajectories[,,dimensions[2]],
-                       power = minkowski_p)
-      } else {
-        dmat <- distMatV(trajectories[,,dimensions[1]],
-                        trajectories[,,dimensions[2]],
+        dmat <- distMat(trajectories[,include,dimensions[1]],
+                        trajectories[,include,dimensions[2]],
                         power = minkowski_p)
+      } else {
+        dmat <- distMatV(trajectories[,include,dimensions[1]],
+                         trajectories[,include,dimensions[2]],
+                         power = minkowski_p)
       }
     } else {
       if(pointwise == TRUE){
           dmat <- distMat3d(trajectories[,,dimensions[1]],
-                           trajectories[,,dimensions[2]],
-                           trajectories[,,dimensions[3]],
-                           power = minkowski_p)
-        } else {
-          dmat <- distMat3dV(data[[use]][,,dimensions[1]],
-                            data[[use]][,,dimensions[2]],
-                            data[[use]][,,dimensions[3]],
+                            trajectories[,,dimensions[2]],
+                            trajectories[,,dimensions[3]],
                             power = minkowski_p)
+        } else {
+          dmat <- distMat3dV(data[[use]][,include,dimensions[1]],
+                             data[[use]][,include,dimensions[2]],
+                             data[[use]][,include,dimensions[3]],
+                             power = minkowski_p)
       }
     }
   
