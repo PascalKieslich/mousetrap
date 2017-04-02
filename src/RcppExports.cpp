@@ -408,16 +408,77 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// zstandardize
-NumericVector zstandardize(NumericMatrix mat, bool center, bool scale);
-RcppExport SEXP mousetrap_zstandardize(SEXP matSEXP, SEXP centerSEXP, SEXP scaleSEXP) {
+// sd_mat
+double sd_mat(NumericMatrix mat);
+RcppExport SEXP mousetrap_sd_mat(SEXP matSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type mat(matSEXP);
+    rcpp_result_gen = Rcpp::wrap(sd_mat(mat));
+    return rcpp_result_gen;
+END_RCPP
+}
+// moments_mat
+NumericVector moments_mat(NumericMatrix mat);
+RcppExport SEXP mousetrap_moments_mat(SEXP matSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type mat(matSEXP);
+    rcpp_result_gen = Rcpp::wrap(moments_mat(mat));
+    return rcpp_result_gen;
+END_RCPP
+}
+// scale_rows
+NumericVector scale_rows(NumericMatrix mat, bool center, bool scale);
+RcppExport SEXP mousetrap_scale_rows(SEXP matSEXP, SEXP centerSEXP, SEXP scaleSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< NumericMatrix >::type mat(matSEXP);
     Rcpp::traits::input_parameter< bool >::type center(centerSEXP);
     Rcpp::traits::input_parameter< bool >::type scale(scaleSEXP);
-    rcpp_result_gen = Rcpp::wrap(zstandardize(mat, center, scale));
+    rcpp_result_gen = Rcpp::wrap(scale_rows(mat, center, scale));
+    return rcpp_result_gen;
+END_RCPP
+}
+// trans_rows
+NumericVector trans_rows(NumericMatrix mat, double scale, bool center);
+RcppExport SEXP mousetrap_trans_rows(SEXP matSEXP, SEXP scaleSEXP, SEXP centerSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type mat(matSEXP);
+    Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
+    Rcpp::traits::input_parameter< bool >::type center(centerSEXP);
+    rcpp_result_gen = Rcpp::wrap(trans_rows(mat, scale, center));
+    return rcpp_result_gen;
+END_RCPP
+}
+// scale_mat
+NumericMatrix scale_mat(NumericMatrix mat, bool center, bool scale);
+RcppExport SEXP mousetrap_scale_mat(SEXP matSEXP, SEXP centerSEXP, SEXP scaleSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type mat(matSEXP);
+    Rcpp::traits::input_parameter< bool >::type center(centerSEXP);
+    Rcpp::traits::input_parameter< bool >::type scale(scaleSEXP);
+    rcpp_result_gen = Rcpp::wrap(scale_mat(mat, center, scale));
+    return rcpp_result_gen;
+END_RCPP
+}
+// trans_mat
+NumericMatrix trans_mat(NumericMatrix mat, double scale, bool center);
+RcppExport SEXP mousetrap_trans_mat(SEXP matSEXP, SEXP scaleSEXP, SEXP centerSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type mat(matSEXP);
+    Rcpp::traits::input_parameter< double >::type scale(scaleSEXP);
+    Rcpp::traits::input_parameter< bool >::type center(centerSEXP);
+    rcpp_result_gen = Rcpp::wrap(trans_mat(mat, scale, center));
     return rcpp_result_gen;
 END_RCPP
 }

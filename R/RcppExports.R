@@ -125,8 +125,28 @@ spatializeArrayToLong4d <- function(xs, ys, z1s, z2s, n_pts) {
     .Call('mousetrap_spatializeArrayToLong4d', PACKAGE = 'mousetrap', xs, ys, z1s, z2s, n_pts)
 }
 
-zstandardize <- function(mat, center, scale) {
-    .Call('mousetrap_zstandardize', PACKAGE = 'mousetrap', mat, center, scale)
+sd_mat <- function(mat) {
+    .Call('mousetrap_sd_mat', PACKAGE = 'mousetrap', mat)
+}
+
+moments_mat <- function(mat) {
+    .Call('mousetrap_moments_mat', PACKAGE = 'mousetrap', mat)
+}
+
+scale_rows <- function(mat, center = TRUE, scale = TRUE) {
+    .Call('mousetrap_scale_rows', PACKAGE = 'mousetrap', mat, center, scale)
+}
+
+trans_rows <- function(mat, scale, center = TRUE) {
+    .Call('mousetrap_trans_rows', PACKAGE = 'mousetrap', mat, scale, center)
+}
+
+scale_mat <- function(mat, center = TRUE, scale = TRUE) {
+    .Call('mousetrap_scale_mat', PACKAGE = 'mousetrap', mat, center, scale)
+}
+
+trans_mat <- function(mat, scale, center = TRUE) {
+    .Call('mousetrap_trans_mat', PACKAGE = 'mousetrap', mat, scale, center)
 }
 
 tab <- function(v1, v2) {

@@ -44,55 +44,55 @@ NumericMatrix distMat(NumericMatrix x,
   }
 
 // [[Rcpp::export]]
-NumericMatrix distMatV(NumericMatrix x,
+NumericMatrix distMat(NumericMatrix x,
                       NumericMatrix y,
                       int power = 2) {
   int ni = x.ncol(), nt = x.nrow();
   double xd,yd,d = 0;
   NumericMatrix dist(nt,nt);
-  for(int r = 0; r < nt; r++) {     // loop rows
-    for(int c = r; c < nt; c++) {   // loop cols (only half due to symmetry)
-      d = 0;                        //dummy value of final matrix entry
-      if(power == 1){
-        for(int i = 0; i < ni; i++) { // loop 1:n
-          xd = std::abs(x(r,i) - x(c,i));
-          yd = std::abs(y(r,i) - y(c,i));
-          d += xd + yd;
-        }
-      } else if (power == 2){
-        for(int i = 0; i < ni; i++) { // loop 1:n
-          xd = x(r,i) - x(c,i);
-          yd = y(r,i) - y(c,i);
-          d += xd*xd  + yd*yd;    
-        }
-      } else {
-        for(int i = 0; i < ni; i++) { // loop 1:n
-          xd = std::abs(x(r,i) - x(c,i));
-          yd = std::abs(y(r,i) - y(c,i));
-          for(int j = 1; j < power; j++){
-            xd *= xd;
-            yd *= yd;
+  if(nt > ni){
+    for(int r = 0; r < nt; r++) {     // loop rows
+      for(int c = r; c < nt; c++) {   // loop cols (only half due to symmetry)
+        d = 0;                        //dummy value of final matrix entry
+        if(power == 1){
+          for(int i = 0; i < ni; i++) { // loop 1:n
+            xd = std::abs(x(r,i) - x(c,i));
+            yd = std::abs(y(r,i) - y(c,i));
+            d += xd + yd;
           }
-          d += xd + yd;
+        } else if (power == 2){
+          for(int i = 0; i < ni; i++) { // loop 1:n
+            xd = x(r,i) - x(c,i);
+            yd = y(r,i) - y(c,i);
+            d += sqrt( xd*xd  + yd*yd );    
+          }
+        } else {
+          for(int i = 0; i < ni; i++) { // loop 1:n
+            xd = std::abs(x(r,i) - x(c,i));
+            yd = std::abs(y(r,i) - y(c,i));
+            for(int j = 1; j < power; j++){
+              xd *= xd;
+              yd *= yd;
+            }
+            d += exp( log(xd + yd) / double(power));
+          }
         }
-      }
-	  if(power == 2){
-        d = sqrt(d);
-        } else if(power > 2){
-        d = exp( log(d) / double(power));
-        }
-      dist(r,c) = d;   // fill distance matrix
-      dist(c,r) = d;   // fill distance matrix
-    }  
+        dist(r,c) = d;   // fill distance matrix
+        dist(c,r) = d;   // fill distance matrix
+      }  
+    }
+  } else {
+    
   }
   return dist;
 }
 
+
 // [[Rcpp::export]]
 NumericMatrix distMat3d(NumericMatrix x,
-                         NumericMatrix y,
-                         NumericMatrix z,
-                         int power = 2) {
+                        NumericMatrix y,
+                        NumericMatrix z,  
+                        int power = 2) {
   int ni = x.ncol(), nt = x.nrow();
   double xd,yd,zd,d = 0;
   NumericMatrix dist(nt,nt);
@@ -135,9 +135,9 @@ NumericMatrix distMat3d(NumericMatrix x,
 
 // [[Rcpp::export]]
 NumericMatrix distMat3dV(NumericMatrix x,
-                       NumericMatrix y,
-                       NumericMatrix z,
-                       int power = 2) {
+                         NumericMatrix y,
+                         NumericMatrix z,  
+                         int power = 2) {
   int ni = x.ncol(), nt = x.nrow();
   double xd,yd,zd,d = 0;
   NumericMatrix dist(nt,nt);
