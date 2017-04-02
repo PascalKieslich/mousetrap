@@ -97,12 +97,12 @@
 #' @export
 mt_map <- function(
   data,
-  use = 'trajectories',
+  use = 'sp_trajectories',
   save_as = 'prototyping',
   dimensions = c('xpos','ypos'),
   
   # prototype arguments
-  prototypes,
+  prototypes = mt_prototypes,
 
   # distance arguments
   pointwise = TRUE,
