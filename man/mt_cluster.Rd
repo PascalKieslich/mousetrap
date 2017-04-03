@@ -7,7 +7,7 @@
 mt_cluster(data, use = "sp_trajectories", save_as = "clustering",
   dimensions = c("xpos", "ypos"), n_cluster = 5, method = "hclust",
   weights = rep(1, length(dimensions)), pointwise = TRUE, minkowski_p = 2,
-  hclust_method = "ward.D", kmeans_nstart = 10, rm_na = TRUE,
+  hclust_method = "ward.D", kmeans_nstart = 10, na_rm = TRUE,
   cluster_output = FALSE, verbose = FALSE)
 }
 \arguments{
@@ -59,6 +59,11 @@ procedure. Larger numbers minimize the risk of finding local minima. Passed
 on to the \code{nstart} argument of \link[stats]{kmeans}. Only relevant if 
 \code{method} is "kmeans".}
 
+\item{na_rm}{logical specifying whether trajectory points including NAs should
+be removed. Removal is done column-wise. E.g., if trajectory has NA at 
+trajectory point 10 all trajectory points 10 are removed. This is necessary
+to compute distance between trajectories.}
+
 \item{cluster_output}{logical. If \code{FALSE} (the default), the mousetrap 
 data object with the cluster assignments is returned (see Value). If 
 \code{TRUE}, the output of the cluster method (\code{kmeans} or 
@@ -66,11 +71,6 @@ data object with the cluster assignments is returned (see Value). If
 
 \item{verbose}{logical indicating whether function should report its
 progress.}
-
-\item{na_rm}{logical specifying whether trajectory points including NAs should
-be removed. Removal is done column-wise. E.g., if trajectory has NA at 
-trajectory point 10 all trajectory points 10 are removed. This is necessary
-to compute distance between trajectories.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) with an additional

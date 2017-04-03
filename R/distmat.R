@@ -96,9 +96,9 @@ mt_distmat <- function(data,
       }
     } else {
       if(pointwise == TRUE){
-          dmat <- distMat3d(trajectories[,,dimensions[1]],
-                            trajectories[,,dimensions[2]],
-                            trajectories[,,dimensions[3]],
+          dmat <- distMat3d(trajectories[,include,dimensions[1]],
+                            trajectories[,include,dimensions[2]],
+                            trajectories[,include,dimensions[3]],
                             power = minkowski_p)
         } else {
           dmat <- distMat3dV(data[[use]][,include,dimensions[1]],
