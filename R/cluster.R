@@ -171,8 +171,6 @@ mt_cluster <- function(data,
     }
   }
 
-  for(dim in dimensions) print(summary(c(trajectories[,,dim])))
-
   # Cluster trajectories
   if (method == 'hclust') {
     # ... using hclust method
