@@ -178,7 +178,7 @@ mt_sample_entropy <- function(data,
       if (length(current_values) >= 2 + lag * 4) { # check if number of logs is sufficient
         se_pracma <- pracma::sample_entropy(
           diff(current_values),
-          r=r, tau=lag
+          r=r, edim=lag
         )
       } else {
         se_pracma <- NA
