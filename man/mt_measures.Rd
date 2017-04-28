@@ -60,8 +60,10 @@ A mousetrap data object (see \link{mt_example}) where an additional
   \item{xpos_min}{Minimum x-position}
   \item{ypos_max}{Maximum y-position} 
   \item{ypos_min}{Minimum y-position}
-  \item{MAD}{Maximum absolute deviation from the direct path connecting start
-  and end point of the trajectory (straight line)}
+  \item{MAD}{Signed Maximum absolute deviation from the direct path
+  connecting start and end point of the trajectory (straight line).
+  If the \code{MAD} occurs above the direct path, this is denoted by
+  a positive value; if it occurs below, by a negative value.}
   \item{MAD_time}{Time at which the maximum absolute deviation was reached
   first}
   \item{MD_above}{Maximum deviation above the direct path} 
@@ -120,14 +122,14 @@ The calculation of most measures can be deduced directly from their
 definition (see Value). For several more complex measures, a few details are 
 provided in the following.
 
-The \strong{maximum absolute deviation} (\code{MAD}) is the maximum 
+The signed \strong{maximum absolute deviation} (\code{MAD}) is the maximum 
 perpendicular deviation from the straight path connecting start and end point
 of the trajectory (e.g., Freeman & Ambady, 2010). If the \code{MAD} occurs 
 above the direct path, this is denoted by a positive value. If it occurs 
 below the direct path, this is denoted by a negative value. This assumes that
 the complete movement in the trial was from bottom to top (i.e., the end 
 point has a higher y-position than the start point). In case the movement was
-from top to bottom, \code{mt_measures} automatically flips the signs. Both
+from top to bottom, \code{mt_measures} automatically flips the signs. Both 
 \code{MD_above} and  \code{MD_below} are also reported separately.
 
 The \strong{average deviation} (\code{AD}) is the average of all deviations 
