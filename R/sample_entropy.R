@@ -13,7 +13,7 @@
 #' time-normalized trajectories so all trajectories have the same length.
 #' 
 #' Sample entropy is computed by comparing windows of a fixed size (specified 
-#' using \code{lag}) across all recorded positions. Sample entropy is the 
+#' using \code{m}) across all recorded positions. Sample entropy is the 
 #' negative natural logarithm of the conditional probability that this windows 
 #' remains similar across the trial (Hehman et al., 2015). A window is 
 #' considered to be similar to another if their distance is smaller than a 
@@ -21,12 +21,7 @@
 #' al. (2015) use a tolerance value of 0.2 * standard deviation of all 
 #' differences between adjacent x-positions in the dataset (which is the default
 #' implemented here).
-#' 
-#' The specific formula for sample entropy depends on the function specified in 
-#' \code{method}. Per default ("pracma"), the \link[pracma]{sample_entropy} 
-#' function from the pracma package is used. Alternatively ("hehman") the 
-#' function by Hehman et al. (2015) is used. Finally, it is also possible to 
-#' calculate sample_entropy values using both functions ("both").
+
 #'
 #' @inheritParams mt_time_normalize
 #' @param save_as a character string specifying where the calculated measures
@@ -34,9 +29,7 @@
 #' @param dimension a character string specifying the dimension based on which
 #'   sample entropy should be calculated. By default (xpos), the x-positions are
 #'   used.
-#' @param method a character string specifying the method used for calculating
-#'   sample entropy (see Details).
-#' @param lag an integer passed on to the sample entropy function (see Details).
+#' @param m an integer passed on to the sample entropy function (see Details).
 #' @param r a numeric value passed on to the sample entropy function (see
 #'   Details).
 #'   
@@ -44,7 +37,7 @@
 #'   
 #'   If a data.frame with label specified in \code{save_as} (by default
 #'   "measures") already exists, the sample entropy values are added as
-#'   additional column(s).
+#'   additional column.
 #'   
 #'   If not, an additional \link{data.frame} will be added.
 #'   
@@ -71,22 +64,24 @@
 #'   save_as="tn_trajectories", nsteps=101)
 #' mt_example <- mt_sample_entropy(mt_example,
 #'   use="tn_trajectories", save_as="measures",
-#'   method="pracma", dimension="xpos", lag=3)
+#'   dimension="xpos", m=3)
 #' 
 #' @author
 #' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' 
+#' Dirk Wulff
 #' 
 #' Felix Henninger
 #' 
 #' @export
 mt_sample_entropy <- function(data,
   use="tn_trajectories", save_as="measures",
-  dimension="xpos", method="pracma", lag=3, r=NULL,
+  dimension="xpos", m=3, r=NULL,
   verbose=FALSE) {
   
   # Function to calculate sample entropy
   # based on Hehman et al. (2015)
-  sample_entropy_hehman <- function(x, m, r) {
+  sample_entropy <- function(x, m, r) {
     
     if (length(x) >= m + 3) { # check if number of logs is sufficient
       dx = diff(x)
@@ -146,62 +141,25 @@ mt_sample_entropy <- function(data,
       r <- .2 * stats::sd(diff(t(trajectories[,,dimension])), na.rm=TRUE)
     }
   }
-    
-  if (method %in% c("pracma", "hehman")) {
-    mt_measures <- c("sample_entropy")
-  } else if (method == "both") {
-    mt_measures <- c("sample_entropy_pracma", "sample_entropy_hehman")
-  } else {
-    stop("method can only have the values pracma, hehman, or both.")
-  }
   
   measures <- matrix(
     data=NA,
     nrow=nrow(trajectories),
-    ncol=length(mt_measures),
+    ncol=1,
     dimnames=list(
       row.names(trajectories),
-      mt_measures
+      "sample_entropy"
     )
   )
   
   # Calculate measures
   for (i in 1:nrow(trajectories)){
-    
-    current_values <- trajectories[i, 1:nlogs[i], dimension]
 
     # Calculate sample entropy
-    
-    # ... using pracma function
-    if (method %in% c("pracma", "both")) {
-      
-      if (length(current_values) >= 2 + lag * 4) { # check if number of logs is sufficient
-        se_pracma <- pracma::sample_entropy(
-          diff(current_values),
-          r=r, edim=lag
-        )
-      } else {
-        se_pracma <- NA
-      }
-      
-    }
-    
-    # ... using function proposed by Hehman et al (2015)
-    if (method %in% c("hehman", "both")) {
-      se_hehman <- sample_entropy_hehman(
-        x=current_values,
-        r=r, m=lag
-      )
-    }
-    
-    if (method == "pracma") {
-      measures[i,"sample_entropy"] <- se_pracma
-    } else if (method == "hehman") {
-      measures[i,"sample_entropy"] <- se_hehman
-    } else {
-      measures[i,"sample_entropy_pracma"] <- se_pracma
-      measures[i,"sample_entropy_hehman"] <- se_hehman
-    }
+    measures[i,"sample_entropy"] <- sample_entropy(
+      x=trajectories[i, 1:nlogs[i], dimension],
+      r=r, m=m
+    )
 
     if (verbose) {
       if (i %% 100 == 0) message(paste(i, "trials finished"))

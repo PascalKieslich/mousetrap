@@ -5,8 +5,7 @@
 \title{Calculate sample entropy.}
 \usage{
 mt_sample_entropy(data, use = "tn_trajectories", save_as = "measures",
-  dimension = "xpos", method = "pracma", lag = 3, r = NULL,
-  verbose = FALSE)
+  dimension = "xpos", m = 3, r = NULL, verbose = FALSE)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import
@@ -23,10 +22,7 @@ should be stored.}
 sample entropy should be calculated. By default (xpos), the x-positions are
 used.}
 
-\item{method}{a character string specifying the method used for calculating
-sample entropy (see Details).}
-
-\item{lag}{an integer passed on to the sample entropy function (see Details).}
+\item{m}{an integer passed on to the sample entropy function (see Details).}
 
 \item{r}{a numeric value passed on to the sample entropy function (see
 Details).}
@@ -39,7 +35,7 @@ A mousetrap data object (see \link{mt_example}).
   
   If a data.frame with label specified in \code{save_as} (by default
   "measures") already exists, the sample entropy values are added as
-  additional column(s).
+  additional column.
   
   If not, an additional \link{data.frame} will be added.
   
@@ -61,7 +57,7 @@ horizontal direction are of interest). Besides, they recommend using the
 time-normalized trajectories so all trajectories have the same length.
 
 Sample entropy is computed by comparing windows of a fixed size (specified 
-using \code{lag}) across all recorded positions. Sample entropy is the 
+using \code{m}) across all recorded positions. Sample entropy is the 
 negative natural logarithm of the conditional probability that this windows 
 remains similar across the trial (Hehman et al., 2015). A window is 
 considered to be similar to another if their distance is smaller than a 
@@ -69,12 +65,6 @@ specified tolerance value (which can be specified using \code{r}). Hehman et
 al. (2015) use a tolerance value of 0.2 * standard deviation of all 
 differences between adjacent x-positions in the dataset (which is the default
 implemented here).
-
-The specific formula for sample entropy depends on the function specified in 
-\code{method}. Per default ("pracma"), the \link[pracma]{sample_entropy} 
-function from the pracma package is used. Alternatively ("hehman") the 
-function by Hehman et al. (2015) is used. Finally, it is also possible to 
-calculate sample_entropy values using both functions ("both").
 }
 \examples{
 # Calculate sample entropy based on time-normalized
@@ -85,7 +75,7 @@ mt_example <- mt_time_normalize(mt_example,
   save_as="tn_trajectories", nsteps=101)
 mt_example <- mt_sample_entropy(mt_example,
   use="tn_trajectories", save_as="measures",
-  method="pracma", dimension="xpos", lag=3)
+  dimension="xpos", m=3)
 
 }
 \references{
@@ -103,6 +93,8 @@ measures.
 }
 \author{
 Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
+
+Dirk Wulff
 
 Felix Henninger
 }
