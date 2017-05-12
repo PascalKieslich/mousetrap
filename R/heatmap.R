@@ -35,22 +35,29 @@
 #'   An xres of 1000 implies an 1000xN px, where N is determined so that the
 #'   trajectories aspect ratio is preserved (provided the \code{bounds} are
 #'   unchanged).
-#' @param upsample a numeric by which the number of points used to represent
-#'   individual trajectories are increased or decreased. Values of smaller than
-#'   one will improve speed but also introduce a certain level of granularity.
+#' @param upsample a numeric value by which the number of points used to
+#'   represent individual trajectories are increased or decreased. Values of
+#'   smaller than one will improve speed but also introduce a certain level of
+#'   granularity.
 #' @param norm a logical specifying whether the data should be warped into
-#'   standard space. Norm = TRUE overrules bounds.
-#' @param smooth_radius a numeric specifying the standard deviation of the
+#'   standard space. \code{norm = TRUE} overrules \code{bounds}.
+#' @param smooth_radius a numeric value specifying the standard deviation of the
 #'   gaussian smoothing. If zero, smoothing is omitted.
-#' @param low_pass an integer specifying allowed number of counts per pixel.
+#' @param low_pass an integer specifying the allowed number of counts per pixel.
 #'   This arguments limits the maximum pixel color intensity.
-#' @param mean_image a numeric between 0 and 1 specifying the average color
-#'   intensity across the entire image. Defaults to .1.
-#' @param mean_color a numeric between 0 and 1 specifying the average color
-#'   intensity across the entire image. Defaults to .1.
+#' @param auto_enhance boolean.
+#' @param mean_image a numeric value between 0 and 1 specifying the average
+#'   color intensity across the entire image. Defaults to 0.1.
+#' @param mean_color a numeric value between 0 and 1 specifying the average
+#'   color intensity across the entire image. Defaults to 0.1.
 #' @param colors a character vector specifying two or three colors used to 
 #'   color the background, the foreground (trajectories), and the values of 
-#'   a third dimension if specified.
+#'   a third dimension (if specified).
+#' @param n_shades an integer specifying the number of shades for the color
+#'   gradient between the first and second, and the second and third color in
+#'   \code{colors}.
+#' @param aggregate_lwd an integer.
+#' @param aggregate_col a character value.
 #' @param n_trajectories an integer specifying the number of trajectories used
 #'   to create the image. If \code{n_trajectories} is smaller than containes in
 #'   the trajectorie object specified by \code{use} the \code{n_trajectories}
@@ -78,8 +85,7 @@
 #'   image's pixel information.
 #'   
 #' @export
-
-mt_heatmap_raw = function(
+mt_heatmap_raw <- function(
   data,
   use = 'trajectories',
   dimensions = c('xpos', 'ypos'),
@@ -539,6 +545,7 @@ mt_heatmap = function(
 #' \code{print.mt_heatmap_raw} shows \code{str()}.
 #'
 #' @param x an object of class mt_heatmap_raw.
+#' @param ... further arguments passed to or from other methods.
 #'
 #' @method print mt_heatmap_raw
 #' @export

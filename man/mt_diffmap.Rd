@@ -47,7 +47,7 @@ unchanged).}
 increased or decreased. Only applies if \code{device} is one of
 \code{c("tiff", "png", "pdf")}.}
 
-\item{smooth_radius}{a numeric specifying the standard deviation of the
+\item{smooth_radius}{a numeric value specifying the standard deviation of the
 gaussian smoothing. If zero, smoothing is omitted.}
 
 \item{colors}{a character vector specifying the colors used to color
