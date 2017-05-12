@@ -5,8 +5,8 @@
 \title{Map trajectories to prototypes.}
 \usage{
 mt_map(data, use = "sp_trajectories", save_as = "prototyping",
-  dimensions = c("xpos", "ypos"), prototypes = mt_prototypes,
-  pointwise = TRUE, minkowski_p = 2)
+  dimensions = c("xpos", "ypos"), prototypes, pointwise = TRUE,
+  minkowski_p = 2)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import

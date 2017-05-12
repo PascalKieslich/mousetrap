@@ -102,7 +102,7 @@ mt_map <- function(
   dimensions = c('xpos','ypos'),
   
   # prototype arguments
-  prototypes = mt_prototypes,
+  prototypes,
 
   # distance arguments
   pointwise = TRUE,
