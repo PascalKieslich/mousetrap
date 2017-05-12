@@ -224,10 +224,12 @@ mt_standardize <-function(data, use="measures",
 #'   standardized variables. If \code{prefix = ""} the original variables
 #'   will be overwritten.
 #' 
-#' @example
+#' @examples
+#' # Calculate derivatives
+#' mt_example <- mt_derivatives(mt_example)
+#' 
 #' # Normalize velocity
-#' mt_example = mt_derivatives(mt_example)
-#' mt_example = mt_scale_trajectories(mt_example,variables = 'vel')
+#' mt_example <- mt_scale_trajectories(mt_example,var_names = 'vel')
 #' 
 #' @author  Dirk U. Wulff (\email{dirk.wulff@@gmail.com})
 #'  

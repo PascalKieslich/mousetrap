@@ -62,6 +62,14 @@ scale = TRUE}).
 \details{
 The new trajectory is added to the object specified in \code{use}.
 }
+\examples{
+# Calculate derivatives
+mt_example <- mt_derivatives(mt_example)
+
+# Normalize velocity
+mt_example <- mt_scale_trajectories(mt_example,var_names = 'vel')
+
+}
 \author{
 Dirk U. Wulff (\email{dirk.wulff@gmail.com})
 }
