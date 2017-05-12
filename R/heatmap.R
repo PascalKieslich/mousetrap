@@ -542,7 +542,7 @@ mt_heatmap = function(
 #'
 #' @method print mt_heatmap_raw
 #' @export
-print.mt_heatmap_raw = function(x){
+print.mt_heatmap_raw = function(x,...){
   utils::str(x)
 }
 
@@ -781,8 +781,6 @@ mt_diffmap = function(
 #' @return NULL
 #'
 #' @export
-
-
 mt_heatmap_ggplot = function(...) {
   plot_data <- mt_heatmap(..., plot=F)
   
