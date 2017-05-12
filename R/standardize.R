@@ -190,39 +190,36 @@ mt_standardize <-function(data, use="measures",
 
 #' Standardize trajectories
 #' 
-#' \code{mt_scale_trajectories} standardizes any trajectory variable to
-#' a mean of 0 (if \code{code = TRUE}) and standard deviation 1 (if \code{
-#' scale = TRUE}).
-#' 
-#' The new trajectory is added to the object specified in \code{use}.
+#' \code{mt_scale_trajectories} centers and / or standardizes selected
+#' trajectory variables within or across trajectories.
 #' 
 #' @inheritParams mt_time_normalize
 #' @param var_names character vector giving the labels of the to be 
 #'   standardized variables.
-#' @param transform function that takes a numeric matric as argument and
-#'   returns a numeric matric of same size with transformed values. If NULL
-#'   the original values are passed on to standardization.
-#' @param center logical specifying whether variables should be centered
-#'   (i.e., \code{mean = 0}). Can be logical vector, in which case the values 
-#'   of \code{scale} are mapped to the variables specified in \code{var_names}.
-#' @param scale logical or numeric specifying the scaling of the variables.
-#'   When logical, \code{scale = TRUE} normalizes the trajectory variable
-#'   to sd = 1, wheras \code{scale = FALSE} leaves the variable on its original
-#'   scale. When numeric, the trajectory variables are scaled by (.i.e., divided
-#'   by) the specific value in scale. Can also be numeric vector, in which case
-#'   the values of \code{scale} are mapped to the variables specified in
+#' @param center logical specifying whether variables should be centered (i.e.,
+#'   \code{mean = 0}). Can be a logical vector, in which case the values of
+#'   \code{scale} are mapped to the variables specified in \code{var_names}.
+#' @param scale logical or numeric specifying the scaling of the variables. When
+#'   logical, \code{scale = TRUE} normalizes the trajectory variable to sd = 1,
+#'   wheras \code{scale = FALSE} leaves the variable on its original scale. When
+#'   numeric, the trajectory variables are scaled by (i.e., divided by) the
+#'   specific value in scale. Can also be a numeric vector, in which case the
+#'   values of \code{scale} are mapped to the variables specified in 
 #'   \code{var_names}.
-#' @param within logical specifying whether trajectory variables should be 
-#'   scaled within or across trajectories. I.e., scaling trajectories to mean = 0
-#'   and sd = 1 for \code{within == TRUE} means that every trajectory will have
-#'   mean = 0 and sd = 1 for with regard to the variables in \code{var_names}. 
-#'   \code{within == FALSE} on the other hand renders mean = 0 and sd = 1 only 
-#'   true in the aggregate that is when considering all trajectories. Can 
-#'   be logical vector, in which case the values of \code{scale} are mapped to 
-#'   the variables specified in \code{var_names}.
-#' @param prefix character string added to the names of the new 
-#'   standardized variables. If \code{prefix = ""} the original variables
-#'   will be overwritten.
+#' @param within_trajectory logical specifying whether trajectory variables
+#'   should be scaled within or across trajectories. If \code{within_trajectory
+#'   == TRUE}, scaling trajectories to mean = 0 and sd = 1 means that every to
+#'   be standardized trajectory variable will have mean = 0 and sd = 1. If
+#'   \code{within_trajectory == FALSE} (the default), mean = 0 and sd = 1 are
+#'   only true in the aggregate (i.e., across all trajectories). Can be a
+#'   logical vector, in which case the values of \code{scale} are mapped to the
+#'   variables specified in \code{var_names}.
+#' @param prefix character string added to the names of the new standardized
+#'   variables. If \code{prefix = ""}, the original variables will be
+#'   overwritten.
+#' @param transform function that takes a numeric matrix as argument and returns
+#'   a numeric matrix of same size with transformed values. If \code{NULL} the
+#'   original values are passed on to standardization.
 #' 
 #' @examples
 #' # Calculate derivatives
@@ -234,19 +231,21 @@ mt_standardize <-function(data, use="measures",
 #' @author  Dirk U. Wulff (\email{dirk.wulff@@gmail.com})
 #'  
 #' @return A mousetrap data object (see \link{mt_example}) with an additional 
-#'   variable in the object specified by \code{use} containing the standardized
-#'   trajectory variable. If a trajectory array was provided directly as \code{data}, 
-#'   only that array includig now the new variable will be returned.
+#'   variable containing the standardized trajectory variable added to the 
+#'   trajectory array). If the trajectory array was provided directly as 
+#'   \code{data}, only the trajectory array will be returned.
 #'   
 #' @export 
 mt_scale_trajectories = function(data,
-                                 use = 'trajectories',
-                                 var_names,
-                                 transform = NULL, 
-                                 center = TRUE, 
-                                 scale = TRUE,
-                                 within = FALSE,
-                                 prefix="z_"){
+  use = 'trajectories',
+  save_as = use,
+  var_names,
+  center = TRUE, 
+  scale = TRUE,
+  within_trajectory = FALSE,
+  prefix="z_",
+  transform = NULL
+  ){
   
 
   # extract trajectories
@@ -277,11 +276,11 @@ mt_scale_trajectories = function(data,
   }
   
   # expand within
-  if(length(within) != length(var_names)){
-    if(length(within) == 1){
-      within = rep(within,length(var_names))
+  if(length(within_trajectory) != length(var_names)){
+    if(length(within_trajectory) == 1){
+      within_trajectory = rep(within_trajectory,length(var_names))
     } else {
-      stop('within must be length 1 or match length of var_names')
+      stop('within_trajectory must be length 1 or match length of var_names')
     }
   }
   
@@ -301,7 +300,7 @@ mt_scale_trajectories = function(data,
     if(is.logical(scale[i])){
       
       # within
-      if(within[i] == TRUE){
+      if(within_trajectory[i] == TRUE){
         n_var = scale_rows(var, center = center[i], scale = scale[i])   
       
       # across  
@@ -313,7 +312,7 @@ mt_scale_trajectories = function(data,
     } else if(is.numeric(scale)){
       
       # within
-      if(within[i] == TRUE){
+      if(within_trajectory[i] == TRUE){
         n_var = trans_rows(var,center = center[i], scale = scale[i])
       
       # across  
@@ -336,11 +335,9 @@ mt_scale_trajectories = function(data,
   names(vars) = paste0(prefix,var_names)
   traj = mt_add_variables(traj,variables = vars)
   
-  # store
-  if(class(data) == 'mousetrap'){ 
-    data[[use]] = traj
-    return(data)
-    } else {
-    return(traj)
-    }
+  # Return results
+  return(create_results(
+    data=data, results=derivatives,
+    use=use, save_as=save_as
+  ))
 }
