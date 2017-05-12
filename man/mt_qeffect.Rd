@@ -17,8 +17,16 @@ array can be provided directly (in this case \code{use} will be ignored).}
 \item{use}{a character string specifying which trajectory data should be
 used.}
 
-\item{measure}{character string specifying the variable used to calculate the
+\item{measure}{a character value specifying the variable used to calculate the
 effect between}
+
+\item{direction}{a character value.}
+
+\item{n_steps}{an integer.}
+
+\item{return_data}{boolean.}
+
+\item{...}{additional arguments passed on to \link[graphics]{points}.}
 }
 \value{
 Nothing, when image is plotted using an external device. Otherwise an

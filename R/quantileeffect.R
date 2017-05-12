@@ -3,8 +3,13 @@
 #' 
 #' @inheritParams mt_time_normalize
 #' @param compare either a vector, the label of a variable in , or a mousetrap object.  
-#' @param measure character string specifying the variable used to calculate the
+#' @param measure a character value specifying the variable used to calculate the
 #'   effect between 
+#' @param direction a character value.
+#' @param n_steps an integer.
+#' @param return_data boolean.
+#' @param ... additional arguments passed on to \link[graphics]{points}.
+#'   
 #'   
 #' @examples
 #' # Plot regular heatmap
