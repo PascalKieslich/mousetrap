@@ -39,10 +39,6 @@
 #'   \code{kmeans}. See \link[cstab]{cStability} and Haslbeck & Wulff (2016).
 #' @param n_gap integer specifying the number of simulated datasets used by
 #'   \code{gap}. See Tibshirani et al. (2001).
-#' @param na_rm logical specifying whether trajectory points including NAs should
-#'   be removed. Removal is done column-wise. E.g., if trajectory has NA at 
-#'   trajectory point 10 all trajectory points 10 are removed. This is necessary
-#'   to compute distance between trajectories.
 #'
 #' @return A list containing two lists that store the results of the different
 #'   methods. \code{kopt} contains the estimated \code{k} for each of the

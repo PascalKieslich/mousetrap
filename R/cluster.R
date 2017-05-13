@@ -46,9 +46,9 @@
 #'   \link[fastcluster]{hclust} (the default) or \link[stats]{kmeans}.
 #' @param weights numeric vector specifying the relative importance of the 
 #'   variables specified in \code{dimensions}. Defaults to a vector of 1s 
-#'   implying equal importance. Technically variables are rescaled so that their
-#'   standard deviations matches the values in \code{weights}. To use the
-#'   original variables set \code{weights = NULL}.
+#'   implying equal importance. Technically, each variable is rescaled so that
+#'   the standard deviation matches the corresponding value in \code{weights}.
+#'   To use the original variables, set \code{weights = NULL}.
 #' @param pointwise boolean specifying the way in which dissimilarity between
 #'   the trajectories is measured. If \code{TRUE} (the default),
 #'   \code{mt_distmat} measures the average dissimilarity and then sums the
@@ -68,10 +68,11 @@
 #'   procedure. Larger numbers minimize the risk of finding local minima. Passed
 #'   on to the \code{nstart} argument of \link[stats]{kmeans}. Only relevant if 
 #'   \code{method} is "kmeans".
-#' @param na_rm logical specifying whether trajectory points including NAs should
-#'   be removed. Removal is done column-wise. E.g., if trajectory has NA at 
-#'   trajectory point 10 all trajectory points 10 are removed. This is necessary
-#'   to compute distance between trajectories.
+#' @param na_rm logical specifying whether trajectory points containing NAs 
+#'   should be removed. Removal is done column-wise. That is, if any trajectory 
+#'   has a missing value at, e.g., the 10th recorded position, the 10th position
+#'   is removed for all trajectories. This is necessary to compute distance
+#'   between trajectories.
 #' @param cluster_output logical. If \code{FALSE} (the default), the mousetrap 
 #'   data object with the cluster assignments is returned (see Value). If 
 #'   \code{TRUE}, the output of the cluster method (\code{kmeans} or 

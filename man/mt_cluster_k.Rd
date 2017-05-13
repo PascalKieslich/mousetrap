@@ -35,9 +35,9 @@ for the stability-based method. Either \code{hclust} or \code{kmeans}.}
 
 \item{weights}{numeric vector specifying the relative importance of the 
 variables specified in \code{dimensions}. Defaults to a vector of 1s 
-implying equal importance. Technically variables are rescaled so that their
-standard deviations matches the values in \code{weights}. To use the
-original variables set \code{weights = NULL}.}
+implying equal importance. Technically, each variable is rescaled so that
+the standard deviation matches the corresponding value in \code{weights}.
+To use the original variables, set \code{weights = NULL}.}
 
 \item{pointwise}{boolean specifying the way in which dissimilarity between
 the trajectories is measured. If \code{TRUE} (the default),
@@ -72,10 +72,11 @@ model-free should be used by \code{stability}, when method is
 \item{n_gap}{integer specifying the number of simulated datasets used by
 \code{gap}. See Tibshirani et al. (2001).}
 
-\item{na_rm}{logical specifying whether trajectory points including NAs should
-be removed. Removal is done column-wise. E.g., if trajectory has NA at 
-trajectory point 10 all trajectory points 10 are removed. This is necessary
-to compute distance between trajectories.}
+\item{na_rm}{logical specifying whether trajectory points containing NAs 
+should be removed. Removal is done column-wise. That is, if any trajectory 
+has a missing value at, e.g., the 10th recorded position, the 10th position
+is removed for all trajectories. This is necessary to compute distance
+between trajectories.}
 
 \item{verbose}{logical indicating whether function should report its
 progress.}

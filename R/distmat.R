@@ -28,10 +28,11 @@
 #'   \code{minkowski_p = 1} computes the city-block distance, \code{minkowski_p 
 #'   = 2} (the default) computes the Euclidian distance, \code{minkowski_p = 3} 
 #'   the cubic distance, etc.
-#' @param na_rm logical specifying whether trajectory points including NAs should
-#'   be removed. Removal is done column-wise. E.g., if trajectory has NA at 
-#'   trajectory point 10 all trajectory points 10 are removed. This is necessary
-#'   to compute distance between trajectories.
+#' @param na_rm logical specifying whether trajectory points containing NAs 
+#'   should be removed. Removal is done column-wise. That is, if any trajectory 
+#'   has a missing value at, e.g., the 10th recorded position, the 10th position
+#'   is removed for all trajectories. This is necessary to compute distance
+#'   between trajectories.
 #'   
 #' @return A mousetrap data object (see \link{mt_example}) with an additional 
 #'   object added (by default called \code{distmat}) containing the distance 
@@ -72,7 +73,7 @@ mt_distmat <- function(data,
   
   # Ensure that there are no NAs
   include = rep(TRUE,ncol(trajectories))
-  if(na_rm == T){
+  if(na_rm == TRUE){
     for(dim in dimensions) include = include & colSums(is.na(trajectories[,,dim])) == 0
     if(sum(include) == 0) stop('No complete case in use')
     if(mean(include) != 1) warning(paste('Removed',sum(!include),'trajectory points due to NAs'))

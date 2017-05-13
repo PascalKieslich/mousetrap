@@ -34,10 +34,11 @@ results. If \code{FALSE}, \code{mt_distmat}  measures dissimilarity once
 = 2} (the default) computes the Euclidian distance, \code{minkowski_p = 3} 
 the cubic distance, etc.}
 
-\item{na_rm}{logical specifying whether trajectory points including NAs should
-be removed. Removal is done column-wise. E.g., if trajectory has NA at 
-trajectory point 10 all trajectory points 10 are removed. This is necessary
-to compute distance between trajectories.}
+\item{na_rm}{logical specifying whether trajectory points containing NAs 
+should be removed. Removal is done column-wise. That is, if any trajectory 
+has a missing value at, e.g., the 10th recorded position, the 10th position
+is removed for all trajectories. This is necessary to compute distance
+between trajectories.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) with an additional 
