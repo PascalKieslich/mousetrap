@@ -2,7 +2,7 @@
 % Please edit documentation in R/standardize.R
 \name{mt_scale_trajectories}
 \alias{mt_scale_trajectories}
-\title{Standardize trajectories}
+\title{Standardize variables in mouse trajectory array.}
 \usage{
 mt_scale_trajectories(data, use = "trajectories", save_as = use, var_names,
   center = TRUE, scale = TRUE, within_trajectory = FALSE, prefix = "z_",
@@ -65,9 +65,13 @@ trajectory variables within or across trajectories.
 # Calculate derivatives
 mt_example <- mt_derivatives(mt_example)
 
-# Normalize velocity
-mt_example <- mt_scale_trajectories(mt_example,var_names = 'vel')
+# Standardize velocity across trajectories
+mt_example <- mt_scale_trajectories(mt_example,var_names = "vel")
 
+}
+\seealso{
+\link{mt_standardize} for standardizing mouse-tracking measures per level of
+other variables.
 }
 \author{
 Dirk U. Wulff (\email{dirk.wulff@gmail.com})

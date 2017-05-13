@@ -133,6 +133,9 @@ scale_within <-function(data,
 #' including the standardized measures.
 #'
 #' @seealso
+#' \link{mt_scale_trajectories} for standardizing variables in mouse trajectory
+#' arrays.
+#' 
 #' \link{scale_within} which is called by \code{mt_standardize}.
 #'
 #' \link{scale} for the R base scale function.
@@ -188,7 +191,7 @@ mt_standardize <-function(data, use="measures",
 
 
 
-#' Standardize trajectories
+#' Standardize variables in mouse trajectory array.
 #' 
 #' \code{mt_scale_trajectories} centers and / or standardizes selected
 #' trajectory variables within or across trajectories.
@@ -221,12 +224,16 @@ mt_standardize <-function(data, use="measures",
 #'   a numeric matrix of same size with transformed values. If \code{NULL} the
 #'   original values are passed on to standardization.
 #' 
+#' @seealso
+#' \link{mt_standardize} for standardizing mouse-tracking measures per level of
+#' other variables.
+#' 
 #' @examples
 #' # Calculate derivatives
 #' mt_example <- mt_derivatives(mt_example)
 #' 
-#' # Normalize velocity
-#' mt_example <- mt_scale_trajectories(mt_example,var_names = 'vel')
+#' # Standardize velocity across trajectories
+#' mt_example <- mt_scale_trajectories(mt_example,var_names = "vel")
 #' 
 #' @author  Dirk U. Wulff (\email{dirk.wulff@@gmail.com})
 #'  
@@ -337,7 +344,7 @@ mt_scale_trajectories = function(data,
   
   # Return results
   return(create_results(
-    data=data, results=derivatives,
+    data=data, results=traj,
     use=use, save_as=save_as
   ))
 }
