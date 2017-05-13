@@ -1,36 +1,36 @@
 #' Create Bezier-curves using the Bernstein approximation.
 #' 
-#' \code{mt_bezier} creates 3-point Bezier-curves using the 
+#' \code{bezier} creates 3-point Bezier-curves using the 
 #'   Bernstein appproximation to simulate continuous competition 
 #'   in mouse- and hand-trajectories.   
 #'   
-#' @param x a numeric vector giving the x-coordinates of exactly 
-#'   three Bezier-points. Defaults to c(0,1,-1) matching the 'mt'
-#'   format in \link{mt_align}.
-#' @param y a numeric vector giving the x-coordinates of exactly
-#'   three Bezier-points. Defaults to c(0,1.5,1.5) matching the 'mt'
-#'   format in \link{mt_align}.
-#' @param w a numeric giving one more Bezier coefficients that, which 
-#'   controls the pull towards the middle point. Each entry in 
-#'   \code{w} creates one Bezier-curve.
-#' @param resol numeric the spatial resolution of the bezier curves. 
-#'   E.g., \code{resol = 100} creates bezier curves comprised of 100 
-#'   points each. 
-#'
+#' @param x a numeric vector giving the x-coordinates of exactly three
+#'   Bezier-points. Defaults to c(0,1,-1) matching the 'mt' format in
+#'   \link{mt_align}.
+#' @param y a numeric vector giving the x-coordinates of exactly three
+#'   Bezier-points. Defaults to c(0,1.5,1.5) matching the 'mt' format in
+#'   \link{mt_align}.
+#' @param w a numeric giving one more Bezier coefficients that, which controls
+#'   the pull towards the middle point. Each entry in \code{w} creates one
+#'   Bezier-curve.
+#' @param resol a numeric value specifying the spatial resolution of the bezier
+#'   curves. For example, \code{resol = 100} creates bezier curves comprised of
+#'   100 points each.
+#' 
+#' @return A trajectory array containing the bezier curves.
+#'   
 #' @examples
-#' \dontrun{
-#'   # Generate range of Bezier-curves
-#'   b = bezier(w=seq(0,10,.1))
-#'   plot.new();plot.window(c(-1,1),c(0,1.5))
-#'   for(i in 1:dim(b)[1]) lines(b[i,,])
-#' }
+#' # Generate range of Bezier-curves
+#' bezier_curves <- bezier(w=seq(0,10,.1))
+#' 
+#' # Plot curves
+#' mt_plot(bezier_curves)
 #'    
 #' @author
 #' Dirk U. Wulff (\email{dirk.wulff@@gmail.com})
 #' 
 #' @export    
-
-bezier = function(x = c(0,1,-1), y = c(0,1.5,1.5), w = 1, resol = 100){
+bezier <- function(x = c(0,1,-1), y = c(0,1.5,1.5), w = 1, resol = 100){
   
   # Setup array
   b = array(

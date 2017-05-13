@@ -7,34 +7,36 @@
 bezier(x = c(0, 1, -1), y = c(0, 1.5, 1.5), w = 1, resol = 100)
 }
 \arguments{
-\item{x}{a numeric vector giving the x-coordinates of exactly 
-three Bezier-points. Defaults to c(0,1,-1) matching the 'mt'
-format in \link{mt_align}.}
+\item{x}{a numeric vector giving the x-coordinates of exactly three
+Bezier-points. Defaults to c(0,1,-1) matching the 'mt' format in
+\link{mt_align}.}
 
-\item{y}{a numeric vector giving the x-coordinates of exactly
-three Bezier-points. Defaults to c(0,1.5,1.5) matching the 'mt'
-format in \link{mt_align}.}
+\item{y}{a numeric vector giving the x-coordinates of exactly three
+Bezier-points. Defaults to c(0,1.5,1.5) matching the 'mt' format in
+\link{mt_align}.}
 
-\item{w}{a numeric giving one more Bezier coefficients that, which 
-controls the pull towards the middle point. Each entry in 
-\code{w} creates one Bezier-curve.}
+\item{w}{a numeric giving one more Bezier coefficients that, which controls
+the pull towards the middle point. Each entry in \code{w} creates one
+Bezier-curve.}
 
-\item{resol}{numeric the spatial resolution of the bezier curves. 
-E.g., \code{resol = 100} creates bezier curves comprised of 100 
-points each.}
+\item{resol}{a numeric value specifying the spatial resolution of the bezier
+curves. For example, \code{resol = 100} creates bezier curves comprised of
+100 points each.}
+}
+\value{
+A trajectory array containing the bezier curves.
 }
 \description{
-\code{mt_bezier} creates 3-point Bezier-curves using the 
+\code{bezier} creates 3-point Bezier-curves using the 
   Bernstein appproximation to simulate continuous competition 
   in mouse- and hand-trajectories.
 }
 \examples{
-\dontrun{
-  # Generate range of Bezier-curves
-  b = bezier(w=seq(0,10,.1))
-  plot.new();plot.window(c(-1,1),c(0,1.5))
-  for(i in 1:dim(b)[1]) lines(b[i,,])
-}
+# Generate range of Bezier-curves
+bezier_curves <- bezier(w=seq(0,10,.1))
+
+# Plot curves
+mt_plot(bezier_curves)
    
 }
 \author{
