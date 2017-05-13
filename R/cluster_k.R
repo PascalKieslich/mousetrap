@@ -142,7 +142,7 @@ mt_cluster_k <- function(
   
   # Ensure that there are no NAs
   include = rep(TRUE,ncol(trajectories))
-  if(na_rm == T){
+  if(na_rm == TRUE){
     for(dim in dimensions) include = include & colSums(is.na(trajectories[,,dim])) == 0
     if(sum(include) == 0) stop('No complete case in use')
     if(mean(include) != 1) warning(paste('Removed',sum(!include),'trajectory points due to NAs'))
@@ -152,6 +152,9 @@ mt_cluster_k <- function(
            "as all trajectories must have the same number of observations.")
     }
   }
+  
+  # Remove NAs
+  trajectories <- trajectories[,include,]
   
   # weight variables
   if(!is.null(weights)){
