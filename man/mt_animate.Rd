@@ -66,8 +66,9 @@ used to draw the trajectories.}
 
 \item{lwd}{numeric specifying the line width of the trajectories.}
 
-\item{loop}{logical specifying whether gif should be looped (loop = TRUE) or 
-not.}
+\item{loop}{logical specifying whether gif should be looped. If \code{FALSE}
+(the default), the last frame will remain visible after the animation is
+finished. If \code{TRUE}, the gif will infinitely repeat itself.}
 
 \item{bounds}{numeric vector specifying the xleft, xright, ybottom, and ytop 
 limits of the animation canvas. Defaults to \code{NULL} in which case the 
