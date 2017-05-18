@@ -372,5 +372,52 @@ trnorm <- function(n,m,sd,a,b){
 }
 
 
+# NA removal and transformation for all clustering related functions
+# E.g., mt_cluster, mt_cluster_k, etc.
+
+prepare_trajectories = function(trajectories, dimensions, weights, na_rm){
+  
+  # limit trajectories to dimensions
+  trajectories <- trajectories[,,dimensions]
+  
+  # Ensure that there are no NAs
+  include = rep(TRUE,ncol(trajectories))
+  if(na_rm == TRUE){
+    for(dim in dimensions) include = include & colSums(is.na(trajectories[,,dim])) == 0
+    if(sum(include) == 0) stop('No complete case in use')
+    if(mean(include) != 1) warning(paste('Removed',sum(!include),'trajectory points due to NAs'))
+  } else {
+    if(any(is.na(trajectories[,,dimensions]))) {
+      stop("Missing values in trajectories not allowed for mt_distmat ",
+           "as all trajectories must have the same number of observations.")
+    }
+  }
+  
+  # Remove NAs
+  trajectories <- trajectories[,include,]
+  
+  # weight variables
+  if(!is.null(weights)){
+    if(length(weights) == length(dimensions)){
+      for(i in 1:length(dimensions)){
+        trajectories[,,dimensions[i]] = trans_mat(trajectories[,,dimensions[i]],scale = weights[i])
+      }
+    } else {
+      stop('weights must match length of dimensions')
+    }
+  }
+  
+  # return trajectories
+  return(trajectories)
+}
+
+
+
+
+
+
+
+
+
 
 

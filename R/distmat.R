@@ -56,9 +56,10 @@ mt_distmat <- function(data,
                        use = 'sp_trajectories',
                        save_as = 'distmat',
                        dimensions = c('xpos','ypos'),
+                       weights = rep(1,length(dimensions)),
                        pointwise = TRUE,
                        minkowski_p = 2,
-                       na_rm = TRUE
+                       na_rm = FALSE
                        ){
   
   # Extract data
@@ -68,21 +69,13 @@ mt_distmat <- function(data,
   if(!length(dimensions) %in% c(2,3)) stop('Dimensions must be of length 2 or 3.')
   if(!all(dimensions %in% dimnames(trajectories)[[3]])) stop('Not all dimensions exist.')
   
-  # Limit trajectories to dimensions
-  trajectories <- trajectories[,,dimensions]
   
-  # Ensure that there are no NAs
-  include = rep(TRUE,ncol(trajectories))
-  if(na_rm == TRUE){
-    for(dim in dimensions) include = include & colSums(is.na(trajectories[,,dim])) == 0
-    if(sum(include) == 0) stop('No complete case in use')
-    if(mean(include) != 1) warning(paste('Removed',sum(!include),'trajectory points due to NAs'))
-  } else {
-  if(any(is.na(trajectories[,,dimensions]))) {
-    stop("Missing values in trajectories not allowed for mt_distmat ",
-         "as all trajectories must have the same number of observations.")
-    }
-  }
+  # prepare trajectories
+  trajectories = prepare_trajectories(trajectories = trajectories, 
+                                      dimensions = dimensions, 
+                                      weights = weights,
+                                      na_rm = na_rm)  
+  
   
   # Get distances
   if(length(dimensions) == 2){

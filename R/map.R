@@ -105,7 +105,9 @@ mt_map <- function(
   prototypes,
 
   # distance arguments
+  weights = rep(1, length(dimensions)),
   pointwise = TRUE,
+  na_rm = FALSE,  
   minkowski_p = 2
   ){
 
@@ -114,27 +116,41 @@ mt_map <- function(
   
   # Tests
   if(!length(dimensions) %in% c(2,3)) stop('Dimensions must be of length 2 or 3.')
-  if(!all(dimensions %in% dimnames(trajectories)[[3]])) stop('Not all dimensions exist.')
+  if(!all(dimensions %in% dimnames(trajectories)[[3]])) stop(paste0('Not all dimensions found in "',use,'".'))
+  
   # Ensure that there are no NAs
   if(any(is.na(trajectories[,,dimensions]))) {
     stop("Missing values in trajectories not allowed for mt_map ",
          "as all trajectories must have the same number of observations.")
   }
   
+  # check prototype dimensionality
+  if(!all(dimensions %in% dimnames(prototypes)[[3]])) stop(paste0('Not all dimensions found in "',prototypers,'".'))
+  
   # Align and rescale prototypes and combine them with trajectories
   n_points <- dim(trajectories)[2]
   n_proto  <- dim(prototypes)[1]
   prototypes <- mt_align(prototypes,coordinates = c(
     colMeans(trajectories[,1,dimensions]),colMeans(trajectories[,n_points,dimensions])
-  ))
+    ))
   prototypes <- mt_spatialize(prototypes,n_points = n_points, dimensions = dimensions)
   joint_array <- mt_bind(prototypes,trajectories,verbose=FALSE)
   
+  # limit trajectories to dimensions
+  joint_array <- joint_array[,,dimensions]
+  
+
+  # prepare trajectories
+  trajectories = prepare_trajectories(trajectories = joint_array, 
+                                      dimensions = dimensions, 
+                                      weights = weights,
+                                      na_rm = na_rm)  
 
   # ---- compute distance & closest prototype
   distm <-  mt_distmat(
     joint_array,
     dimensions = dimensions,
+    weigthts = NULL,
     pointwise = pointwise,
     minkowski_p = minkowski_p)
   

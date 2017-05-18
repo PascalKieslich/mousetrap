@@ -144,43 +144,21 @@ mt_cluster <- function(data,
     stop('Not all dimensions exist.')
   if (!method %in% c("hclust", "kmeans"))
     stop('Method must either be "hclust" or "kmeans".')
-
-  # limit trajectories to dimensions
-  trajectories <- trajectories[,,dimensions]
   
-  # Ensure that there are no NAs
-  include = rep(TRUE,ncol(trajectories))
-  if(na_rm == TRUE){
-    for(dim in dimensions) include = include & colSums(is.na(trajectories[,,dim])) == 0
-    if(sum(include) == 0) stop('No complete case in use')
-    if(mean(include) != 1) warning(paste('Removed',sum(!include),'trajectory points due to NAs'))
-  } else {
-    if(any(is.na(trajectories[,,dimensions]))) {
-      stop("Missing values in trajectories not allowed for mt_distmat ",
-           "as all trajectories must have the same number of observations.")
-    }
-  }
   
-  # Remove NAs
-  trajectories <- trajectories[,include,]
+  # prepare trajectories
+  trajectories = prepare_trajectories(trajectories = trajectories, 
+                                      dimensions = dimensions, 
+                                      weights = weights,
+                                      na_rm = na_rm)
   
-  # weight variables
-  if(!is.null(weights)){
-    if(length(weights) == length(dimensions)){
-      for(i in 1:length(dimensions)){
-        trajectories[,,dimensions[i]] = trans_mat(trajectories[,,dimensions[i]],scale = weights[i])
-      }
-    } else {
-      stop('weights must match length of dimensions')
-    }
-  }
-
   # Cluster trajectories
   if (method == 'hclust') {
     # ... using hclust method
     distm <- mt_distmat(
       trajectories,
       dimensions=dimensions,
+      weights = NULL,
       pointwise=pointwise,
       minkowski_p=minkowski_p
     )
