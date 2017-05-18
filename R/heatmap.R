@@ -378,25 +378,24 @@ mt_heatmap_raw <- function(
 
 #' Plot trajectory heatmap
 #' 
-#' \code{mt_heatmap} plots high resolution raw trajectory maps.
+#' \code{mt_heatmap} plots high resolution raw trajectory maps. Note that this
+#' function has beta status.
 #' 
-#' \code{mt_heatmap} is a wraps \code{mt_heatmap_raw} and provides direct
-#' plotting output in \code{tiff}, \code{png}, or R's default window output. For
-#' further details on how the trajectory heatmaps are constructed see
-#' \link{mt_heatmap_raw}.
+#' \code{mt_heatmap} wraps \link{mt_heatmap_raw} and provides direct plotting 
+#' output in \link[grDevices]{tiff}, \link[grDevices]{png},
+#' \link[grDevices]{pdf}, or R's default window output. For further details on
+#' how the trajectory heatmaps are constructed, see \link{mt_heatmap_raw}.
 #' 
-#' @inheritParams mt_time_normalize
 #' @inheritParams mt_heatmap_raw
-#' @param x usually an object of class mousetrap. Alternatively a trajectory
-#'   array or an object of class mt_heatmap_raw.
-#' @param filename a character string giving the name of the file. If \code{NULL} 
-#'   the R standard device is used for plotting. Otherwise, the plotting device
-#'   is inferred from the file extension. Only supports devices \code{tiff()},
-#'   \code{png()}, \code{pdf()}.
+#' @param x usually an object of class \code{mousetrap}. Alternatively, a
+#'   trajectory array or an object of class \code{mt_heatmap_raw}.
+#' @param filename a character string giving the name of the file. If
+#'   \code{NULL}, the R standard device is used for plotting. Otherwise, the
+#'   plotting device is inferred from the file extension. Only supports devices
+#'   \link[grDevices]{tiff}, \link[grDevices]{png}, \link[grDevices]{pdf}.
 #' @param ... arguments passed to \link{mt_heatmap_raw}.
 #' @param upscale a numeric value by which the output resolution of the image is
-#'   increased or decreased. Only applies if \code{device} is one of
-#'   \code{c("tiff", "png", "pdf")}.
+#'   increased or decreased. Only applies if device is one of tiff, png, or pdf.
 #' @param plot_dims adds the coordinates of the four image corners to the plot. 
 #'   Helps setting \code{bounds}.
 #'   
@@ -425,7 +424,7 @@ mt_heatmap = function(
   }
   
   # take time
-  t = proc.time()[3]
+  t_start = proc.time()[3]
   
   # --------- get heatmap
   agg = NULL
@@ -527,9 +526,9 @@ mt_heatmap = function(
   
   # Finalization ---------------------------------------------------------------
   # Give feedback
-  if (verbose == T) {
-    t = proc.time()[3] - t
-    cat('heatmap created in ', round(t), 's\n', sep='')
+  if (verbose == TRUE) {
+    t_end = proc.time()[3] - t_start
+    cat('heatmap created in ', round(t_end), 's\n', sep='')
   }
 }
 
