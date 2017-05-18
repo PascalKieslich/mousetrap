@@ -7,7 +7,7 @@
 mt_cluster(data, use = "sp_trajectories", save_as = "clustering",
   dimensions = c("xpos", "ypos"), n_cluster = 5, method = "hclust",
   weights = rep(1, length(dimensions)), pointwise = TRUE, minkowski_p = 2,
-  hclust_method = "ward.D", kmeans_nstart = 10, na_rm = TRUE,
+  hclust_method = "ward.D", kmeans_nstart = 10, na_rm = FALSE,
   cluster_output = FALSE, verbose = FALSE)
 }
 \arguments{

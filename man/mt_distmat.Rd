@@ -5,8 +5,8 @@
 \title{Compute distance matrix.}
 \usage{
 mt_distmat(data, use = "sp_trajectories", save_as = "distmat",
-  dimensions = c("xpos", "ypos"), pointwise = TRUE, minkowski_p = 2,
-  na_rm = TRUE)
+  dimensions = c("xpos", "ypos"), weights = rep(1, length(dimensions)),
+  pointwise = TRUE, minkowski_p = 2, na_rm = FALSE)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import

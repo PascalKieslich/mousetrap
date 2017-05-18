@@ -10,7 +10,8 @@ mt_heatmap_ggplot(...)
 \item{...}{arguments passed to \link{mt_heatmap}.}
 }
 \description{
-\code{mt_heatmap_ggplot} plots high resolution raw trajectory maps.
+\code{mt_heatmap_ggplot} plots high resolution raw trajectory maps. Note that
+this function has beta status.
 }
 \details{
 \code{mt_heatmap_ggplot} is a wrapper for \code{mt_heatmap_plot} to enable. In 

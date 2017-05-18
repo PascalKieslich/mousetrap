@@ -6,10 +6,10 @@
 \usage{
 mt_heatmap_raw(data, use = "trajectories", dimensions = c("xpos", "ypos"),
   bounds = NULL, xres = 1000, upsample = 1, norm = FALSE,
+  colors = c("black", "blue", "white"), n_shades = c(1000, 10),
   smooth_radius = 1.5, low_pass = 200, auto_enhance = TRUE,
-  mean_image = 0.2, mean_color = 0.2, colors = c("black", "blue",
-  "white"), n_shades = c(1000, 10), aggregate_lwd = 0,
-  aggregate_col = "black", n_trajectories = 10000, seed = 1,
+  mean_image = 0.1, mean_color = 0.1, aggregate_lwd = 0,
+  aggregate_col = "black", n_trajectories = NULL, seed = NULL,
   verbose = TRUE)
 }
 \arguments{
@@ -24,22 +24,30 @@ used.}
 to create the heatmap. The first two entries are used as x and 
 y-coordinates, the third, if provided, will be added as color information.}
 
-\item{bounds}{numeric vector specifying the corners (xmin, ymin, xmax, ymax)
-of the plot region. For the default \code{bounds = NULL} bounds are
+\item{bounds}{numeric vector specifying the corners (xmin, ymin, xmax, ymax) 
+of the plot region. By default (\code{bounds = NULL}), bounds are 
 determined based on the data input.}
 
 \item{xres}{an integer specifying the number of pixels along the x-dimension.
-An xres of 1000 implies an 1000xN px, where N is determined so that the
-trajectories aspect ratio is preserved (provided the \code{bounds} are
+An \code{xres} of 1000 implies an 1000*N px, where N is determined so that 
+the trajectories aspect ratio is preserved (provided the \code{bounds} are 
 unchanged).}
 
-\item{upsample}{a numeric value by which the number of points used to
-represent individual trajectories are increased or decreased. Values of
-smaller than one will improve speed but also introduce a certain level of
+\item{upsample}{a numeric value by which the number of points used to 
+represent individual trajectories are increased or decreased. Values of 
+smaller than one will improve speed but also introduce a certain level of 
 granularity.}
 
-\item{norm}{a logical specifying whether the data should be warped into
-standard space. \code{norm = TRUE} overrules \code{bounds}.}
+\item{norm}{a logical specifying whether the data should be warped into 
+standard space. If \code{norm = TRUE}, this overrules \code{bounds}.}
+
+\item{colors}{a character vector specifying two or three colors used to color
+the background, the foreground (trajectories), and the values of a third
+dimension (if specified).}
+
+\item{n_shades}{an integer specifying the number of shades for the color 
+gradient between the first and second, and the second and third color in 
+\code{colors}.}
 
 \item{smooth_radius}{a numeric value specifying the standard deviation of the
 gaussian smoothing. If zero, smoothing is omitted.}
@@ -47,79 +55,66 @@ gaussian smoothing. If zero, smoothing is omitted.}
 \item{low_pass}{an integer specifying the allowed number of counts per pixel.
 This arguments limits the maximum pixel color intensity.}
 
-\item{auto_enhance}{boolean.}
+\item{auto_enhance}{boolean. If \code{TRUE} (the default), the image is 
+adjusted so that the mean color intensity matches \code{mean_image} and 
+\code{mean_color}.}
 
-\item{mean_image}{a numeric value between 0 and 1 specifying the average
-color intensity across the entire image. Defaults to 0.1.}
+\item{mean_image}{a numeric value between 0 and 1 specifying the average 
+foreground color intensity across the entire image. Defaults to 0.1.}
 
-\item{mean_color}{a numeric value between 0 and 1 specifying the average
-color intensity across the entire image. Defaults to 0.1.}
+\item{mean_color}{a numeric value between 0 and 1 specifying the average 
+third dimension's color intensity across the entire image. Defaults to 0.1.
+Only relevant if a third dimension is specified in \code{colors}.}
 
-\item{colors}{a character vector specifying two or three colors used to 
-color the background, the foreground (trajectories), and the values of 
-a third dimension (if specified).}
+\item{aggregate_lwd}{an integer specifying the width of the aggregate 
+trajectory. If \code{aggregate_lwd} is > 0 (the default), the aggregate 
+trajectory is omitted.}
 
-\item{n_shades}{an integer specifying the number of shades for the color
-gradient between the first and second, and the second and third color in
-\code{colors}.}
+\item{aggregate_col}{a character value specifying the color of the aggregate 
+trajectory.}
 
-\item{aggregate_lwd}{an integer.}
+\item{n_trajectories}{an optional integer specifying the number of 
+trajectories used to create the image. By default, all trajectories are 
+used. If \code{n_trajectories} is specified and smaller than the number of 
+trajectories in the trajectory array, then \code{n_trajectories} are 
+randomly sampled.}
 
-\item{aggregate_col}{a character value.}
+\item{seed}{an optional integer specifying the seed used for the trajectory 
+sampling.}
 
-\item{n_trajectories}{an integer specifying the number of trajectories used
-to create the image. If \code{n_trajectories} is smaller than containes in
-the trajectorie object specified by \code{use} the \code{n_trajectories}
-are randomly sampled.}
-
-\item{seed}{an integer specifying the seed used for the trajectory sampling.}
-
-\item{verbose}{boolean specifying whether progress updates should printed.}
+\item{verbose}{logical indicating whether function should report its
+progress.}
 }
 \value{
-Nothing, when image is plotted using an external device. Otherwise an
-  object of class \code{mt_object_raw} containing in a matrix format the
-  image's pixel information.
+An object of class \code{mt_object_raw} containing in a matrix format
+  the image's pixel information, the aggregate trajectory, and the colors.
 }
 \description{
-\code{mt_heatmap_raw} creates a high-resolution heatmap image of the
-trajectory data using gaussian smoothing.
+\code{mt_heatmap_raw} creates a high-resolution heatmap image of the 
+trajectory data using gaussian smoothing. Note that this function has beta
+status.
 }
 \details{
-To create the image, \code{mt_heatmap_raw} takes the following steps. First,
-the function maps the trajectory points to a pixel space with x ranging from
-1 and xres and y ranging from 1 to xres divided by the ratio of x and y's
-value range. Second, the function counts and normalizes the number of
+To create the image, \code{mt_heatmap_raw} takes the following steps. First, 
+the function maps the trajectory points to a pixel space with x ranging from 
+1 to xres and y ranging from 1 to xres divided by the ratio of x and y's 
+value range. Second, the function counts and normalizes the number of 
 trajectory points occupying each of the x,y-pixels to yield image intensities
 between 0 and 1. Third, the function smooths the image using an approximative
-guassian approach governed by smooth_radius, which controls the dispersion of
-the gaussian smoothing. Fourth, the function automatically enhances the image
-(unless otherwise specified) using non-linear transformation in order to
-yield a desired \code{mean_image} intensity. Fourth, the function translates
-image intensity into color using the colors specified in \code{colors}.
-Finally, the function the function returns the image in a long format
-containing the x, y, and color information.
+guassian approach governed by \code{smooth_radius}, which controls the 
+dispersion of the gaussian smoothing. Fourth, the function automatically 
+enhances the image (unless \code{auto_enhance = FALSE}) using a non-linear 
+transformation in order to yield a desired \code{mean_image} intensity. 
+Fifth, the function translates the image intensity into color using the 
+colors specified in \code{colors}. Finally, the function returns the image 
+data in a long format containing the x, y, and color information.
 
-\code{mt_heatmap_raw} also offers the possibilty to overlay the heatmap with
-an additional variable, such as for instance velocity, so that both the
-density of mouse trajectories and the informatio of the additional variable
-are visible. In order to do this specify a third variable label in
-\code{dimensions} and control its appearance using the \code{color} and
+\code{mt_heatmap_raw} also offers the possibilty to overlay the heatmap with 
+an additional variable, such as for instance velocity, so that both the 
+density of mouse trajectories and the information of the additional variable 
+are visible. In order to do this, specify a third variable label in 
+\code{dimensions} and control its appearance using the \code{color} and 
 \code{mean_color} arguments.
-}
-\examples{
-# Plot regular heatmap
-#SpiveyEtAl2005 = mt_import_long(SpiveyEtAl2005_raw,'x','y',NULL,'t',
-#mt_id_label = c('ptp','trial'))
-#heatmap = mt_heatmap_raw(SpiveyEtAl2005,xres = 2000)
-#mt_heatmap(heatmap,filename = NULL)
-
-# compute measures
-#SpiveyEtAl2005 = mt_measures(SpiveyEtAl2005)
-
-# Plot heatmap using velocity
-#mt_heatmap(SpiveyEtAl2005)
-
 }
 \author{
 Dirk U. Wulff (\email{dirk.wulff@gmail.com})

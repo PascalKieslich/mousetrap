@@ -9,26 +9,25 @@ mt_heatmap(x, use = "trajectories", dimensions = c("xpos", "ypos"),
   verbose = TRUE)
 }
 \arguments{
-\item{x}{usually an object of class mousetrap. Alternatively a trajectory
-array or an object of class mt_heatmap_raw.}
+\item{x}{usually an object of class \code{mousetrap}. Alternatively, a
+trajectory array or an object of class \code{mt_heatmap_raw}.}
 
 \item{use}{a character string specifying which trajectory data should be
 used.}
 
-\item{dimensions}{a character vector specifying the dimensions in the
-trajectory array that should be time-normalized. If \code{"all"}, all
-trajectory dimensions except the timestamps will be time-normalized.}
+\item{dimensions}{a character vector specifying the trajectory variables used
+to create the heatmap. The first two entries are used as x and 
+y-coordinates, the third, if provided, will be added as color information.}
 
-\item{filename}{a character string giving the name of the file. If \code{NULL} 
-the R standard device is used for plotting. Otherwise, the plotting device
-is inferred from the file extension. Only supports devices \code{tiff()},
-\code{png()}, \code{pdf()}.}
+\item{filename}{a character string giving the name of the file. If
+\code{NULL}, the R standard device is used for plotting. Otherwise, the
+plotting device is inferred from the file extension. Only supports devices
+\link[grDevices]{tiff}, \link[grDevices]{png}, \link[grDevices]{pdf}.}
 
 \item{...}{arguments passed to \link{mt_heatmap_raw}.}
 
 \item{upscale}{a numeric value by which the output resolution of the image is
-increased or decreased. Only applies if \code{device} is one of
-\code{c("tiff", "png", "pdf")}.}
+increased or decreased. Only applies if device is one of tiff, png, or pdf.}
 
 \item{plot_dims}{adds the coordinates of the four image corners to the plot. 
 Helps setting \code{bounds}.}
@@ -37,11 +36,12 @@ Helps setting \code{bounds}.}
 progress.}
 }
 \description{
-\code{mt_heatmap} plots high resolution raw trajectory maps.
+\code{mt_heatmap} plots high resolution raw trajectory maps. Note that this
+function has beta status.
 }
 \details{
-\code{mt_heatmap} is a wraps \code{mt_heatmap_raw} and provides direct
-plotting output in \code{tiff}, \code{png}, or R's default window output. For
-further details on how the trajectory heatmaps are constructed see
-\link{mt_heatmap_raw}.
+\code{mt_heatmap} wraps \link{mt_heatmap_raw} and provides direct plotting 
+output in \link[grDevices]{tiff}, \link[grDevices]{png},
+\link[grDevices]{pdf}, or R's default window output. For further details on
+how the trajectory heatmaps are constructed, see \link{mt_heatmap_raw}.
 }

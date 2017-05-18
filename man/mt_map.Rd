@@ -5,8 +5,8 @@
 \title{Map trajectories to prototypes.}
 \usage{
 mt_map(data, use = "sp_trajectories", save_as = "prototyping",
-  dimensions = c("xpos", "ypos"), prototypes, pointwise = TRUE,
-  minkowski_p = 2)
+  dimensions = c("xpos", "ypos"), prototypes, weights = rep(1,
+  length(dimensions)), pointwise = TRUE, na_rm = FALSE, minkowski_p = 2)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import
@@ -33,6 +33,12 @@ trajectories is measured (see Details). If \code{TRUE} (the default),
 \code{mt_distmat} measures the average dissimilarity and then sums the 
 results. If \code{FALSE}, \code{mt_distmat}  measures dissimilarity once 
 (by treating the various points as independent dimensions).}
+
+\item{na_rm}{logical specifying whether trajectory points containing NAs 
+should be removed. Removal is done column-wise. That is, if any trajectory 
+has a missing value at, e.g., the 10th recorded position, the 10th position
+is removed for all trajectories. This is necessary to compute distance
+between trajectories.}
 
 \item{minkowski_p}{an integer specifying the distance metric. 
 \code{minkowski_p = 1} computes the city-block distance, \code{minkowski_p 
