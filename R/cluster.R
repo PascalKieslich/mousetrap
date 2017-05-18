@@ -129,7 +129,7 @@ mt_cluster <- function(data,
                       hclust_method='ward.D',
                       kmeans_nstart=10,
 
-                      na_rm = TRUE,
+                      na_rm = FALSE,
                       cluster_output=FALSE,
                       verbose=FALSE
                       ){

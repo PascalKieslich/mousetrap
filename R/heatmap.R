@@ -45,23 +45,28 @@
 #'   gaussian smoothing. If zero, smoothing is omitted.
 #' @param low_pass an integer specifying the allowed number of counts per pixel.
 #'   This arguments limits the maximum pixel color intensity.
-#' @param auto_enhance boolean.
+#' @param auto_enhance boolean. If true the image is adjusted so that the mean 
+#'   color intensity matches \code{mean_image} and \code{mean_color}. 
 #' @param mean_image a numeric value between 0 and 1 specifying the average
-#'   color intensity across the entire image. Defaults to 0.1.
+#'   base color intensity across the entire image. Defaults to 0.1.
 #' @param mean_color a numeric value between 0 and 1 specifying the average
-#'   color intensity across the entire image. Defaults to 0.1.
+#'   third dimension's color intensity across the entire image. Defaults 
+#'   to 0.1. Only relevant if a third dimension is specified.
 #' @param colors a character vector specifying two or three colors used to 
 #'   color the background, the foreground (trajectories), and the values of 
 #'   a third dimension (if specified).
 #' @param n_shades an integer specifying the number of shades for the color
 #'   gradient between the first and second, and the second and third color in
 #'   \code{colors}.
-#' @param aggregate_lwd an integer.
-#' @param aggregate_col a character value.
+#' @param aggregate_lwd an integer specifying the width of the aggregate 
+#'   trajectory. If \code{aggregate_lwd > 0}, the default, the aggregate 
+#'   trajectory is omitted.  
+#' @param aggregate_col a character value specifying the color of the aggregate
+#'   trajectory.
 #' @param n_trajectories an integer specifying the number of trajectories used
-#'   to create the image. If \code{n_trajectories} is smaller than containes in
-#'   the trajectorie object specified by \code{use} the \code{n_trajectories}
-#'   are randomly sampled.
+#'   to create the image. If \code{n_trajectories} is smaller than present in
+#'   the trajectorie object specified by \code{use} then \code{n_trajectories}
+#'   are selected from \code{use}.
 #' @param seed an integer specifying the seed used for the trajectory sampling.
 #' @param verbose boolean specifying whether progress updates should printed.
 #'   
@@ -89,7 +94,7 @@ mt_heatmap_raw <- function(
   data,
   use = 'trajectories',
   dimensions = c('xpos', 'ypos'),
-
+  
   # plot arguments
   bounds    = NULL,
   xres      = 1000,
@@ -102,59 +107,60 @@ mt_heatmap_raw <- function(
   auto_enhance = TRUE,
   mean_image = .2,
   mean_color = .2,
-
+  
   # color arguments
   colors   = c('black','blue', 'white'),
   n_shades = c(1000, 10),
-
+  
   # plot aggregate
   aggregate_lwd = 0,
   aggregate_col = 'black',
-
+  
   # subsample arguments
   n_trajectories = 10000,
-  seed = 1,
-
+  seed = NULL,
+  
   # control
   verbose = TRUE
 ){
-
+  
   # Get time
   t = proc.time()[3]
-
+  
   # Data checks
   if (!length(dimensions) %in% c(2, 3)) {
     stop('Dimensions must of length 2 or 3!')
   }
-
+  
   # extract trajectories  
   trajectories = extract_data(data,use)
-
+  
   if (!all(dimensions %in% dimnames(trajectories)[[3]])) {
     stop('Not all dimensions exist in data')
   }
-
+  
   # Subsample trajectories -----------------------------------------------------
   # If n_trajectories is smaller than number of trajectories,
   # subsample data to n_trajectories
   if (n_trajectories < dim(trajectories)[1]) {
     if (verbose == TRUE) cat('subset trajectories','\n')
+    seed = ifelse(is.null(seed),round(runif(1,0,runif(1,0,.Machine$integer.max))), seed)
     trajectories = subsample(trajectories, n=n_trajectories, seed=seed)
   }
-
+  
   # Get aggregate --------------------------------------------------------------
   # Compute aggregate x and y
   aggregate = cbind(
     colMeans(trajectories[,,dimensions[1]],na.rm=T),
     colMeans(trajectories[,,dimensions[2]],na.rm=T)
   )
-
+  
   # Determine Dimensions ----------------------------------------------------
   # Rescale trajectories so that there are sufficient points to fill
   # the diagonal, i.e, length of diagonal divided by px
-
+  
   if (verbose == TRUE) cat('spatializing trajectories','\n')
-
+  
   if(is.null(bounds) & norm == FALSE){
     range_x = range(trajectories[,,dimensions[1]],na.rm=T)
     range_y = range(trajectories[,,dimensions[2]],na.rm=T)
@@ -163,15 +169,15 @@ mt_heatmap_raw <- function(
     range_x = mid_x + (range_x - mid_x) * 1.02
     range_y = mid_y + (range_y - mid_y) * 1.02
     bounds = c(range_x[1],range_y[1],range_x[2],range_y[2])
-    } else if(norm == TRUE){
+  } else if(norm == TRUE){
     trajectories = mt_align(trajectories,coordinates = 'mt')
     bounds = c(-1.4, -.2, 1.4, 1.9)
     range_x = c(bounds[1],bounds[3])
     range_y = c(bounds[2],bounds[4])
-    } else {
+  } else {
     range_x = bounds[c(1,3)]
     range_y = bounds[c(2,4)]
-    }
+  }
   
   # Determine pixel size
   margin  = ceiling(smooth_radius * 2) + ceiling(smooth_radius * 2)
@@ -183,7 +189,7 @@ mt_heatmap_raw <- function(
   yres_m  = ceiling(xres_m * diff(range_y) / diff(range_x))
   n_resc  = ceiling(sqrt(xres_m * xres_m + yres_m * yres_m))
   l_diag  = sqrt(diff(range_x)**2 + diff(range_y)**2)
-
+  
   
   # Determine Dimensions ----------------------------------------------------
   
@@ -192,16 +198,16 @@ mt_heatmap_raw <- function(
     trajectories[,,dimensions[1]],
     trajectories[,,dimensions[2]]
   )
-
+  
   n_points = round(n_resc * (lengths / l_diag))
   n_points = n_points * upsample
-
+  
   spatialized_trajectories = mt_spatialize_tolong(
     trajectories,
     dimensions = dimensions,
     n_points = n_points
-    )
-
+  )
+  
   if (aggregate_lwd > 0) {
     agg_x = aggregate[,1]
     agg_y = aggregate[,2]
@@ -211,41 +217,41 @@ mt_heatmap_raw <- function(
       round(2 * n_resc * agg_l / l_diag)
     )
   }
-
+  
   # Compute raw image ----------------------------------------------------------
   if (verbose == TRUE) cat('calculate image','\n')
-
+  
   # retrieve image
   pts = spatialized_trajectories
-
+  
   # range of pixels plus white space around image
   xs = 0 : (xres_m + margin) + 1
   ys = 0 : (yres_m + ceiling(smooth_radius * 2) + ceiling(smooth_radius * 2)) + 1
-
+  
   # Remove points outside of bounds
   pts = pts[pts[,1] >= bounds[1] &
-            pts[,1] <= bounds[3] &
-            pts[,2] >= bounds[2] &
-            pts[,2] <= bounds[4],]
-
-
+              pts[,1] <= bounds[3] &
+              pts[,2] >= bounds[2] &
+              pts[,2] <= bounds[4],]
+  
+  
   # Determine pixel locations
   x  = round(((pts[,1] - bounds[1]) / px_size) + 1)
   y  = round(((pts[,2] - bounds[2]) / px_size) + 1)
-
+  
   # Determine table of pixels
   #img_df = data_frame('x'=x,'y'=y)
   #img_tb = img_df %>% group_by(x,y) %>% tally() %>% ungroup()
   img_tb = tab(x, y)
-
+  
   # Map pixels into matrix of zeros
   img_mat = matrix(0, ncol=length(xs), nrow=length(ys))
   img_mat[as.matrix(img_tb[,2:1]) + ceiling(smooth_radius * 2)] = img_tb[,3]
-
+  
   # Store raw image, pixel locations and
   raw_img = c(t(img_mat))
   xys     = expand.grid(1:length(xs), 1:length(ys))
-
+  
   # Calculate overlay information and create ovrlay image
   if (length(dimensions) == 3) {
     a = pts[,3]
@@ -253,25 +259,25 @@ mt_heatmap_raw <- function(
       a[is.na(a)] = 0
       message('NAs in third dimension replaced by 0')
     }
-
+    
     #img_df = data_frame('x'=x,'y'=y,'a'=a)
     #img_tb = img_df %>% group_by(x,y) %>% summarize(a = mean(a)) %>% ungroup()
     img_tb = tab_mean(x,y,a)
-
+    
     img_mat = matrix(0, ncol=length(xs), nrow=length(ys))
     img_mat[as.matrix(img_tb[,2:1]) + smooth_radius * 2] = img_tb[,3]
     add_img = c(t(img_mat))
   } else {
     add_img = rep(1, length(raw_img))
   }
-
+  
   # get aggregate points
   agg = NULL
   if (aggregate_lwd > 0) {
     agg_x = round(((spatialized_aggregate[,1] - bounds[1]) / px_size) + 1) + smooth_radius * 2
     agg_y = round(((spatialized_aggregate[,2] - bounds[2]) / px_size) + 1) + smooth_radius * 2
     test  = (agg_x > 0 & agg_x <= max(xs) &
-             agg_y > 0 & agg_y <= max(ys))
+               agg_y > 0 & agg_y <= max(ys))
     agg_x = agg_x[test]
     agg_y = agg_y[test]
     agg   = data.frame(
@@ -280,20 +286,20 @@ mt_heatmap_raw <- function(
       stringsAsFactors = F
     )
   }
-
+  
   # Smooth image ---------------------------------------------------------------
-
+  
   smooth_img = raw_img
   if (smooth_radius > 0) {
     if(verbose == TRUE)
       cat('smooth image','\n')
-
+    
     smooth_img = gaussBlur(
       smooth_img, smooth_img,
       max(xs), max(ys),
       smooth_radius
     )
-
+    
     if (length(dimensions) == 3) {
       add_img = gaussBlur(
         add_img, add_img,
@@ -302,39 +308,39 @@ mt_heatmap_raw <- function(
       )
     }
   }
-
+  
   # Create, normalize, and enhance image ---------------------------------------
   # Low-pass: shave off max color intensities
   # Enhance contrast
   # Normalize image
-
+  
   # create image object
   img = data.frame(xys, smooth_img, add_img)
   names(img) = c('x','y','img','a')
-
+  
   # Low-pass
   img$img[img$img > low_pass * upsample] = low_pass  * upsample
-
+  
   # Normalize image
   img$img = (img$img - min(img$img)) / max(img$img - min(img$img))
-
+  
   if (length(dimensions) == 3) {
     img$a = (img$a - min(img$a)) / max(img$a - min(img$a))
   }
-
+  
   # Enhance image
   if (auto_enhance == TRUE) {
     ms = c(); steps = c(.1, 2, 5, 10, 20, 50, 100)
-
+    
     for (i in steps) {
       ms = c(ms, abs(mean(abs(img$img-1)**i - 1)));
     }
-
+    
     enhance = exp(stats::predict(fields::qsreg(ms,log(steps)),mean_image))
     if (enhance > max(steps)) enhance = max(steps)
     if (enhance < 0) enhance = 1
     img$img = abs(abs(img$img - 1)**enhance - 1)
-
+    
     if (verbose == TRUE) cat('enhance image by', round(enhance, 1), '\n')
     
     if(length(dimensions) == 3){
@@ -349,19 +355,19 @@ mt_heatmap_raw <- function(
       
       if (verbose == TRUE) cat('enhance image color by', round(enhance, 1), '\n')
     }
-
-    }
-
+    
+  }
+  
   # Determine colors -----------------------------------------------------------
-
+  
   img$img = group(img$img, n_shades[1])
-
+  
   if (length(dimensions) == 2) {
     img$col = colormixer(
       colors[1], colors[2], img$img, format='hex'
     )
   }
-
+  
   if (length(dimensions) == 3) {
     if (length(colors) < 3 | length(n_shades) < 2) {
       stop('Colors and n_shades must be (at least) of length 2 and 3, respectively.')
@@ -371,14 +377,14 @@ mt_heatmap_raw <- function(
     img$col = colormixer(colors[1], color_tone, img$img, format='hex')
     
   }
-
+  
   # create output -----------------------------------------------------------
   heatmap = list('img' = img[,c('x', 'y', 'img', 'col')], 'agg' = agg, 'colors' = colors)
   class(heatmap) = 'mt_heatmap_raw'
   
   # Export raw data
   return(heatmap)
-
+  
 }
 
 
@@ -438,24 +444,24 @@ mt_heatmap = function(
   if(class(x) == 'mousetrap' | is.array(x)){
     if(class(x) == 'mousetrap') x = extract_data(data = x, use = use)
     if(!all(dimensions %in% dimnames(x)[[3]])) stop('Not all dimensions found.')
-      heatmap = mt_heatmap_raw(x,use,dimensions,...)
-        img = heatmap$img
-        agg = heatmap$agg
-        bg  = heatmap$colors[1]
-    } else if(class(x) == 'mt_heatmap_raw'){
-      img = x$img
-      agg = x$agg
-      bg  = heatmap$colors[1]
-    } else if(is.data.frame(x)){
-      if(all(c('x','y','col') %in% names(x))){
-        img = x
-        } else {
-        stop('x is non-usable data frame. See documentation.')
-        }
-      } else {
-      stop('x has non-usable data format. see documentation.')
-      }
-    
+    heatmap = mt_heatmap_raw(x,use,dimensions,...)
+    img = heatmap$img
+    agg = heatmap$agg
+    bg  = heatmap$colors[1]
+  } else if(class(x) == 'mt_heatmap_raw'){
+    img = x$img
+    agg = x$agg
+    bg  = heatmap$colors[1]
+  } else if(is.data.frame(x)){
+    if(all(c('x','y','col') %in% names(x))){
+      img = x
+    } else {
+      stop('x is non-usable data frame. See documentation.')
+    }
+  } else {
+    stop('x has non-usable data format. see documentation.')
+  }
+  
   if (verbose == TRUE) {
     cat('creating heatmap: ', max(img$x), 'x', max(img$y), 'px', '\n')
   }
@@ -467,8 +473,8 @@ mt_heatmap = function(
       width=10 * (max(img$x) / max(img$y)) * upscale,
       height=10 * upscale,
       bg = bg
-      )
-    } else if(device == 'png') {
+    )
+  } else if(device == 'png') {
     grDevices::png(
       filename,
       width=max(img$x) * upscale,
@@ -497,8 +503,8 @@ mt_heatmap = function(
   graphics::plot.new()
   graphics::par( mar=c(0, 0, 0, 0))
   graphics::plot.window(xlim=range_x + c(-.5, .5),
-              ylim=range_y + c(-.5, .5)
-              )
+                        ylim=range_y + c(-.5, .5)
+  )
   graphics::par(usr = c(range_x + c(-.5, .5),range_y + c(-.5, .5)))
   
   # plot points
@@ -507,11 +513,11 @@ mt_heatmap = function(
     p_img$x + .5, p_img$y + .5,
     col=p_img$col,
     border=NA
-    )
+  )
   
   if (!is.null(agg)) {
     graphics::points(agg[1:2],cex=agg$lwd,col=agg$col,pch=16)
-    }
+  }
   
   # plot dimensions
   if(plot_dims){
@@ -530,7 +536,7 @@ mt_heatmap = function(
   if(device %in% c('pdf','png','tiff')) {
     grDevices::dev.off()
   }
-
+  
   # Finalization ---------------------------------------------------------------
   # Give feedback
   if (verbose == T) {
@@ -634,12 +640,12 @@ mt_diffmap = function(
     if(!is.null(cond)){
       y = x[[use]][!cond,,] 
       x = x[[use]][ cond,,] 
-      }
-    } else if(class(x) == 'mt_heatmap_raw') {
-      if(!is.null(class(y))) stop('y must must be specified, if x is a heatmap object.')
-      if(class(y) != 'mt_heatmap_raw') stop('y must match class of x.')
-      }
-
+    }
+  } else if(class(x) == 'mt_heatmap_raw') {
+    if(!is.null(class(y))) stop('y must must be specified, if x is a heatmap object.')
+    if(class(y) != 'mt_heatmap_raw') stop('y must match class of x.')
+  }
+  
   # --------- extract data
   x = extract_data(x, use = use)
   y = extract_data(y, use = use)
@@ -683,7 +689,7 @@ mt_diffmap = function(
     img$img, img$img,
     max(img$x), max(img$y),
     smooth_radius
-    )
+  )
   
   # --------- normalize
   v = img$img
@@ -738,7 +744,7 @@ mt_diffmap = function(
       ylim=range(img$y) + c(-.5, .5)
     )
     graphics::par(usr = c(range(img$x) + c(-.5, .5),range(img$y) + c(-.5, .5)))
-
+    
     
     # plot points
     graphics::rect(
@@ -759,12 +765,12 @@ mt_diffmap = function(
   
   if (device %in% c('pdf','png','tiff') & plot == TRUE) grDevices::dev.off()
   if (plot == FALSE) return(img)
-
+  
   if (verbose == T) {
     t = proc.time()[3] - t
     cat('heatmap created in ', round(t), 's\n', sep='')
   }
-  }
+}
 
 
 
@@ -796,26 +802,26 @@ mt_heatmap_ggplot = function(...) {
       ggplot2::aes_string(x='x', y='y'),
       data=plot_data
     ) +
-    ggplot2::scale_x_continuous(
-      expand=c(0,0), limits=range(plot_data$x)
-    ) +
-    ggplot2::scale_y_continuous(
-      expand=c(0,0), limits=range(plot_data$y)
-    ) +
-    ggplot2::geom_raster(
-      fill=plot_data$col
-    ) +
-    ggplot2::theme(
-      panel.grid=ggplot2::element_blank(),
-      panel.border=ggplot2::element_blank(),
-      plot.margin=ggplot2::unit(c(0,0,0,0), "lines"),
-      axis.title.x=ggplot2::element_blank(),
-      axis.text.x=ggplot2::element_blank(),
-      axis.ticks.x=ggplot2::element_blank(),
-      axis.title.y=ggplot2::element_blank(),
-      axis.text.y=ggplot2::element_blank(),
-      axis.ticks.y=ggplot2::element_blank()
-    ) +
-    ggplot2::labs(x=NULL, y=NULL)
+      ggplot2::scale_x_continuous(
+        expand=c(0,0), limits=range(plot_data$x)
+      ) +
+      ggplot2::scale_y_continuous(
+        expand=c(0,0), limits=range(plot_data$y)
+      ) +
+      ggplot2::geom_raster(
+        fill=plot_data$col
+      ) +
+      ggplot2::theme(
+        panel.grid=ggplot2::element_blank(),
+        panel.border=ggplot2::element_blank(),
+        plot.margin=ggplot2::unit(c(0,0,0,0), "lines"),
+        axis.title.x=ggplot2::element_blank(),
+        axis.text.x=ggplot2::element_blank(),
+        axis.ticks.x=ggplot2::element_blank(),
+        axis.title.y=ggplot2::element_blank(),
+        axis.text.y=ggplot2::element_blank(),
+        axis.ticks.y=ggplot2::element_blank()
+      ) +
+      ggplot2::labs(x=NULL, y=NULL)
   )
 }
