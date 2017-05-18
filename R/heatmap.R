@@ -535,7 +535,7 @@ mt_heatmap = function(
 
 #' Generic print for class mt_heatmap_raw 
 #'
-#' \code{print.mt_heatmap_raw} shows \code{str()}.
+#' \code{print.mt_heatmap_raw} shows \link[utils]{str}.
 #'
 #' @param x an object of class mt_heatmap_raw.
 #' @param ... further arguments passed to or from other methods.
@@ -549,8 +549,8 @@ print.mt_heatmap_raw = function(x,...){
 
 #' Creates a difference-heatmap of two trajectory heatmap images
 #'
-#' \code{mt_diffmap} creates a difference-heatmap of the trajectory
-#'   data using gaussian smoothing.
+#' \code{mt_diffmap} creates a difference-heatmap of the trajectory data using
+#' gaussian smoothing. Note that this function has beta status.
 #' 
 #' \code{mt_diffmap} takes two objects that either contain trajectory heatmaps
 #' or from which trajectory heatmaps can be computed. Difference-heatmaps are
@@ -604,7 +604,7 @@ mt_diffmap = function(
 ) {
   
   # --------- Take time
-  t = proc.time()[3]
+  t_start = proc.time()[3]
   
   # --------- collect device
   if(!is.null(filename)){
@@ -640,10 +640,10 @@ mt_diffmap = function(
   # --------- determine bounds
   if(is.null(bounds)){
     if(verbose == TRUE) cat('Determine joint bounds','\n')
-    range_x1 = range(x[,dimensions[1],],na.rm=T)
-    range_x2 = range(x[,dimensions[2],],na.rm=T)
-    range_y1 = range(y[,dimensions[1],],na.rm=T)
-    range_y2 = range(y[,dimensions[2],],na.rm=T)
+    range_x1 = range(x[,dimensions[1],],na.rm=TRUE)
+    range_x2 = range(x[,dimensions[2],],na.rm=TRUE)
+    range_y1 = range(y[,dimensions[1],],na.rm=TRUE)
+    range_y2 = range(y[,dimensions[2],],na.rm=TRUE)
     range_1  = c(c(range_x1[1],range_y1[1])[which.min(c(range_x1[1],range_y1[1]))],
                  c(range_x1[2],range_y1[2])[which.max(c(range_x1[2],range_y1[2]))])
     range_2  = c(c(range_x2[1],range_y2[1])[which.min(c(range_x2[1],range_y2[1]))],
@@ -753,9 +753,9 @@ mt_diffmap = function(
   if (device %in% c('pdf','png','tiff') & plot == TRUE) grDevices::dev.off()
   if (plot == FALSE) return(img)
   
-  if (verbose == T) {
-    t = proc.time()[3] - t
-    cat('heatmap created in ', round(t), 's\n', sep='')
+  if (verbose == TRUE) {
+    t_end = proc.time()[3] - t_start
+    cat('heatmap created in ', round(t_end), 's\n', sep='')
   }
 }
 
@@ -764,7 +764,8 @@ mt_diffmap = function(
 
 #' Plot trajectory heatmap using ggplot.
 #' 
-#' \code{mt_heatmap_ggplot} plots high resolution raw trajectory maps.
+#' \code{mt_heatmap_ggplot} plots high resolution raw trajectory maps. Note that
+#' this function has beta status.
 #' 
 #' \code{mt_heatmap_ggplot} is a wrapper for \code{mt_heatmap_plot} to enable. In 
 #' contrast to \code{mt_heatmap_plot} plots created by \code{mt_heatmap_ggplot} 

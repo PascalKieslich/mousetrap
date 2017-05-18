@@ -1,7 +1,7 @@
 #' Create gif trajectory animation.
 #' 
 #' \code{mt_animate} animates trajectories using the animation package. Note
-#' that this function is still experimental.
+#' that this function has beta status.
 #' 
 #' \code{mt_animate} produces a .gif file showing a continuous stream of 
 #' animated trajectories. The function first produces a series of \emph{.png} 
