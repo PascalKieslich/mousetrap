@@ -329,7 +329,15 @@ mt_animate = function(
     if(i == 1){
       
       # add selected trajectories to active
-      is = sample(all_is,density)
+      if(length(all_is) > 1){
+        is = sample(all_is,density)
+      } else {
+        if(length(all_is) == 1){
+          is = all_is
+        } else {
+            break
+          }
+        }
       
       # set spawn time
       spawns = rep(0,density)
