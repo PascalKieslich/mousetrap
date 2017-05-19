@@ -1,9 +1,10 @@
 #' Calculate distance, velocity, and acceleration.
 #'
-#' Calculate distance traveled, velocity, and acceleration for each logged
+#' Calculate distance traveled, velocity, and acceleration for each logged 
 #' position. Distance is calculated as the Euclidean distance between successive
-#' coordinates, and velocity as distance covered per time interval. The
-#' acceleration denotes the difference in velocity, again normalized per time.
+#' coordinates, and velocity as distance covered per time interval. The 
+#' acceleration denotes the difference in absolute velocity, again normalized
+#' per time.
 #'
 #' Distances, velocities and acceleration are computed as follows:
 #'
@@ -14,19 +15,19 @@
 #' intervening period between the previous sample and the one with which the
 #' numeric value is saved.
 #'
-#' The acceleration, by contrast, denotes the change in velocity between two
-#' adjacent periods. Because of this, it is shifted forward to best match the
-#' actual time point at which the acceleration was measured. Because there will
-#' always be one less value computed for acceleration than for velocity, the
-#' final value in the acceleration vector has been padded with an NA. To
-#' reconstruct the velocity from the acceleration, multiply the acceleration
-#' vector with the sampling interval, compute the cumulative sum of the result,
-#' and add a zero at the beginning.
+#' The acceleration, by contrast, denotes the change in absolute velocity
+#' between two adjacent periods. Because of this, it is shifted forward to best
+#' match the actual time point at which the acceleration was measured. Because
+#' there will always be one less value computed for acceleration than for
+#' velocity, the final value in the acceleration vector has been padded with an
+#' NA.
 #'
-#' If the distance is calculated across both horizontal and vertical (x and y)
-#' dimensions, distance and velocity is always positive (or 0). If only one
-#' dimension is used, increases in x (or y) values result in positive distances
-#' and velocity values, decreases in negative distances and velocity values.
+#' If the distance is calculated across both horizontal and vertical (x and y) 
+#' dimensions, distance and velocity is always positive (or 0). If only one 
+#' dimension is used, by default (\code{absolute=TRUE}), increases in x (or y)
+#' values result in positive distances and velocity values, decreases in
+#' negative distances and velocity values. If \code{absolute=FALSE}, absolute
+#' values for distance and velocity are reported.
 #'
 #' @inheritParams mt_time_normalize
 #' @param dimensions a character vector specifying across which dimension(s)
@@ -38,9 +39,9 @@
 #'   containing the timestamps.
 #' @param prefix an optional character string that is added as a prefix to the
 #'   to be created new trajectory dimensions.
-#' @param acc_on_abs_vel logical indicating if acceleration should be calculated
-#'   based on absolute velocity values (ignoring direction). Only relevant if
-#'   velocity can be negative (see Details).
+#' @param absolute logical indicating if absolute values for distances and
+#'   velocities should be reported. Only relevant if a single dimension is
+#'   specified in \code{dimensions} (see Details).
 #' @param return_delta_time logical indicating if the timestamp differences 
 #'   should be returned as well (as "delta_time").
 #'
@@ -77,7 +78,8 @@ mt_derivatives <- function(
   use="trajectories", save_as=use,
   dimensions=c("xpos","ypos"), timestamps="timestamps",
   prefix="",
-  acc_on_abs_vel=FALSE, return_delta_time=FALSE,
+  absolute = FALSE,
+  return_delta_time=FALSE,
   verbose=FALSE) {
   
   
@@ -113,17 +115,18 @@ mt_derivatives <- function(
     } else {
       distances <- sqrt(rowSums(diff(derivatives[i,,dimensions])^2))
     }
+    
+    # If specified, use absolute distances
+    if (absolute){
+      distances <- abs(distances)
+    }
 
     # Compute velocity based on distance and time deltas
     velocities <- distances / delta_timestamps
 
-    # Compute acceleration based on the velocity differences
-    if (acc_on_abs_vel) {
-      accelerations <- diff(abs(velocities)) / delta_timestamps[-length(delta_timestamps)]
-    } else {
-      accelerations <- diff(velocities) / delta_timestamps[-length(delta_timestamps)]
-    }
-
+    # Compute acceleration based on the differences of absolute velocities
+    accelerations <- diff(abs(velocities)) / delta_timestamps[-length(delta_timestamps)]
+    
     # Pad the accelerations so that they can be concatenated to the remaining data
     accelerations <- c(accelerations, NA)
 
