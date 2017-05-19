@@ -1,13 +1,14 @@
 # mousetrap 3.1.0
 
 ## Announcements
-* A first paper on the mousetrap software packages has been accepted for publication. It presents the mousetrap plugin for creating mouse-tracking experiments in OpenSesame and also includes a short demonstration of basic analyses using the mousetrap R package. The reference is: Kieslich, P. J., & Henninger, F. (in press). Mousetrap: An integrated, open-source mouse-tracking package. \emph{Behavior Research Methods}. doi:10.3758/s13428-017-0900-z
+* A first paper on the mousetrap software packages has been accepted for publication. It presents the mousetrap plugin for creating mouse-tracking experiments in OpenSesame and also includes a short demonstration of basic analyses using the mousetrap R package.
+* Reference: Kieslich, P. J., & Henninger, F. (in press). Mousetrap: An integrated, open-source mouse-tracking package. `Behavior Research Methods`. doi:10.3758/s13428-017-0900-z
 
 ## Changes in specific functions
 * `mt_sample_entropy`: the default values reported have changed (cf. bug fix below). `mt_sample_entropy` now only uses a custom function for computing sample entropy (which is faster and produces the same results as `pracma::sample_entropy` if identical parameters are used). Therefore, the `method` argument has been removed. Besides, the `lag` argument has been renamed to `m`.
 * `mt_distmat`, `mt_cluster`, `mt_cluster_k`, and `mt_map`: now provide the option to remove trajectory points containing missing values (by setting the `na_rm` argument to `TRUE`). Removal is done column-wise. That is, if any trajectory has a missing value at, e.g., the 10th recorded position, the 10th position is removed for all trajectories.
-* `mt_distmat`, `mt_cluster`, `mt_cluster_k`, and `mt_map`: now allow for specifying the relative importance of each trajectory dimension via the `weights` argument. Technically, each variable is rescaled so that the standard deviation matches the corresponding value in `weights`. By default, `weights` is a vector of 1s implying equal importance of each dimension (i.e., all dimensions are standardized to a standard deviation of 1). This changes the default behavior of the functions in the previous release of mousetrap where the original variables were used without standardization. To use the original variables, set `weights = NULL`.
-* `mt_map`: now uses `mousetrap::mt_prototypes` as prototypes if no `prototypes` are specified explicitly.
+* `mt_distmat`, `mt_cluster`, `mt_cluster_k`, and `mt_map`: now allow for specifying the relative importance of each trajectory dimension via the `weights` argument. Technically, each variable is rescaled so that the standard deviation matches the corresponding value in `weights`. By default, `weights` is a vector of 1s implying equal importance of each dimension (i.e., all dimensions are standardized to a standard deviation of 1). This changes the default behavior of the functions compared to the previous release where the original variables were used without standardization. To use the original variables, set `weights = NULL`.
+* `mt_map`: uses `mousetrap::mt_prototypes` as default for `prototypes` if no prototypes are provided.
 * `mt_average`: now internally replaces NaNs with NAs. NaNs only occur if a specific dimension contains only NAs for an interval (which in practice only happens for acc values if the trial stops at the interval boundary).
 
 ## Bugs fixed
@@ -24,8 +25,8 @@
 * Please note that although these functions have been tested extensively, they still have beta status.
 
 ## New dataset
-* `KH2017_raw`: Raw mouse-tracking dataset from Kieslich & Henninger (in press)
-* `KH2017`: Mouse-tracking dataset from Kieslich & Henninger (in press)
+* `KH2017_raw`: Raw mouse-tracking dataset from Kieslich & Henninger (in press).
+* `KH2017`: Mouse-tracking dataset from Kieslich & Henninger (in press).
 
 # mousetrap 3.0.0
 
