@@ -84,10 +84,10 @@ values for distance and velocity are reported.
 # across both dimensions
 mt_example <- mt_derivatives(mt_example)
 
-# Calculate derivatives ony looking at movement
-# in x dimension
+# Calculate derivatives only looking at movement along x dimension
+# reporting absolute values for distance and velocity
 mt_example <- mt_derivatives(mt_example,
-  dimensions="xpos")
+  dimensions="xpos", absolute=TRUE)
 
 }
 \seealso{
