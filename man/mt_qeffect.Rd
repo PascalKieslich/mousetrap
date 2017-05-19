@@ -34,7 +34,7 @@ Nothing, when image is plotted using an external device. Otherwise an
   image's pixel information.
 }
 \description{
-Create quantile-effect plot
+Function in beta and currently only for internal purposes.
 }
 \examples{
 # Plot regular heatmap

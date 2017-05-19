@@ -15,9 +15,9 @@ Bezier-points. Defaults to c(0,1,-1) matching the 'mt' format in
 Bezier-points. Defaults to c(0,1.5,1.5) matching the 'mt' format in
 \link{mt_align}.}
 
-\item{w}{a numeric giving one more Bezier coefficients that, which controls
-the pull towards the middle point. Each entry in \code{w} creates one
-Bezier-curve.}
+\item{w}{a numeric value or vector specifying one or several Bezier curves, 
+with w giverning the pull towards the middle point. Each entry in \code{w} 
+creates one Bezier-curve.}
 
 \item{resol}{a numeric value specifying the spatial resolution of the bezier
 curves. For example, \code{resol = 100} creates bezier curves comprised of
