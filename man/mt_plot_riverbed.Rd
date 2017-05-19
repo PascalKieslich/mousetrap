@@ -53,10 +53,10 @@ as all trajectories must contain the same number of values.
 }
 \examples{
 # Time-normalize trajectories
-mt_example <- mt_time_normalize(mt_example)
+KH2017 <- mt_time_normalize(KH2017)
   
 # Create riverbed plot for all trials
-mt_plot_riverbed(mt_example)
+mt_plot_riverbed(KH2017)
 
 \dontrun{
 # Create separate plots for typical and atypical trials

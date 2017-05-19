@@ -82,6 +82,9 @@
 #' @examples
 #' # Load ggplot2
 #' library(ggplot2)
+#' 
+#' 
+#' ## Plot individual example trajectories
 #'
 #' # Time-normalize trajectories
 #' mt_example <- mt_time_normalize(mt_example)
@@ -100,18 +103,6 @@
 #' mt_plot(mt_example, use="tn_trajectories",
 #'   facet_col="Condition")
 #'
-#' # Plot aggregated time-normalized trajectories per condition
-#' mt_plot_aggregate(mt_example, use="tn_trajectories",
-#'   color="Condition")
-#'
-#' # ... first aggregating trajectories within subjects
-#' mt_plot_aggregate(mt_example, use="tn_trajectories",
-#'   color="Condition", subject_id="subject_nr")
-#'
-#' # ... adding points for each position to the plot
-#' mt_plot_aggregate(mt_example, use="tn_trajectories",
-#'   color="Condition", points=TRUE)
-#'
 #' # Plot velocity profiles based on the averaged trajectories
 #' # varying the color depending on the condition
 #' mt_example <- mt_derivatives(mt_example)
@@ -120,13 +111,38 @@
 #'   x="timestamps", y="vel", color="Condition")
 #'
 #'
-#' # Use only_ggplot option to return a ggplot object without geoms
-#' mt_avg_plot <- mt_plot_aggregate(mt_example, use="tn_trajectories",
-#'   color="Condition", only_ggplot=TRUE)
+#' ## Plot aggregate trajectories for KH2017 data
 #'
-#' # ... and add a geom to it with a custom line width
-#' # and semitransparent lines (by specifying alpha < 1)
-#' mt_avg_plot + geom_path(size=1.5, alpha=0.5)
+#' # Time-normalize trajectories
+#' KH2017 <- mt_time_normalize(KH2017)
+#'
+#' # Plot aggregated time-normalized trajectories per condition
+#' mt_plot_aggregate(KH2017, use="tn_trajectories",
+#'   color="Condition")
+#'
+#' # ... first aggregating trajectories within subjects
+#' mt_plot_aggregate(KH2017, use="tn_trajectories",
+#'   color="Condition", subject_id="subject_nr")
+#'
+#' # ... adding points for each position to the plot
+#' mt_plot_aggregate(KH2017, use="tn_trajectories",
+#'   color="Condition", points=TRUE)
+#'
+#' \dontrun{
+#' # Create customized aggregate trajectory plot
+#' # by using only_ggplot option to return a ggplot object without geoms
+#' # and by adding a geom to it with a custom line width
+#' mt_plot_aggregate(KH2017, use="tn_trajectories",
+#'   color="Condition", only_ggplot=TRUE) + 
+#'   geom_path(size=1.5)
+#'   
+#' # Create customized plot of individual trajectories
+#' # by using only_ggplot option to return a ggplot object without geoms
+#' # and by adding a geom to it with semitransparent lines 
+#' # (by specifying alpha < 1)
+#' mt_plot(KH2017, use="tn_trajectories", only_ggplot=TRUE) + 
+#'   geom_path(alpha=0.2)
+#' }
 #'
 #' @author
 #' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
