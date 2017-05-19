@@ -131,7 +131,7 @@ NumericMatrix scale_mat(NumericMatrix mat, bool center = true, bool scale = true
       for(j = 0; j < m; ++j){
         if(n_mat(i,j) == n_mat(i,j)){
           if(center == true) n_mat(i,j) -= moments[0];
-          if(center == true) n_mat(i,j) /= moments[1];
+          if(scale == true) n_mat(i,j) /= moments[1];
           }
         }
       }
@@ -140,7 +140,7 @@ NumericMatrix scale_mat(NumericMatrix mat, bool center = true, bool scale = true
       for(i = 0; i < n; ++i){
         if(n_mat(i,j) == n_mat(i,j)){
           if(center == true) n_mat(i,j) -= moments[0];
-          if(center == true) n_mat(i,j) /= moments[1];   
+          if(scale == true) n_mat(i,j) /= moments[1];   
           }
         }
       }
@@ -159,7 +159,7 @@ NumericMatrix trans_mat(NumericMatrix mat, double scale, bool center = true){
       for(j = 0; j < m; ++j){
         if(n_mat(i,j) == n_mat(i,j)){
           if(center == true) n_mat(i,j) -= moments[0];
-          if(center == true) n_mat(i,j) /= (moments[1]/scale);
+          if(scale != 1) n_mat(i,j) /= (moments[1]/scale);
           }
         }
       }
@@ -168,7 +168,7 @@ NumericMatrix trans_mat(NumericMatrix mat, double scale, bool center = true){
       for(i = 0; i < n; ++i){
         if(n_mat(i,j) == n_mat(i,j)){
           if(center == true) n_mat(i,j) -= moments[0];
-          if(center == true) n_mat(i,j) /= (moments[1]/scale); 
+          if(scale != 1) n_mat(i,j) /= (moments[1]/scale); 
           }
         }
       }
