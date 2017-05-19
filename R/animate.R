@@ -502,12 +502,12 @@ mt_animate = function(
 
     # generate individual frames as pngs
     # this operation is parallelized via the parallel package
-    cl <- parallel::makeCluster()
+    cl <- parallel::makeCluster(ncores)
     parallel::clusterExport(cl, c(
       'framerate', 'speed', 'decay', 'max_intensity',
       'xs', 'ys', 'upscale', 'bg', 'colormixer',
       'tmp_path', 'filename'
-    ))
+    ), envir=environment())
     parallel::clusterApplyLB(cl, jobs_split, plot_frame, trajectory_list=trajectory_list)
     parallel::stopCluster(cl)
 
