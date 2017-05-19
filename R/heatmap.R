@@ -131,7 +131,9 @@ mt_heatmap_raw <- function(
   if(is.null(n_trajectories)==FALSE){
     if (n_trajectories < dim(trajectories)[1]) {
       if (verbose == TRUE) cat('subset trajectories','\n')
-      seed <- ifelse(is.null(seed),round(runif(1,0,runif(1,0,.Machine$integer.max))), seed)
+      seed <- ifelse(is.null(seed),
+                     round(stats::runif(1,0,stats::runif(1,0,.Machine$integer.max))),
+                     seed)
       trajectories <- subsample(trajectories, n=n_trajectories, seed=seed)
     }
   }
