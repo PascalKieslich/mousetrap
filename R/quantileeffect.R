@@ -1,5 +1,6 @@
 #' Create quantile-effect plot
 #' 
+#' Function in beta and currently only for internal purposes.
 #' 
 #' @inheritParams mt_time_normalize
 #' @param compare either a vector, the label of a variable in , or a mousetrap object.  
