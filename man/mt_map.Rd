@@ -5,7 +5,7 @@
 \title{Map trajectories to prototypes.}
 \usage{
 mt_map(data, use = "sp_trajectories", save_as = "prototyping",
-  dimensions = c("xpos", "ypos"), prototypes = mt_prototypes,
+  dimensions = c("xpos", "ypos"), prototypes = mousetrap::mt_prototypes,
   weights = rep(1, length(dimensions)), pointwise = TRUE, na_rm = FALSE,
   minkowski_p = 2)
 }
@@ -96,7 +96,7 @@ KH2017 <- mt_spatialize(KH2017)
 
 # Map trajectories onto standard prototype set
 KH2017 <- mt_map(KH2017,
-  use="sp_trajectories", prototypes=mt_prototypes)
+  use="sp_trajectories")
 
 
 # Plot prototypes
@@ -104,7 +104,8 @@ mt_plot(mt_prototypes,facet_col="mt_id") +
   ggplot2::facet_grid(.~factor(mt_id,levels=unique(mt_id)))
 
 # Plot trajectories per assigned prototype
-mt_plot(KH2017,use2="prototyping",facet_col="prototype_label")
+mt_plot(KH2017,use="sp_trajectories",
+  use2="prototyping",facet_col="prototype_label")
 
 
 # Map trajectories onto reduced prototype set
