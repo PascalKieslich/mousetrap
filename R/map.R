@@ -51,10 +51,10 @@
 #'         
 #' @examples
 #' # Spatialize trajectories
-#' mt_example <- mt_spatialize(mt_example)
+#' KH2017 <- mt_spatialize(KH2017)
 #' 
 #' # Map trajectories onto standard prototype set
-#' mt_example <- mt_map(mt_example,
+#' KH2017 <- mt_map(KH2017,
 #'   use="sp_trajectories", prototypes=mt_prototypes)
 #' 
 #' 
@@ -63,11 +63,11 @@
 #'   ggplot2::facet_grid(.~factor(mt_id,levels=unique(mt_id)))
 #' 
 #' # Plot trajectories per assigned prototype
-#' mt_plot(mt_example,use2="prototyping",facet_col="prototype_label")
+#' mt_plot(KH2017,use2="prototyping",facet_col="prototype_label")
 #' 
 #' 
 #' # Map trajectories onto reduced prototype set
-#' mt_example <- mt_map(mt_example,
+#' KH2017 <- mt_map(KH2017,
 #'   use="sp_trajectories",
 #'   prototypes=mt_prototypes[c("straight","curved","cCoM"),,],
 #'   save_as="prototyping_red")
@@ -84,7 +84,7 @@
 #' )
 #' 
 #' # Map trajectories
-#' mt_example <- mt_map(mt_example,
+#' KH2017 <- mt_map(KH2017,
 #'   use="sp_trajectories", prototypes=mt_prototypes_ext,
 #'   save_as="prototyping_ext")
 #' 

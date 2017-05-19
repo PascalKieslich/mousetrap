@@ -26,7 +26,7 @@
 #'   only the spatialized trajectories will be returned.
 #'
 #' @examples
-#' mt_example <- mt_spatialize(data=mt_example,
+#' KH2017 <- mt_spatialize(data=KH2017,
 #'   dimensions = c('xpos','ypos'),
 #'   n_points = 20)
 #'
