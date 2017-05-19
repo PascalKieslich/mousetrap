@@ -217,9 +217,12 @@ following, a brief overview of the functions in this package is given.
 }
 
 \examples{
+\dontrun{
 KH2017 <- mt_import_mousetrap(subset(KH2017_raw,correct==1))
 KH2017 <- mt_remap_symmetric(KH2017)
 KH2017 <- mt_align_start(KH2017)
+}
+
 KH2017 <- mt_time_normalize(KH2017)
 KH2017 <- mt_measures(KH2017)
 
