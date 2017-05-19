@@ -5,8 +5,9 @@
 \title{Map trajectories to prototypes.}
 \usage{
 mt_map(data, use = "sp_trajectories", save_as = "prototyping",
-  dimensions = c("xpos", "ypos"), prototypes, weights = rep(1,
-  length(dimensions)), pointwise = TRUE, na_rm = FALSE, minkowski_p = 2)
+  dimensions = c("xpos", "ypos"), prototypes = mt_prototypes,
+  weights = rep(1, length(dimensions)), pointwise = TRUE, na_rm = FALSE,
+  minkowski_p = 2)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import
@@ -91,10 +92,10 @@ Schulte-Mecklenbeck, 2017).
 }
 \examples{
 # Spatialize trajectories
-mt_example <- mt_spatialize(mt_example)
+KH2017 <- mt_spatialize(KH2017)
 
 # Map trajectories onto standard prototype set
-mt_example <- mt_map(mt_example,
+KH2017 <- mt_map(KH2017,
   use="sp_trajectories", prototypes=mt_prototypes)
 
 
@@ -103,11 +104,11 @@ mt_plot(mt_prototypes,facet_col="mt_id") +
   ggplot2::facet_grid(.~factor(mt_id,levels=unique(mt_id)))
 
 # Plot trajectories per assigned prototype
-mt_plot(mt_example,use2="prototyping",facet_col="prototype_label")
+mt_plot(KH2017,use2="prototyping",facet_col="prototype_label")
 
 
 # Map trajectories onto reduced prototype set
-mt_example <- mt_map(mt_example,
+KH2017 <- mt_map(KH2017,
   use="sp_trajectories",
   prototypes=mt_prototypes[c("straight","curved","cCoM"),,],
   save_as="prototyping_red")
@@ -124,7 +125,7 @@ mt_prototypes_ext <- mt_add_trajectory(mt_prototypes_ext,
 )
 
 # Map trajectories
-mt_example <- mt_map(mt_example,
+KH2017 <- mt_map(KH2017,
   use="sp_trajectories", prototypes=mt_prototypes_ext,
   save_as="prototyping_ext")
 

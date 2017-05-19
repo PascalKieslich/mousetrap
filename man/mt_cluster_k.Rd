@@ -119,10 +119,10 @@ Kieslich, Henninger, & Schulte-Mecklenbeck, 2017).
 
 \dontrun{
 # Spatialize trajectories
-mt_example <- mt_spatialize(mt_example)
+KH2017 <- mt_spatialize(KH2017)
 
 # Find k
-results <- mt_cluster_k(mt_example, use="sp_trajectories")
+results <- mt_cluster_k(KH2017, use="sp_trajectories")
 
 # Retrieve results
 results$kopt

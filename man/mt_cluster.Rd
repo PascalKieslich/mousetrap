@@ -119,10 +119,10 @@ Kieslich, Henninger, & Schulte-Mecklenbeck, 2017).
 }
 \examples{
 # Spatialize trajectories
-mt_example <- mt_spatialize(mt_example)
+KH2017 <- mt_spatialize(KH2017)
 
 # Cluster trajectories
-mt_example <- mt_cluster(mt_example, use="sp_trajectories")
+KH2017 <- mt_cluster(KH2017, use="sp_trajectories")
 
 }
 \references{

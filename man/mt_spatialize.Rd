@@ -47,7 +47,7 @@ trajectory. \code{mt_spatialize} is mainly used to improve the results of
 clustering (in particular \link{mt_cluster}) and visualization.
 }
 \examples{
-mt_example <- mt_spatialize(data=mt_example,
+KH2017 <- mt_spatialize(data=KH2017,
   dimensions = c('xpos','ypos'),
   n_points = 20)
 
