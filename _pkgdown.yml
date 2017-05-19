@@ -16,6 +16,7 @@ reference:
     desc:
      A number of additional helper functions are provided.
     contents:
+    - bezier
     - bimodality_coefficient
     - scale_within
     - read_mt
