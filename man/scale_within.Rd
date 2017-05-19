@@ -14,10 +14,10 @@ scale_within(data, variables = NULL, within = NULL, prefix = "",
 variables that \link{scale} is applied to. If unspecified,
 \code{scale_within} will be applied to all variables in data.}
 
-\item{within}{a character string specifying the name of one or more variables
-in \code{data}. For each of the levels of this variable (or for each
-combination of levels, if more than one variable is specified),
-\link{scale} is applied separately. Alternatively, a vector directly
+\item{within}{an optional character string specifying the name of one or more
+variables in \code{data}. If specified, \link{scale} is applied separately 
+for each of the levels of the variable (or for each combination of levels,
+if more than one variable is specified). Alternatively, a vector directly
 containing the level values.}
 
 \item{prefix}{a character string that is inserted before each scaled

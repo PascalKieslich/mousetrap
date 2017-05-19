@@ -10,10 +10,10 @@
 #' @param variables a character string (or vector) specifying one or more
 #'   variables that \link{scale} is applied to. If unspecified,
 #'   \code{scale_within} will be applied to all variables in data.
-#' @param within a character string specifying the name of one or more variables
-#'   in \code{data}. For each of the levels of this variable (or for each
-#'   combination of levels, if more than one variable is specified),
-#'   \link{scale} is applied separately. Alternatively, a vector directly
+#' @param within an optional character string specifying the name of one or more
+#'   variables in \code{data}. If specified, \link{scale} is applied separately 
+#'   for each of the levels of the variable (or for each combination of levels,
+#'   if more than one variable is specified). Alternatively, a vector directly
 #'   containing the level values.
 #' @param prefix a character string that is inserted before each scaled
 #'   variable. By default (empty string) the original variables are replaced.
@@ -106,10 +106,10 @@ scale_within <-function(data,
 
 #' Standardize mouse-tracking measures per level of other variables.
 #'
-#' Standardize selected mouse-tracking measures per level of one or more other
-#' variable, and store them in new variables. This function is a thin wrapper
-#' around \link{scale_within}, focussed on mouse-tracking data stored in a
-#' mousetrap data object.
+#' Standardize selected mouse-tracking measures across all trials or per level
+#' of one or more other variable, and store them in new variables. This function
+#' is a thin wrapper around \link{scale_within}, focussed on mouse-tracking data
+#' stored in a mousetrap data object.
 #'
 #' @param data a mousetrap data object created using one of the mt_import
 #'   functions (see \link{mt_example} for details).
@@ -118,11 +118,10 @@ scale_within <-function(data,
 #'   \link{mt_measures}.
 #' @param use_variables a vector specifying which variables should be
 #'   standardized. If unspecified, all variables will be standardized.
-#' @param within a character string specifying one or more variables in
-#'   \code{data[["data"]]}. All measures will be standardized separately for
-#'   each level of the variable (or for each combination of levels, if more than
-#'   one variable is specified). By default, points to the subject identifier
-#'   used in OpenSesame ("subject_nr").
+#' @param within an optional character string specifying one or more variables
+#'   in \code{data[["data"]]}. If specified, all measures will be standardized
+#'   separately for each level of the variable (or for each combination of
+#'   levels, if more than one variable is specified).
 #' @param prefix a character string that is inserted before each standardized
 #'   variable. If an empty string is specified, the original variables are
 #'   replaced.
@@ -161,21 +160,25 @@ scale_within <-function(data,
 #'   
 #' @export
 mt_standardize <-function(data, use="measures",
-  use_variables=NULL, within="subject_nr",
+  use_variables=NULL, within=NULL,
   prefix="z_", center=TRUE, scale=TRUE) {
 
   data[[use]] <- extract_data(data=data,use=use)
   
-  # Extract within variable values
-  within <- data$data[rownames(data[[use]]), within, drop=FALSE]
-
-  # Combine within variable values to one
-  # vector coding each combination of values
-  # with a unique integer
-  within <- as.numeric(factor(
-    apply(within, 1, paste, collapse=";")
-  ))
-
+  if(is.null(within)==FALSE){
+    
+    # Extract within variable values
+    within <- data$data[rownames(data[[use]]), within, drop=FALSE]
+    
+    # Combine within variable values to one
+    # vector coding each combination of values
+    # with a unique integer
+    within <- as.numeric(factor(
+      apply(within, 1, paste, collapse=";")
+    ))
+    
+  }
+  
   # Apply the scale_within function
   data[[use]] <- scale_within(
     data[[use]],
