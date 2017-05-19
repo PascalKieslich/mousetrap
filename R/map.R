@@ -102,7 +102,7 @@ mt_map <- function(
   dimensions = c('xpos','ypos'),
   
   # prototype arguments
-  prototypes,
+  prototypes = mt_prototypes,
 
   # distance arguments
   weights = rep(1, length(dimensions)),
