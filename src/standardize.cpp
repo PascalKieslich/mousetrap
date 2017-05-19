@@ -113,7 +113,7 @@ NumericVector trans_rows(NumericMatrix mat, double scale, bool center = true) {
       mean = mean/ind;
       sd   = sqrt((sd - ind * mean * mean)/(ind - 1));
       if(center == true) vec = vec - mean;
-      vec = (vec / sd) * scale;
+      if(scale != 1) vec = (vec / sd) * scale;
       n_mat(i,_) = vec;
       }
     return n_mat;

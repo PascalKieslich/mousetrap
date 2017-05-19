@@ -261,6 +261,10 @@ mt_scale_trajectories = function(data,
   # test if variables are in traj
   if(!all(var_names %in% dimnames(traj)[[3]])) stop('Variables not found')
 
+  if(center == FALSE & (scale == FALSE | is.numeric(scale))){
+    message('Note scaling does affect the arithmetic means of the variables even if center = FALSE.')
+  }
+  
   # store old names
   nam = dimnames(traj)
 
