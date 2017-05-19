@@ -19,6 +19,11 @@
 #' @param dimensions a character vector specifying which trajectory variables 
 #'   should be used. Can be of length 2 or 3 for two-dimensional or 
 #'   three-dimensional trajectories respectively.
+#' @param weights numeric vector specifying the relative importance of the 
+#'   variables specified in \code{dimensions}. Defaults to a vector of 1s 
+#'   implying equal importance. Technically, each variable is rescaled so that
+#'   the standard deviation matches the corresponding value in \code{weights}.
+#'   To use the original variables, set \code{weights = NULL}.
 #' @param pointwise boolean specifying the way dissimilarity between the 
 #'   trajectories is measured (see Details). If \code{TRUE} (the default), 
 #'   \code{mt_distmat} measures the average dissimilarity and then sums the 
@@ -80,24 +85,24 @@ mt_distmat <- function(data,
   # Get distances
   if(length(dimensions) == 2){
     if(pointwise == TRUE){
-        dmat <- distMat(trajectories[,include,dimensions[1]],
-                        trajectories[,include,dimensions[2]],
+        dmat <- distMat(trajectories[,,dimensions[1]],
+                        trajectories[,,dimensions[2]],
                         power = minkowski_p)
       } else {
-        dmat <- distMatV(trajectories[,include,dimensions[1]],
-                         trajectories[,include,dimensions[2]],
+        dmat <- distMatV(trajectories[,,dimensions[1]],
+                         trajectories[,,dimensions[2]],
                          power = minkowski_p)
       }
     } else {
       if(pointwise == TRUE){
-          dmat <- distMat3d(trajectories[,include,dimensions[1]],
-                            trajectories[,include,dimensions[2]],
-                            trajectories[,include,dimensions[3]],
+          dmat <- distMat3d(trajectories[,,dimensions[1]],
+                            trajectories[,,dimensions[2]],
+                            trajectories[,,dimensions[3]],
                             power = minkowski_p)
         } else {
-          dmat <- distMat3dV(data[[use]][,include,dimensions[1]],
-                             data[[use]][,include,dimensions[2]],
-                             data[[use]][,include,dimensions[3]],
+          dmat <- distMat3dV(data[[use]][,,dimensions[1]],
+                             data[[use]][,,dimensions[2]],
+                             data[[use]][,,dimensions[3]],
                              power = minkowski_p)
       }
     }

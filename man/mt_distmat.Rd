@@ -23,6 +23,12 @@ be stored.}
 should be used. Can be of length 2 or 3 for two-dimensional or 
 three-dimensional trajectories respectively.}
 
+\item{weights}{numeric vector specifying the relative importance of the 
+variables specified in \code{dimensions}. Defaults to a vector of 1s 
+implying equal importance. Technically, each variable is rescaled so that
+the standard deviation matches the corresponding value in \code{weights}.
+To use the original variables, set \code{weights = NULL}.}
+
 \item{pointwise}{boolean specifying the way dissimilarity between the 
 trajectories is measured (see Details). If \code{TRUE} (the default), 
 \code{mt_distmat} measures the average dissimilarity and then sums the 
