@@ -1,3 +1,35 @@
+# mousetrap 3.1.0
+
+## Announcements
+* A first paper on the mousetrap software packages has been accepted for publication. It presents the mousetrap plugin for creating mouse-tracking experiments in OpenSesame and also includes a short demonstration of basic analyses using the mousetrap R package.
+* Reference: Kieslich, P. J., & Henninger, F. (in press). Mousetrap: An integrated, open-source mouse-tracking package. _Behavior Research Methods_. doi:10.3758/s13428-017-0900-z
+
+## Changes in specific functions
+* `mt_derivatives`: now always reports acceleration as difference in absolute velocity (the argument `acc_on_abs_vel` has been removed). Besides, the argument `absolute` has been introduced that indicates if absolute values for distances and velocities should be reported (by default, this is not the case). All of this is only relevant if a single dimension is specified in `dimensions`. 
+* `mt_sample_entropy`: the default values reported have changed (cf. bug fix below). `mt_sample_entropy` now only uses a custom function for computing sample entropy (which is faster and produces virtually identical results as `pracma::sample_entropy` if the same parameters are used). Therefore, the `method` argument has been removed. Besides, the `lag` argument has been renamed to `m`.
+* `mt_distmat`, `mt_cluster`, `mt_cluster_k`, and `mt_map`: now provide the option to remove trajectory points containing missing values (by setting the `na_rm` argument to `TRUE`). Removal is done column-wise. That is, if any trajectory has a missing value at, e.g., the 10th recorded position, the 10th position is removed for all trajectories.
+* `mt_distmat`, `mt_cluster`, `mt_cluster_k`, and `mt_map`: now allow for specifying the relative importance of each trajectory dimension via the `weights` argument. Technically, each variable is rescaled so that the standard deviation matches the corresponding value in `weights`. By default, `weights` is a vector of 1s implying equal importance of each dimension (i.e., all dimensions are standardized to a standard deviation of 1). This changes the default behavior of the functions compared to the previous release where the original variables were used without standardization. To use the original variables, set `weights = NULL`.
+* `mt_map`: uses `mousetrap::mt_prototypes` as default for `prototypes` if no prototypes are provided.
+* `mt_average`: now internally replaces NaNs with NAs. NaNs only occur if a specific dimension contains only NAs for an interval (which in practice only happens for acc values if the trial stops at the interval boundary).
+* `mt_standardize`: now by default standardizes mouse-tracking measures across all trials if no `within` variable is specified.
+
+## Bugs fixed
+* `mt_sample_entropy`: Bug fixed for `method="pracma"` (the default method): The window size argument (which used to be specified using the `lag` argument - now this has been renamed to `m`) was incorrectly passed on to the `tau` argument of `pracma::sample_entropy`. It should have beend passed on to the `edim` argument. After fixing this, both methods in `mt_sample_entropy` provided virtually identical results (which is why the `method` argument has been dropped, see above).
+
+## New functions
+* `bezier`: create Bezier-curves using the Bernstein approximation.
+* `mt_scale_trajectories`: standardize variables in a mouse trajectory array.
+* `mt_heatmap_raw`: create high-resolution heatmap of trajectory data.
+* `mt_heatmap`: plot trajectory heatmap using base plots.
+* `mt_heatmap_ggplot`: plot trajectory heatmap using ggplot. 
+* `mt_diffmap`: create a difference-heatmap of two trajectory heatmap images.
+* `mt_animate`: create a gif trajectory animation.
+* Please note that although these functions have been tested extensively, they still have beta status.
+
+## New dataset
+* `KH2017_raw`: Raw mouse-tracking dataset from Kieslich & Henninger (in press).
+* `KH2017`: Mouse-tracking dataset from Kieslich & Henninger (in press).
+
 # mousetrap 3.0.0
 
 ## Announcements

@@ -5,7 +5,7 @@
 \title{Standardize mouse-tracking measures per level of other variables.}
 \usage{
 mt_standardize(data, use = "measures", use_variables = NULL,
-  within = "subject_nr", prefix = "z_", center = TRUE, scale = TRUE)
+  within = NULL, prefix = "z_", center = TRUE, scale = TRUE)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import
@@ -18,11 +18,10 @@ default points to the \code{measures} data.frame created using
 \item{use_variables}{a vector specifying which variables should be
 standardized. If unspecified, all variables will be standardized.}
 
-\item{within}{a character string specifying one or more variables in
-\code{data[["data"]]}. All measures will be standardized separately for
-each level of the variable (or for each combination of levels, if more than
-one variable is specified). By default, points to the subject identifier
-used in OpenSesame ("subject_nr").}
+\item{within}{an optional character string specifying one or more variables
+in \code{data[["data"]]}. If specified, all measures will be standardized
+separately for each level of the variable (or for each combination of
+levels, if more than one variable is specified).}
 
 \item{prefix}{a character string that is inserted before each standardized
 variable. If an empty string is specified, the original variables are
@@ -37,10 +36,10 @@ A mousetrap data object (see \link{mt_example})
 including the standardized measures.
 }
 \description{
-Standardize selected mouse-tracking measures per level of one or more other
-variable, and store them in new variables. This function is a thin wrapper
-around \link{scale_within}, focussed on mouse-tracking data stored in a
-mousetrap data object.
+Standardize selected mouse-tracking measures across all trials or per level
+of one or more other variable, and store them in new variables. This function
+is a thin wrapper around \link{scale_within}, focussed on mouse-tracking data
+stored in a mousetrap data object.
 }
 \examples{
 mt_example <- mt_measures(mt_example)

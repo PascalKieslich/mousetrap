@@ -63,10 +63,10 @@ trajectory variables within or across trajectories.
 }
 \examples{
 # Calculate derivatives
-KH2017 <- mt_derivatives(KH2017)
+mt_example <- mt_derivatives(mt_example)
 
 # Standardize velocity across trajectories
-KH2017 <- mt_scale_trajectories(KH2017,var_names = "vel")
+mt_example <- mt_scale_trajectories(mt_example,var_names = "vel")
 
 }
 \seealso{

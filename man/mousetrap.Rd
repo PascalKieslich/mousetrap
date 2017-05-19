@@ -130,6 +130,9 @@ following, a brief overview of the functions in this package is given.
   \link{mt_standardize} standardizes mouse-tracking measures onto a common 
   scale (separately for subsets of the data, e.g., per participant).
   
+  \link{mt_scale_trajectories} provides different options for standardizing
+  variables in a mouse trajectory array.
+  
   \link{mt_check_bimodality}	assesses the bimodality of mouse-tracking
   measure distributions.
   
@@ -194,6 +197,11 @@ following, a brief overview of the functions in this package is given.
   \link{mt_plot_per_trajectory} creates a pdf with separate plots per 
   trajectory.
   
+  \link{mt_heatmap} and \link{mt_heatmap_ggplot} plot trajectory heatmaps.
+  
+  \link{mt_diffmap} for creating a difference-heatmap of two trajectory 
+  heatmap images.
+  
   \link{mt_animate} creates a gif trajectory animation.
 }
 
@@ -204,31 +212,36 @@ following, a brief overview of the functions in this package is given.
   
   \link{scale_within} scales and centers variables within the levels of 
   another variable.
+  
+  \link{bezier} creates Bezier-curves using the Bernstein approximation.
 }
 
 \examples{
-mt_example <- mt_import_mousetrap(mt_example_raw)
-mt_example <- mt_remap_symmetric(mt_example)
-mt_example <- mt_align_start(mt_example)
-mt_example <- mt_time_normalize(mt_example)
-mt_example <- mt_derivatives(mt_example)
-mt_example <- mt_deviations(mt_example)
-mt_example <- mt_measures(mt_example)
+\dontrun{
+KH2017 <- mt_import_mousetrap(subset(KH2017_raw,correct==1))
+KH2017 <- mt_remap_symmetric(KH2017)
+KH2017 <- mt_align_start(KH2017)
+}
+
+KH2017 <- mt_time_normalize(KH2017)
+KH2017 <- mt_measures(KH2017)
 
 mt_aggregate(
-  mt_example, use="measures",
+  KH2017, use="measures",
   use_variables=c("MAD", "AD"),
   use2_variables="Condition"
 )
 
-mt_plot(mt_example,
+mt_plot_aggregate(KH2017,
   use="tn_trajectories",
   x="xpos", y="ypos", color="Condition"
 )
-        
-mt_plot_aggregate(mt_example,
+
+\dontrun{
+mt_plot(KH2017,
   use="tn_trajectories",
   x="xpos", y="ypos", color="Condition"
 )
+}
 
 }

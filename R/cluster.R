@@ -105,6 +105,10 @@
 #'
 #' # Cluster trajectories
 #' KH2017 <- mt_cluster(KH2017, use="sp_trajectories")
+#' 
+#' # Plot clustered trajectories
+#' mt_plot(KH2017,use="sp_trajectories",
+#'   use2="clustering",facet_col="cluster")
 #'
 #' @author
 #' Dirk U. Wulff (\email{dirk.wulff@@gmail.com})

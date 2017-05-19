@@ -27,6 +27,15 @@ created by \code{mt_heatmap_ggplot} can be extended using ggplot's \code{+}
 operator. For further details on how the trajectory heatmaps are constructed,
 see \link{mt_heatmap_raw}.
 }
+\examples{
+mt_heatmap_ggplot(KH2017, n_shades=5,mean_image=0.2)
+
+}
+\seealso{
+\link{mt_heatmap} for plotting a trajectory heatmap using base plots.
+    
+\link{mt_diffmap} for plotting trajectory difference-heatmaps.
+}
 \author{
 Felix Henninger
 
