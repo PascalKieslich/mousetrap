@@ -625,7 +625,12 @@ print.mt_heatmap_raw = function(x,...){
 #'   \code{array}, or an object of class \code{mt_heatmap_raw} (as created by
 #'   \link{mt_heatmap_raw}). The class of \code{y} must match the class of 
 #'   \code{x}, unless \code{y} is \code{NULL}.
-#' @param cond logical vector matching the number of trajectories in \code{use}.  
+#' @param condition logical vector matching the number of trajectories in 
+#'   \code{use}. \code{mt_diffmap} will create a difference-heatmap comparing 
+#'   all trajectories for which \code{condition==TRUE} to all trajectories for
+#'   which \code{condition==FALSE}. If \code{condition} is specified, \code{y}
+#'   will be ignored (unless \code{x} and \code{y} are of class
+#'   \code{heatmap_raw}).
 #' @param colors a character vector specifying the colors used to color
 #'   cases of \code{image1 > image2, image1 ~ image2, image1 < image2},
 #'   respectively. Note that the colors are used in that specific order.
@@ -648,14 +653,14 @@ print.mt_heatmap_raw = function(x,...){
 mt_diffmap = function(
   x,
   y = NULL,
-  cond = NULL,
+  condition = NULL,
   use = 'trajectories',
   dimensions = c('xpos','ypos'),
   filename = NULL,
   bounds = NULL,
   xres = 500,
   upscale = 4,
-  smooth_radius = 20,
+  smooth_radius = 10,
   colors = c("#00863F", "#000000", "#FF1900"),
   n_shades = 1000,
   plot = TRUE,
@@ -679,14 +684,14 @@ mt_diffmap = function(
   
   # --------- collect heatmaps
   agg_x = NULL; agg_y = NULL
-  if(is.null(y) & is.null(cond)) stop('Either y or cond must be specified.')
+  if(is.null(y) & is.null(condition)) stop('Either y or condition must be specified.')
   if((class(x) == 'mousetrap' | is.array(x)) &
-     ((class(y) == 'mousetrap' | is.array(y)) | !is.null(cond))){
+     ((class(y) == 'mousetrap' | is.array(y)) | !is.null(condition))){
     if(is.array(x)) if(!all(dimensions %in% dimnames(x)[[3]])) stop('Not all dimensions found in x.')
-    if(!is.null(y) == !is.null(cond)) stop('Specify either y or cond, but not both.')
-    if(!is.null(cond)){
-      y = x[[use]][!cond,,] 
-      x = x[[use]][ cond,,] 
+    if(!is.null(y) == !is.null(condition)) stop('Specify either y or condition, but not both.')
+    if(!is.null(condition)){
+      y = x[[use]][!condition,,] 
+      x = x[[use]][ condition,,] 
     }
   } else if(class(x) == 'mt_heatmap_raw') {
     if(!is.null(class(y))) stop('y must must be specified, if x is a heatmap object.')
@@ -700,10 +705,10 @@ mt_diffmap = function(
   # --------- determine bounds
   if(is.null(bounds)){
     if(verbose == TRUE) cat('Determine joint bounds','\n')
-    range_x1 = range(x[,dimensions[1],],na.rm=TRUE)
-    range_x2 = range(x[,dimensions[2],],na.rm=TRUE)
-    range_y1 = range(y[,dimensions[1],],na.rm=TRUE)
-    range_y2 = range(y[,dimensions[2],],na.rm=TRUE)
+    range_x1 = range(x[,,dimensions[1]],na.rm=TRUE)
+    range_x2 = range(x[,,dimensions[2]],na.rm=TRUE)
+    range_y1 = range(y[,,dimensions[1]],na.rm=TRUE)
+    range_y2 = range(y[,,dimensions[2]],na.rm=TRUE)
     range_1  = c(c(range_x1[1],range_y1[1])[which.min(c(range_x1[1],range_y1[1]))],
                  c(range_x1[2],range_y1[2])[which.max(c(range_x1[2],range_y1[2]))])
     range_2  = c(c(range_x2[1],range_y2[1])[which.min(c(range_x2[1],range_y2[1]))],

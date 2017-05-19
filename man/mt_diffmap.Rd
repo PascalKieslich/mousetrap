@@ -4,9 +4,9 @@
 \alias{mt_diffmap}
 \title{Creates a difference-heatmap of two trajectory heatmap images}
 \usage{
-mt_diffmap(x, y = NULL, cond = NULL, use = "trajectories",
+mt_diffmap(x, y = NULL, condition = NULL, use = "trajectories",
   dimensions = c("xpos", "ypos"), filename = NULL, bounds = NULL,
-  xres = 500, upscale = 4, smooth_radius = 20, colors = c("#00863F",
+  xres = 500, upscale = 4, smooth_radius = 10, colors = c("#00863F",
   "#000000", "#FF1900"), n_shades = 1000, plot = TRUE, ...,
   verbose = TRUE)
 }
@@ -20,7 +20,12 @@ mt_diffmap(x, y = NULL, cond = NULL, use = "trajectories",
 \link{mt_heatmap_raw}). The class of \code{y} must match the class of 
 \code{x}, unless \code{y} is \code{NULL}.}
 
-\item{cond}{logical vector matching the number of trajectories in \code{use}.}
+\item{condition}{logical vector matching the number of trajectories in 
+\code{use}. \code{mt_diffmap} will create a difference-heatmap comparing 
+all trajectories for which \code{condition==TRUE} to all trajectories for
+which \code{condition==FALSE}. If \code{condition} is specified, \code{y}
+will be ignored (unless \code{x} and \code{y} are of class
+\code{heatmap_raw}).}
 
 \item{use}{a character string specifying which trajectory data should be
 used.}
