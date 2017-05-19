@@ -29,6 +29,9 @@
 #' @param dimensions a character vector specifying the trajectory variables used
 #'   to create the heatmap. The first two entries are used as x and 
 #'   y-coordinates, the third, if provided, will be added as color information.
+#' @param variable boolean or numeric vector matching the number of trajectories
+#'   that if provided will be used as color information. \code{variable} is only
+#'   considered when \code{length(dimensions) < 3}.
 #' @param bounds numeric vector specifying the corners (xmin, ymin, xmax, ymax) 
 #'   of the plot region. By default (\code{bounds = NULL}), bounds are 
 #'   determined based on the data input.
@@ -83,6 +86,7 @@ mt_heatmap_raw <- function(
   data,
   use = 'trajectories',
   dimensions = c('xpos', 'ypos'),
+  variable = NULL,
   
   # plot arguments
   bounds    = NULL,
@@ -181,6 +185,20 @@ mt_heatmap_raw <- function(
   l_diag  = sqrt(diff(range_x)**2 + diff(range_y)**2)
   
   
+  # Add third dimension -----------------------------------------------------
+  
+  if(length(dimensions) < 3 & !is.null(variable)){
+    if(length(variable) == nrow(trajectories)){
+      add = matrix(rep(variable,rep(ncol(trajectories),length(variable))), 
+                   ncol = ncol(trajectories), byrow = T)
+      trajectories <- mt_add_variables(trajectories)
+    } else {
+      stop('Variable does not match number of trajectories.')
+    }
+    
+    
+  }
+  
   # Determine Dimensions ----------------------------------------------------
   
   # Determine number of resc
@@ -220,9 +238,9 @@ mt_heatmap_raw <- function(
   
   # Remove points outside of bounds
   pts = pts[pts[,1] >= bounds[1] &
-              pts[,1] <= bounds[3] &
-              pts[,2] >= bounds[2] &
-              pts[,2] <= bounds[4],]
+            pts[,1] <= bounds[3] &
+            pts[,2] >= bounds[2] &
+            pts[,2] <= bounds[4],]
   
   
   # Determine pixel locations
