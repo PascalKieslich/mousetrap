@@ -1,5 +1,4 @@
 .onAttach <- function(libname, pkgname) {
   packageStartupMessage("Welcome to mousetrap 3.1.0!")
-  packageStartupMessage("If you have used previous versions of mousetrap,\nplease note that some function and argument names have changed.")
-  packageStartupMessage("All changes are summarized in the package news which are available at \nhttp://pascalkieslich.github.io/mousetrap/news")
+  packageStartupMessage("If you have used previous versions of mousetrap,\nplease see the  package news for a summary of recent changes:\nhttp://pascalkieslich.github.io/mousetrap/news")
 }
