@@ -536,6 +536,63 @@ mt_heatmap = function(
 }
 
 
+#' Plot trajectory heatmap using ggplot.
+#' 
+#' \code{mt_heatmap_ggplot} plots high resolution raw trajectory maps. Note that
+#' this function has beta status.
+#' 
+#' \code{mt_heatmap_ggplot} wraps \link{mt_heatmap_raw} and returns a ggplot 
+#' object containing the plot. In contrast to \code{mt_heatmap_plot} plots 
+#' created by \code{mt_heatmap_ggplot} can be extended using ggplot's \code{+} 
+#' operator. For further details on how the trajectory heatmaps are constructed,
+#' see \link{mt_heatmap_raw}.
+#' 
+#' @inheritParams mt_heatmap_raw
+#' @param ... arguments passed to \link{mt_heatmap}.
+#' 
+#' @author
+#' Felix Henninger
+#' 
+#' Dirk U. Wulff (\email{dirk.wulff@@gmail.com})
+#' 
+#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' 
+#' @return NULL
+#'
+#' @export
+mt_heatmap_ggplot = function(data, use="trajectories", ...) {
+  
+  plot_data <- mt_heatmap_raw(data=data,use=use,...)
+  
+  return(
+    ggplot2::ggplot(
+      ggplot2::aes_string(x="x", y="y"),
+      data=plot_data$img
+    ) +
+      ggplot2::scale_x_continuous(
+        expand=c(0,0), limits=range(plot_data$img$x)
+      ) +
+      ggplot2::scale_y_continuous(
+        expand=c(0,0), limits=range(plot_data$img$y)
+      ) +
+      ggplot2::geom_raster(
+        fill=plot_data$img$col
+      ) +
+      ggplot2::theme(
+        panel.grid=ggplot2::element_blank(),
+        panel.border=ggplot2::element_blank(),
+        plot.margin=ggplot2::unit(c(0,0,0,0), "lines"),
+        axis.title.x=ggplot2::element_blank(),
+        axis.text.x=ggplot2::element_blank(),
+        axis.ticks.x=ggplot2::element_blank(),
+        axis.title.y=ggplot2::element_blank(),
+        axis.text.y=ggplot2::element_blank(),
+        axis.ticks.y=ggplot2::element_blank()
+      ) +
+      ggplot2::labs(x=NULL, y=NULL)
+  )
+}
+
 #' Generic print for class mt_heatmap_raw 
 #'
 #' \code{print.mt_heatmap_raw} shows \link[utils]{str}.
@@ -760,59 +817,4 @@ mt_diffmap = function(
     t_end = proc.time()[3] - t_start
     cat('heatmap created in ', round(t_end), 's\n', sep='')
   }
-}
-
-
-
-
-#' Plot trajectory heatmap using ggplot.
-#' 
-#' \code{mt_heatmap_ggplot} plots high resolution raw trajectory maps. Note that
-#' this function has beta status.
-#' 
-#' \code{mt_heatmap_ggplot} is a wrapper for \code{mt_heatmap_plot} to enable. In 
-#' contrast to \code{mt_heatmap_plot} plots created by \code{mt_heatmap_ggplot} 
-#' can be extended using ggplot's \code{+} operator.
-#' 
-#' For arguments to \code{mt_heatmap_ggplot} see \link{mt_heatmap}
-#' 
-#' @param ... arguments passed to \link{mt_heatmap}.
-#' 
-#' @author 
-#' Felix Henninger
-#' Dirk U. Wulff (\email{dirk.wulff@@gmail.com})
-#' 
-#' @return NULL
-#'
-#' @export
-mt_heatmap_ggplot = function(...) {
-  plot_data <- mt_heatmap(..., plot=F)
-  
-  return(
-    ggplot2::ggplot(
-      ggplot2::aes_string(x='x', y='y'),
-      data=plot_data
-    ) +
-      ggplot2::scale_x_continuous(
-        expand=c(0,0), limits=range(plot_data$x)
-      ) +
-      ggplot2::scale_y_continuous(
-        expand=c(0,0), limits=range(plot_data$y)
-      ) +
-      ggplot2::geom_raster(
-        fill=plot_data$col
-      ) +
-      ggplot2::theme(
-        panel.grid=ggplot2::element_blank(),
-        panel.border=ggplot2::element_blank(),
-        plot.margin=ggplot2::unit(c(0,0,0,0), "lines"),
-        axis.title.x=ggplot2::element_blank(),
-        axis.text.x=ggplot2::element_blank(),
-        axis.ticks.x=ggplot2::element_blank(),
-        axis.title.y=ggplot2::element_blank(),
-        axis.text.y=ggplot2::element_blank(),
-        axis.ticks.y=ggplot2::element_blank()
-      ) +
-      ggplot2::labs(x=NULL, y=NULL)
-  )
 }

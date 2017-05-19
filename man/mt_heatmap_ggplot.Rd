@@ -4,9 +4,16 @@
 \alias{mt_heatmap_ggplot}
 \title{Plot trajectory heatmap using ggplot.}
 \usage{
-mt_heatmap_ggplot(...)
+mt_heatmap_ggplot(data, use = "trajectories", ...)
 }
 \arguments{
+\item{data}{a mousetrap data object created using one of the mt_import
+functions (see \link{mt_example} for details). Alternatively, a trajectory
+array can be provided directly (in this case \code{use} will be ignored).}
+
+\item{use}{a character string specifying which trajectory data should be
+used.}
+
 \item{...}{arguments passed to \link{mt_heatmap}.}
 }
 \description{
@@ -14,13 +21,16 @@ mt_heatmap_ggplot(...)
 this function has beta status.
 }
 \details{
-\code{mt_heatmap_ggplot} is a wrapper for \code{mt_heatmap_plot} to enable. In 
-contrast to \code{mt_heatmap_plot} plots created by \code{mt_heatmap_ggplot} 
-can be extended using ggplot's \code{+} operator.
-
-For arguments to \code{mt_heatmap_ggplot} see \link{mt_heatmap}
+\code{mt_heatmap_ggplot} wraps \link{mt_heatmap_raw} and returns a ggplot 
+object containing the plot. In contrast to \code{mt_heatmap_plot} plots 
+created by \code{mt_heatmap_ggplot} can be extended using ggplot's \code{+} 
+operator. For further details on how the trajectory heatmaps are constructed,
+see \link{mt_heatmap_raw}.
 }
 \author{
 Felix Henninger
+
 Dirk U. Wulff (\email{dirk.wulff@gmail.com})
+
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
 }
