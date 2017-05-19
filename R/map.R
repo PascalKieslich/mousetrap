@@ -141,7 +141,7 @@ mt_map <- function(
   
 
   # prepare trajectories
-  trajectories = prepare_trajectories(trajectories = joint_array, 
+  joint_array = prepare_trajectories(trajectories = joint_array, 
                                       dimensions = dimensions, 
                                       weights = weights,
                                       na_rm = na_rm)  
