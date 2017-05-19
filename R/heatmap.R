@@ -414,7 +414,7 @@ mt_heatmap_raw <- function(
 #' \link{mt_diffmap} for plotting trajectory difference-heatmaps.
 #' 
 #' @examples
-#' mt_heatmap(KH2017, smooth_radius=2, n_shades=5,mean_image=0.2)
+#' mt_heatmap(KH2017, n_shades=5,mean_image=0.2)
 #' 
 #' @export
 mt_heatmap <- function(
@@ -576,7 +576,7 @@ mt_heatmap <- function(
 #' \link{mt_diffmap} for plotting trajectory difference-heatmaps.
 #' 
 #' @examples
-#' mt_heatmap_ggplot(KH2017, smooth_radius=2, n_shades=5,mean_image=0.2)
+#' mt_heatmap_ggplot(KH2017, n_shades=5,mean_image=0.2)
 #' 
 #' @export
 mt_heatmap_ggplot <- function(data, use="trajectories", ...) {

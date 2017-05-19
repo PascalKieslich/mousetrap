@@ -28,7 +28,7 @@ operator. For further details on how the trajectory heatmaps are constructed,
 see \link{mt_heatmap_raw}.
 }
 \examples{
-mt_heatmap_ggplot(KH2017, smooth_radius=2, n_shades=5,mean_image=0.2)
+mt_heatmap_ggplot(KH2017, n_shades=5,mean_image=0.2)
 
 }
 \seealso{
