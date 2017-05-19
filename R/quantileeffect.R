@@ -29,8 +29,6 @@
 #' @return Nothing, when image is plotted using an external device. Otherwise an
 #'   object of class \code{mt_object_raw} containing in a matrix format the
 #'   image's pixel information.
-#'   
-#' @export
 
 mt_qeffect = function(
   data,
