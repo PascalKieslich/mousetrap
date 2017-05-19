@@ -113,7 +113,7 @@ NumericVector trans_rows(NumericMatrix mat, double scale, bool center = true) {
       mean = mean/ind;
       sd   = sqrt((sd - ind * mean * mean)/(ind - 1));
       if(center == true) vec = vec - mean;
-      if(scale != 1) vec = (vec / sd) * scale;
+      vec = (vec / sd) * scale;
       n_mat(i,_) = vec;
       }
     return n_mat;
@@ -159,7 +159,7 @@ NumericMatrix trans_mat(NumericMatrix mat, double scale, bool center = true){
       for(j = 0; j < m; ++j){
         if(n_mat(i,j) == n_mat(i,j)){
           if(center == true) n_mat(i,j) -= moments[0];
-          if(scale != 1) n_mat(i,j) /= (moments[1]/scale);
+          n_mat(i,j) /= (moments[1]/scale);
           }
         }
       }
@@ -168,7 +168,7 @@ NumericMatrix trans_mat(NumericMatrix mat, double scale, bool center = true){
       for(i = 0; i < n; ++i){
         if(n_mat(i,j) == n_mat(i,j)){
           if(center == true) n_mat(i,j) -= moments[0];
-          if(scale != 1) n_mat(i,j) /= (moments[1]/scale); 
+          n_mat(i,j) /= (moments[1]/scale); 
           }
         }
       }
