@@ -85,7 +85,7 @@ constructed analogously to \link{mt_heatmap_raw}.
 }
 \examples{
 mt_diffmap(KH2017, condition=KH2017$data$Condition=="Typical",
-  smooth_radius=6, n_shades=5)
+  xres=400, smooth_radius=6, n_shades=5)
 
 }
 \author{
