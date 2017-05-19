@@ -26,7 +26,7 @@
 * `mt_animate`: create a gif trajectory animation.
 * Please note that although these functions have been tested extensively, they still have beta status.
 
-## New dataset
+## New data
 * `KH2017_raw`: Raw mouse-tracking dataset from Kieslich & Henninger (in press).
 * `KH2017`: Mouse-tracking dataset from Kieslich & Henninger (in press).
 
