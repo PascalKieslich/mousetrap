@@ -125,7 +125,7 @@ mt_map <- function(
   }
   
   # check prototype dimensionality
-  if(!all(dimensions %in% dimnames(prototypes)[[3]])) stop(paste0('Not all dimensions found in "',prototypers,'".'))
+  if(!all(dimensions %in% dimnames(prototypes)[[3]])) stop(paste0('Not all dimensions found in prototypes.'))
   
   # Align and rescale prototypes and combine them with trajectories
   n_points <- dim(trajectories)[2]
@@ -139,9 +139,8 @@ mt_map <- function(
   # limit trajectories to dimensions
   joint_array <- joint_array[,,dimensions]
   
-
   # prepare trajectories
-  trajectories = prepare_trajectories(trajectories = joint_array, 
+  joint_array = prepare_trajectories(trajectories = joint_array, 
                                       dimensions = dimensions, 
                                       weights = weights,
                                       na_rm = na_rm)  
@@ -150,7 +149,7 @@ mt_map <- function(
   distm <-  mt_distmat(
     joint_array,
     dimensions = dimensions,
-    weigthts = NULL,
+    weights = NULL,
     pointwise = pointwise,
     minkowski_p = minkowski_p)
   
