@@ -74,7 +74,8 @@ gradient between the first and second, and the second and third color in
 progress.}
 }
 \value{
-image representing the difference of image1 and image2
+An object of class \code{mt_object_raw} containing in a matrix format
+  the image's pixel information and the colors.
 }
 \description{
 \code{mt_diffmap} creates a difference-heatmap of the trajectory data using

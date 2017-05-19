@@ -646,7 +646,8 @@ print.mt_heatmap_raw = function(x,...){
 #' @author
 #' Dirk U. Wulff (\email{dirk.wulff@@gmail.com})
 #' 
-#' @return image representing the difference of image1 and image2
+#' @return An object of class \code{mt_object_raw} containing in a matrix format
+#'   the image's pixel information and the colors.
 #' 
 #' @export
 
@@ -815,8 +816,12 @@ mt_diffmap = function(
     graphics::points(agg_y[1:2],cex=agg_y$lwd,col=agg_y$col,pch=16)
   }
   
+  # create output -----------------------------------------------------------
+  heatmap = list('img' = img[,c('x', 'y', 'img', 'col')], 'agg' = NULL, 'colors' = colors)
+  class(heatmap) = 'mt_heatmap_raw'
+  
   if (device %in% c('pdf','png','tiff') & plot == TRUE) grDevices::dev.off()
-  if (plot == FALSE) return(img)
+  if (plot == FALSE) return(heatmap)
   
   if (verbose == TRUE) {
     t_end = proc.time()[3] - t_start
