@@ -229,12 +229,14 @@ KH2017 <- mt_measures(KH2017)
 mt_aggregate(
   KH2017, use="measures",
   use_variables=c("MAD", "AD"),
-  use2_variables="Condition"
+  use2_variables="Condition",
+  subject_id="subject_nr"
 )
 
 mt_plot_aggregate(KH2017,
   use="tn_trajectories",
-  x="xpos", y="ypos", color="Condition"
+  x="xpos", y="ypos", color="Condition",
+  subject_id="subject_nr"
 )
 
 \dontrun{
