@@ -1,5 +1,5 @@
 ## Test environments
-* R 3.3.2 (stable) Windows 7
+* R 3.4.0 (stable) Windows 7
 * R 3.3.2 (stable) Mac OS
 * R 3.4.0 (stable) Ubuntu/Linux
 
