@@ -102,14 +102,14 @@ mt_heatmap_raw <- function(
   
   # color arguments
   colors   = c('black','blue', 'white'),
-  n_shades = c(1000, 10),
+  n_shades = c(1000, 1000),
   
   # image processing
   smooth_radius  = 1.5,
   low_pass  = 200,
   auto_enhance = TRUE,
-  mean_image = .1,
-  mean_color = .1,
+  mean_image = .15,
+  mean_color = .25,
   
   # plot aggregate
   aggregate_lwd = 0,
@@ -134,6 +134,8 @@ mt_heatmap_raw <- function(
   if (!all(dimensions %in% dimnames(trajectories)[[3]])) {
     stop('Not all dimensions exist in data')
   }
+  
+  trajectories <- trajectories[,,dimensions]
   
   # Subsample trajectories -----------------------------------------------------
   # If n_trajectories is smaller than number of trajectories,
@@ -197,12 +199,11 @@ mt_heatmap_raw <- function(
     if(length(variable) == nrow(trajectories)){
       add = matrix(rep(variable,rep(ncol(trajectories),length(variable))), 
                    ncol = ncol(trajectories), byrow = T)
-      trajectories <- mt_add_variables(trajectories)
+      trajectories <- mt_add_variables(trajectories, variables = list('add' = add))
+      dimensions <- c(dimensions, 'add')
     } else {
       stop('Variable does not match number of trajectories.')
     }
-    
-    
   }
   
   # Determine Dimensions ----------------------------------------------------
