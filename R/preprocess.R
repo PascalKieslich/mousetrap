@@ -1095,7 +1095,7 @@ mt_subset <- function(data, subset, check="data") {
 #' @return A mousetrap data object (see \link{mt_example}).
 #'   
 #'   If a data.frame with label specified in \code{save_as} (by default 
-#'   "measures") already exists, the number of obervations (called \code{nobs})
+#'   "measures") already exists, the number of observations (called \code{nobs})
 #'   are added as additional column. If not, an additional \link{data.frame}
 #'   will be added.
 #'   

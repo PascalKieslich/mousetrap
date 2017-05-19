@@ -56,7 +56,7 @@
 #' subtracting the value of the first timestamp from all timestamps within a
 #' trial (assuming that the first timestamp corresponds to the time when
 #' tracking started). Timestamps are reset by default when importing the data
-#' using one of the mt_import fuctions (e.g., \link{mt_import_mousetrap}).
+#' using one of the mt_import functions (e.g., \link{mt_import_mousetrap}).
 #' 
 #' 
 #' 

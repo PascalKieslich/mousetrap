@@ -11,7 +11,7 @@
 #' If a deviation occurs above the direct path, this is denoted by a positive 
 #' value. If it occurs below the direct path, this is denoted by a negative 
 #' value. This assumes that the complete movement in the trial was from bottom 
-#' to top (i.e., the end point has a higher y-position than the start poins). In
+#' to top (i.e., the end point has a higher y-position than the start points). In
 #' case the movement was from top to bottom, \code{mt_deviations} 
 #' automatically flips the signs. Note that the second dimension specified in 
 #' \code{dimensions} is used for determining all this.

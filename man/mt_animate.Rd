@@ -46,7 +46,7 @@ their original velocity profile. I.e., a value of .5 shows trajectories in
 half of the original velocities, whereas a value of 2 shows trajectories in
 double of the original velocities.}
 
-\item{density}{integer specifiying the number of trajectories to be added 
+\item{density}{integer specifying the number of trajectories to be added 
 each frame. I.e., if \code{density = 10}, \code{seconds = 10}, 
 \code{framerate = 24} and \code{speed = .5} then the animation will show 10
 x 10 x 24 x .5 = 1200 trajectories.}
@@ -61,7 +61,7 @@ points should be removed from the rest of the animation. Defaults to
 
 \item{bg}{character string specifying the background color.}
 
-\item{col}{character string specifiyng the foreground color, i.e., the color 
+\item{col}{character string specifying the foreground color, i.e., the color 
 used to draw the trajectories.}
 
 \item{lwd}{numeric specifying the line width of the trajectories.}
@@ -75,7 +75,7 @@ limits of the animation canvas. Defaults to \code{NULL} in which case the
 animation canvas is set to include all existing trajectory points,
 irrespective of how extreme they may be.}
 
-\item{norm}{logical specifying wether the trajectories should be remapped to
+\item{norm}{logical specifying whether the trajectories should be remapped to
 the \emph{mt-space}. See \link{mt_align}. Note that aligning often requires
 that that all trajectories are flipped to one side first (see
 \link{mt_remap_symmetric}).}
@@ -141,7 +141,7 @@ in \code{data}.
 By default, \code{mt_animate} animates trajectories using the original 
 timestamps. Timestamps are expected to be expressed in milliseconds. By
 setting \code{timestamps = NULL}, the function can also assume timestamps to
-be regualar, i.e., of constant interval, in this case the longest duration is
+be regular, i.e., of constant interval, in this case the longest duration is
 set to exactly one second.
 
 In order to create high-resolution (large) animations in a relatively short

@@ -80,7 +80,7 @@ mt_add_trajectory <- function(
 #' Join two trajectory arrays
 #' 
 #' Join two trajectory arrays. This function is mainly used internally, but can 
-#' be helpful in those (relatively rare) occasions where addional processed 
+#' be helpful in those (relatively rare) occasions where additional processed 
 #' trajectory data should be added to another trajectory array.
 #' 
 #' @inheritParams mt_time_normalize

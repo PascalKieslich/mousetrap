@@ -30,7 +30,7 @@
 #'   the metrics specified in \code{compute}.
 #' @param compute character vector specifying the to be computed measures. Can
 #'   be any subset of \code{c("stability","gap","jump","slope")}.
-#' @param method character string specifiying the type of clustering procedure
+#' @param method character string specifying the type of clustering procedure
 #'   for the stability-based method. Either \code{hclust} or \code{kmeans}.
 #' @param n_bootstrap an integer specifying the number of bootstrap comparisons
 #'   used by \code{stability}. See \link[cstab]{cStability}.

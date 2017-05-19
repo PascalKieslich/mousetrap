@@ -51,7 +51,7 @@ progress.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) with aligned 
-  trajectories. Per default, the dimemnsions in the original trajectory array
+  trajectories. Per default, the dimensions in the original trajectory array
   will be replaced. If a different trajectory array is specified using
   \code{save_as}, a new trajectory array will be created (including only the
   aligned dimensions). If a trajectory array was provided directly as

@@ -113,7 +113,7 @@ Fifth, the function translates the image intensity into color using the
 colors specified in \code{colors}. Finally, the function returns the image 
 data in a long format containing the x, y, and color information.
 
-\code{mt_heatmap_raw} also offers the possibilty to overlay the heatmap with 
+\code{mt_heatmap_raw} also offers the possibility to overlay the heatmap with 
 an additional variable, such as for instance velocity, so that both the 
 density of mouse trajectories and the information of the additional variable 
 are visible. In order to do this, specify a third variable label in 

@@ -33,7 +33,7 @@
 #' @param dimensions a character vector specifying across which dimension(s)
 #'   distances, velocity, and acceleration are calculated. By default
 #'   (\code{c("xpos","ypos")}), they are calculated across both x and y
-#'   dimensions. Alternatively, only one dimesion can be specified, e.g.,
+#'   dimensions. Alternatively, only one dimension can be specified, e.g.,
 #'   \code{"xpos"} or \code{"ypos"}.
 #' @param timestamps a character string specifying the trajectory dimension
 #'   containing the timestamps.

@@ -30,7 +30,7 @@ the metrics specified in \code{compute}.}
 \item{compute}{character vector specifying the to be computed measures. Can
 be any subset of \code{c("stability","gap","jump","slope")}.}
 
-\item{method}{character string specifiying the type of clustering procedure
+\item{method}{character string specifying the type of clustering procedure
 for the stability-based method. Either \code{hclust} or \code{kmeans}.}
 
 \item{weights}{numeric vector specifying the relative importance of the 
