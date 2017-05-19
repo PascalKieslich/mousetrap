@@ -2,7 +2,7 @@
 
 ## Announcements
 * A first paper on the mousetrap software packages has been accepted for publication. It presents the mousetrap plugin for creating mouse-tracking experiments in OpenSesame and also includes a short demonstration of basic analyses using the mousetrap R package.
-* Reference: Kieslich, P. J., & Henninger, F. (in press). Mousetrap: An integrated, open-source mouse-tracking package. `Behavior Research Methods`. doi:10.3758/s13428-017-0900-z
+* Reference: Kieslich, P. J., & Henninger, F. (in press). Mousetrap: An integrated, open-source mouse-tracking package. _Behavior Research Methods_. doi:10.3758/s13428-017-0900-z
 
 ## Changes in specific functions
 * `mt_sample_entropy`: the default values reported have changed (cf. bug fix below). `mt_sample_entropy` now only uses a custom function for computing sample entropy (which is faster and produces the same results as `pracma::sample_entropy` if identical parameters are used). Therefore, the `method` argument has been removed. Besides, the `lag` argument has been renamed to `m`.
