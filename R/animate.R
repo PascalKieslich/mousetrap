@@ -104,7 +104,7 @@
 #'   Windows (see Details and Examples).
 #' @param parallel logical specifying whether the temporary \emph{.png} images
 #'   should be created using parallel processing (uses
-#'   \link[snowfall]{sfClusterApplyLB}). Process will be run on the maximum
+#'   \link[parallel]{clusterApplyLB}). Process will be run on the maximum
 #'   number of available cores (as determined by \link[parallel]{detectCores}).
 #' @param verbose logical indicating whether function should report its 
 #'   progress.
@@ -499,14 +499,18 @@ mt_animate = function(
     
     # call colormixer so that it is available
     colormixer = colormixer
-    
-    # parallel execution
-    snowfall::sfInit(T, ncores)
-    snowfall::sfExport('framerate','speed','decay','max_intensity','filename',
-             'xs','ys','upscale','bg','tmp_path','colormixer')
-    snowfall::sfClusterApplyLB(jobs_split,plot_frame,trajectory_list = trajectory_list)
-    snowfall::sfStop()
-    
+
+    # generate individual frames as pngs
+    # this operation is parallelized via the parallel package
+    cl <- parallel::makeCluster()
+    parallel::clusterExport(cl, c(
+      'framerate', 'speed', 'decay', 'max_intensity',
+      'xs', 'ys', 'upscale', 'bg', 'colormixer',
+      'tmp_path', 'filename'
+    ))
+    parallel::clusterApplyLB(cl, jobs_split, plot_frame, trajectory_list=trajectory_list)
+    parallel::stopCluster(cl)
+
     # report time
     if(verbose == TRUE) cat('completed in',round(proc.time()[3] - t,2),'seconds','\n')
     
