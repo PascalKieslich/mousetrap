@@ -66,16 +66,13 @@ gradient between the first and second, and the second and third color in
 \code{colors}.}
 
 \item{plot}{logical specifying whether resulting image should be plotted 
-(\code{plot = TRUE}) or returned (\code{plot = FALSE}).}
+(\code{plot = TRUE}, the default). If (\code{plot = FALSE}), an object of
+class \code{mt_object_raw} is returned.}
 
 \item{...}{arguments passed to \link{mt_heatmap_raw}.}
 
 \item{verbose}{logical indicating whether function should report its
 progress.}
-}
-\value{
-An object of class \code{mt_object_raw} containing in a matrix format
-  the image's pixel information and the colors.
 }
 \description{
 \code{mt_diffmap} creates a difference-heatmap of the trajectory data using

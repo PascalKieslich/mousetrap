@@ -556,8 +556,6 @@ mt_heatmap = function(
 #' Dirk U. Wulff (\email{dirk.wulff@@gmail.com})
 #' 
 #' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
-#' 
-#' @return NULL
 #'
 #' @export
 mt_heatmap_ggplot = function(data, use="trajectories", ...) {
@@ -640,14 +638,12 @@ print.mt_heatmap_raw = function(x,...){
 #'   gradient between the first and second, and the second and third color in
 #'   \code{colors}.
 #' @param plot logical specifying whether resulting image should be plotted 
-#'   (\code{plot = TRUE}) or returned (\code{plot = FALSE}).
+#'   (\code{plot = TRUE}, the default). If (\code{plot = FALSE}), an object of
+#'   class \code{mt_object_raw} is returned.
 #' @param ... arguments passed to \link{mt_heatmap_raw}.
 #'
 #' @author
 #' Dirk U. Wulff (\email{dirk.wulff@@gmail.com})
-#' 
-#' @return An object of class \code{mt_object_raw} containing in a matrix format
-#'   the image's pixel information and the colors.
 #' 
 #' @export
 
