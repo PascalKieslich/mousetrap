@@ -12,5 +12,5 @@
 \item{...}{further arguments passed to or from other methods.}
 }
 \description{
-\code{print.mt_heatmap_raw} shows \code{str()}.
+\code{print.mt_heatmap_raw} shows \link[utils]{str}.
 }

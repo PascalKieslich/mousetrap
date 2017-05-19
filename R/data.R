@@ -3,7 +3,7 @@
 #' An exemplary mouse-tracking dataset collected 
 #' \href{http://osdoc.cogsci.nl/}{OpenSesame} using the 
 #' \href{https://github.com/pascalkieslich/mousetrap-os}{mousetrap plugin} 
-#' (Kieslich & Henninger, 2017). A preprocessed (as opposed to raw) version of
+#' (Kieslich & Henninger, in press). A preprocessed (as opposed to raw) version of
 #' the same data can be found in \link{mt_example}.
 #'
 #' The data stem from a study based on experiment 1 by Dale et al. (2007). In
@@ -23,13 +23,14 @@
 #' Please note that \code{mt_example_raw} should only be used for exploring the
 #' features of the mousetrap package and not for any substantive analysis.
 #'
-#' @references Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor
-#'   responses in the time course of categorizing atypical exemplars.
-#'   \emph{Memory & Cognition, 35}(1), 15-28.
-#'
-#'   Kieslich, P. J., & Henninger, F. (2017). Mousetrap: An integrated, 
-#'   open-source mouse-tracking package. Manuscript submitted for publication.
-#'
+#'@references Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor 
+#'  responses in the time course of categorizing atypical exemplars. 
+#'  \emph{Memory & Cognition, 35}(1), 15-28.
+#'  
+#'  Kieslich, P. J., & Henninger, F. (in press). Mousetrap: An integrated,
+#'  open-source mouse-tracking package. \emph{Behavior Research Methods}.
+#'  doi:10.3758/s13428-017-0900-z
+#'   
 #' @format A \link{data.frame} with 38 rows and 19 variables. The data.frame is 
 #'   based on the combined raw data that were created using 
 #'   \link[readbulk]{read_opensesame} from the 
@@ -95,6 +96,117 @@
 #'   additional data.frame with mouse-tracking measures to it.
 #'
 "mt_example"
+
+
+#' Raw mouse-tracking dataset from Kieslich & Henninger (in press)
+#'
+#' Raw mouse-tracking dataset from Kieslich & Henninger (in press), an experiment
+#' using the material and procedure of experiment 1 by Dale et al. (2007). A
+#' preprocessed (as opposed to raw) version of the same data can be found in 
+#' \link{KH2017}.
+#'
+#' The data stem from a study by Kieslich & Henninger (in press) which used the 
+#' material and procedure of experiment 1 by Dale et al. (2007). In this 
+#' experiment, participants have to assign exemplars (e.g., "whale") to one of 
+#' two categories (e.g., "fish" or "mammal") by clicking on the button 
+#' corresponding to the correct category. All exemplars and categories from the
+#' original study were translated to and presented in German.
+#'
+#' The data was collected in \href{http://osdoc.cogsci.nl/}{OpenSesame} using
+#' the \href{https://github.com/pascalkieslich/mousetrap-os}{mousetrap plugin} 
+#' (Kieslich & Henninger, in press).
+#' 
+#' Across the 19 trials of the experiment, 60 participants categorized 13
+#' exemplars that were typical of their category and 6 atypical exemplars for
+#' which this was not the case. For the atypical exemplars (e.g., "whale"), the
+#' competing category ("fish") was selected to compete with the correct category
+#' ("mammal"). The hypothesis under investigation is whether participants' mouse
+#' trajectories deviate more towards the competing category for the atypical 
+#' exemplars, indicating increased conflict between the response options.
+#'
+#' @references Kieslich, P. J., & Henninger, F. (in press). Mousetrap: An 
+#'   integrated, open-source mouse-tracking package. \emph{Behavior Research 
+#'   Methods}. doi:10.3758/s13428-017-0900-z
+#'   
+#'   Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor responses in the
+#'   time course of categorizing atypical exemplars. \emph{Memory & Cognition,
+#'   35}(1), 15-28.
+#'
+#' @format A \link{data.frame} with 1140 rows and 19 variables. The data.frame is 
+#'   based on the combined raw data that were created using 
+#'   \link[readbulk]{read_opensesame} from the 
+#'   \href{http://pascalkieslich.github.io/readbulk/}{readbulk} library. For 
+#'   ease of use, unnecessary columns were excluded.
+#'
+#'   The variables included relate to the item that was presented 
+#'   (\code{Exemplar}), the answer categories (\code{Category1} and 
+#'   \code{Category2}), the subject identifier (\code{subject_nr}), the
+#'   subjects' response (\code{response}), the correctness of the response 
+#'   (\code{response}) as well as the mouse-tracking variables 
+#'   (\code{timestamps_get_response}, \code{xpos_get_response} and 
+#'   \code{ypos_get_response})
+#'
+#'   Each mouse-tracking variable contains a list of values (separated by ', ')
+#'   - one entry for each recorded position of the mouse. The position
+#'   coordinates are given in pixels, such that values of zero for both
+#'   \code{xpos_get_response} and \code{ypos_get_response} indicate that the
+#'   cursor is located in the center of the screen. Both variables increase in
+#'   value as the mouse moves toward the bottom right. Timestamps are given in
+#'   milliseconds.
+#'
+"KH2017_raw"
+
+#' Mouse-tracking dataset from Kieslich & Henninger (in press)
+#'
+#' A data object of class "mousetrap" with the imported and preprocessed
+#' mouse-tracking data from Kieslich & Henninger (in press). More information about
+#' the study and raw data can be found in \link{KH2017_raw}.
+#'
+#' The raw dataset (\link{KH2017_raw}) was filtered keeping only correctly 
+#' answered trials. The filtered dataset was imported using 
+#' \link{mt_import_mousetrap}. Trajectories were then remapped using 
+#' \link{mt_remap_symmetric} so that all trajectories end in the top-left corner
+#' and their starting point was aligned to a common value (0,0) using
+#' \link{mt_align_start}.
+#'
+#' @references Kieslich, P. J., & Henninger, F. (in press). Mousetrap: An 
+#'   integrated, open-source mouse-tracking package. \emph{Behavior Research 
+#'   Methods}. doi:10.3758/s13428-017-0900-z
+#'   
+#'   Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor responses in the
+#'   time course of categorizing atypical exemplars. \emph{Memory & Cognition,
+#'   35}(1), 15-28.
+#'   
+#' @format A mousetrap data object is a \link{list} containing  at least the
+#'   following objects:
+#'   \itemize{
+#'     \item{\code{data}: a \link{data.frame} containing the trial data (from 
+#'     which the mouse-tracking data columns have been removed). More 
+#'     information about the content of the trial data in \code{KH2017} can 
+#'     be found in \link{KH2017_raw}. The \link{rownames} of \code{data} 
+#'     correspond to the trial identifier. For convenience, the trial identifier
+#'     is also stored in an additional column called "mt_id".} 
+#'     \item{\code{trajectories}: an \link{array} containing the raw 
+#'     mouse-tracking trajectories. The first dimension represents the different
+#'     trials and the dimension names (which can be accessed using 
+#'     \link{rownames}) correspond to the trial identifier (the same identifier 
+#'     that is used as the \code{rownames} in \code{data}). The second dimension
+#'     corresponds to the samples taken over time which are included in
+#'     chronological order. The third dimension corresponds to the different
+#'     mouse-tracking variables (timestamps, x-positions, y-positions) which are
+#'     usually called \code{timestamps}, \code{xpos}, and \code{ypos}. }
+#'   }
+#'
+#'   Some functions in this package (e.g., \link{mt_time_normalize} and
+#'   \link{mt_average}) add additional trajectory arrays (e.g.,
+#'   \code{tn_trajectories} and \code{av_trajectories}) to the mousetrap data
+#'   object. Other functions modify the existing arrays (e.g.,
+#'   \link{mt_derivatives} adds distance, velocity, and acceleration
+#'   to an existing dataset). Finally \link{mt_measures} adds an
+#'   additional data.frame with mouse-tracking measures to it.
+#'
+"KH2017"
+
 
 #' Mouse trajectory prototypes.
 #'

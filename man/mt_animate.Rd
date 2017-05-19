@@ -117,7 +117,7 @@ progress.}
 }
 \description{
 \code{mt_animate} animates trajectories using the animation package. Note
-that this function is still experimental.
+that this function has beta status.
 }
 \details{
 \code{mt_animate} produces a .gif file showing a continuous stream of 

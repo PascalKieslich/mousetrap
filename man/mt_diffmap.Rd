@@ -29,23 +29,22 @@ used.}
 to create the heatmap. The first two entries are used as x and 
 y-coordinates, the third, if provided, will be added as color information.}
 
-\item{filename}{a character string giving the name of the file. If \code{NULL} 
-the R standard device is used for plotting. Otherwise, the plotting device
-is inferred from the file extension. Only supports devices \code{tiff()},
-\code{png()}, \code{pdf()}.}
+\item{filename}{a character string giving the name of the file. If
+\code{NULL}, the R standard device is used for plotting. Otherwise, the
+plotting device is inferred from the file extension. Only supports devices
+\link[grDevices]{tiff}, \link[grDevices]{png}, \link[grDevices]{pdf}.}
 
-\item{bounds}{numeric vector specifying the corners (xmin, ymin, xmax, ymax)
-of the plot region. For the default \code{bounds = NULL} bounds are
+\item{bounds}{numeric vector specifying the corners (xmin, ymin, xmax, ymax) 
+of the plot region. By default (\code{bounds = NULL}), bounds are 
 determined based on the data input.}
 
 \item{xres}{an integer specifying the number of pixels along the x-dimension.
-An xres of 1000 implies an 1000xN px, where N is determined so that the
-trajectories aspect ratio is preserved (provided the \code{bounds} are
+An \code{xres} of 1000 implies an 1000*N px, where N is determined so that 
+the trajectories aspect ratio is preserved (provided the \code{bounds} are 
 unchanged).}
 
 \item{upscale}{a numeric value by which the output resolution of the image is
-increased or decreased. Only applies if \code{device} is one of
-\code{c("tiff", "png", "pdf")}.}
+increased or decreased. Only applies if device is one of tiff, png, or pdf.}
 
 \item{smooth_radius}{a numeric value specifying the standard deviation of the
 gaussian smoothing. If zero, smoothing is omitted.}
@@ -65,14 +64,15 @@ gradient between the first and second, and the second and third color in
 
 \item{...}{arguments passed to \link{mt_heatmap_raw}.}
 
-\item{verbose}{boolean specifying whether progress updates should printed.}
+\item{verbose}{logical indicating whether function should report its
+progress.}
 }
 \value{
 image representing the difference of image1 and image2
 }
 \description{
-\code{mt_diffmap} creates a difference-heatmap of the trajectory
-  data using gaussian smoothing.
+\code{mt_diffmap} creates a difference-heatmap of the trajectory data using
+gaussian smoothing. Note that this function has beta status.
 }
 \details{
 \code{mt_diffmap} takes two objects that either contain trajectory heatmaps

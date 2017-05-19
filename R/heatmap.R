@@ -1,93 +1,82 @@
 #' Creates high-resolution heatmap of trajectory data.
 #' 
-#' \code{mt_heatmap_raw} creates a high-resolution heatmap image of the
-#' trajectory data using gaussian smoothing.
+#' \code{mt_heatmap_raw} creates a high-resolution heatmap image of the 
+#' trajectory data using gaussian smoothing. Note that this function has beta
+#' status.
 #' 
-#' To create the image, \code{mt_heatmap_raw} takes the following steps. First,
-#' the function maps the trajectory points to a pixel space with x ranging from
-#' 1 and xres and y ranging from 1 to xres divided by the ratio of x and y's
-#' value range. Second, the function counts and normalizes the number of
+#' To create the image, \code{mt_heatmap_raw} takes the following steps. First, 
+#' the function maps the trajectory points to a pixel space with x ranging from 
+#' 1 to xres and y ranging from 1 to xres divided by the ratio of x and y's 
+#' value range. Second, the function counts and normalizes the number of 
 #' trajectory points occupying each of the x,y-pixels to yield image intensities
 #' between 0 and 1. Third, the function smooths the image using an approximative
-#' guassian approach governed by smooth_radius, which controls the dispersion of
-#' the gaussian smoothing. Fourth, the function automatically enhances the image
-#' (unless otherwise specified) using non-linear transformation in order to
-#' yield a desired \code{mean_image} intensity. Fourth, the function translates
-#' image intensity into color using the colors specified in \code{colors}.
-#' Finally, the function the function returns the image in a long format
-#' containing the x, y, and color information.
+#' guassian approach governed by \code{smooth_radius}, which controls the 
+#' dispersion of the gaussian smoothing. Fourth, the function automatically 
+#' enhances the image (unless \code{auto_enhance = FALSE}) using a non-linear 
+#' transformation in order to yield a desired \code{mean_image} intensity. 
+#' Fifth, the function translates the image intensity into color using the 
+#' colors specified in \code{colors}. Finally, the function returns the image 
+#' data in a long format containing the x, y, and color information.
 #' 
-#' \code{mt_heatmap_raw} also offers the possibilty to overlay the heatmap with
-#' an additional variable, such as for instance velocity, so that both the
-#' density of mouse trajectories and the informatio of the additional variable
-#' are visible. In order to do this specify a third variable label in
-#' \code{dimensions} and control its appearance using the \code{color} and
+#' \code{mt_heatmap_raw} also offers the possibilty to overlay the heatmap with 
+#' an additional variable, such as for instance velocity, so that both the 
+#' density of mouse trajectories and the information of the additional variable 
+#' are visible. In order to do this, specify a third variable label in 
+#' \code{dimensions} and control its appearance using the \code{color} and 
 #' \code{mean_color} arguments.
 #' 
 #' @inheritParams mt_time_normalize
 #' @param dimensions a character vector specifying the trajectory variables used
 #'   to create the heatmap. The first two entries are used as x and 
 #'   y-coordinates, the third, if provided, will be added as color information.
-#' @param bounds numeric vector specifying the corners (xmin, ymin, xmax, ymax)
-#'   of the plot region. For the default \code{bounds = NULL} bounds are
+#' @param bounds numeric vector specifying the corners (xmin, ymin, xmax, ymax) 
+#'   of the plot region. By default (\code{bounds = NULL}), bounds are 
 #'   determined based on the data input.
 #' @param xres an integer specifying the number of pixels along the x-dimension.
-#'   An xres of 1000 implies an 1000xN px, where N is determined so that the
-#'   trajectories aspect ratio is preserved (provided the \code{bounds} are
+#'   An \code{xres} of 1000 implies an 1000*N px, where N is determined so that 
+#'   the trajectories aspect ratio is preserved (provided the \code{bounds} are 
 #'   unchanged).
-#' @param upsample a numeric value by which the number of points used to
-#'   represent individual trajectories are increased or decreased. Values of
-#'   smaller than one will improve speed but also introduce a certain level of
+#' @param upsample a numeric value by which the number of points used to 
+#'   represent individual trajectories are increased or decreased. Values of 
+#'   smaller than one will improve speed but also introduce a certain level of 
 #'   granularity.
-#' @param norm a logical specifying whether the data should be warped into
-#'   standard space. \code{norm = TRUE} overrules \code{bounds}.
+#' @param norm a logical specifying whether the data should be warped into 
+#'   standard space. If \code{norm = TRUE}, this overrules \code{bounds}.
+#' @param colors a character vector specifying two or three colors used to color
+#'   the background, the foreground (trajectories), and the values of a third
+#'   dimension (if specified).
+#' @param n_shades an integer specifying the number of shades for the color 
+#'   gradient between the first and second, and the second and third color in 
+#'   \code{colors}.
 #' @param smooth_radius a numeric value specifying the standard deviation of the
 #'   gaussian smoothing. If zero, smoothing is omitted.
 #' @param low_pass an integer specifying the allowed number of counts per pixel.
 #'   This arguments limits the maximum pixel color intensity.
-#' @param auto_enhance boolean. If true the image is adjusted so that the mean 
-#'   color intensity matches \code{mean_image} and \code{mean_color}. 
-#' @param mean_image a numeric value between 0 and 1 specifying the average
-#'   base color intensity across the entire image. Defaults to 0.1.
-#' @param mean_color a numeric value between 0 and 1 specifying the average
-#'   third dimension's color intensity across the entire image. Defaults 
-#'   to 0.1. Only relevant if a third dimension is specified.
-#' @param colors a character vector specifying two or three colors used to 
-#'   color the background, the foreground (trajectories), and the values of 
-#'   a third dimension (if specified).
-#' @param n_shades an integer specifying the number of shades for the color
-#'   gradient between the first and second, and the second and third color in
-#'   \code{colors}.
+#' @param auto_enhance boolean. If \code{TRUE} (the default), the image is 
+#'   adjusted so that the mean color intensity matches \code{mean_image} and 
+#'   \code{mean_color}.
+#' @param mean_image a numeric value between 0 and 1 specifying the average 
+#'   foreground color intensity across the entire image. Defaults to 0.1.
+#' @param mean_color a numeric value between 0 and 1 specifying the average 
+#'   third dimension's color intensity across the entire image. Defaults to 0.1.
+#'   Only relevant if a third dimension is specified in \code{colors}.
 #' @param aggregate_lwd an integer specifying the width of the aggregate 
-#'   trajectory. If \code{aggregate_lwd > 0}, the default, the aggregate 
-#'   trajectory is omitted.  
-#' @param aggregate_col a character value specifying the color of the aggregate
+#'   trajectory. If \code{aggregate_lwd} is > 0 (the default), the aggregate 
+#'   trajectory is omitted.
+#' @param aggregate_col a character value specifying the color of the aggregate 
 #'   trajectory.
-#' @param n_trajectories an integer specifying the number of trajectories used
-#'   to create the image. If \code{n_trajectories} is smaller than present in
-#'   the trajectorie object specified by \code{use} then \code{n_trajectories}
-#'   are selected from \code{use}.
-#' @param seed an integer specifying the seed used for the trajectory sampling.
-#' @param verbose boolean specifying whether progress updates should printed.
-#'   
-#' @examples
-#' # Plot regular heatmap
-#' #SpiveyEtAl2005 = mt_import_long(SpiveyEtAl2005_raw,'x','y',NULL,'t',
-#' #mt_id_label = c('ptp','trial'))
-#' #heatmap = mt_heatmap_raw(SpiveyEtAl2005,xres = 2000)
-#' #mt_heatmap(heatmap,filename = NULL)
-#' 
-#' # compute measures
-#' #SpiveyEtAl2005 = mt_measures(SpiveyEtAl2005)
-#' 
-#' # Plot heatmap using velocity
-#' #mt_heatmap(SpiveyEtAl2005)
+#' @param n_trajectories an optional integer specifying the number of 
+#'   trajectories used to create the image. By default, all trajectories are 
+#'   used. If \code{n_trajectories} is specified and smaller than the number of 
+#'   trajectories in the trajectory array, then \code{n_trajectories} are 
+#'   randomly sampled.
+#' @param seed an optional integer specifying the seed used for the trajectory 
+#'   sampling.
 #' 
 #' @author Dirk U. Wulff (\email{dirk.wulff@@gmail.com})
 #' 
-#' @return Nothing, when image is plotted using an external device. Otherwise an
-#'   object of class \code{mt_object_raw} containing in a matrix format the
-#'   image's pixel information.
+#' @return An object of class \code{mt_object_raw} containing in a matrix format
+#'   the image's pixel information, the aggregate trajectory, and the colors.
 #'   
 #' @export
 mt_heatmap_raw <- function(
@@ -101,31 +90,28 @@ mt_heatmap_raw <- function(
   upsample  = 1,
   norm      = FALSE,
   
+  # color arguments
+  colors   = c('black','blue', 'white'),
+  n_shades = c(1000, 10),
+  
   # image processing
   smooth_radius  = 1.5,
   low_pass  = 200,
   auto_enhance = TRUE,
-  mean_image = .2,
-  mean_color = .2,
-  
-  # color arguments
-  colors   = c('black','blue', 'white'),
-  n_shades = c(1000, 10),
+  mean_image = .1,
+  mean_color = .1,
   
   # plot aggregate
   aggregate_lwd = 0,
   aggregate_col = 'black',
   
   # subsample arguments
-  n_trajectories = 10000,
+  n_trajectories = NULL,
   seed = NULL,
   
   # control
   verbose = TRUE
 ){
-  
-  # Get time
-  t = proc.time()[3]
   
   # Data checks
   if (!length(dimensions) %in% c(2, 3)) {
@@ -142,17 +128,21 @@ mt_heatmap_raw <- function(
   # Subsample trajectories -----------------------------------------------------
   # If n_trajectories is smaller than number of trajectories,
   # subsample data to n_trajectories
-  if (n_trajectories < dim(trajectories)[1]) {
-    if (verbose == TRUE) cat('subset trajectories','\n')
-    seed = ifelse(is.null(seed),round(runif(1,0,runif(1,0,.Machine$integer.max))), seed)
-    trajectories = subsample(trajectories, n=n_trajectories, seed=seed)
+  if(is.null(n_trajectories)==FALSE){
+    if (n_trajectories < dim(trajectories)[1]) {
+      if (verbose == TRUE) cat('subset trajectories','\n')
+      seed <- ifelse(is.null(seed),
+                     round(stats::runif(1,0,stats::runif(1,0,.Machine$integer.max))),
+                     seed)
+      trajectories <- subsample(trajectories, n=n_trajectories, seed=seed)
+    }
   }
   
   # Get aggregate --------------------------------------------------------------
   # Compute aggregate x and y
   aggregate = cbind(
-    colMeans(trajectories[,,dimensions[1]],na.rm=T),
-    colMeans(trajectories[,,dimensions[2]],na.rm=T)
+    colMeans(trajectories[,,dimensions[1]],na.rm=TRUE),
+    colMeans(trajectories[,,dimensions[2]],na.rm=TRUE)
   )
   
   # Determine Dimensions ----------------------------------------------------
@@ -162,8 +152,8 @@ mt_heatmap_raw <- function(
   if (verbose == TRUE) cat('spatializing trajectories','\n')
   
   if(is.null(bounds) & norm == FALSE){
-    range_x = range(trajectories[,,dimensions[1]],na.rm=T)
-    range_y = range(trajectories[,,dimensions[2]],na.rm=T)
+    range_x = range(trajectories[,,dimensions[1]],na.rm=TRUE)
+    range_y = range(trajectories[,,dimensions[2]],na.rm=TRUE)
     mid_x   = range_x[1] + diff(range_x) / 2
     mid_y   = range_y[1] + diff(range_y) / 2
     range_x = mid_x + (range_x - mid_x) * 1.02
@@ -390,25 +380,24 @@ mt_heatmap_raw <- function(
 
 #' Plot trajectory heatmap
 #' 
-#' \code{mt_heatmap} plots high resolution raw trajectory maps.
+#' \code{mt_heatmap} plots high resolution raw trajectory maps. Note that this
+#' function has beta status.
 #' 
-#' \code{mt_heatmap} is a wraps \code{mt_heatmap_raw} and provides direct
-#' plotting output in \code{tiff}, \code{png}, or R's default window output. For
-#' further details on how the trajectory heatmaps are constructed see
-#' \link{mt_heatmap_raw}.
+#' \code{mt_heatmap} wraps \link{mt_heatmap_raw} and provides direct plotting 
+#' output in \link[grDevices]{tiff}, \link[grDevices]{png},
+#' \link[grDevices]{pdf}, or R's default window output. For further details on
+#' how the trajectory heatmaps are constructed, see \link{mt_heatmap_raw}.
 #' 
-#' @inheritParams mt_time_normalize
 #' @inheritParams mt_heatmap_raw
-#' @param x usually an object of class mousetrap. Alternatively a trajectory
-#'   array or an object of class mt_heatmap_raw.
-#' @param filename a character string giving the name of the file. If \code{NULL} 
-#'   the R standard device is used for plotting. Otherwise, the plotting device
-#'   is inferred from the file extension. Only supports devices \code{tiff()},
-#'   \code{png()}, \code{pdf()}.
+#' @param x usually an object of class \code{mousetrap}. Alternatively, a
+#'   trajectory array or an object of class \code{mt_heatmap_raw}.
+#' @param filename a character string giving the name of the file. If
+#'   \code{NULL}, the R standard device is used for plotting. Otherwise, the
+#'   plotting device is inferred from the file extension. Only supports devices
+#'   \link[grDevices]{tiff}, \link[grDevices]{png}, \link[grDevices]{pdf}.
 #' @param ... arguments passed to \link{mt_heatmap_raw}.
 #' @param upscale a numeric value by which the output resolution of the image is
-#'   increased or decreased. Only applies if \code{device} is one of
-#'   \code{c("tiff", "png", "pdf")}.
+#'   increased or decreased. Only applies if device is one of tiff, png, or pdf.
 #' @param plot_dims adds the coordinates of the four image corners to the plot. 
 #'   Helps setting \code{bounds}.
 #'   
@@ -437,7 +426,7 @@ mt_heatmap = function(
   }
   
   # take time
-  t = proc.time()[3]
+  t_start = proc.time()[3]
   
   # --------- get heatmap
   agg = NULL
@@ -539,16 +528,16 @@ mt_heatmap = function(
   
   # Finalization ---------------------------------------------------------------
   # Give feedback
-  if (verbose == T) {
-    t = proc.time()[3] - t
-    cat('heatmap created in ', round(t), 's\n', sep='')
+  if (verbose == TRUE) {
+    t_end = proc.time()[3] - t_start
+    cat('heatmap created in ', round(t_end), 's\n', sep='')
   }
 }
 
 
 #' Generic print for class mt_heatmap_raw 
 #'
-#' \code{print.mt_heatmap_raw} shows \code{str()}.
+#' \code{print.mt_heatmap_raw} shows \link[utils]{str}.
 #'
 #' @param x an object of class mt_heatmap_raw.
 #' @param ... further arguments passed to or from other methods.
@@ -562,8 +551,8 @@ print.mt_heatmap_raw = function(x,...){
 
 #' Creates a difference-heatmap of two trajectory heatmap images
 #'
-#' \code{mt_diffmap} creates a difference-heatmap of the trajectory
-#'   data using gaussian smoothing.
+#' \code{mt_diffmap} creates a difference-heatmap of the trajectory data using
+#' gaussian smoothing. Note that this function has beta status.
 #' 
 #' \code{mt_diffmap} takes two objects that either contain trajectory heatmaps
 #' or from which trajectory heatmaps can be computed. Difference-heatmaps are
@@ -617,7 +606,7 @@ mt_diffmap = function(
 ) {
   
   # --------- Take time
-  t = proc.time()[3]
+  t_start = proc.time()[3]
   
   # --------- collect device
   if(!is.null(filename)){
@@ -653,10 +642,10 @@ mt_diffmap = function(
   # --------- determine bounds
   if(is.null(bounds)){
     if(verbose == TRUE) cat('Determine joint bounds','\n')
-    range_x1 = range(x[,dimensions[1],],na.rm=T)
-    range_x2 = range(x[,dimensions[2],],na.rm=T)
-    range_y1 = range(y[,dimensions[1],],na.rm=T)
-    range_y2 = range(y[,dimensions[2],],na.rm=T)
+    range_x1 = range(x[,dimensions[1],],na.rm=TRUE)
+    range_x2 = range(x[,dimensions[2],],na.rm=TRUE)
+    range_y1 = range(y[,dimensions[1],],na.rm=TRUE)
+    range_y2 = range(y[,dimensions[2],],na.rm=TRUE)
     range_1  = c(c(range_x1[1],range_y1[1])[which.min(c(range_x1[1],range_y1[1]))],
                  c(range_x1[2],range_y1[2])[which.max(c(range_x1[2],range_y1[2]))])
     range_2  = c(c(range_x2[1],range_y2[1])[which.min(c(range_x2[1],range_y2[1]))],
@@ -766,9 +755,9 @@ mt_diffmap = function(
   if (device %in% c('pdf','png','tiff') & plot == TRUE) grDevices::dev.off()
   if (plot == FALSE) return(img)
   
-  if (verbose == T) {
-    t = proc.time()[3] - t
-    cat('heatmap created in ', round(t), 's\n', sep='')
+  if (verbose == TRUE) {
+    t_end = proc.time()[3] - t_start
+    cat('heatmap created in ', round(t_end), 's\n', sep='')
   }
 }
 
@@ -777,7 +766,8 @@ mt_diffmap = function(
 
 #' Plot trajectory heatmap using ggplot.
 #' 
-#' \code{mt_heatmap_ggplot} plots high resolution raw trajectory maps.
+#' \code{mt_heatmap_ggplot} plots high resolution raw trajectory maps. Note that
+#' this function has beta status.
 #' 
 #' \code{mt_heatmap_ggplot} is a wrapper for \code{mt_heatmap_plot} to enable. In 
 #' contrast to \code{mt_heatmap_plot} plots created by \code{mt_heatmap_ggplot} 

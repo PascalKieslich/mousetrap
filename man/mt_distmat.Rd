@@ -5,8 +5,8 @@
 \title{Compute distance matrix.}
 \usage{
 mt_distmat(data, use = "sp_trajectories", save_as = "distmat",
-  dimensions = c("xpos", "ypos"), pointwise = TRUE, minkowski_p = 2,
-  na_rm = TRUE)
+  dimensions = c("xpos", "ypos"), weights = rep(1, length(dimensions)),
+  pointwise = TRUE, minkowski_p = 2, na_rm = FALSE)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import
@@ -22,6 +22,12 @@ be stored.}
 \item{dimensions}{a character vector specifying which trajectory variables 
 should be used. Can be of length 2 or 3 for two-dimensional or 
 three-dimensional trajectories respectively.}
+
+\item{weights}{numeric vector specifying the relative importance of the 
+variables specified in \code{dimensions}. Defaults to a vector of 1s 
+implying equal importance. Technically, each variable is rescaled so that
+the standard deviation matches the corresponding value in \code{weights}.
+To use the original variables, set \code{weights = NULL}.}
 
 \item{pointwise}{boolean specifying the way dissimilarity between the 
 trajectories is measured (see Details). If \code{TRUE} (the default), 
