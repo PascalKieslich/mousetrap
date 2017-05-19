@@ -391,10 +391,11 @@ mt_heatmap_raw <- function(
 #' @inheritParams mt_heatmap_raw
 #' @param x usually an object of class \code{mousetrap}. Alternatively, a
 #'   trajectory array or an object of class \code{mt_heatmap_raw}.
-#' @param filename a character string giving the name of the file. If
-#'   \code{NULL}, the R standard device is used for plotting. Otherwise, the
-#'   plotting device is inferred from the file extension. Only supports devices
-#'   \link[grDevices]{tiff}, \link[grDevices]{png}, \link[grDevices]{pdf}.
+#' @param filename a character string giving the name of the file. If 
+#'   \code{NULL} (the default), the R standard device is used for plotting.
+#'   Otherwise, the plotting device is inferred from the file extension. Only
+#'   supports devices \link[grDevices]{tiff}, \link[grDevices]{png},
+#'   \link[grDevices]{pdf}.
 #' @param ... arguments passed to \link{mt_heatmap_raw}.
 #' @param upscale a numeric value by which the output resolution of the image is
 #'   increased or decreased. Only applies if device is one of tiff, png, or pdf.
@@ -407,7 +408,7 @@ mt_heatmap = function(
   x,
   use = 'trajectories',
   dimensions = c('xpos', 'ypos'),
-  filename   = 'image.tiff',
+  filename   = NULL,
   ...,
   upscale = 1,
   plot_dims = FALSE,
@@ -593,7 +594,7 @@ mt_diffmap = function(
   cond = NULL,
   use = 'trajectories',
   dimensions = c('xpos','ypos'),
-  filename = 'diff_image.tiff',
+  filename = NULL,
   bounds = NULL,
   xres = 500,
   upscale = 4,

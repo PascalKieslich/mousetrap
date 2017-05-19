@@ -5,10 +5,10 @@
 \title{Creates a difference-heatmap of two trajectory heatmap images}
 \usage{
 mt_diffmap(x, y = NULL, cond = NULL, use = "trajectories",
-  dimensions = c("xpos", "ypos"), filename = "diff_image.tiff",
-  bounds = NULL, xres = 500, upscale = 4, smooth_radius = 20,
-  colors = c("#00863F", "#000000", "#FF1900"), n_shades = 1000,
-  plot = TRUE, ..., verbose = TRUE)
+  dimensions = c("xpos", "ypos"), filename = NULL, bounds = NULL,
+  xres = 500, upscale = 4, smooth_radius = 20, colors = c("#00863F",
+  "#000000", "#FF1900"), n_shades = 1000, plot = TRUE, ...,
+  verbose = TRUE)
 }
 \arguments{
 \item{x}{an object of class \code{mousetrap}), a trajectory object of class 
@@ -29,10 +29,11 @@ used.}
 to create the heatmap. The first two entries are used as x and 
 y-coordinates, the third, if provided, will be added as color information.}
 
-\item{filename}{a character string giving the name of the file. If
-\code{NULL}, the R standard device is used for plotting. Otherwise, the
-plotting device is inferred from the file extension. Only supports devices
-\link[grDevices]{tiff}, \link[grDevices]{png}, \link[grDevices]{pdf}.}
+\item{filename}{a character string giving the name of the file. If 
+\code{NULL} (the default), the R standard device is used for plotting.
+Otherwise, the plotting device is inferred from the file extension. Only
+supports devices \link[grDevices]{tiff}, \link[grDevices]{png},
+\link[grDevices]{pdf}.}
 
 \item{bounds}{numeric vector specifying the corners (xmin, ymin, xmax, ymax) 
 of the plot region. By default (\code{bounds = NULL}), bounds are 
