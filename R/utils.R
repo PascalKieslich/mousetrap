@@ -68,7 +68,7 @@ create_results <- function(data, results, use, save_as, ids=NULL, overwrite=TRUE
         if (any(colnames(results)%in%colnames(data[[save_as]]))){
           # if so, remove them and issue warning
           data[[save_as]] <- data[[save_as]][,colnames(data[[save_as]])[!colnames(data[[save_as]])%in%colnames(results)],drop=FALSE]
-          warning("Columns of same name already exist and have been removed.")
+          warning("Columns of same name already exist and have been replaced")
         }
         # ensure id column is present
         data[[save_as]][,"mt_id"] <- as.character(rownames(data[[save_as]]))
