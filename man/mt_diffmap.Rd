@@ -2,7 +2,7 @@
 % Please edit documentation in R/heatmap.R
 \name{mt_diffmap}
 \alias{mt_diffmap}
-\title{Creates a difference-heatmap of two trajectory heatmap images}
+\title{Creates a difference-heatmap of two trajectory heatmap images.}
 \usage{
 mt_diffmap(x, y = NULL, condition = NULL, use = "trajectories",
   dimensions = c("xpos", "ypos"), filename = NULL, bounds = NULL,
@@ -83,6 +83,14 @@ gaussian smoothing. Note that this function has beta status.
 or from which trajectory heatmaps can be computed. Difference-heatmaps are
 constructed analogously to \link{mt_heatmap_raw}.
 }
+\examples{
+mt_diffmap(KH2017, condition=KH2017$data$Condition=="Typical",
+  smooth_radius=6, n_shades=5)
+
+}
 \author{
 Dirk U. Wulff (\email{dirk.wulff@gmail.com})
+
+\link{mt_heatmap} and  \link{mt_heatmap_ggplot} for plotting trajectory
+heatmaps.
 }

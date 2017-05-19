@@ -2,7 +2,7 @@
 % Please edit documentation in R/heatmap.R
 \name{mt_heatmap}
 \alias{mt_heatmap}
-\title{Plot trajectory heatmap}
+\title{Plot trajectory heatmap.}
 \usage{
 mt_heatmap(x, use = "trajectories", dimensions = c("xpos", "ypos"),
   filename = NULL, ..., upscale = 1, plot_dims = FALSE, verbose = TRUE)
@@ -44,4 +44,13 @@ function has beta status.
 output in \link[grDevices]{tiff}, \link[grDevices]{png},
 \link[grDevices]{pdf}, or R's default window output. For further details on
 how the trajectory heatmaps are constructed, see \link{mt_heatmap_raw}.
+}
+\examples{
+mt_heatmap(KH2017, smooth_radius=2, n_shades=5,mean_image=0.2)
+
+}
+\seealso{
+\link{mt_heatmap_ggplot} for plotting a trajectory heatmap using ggplot2.
+    
+\link{mt_diffmap} for plotting trajectory difference-heatmaps.
 }

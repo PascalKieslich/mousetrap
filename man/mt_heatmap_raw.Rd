@@ -116,6 +116,12 @@ are visible. In order to do this, specify a third variable label in
 \code{dimensions} and control its appearance using the \code{color} and 
 \code{mean_color} arguments.
 }
+\seealso{
+\link{mt_heatmap} and  \link{mt_heatmap_ggplot} for plotting trajectory
+heatmaps.
+    
+\link{mt_diffmap} for plotting trajectory difference-heatmaps.
+}
 \author{
 Dirk U. Wulff (\email{dirk.wulff@gmail.com})
 }
