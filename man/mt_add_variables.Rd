@@ -17,16 +17,16 @@ used.}
 \item{save_as}{a character string specifying where the resulting trajectory
 data should be stored.}
 
-\item{variables}{either a character vector specifying the name of the new
-variables that should be added to the trajectory array. In this case, the
-new variables are added as additional columns to the trajectory array
-filled with \code{NA}s. Or a list of matrices that each contain the data of
+\item{variables}{a list of matrices that each contain the data of
 one of the to be added variables. In this case, the new variables with
-their values are added as additional columns to the trajectory array.}
+their values are added as a new entry in the trajectory arrays third
+dimension. Alternatively, a character vector specifying the name of the new
+variables that should be added to the trajectory array. In this case, the
+new variables are filled with \code{NA}s.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) where the new
-  variables have been added as additional columns to the trajectory array.
+  variables have been added to the trajectory array.
   Depending on the input to \code{variables}, the values for the added
   variables are either \code{NA}s or their actual values. If columns of the
   same name already existed, they have been removed. If the trajectory array
