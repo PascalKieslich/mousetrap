@@ -124,8 +124,8 @@ mt_heatmap_raw <- function(
 ){
   
   # Data checks
-  if (!length(dimensions) %in% c(2, 3)) {
-    stop('Dimensions must of length 2 or 3!')
+  if (!length(dimensions) %in% c(1, 2, 3)) {
+    stop('Dimensions must of length 1, 2 or 3!')
   }
   
   # extract trajectories  
