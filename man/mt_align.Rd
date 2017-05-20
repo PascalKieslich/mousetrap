@@ -88,10 +88,10 @@ mt_example <- mt_align(mt_example,
 \seealso{
 \link{mt_align_start} for aligning all trajectories to a common
   start position.
-  
+
   \link{mt_align_start_end} for aligning all trajectories so that they share
   a common initial and final coordinate.
-  
+
   \link{mt_remap_symmetric} for remapping trajectories to one side (or one 
   quadrant) of the coordinate system.
 }

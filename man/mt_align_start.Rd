@@ -59,7 +59,7 @@ mt_example <- mt_align_start(mt_example,
 \seealso{
 \link{mt_align_start_end}  for aligning the start and end position
   of trajectories.
-  
+
   \link{mt_align} as a general purpose function for aligning and rescaling 
   trajectories.
 
