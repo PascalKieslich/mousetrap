@@ -134,8 +134,18 @@ mt_heatmap_raw <- function(
   if (!all(dimensions %in% dimnames(trajectories)[[3]])) {
     stop('Not all dimensions exist in data')
   }
+  trajectories <- trajectories[,,dimensions,drop = F]
   
-  trajectories <- trajectories[,,dimensions]
+  # Add first dimension -----------------------------------------------------
+  
+  if(length(dimensions) == 1){
+    add = matrix(rep(1:ncol(trajectories),nrow(trajectories)), 
+                 ncol = ncol(trajectories), byrow = T)
+    trajectories <- mt_add_variables(trajectories, variables = list('add' = add))
+    trajectories <- trajectories[,,2:1]
+    dimensions <- c('add',dimensions)
+  }
+  
   
   # Subsample trajectories -----------------------------------------------------
   # If n_trajectories is smaller than number of trajectories,
@@ -192,15 +202,6 @@ mt_heatmap_raw <- function(
   n_resc  = ceiling(sqrt(xres_m * xres_m + yres_m * yres_m))
   l_diag  = sqrt(diff(range_x)**2 + diff(range_y)**2)
   
-  
-  # Add first dimension -----------------------------------------------------
-  
-  if(length(dimensions) == 1){
-    add = matrix(rep(1:nrow(trajectories),ncol(trajectories)), 
-                 ncol = ncol(trajectories), byrow = T)
-    trajectories <- mt_add_variables(trajectories, variables = list('add' = add))
-    dimensions <- c('add',dimensions)
-  }
   
   # Add third dimension -----------------------------------------------------
   

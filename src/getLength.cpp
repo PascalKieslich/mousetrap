@@ -10,7 +10,7 @@ double getLength(NumericVector x, NumericVector y) {
   double xd, yd; 
   int n = x.length();
   for(int i = 0; i < (n - 1); i++){
-    if(x[i] != x[i]  || x[i+1] != x[i+1]) continue;
+    if(x[i] != x[i]  || x[i+1] != x[i+1] || y[i] != y[i]  || y[i+1] != y[i+1]) continue;
     xd = x[i+1] - x[i];
     yd = y[i+1] - y[i];
     Length += sqrt(xd*xd + yd*yd);
@@ -24,7 +24,7 @@ double getLength3d(NumericVector x, NumericVector y, NumericVector z) {
   double xd, yd, zd;
   int n = x.length();
   for(int i = 0; i < (n - 1); i++){
-    if(x[i] != x[i] || x[i+1] != x[i+1]) continue;
+    if(x[i] != x[i] || x[i+1] != x[i+1] || y[i] != y[i] || y[i+1] != y[i+1] || z[i] != z[i] || z[i+1] != z[i+1]) continue;
     xd = x[i+1] - x[i];;
     yd = y[i+1] - y[i];
     zd = z[i+1] - z[i];
