@@ -193,6 +193,15 @@ mt_heatmap_raw <- function(
   l_diag  = sqrt(diff(range_x)**2 + diff(range_y)**2)
   
   
+  # Add first dimension -----------------------------------------------------
+  
+  if(length(dimensions) == 1){
+    add = matrix(rep(1:nrow(trajectories),ncol(trajectories)), 
+                 ncol = ncol(trajectories), byrow = T)
+    trajectories <- mt_add_variables(trajectories, variables = list('add' = add))
+    dimensions <- c('add',dimensions)
+  }
+  
   # Add third dimension -----------------------------------------------------
   
   if(length(dimensions) < 3 & !is.null(variable)){
