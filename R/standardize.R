@@ -207,7 +207,7 @@ mt_standardize <-function(data, use="measures",
 #'   \code{scale} are mapped to the variables specified in \code{var_names}.
 #' @param scale logical or numeric specifying the scaling of the variables. When
 #'   logical, \code{scale = TRUE} normalizes the trajectory variable to sd = 1,
-#'   wheras \code{scale = FALSE} leaves the variable on its original scale. When
+#'   whereas \code{scale = FALSE} leaves the variable on its original scale. When
 #'   numeric, the trajectory variables are scaled by (i.e., divided by) the
 #'   specific value in scale. Can also be a numeric vector, in which case the
 #'   values of \code{scale} are mapped to the variables specified in 

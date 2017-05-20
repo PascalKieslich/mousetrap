@@ -2,7 +2,7 @@
 #' 
 #' Performs trajectory clustering. It first computes distances between each pair
 #' of trajectories and then applies off-the-shelf clustering tools to explain 
-#' the resulting dissimiliarity matrix using a predefined number of clusters.
+#' the resulting dissimilarity matrix using a predefined number of clusters.
 #' 
 #' \code{mt_cluster} uses off-the-shelf clustering tools, i.e., 
 #' \link[fastcluster]{hclust} and \link[stats]{kmeans}, for cluster estimation. 
@@ -42,7 +42,7 @@
 #'   should be used. Can be of length 2 or 3, for two-dimensional or 
 #'   three-dimensional trajectories respectively.
 #' @param n_cluster an integer specifying the number of clusters to estimate.
-#' @param method character string specifiying the clustering procedure. Either
+#' @param method character string specifying the clustering procedure. Either
 #'   \link[fastcluster]{hclust} (the default) or \link[stats]{kmeans}.
 #' @param weights numeric vector specifying the relative importance of the 
 #'   variables specified in \code{dimensions}. Defaults to a vector of 1s 

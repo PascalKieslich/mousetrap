@@ -5,10 +5,10 @@
 \title{Creates high-resolution heatmap of trajectory data.}
 \usage{
 mt_heatmap_raw(data, use = "trajectories", dimensions = c("xpos", "ypos"),
-  bounds = NULL, xres = 1000, upsample = 1, norm = FALSE,
-  colors = c("black", "blue", "white"), n_shades = c(1000, 10),
-  smooth_radius = 1.5, low_pass = 200, auto_enhance = TRUE,
-  mean_image = 0.1, mean_color = 0.1, aggregate_lwd = 0,
+  variable = NULL, bounds = NULL, xres = 1000, upsample = 1,
+  norm = FALSE, colors = c("black", "blue", "white"), n_shades = c(1000,
+  1000), smooth_radius = 1.5, low_pass = 200, auto_enhance = TRUE,
+  mean_image = 0.15, mean_color = 0.25, aggregate_lwd = 0,
   aggregate_col = "black", n_trajectories = NULL, seed = NULL,
   verbose = TRUE)
 }
@@ -23,6 +23,10 @@ used.}
 \item{dimensions}{a character vector specifying the trajectory variables used
 to create the heatmap. The first two entries are used as x and 
 y-coordinates, the third, if provided, will be added as color information.}
+
+\item{variable}{boolean or numeric vector matching the number of trajectories
+that if provided will be used as color information. \code{variable} is only
+considered when \code{length(dimensions) < 3}.}
 
 \item{bounds}{numeric vector specifying the corners (xmin, ymin, xmax, ymax) 
 of the plot region. By default (\code{bounds = NULL}), bounds are 
@@ -109,7 +113,7 @@ Fifth, the function translates the image intensity into color using the
 colors specified in \code{colors}. Finally, the function returns the image 
 data in a long format containing the x, y, and color information.
 
-\code{mt_heatmap_raw} also offers the possibilty to overlay the heatmap with 
+\code{mt_heatmap_raw} also offers the possibility to overlay the heatmap with 
 an additional variable, such as for instance velocity, so that both the 
 density of mouse trajectories and the information of the additional variable 
 are visible. In order to do this, specify a third variable label in 

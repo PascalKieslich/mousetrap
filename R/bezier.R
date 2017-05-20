@@ -1,7 +1,7 @@
 #' Create Bezier-curves using the Bernstein approximation.
 #' 
 #' \code{bezier} creates 3-point Bezier-curves using the 
-#'   Bernstein appproximation to simulate continuous competition 
+#'   Bernstein approximation to simulate continuous competition 
 #'   in mouse- and hand-trajectories.   
 #'   
 #' @param x a numeric vector giving the x-coordinates of exactly three

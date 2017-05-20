@@ -28,7 +28,7 @@ A trajectory array containing the bezier curves.
 }
 \description{
 \code{bezier} creates 3-point Bezier-curves using the 
-  Bernstein appproximation to simulate continuous competition 
+  Bernstein approximation to simulate continuous competition 
   in mouse- and hand-trajectories.
 }
 \examples{

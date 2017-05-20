@@ -27,7 +27,7 @@ three-dimensional trajectories respectively.}
 
 \item{n_cluster}{an integer specifying the number of clusters to estimate.}
 
-\item{method}{character string specifiying the clustering procedure. Either
+\item{method}{character string specifying the clustering procedure. Either
 \link[fastcluster]{hclust} (the default) or \link[stats]{kmeans}.}
 
 \item{weights}{numeric vector specifying the relative importance of the 
@@ -83,7 +83,7 @@ A mousetrap data object (see \link{mt_example}) with an additional
 \description{
 Performs trajectory clustering. It first computes distances between each pair
 of trajectories and then applies off-the-shelf clustering tools to explain 
-the resulting dissimiliarity matrix using a predefined number of clusters.
+the resulting dissimilarity matrix using a predefined number of clusters.
 }
 \details{
 \code{mt_cluster} uses off-the-shelf clustering tools, i.e., 

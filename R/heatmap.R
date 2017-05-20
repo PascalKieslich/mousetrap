@@ -18,7 +18,7 @@
 #' colors specified in \code{colors}. Finally, the function returns the image 
 #' data in a long format containing the x, y, and color information.
 #' 
-#' \code{mt_heatmap_raw} also offers the possibilty to overlay the heatmap with 
+#' \code{mt_heatmap_raw} also offers the possibility to overlay the heatmap with 
 #' an additional variable, such as for instance velocity, so that both the 
 #' density of mouse trajectories and the information of the additional variable 
 #' are visible. In order to do this, specify a third variable label in 
@@ -442,7 +442,7 @@ mt_heatmap_raw <- function(
 #' \link{mt_diffmap} for plotting trajectory difference-heatmaps.
 #' 
 #' @examples
-#' mt_heatmap(KH2017, n_shades=5,mean_image=0.2)
+#' mt_heatmap(KH2017, xres=500, n_shades=5,mean_image=0.2)
 #' 
 #' @export
 mt_heatmap <- function(
@@ -604,7 +604,7 @@ mt_heatmap <- function(
 #' \link{mt_diffmap} for plotting trajectory difference-heatmaps.
 #' 
 #' @examples
-#' mt_heatmap_ggplot(KH2017, n_shades=5,mean_image=0.2)
+#' mt_heatmap_ggplot(KH2017, xres=500, n_shades=5,mean_image=0.2)
 #' 
 #' @export
 mt_heatmap_ggplot <- function(data, use="trajectories", ...) {
@@ -699,7 +699,7 @@ print.mt_heatmap_raw = function(x,...){
 #' 
 #' @examples
 #' mt_diffmap(KH2017, condition=KH2017$data$Condition=="Typical",
-#'   smooth_radius=6, n_shades=5)
+#'   xres=400, smooth_radius=6, n_shades=5)
 #' 
 #' @export
 mt_diffmap <- function(
