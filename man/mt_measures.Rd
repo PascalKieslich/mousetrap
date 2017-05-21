@@ -48,12 +48,12 @@ A mousetrap data object (see \link{mt_example}) where an additional
   the data.frame corresponds to one of the measures. If a trajectory array 
   was provided directly as \code{data}, only the measures data.frame will be 
   returned.
-  
+
   The following measures are computed for each trajectory (the labels 
   relating to x- and y-positions will be adapted depending on the values 
   specified in \code{dimensions}). Please note that additional information is
   provided in the Details section.
-  
+
   \item{mt_id}{Trial ID (can be used for merging measures data.frame with
   other trial-level data)}
   \item{xpos_max}{Maximum x-position} 
@@ -176,7 +176,7 @@ Kieslich, P. J., Wulff, D. U., Henninger, F., Haslbeck, J. M. B.,
   & Schulte-Mecklenbeck, M. (2017). Mouse- and hand-tracking as a window to
   cognition: A tutorial on implementation, analysis, and visualization.
   Manuscript in preparation.
-  
+
   Freeman, J. B., & Ambady, N. (2010). MouseTracker: Software for studying 
   real-time mental processing using a computer mouse-tracking method. 
   \emph{Behavior Research Methods, 42}(1), 226-241.
@@ -184,15 +184,15 @@ Kieslich, P. J., Wulff, D. U., Henninger, F., Haslbeck, J. M. B.,
 \seealso{
 \link{mt_sample_entropy} for calculating sample entropy.
 
-\link{mt_standardize} for standardizing the measures per subject.
+  \link{mt_standardize} for standardizing the measures per subject.
 
-\link{mt_check_bimodality} for checking bimodality of the measures using
-different methods.
+  \link{mt_check_bimodality} for checking bimodality of the measures using
+  different methods.
 
-\link{mt_aggregate} and \link{mt_aggregate_per_subject} for aggregating the
-measures.
+  \link{mt_aggregate} and \link{mt_aggregate_per_subject} for aggregating the
+  measures.
 
-\link[dplyr]{inner_join} for merging data using the \code{dplyr} package.
+  \link[dplyr]{inner_join} for merging data using the \code{dplyr} package.
 }
 \author{
 Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})

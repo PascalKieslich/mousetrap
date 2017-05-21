@@ -52,10 +52,10 @@
 #'   \code{data}, only the trajectory array will be returned.
 #'
 #' @seealso \link{mt_average} for averaging trajectories across constant time
-#' intervals.
+#'   intervals.
 #'
-#' \link{mt_measures} for calculating per-trial mouse-tracking
-#' measures.
+#'   \link{mt_measures} for calculating per-trial mouse-tracking
+#'   measures.
 #'
 #' @examples
 #' # Calculate derivatives looking at movement

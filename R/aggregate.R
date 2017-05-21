@@ -35,13 +35,11 @@
 #'
 #' @return A \link{data.frame} containing the aggregated data.
 #'
-#' @seealso
+#' @seealso \link{mt_aggregate_per_subject} for aggregating mouse-tracking
+#'   measures and trajectories per subject.
 #'
-#' \link{mt_aggregate_per_subject} for aggregating mouse-tracking measures and
-#' trajectories per subject.
-#'
-#' \link[dplyr]{summarize_at} for aggregating data using the \code{dplyr}
-#' package.
+#'   \link[dplyr]{summarize_at} for aggregating data using the \code{dplyr} 
+#'   package.
 #'
 #' @examples
 #' # Time-normalize trajectories
@@ -109,13 +107,11 @@ mt_aggregate <- function(data,
 #'
 #' @return A \link{data.frame} containing the aggregated data.
 #'
-#' @seealso
+#' @seealso \link{mt_aggregate} for aggregating mouse-tracking measures and
+#'   trajectories per condition.
 #'
-#' \link{mt_aggregate} for aggregating mouse-tracking measures and trajectories
-#' per condition.
-#'
-#' \link[dplyr]{summarize_at} for aggregating data using the \code{dplyr}
-#' package.
+#'   \link[dplyr]{summarize_at} for aggregating data using the \code{dplyr} 
+#'   package.
 #'
 #' @examples
 #' # Time-normalize trajectories

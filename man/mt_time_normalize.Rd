@@ -74,8 +74,8 @@ Spivey, M. J., Grosjean, M., & Knoblich, G. (2005). Continuous
 \link[stats]{approx} for information about the function used for
   linear interpolation.
 
-\link{mt_resample} for resampling trajectories using a constant time
-interval.
+  \link{mt_resample} for resampling trajectories using a constant time
+  interval.
 }
 \author{
 Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})

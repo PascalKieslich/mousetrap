@@ -23,10 +23,9 @@
 #' @return The original data.frame including the centered and / or scaled
 #'   variables.
 #'
-#' @seealso
-#' \link{scale} for the R base scale function.
-#'
-#' \link{mt_standardize} for standardizing measures in a mousetrap data object.
+#' @seealso \link{scale} for the R base scale function.
+#' 
+#'    \link{mt_standardize} for standardizing measures in a mousetrap data object.
 #'
 #' @examples
 #' ChickWeight_scaled <-  scale_within(
@@ -131,13 +130,12 @@ scale_within <-function(data,
 #' @return A mousetrap data object (see \link{mt_example})
 #' including the standardized measures.
 #'
-#' @seealso
-#' \link{mt_scale_trajectories} for standardizing variables in mouse trajectory
-#' arrays.
-#' 
-#' \link{scale_within} which is called by \code{mt_standardize}.
+#' @seealso \link{mt_scale_trajectories} for standardizing variables in mouse
+#'   trajectory arrays.
 #'
-#' \link{scale} for the R base scale function.
+#'   \link{scale_within} which is called by \code{mt_standardize}.
+#'
+#'   \link{scale} for the R base scale function.
 #'
 #' @examples
 #' mt_example <- mt_measures(mt_example)

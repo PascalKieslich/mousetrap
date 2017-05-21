@@ -41,10 +41,10 @@ Good things peak in pairs: A note on the bimodality coefficient.
 }
 \seealso{
 \link[psych]{skew} and \link[psych]{kurtosi} for calculating
-skewness and kurtosis.
+  skewness and kurtosis.
 
-\link{mt_check_bimodality} for assessing bimodality using several methods in
-a mousetrap data object.
+  \link{mt_check_bimodality} for assessing bimodality using several methods in
+  a mousetrap data object.
 }
 \author{
 Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})

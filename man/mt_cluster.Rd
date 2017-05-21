@@ -132,7 +132,7 @@ mt_plot(KH2017,use="sp_trajectories",
 \references{
 Wulff, D. U., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. 
   (2017). Measuring the (dis-)continuous mind. Manuscript in preparation.
-  
+
   Haslbeck, J. M. B., Wulff, D. U., Kieslich, P. J., Henninger, F., & 
   Schulte-Mecklenbeck, M. (2017). Advanced mouse- and hand-tracking analysis:
   Detecting and visualizing clusters in movement trajectories. Manuscript in 
@@ -140,9 +140,9 @@ Wulff, D. U., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M.
 }
 \seealso{
 \link{mt_distmat} for more information about how the distance matrix is 
-computed when the hclust method is used.
+  computed when the hclust method is used.
 
-\link{mt_cluster_k} for estimating the optimal number of clusters.
+  \link{mt_cluster_k} for estimating the optimal number of clusters.
 }
 \author{
 Dirk U. Wulff (\email{dirk.wulff@gmail.com})

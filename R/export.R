@@ -23,13 +23,11 @@
 #' 
 #' @return A \link{data.frame} containing the exported data.
 #' 
-#' @seealso
-#' 
-#' \link{mt_import_long} for importing mouse-tracking data saved in a long
-#' format.
-#' 
-#' \link{mt_import_wide} for importing mouse-tracking data saved in a wide
-#' format.
+#' @seealso \link{mt_import_long} for importing mouse-tracking data saved in a
+#'   long format.
+#'
+#'   \link{mt_import_wide} for importing mouse-tracking data saved in a wide 
+#'   format.
 #' 
 #' @examples
 #' # Export data in long format

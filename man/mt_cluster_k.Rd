@@ -153,11 +153,11 @@ Haslbeck, J., & Wulff, D. U. (2016). Estimating the Number of
   Data Analysis, 73}, 27-39.
 }
 \seealso{
-\link{mt_distmat} for more information about how the distance matrix is
-computed when the hclust method is used.
+\link{mt_distmat} for more information about how the distance matrix
+  is computed when the hclust method is used.
 
-\link{mt_cluster} for performing trajectory clustering with a specified
-number of clusters.
+  \link{mt_cluster} for performing trajectory clustering with a specified
+  number of clusters.
 }
 \author{
 Dirk U. Wulff (\email{dirk.wulff@gmail.com})

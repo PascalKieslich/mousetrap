@@ -87,11 +87,11 @@ mt_example <- mt_resample(mt_example,
 }
 \seealso{
 \link[stats]{approx} for information about the function used for
-linear interpolation.
+  linear interpolation.
 
-\link{mt_average} for averaging trajectories across constant time intervals.
+  \link{mt_average} for averaging trajectories across constant time intervals.
 
-\link{mt_time_normalize} for time-normalizing trajectories.
+  \link{mt_time_normalize} for time-normalizing trajectories.
 }
 \author{
 Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})

@@ -83,7 +83,7 @@ Scherbaum, S., Dshemuchadse, M., Fischer, R., & Goschke, T.
 \seealso{
 \link{mt_plot} for plotting trajectory data.
 
-\link{mt_time_normalize} for time-normalizing trajectories.
+  \link{mt_time_normalize} for time-normalizing trajectories.
 }
 \author{
 Felix Henninger (\email{mailbox@felixhenninger.com})

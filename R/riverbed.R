@@ -37,10 +37,9 @@
 #'   (2010). How decisions evolve: The temporal dynamics of action selection.
 #'   \emph{Cognition, 115}(3), 407-416.
 #' 
-#' @seealso
-#' \link{mt_plot} for plotting trajectory data.
-#' 
-#' \link{mt_time_normalize} for time-normalizing trajectories.
+#' @seealso \link{mt_plot} for plotting trajectory data.
+#'
+#'   \link{mt_time_normalize} for time-normalizing trajectories.
 #' 
 #' @examples
 #' # Time-normalize trajectories

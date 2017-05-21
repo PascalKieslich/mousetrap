@@ -114,9 +114,9 @@ Processes & Intergroup Relations, 18}(3), 384-401.
 }
 \seealso{
 \link{bimodality_coefficient} for more information about the bimodality
-coefficient.
+  coefficient.
 
-\link[diptest]{dip.test} for more information about Hartigan's dip test.
+  \link[diptest]{dip.test} for more information about Hartigan's dip test.
 }
 \author{
 Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})

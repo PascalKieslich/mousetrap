@@ -50,7 +50,8 @@ mt_heatmap(KH2017, xres=500, n_shades=5,mean_image=0.2)
 
 }
 \seealso{
-\link{mt_heatmap_ggplot} for plotting a trajectory heatmap using ggplot2.
-    
-\link{mt_diffmap} for plotting trajectory difference-heatmaps.
+\link{mt_heatmap_ggplot} for plotting a trajectory heatmap using
+  ggplot2.
+
+  \link{mt_diffmap} for plotting trajectory difference-heatmaps.
 }

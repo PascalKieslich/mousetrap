@@ -47,7 +47,7 @@ ChickWeight_scaled <-  scale_within(
 \seealso{
 \link{scale} for the R base scale function.
 
-\link{mt_standardize} for standardizing measures in a mousetrap data object.
+   \link{mt_standardize} for standardizing measures in a mousetrap data object.
 }
 \author{
 Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})

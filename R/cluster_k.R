@@ -47,13 +47,11 @@
 #'   in \code{compute}. The values in \code{kopt} are optima for each of the
 #'   vectors in \code{paths}.
 #'
-#' @seealso
+#' @seealso \link{mt_distmat} for more information about how the distance matrix
+#'   is computed when the hclust method is used.
 #'
-#' \link{mt_distmat} for more information about how the distance matrix is
-#' computed when the hclust method is used.
-#'
-#' \link{mt_cluster} for performing trajectory clustering with a specified
-#' number of clusters.
+#'   \link{mt_cluster} for performing trajectory clustering with a specified
+#'   number of clusters.
 #'
 #' @examples
 #'

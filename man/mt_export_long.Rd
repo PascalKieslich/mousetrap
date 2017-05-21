@@ -68,11 +68,11 @@ mt_data_wide <- mt_export_wide(mt_example,
 
 }
 \seealso{
-\link{mt_import_long} for importing mouse-tracking data saved in a long
-format.
+\link{mt_import_long} for importing mouse-tracking data saved in a
+  long format.
 
-\link{mt_import_wide} for importing mouse-tracking data saved in a wide
-format.
+  \link{mt_import_wide} for importing mouse-tracking data saved in a wide 
+  format.
 }
 \author{
 Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})

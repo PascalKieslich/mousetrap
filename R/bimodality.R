@@ -22,10 +22,10 @@
 #' \url{http://dx.doi.org/10.3389/fpsyg.2013.00700}
 #' 
 #' @seealso \link[psych]{skew} and \link[psych]{kurtosi} for calculating
-#' skewness and kurtosis.
-#' 
-#' \link{mt_check_bimodality} for assessing bimodality using several methods in
-#' a mousetrap data object.
+#'   skewness and kurtosis.
+#'
+#'   \link{mt_check_bimodality} for assessing bimodality using several methods in
+#'   a mousetrap data object.
 #' 
 #' @examples
 #' pfister_data_a <- rep(1:11, times=c(3,5,5,10,17,20,17,10,5,5,3))
@@ -138,10 +138,10 @@ bimodality_coefficient <- function(x, na.rm=FALSE) {
 #' Processes & Intergroup Relations, 18}(3), 384-401.
 #' 
 #' @seealso
-#' \link{bimodality_coefficient} for more information about the bimodality
-#' coefficient.
-#' 
-#' \link[diptest]{dip.test} for more information about Hartigan's dip test.
+#'   \link{bimodality_coefficient} for more information about the bimodality
+#'   coefficient.
+#'
+#'   \link[diptest]{dip.test} for more information about Hartigan's dip test.
 #' 
 #' @examples
 #' # Calculate measures

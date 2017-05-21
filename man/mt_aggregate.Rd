@@ -92,11 +92,11 @@ average_measures <- mt_aggregate(mt_example,
 
 }
 \seealso{
-\link{mt_aggregate_per_subject} for aggregating mouse-tracking measures and
-trajectories per subject.
+\link{mt_aggregate_per_subject} for aggregating mouse-tracking
+  measures and trajectories per subject.
 
-\link[dplyr]{summarize_at} for aggregating data using the \code{dplyr}
-package.
+  \link[dplyr]{summarize_at} for aggregating data using the \code{dplyr} 
+  package.
 }
 \author{
 Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})

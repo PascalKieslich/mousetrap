@@ -81,11 +81,10 @@
 #' @return An object of class \code{mt_object_raw} containing in a matrix format
 #'   the image's pixel information, the aggregate trajectory, and the colors.
 #' 
-#' @seealso
-#' \link{mt_heatmap} and  \link{mt_heatmap_ggplot} for plotting trajectory
-#' heatmaps.
-#'     
-#' \link{mt_diffmap} for plotting trajectory difference-heatmaps.
+#' @seealso \link{mt_heatmap} and  \link{mt_heatmap_ggplot} for plotting
+#'   trajectory heatmaps.
+#'
+#'   \link{mt_diffmap} for plotting trajectory difference-heatmaps.
 #' 
 #' @export
 mt_heatmap_raw <- function(
@@ -437,10 +436,10 @@ mt_heatmap_raw <- function(
 #' @param plot_dims adds the coordinates of the four image corners to the plot. 
 #'   Helps setting \code{bounds}.
 #'   
-#' @seealso
-#' \link{mt_heatmap_ggplot} for plotting a trajectory heatmap using ggplot2.
-#'     
-#' \link{mt_diffmap} for plotting trajectory difference-heatmaps.
+#' @seealso \link{mt_heatmap_ggplot} for plotting a trajectory heatmap using
+#'   ggplot2.
+#'
+#'   \link{mt_diffmap} for plotting trajectory difference-heatmaps.
 #' 
 #' @examples
 #' mt_heatmap(KH2017, xres=500, n_shades=5,mean_image=0.2)
@@ -599,10 +598,10 @@ mt_heatmap <- function(
 #' 
 #' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
 #'
-#' @seealso
-#' \link{mt_heatmap} for plotting a trajectory heatmap using base plots.
-#'     
-#' \link{mt_diffmap} for plotting trajectory difference-heatmaps.
+#' @seealso \link{mt_heatmap} for plotting a trajectory heatmap using base
+#'   plots.
+#'
+#'   \link{mt_diffmap} for plotting trajectory difference-heatmaps.
 #' 
 #' @examples
 #' mt_heatmap_ggplot(KH2017, xres=500, n_shades=5,mean_image=0.2)

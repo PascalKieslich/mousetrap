@@ -57,12 +57,12 @@ mt_example <- mt_standardize(mt_example,
   
 }
 \seealso{
-\link{mt_scale_trajectories} for standardizing variables in mouse trajectory
-arrays.
+\link{mt_scale_trajectories} for standardizing variables in mouse
+  trajectory arrays.
 
-\link{scale_within} which is called by \code{mt_standardize}.
+  \link{scale_within} which is called by \code{mt_standardize}.
 
-\link{scale} for the R base scale function.
+  \link{scale} for the R base scale function.
 }
 \author{
 Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})

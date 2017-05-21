@@ -32,9 +32,10 @@ mt_heatmap_ggplot(KH2017, xres=500, n_shades=5,mean_image=0.2)
 
 }
 \seealso{
-\link{mt_heatmap} for plotting a trajectory heatmap using base plots.
-    
-\link{mt_diffmap} for plotting trajectory difference-heatmaps.
+\link{mt_heatmap} for plotting a trajectory heatmap using base
+  plots.
+
+  \link{mt_diffmap} for plotting trajectory difference-heatmaps.
 }
 \author{
 Felix Henninger

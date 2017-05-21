@@ -49,8 +49,8 @@
 #' @seealso \link[stats]{approx} for information about the function used for
 #'   linear interpolation.
 #'
-#' \link{mt_resample} for resampling trajectories using a constant time
-#' interval.
+#'   \link{mt_resample} for resampling trajectories using a constant time
+#'   interval.
 #'
 #' @examples
 #' mt_example <- mt_time_normalize(mt_example,
@@ -655,11 +655,11 @@ mt_align_start <- function(
 #'   only the resampled trajectories will be returned.
 #'
 #' @seealso \link[stats]{approx} for information about the function used for
-#' linear interpolation.
+#'   linear interpolation.
 #'
-#' \link{mt_average} for averaging trajectories across constant time intervals.
+#'   \link{mt_average} for averaging trajectories across constant time intervals.
 #'
-#' \link{mt_time_normalize} for time-normalizing trajectories.
+#'   \link{mt_time_normalize} for time-normalizing trajectories.
 #'
 #' @examples
 #' mt_example <- mt_resample(mt_example,
@@ -839,8 +839,8 @@ mt_resample <- function(data,
 #' @seealso \link{mt_derivatives} for calculating velocity and
 #'   acceleration.
 #'
-#' \link{mt_resample} for resampling trajectories using a constant time
-#' interval.
+#'   \link{mt_resample} for resampling trajectories using a constant time
+#'   interval.
 #' 
 #' @author
 #' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
@@ -1021,10 +1021,10 @@ mt_average <- function(data,
 #'   data and trajectories.
 #'
 #' @seealso \link{subset} for the R base subset function for vectors, matrices,
-#' or data.frames.
+#'   or data.frames.
 #'
-#' \link{mt_reshape} for information about the subset argument in various other
-#' mousetrap functions.
+#'   \link{mt_reshape} for information about the subset argument in various other
+#'   mousetrap functions.
 #'
 #' @examples
 #' # Subset based on trial data
@@ -1093,12 +1093,12 @@ mt_subset <- function(data, subset, check="data") {
 #'   that should be used for counting the number of observations. If several
 #'   dimensions are specified, the number of complete observations are reported.
 #' @return A mousetrap data object (see \link{mt_example}).
-#'   
+#'
 #'   If a data.frame with label specified in \code{save_as} (by default 
 #'   "measures") already exists, the number of observations (called \code{nobs})
 #'   are added as additional column. If not, an additional \link{data.frame}
 #'   will be added.
-#'   
+#'
 #'   If a trajectory array was provided directly as \code{data}, only a named
 #'   character vector will be returned.
 #'
