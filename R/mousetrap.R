@@ -190,7 +190,14 @@
 #'
 #'   \link{bezier} creates Bezier-curves using the Bernstein approximation.
 #'   
+#' @section Datasets:
 #'   
+#'   \link{mt_example} and \link{mt_example_raw} contain a mouse-tracking
+#'   example dataset for demonstrations using the \code{mousetrap} package.
+#'
+#'   \link{KH2017} and \link{KH2017_raw} contain a mouse-tracking dataset from
+#'   Kieslich & Henninger (in press).
+#'
 #' @examples
 #' \dontrun{
 #' KH2017 <- mt_import_mousetrap(subset(KH2017_raw,correct==1))
