@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>mt_example_raw • mousetrap</title>
+<title>KH2017 • mousetrap</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -79,68 +79,62 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Raw mouse-tracking dataset for demonstrations of the mousetrap package</h1>
+    <h1>Mouse-tracking dataset from Kieslich &amp; Henninger (in press)</h1>
     </div>
 
     
-    <p>An exemplary mouse-tracking dataset collected 
-<a href = 'http://osdoc.cogsci.nl/'>OpenSesame</a> using the 
-<a href = 'https://github.com/pascalkieslich/mousetrap-os'>mousetrap plugin</a> 
-(Kieslich &amp; Henninger, in press). A preprocessed (as opposed to raw) version of
-the same data can be found in <a href='mt_example.html'>mt_example</a>.</p>
+    <p>A data object of class "mousetrap" with the imported and preprocessed
+mouse-tracking data from Kieslich &amp; Henninger (in press). More information about
+the study and raw data can be found in <a href='KH2017_raw.html'>KH2017_raw</a>.</p>
     
 
-    <pre class="usage"><span class='no'>mt_example_raw</span></pre>
+    <pre class="usage"><span class='no'>KH2017</span></pre>
         
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A data.frame with 38 rows and 19 variables. The data.frame is 
-  based on the combined raw data that were created using 
-  <a href='http://www.rdocumentation.org/packages/readbulk/topics/read_opensesame'>read_opensesame</a> from the 
-  <a href = 'http://pascalkieslich.github.io/readbulk/'>readbulk</a> library. For 
-  ease of use, unnecessary columns were excluded.</p>
-<p>The variables included relate to the item that was presented
-  (<code>Exemplar</code>), the answer categories (<code>Category1</code> and
-  <code>Category2</code>), the subject identifier (<code>subject_nr</code>) the subjects'
-  response (<code>response_get_response</code>), as well as the mouse-tracking
-  variables (<code>timestamps_get_response</code>, <code>xpos_get_response</code> and
-  <code>ypos_get_response</code>). Besides, a number of additional variables are
-  included, e.g., some variables relating to the general settings of the
-  experiment (e.g., the <code>width</code> and <code>height</code> of the screen in
-  pixels).</p>
-<p>Each mouse-tracking variable contains a list of values (separated by ', ')
-  - one entry for each recorded position of the mouse. The position
-  coordinates are given in pixels, such that values of zero for both
-  <code>xpos_get_response</code> and <code>ypos_get_response</code> indicate that the
-  cursor is located in the center of the screen. Both variables increase in
-  value as the mouse moves toward the bottom right. Timestamps are given in
-  milliseconds.</p>
+    <p>A mousetrap data object is a list containing  at least the
+  following objects:</p><ul>
+<li><p><code>data</code>: a data.frame containing the trial data (from 
+    which the mouse-tracking data columns have been removed). More 
+    information about the content of the trial data in <code>KH2017</code> can 
+    be found in <a href='KH2017_raw.html'>KH2017_raw</a>. The rownames of <code>data</code> 
+    correspond to the trial identifier. For convenience, the trial identifier
+    is also stored in an additional column called "mt_id".</p></li>
+<li><p><code>trajectories</code>: an array containing the raw 
+    mouse-tracking trajectories. The first dimension represents the different
+    trials and the dimension names (which can be accessed using 
+    rownames) correspond to the trial identifier (the same identifier 
+    that is used as the <code>rownames</code> in <code>data</code>). The second dimension
+    corresponds to the samples taken over time which are included in
+    chronological order. The third dimension corresponds to the different
+    mouse-tracking variables (timestamps, x-positions, y-positions) which are
+    usually called <code>timestamps</code>, <code>xpos</code>, and <code>ypos</code>.</p></li>
+</ul>
+    <p>Some functions in this package (e.g., <a href='mt_time_normalize.html'>mt_time_normalize</a> and
+  <a href='mt_average.html'>mt_average</a>) add additional trajectory arrays (e.g.,
+  <code>tn_trajectories</code> and <code>av_trajectories</code>) to the mousetrap data
+  object. Other functions modify the existing arrays (e.g.,
+  <a href='mt_derivatives.html'>mt_derivatives</a> adds distance, velocity, and acceleration
+  to an existing dataset). Finally <a href='mt_measures.html'>mt_measures</a> adds an
+  additional data.frame with mouse-tracking measures to it.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The data stem from a study based on experiment 1 by Dale et al. (2007). In
-this experiment, participants have to assign exemplars (e.g., "shark") to one
-of two categories (e.g., "fish" or "mammal") by clicking on the button
-corresponding to the correct category. All exemplars and categories were
-translated to and presented in German.</p>
-<p>Across the 19 trials of the experiment, participants categorized 13 exemplars
-that were typical of their category and 6 atypical exemplars for which this
-was not the case. For the atypical exemplars (e.g., "whale"), the competing
-category ("fish") was selected to compete with the correct category
-("mammal"). The hypothesis under investigation is whether participants' mouse
-trajectories deviate more towards the competing category for the atypical
-exemplars, indicating increased conflict between the response options.</p>
-<p>Please note that <code>mt_example_raw</code> should only be used for exploring the
-features of the mousetrap package and not for any substantive analysis.</p>
+    <p>The raw dataset (<a href='KH2017_raw.html'>KH2017_raw</a>) was filtered keeping only correctly 
+answered trials. The filtered dataset was imported using 
+<a href='mt_import_mousetrap.html'>mt_import_mousetrap</a>. Trajectories were then remapped using 
+<a href='mt_remap_symmetric.html'>mt_remap_symmetric</a> so that all trajectories end in the top-left corner
+and their starting point was aligned to a common value (0,0) using
+<a href='mt_align_start.html'>mt_align_start</a>.</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Dale, R., Kehoe, C., &amp; Spivey, M. J. (2007). Graded motor 
- responses in the time course of categorizing atypical exemplars. 
- <em>Memory &amp; Cognition, 35</em>(1), 15-28.
-    Kieslich, P. J., &amp; Henninger, F. (in press). Mousetrap: An integrated,
- open-source mouse-tracking package. <em>Behavior Research Methods</em>.
- doi:10.3758/s13428-017-0900-z</p>
+    <p>Kieslich, P. J., &amp; Henninger, F. (in press). Mousetrap: An 
+  integrated, open-source mouse-tracking package. <em>Behavior Research 
+  Methods</em>. doi:10.3758/s13428-017-0900-z
+    Dale, R., Kehoe, C., &amp; Spivey, M. J. (2007). Graded motor responses in the
+  time course of categorizing atypical exemplars. <em>Memory &amp; Cognition,
+  35</em>(1), 15-28.</p>
     
 
   </div>

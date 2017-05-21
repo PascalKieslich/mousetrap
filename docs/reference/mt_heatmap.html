@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>mt_check_resolution • mousetrap</title>
+<title>mt_heatmap • mousetrap</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -79,26 +79,24 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Check logging resolution by looking at timestamp differences.</h1>
+    <h1>Plot trajectory heatmap.</h1>
     </div>
 
     
-    <p><code>mt_check_resolution</code> computes the timestamp differences as a measure of
-the logging resolution. It provides various descriptive statistics to check
-the logging resolution.</p>
+    <p><code>mt_heatmap</code> plots high resolution raw trajectory maps. Note that this
+function has beta status.</p>
     
 
-    <pre class="usage"><span class='fu'>mt_check_resolution</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>timestamps</span> <span class='kw'>=</span> <span class='st'>"timestamps"</span>,
-  <span class='kw'>desired</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>mt_heatmap</span>(<span class='no'>x</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>),
+  <span class='kw'>filename</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>, <span class='kw'>upscale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>plot_dims</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>data</th>
-      <td><p>a mousetrap data object created using one of the mt_import
-functions (see <a href='mt_example.html'>mt_example</a> for details). Alternatively, a trajectory
-array can be provided directly (in this case <code>use</code> will be ignored).</p></td>
+      <th>x</th>
+      <td><p>usually an object of class <code>mousetrap</code>. Alternatively, a
+trajectory array or an object of class <code>mt_heatmap_raw</code>.</p></td>
     </tr>
     <tr>
       <th>use</th>
@@ -106,54 +104,60 @@ array can be provided directly (in this case <code>use</code> will be ignored).<
 used.</p></td>
     </tr>
     <tr>
-      <th>timestamps</th>
-      <td><p>a character string specifying the trajectory dimension
-containing the timestamps.</p></td>
+      <th>dimensions</th>
+      <td><p>a character vector specifying the trajectory variables used
+to create the heatmap. The first two entries are used as x and 
+y-coordinates, the third, if provided, will be added as color information.</p></td>
     </tr>
     <tr>
-      <th>desired</th>
-      <td><p>an optional integer. If specified, additional statistics are
-computed concerning the (relative) frequencies with which exactly the
-desired timestamp difference (with tolerance 1e-12) occurred.</p></td>
+      <th>filename</th>
+      <td><p>a character string giving the name of the file. If 
+<code>NULL</code> (the default), the R standard device is used for plotting.
+Otherwise, the plotting device is inferred from the file extension. Only
+supports devices <a href='http://www.rdocumentation.org/packages/grDevices/topics/png'>tiff</a>, <a href='http://www.rdocumentation.org/packages/grDevices/topics/png'>png</a>,
+<a href='http://www.rdocumentation.org/packages/grDevices/topics/pdf'>pdf</a>.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>arguments passed to <a href='mt_heatmap_raw.html'>mt_heatmap_raw</a>.</p></td>
+    </tr>
+    <tr>
+      <th>upscale</th>
+      <td><p>a numeric value by which the output resolution of the image is
+increased or decreased. Only applies if device is one of tiff, png, or pdf.</p></td>
+    </tr>
+    <tr>
+      <th>plot_dims</th>
+      <td><p>adds the coordinates of the four image corners to the plot. 
+Helps setting <code>bounds</code>.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>logical indicating whether function should report its
+progress.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A list with various descriptive statistics. For convenience, the
-  relative frequencies are rounded to 4 decimal places.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>If mouse-tracking experiments are conducted using the mousetrap plug-ins for 
-OpenSesame, the logging resolution can be specified explicitly in the 
-experiment under "Logging resolution", which corresponds to the delay (in 
-milliseconds) between recordings of the mouse position. By default, mouse 
-positions are recorded every 10 ms (corresponding to a 100 Hz sampling rate).
-As the actual resolution achieved depends on the performance of the hardware,
-it makes sense to check the logging resolution using 
-<code>mt_check_resolution</code>. Note that delays smaller than the specified delay
-typically result from mouse clicks in the experiment.</p>
+    <p><code>mt_heatmap</code> wraps <a href='mt_heatmap_raw.html'>mt_heatmap_raw</a> and provides direct plotting 
+output in <a href='http://www.rdocumentation.org/packages/grDevices/topics/png'>tiff</a>, <a href='http://www.rdocumentation.org/packages/grDevices/topics/png'>png</a>,
+<a href='http://www.rdocumentation.org/packages/grDevices/topics/pdf'>pdf</a>, or R's default window output. For further details on
+how the trajectory heatmaps are constructed, see <a href='mt_heatmap_raw.html'>mt_heatmap_raw</a>.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <p><a href='mt_heatmap_ggplot.html'>mt_heatmap_ggplot</a> for plotting a trajectory heatmap using
+  ggplot2.</p>
+<p><a href='mt_diffmap.html'>mt_diffmap</a> for plotting trajectory difference-heatmaps.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>mt_check_resolution</span>(<span class='no'>mt_example</span>)</div><div class='output co'>#&gt; $summary
-#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-#&gt;   1.000  10.000  10.000   9.977  10.000  14.000 
-#&gt; 
-#&gt; $sd
-#&gt; [1] 0.4015953
-#&gt; 
-#&gt; $frequencies
-#&gt; log_diffs
-#&gt;    1    2    3    4    6    7    8   10   11   14 
-#&gt;    4    7    4    1    8    4    8 7504    5    1 
-#&gt; 
-#&gt; $relative_frequencies
-#&gt; log_diffs
-#&gt;      1      2      3      4      6      7      8     10     11     14 
-#&gt; 0.0005 0.0009 0.0005 0.0001 0.0011 0.0005 0.0011 0.9944 0.0007 0.0001 
-#&gt; </div><div class='input'>
+    <pre class="examples"><div class='input'><span class='fu'>mt_heatmap</span>(<span class='no'>KH2017</span>, <span class='kw'>xres</span><span class='kw'>=</span><span class='fl'>500</span>, <span class='kw'>n_shades</span><span class='kw'>=</span><span class='fl'>5</span>,<span class='kw'>mean_image</span><span class='kw'>=</span><span class='fl'>0.2</span>)</div><div class='output co'>#&gt; spatializing trajectories 
+#&gt; calculate image 
+#&gt; smooth image 
+#&gt; enhance image by 26.5 
+#&gt; creating heatmap:  500 x 308 px </div><img src='mt_heatmap-3.png' alt='' width='540' height='400' /><div class='output co'>#&gt; heatmap created in 1s</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -161,18 +165,12 @@ typically result from mouse clicks in the experiment.</p>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
+
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
-
-    <h2>Author</h2>
-    
-Pascal J. Kieslich (<a href='mailto:kieslich@psychologie.uni-mannheim.de'>kieslich@psychologie.uni-mannheim.de</a>)
-
-Felix Henninger
 
   </div>
 </div>

@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -85,32 +87,43 @@
 that adjacent points on the trajectory become equidistant to each other.</p>
     
 
-    <pre><span class='fu'>mt_spatialize</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>),
+    <pre class="usage"><span class='fu'>mt_spatialize</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>),
   <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='st'>"sp_trajectories"</span>, <span class='kw'>n_points</span> <span class='kw'>=</span> <span class='fl'>20</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>data</dt>
-      <dd>a mousetrap data object created using one of the mt_import
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>data</th>
+      <td><p>a mousetrap data object created using one of the mt_import
 functions (see <a href='mt_example.html'>mt_example</a> for details). Alternatively, a trajectory
-array can be provided directly (in this case <code>use</code> will be ignored).</dd>
-      <dt>use</dt>
-      <dd>a character string specifying which trajectory data should be
-used.</dd>
-      <dt>dimensions</dt>
-      <dd>a character string specifying which trajectory variables 
+array can be provided directly (in this case <code>use</code> will be ignored).</p></td>
+    </tr>
+    <tr>
+      <th>use</th>
+      <td><p>a character string specifying which trajectory data should be
+used.</p></td>
+    </tr>
+    <tr>
+      <th>dimensions</th>
+      <td><p>a character string specifying which trajectory variables 
 should be used. Can be of length 2 or 3 for two-dimensional or 
-three-dimensional data.</dd>
-      <dt>save_as</dt>
-      <dd>a character string specifying where the resulting trajectory
-data should be stored.</dd>
-      <dt>n_points</dt>
-      <dd>an integer or vector of integers specifying the number of 
+three-dimensional data.</p></td>
+    </tr>
+    <tr>
+      <th>save_as</th>
+      <td><p>a character string specifying where the resulting trajectory
+data should be stored.</p></td>
+    </tr>
+    <tr>
+      <th>n_points</th>
+      <td><p>an integer or vector of integers specifying the number of 
 points used to represent the spatially rescaled trajectories. If a single 
 integer is provided, the number of points will be constant across 
 trajectories. Alternatively, a vector of integers can provided that specify
-the number of points for each trajectory individually.</dd>
-    </dl>
+the number of points for each trajectory individually.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
@@ -121,7 +134,7 @@ the number of points for each trajectory individually.</dd>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code>mt_spatialize</code> is used to emphasize the trajectories&#39; shape. Usually, 
+    <p><code>mt_spatialize</code> is used to emphasize the trajectories' shape. Usually, 
 the vast majority of points of a raw or a time-normalized trajectory lie
 close to the start and end point. <code>mt_spatialize</code> re-distributes these
 points so that the spatial distribution is uniform across the entire
@@ -130,7 +143,7 @@ clustering (in particular <a href='mt_cluster.html'>mt_cluster</a>) and visualiz
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>mt_example</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_spatialize</span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>mt_example</span>,
+    <pre class="examples"><div class='input'><span class='no'>KH2017</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_spatialize</span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>KH2017</span>,
   <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>'xpos'</span>,<span class='st'>'ypos'</span>),
   <span class='kw'>n_points</span> <span class='kw'>=</span> <span class='fl'>20</span>)</div></pre>
   </div>

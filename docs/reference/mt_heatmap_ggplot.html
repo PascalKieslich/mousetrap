@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>mt_bind • mousetrap</title>
+<title>mt_heatmap_ggplot • mousetrap</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -79,61 +79,77 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Join two trajectory arrays</h1>
+    <h1>Plot trajectory heatmap using ggplot.</h1>
     </div>
 
     
-    <p>Join two trajectory arrays. This function is mainly used internally, but can 
-be helpful in those (relatively rare) occasions where additional processed 
-trajectory data should be added to another trajectory array.</p>
+    <p><code>mt_heatmap_ggplot</code> plots high resolution raw trajectory maps. Note that
+this function has beta status.</p>
     
 
-    <pre class="usage"><span class='fu'>mt_bind</span>(<span class='no'>trajectories1</span>, <span class='no'>trajectories2</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>mt_heatmap_ggplot</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>trajectories1</th>
-      <td><p>a trajectory array (see <a href='mt_example.html'>mt_example</a>).</p></td>
+      <th>data</th>
+      <td><p>a mousetrap data object created using one of the mt_import
+functions (see <a href='mt_example.html'>mt_example</a> for details). Alternatively, a trajectory
+array can be provided directly (in this case <code>use</code> will be ignored).</p></td>
     </tr>
     <tr>
-      <th>trajectories2</th>
-      <td><p>a trajectory array (see <a href='mt_example.html'>mt_example</a>).</p></td>
+      <th>use</th>
+      <td><p>a character string specifying which trajectory data should be
+used.</p></td>
     </tr>
     <tr>
-      <th>verbose</th>
-      <td><p>logical indicating whether function should report its
-progress.</p></td>
+      <th>...</th>
+      <td><p>arguments passed to <a href='mt_heatmap.html'>mt_heatmap</a>.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>A trajectory array.</p>
+    <p><code>mt_heatmap_ggplot</code> wraps <a href='mt_heatmap_raw.html'>mt_heatmap_raw</a> and returns a ggplot 
+object containing the plot. In contrast to <code>mt_heatmap_plot</code> plots 
+created by <code>mt_heatmap_ggplot</code> can be extended using ggplot's <code>+</code> 
+operator. For further details on how the trajectory heatmaps are constructed,
+see <a href='mt_heatmap_raw.html'>mt_heatmap_raw</a>.</p>
+    
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <p><a href='mt_heatmap.html'>mt_heatmap</a> for plotting a trajectory heatmap using base
+  plots.</p>
+<p><a href='mt_diffmap.html'>mt_diffmap</a> for plotting trajectory difference-heatmaps.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>trajectories_combined</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_bind</span>(
-  <span class='no'>mt_example</span>$<span class='no'>trajectories</span>,
-  <span class='no'>mt_prototypes</span>
-)</div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>mt_heatmap_ggplot</span>(<span class='no'>KH2017</span>, <span class='kw'>xres</span><span class='kw'>=</span><span class='fl'>500</span>, <span class='kw'>n_shades</span><span class='kw'>=</span><span class='fl'>5</span>,<span class='kw'>mean_image</span><span class='kw'>=</span><span class='fl'>0.2</span>)</div><div class='output co'>#&gt; spatializing trajectories 
+#&gt; calculate image 
+#&gt; smooth image 
+#&gt; enhance image by 26.5 </div><img src='mt_heatmap_ggplot-3.png' alt='' width='540' height='400' /><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
     </ul>
 
     <h2>Author</h2>
     
-Pascal J. Kieslich (<a href='mailto:kieslich@psychologie.uni-mannheim.de'>kieslich@psychologie.uni-mannheim.de</a>)
-
 Felix Henninger
+
+Dirk U. Wulff (<a href='mailto:dirk.wulff@gmail.com'>dirk.wulff@gmail.com</a>)
+
+Pascal J. Kieslich (<a href='mailto:kieslich@psychologie.uni-mannheim.de'>kieslich@psychologie.uni-mannheim.de</a>)
 
   </div>
 </div>

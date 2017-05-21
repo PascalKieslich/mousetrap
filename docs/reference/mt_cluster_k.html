@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -84,96 +86,143 @@
     <p>Estimates the optimal number of clusters (<code>k</code>) using various methods.</p>
     
 
-    <pre><span class='fu'>mt_cluster_k</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"sp_trajetcories"</span>, <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>),
+    <pre class="usage"><span class='fu'>mt_cluster_k</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"sp_trajectories"</span>, <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>),
   <span class='kw'>kseq</span> <span class='kw'>=</span> <span class='fl'>2</span>:<span class='fl'>15</span>, <span class='kw'>compute</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"stability"</span>, <span class='st'>"gap"</span>, <span class='st'>"jump"</span>, <span class='st'>"slope"</span>),
-  <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"hclust"</span>, <span class='kw'>pointwise</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>minkowski_p</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>hclust_method</span> <span class='kw'>=</span> <span class='st'>"ward.D"</span>, <span class='kw'>kmeans_nstart</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>n_bootstrap</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-  <span class='kw'>model_based</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>n_gap</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+  <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"hclust"</span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='fu'>rep</span>(<span class='fl'>1</span>, <span class='fu'>length</span>(<span class='no'>dimensions</span>)),
+  <span class='kw'>pointwise</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>minkowski_p</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>hclust_method</span> <span class='kw'>=</span> <span class='st'>"ward.D"</span>,
+  <span class='kw'>kmeans_nstart</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>n_bootstrap</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>model_based</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>n_gap</span> <span class='kw'>=</span> <span class='fl'>10</span>,
+  <span class='kw'>na_rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>data</dt>
-      <dd>a mousetrap data object created using one of the mt_import
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>data</th>
+      <td><p>a mousetrap data object created using one of the mt_import
 functions (see <a href='mt_example.html'>mt_example</a> for details). Alternatively, a trajectory
-array can be provided directly (in this case <code>use</code> will be ignored).</dd>
-      <dt>use</dt>
-      <dd>a character string specifying which trajectory data should be
-used.</dd>
-      <dt>dimensions</dt>
-      <dd>a character vector specifying which trajectory variables 
+array can be provided directly (in this case <code>use</code> will be ignored).</p></td>
+    </tr>
+    <tr>
+      <th>use</th>
+      <td><p>a character string specifying which trajectory data should be
+used.</p></td>
+    </tr>
+    <tr>
+      <th>dimensions</th>
+      <td><p>a character vector specifying which trajectory variables 
 should be used. Can be of length 2 or 3, for two-dimensional or 
-three-dimensional trajectories respectively.</dd>
-      <dt>kseq</dt>
-      <dd>a numeric vector specifying set of candidates for k. Defaults to 
-2:15, implying that all values of k within that range are compared using 
-the metrics specified in <code>compute</code>.</dd>
-      <dt>compute</dt>
-      <dd>character vector specifying the to be computed measures. Can 
-be any subset of <code>c(&quot;stability&quot;,&quot;gap&quot;,&quot;jump&quot;,&quot;slope&quot;)</code>.</dd>
-      <dt>method</dt>
-      <dd>character string specifiying the type of clustering procedure 
-for the stability-based method. Either <code>hclust</code> or <code>kmeans</code>.</dd>
-      <dt>pointwise</dt>
-      <dd>boolean specifying the way in which dissimilarity between
+three-dimensional trajectories respectively.</p></td>
+    </tr>
+    <tr>
+      <th>kseq</th>
+      <td><p>a numeric vector specifying set of candidates for k. Defaults to
+2:15, implying that all values of k within that range are compared using
+the metrics specified in <code>compute</code>.</p></td>
+    </tr>
+    <tr>
+      <th>compute</th>
+      <td><p>character vector specifying the to be computed measures. Can
+be any subset of <code>c("stability","gap","jump","slope")</code>.</p></td>
+    </tr>
+    <tr>
+      <th>method</th>
+      <td><p>character string specifying the type of clustering procedure
+for the stability-based method. Either <code>hclust</code> or <code>kmeans</code>.</p></td>
+    </tr>
+    <tr>
+      <th>weights</th>
+      <td><p>numeric vector specifying the relative importance of the 
+variables specified in <code>dimensions</code>. Defaults to a vector of 1s 
+implying equal importance. Technically, each variable is rescaled so that
+the standard deviation matches the corresponding value in <code>weights</code>.
+To use the original variables, set <code>weights = NULL</code>.</p></td>
+    </tr>
+    <tr>
+      <th>pointwise</th>
+      <td><p>boolean specifying the way in which dissimilarity between
 the trajectories is measured. If <code>TRUE</code> (the default),
 <code>mt_distmat</code> measures the average dissimilarity and then sums the
 results. If <code>FALSE</code>, <code>mt_distmat</code>  measures dissimilarity once
 (by treating the various points as independent dimensions). This is only
-relevant if <code>method</code> is &quot;hclust&quot;. See <a href='mt_distmat.html'>mt_distmat</a> for further
-details.</dd>
-      <dt>minkowski_p</dt>
-      <dd>an integer specifying the distance metric for the cluster
+relevant if <code>method</code> is "hclust". See <a href='mt_distmat.html'>mt_distmat</a> for further
+details.</p></td>
+    </tr>
+    <tr>
+      <th>minkowski_p</th>
+      <td><p>an integer specifying the distance metric for the cluster
 solution. <code>minkowski_p = 1</code> computes the city-block distance,
 <code>minkowski_p = 2</code> (the default) computes the Euclidian distance,
 <code>minkowski_p = 3</code> the cubic distance, etc. Only relevant if
-<code>method</code> is &quot;hclust&quot;. See <a href='mt_distmat.html'>mt_distmat</a> for further details.</dd>
-      <dt>hclust_method</dt>
-      <dd>character string specifying the linkage criterion used. 
+<code>method</code> is "hclust". See <a href='mt_distmat.html'>mt_distmat</a> for further details.</p></td>
+    </tr>
+    <tr>
+      <th>hclust_method</th>
+      <td><p>character string specifying the linkage criterion used. 
 Passed on to the <code>method</code> argument of <a href='http://www.rdocumentation.org/packages/stats/topics/hclust'>hclust</a>. Default is
-set to <code>ward.D</code>. Only relevant if <code>method</code> is &quot;hclust&quot;.</dd>
-      <dt>kmeans_nstart</dt>
-      <dd>integer specifying the number of reruns of the kmeans 
+set to <code>ward.D</code>. Only relevant if <code>method</code> is "hclust".</p></td>
+    </tr>
+    <tr>
+      <th>kmeans_nstart</th>
+      <td><p>integer specifying the number of reruns of the kmeans 
 procedure. Larger numbers minimize the risk of finding local minima. Passed
 on to the <code>nstart</code> argument of <a href='http://www.rdocumentation.org/packages/stats/topics/kmeans'>kmeans</a>. Only relevant if 
-<code>method</code> is &quot;kmeans&quot;.</dd>
-      <dt>n_bootstrap</dt>
-      <dd>an integer specifying the number of bootstrap comparisons 
-used by <code>stability</code>. See <a href='http://www.rdocumentation.org/packages/cstab/topics/cStability'>cStability</a>.</dd>
-      <dt>model_based</dt>
-      <dd>boolean specifying whether the model-based or the
+<code>method</code> is "kmeans".</p></td>
+    </tr>
+    <tr>
+      <th>n_bootstrap</th>
+      <td><p>an integer specifying the number of bootstrap comparisons
+used by <code>stability</code>. See <a href='http://www.rdocumentation.org/packages/cstab/topics/cStability'>cStability</a>.</p></td>
+    </tr>
+    <tr>
+      <th>model_based</th>
+      <td><p>boolean specifying whether the model-based or the
 model-free should be used by <code>stability</code>, when method is
-<code>kmeans</code>. See <a href='http://www.rdocumentation.org/packages/cstab/topics/cStability'>cStability</a> and Haslbeck &amp; Wulff (2016).</dd>
-      <dt>n_gap</dt>
-      <dd>integer specifying the number of simulated datasets used by 
-<code>gap</code>. See Tibshirani et al. (2001).</dd>
-      <dt>verbose</dt>
-      <dd>logical indicating whether function should report its
-progress.</dd>
-    </dl>
+<code>kmeans</code>. See <a href='http://www.rdocumentation.org/packages/cstab/topics/cStability'>cStability</a> and Haslbeck &amp; Wulff (2016).</p></td>
+    </tr>
+    <tr>
+      <th>n_gap</th>
+      <td><p>integer specifying the number of simulated datasets used by
+<code>gap</code>. See Tibshirani et al. (2001).</p></td>
+    </tr>
+    <tr>
+      <th>na_rm</th>
+      <td><p>logical specifying whether trajectory points containing NAs 
+should be removed. Removal is done column-wise. That is, if any trajectory 
+has a missing value at, e.g., the 10th recorded position, the 10th position
+is removed for all trajectories. This is necessary to compute distance
+between trajectories.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>logical indicating whether function should report its
+progress.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list containing two lists that store the results of the different 
-  methods. <code>kopt</code> contains the estimated <code>k</code> for each of the 
-  methods specified in <code>compute</code>. <code>paths</code> contains the values for 
-  each <code>k</code> in <code>kseq</code> as computed by each of the methods specified 
-  in <code>compute</code>. The values in <code>kopt</code> are optima for each of the 
+    <p>A list containing two lists that store the results of the different
+  methods. <code>kopt</code> contains the estimated <code>k</code> for each of the
+  methods specified in <code>compute</code>. <code>paths</code> contains the values for
+  each <code>k</code> in <code>kseq</code> as computed by each of the methods specified
+  in <code>compute</code>. The values in <code>kopt</code> are optima for each of the
   vectors in <code>paths</code>.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p><code>mt_cluster_k</code> estimates the number of clusters (<code>k</code>) using four 
-commonly used k-selection methods (specified via <code>compute</code>): cluster 
-stability (<code>stability</code>), the gap statistic (<code>gap</code>), the jump 
+    <p><code>mt_cluster_k</code> estimates the number of clusters (<code>k</code>) using four
+commonly used k-selection methods (specified via <code>compute</code>): cluster
+stability (<code>stability</code>), the gap statistic (<code>gap</code>), the jump
 statistic (<code>jump</code>), and the slope statistic (<code>slope</code>).</p>
-    <p>Cluster stability methods select <code>k</code> as the number of clusters for which
-the assignment of objects to clusters is most stable across bootstrap 
-samples. This function implements the model-based and model-free methods 
-developed by Haslbeck &amp; Wulff (2016). See references.</p>
-    <p>The remaining three methods select <code>k</code> as the value that minimizes some 
-distance metric measured for objects within and between clusters. See the 
-references below.</p>
-    <p>For clustering trajectories, it is often useful that the endpoints of all
+<p>Cluster stability methods select <code>k</code> as the number of clusters for which
+the assignment of objects to clusters is most stable across bootstrap
+samples. This function implements the model-based and model-free methods
+described by Haslbeck &amp; Wulff (2016). See references.</p>
+<p>The remaining three methods select <code>k</code> as the value that optimizes the
+gap statistic (Tibshirani, Walther, &amp; Hastie, 2001), the jump statistic
+(Sugar &amp; James, 2013), and the slope statistic (Fujita, Takahashi, &amp;
+Patriota, 2014), respectively.</p>
+<p>For clustering trajectories, it is often useful that the endpoints of all
 trajectories share the same direction, e.g., that all trajectories end in the
 top-left corner of the coordinate system (<a href='mt_remap_symmetric.html'>mt_remap_symmetric</a> or
 <a href='mt_align.html'>mt_align</a> can be used to achieve this). Furthermore, it is recommended
@@ -182,44 +231,44 @@ Kieslich, Henninger, &amp; Schulte-Mecklenbeck, 2017).</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Haslbeck, J., &amp; Wulff, D. U. (2016). Estimating the Number of 
-  Clusters via Normalized Cluster Instability. <em>arXiv preprint</em> 
+    <p>Haslbeck, J., &amp; Wulff, D. U. (2016). Estimating the Number of
+  Clusters via Normalized Cluster Instability. <em>arXiv preprint</em>
   arXiv:1608.07494.</p>
-    <p>Haslbeck, J. M. B., Wulff, D. U., Kieslich, P. J., Henninger, F., &amp; 
+<p>Haslbeck, J. M. B., Wulff, D. U., Kieslich, P. J., Henninger, F., &amp;
   Schulte-Mecklenbeck, M. (2017). Advanced mouse- and hand-tracking analysis:
-  Detecting and visualizing clusters in movement trajectories. Manuscript in 
+  Detecting and visualizing clusters in movement trajectories. Manuscript in
   preparation.</p>
-    <p>Tibshirani, R., Walther, G., &amp; Hastie, T. (2001). Estimating the number of 
-  clusters in a data set via the gap statistic. <em>Journal of the Royal 
+<p>Tibshirani, R., Walther, G., &amp; Hastie, T. (2001). Estimating the number of
+  clusters in a data set via the gap statistic. <em>Journal of the Royal
   Statistical Society: Series B (Statistical Methodology), 63</em>(2), 411-423.</p>
-    <p>Sugar, C. A., &amp; James, G. M. (2013). Finding the number of clusters in a 
-  dataset. <em>Journal of the American Statistical Association, 98</em>(463), 
+<p>Sugar, C. A., &amp; James, G. M. (2013). Finding the number of clusters in a
+  dataset. <em>Journal of the American Statistical Association, 98</em>(463),
   750-763.</p>
-    <p>Fujita, A., Takahashi, D. Y., &amp; Patriota, A. G. (2014). A non-parametric 
+<p>Fujita, A., Takahashi, D. Y., &amp; Patriota, A. G. (2014). A non-parametric
   method to estimate the number of clusters. <em>Computational Statistics &amp;
   Data Analysis, 73</em>, 27-39.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><a href='mt_distmat.html'>mt_distmat</a> for more information about how the distance matrix is 
-computed when the hclust method is used.</p>
-    <p><a href='mt_cluster.html'>mt_cluster</a> for performing trajectory clustering with a specified 
-number of clusters.</p>
+    <p><a href='mt_distmat.html'>mt_distmat</a> for more information about how the distance matrix
+  is computed when the hclust method is used.</p>
+<p><a href='mt_cluster.html'>mt_cluster</a> for performing trajectory clustering with a specified
+  number of clusters.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-<span class='co'>## Not run: ------------------------------------</span>
-<span class='co'># # Spatialize trajectories</span>
-<span class='co'># mt_example &lt;- mt_spatialize(mt_example)</span>
-<span class='co'>#  </span>
-<span class='co'># # Find k</span>
-<span class='co'># results &lt;- mt_cluster_k(mt_example, use="sp_trajectories")</span>
-<span class='co'># </span>
-<span class='co'># # Retrieve results</span>
-<span class='co'># results$kopt</span>
-<span class='co'># results$paths</span>
-<span class='co'>## ---------------------------------------------</span></div></pre>
+<span class='fu'>not_run</span>({
+  <span class='co'># Spatialize trajectories</span>
+  <span class='no'>KH2017</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_spatialize.html'>mt_spatialize</a></span>(<span class='no'>KH2017</span>)
+
+  <span class='co'># Find k</span>
+  <span class='no'>results</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_cluster_k</span>(<span class='no'>KH2017</span>, <span class='kw'>use</span><span class='kw'>=</span><span class='st'>"sp_trajectories"</span>)
+
+  <span class='co'># Retrieve results</span>
+  <span class='no'>results</span>$<span class='no'>kopt</span>
+  <span class='no'>results</span>$<span class='no'>paths</span>
+})</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

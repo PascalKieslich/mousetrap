@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>mt_bind • mousetrap</title>
+<title>bezier • mousetrap</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -79,45 +79,58 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Join two trajectory arrays</h1>
+    <h1>Create Bezier-curves using the Bernstein approximation.</h1>
     </div>
 
     
-    <p>Join two trajectory arrays. This function is mainly used internally, but can 
-be helpful in those (relatively rare) occasions where additional processed 
-trajectory data should be added to another trajectory array.</p>
+    <p><code>bezier</code> creates 3-point Bezier-curves using the 
+  Bernstein approximation to simulate continuous competition 
+  in mouse- and hand-trajectories.</p>
     
 
-    <pre class="usage"><span class='fu'>mt_bind</span>(<span class='no'>trajectories1</span>, <span class='no'>trajectories2</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>bezier</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0</span>, <span class='fl'>1</span>, -<span class='fl'>1</span>), <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0</span>, <span class='fl'>1.5</span>, <span class='fl'>1.5</span>), <span class='kw'>w</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>resol</span> <span class='kw'>=</span> <span class='fl'>100</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>trajectories1</th>
-      <td><p>a trajectory array (see <a href='mt_example.html'>mt_example</a>).</p></td>
+      <th>x</th>
+      <td><p>a numeric vector giving the x-coordinates of exactly three
+Bezier-points. Defaults to c(0,1,-1) matching the 'mt' format in
+<a href='mt_align.html'>mt_align</a>.</p></td>
     </tr>
     <tr>
-      <th>trajectories2</th>
-      <td><p>a trajectory array (see <a href='mt_example.html'>mt_example</a>).</p></td>
+      <th>y</th>
+      <td><p>a numeric vector giving the x-coordinates of exactly three
+Bezier-points. Defaults to c(0,1.5,1.5) matching the 'mt' format in
+<a href='mt_align.html'>mt_align</a>.</p></td>
     </tr>
     <tr>
-      <th>verbose</th>
-      <td><p>logical indicating whether function should report its
-progress.</p></td>
+      <th>w</th>
+      <td><p>a numeric value or vector specifying one or several Bezier curves, 
+with <code>w</code> governing the pull towards the middle point. Each entry in
+<code>w</code> creates one Bezier-curve.</p></td>
+    </tr>
+    <tr>
+      <th>resol</th>
+      <td><p>a numeric value specifying the spatial resolution of the bezier
+curves. For example, <code>resol = 100</code> creates bezier curves comprised of
+100 points each.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A trajectory array.</p>
+    <p>A trajectory array containing the bezier curves.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>trajectories_combined</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_bind</span>(
-  <span class='no'>mt_example</span>$<span class='no'>trajectories</span>,
-  <span class='no'>mt_prototypes</span>
-)</div></pre>
+    <pre class="examples"><div class='input'><span class='co'># Generate range of Bezier-curves</span>
+<span class='no'>bezier_curves</span> <span class='kw'>&lt;-</span> <span class='fu'>bezier</span>(<span class='kw'>w</span><span class='kw'>=</span><span class='fu'>seq</span>(<span class='fl'>0</span>,<span class='fl'>10</span>,<span class='fl'>.1</span>))
+
+<span class='co'># Plot curves</span>
+<span class='fu'><a href='mt_plot.html'>mt_plot</a></span>(<span class='no'>bezier_curves</span>)</div><img src='bezier-2.png' alt='' width='540' height='400' /><div class='input'>   
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -131,9 +144,7 @@ progress.</p></td>
 
     <h2>Author</h2>
     
-Pascal J. Kieslich (<a href='mailto:kieslich@psychologie.uni-mannheim.de'>kieslich@psychologie.uni-mannheim.de</a>)
-
-Felix Henninger
+Dirk U. Wulff (<a href='mailto:dirk.wulff@gmail.com'>dirk.wulff@gmail.com</a>)
 
   </div>
 </div>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>mt_time_normalize • mousetrap</title>
+<title>mt_scale_trajectories • mousetrap</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -79,20 +79,17 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Time normalize trajectories.</h1>
+    <h1>Standardize variables in mouse trajectory array.</h1>
     </div>
 
     
-    <p>Compute time-normalized trajectories using a constant number of equally sized
-time steps. Time normalization is performed separately for all specified
-trajectory dimensions (by default, the x- and y-positions) using linear
-interpolation based on the timestamps. By default, 101 time steps are used
-(following Spivey et al., 2005).</p>
+    <p><code>mt_scale_trajectories</code> centers and / or standardizes selected
+trajectory variables within or across trajectories.</p>
     
 
-    <pre class="usage"><span class='fu'>mt_time_normalize</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='st'>"tn_trajectories"</span>,
-  <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>), <span class='kw'>timestamps</span> <span class='kw'>=</span> <span class='st'>"timestamps"</span>, <span class='kw'>nsteps</span> <span class='kw'>=</span> <span class='fl'>101</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>mt_scale_trajectories</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='no'>use</span>, <span class='no'>var_names</span>,
+  <span class='kw'>center</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>within_trajectory</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>"z_"</span>,
+  <span class='kw'>transform</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -114,67 +111,70 @@ used.</p></td>
 data should be stored.</p></td>
     </tr>
     <tr>
-      <th>dimensions</th>
-      <td><p>a character vector specifying the dimensions in the
-trajectory array that should be time-normalized. If <code>"all"</code>, all
-trajectory dimensions except the timestamps will be time-normalized.</p></td>
+      <th>var_names</th>
+      <td><p>character vector giving the labels of the to be 
+standardized variables.</p></td>
     </tr>
     <tr>
-      <th>timestamps</th>
-      <td><p>a character string specifying the trajectory dimension
-containing the timestamps.</p></td>
+      <th>center</th>
+      <td><p>logical specifying whether variables should be centered (i.e.,
+<code>mean = 0</code>). Can be a logical vector, in which case the values of
+<code>scale</code> are mapped to the variables specified in <code>var_names</code>.</p></td>
     </tr>
     <tr>
-      <th>nsteps</th>
-      <td><p>an integer specifying the number of equally sized time steps.</p></td>
+      <th>scale</th>
+      <td><p>logical or numeric specifying the scaling of the variables. When
+logical, <code>scale = TRUE</code> normalizes the trajectory variable to sd = 1,
+whereas <code>scale = FALSE</code> leaves the variable on its original scale. When
+numeric, the trajectory variables are scaled by (i.e., divided by) the
+specific value in scale. Can also be a numeric vector, in which case the
+values of <code>scale</code> are mapped to the variables specified in 
+<code>var_names</code>.</p></td>
     </tr>
     <tr>
-      <th>verbose</th>
-      <td><p>logical indicating whether function should report its
-progress.</p></td>
+      <th>within_trajectory</th>
+      <td><p>logical specifying whether trajectory variables
+should be scaled within or across trajectories. If <code>within_trajectory
+== TRUE</code>, scaling trajectories to mean = 0 and sd = 1 means that every to
+be standardized trajectory variable will have mean = 0 and sd = 1. If
+<code>within_trajectory == FALSE</code> (the default), mean = 0 and sd = 1 are
+only true in the aggregate (i.e., across all trajectories). Can be a
+logical vector, in which case the values of <code>scale</code> are mapped to the
+variables specified in <code>var_names</code>.</p></td>
+    </tr>
+    <tr>
+      <th>prefix</th>
+      <td><p>character string added to the names of the new standardized
+variables. If <code>prefix = ""</code>, the original variables will be
+overwritten.</p></td>
+    </tr>
+    <tr>
+      <th>transform</th>
+      <td><p>function that takes a numeric matrix as argument and returns
+a numeric matrix of same size with transformed values. If <code>NULL</code> the
+original values are passed on to standardization.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A mousetrap data object (see <a href='mt_example.html'>mt_example</a>) with an additional
-  array (by default called <code>tn_trajectories</code>) containing the
-  time-normalized trajectories. In this array, another dimension (called
-  <code>steps</code>) has been added with increasing integer values indexing the
-  time-normalized position. If a trajectory array was provided directly as
-  <code>data</code>, only the time-normalized trajectories will be returned.</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Time-normalization is often performed if the number of recorded x- and
-y-positions varies across trajectories, which typically occurs when
-trajectories vary in their response time. After time-normalization, all
-trajectories have the same number of recorded positions (which is specified
-using <code>nsteps</code>) and the positions at different relative time points can
-be compared across trajectories.</p>
-<p>For example, time normalized trajectories can be compared across conditions
-that differed in their overall response time, as the timestamps are now
-relative to the overall trial duration. This is also helpful for creating
-average trajectories, which are often used in plots.</p>
-    
-    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
-
-    <p>Spivey, M. J., Grosjean, M., &amp; Knoblich, G. (2005). Continuous
-  attraction toward phonological competitors. <em>Proceedings of the
-  National Academy of Sciences of the United States of America, 102</em>(29),
-  10393-10398.</p>
+    <p>A mousetrap data object (see <a href='mt_example.html'>mt_example</a>) with an additional 
+  variable containing the standardized trajectory variable added to the 
+  trajectory array). If the trajectory array was provided directly as 
+  <code>data</code>, only the trajectory array will be returned.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><a href='http://www.rdocumentation.org/packages/stats/topics/approxfun'>approx</a> for information about the function used for
-  linear interpolation.</p>
-<p><a href='mt_resample.html'>mt_resample</a> for resampling trajectories using a constant time
-  interval.</p>
+    <p><a href='mt_standardize.html'>mt_standardize</a> for standardizing mouse-tracking measures per level of
+other variables.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>mt_example</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_time_normalize</span>(<span class='no'>mt_example</span>,
-  <span class='kw'>save_as</span><span class='kw'>=</span><span class='st'>"tn_trajectories"</span>, <span class='kw'>nsteps</span><span class='kw'>=</span><span class='fl'>101</span>)</div></pre>
+    <pre class="examples"><div class='input'><span class='co'># Calculate derivatives</span>
+<span class='no'>mt_example</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_derivatives.html'>mt_derivatives</a></span>(<span class='no'>mt_example</span>)
+
+<span class='co'># Standardize velocity across trajectories</span>
+<span class='no'>mt_example</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_scale_trajectories</span>(<span class='no'>mt_example</span>,<span class='kw'>var_names</span> <span class='kw'>=</span> <span class='st'>"vel"</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -183,10 +183,6 @@ average trajectories, which are often used in plots.</p>
       
       <li><a href="#value">Value</a></li>
 
-      <li><a href="#details">Details</a></li>
-
-      <li><a href="#references">References</a></li>
-
       <li><a href="#see-also">See also</a></li>
       
       <li><a href="#examples">Examples</a></li>
@@ -194,9 +190,7 @@ average trajectories, which are often used in plots.</p>
 
     <h2>Author</h2>
     
-Pascal J. Kieslich (<a href='mailto:kieslich@psychologie.uni-mannheim.de'>kieslich@psychologie.uni-mannheim.de</a>)
-
-Felix Henninger
+Dirk U. Wulff (<a href='mailto:dirk.wulff@gmail.com'>dirk.wulff@gmail.com</a>)
 
   </div>
 </div>

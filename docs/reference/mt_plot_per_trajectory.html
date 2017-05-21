@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -89,64 +91,93 @@ inserted, this function can also be used for plotting velocity and
 acceleration profiles.</p>
     
 
-    <pre><span class='fu'>mt_plot_per_trajectory</span>(<span class='no'>file</span>, <span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"xpos"</span>,
+    <pre class="usage"><span class='fu'>mt_plot_per_trajectory</span>(<span class='no'>file</span>, <span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"xpos"</span>,
   <span class='kw'>y</span> <span class='kw'>=</span> <span class='st'>"ypos"</span>, <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>axes_exact</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>points</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>rect</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
   <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>file</dt>
-      <dd>a character string specifying the name of the PDF file. Passed on
-to <a href='http://www.rdocumentation.org/packages/grDevices/topics/pdf'>pdf</a>.</dd>
-      <dt>data</dt>
-      <dd>a mousetrap data object created using one of the mt_import
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>file</th>
+      <td><p>a character string specifying the name of the PDF file. Passed on
+to <a href='http://www.rdocumentation.org/packages/grDevices/topics/pdf'>pdf</a>.</p></td>
+    </tr>
+    <tr>
+      <th>data</th>
+      <td><p>a mousetrap data object created using one of the mt_import
 functions (see <a href='mt_example.html'>mt_example</a> for details). Alternatively, a trajectory
-array can be provided directly (in this case <code>use</code> will be ignored).</dd>
-      <dt>use</dt>
-      <dd>a character string specifying which trajectories should be
+array can be provided directly (in this case <code>use</code> will be ignored).</p></td>
+    </tr>
+    <tr>
+      <th>use</th>
+      <td><p>a character string specifying which trajectories should be
 plotted. The corresponding trajectories are selected from data using
 <code>data[[use]]</code>. Usually, this value corresponds to either
-&quot;trajectories&quot;, &quot;tn_trajectories&quot; or &quot;av_trajectories&quot;, depending on
+"trajectories", "tn_trajectories" or "av_trajectories", depending on
 whether the raw, time-normalized or averaged trajectories should be
-plotted.</dd>
-      <dt>x</dt>
-      <dd>a character string specifying which dimension in the trajectory
-array should be displayed on the x-axis (defaults to xpos).</dd>
-      <dt>y</dt>
-      <dd>a character string specifying which dimension in the trajectory
-array should be displayed on the y-axis (defaults to ypos).</dd>
-      <dt>xlim</dt>
-      <dd>optional argument specifying the limits for the x axis (passed on
+plotted.</p></td>
+    </tr>
+    <tr>
+      <th>x</th>
+      <td><p>a character string specifying which dimension in the trajectory
+array should be displayed on the x-axis (defaults to xpos).</p></td>
+    </tr>
+    <tr>
+      <th>y</th>
+      <td><p>a character string specifying which dimension in the trajectory
+array should be displayed on the y-axis (defaults to ypos).</p></td>
+    </tr>
+    <tr>
+      <th>xlim</th>
+      <td><p>optional argument specifying the limits for the x axis (passed on
 to <a href='http://www.rdocumentation.org/packages/ggplot2/topics/coord_cartesian'>coord_cartesian</a>). If not specified (the default),
-sensible axis limits will be computed.</dd>
-      <dt>ylim</dt>
-      <dd>optional argument specifying the limits for the y axis (passed on
+sensible axis limits will be computed.</p></td>
+    </tr>
+    <tr>
+      <th>ylim</th>
+      <td><p>optional argument specifying the limits for the y axis (passed on
 to <a href='http://www.rdocumentation.org/packages/ggplot2/topics/coord_cartesian'>coord_cartesian</a>). If not specified (the default),
-sensible axis limits will be computed.</dd>
-      <dt>axes_exact</dt>
-      <dd>logical. If <code>TRUE</code>, axes will be set without offset
+sensible axis limits will be computed.</p></td>
+    </tr>
+    <tr>
+      <th>axes_exact</th>
+      <td><p>logical. If <code>TRUE</code>, axes will be set without offset
 exactly at the limits of the x and y axes (which can be specified using
-<code>xlim</code> and <code>ylim</code>]).</dd>
-      <dt>points</dt>
-      <dd>logical. If <code>TRUE</code>, points will be added to the plot using
-<a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a>.</dd>
-      <dt>rect</dt>
-      <dd>optional argument passed on to <a href='mt_plot_add_rect.html'>mt_plot_add_rect</a>. If
+<code>xlim</code> and <code>ylim</code>]).</p></td>
+    </tr>
+    <tr>
+      <th>points</th>
+      <td><p>logical. If <code>TRUE</code>, points will be added to the plot using
+<a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a>.</p></td>
+    </tr>
+    <tr>
+      <th>rect</th>
+      <td><p>optional argument passed on to <a href='mt_plot_add_rect.html'>mt_plot_add_rect</a>. If
 specified, rectangles (usually representing the response buttons) will be
-plotted for each trajectory plot.</dd>
-      <dt>color</dt>
-      <dd>optional argument passed on to <a href='mt_plot_add_rect.html'>mt_plot_add_rect</a>. Only
-relevant if <code>rect</code> is specified.</dd>
-      <dt>fill</dt>
-      <dd>optional argument passed on to <a href='mt_plot_add_rect.html'>mt_plot_add_rect</a>. Only
-relevant if <code>rect</code> is specified.</dd>
-      <dt>verbose</dt>
-      <dd>logical indicating whether function should report its
-progress.</dd>
-      <dt>...</dt>
-      <dd>additional arguments passed on to <a href='http://www.rdocumentation.org/packages/grDevices/topics/pdf'>pdf</a>.</dd>
-    </dl>
+plotted for each trajectory plot.</p></td>
+    </tr>
+    <tr>
+      <th>color</th>
+      <td><p>optional argument passed on to <a href='mt_plot_add_rect.html'>mt_plot_add_rect</a>. Only
+relevant if <code>rect</code> is specified.</p></td>
+    </tr>
+    <tr>
+      <th>fill</th>
+      <td><p>optional argument passed on to <a href='mt_plot_add_rect.html'>mt_plot_add_rect</a>. Only
+relevant if <code>rect</code> is specified.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>logical indicating whether function should report its
+progress.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>additional arguments passed on to <a href='http://www.rdocumentation.org/packages/grDevices/topics/pdf'>pdf</a>.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
@@ -160,11 +191,11 @@ is labeled using the rownames of the trajectories.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
-<span class='co'># mt_plot_per_trajectory(mt_example,</span>
-<span class='co'>#   file="trajectories.pdf",</span>
-<span class='co'>#   use="trajectories")</span>
-<span class='co'>## ---------------------------------------------</span></div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>not_run</span>({
+  <span class='fu'>mt_plot_per_trajectory</span>(<span class='no'>mt_example</span>,
+    <span class='kw'>file</span><span class='kw'>=</span><span class='st'>"trajectories.pdf"</span>,
+    <span class='kw'>use</span><span class='kw'>=</span><span class='st'>"trajectories"</span>)
+})</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

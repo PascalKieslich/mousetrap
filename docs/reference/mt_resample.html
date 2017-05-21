@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -86,47 +88,66 @@ that represents an exact multiple of this time interval is found, linear
 interpolation is performed using the two adjacent timestamps.</p>
     
 
-    <pre><span class='fu'>mt_resample</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='st'>"rs_trajectories"</span>,
+    <pre class="usage"><span class='fu'>mt_resample</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='st'>"rs_trajectories"</span>,
   <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>), <span class='kw'>timestamps</span> <span class='kw'>=</span> <span class='st'>"timestamps"</span>,
   <span class='kw'>step_size</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>exact_last_timestamp</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>constant_interpolation</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>data</dt>
-      <dd>a mousetrap data object created using one of the mt_import
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>data</th>
+      <td><p>a mousetrap data object created using one of the mt_import
 functions (see <a href='mt_example.html'>mt_example</a> for details). Alternatively, a trajectory
-array can be provided directly (in this case <code>use</code> will be ignored).</dd>
-      <dt>use</dt>
-      <dd>a character string specifying which trajectory data should be
-used.</dd>
-      <dt>save_as</dt>
-      <dd>a character string specifying where the resulting trajectory
-data should be stored.</dd>
-      <dt>dimensions</dt>
-      <dd>a character vector specifying the dimensions in the
-trajectory array that should be resampled. If <code>&quot;all&quot;</code>, all trajectory
-dimensions except the timestamps will be resampled.</dd>
-      <dt>timestamps</dt>
-      <dd>a character string specifying the trajectory dimension
-containing the timestamps.</dd>
-      <dt>step_size</dt>
-      <dd>an integer specifying the size of the constant time
-interval. The unit corresponds to the unit of the timestamps.</dd>
-      <dt>exact_last_timestamp</dt>
-      <dd>logical indicating if the last timestamp should
+array can be provided directly (in this case <code>use</code> will be ignored).</p></td>
+    </tr>
+    <tr>
+      <th>use</th>
+      <td><p>a character string specifying which trajectory data should be
+used.</p></td>
+    </tr>
+    <tr>
+      <th>save_as</th>
+      <td><p>a character string specifying where the resulting trajectory
+data should be stored.</p></td>
+    </tr>
+    <tr>
+      <th>dimensions</th>
+      <td><p>a character vector specifying the dimensions in the
+trajectory array that should be resampled. If <code>"all"</code>, all trajectory
+dimensions except the timestamps will be resampled.</p></td>
+    </tr>
+    <tr>
+      <th>timestamps</th>
+      <td><p>a character string specifying the trajectory dimension
+containing the timestamps.</p></td>
+    </tr>
+    <tr>
+      <th>step_size</th>
+      <td><p>an integer specifying the size of the constant time
+interval. The unit corresponds to the unit of the timestamps.</p></td>
+    </tr>
+    <tr>
+      <th>exact_last_timestamp</th>
+      <td><p>logical indicating if the last timestamp should
 always be appended (which is the case by default). If <code>FALSE</code>, the
-last timestamp is only appended if it is a multiple of the step_size.</dd>
-      <dt>constant_interpolation</dt>
-      <dd>an optional integer. If specified, constant 
+last timestamp is only appended if it is a multiple of the step_size.</p></td>
+    </tr>
+    <tr>
+      <th>constant_interpolation</th>
+      <td><p>an optional integer. If specified, constant 
 instead of linear interpolation will be performed for all adjacent 
 timestamps whose difference exceeds the number specified for
 <code>constant_interpolation</code>. The unit corresponds to the unit of the
-timestamps.</dd>
-      <dt>verbose</dt>
-      <dd>logical indicating whether function should report its
-progress.</dd>
-    </dl>
+timestamps.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>logical indicating whether function should report its
+progress.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
@@ -144,26 +165,26 @@ example, if mouse positions were recorded every 10 ms in an experiment, but
 one was only interested in the exact mouse position every 50 ms,
 <code>mt_resample</code> with <code>step_size=50</code> could be used. In this case, only
 every fifth sample would be kept.</p>
-    <p>In addition, <code>mt_resample</code> can be used to only retain values for
+<p>In addition, <code>mt_resample</code> can be used to only retain values for
 specific timestamps across trials (e.g., if for each trial the position of
 the mouse exactly 250 ms and 500 ms after onset of the trial are of
 interest). In case that a trial does not contain samples at the specified
 timestamps, linear interpolation is performed using the two adjacent
 timestamps.</p>
-    <p>If a number is specified for <code>constant_interpolation</code>, constant instead 
+<p>If a number is specified for <code>constant_interpolation</code>, constant instead 
 of linear interpolation will be performed for all adjacent timestamps whose 
 difference exceeds this number. Specifically, a period without mouse movement
 will be assumed starting at the respective timestamp until the next timestamp
 - <code>constant_interpolation/2</code>.</p>
-    <p>Note that <code>mt_resample</code> does not average across time intervals. For
+<p>Note that <code>mt_resample</code> does not average across time intervals. For
 this, <a href='mt_average.html'>mt_average</a> can be used.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p><a href='http://www.rdocumentation.org/packages/stats/topics/approxfun'>approx</a> for information about the function used for
-linear interpolation.</p>
-    <p><a href='mt_average.html'>mt_average</a> for averaging trajectories across constant time intervals.</p>
-    <p><a href='mt_time_normalize.html'>mt_time_normalize</a> for time-normalizing trajectories.</p>
+  linear interpolation.</p>
+<p><a href='mt_average.html'>mt_average</a> for averaging trajectories across constant time intervals.</p>
+<p><a href='mt_time_normalize.html'>mt_time_normalize</a> for time-normalizing trajectories.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

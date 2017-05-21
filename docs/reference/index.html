@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -77,246 +79,364 @@
       <div class="row">
   <div class="col-md-9">
     <div class="page-header">
-      <h1>Function reference</h1>
-      <h4>version&nbsp;3.0.0</h4>
+      <h1>
+        Reference
+        <small>version&nbsp;3.1.0</small>
+      </h1>
     </div>
 
     <div class="contents">
-      <h2 id="section-overview" class="hasAnchor"><a href="#section-overview" class="anchor"></a>Overview</h2>
-      <p class="section-desc"><p>The mousetrap package provides functions for importing, preprocessing, analyzing, aggregating, and visualizing mouse-tracking data. A structured overview is given in the general package documentation which can be accessed through one of the following links.</p></p>
+      <table class="ref-index">
 
-      
-      <p><a href="mousetrap.html">Process and analyze mouse-tracking data</a></p>
-      <ul>
-        <li><code><a href="mousetrap.html">mousetrap</a></code></li><li><code><a href="mousetrap.html">mousetrap-package</a></code></li>
-      </ul>
-          <h2 id="section-mousetrap-functions" class="hasAnchor"><a href="#section-mousetrap-functions" class="anchor"></a>Mousetrap functions</h2>
-      <p class="section-desc"><p>Below you find all mousetrap functions in alphabetical order.</p></p>
+      <colgroup>
+        <col class="alias" />
+        <col class="title" />
+      </colgroup>
 
-      
-      <p><a href="mt_add_trajectory.html">Add new trajectory to trajectory array.</a></p>
-      <ul>
-        <li><code><a href="mt_add_trajectory.html">mt_add_trajectory</a></code></li>
-      </ul>
-      
-      <p><a href="mt_add_variables.html">Add new variables to trajectory array.</a></p>
-      <ul>
-        <li><code><a href="mt_add_variables.html">mt_add_variables</a></code></li>
-      </ul>
-      
-      <p><a href="mt_aggregate.html">Aggregate mouse-tracking data per condition.</a></p>
-      <ul>
-        <li><code><a href="mt_aggregate.html">mt_aggregate</a></code></li>
-      </ul>
-      
-      <p><a href="mt_aggregate_per_subject.html">Aggregate mouse-tracking data per condition separately for each subject.</a></p>
-      <ul>
-        <li><code><a href="mt_aggregate_per_subject.html">mt_aggregate_per_subject</a></code></li>
-      </ul>
-      
-      <p><a href="mt_align.html">Align trajectories.</a></p>
-      <ul>
-        <li><code><a href="mt_align.html">mt_align</a></code></li>
-      </ul>
-      
-      <p><a href="mt_align_start.html">Align start position of trajectories.</a></p>
-      <ul>
-        <li><code><a href="mt_align_start.html">mt_align_start</a></code></li>
-      </ul>
-      
-      <p><a href="mt_align_start_end.html">Align start and end position of trajectories.</a></p>
-      <ul>
-        <li><code><a href="mt_align_start_end.html">mt_align_start_end</a></code></li>
-      </ul>
-      
-      <p><a href="mt_angles.html">Calculate movement angles.</a></p>
-      <ul>
-        <li><code><a href="mt_angles.html">mt_angles</a></code></li>
-      </ul>
-      
-      <p><a href="mt_average.html">Average trajectories across intervals.</a></p>
-      <ul>
-        <li><code><a href="mt_average.html">mt_average</a></code></li>
-      </ul>
-      
-      <p><a href="mt_bind.html">Join two trajectory arrays</a></p>
-      <ul>
-        <li><code><a href="mt_bind.html">mt_bind</a></code></li>
-      </ul>
-      
-      <p><a href="mt_check_bimodality.html">Assess bimodality of mouse-tracking measure distributions.</a></p>
-      <ul>
-        <li><code><a href="mt_check_bimodality.html">mt_check_bimodality</a></code></li>
-      </ul>
-      
-      <p><a href="mt_check_resolution.html">Check logging resolution by looking at timestamp differences.</a></p>
-      <ul>
-        <li><code><a href="mt_check_resolution.html">mt_check_resolution</a></code></li>
-      </ul>
-      
-      <p><a href="mt_cluster.html">Cluster trajectories.</a></p>
-      <ul>
-        <li><code><a href="mt_cluster.html">mt_cluster</a></code></li>
-      </ul>
-      
-      <p><a href="mt_cluster_k.html">Estimate optimal number of clusters.</a></p>
-      <ul>
-        <li><code><a href="mt_cluster_k.html">mt_cluster_k</a></code></li>
-      </ul>
-      
-      <p><a href="mt_count.html">Count number of observations.</a></p>
-      <ul>
-        <li><code><a href="mt_count.html">mt_count</a></code></li>
-      </ul>
-      
-      <p><a href="mt_derivatives.html">Calculate distance, velocity, and acceleration.</a></p>
-      <ul>
-        <li><code><a href="mt_derivatives.html">mt_derivatives</a></code></li>
-      </ul>
-      
-      <p><a href="mt_deviations.html">Calculate deviations from idealized trajectory.</a></p>
-      <ul>
-        <li><code><a href="mt_deviations.html">mt_deviations</a></code></li>
-      </ul>
-      
-      <p><a href="mt_distmat.html">Compute distance matrix.</a></p>
-      <ul>
-        <li><code><a href="mt_distmat.html">mt_distmat</a></code></li>
-      </ul>
-      
-      <p><a href="mt_example.html">A mousetrap data object.</a></p>
-      <ul>
-        <li><code><a href="mt_example.html">mt_example</a></code></li>
-      </ul>
-      
-      <p><a href="mt_example_raw.html">Raw mouse-tracking dataset for demonstrations of the mousetrap package</a></p>
-      <ul>
-        <li><code><a href="mt_example_raw.html">mt_example_raw</a></code></li>
-      </ul>
-      
-      <p><a href="mt_exclude_initiation.html">Exclude initial phase without mouse movement.</a></p>
-      <ul>
-        <li><code><a href="mt_exclude_initiation.html">mt_exclude_initiation</a></code></li>
-      </ul>
-      
-      <p><a href="mt_export_long.html">Export mouse-tracking data.</a></p>
-      <ul>
-        <li><code><a href="mt_export_long.html">mt_export_long</a></code></li><li><code><a href="mt_export_long.html">mt_export_wide</a></code></li>
-      </ul>
-      
-      <p><a href="mt_import_long.html">Import mouse-tracking data saved in long format.</a></p>
-      <ul>
-        <li><code><a href="mt_import_long.html">mt_import_long</a></code></li>
-      </ul>
-      
-      <p><a href="mt_import_mousetrap.html">Import mouse-tracking data recorded using the mousetrap plug-ins in OpenSesame.</a></p>
-      <ul>
-        <li><code><a href="mt_import_mousetrap.html">mt_import_mousetrap</a></code></li>
-      </ul>
-      
-      <p><a href="mt_import_wide.html">Import mouse-tracking data saved in wide format.</a></p>
-      <ul>
-        <li><code><a href="mt_import_wide.html">mt_import_wide</a></code></li>
-      </ul>
-      
-      <p><a href="mt_map.html">Map trajectories to prototypes.</a></p>
-      <ul>
-        <li><code><a href="mt_map.html">mt_map</a></code></li>
-      </ul>
-      
-      <p><a href="mt_measures.html">Calculate mouse-tracking measures.</a></p>
-      <ul>
-        <li><code><a href="mt_measures.html">mt_measures</a></code></li>
-      </ul>
-      
-      <p><a href="mt_plot.html">Plot trajectory data.</a></p>
-      <ul>
-        <li><code><a href="mt_plot.html">mt_plot</a></code></li><li><code><a href="mt_plot.html">mt_plot_aggregate</a></code></li>
-      </ul>
-      
-      <p><a href="mt_plot_add_rect.html">Add rectangles to trajectory plot.</a></p>
-      <ul>
-        <li><code><a href="mt_plot_add_rect.html">mt_plot_add_rect</a></code></li>
-      </ul>
-      
-      <p><a href="mt_plot_per_trajectory.html">Create PDF with separate plots per trajectory.</a></p>
-      <ul>
-        <li><code><a href="mt_plot_per_trajectory.html">mt_plot_per_trajectory</a></code></li>
-      </ul>
-      
-      <p><a href="mt_plot_riverbed.html">Plot density of mouse positions across time steps.</a></p>
-      <ul>
-        <li><code><a href="mt_plot_riverbed.html">mt_plot_riverbed</a></code></li>
-      </ul>
-      
-      <p><a href="mt_prototypes.html">Mouse trajectory prototypes.</a></p>
-      <ul>
-        <li><code><a href="mt_prototypes.html">mt_prototypes</a></code></li>
-      </ul>
-      
-      <p><a href="mt_remap_symmetric.html">Remap mouse trajectories.</a></p>
-      <ul>
-        <li><code><a href="mt_remap_symmetric.html">mt_remap_symmetric</a></code></li>
-      </ul>
-      
-      <p><a href="mt_resample.html">Resample trajectories using a constant time interval.</a></p>
-      <ul>
-        <li><code><a href="mt_resample.html">mt_resample</a></code></li>
-      </ul>
-      
-      <p><a href="mt_reshape.html">General-purpose reshape and aggregation function for mousetrap data.</a></p>
-      <ul>
-        <li><code><a href="mt_reshape.html">mt_reshape</a></code></li>
-      </ul>
-      
-      <p><a href="mt_sample_entropy.html">Calculate sample entropy.</a></p>
-      <ul>
-        <li><code><a href="mt_sample_entropy.html">mt_sample_entropy</a></code></li>
-      </ul>
-      
-      <p><a href="mt_space_normalize.html">Space normalize trajectories.</a></p>
-      <ul>
-        <li><code><a href="mt_space_normalize.html">mt_space_normalize</a></code></li>
-      </ul>
-      
-      <p><a href="mt_spatialize.html">Spatialize trajectories.</a></p>
-      <ul>
-        <li><code><a href="mt_spatialize.html">mt_spatialize</a></code></li>
-      </ul>
-      
-      <p><a href="mt_standardize.html">Standardize mouse-tracking measures per level of other variables.</a></p>
-      <ul>
-        <li><code><a href="mt_standardize.html">mt_standardize</a></code></li>
-      </ul>
-      
-      <p><a href="mt_subset.html">Filter mousetrap data.</a></p>
-      <ul>
-        <li><code><a href="mt_subset.html">mt_subset</a></code></li>
-      </ul>
-      
-      <p><a href="mt_time_normalize.html">Time normalize trajectories.</a></p>
-      <ul>
-        <li><code><a href="mt_time_normalize.html">mt_time_normalize</a></code></li>
-      </ul>
-          <h2 id="section-helper-functions" class="hasAnchor"><a href="#section-helper-functions" class="anchor"></a>Helper functions</h2>
-      <p class="section-desc"><p>A number of additional helper functions are provided.</p></p>
-
-      
-      <p><a href="bimodality_coefficient.html">Calculate bimodality coefficient.</a></p>
-      <ul>
-        <li><code><a href="bimodality_coefficient.html">bimodality_coefficient</a></code></li>
-      </ul>
-      
-      <p><a href="read_mt.html">Read MouseTracker raw data.</a></p>
-      <ul>
-        <li><code><a href="read_mt.html">read_mt</a></code></li>
-      </ul>
-      
-      <p><a href="scale_within.html">Scale and center variables within the levels of another variable.</a></p>
-      <ul>
-        <li><code><a href="scale_within.html">scale_within</a></code></li>
-      </ul>
-    
+      <tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-overview" class="hasAnchor"><a href="#section-overview" class="anchor"></a>Overview</h2>
+            <p class="section-desc"><p>The mousetrap package provides functions for importing, preprocessing, analyzing, aggregating, and visualizing mouse-tracking data. A structured overview is given in the general package documentation which can be accessed through one of the following links.</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mousetrap.html">mousetrap</a></code> </p>
+          </td>
+          <td><p>Process and analyze mouse-tracking data</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-mousetrap-functions" class="hasAnchor"><a href="#section-mousetrap-functions" class="anchor"></a>Mousetrap functions</h2>
+            <p class="section-desc"><p>Below you find all mousetrap functions in alphabetical order.</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_add_trajectory.html">mt_add_trajectory</a></code> </p>
+          </td>
+          <td><p>Add new trajectory to trajectory array.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_add_variables.html">mt_add_variables</a></code> </p>
+          </td>
+          <td><p>Add new variables to trajectory array.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_aggregate.html">mt_aggregate</a></code> </p>
+          </td>
+          <td><p>Aggregate mouse-tracking data per condition.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_aggregate_per_subject.html">mt_aggregate_per_subject</a></code> </p>
+          </td>
+          <td><p>Aggregate mouse-tracking data per condition separately for each subject.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_align.html">mt_align</a></code> </p>
+          </td>
+          <td><p>Align trajectories.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_align_start.html">mt_align_start</a></code> </p>
+          </td>
+          <td><p>Align start position of trajectories.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_align_start_end.html">mt_align_start_end</a></code> </p>
+          </td>
+          <td><p>Align start and end position of trajectories.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_angles.html">mt_angles</a></code> </p>
+          </td>
+          <td><p>Calculate movement angles.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_animate.html">mt_animate</a></code> </p>
+          </td>
+          <td><p>Create gif trajectory animation.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_average.html">mt_average</a></code> </p>
+          </td>
+          <td><p>Average trajectories across intervals.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_bind.html">mt_bind</a></code> </p>
+          </td>
+          <td><p>Join two trajectory arrays</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_check_bimodality.html">mt_check_bimodality</a></code> </p>
+          </td>
+          <td><p>Assess bimodality of mouse-tracking measure distributions.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_check_resolution.html">mt_check_resolution</a></code> </p>
+          </td>
+          <td><p>Check logging resolution by looking at timestamp differences.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_cluster.html">mt_cluster</a></code> </p>
+          </td>
+          <td><p>Cluster trajectories.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_cluster_k.html">mt_cluster_k</a></code> </p>
+          </td>
+          <td><p>Estimate optimal number of clusters.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_count.html">mt_count</a></code> </p>
+          </td>
+          <td><p>Count number of observations.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_derivatives.html">mt_derivatives</a></code> </p>
+          </td>
+          <td><p>Calculate distance, velocity, and acceleration.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_deviations.html">mt_deviations</a></code> </p>
+          </td>
+          <td><p>Calculate deviations from idealized trajectory.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_diffmap.html">mt_diffmap</a></code> </p>
+          </td>
+          <td><p>Creates a difference-heatmap of two trajectory heatmap images.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_distmat.html">mt_distmat</a></code> </p>
+          </td>
+          <td><p>Compute distance matrix.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_example.html">mt_example</a></code> </p>
+          </td>
+          <td><p>A mousetrap data object.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_example_raw.html">mt_example_raw</a></code> </p>
+          </td>
+          <td><p>Raw mouse-tracking dataset for demonstrations of the mousetrap package</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_exclude_initiation.html">mt_exclude_initiation</a></code> </p>
+          </td>
+          <td><p>Exclude initial phase without mouse movement.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_export_long.html">mt_export_long</a></code> <code><a href="mt_export_long.html">mt_export_wide</a></code> </p>
+          </td>
+          <td><p>Export mouse-tracking data.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_heatmap.html">mt_heatmap</a></code> </p>
+          </td>
+          <td><p>Plot trajectory heatmap.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_heatmap_ggplot.html">mt_heatmap_ggplot</a></code> </p>
+          </td>
+          <td><p>Plot trajectory heatmap using ggplot.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_heatmap_raw.html">mt_heatmap_raw</a></code> </p>
+          </td>
+          <td><p>Creates high-resolution heatmap of trajectory data.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_import_long.html">mt_import_long</a></code> </p>
+          </td>
+          <td><p>Import mouse-tracking data saved in long format.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_import_mousetrap.html">mt_import_mousetrap</a></code> </p>
+          </td>
+          <td><p>Import mouse-tracking data recorded using the mousetrap plug-ins in OpenSesame.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_import_wide.html">mt_import_wide</a></code> </p>
+          </td>
+          <td><p>Import mouse-tracking data saved in wide format.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_map.html">mt_map</a></code> </p>
+          </td>
+          <td><p>Map trajectories to prototypes.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_measures.html">mt_measures</a></code> </p>
+          </td>
+          <td><p>Calculate mouse-tracking measures.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_plot.html">mt_plot</a></code> <code><a href="mt_plot.html">mt_plot_aggregate</a></code> </p>
+          </td>
+          <td><p>Plot trajectory data.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_plot_add_rect.html">mt_plot_add_rect</a></code> </p>
+          </td>
+          <td><p>Add rectangles to trajectory plot.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_plot_per_trajectory.html">mt_plot_per_trajectory</a></code> </p>
+          </td>
+          <td><p>Create PDF with separate plots per trajectory.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_plot_riverbed.html">mt_plot_riverbed</a></code> </p>
+          </td>
+          <td><p>Plot density of mouse positions across time steps.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_prototypes.html">mt_prototypes</a></code> </p>
+          </td>
+          <td><p>Mouse trajectory prototypes.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_qeffect.html">mt_qeffect</a></code> </p>
+          </td>
+          <td><p>Create quantile-effect plot</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_remap_symmetric.html">mt_remap_symmetric</a></code> </p>
+          </td>
+          <td><p>Remap mouse trajectories.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_resample.html">mt_resample</a></code> </p>
+          </td>
+          <td><p>Resample trajectories using a constant time interval.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_reshape.html">mt_reshape</a></code> </p>
+          </td>
+          <td><p>General-purpose reshape and aggregation function for mousetrap data.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_sample_entropy.html">mt_sample_entropy</a></code> </p>
+          </td>
+          <td><p>Calculate sample entropy.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_scale_trajectories.html">mt_scale_trajectories</a></code> </p>
+          </td>
+          <td><p>Standardize variables in mouse trajectory array.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_space_normalize.html">mt_space_normalize</a></code> </p>
+          </td>
+          <td><p>Space normalize trajectories.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_spatialize.html">mt_spatialize</a></code> </p>
+          </td>
+          <td><p>Spatialize trajectories.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_standardize.html">mt_standardize</a></code> </p>
+          </td>
+          <td><p>Standardize mouse-tracking measures per level of other variables.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_subset.html">mt_subset</a></code> </p>
+          </td>
+          <td><p>Filter mousetrap data.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="mt_time_normalize.html">mt_time_normalize</a></code> </p>
+          </td>
+          <td><p>Time normalize trajectories.</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-helper-functions" class="hasAnchor"><a href="#section-helper-functions" class="anchor"></a>Helper functions</h2>
+            <p class="section-desc"><p>A number of additional helper functions are provided.</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="bezier.html">bezier</a></code> </p>
+          </td>
+          <td><p>Create Bezier-curves using the Bernstein approximation.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="bimodality_coefficient.html">bimodality_coefficient</a></code> </p>
+          </td>
+          <td><p>Calculate bimodality coefficient.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="scale_within.html">scale_within</a></code> </p>
+          </td>
+          <td><p>Scale and center variables within the levels of another variable.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="read_mt.html">read_mt</a></code> </p>
+          </td>
+          <td><p>Read MouseTracker raw data.</p></td>
+        </tr>
+      </tbody>
+      </table>
     </div>
   </div>
 

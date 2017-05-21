@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -88,37 +90,52 @@ they have the same start position. Please note that this function is
 instead, which provides the same (and additional) functionality.</p>
     
 
-    <pre><span class='fu'>mt_space_normalize</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='st'>"sn_trajectories"</span>,
+    <pre class="usage"><span class='fu'>mt_space_normalize</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='st'>"sn_trajectories"</span>,
   <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>), <span class='kw'>start</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>0</span>, <span class='fl'>0</span>), <span class='kw'>end</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>data</dt>
-      <dd>a mousetrap data object created using one of the mt_import
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>data</th>
+      <td><p>a mousetrap data object created using one of the mt_import
 functions (see <a href='mt_example.html'>mt_example</a> for details). Alternatively, a trajectory
-array can be provided directly (in this case <code>use</code> will be ignored).</dd>
-      <dt>use</dt>
-      <dd>a character string specifying which trajectory data should be
-used.</dd>
-      <dt>save_as</dt>
-      <dd>a character string specifying where the resulting trajectory
-data should be stored.</dd>
-      <dt>dimensions</dt>
-      <dd>a character vector specifying the dimensions in the
-trajectory array that should be space-normalized.</dd>
-      <dt>start</dt>
-      <dd>a numeric vector specifying the start values for each dimension,
-i.e., the values the first recorded position should have in every trial.</dd>
-      <dt>end</dt>
-      <dd>a numeric vector specifying the end values for each dimension,
+array can be provided directly (in this case <code>use</code> will be ignored).</p></td>
+    </tr>
+    <tr>
+      <th>use</th>
+      <td><p>a character string specifying which trajectory data should be
+used.</p></td>
+    </tr>
+    <tr>
+      <th>save_as</th>
+      <td><p>a character string specifying where the resulting trajectory
+data should be stored.</p></td>
+    </tr>
+    <tr>
+      <th>dimensions</th>
+      <td><p>a character vector specifying the dimensions in the
+trajectory array that should be space-normalized.</p></td>
+    </tr>
+    <tr>
+      <th>start</th>
+      <td><p>a numeric vector specifying the start values for each dimension,
+i.e., the values the first recorded position should have in every trial.</p></td>
+    </tr>
+    <tr>
+      <th>end</th>
+      <td><p>a numeric vector specifying the end values for each dimension,
 i.e., the values the last recorded position should have in every trial. If
 <code>NULL</code>, trajectories are only adjusted so that they have the same
-start position.</dd>
-      <dt>verbose</dt>
-      <dd>logical indicating whether function should report its
-progress.</dd>
-    </dl>
+start position.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>logical indicating whether function should report its
+progress.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
@@ -139,15 +156,15 @@ progress.</dd>
 
     <p><a href='mt_align_start.html'>mt_align_start</a> for aligning the start position of
   trajectories.</p>
-    <p><a href='mt_remap_symmetric.html'>mt_remap_symmetric</a> for remapping trajectories.</p>
+<p><a href='mt_remap_symmetric.html'>mt_remap_symmetric</a> for remapping trajectories.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## Not run: ------------------------------------</span>
-<span class='co'># mt_example &lt;- mt_space_normalize(mt_example,</span>
-<span class='co'>#   save_as ="sn_trajectories",</span>
-<span class='co'>#   start=c(0,0), end=c(-1,1))</span>
-<span class='co'>## ---------------------------------------------</span></div></pre>
+    <pre class="examples"><div class='input'><span class='fu'>not_run</span>({
+  <span class='no'>mt_example</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_space_normalize</span>(<span class='no'>mt_example</span>,
+    <span class='kw'>save_as</span> <span class='kw'>=</span><span class='st'>"sn_trajectories"</span>,
+    <span class='kw'>start</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='fl'>0</span>,<span class='fl'>0</span>), <span class='kw'>end</span><span class='kw'>=</span><span class='fu'>c</span>(-<span class='fl'>1</span>,<span class='fl'>1</span>))
+})</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

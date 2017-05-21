@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -88,50 +90,71 @@ acceleration etc.), the mean value for the respective interval is calculated
 (see Details for information regarding the exact averaging procedure).</p>
     
 
-    <pre><span class='fu'>mt_average</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='st'>"av_trajectories"</span>,
+    <pre class="usage"><span class='fu'>mt_average</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='st'>"av_trajectories"</span>,
   <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='st'>"all"</span>, <span class='kw'>av_dimension</span> <span class='kw'>=</span> <span class='st'>"timestamps"</span>, <span class='kw'>intervals</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>interval_size</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>max_interval</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>dimension</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>data</dt>
-      <dd>a mousetrap data object created using one of the mt_import
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>data</th>
+      <td><p>a mousetrap data object created using one of the mt_import
 functions (see <a href='mt_example.html'>mt_example</a> for details). Alternatively, a trajectory
-array can be provided directly (in this case <code>use</code> will be ignored).</dd>
-      <dt>use</dt>
-      <dd>a character string specifying which trajectory data should be
-used.</dd>
-      <dt>save_as</dt>
-      <dd>a character string specifying where the resulting trajectory
-data should be stored.</dd>
-      <dt>dimensions</dt>
-      <dd>a character vector specifying the dimensions in the
-trajectory array that should be averaged. By default (<code>&quot;all&quot;</code>), all
-trajectory dimensions will be averaged.</dd>
-      <dt>av_dimension</dt>
-      <dd>a character string specifying which values should be used
-for determining the intervals for averaging (<code>&quot;timestamps&quot;</code> by
-default).</dd>
-      <dt>intervals</dt>
-      <dd>an optional numeric vector. If specified, these values are
+array can be provided directly (in this case <code>use</code> will be ignored).</p></td>
+    </tr>
+    <tr>
+      <th>use</th>
+      <td><p>a character string specifying which trajectory data should be
+used.</p></td>
+    </tr>
+    <tr>
+      <th>save_as</th>
+      <td><p>a character string specifying where the resulting trajectory
+data should be stored.</p></td>
+    </tr>
+    <tr>
+      <th>dimensions</th>
+      <td><p>a character vector specifying the dimensions in the
+trajectory array that should be averaged. By default (<code>"all"</code>), all
+trajectory dimensions will be averaged.</p></td>
+    </tr>
+    <tr>
+      <th>av_dimension</th>
+      <td><p>a character string specifying which values should be used
+for determining the intervals for averaging (<code>"timestamps"</code> by
+default).</p></td>
+    </tr>
+    <tr>
+      <th>intervals</th>
+      <td><p>an optional numeric vector. If specified, these values are
 taken as the borders of the intervals (<code>interval_size</code> and
-<code>max_interval</code> are ignored).</dd>
-      <dt>interval_size</dt>
-      <dd>an integer specifying the size of the constant dimension
-interval.</dd>
-      <dt>max_interval</dt>
-      <dd>an integer specifying the upper limit of the last
+<code>max_interval</code> are ignored).</p></td>
+    </tr>
+    <tr>
+      <th>interval_size</th>
+      <td><p>an integer specifying the size of the constant dimension
+interval.</p></td>
+    </tr>
+    <tr>
+      <th>max_interval</th>
+      <td><p>an integer specifying the upper limit of the last
 dimension value that should be included (therefore, it should be a multiple
 of the <code>interval_size</code>). If specified, only values will be used for
 averaging where the dimension values are smaller than <code>max_interval</code>.
-If unspecified (the default), all values will be included.</dd>
-      <dt>verbose</dt>
-      <dd>logical indicating whether function should report its
-progress.</dd>
-      <dt>dimension</dt>
-      <dd>Deprecated. Please use <code>av_dimension</code> instead.</dd>
-    </dl>
+If unspecified (the default), all values will be included.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>logical indicating whether function should report its
+progress.</p></td>
+    </tr>
+    <tr>
+      <th>dimension</th>
+      <td><p>Deprecated. Please use <code>av_dimension</code> instead.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
@@ -139,7 +162,7 @@ progress.</dd>
   array (by default called <code>av_trajectories</code>) that contains the average
   trajectory data per dimension interval. If a trajectory array was provided
   directly as <code>data</code>, only the average trajectories will be returned.</p>
-    <p>For the dimension values used for averaging (specified in
+<p>For the dimension values used for averaging (specified in
   <code>av_dimension</code>), the mid point of the respective interval is reported,
   which is helpful for plotting the trajectory data later on. However, this
   value does not necessarily correspond to the empirical mean of the
@@ -154,23 +177,23 @@ constant timestamps of 100 ms, a timestamp of 1200 would be included in the
 interval 1100-1200 while a timestamp of 1300 would be included in the
 interval 1200-1300). Then, all values for which the corresponding average
 dimension values lie within the interval are averaged.</p>
-    <p>In case the last interval is not fully covered (e.g., if the last timestamp
+<p>In case the last interval is not fully covered (e.g., if the last timestamp
 has the value 1250), values for the corresponding interval (1200-1300) will
 be computed based on the average of the values up to the last existing value.</p>
-    <p>Note that <code>mt_average</code> assumes that the trajectory variables are
+<p>Note that <code>mt_average</code> assumes that the trajectory variables are
 recorded with a constant sampling rate (i.e., with a constant difference in
 the timestamps). If the sampling rate varies considerably, <a href='mt_resample.html'>mt_resample</a>
 should be called before averaging to arrive at equally spaced timestamps. The
 sampling rate can be investigated using <a href='mt_check_resolution.html'>mt_check_resolution</a>.</p>
-    <p>If average velocity and acceleration are of interest,
+<p>If average velocity and acceleration are of interest,
 <a href='mt_derivatives.html'>mt_derivatives</a> should be called before averaging.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p><a href='mt_derivatives.html'>mt_derivatives</a> for calculating velocity and
   acceleration.</p>
-    <p><a href='mt_resample.html'>mt_resample</a> for resampling trajectories using a constant time
-interval.</p>
+<p><a href='mt_resample.html'>mt_resample</a> for resampling trajectories using a constant time
+  interval.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

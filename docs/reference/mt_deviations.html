@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -85,41 +87,58 @@
 actual trajectory from it for each logged position.</p>
     
 
-    <pre><span class='fu'>mt_deviations</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='no'>use</span>,
+    <pre class="usage"><span class='fu'>mt_deviations</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='no'>use</span>,
   <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>), <span class='kw'>start_ideal</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>end_ideal</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>data</dt>
-      <dd>a mousetrap data object created using one of the mt_import
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>data</th>
+      <td><p>a mousetrap data object created using one of the mt_import
 functions (see <a href='mt_example.html'>mt_example</a> for details). Alternatively, a trajectory
-array can be provided directly (in this case <code>use</code> will be ignored).</dd>
-      <dt>use</dt>
-      <dd>a character string specifying which trajectory data should be
-used.</dd>
-      <dt>save_as</dt>
-      <dd>a character string specifying where the resulting trajectory
-data should be stored.</dd>
-      <dt>dimensions</dt>
-      <dd>a character vector specifying the two dimensions in the
+array can be provided directly (in this case <code>use</code> will be ignored).</p></td>
+    </tr>
+    <tr>
+      <th>use</th>
+      <td><p>a character string specifying which trajectory data should be
+used.</p></td>
+    </tr>
+    <tr>
+      <th>save_as</th>
+      <td><p>a character string specifying where the resulting trajectory
+data should be stored.</p></td>
+    </tr>
+    <tr>
+      <th>dimensions</th>
+      <td><p>a character vector specifying the two dimensions in the
 trajectory array that contain the mouse positions. By default 
-(<code>c(&quot;xpos&quot;,&quot;ypos&quot;)</code>), the x- and y-positions are used.</dd>
-      <dt>start_ideal</dt>
-      <dd>an optional vector specifying the start position (see
+(<code>c("xpos","ypos")</code>), the x- and y-positions are used.</p></td>
+    </tr>
+    <tr>
+      <th>start_ideal</th>
+      <td><p>an optional vector specifying the start position (see
 Example). If specified, this position will be used as the starting point of
-the idealized trajectory (instead of the actual starting point).</dd>
-      <dt>end_ideal</dt>
-      <dd>an optional vector specifying the end position (see
+the idealized trajectory (instead of the actual starting point).</p></td>
+    </tr>
+    <tr>
+      <th>end_ideal</th>
+      <td><p>an optional vector specifying the end position (see
 Example). If specified, this position will be used as the end point of the
-idealized trajectory (instead of the actual end point).</dd>
-      <dt>prefix</dt>
-      <dd>an optional character string that is added as a prefix to the 
-to be created new trajectory dimensions.</dd>
-      <dt>verbose</dt>
-      <dd>logical indicating whether function should report its
-progress.</dd>
-    </dl>
+idealized trajectory (instead of the actual end point).</p></td>
+    </tr>
+    <tr>
+      <th>prefix</th>
+      <td><p>an optional character string that is added as a prefix to the 
+to be created new trajectory dimensions.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>logical indicating whether function should report its
+progress.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
@@ -137,10 +156,10 @@ progress.</dd>
 and end point of the actual trajectory (e.g., Freeman &amp; Ambady, 2010). The 
 deviation for each position is calculated as the perpendicular deviation of 
 the actual trajectory from the idealized trajectory.</p>
-    <p>If a deviation occurs above the direct path, this is denoted by a positive 
+<p>If a deviation occurs above the direct path, this is denoted by a positive 
 value. If it occurs below the direct path, this is denoted by a negative 
 value. This assumes that the complete movement in the trial was from bottom 
-to top (i.e., the end point has a higher y-position than the start poins). In
+to top (i.e., the end point has a higher y-position than the start points). In
 case the movement was from top to bottom, <code>mt_deviations</code> 
 automatically flips the signs. Note that the second dimension specified in 
 <code>dimensions</code> is used for determining all this.</p>

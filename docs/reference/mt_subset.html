@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -86,20 +88,27 @@ corresponding trajectories that meet the conditions specified in the
 arguments.</p>
     
 
-    <pre><span class='fu'>mt_subset</span>(<span class='no'>data</span>, <span class='no'>subset</span>, <span class='kw'>check</span> <span class='kw'>=</span> <span class='st'>"data"</span>)</pre>
+    <pre class="usage"><span class='fu'>mt_subset</span>(<span class='no'>data</span>, <span class='no'>subset</span>, <span class='kw'>check</span> <span class='kw'>=</span> <span class='st'>"data"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>data</dt>
-      <dd>a mousetrap data object created using one of the mt_import
-functions (see <a href='mt_example.html'>mt_example</a> for details).</dd>
-      <dt>subset</dt>
-      <dd>a logical expression (passed on to subset) indicating
-the rows to keep. Missing values are taken as <code>FALSE</code>.</dd>
-      <dt>check</dt>
-      <dd>a character string specifying which data should be used for
-checking the subset condition.</dd>
-    </dl>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>data</th>
+      <td><p>a mousetrap data object created using one of the mt_import
+functions (see <a href='mt_example.html'>mt_example</a> for details).</p></td>
+    </tr>
+    <tr>
+      <th>subset</th>
+      <td><p>a logical expression (passed on to subset) indicating
+the rows to keep. Missing values are taken as <code>FALSE</code>.</p></td>
+    </tr>
+    <tr>
+      <th>check</th>
+      <td><p>a character string specifying which data should be used for
+checking the subset condition.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
@@ -109,26 +118,26 @@ checking the subset condition.</dd>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p><code>mt_subset</code> is helpful when trials should be removed from all analyses.
-By default, <code>check</code> is set to &quot;data&quot; meaning that the subset condition
-is evaluated based on the trial data (stored in <code>data[[&quot;data&quot;]]</code>).
+By default, <code>check</code> is set to "data" meaning that the subset condition
+is evaluated based on the trial data (stored in <code>data[["data"]]</code>).
 However, it might also be of interest to only include trials based on
 specific mouse-tracking measures (e.g., all trials with an <code>MAD</code> smaller
 than 200). In this case, <code>check</code> needs to be set to the respective name
-of the data.frame (e.g., &quot;measures&quot;).</p>
-    <p>Note that if specific trials should be removed from all analyses based on a
+of the data.frame (e.g., "measures").</p>
+<p>Note that if specific trials should be removed from all analyses based on a
 condition known a priori (e.g., practice trials), it is more efficient to use
 the subset function on the raw data before importing the trajectories
 using one of the mt_import functions (such as <a href='mt_import_mousetrap.html'>mt_import_mousetrap</a>).</p>
-    <p>Besides, if trials should only be removed from some analyses or for specific
+<p>Besides, if trials should only be removed from some analyses or for specific
 plots, note that other mousetrap functions (e.g., <a href='mt_reshape.html'>mt_reshape</a>,
 <a href='mt_aggregate.html'>mt_aggregate</a>, and <a href='mt_plot.html'>mt_plot</a>) also allow for subsetting.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p>subset for the R base subset function for vectors, matrices,
-or data.frames.</p>
-    <p><a href='mt_reshape.html'>mt_reshape</a> for information about the subset argument in various other
-mousetrap functions.</p>
+  or data.frames.</p>
+<p><a href='mt_reshape.html'>mt_reshape</a> for information about the subset argument in various other
+  mousetrap functions.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

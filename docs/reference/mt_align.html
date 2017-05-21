@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -85,28 +87,38 @@
 or coordinate system.</p>
     
 
-    <pre><span class='fu'>mt_align</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='no'>use</span>, <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"xpos"</span>,
+    <pre class="usage"><span class='fu'>mt_align</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='no'>use</span>, <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"xpos"</span>,
   <span class='st'>"ypos"</span>), <span class='kw'>coordinates</span> <span class='kw'>=</span> <span class='st'>"isotropic"</span>, <span class='kw'>align_start</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>align_end</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>align_side</span> <span class='kw'>=</span> <span class='st'>"no"</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>data</dt>
-      <dd>a mousetrap data object created using one of the mt_import
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>data</th>
+      <td><p>a mousetrap data object created using one of the mt_import
 functions (see <a href='mt_example.html'>mt_example</a> for details). Alternatively, a trajectory
-array can be provided directly (in this case <code>use</code> will be ignored).</dd>
-      <dt>use</dt>
-      <dd>a character string specifying which trajectory data should be
-used.</dd>
-      <dt>save_as</dt>
-      <dd>a character string specifying where the resulting trajectory
-data should be stored.</dd>
-      <dt>dimensions</dt>
-      <dd>a character string specifying which trajectory variables 
+array can be provided directly (in this case <code>use</code> will be ignored).</p></td>
+    </tr>
+    <tr>
+      <th>use</th>
+      <td><p>a character string specifying which trajectory data should be
+used.</p></td>
+    </tr>
+    <tr>
+      <th>save_as</th>
+      <td><p>a character string specifying where the resulting trajectory
+data should be stored.</p></td>
+    </tr>
+    <tr>
+      <th>dimensions</th>
+      <td><p>a character string specifying which trajectory variables 
 should be used. Can be of length 2 or 3 for two-dimensional or 
-three-dimensional alignment respectively.</dd>
-      <dt>coordinates</dt>
-      <dd>either a numeric vector of length 4 specifying the xstart, 
+three-dimensional alignment respectively.</p></td>
+    </tr>
+    <tr>
+      <th>coordinates</th>
+      <td><p>either a numeric vector of length 4 specifying the xstart, 
 ystart, xend, yend coordinates of the trajectory start and end points. Can 
 also be <code>isotropic</code> (the default) to preserve the coordinates of dim1 
 and dim2, <code>isotropic-norm</code> to set the coordinates to 
@@ -114,29 +126,38 @@ and dim2, <code>isotropic-norm</code> to set the coordinates to
 and dim2, <code>mt</code> to set coordinates to <code>c(0,0,-1,1.5)</code>, <code>norm</code>
 to set coordinates  to <code>c(0,0,-1,1)</code>, and <code>wide</code> to set 
 coordinates  to <code>c(0,0,-1,1.2)</code>. In the three-dimensional case, 
-<code>coordinates</code> is a vector of length 6.</dd>
-      <dt>align_start</dt>
-      <dd>boolean specifying whether the start points of all
+<code>coordinates</code> is a vector of length 6.</p></td>
+    </tr>
+    <tr>
+      <th>align_start</th>
+      <td><p>boolean specifying whether the start points of all
 trajectories should be aligned to the position specified in
-<code>coordinates</code>. See Details.</dd>
-      <dt>align_end</dt>
-      <dd>boolean specifying whether the end points of all trajectories
+<code>coordinates</code>. See Details.</p></td>
+    </tr>
+    <tr>
+      <th>align_end</th>
+      <td><p>boolean specifying whether the end points of all trajectories
 should be aligned to the position specified in <code>coordinates</code>. See 
-Details.</dd>
-      <dt>align_side</dt>
-      <dd>character string specifying whether all trajectories should
+Details.</p></td>
+    </tr>
+    <tr>
+      <th>align_side</th>
+      <td><p>character string specifying whether all trajectories should
 be flipped to the left side (<code>left</code>), the right side (<code>right</code>),
 or not at all (<code>no</code>). Assumes that first entry in <code>dimensions</code>
-are the x positions.</dd>
-      <dt>verbose</dt>
-      <dd>logical indicating whether function should report its
-progress.</dd>
-    </dl>
+are the x positions.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>logical indicating whether function should report its
+progress.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A mousetrap data object (see <a href='mt_example.html'>mt_example</a>) with aligned 
-  trajectories. Per default, the dimemnsions in the original trajectory array
+  trajectories. Per default, the dimensions in the original trajectory array
   will be replaced. If a different trajectory array is specified using
   <code>save_as</code>, a new trajectory array will be created (including only the
   aligned dimensions). If a trajectory array was provided directly as
@@ -146,14 +167,14 @@ progress.</dd>
 
     <p>If <code>align_start</code> / <code>align_end</code> is <code>FALSE</code>, <code>coordinates</code> 
 define the position of the average start / end point across all trajectories.</p>
-    <p>Note that if the end points of trajectories are not aligned, coordinates
+<p>Note that if the end points of trajectories are not aligned, coordinates
 refer to the hypothetical case where all trajectories are mapped to one side.</p>
-    <p>If <code>align_start</code> / <code>align_end</code> is <code>TRUE</code>, the start / end
+<p>If <code>align_start</code> / <code>align_end</code> is <code>TRUE</code>, the start / end
 point of each trajectory is set to the exact position specified in
 <code>coordinates</code>. <code>align_start</code> and <code>align_end</code> can be set
 completely independently of one another, i.e., one can align only end points,
-only start points, none, or both.</p>
-    <p>If <code>align_start</code> is set to <code>&quot;left&quot;</code> or <code>&quot;right&quot;</code> trajectories 
+only start points, none, or both.
+    If <code>align_start</code> is set to <code>"left"</code> or <code>"right"</code> trajectories 
 will be flipped to the lower or upper spectrum of the first dimensions, 
 respectively. If the first dimension is the x-coordinate this is equivalent
 to flipping the trajectories to the left and right side, respectively.</p>
@@ -162,9 +183,9 @@ to flipping the trajectories to the left and right side, respectively.</p>
 
     <p><a href='mt_align_start.html'>mt_align_start</a> for aligning all trajectories to a common
   start position.</p>
-    <p><a href='mt_align_start_end.html'>mt_align_start_end</a> for aligning all trajectories so that they share
+<p><a href='mt_align_start_end.html'>mt_align_start_end</a> for aligning all trajectories so that they share
   a common initial and final coordinate.</p>
-    <p><a href='mt_remap_symmetric.html'>mt_remap_symmetric</a> for remapping trajectories to one side (or one 
+<p><a href='mt_remap_symmetric.html'>mt_remap_symmetric</a> for remapping trajectories to one side (or one 
   quadrant) of the coordinate system.</p>
     
 

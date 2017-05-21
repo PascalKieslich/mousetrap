@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -81,25 +83,23 @@
     </div>
 
     
-    <p>A data object of class &quot;mousetrap&quot; with example data created by importing 
+    <p>A data object of class "mousetrap" with example data created by importing 
 <a href='mt_example_raw.html'>mt_example_raw</a> and applying basic post-processing.</p>
     
 
-    <pre><span class='no'>mt_example</span></pre>
+    <pre class="usage"><span class='no'>mt_example</span></pre>
         
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
     <p>A mousetrap data object is a list containing  at least the
-  following objects:
-  <ul>
-<li><code>data</code>: a data.frame containing the trial data (from 
+  following objects:</p><ul>
+<li><p><code>data</code>: a data.frame containing the trial data (from 
     which the mouse-tracking data columns have been removed). More 
     information about the content of the trial data in <code>mt_example</code> can 
     be found in <a href='mt_example_raw.html'>mt_example_raw</a>. The rownames of <code>data</code> 
     correspond to the trial identifier. For convenience, the trial identifier
-    is also stored in an additional column called &quot;mt_id&quot;. 
-    </li>
-<li><code>trajectories</code>: an array containing the raw 
+    is also stored in an additional column called "mt_id".</p></li>
+<li><p><code>trajectories</code>: an array containing the raw 
     mouse-tracking trajectories. The first dimension represents the different
     trials and the dimension names (which can be accessed using 
     rownames) correspond to the trial identifier (the same identifier 
@@ -107,9 +107,8 @@
     corresponds to the samples taken over time which are included in
     chronological order. The third dimension corresponds to the different
     mouse-tracking variables (timestamps, x-positions, y-positions) which are
-    usually called <code>timestamps</code>, <code>xpos</code>, and <code>ypos</code>. 
-  </li>
-</ul></p>
+    usually called <code>timestamps</code>, <code>xpos</code>, and <code>ypos</code>.</p></li>
+</ul>
     <p>Some functions in this package (e.g., <a href='mt_time_normalize.html'>mt_time_normalize</a> and
   <a href='mt_average.html'>mt_average</a>) add additional trajectory arrays (e.g.,
   <code>tn_trajectories</code> and <code>av_trajectories</code>) to the mousetrap data

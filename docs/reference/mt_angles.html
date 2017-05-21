@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -87,35 +89,50 @@ subsequent points on the trajectory. Vertical-based angles are the angles
 between two subsequent points and the vertical axis.</p>
     
 
-    <pre><span class='fu'>mt_angles</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>),
+    <pre class="usage"><span class='fu'>mt_angles</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>),
   <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='no'>use</span>, <span class='kw'>na_replace</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>unit</span> <span class='kw'>=</span> <span class='st'>"radian"</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>data</dt>
-      <dd>a mousetrap data object created using one of the mt_import
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>data</th>
+      <td><p>a mousetrap data object created using one of the mt_import
 functions (see <a href='mt_example.html'>mt_example</a> for details). Alternatively, a trajectory
-array can be provided directly (in this case <code>use</code> will be ignored).</dd>
-      <dt>use</dt>
-      <dd>a character string specifying which trajectory data should be
-used.</dd>
-      <dt>dimensions</dt>
-      <dd>a character string specifying which trajectory variables 
-should be used. Must be of length 2.</dd>
-      <dt>save_as</dt>
-      <dd>a character string specifying where the resulting trajectory
-data should be stored.</dd>
-      <dt>na_replace</dt>
-      <dd>logical specifying whether <code>NA</code>s in the angle values 
+array can be provided directly (in this case <code>use</code> will be ignored).</p></td>
+    </tr>
+    <tr>
+      <th>use</th>
+      <td><p>a character string specifying which trajectory data should be
+used.</p></td>
+    </tr>
+    <tr>
+      <th>dimensions</th>
+      <td><p>a character string specifying which trajectory variables 
+should be used. Must be of length 2.</p></td>
+    </tr>
+    <tr>
+      <th>save_as</th>
+      <td><p>a character string specifying where the resulting trajectory
+data should be stored.</p></td>
+    </tr>
+    <tr>
+      <th>na_replace</th>
+      <td><p>logical specifying whether <code>NA</code>s in the angle values 
 should be replaced using the next existing angle value (see Details). 
-Defaults to <code>FALSE</code>.</dd>
-      <dt>unit</dt>
-      <dd>character specifying the unit for the angles. Default is 
-&quot;radian&quot;, alternative is &quot;degree&quot;.</dd>
-      <dt>verbose</dt>
-      <dd>logical indicating whether function should report its
-progress.</dd>
-    </dl>
+Defaults to <code>FALSE</code>.</p></td>
+    </tr>
+    <tr>
+      <th>unit</th>
+      <td><p>character specifying the unit for the angles. Default is 
+"radian", alternative is "degree".</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>logical indicating whether function should report its
+progress.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
@@ -130,13 +147,13 @@ progress.</dd>
     <p>By default, angles are reported in radians, the alternative is degrees. For 
 the first point in a trajectory, the angle values are always not defined 
 (<code>NA</code>).</p>
-    <p>For vertical-based angles (<code>angle_v</code>), positive values indicate a 
+<p>For vertical-based angles (<code>angle_v</code>), positive values indicate a 
 movement to the left of the vertical, negative values to the right of the 
 vertical. If there was no movement across two consecutive points, 
 <code>angle_v</code> is not defined and, by default, <code>NA</code> is returned. If 
 <code>na_replace</code> is <code>TRUE</code>, the next existing angle value is reported 
 instead.</p>
-    <p>For point-based angles (<code>angle_p</code>), angles indicate changes of movement 
+<p>For point-based angles (<code>angle_p</code>), angles indicate changes of movement 
 within three consecutive time steps. The reported angle is always the smaller
 one. A value of pi (= 3.14...) (for radians) or 180 (for degrees) indicates a
 constant movement direction, a value of 0 (both for radians and degrees) a 

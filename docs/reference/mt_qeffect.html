@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>mt_bind • mousetrap</title>
+<title>mt_qeffect • mousetrap</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -79,45 +79,76 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Join two trajectory arrays</h1>
+    <h1>Create quantile-effect plot</h1>
     </div>
 
     
-    <p>Join two trajectory arrays. This function is mainly used internally, but can 
-be helpful in those (relatively rare) occasions where additional processed 
-trajectory data should be added to another trajectory array.</p>
+    <p>Function in beta and currently only for internal purposes.</p>
     
 
-    <pre class="usage"><span class='fu'>mt_bind</span>(<span class='no'>trajectories1</span>, <span class='no'>trajectories2</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>mt_qeffect</span>(<span class='no'>data</span>, <span class='no'>compare</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"measures"</span>, <span class='kw'>measure</span> <span class='kw'>=</span> <span class='st'>"MAD"</span>,
+  <span class='kw'>direction</span> <span class='kw'>=</span> <span class='st'>"upward"</span>, <span class='kw'>n_steps</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>return_data</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>trajectories1</th>
-      <td><p>a trajectory array (see <a href='mt_example.html'>mt_example</a>).</p></td>
+      <th>data</th>
+      <td><p>a mousetrap data object created using one of the mt_import
+functions (see <a href='mt_example.html'>mt_example</a> for details). Alternatively, a trajectory
+array can be provided directly (in this case <code>use</code> will be ignored).</p></td>
     </tr>
     <tr>
-      <th>trajectories2</th>
-      <td><p>a trajectory array (see <a href='mt_example.html'>mt_example</a>).</p></td>
+      <th>compare</th>
+      <td><p>either a vector, the label of a variable in , or a mousetrap object.</p></td>
     </tr>
     <tr>
-      <th>verbose</th>
-      <td><p>logical indicating whether function should report its
-progress.</p></td>
+      <th>use</th>
+      <td><p>a character string specifying which trajectory data should be
+used.</p></td>
+    </tr>
+    <tr>
+      <th>measure</th>
+      <td><p>a character value specifying the variable used to calculate the
+effect between</p></td>
+    </tr>
+    <tr>
+      <th>direction</th>
+      <td><p>a character value.</p></td>
+    </tr>
+    <tr>
+      <th>n_steps</th>
+      <td><p>an integer.</p></td>
+    </tr>
+    <tr>
+      <th>return_data</th>
+      <td><p>boolean.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>additional arguments passed on to <a href='http://www.rdocumentation.org/packages/graphics/topics/points'>points</a>.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A trajectory array.</p>
+    <p>Nothing, when image is plotted using an external device. Otherwise an
+  object of class <code>mt_object_raw</code> containing in a matrix format the
+  image's pixel information.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>trajectories_combined</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_bind</span>(
-  <span class='no'>mt_example</span>$<span class='no'>trajectories</span>,
-  <span class='no'>mt_prototypes</span>
-)</div></pre>
+    <pre class="examples"><div class='input'><span class='co'># Plot regular heatmap</span>
+<span class='co'>#SpiveyEtAl2005 = mt_import_long(SpiveyEtAl2005_raw,'x','y',NULL,'t',</span>
+<span class='co'>#mt_id_label = c('ptp','trial'))</span>
+<span class='co'>#heatmap = mt_heatmap_raw(SpiveyEtAl2005,xres = 2000)</span>
+<span class='co'>#mt_heatmap(heatmap,file = NULL)</span>
+
+<span class='co'># compute measures</span>
+<span class='co'>#SpiveyEtAl2005 = mt_measures(SpiveyEtAl2005)</span>
+
+<span class='co'># Plot heatmap using velocity</span>
+<span class='co'>#mt_heatmap(SpiveyEtAl2005)</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -131,9 +162,7 @@ progress.</p></td>
 
     <h2>Author</h2>
     
-Pascal J. Kieslich (<a href='mailto:kieslich@psychologie.uni-mannheim.de'>kieslich@psychologie.uni-mannheim.de</a>)
-
-Felix Henninger
+Dirk U. Wulff (<a href='mailto:dirk.wulff@gmail.com'>dirk.wulff@gmail.com</a>)
 
   </div>
 </div>

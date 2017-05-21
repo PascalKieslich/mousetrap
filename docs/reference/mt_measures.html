@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -87,83 +89,147 @@ curvature (e.g., <code>MAD</code>, <code>AD</code>, and <code>AUC</code>). More 
 the different measures can be found in the Details and Values sections.</p>
     
 
-    <pre><span class='fu'>mt_measures</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='st'>"measures"</span>,
+    <pre class="usage"><span class='fu'>mt_measures</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='st'>"measures"</span>,
   <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>), <span class='kw'>timestamps</span> <span class='kw'>=</span> <span class='st'>"timestamps"</span>,
   <span class='kw'>flip_threshold</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>hover_threshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>data</dt>
-      <dd>a mousetrap data object created using one of the mt_import
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>data</th>
+      <td><p>a mousetrap data object created using one of the mt_import
 functions (see <a href='mt_example.html'>mt_example</a> for details). Alternatively, a trajectory
-array can be provided directly (in this case <code>use</code> will be ignored).</dd>
-      <dt>use</dt>
-      <dd>a character string specifying which trajectory data should be
-used.</dd>
-      <dt>save_as</dt>
-      <dd>a character string specifying where the calculated measures 
-should be stored.</dd>
-      <dt>dimensions</dt>
-      <dd>a character vector specifying the two dimensions in the 
+array can be provided directly (in this case <code>use</code> will be ignored).</p></td>
+    </tr>
+    <tr>
+      <th>use</th>
+      <td><p>a character string specifying which trajectory data should be
+used.</p></td>
+    </tr>
+    <tr>
+      <th>save_as</th>
+      <td><p>a character string specifying where the calculated measures 
+should be stored.</p></td>
+    </tr>
+    <tr>
+      <th>dimensions</th>
+      <td><p>a character vector specifying the two dimensions in the 
 trajectory array that contain the mouse positions. Usually (and by 
 default), the first value in the vector corresponds to the x-positions
-(<code>xpos</code>) and the second to the y-positions (<code>ypos</code>).</dd>
-      <dt>timestamps</dt>
-      <dd>a character string specifying the trajectory dimension
-containing the timestamps.</dd>
-      <dt>flip_threshold</dt>
-      <dd>a numeric value specifying the distance that needs to 
+(<code>xpos</code>) and the second to the y-positions (<code>ypos</code>).</p></td>
+    </tr>
+    <tr>
+      <th>timestamps</th>
+      <td><p>a character string specifying the trajectory dimension
+containing the timestamps.</p></td>
+    </tr>
+    <tr>
+      <th>flip_threshold</th>
+      <td><p>a numeric value specifying the distance that needs to 
 be exceeded in one direction so that a change in direction counts as a
-flip.</dd>
-      <dt>hover_threshold</dt>
-      <dd>an optional numeric value. If specified, <code>hovers</code>
+flip.</p></td>
+    </tr>
+    <tr>
+      <th>hover_threshold</th>
+      <td><p>an optional numeric value. If specified, <code>hovers</code>
 (and <code>hover_time</code>)  will be calculated as the number (and total time)
 of periods without movement in a trial (whose duration exceeds the value
-specified in <code>hover_threshold</code>).</dd>
-      <dt>verbose</dt>
-      <dd>logical indicating whether function should report its
-progress.</dd>
-    </dl>
+specified in <code>hover_threshold</code>).</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>logical indicating whether function should report its
+progress.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A mousetrap data object (see <a href='mt_example.html'>mt_example</a>) where an additional 
-  data.frame has been added (by default called &quot;measures&quot;) containing 
+  data.frame has been added (by default called "measures") containing 
   the per-trial mouse-tracking measures. Each row in the data.frame 
   corresponds to one trajectory (the corresponding trajectory is identified 
-  via the rownames and, additionally, in the column &quot;mt_id&quot;). Each column in 
+  via the rownames and, additionally, in the column "mt_id"). Each column in 
   the data.frame corresponds to one of the measures. If a trajectory array 
   was provided directly as <code>data</code>, only the measures data.frame will be 
   returned.</p>
-    <p>The following measures are computed for each trajectory (the labels 
+<p>The following measures are computed for each trajectory (the labels 
   relating to x- and y-positions will be adapted depending on the values 
   specified in <code>dimensions</code>). Please note that additional information is
   provided in the Details section.</p>
+<p></p>
+<dt>mt_id</dt><dd><p>Trial ID (can be used for merging measures data.frame with
+  other trial-level data)</p></dd>
+  <dt>xpos_max</dt><dd><p>Maximum x-position</p></dd> 
+  <dt>xpos_min</dt><dd><p>Minimum x-position</p></dd>
+  <dt>ypos_max</dt><dd><p>Maximum y-position</p></dd> 
+  <dt>ypos_min</dt><dd><p>Minimum y-position</p></dd>
+  <dt>MAD</dt><dd><p>Signed Maximum absolute deviation from the direct path
+  connecting start and end point of the trajectory (straight line).
+  If the <code>MAD</code> occurs above the direct path, this is denoted by
+  a positive value; if it occurs below, by a negative value.</p></dd>
+  <dt>MAD_time</dt><dd><p>Time at which the maximum absolute deviation was reached
+  first</p></dd>
+  <dt>MD_above</dt><dd><p>Maximum deviation above the direct path</p></dd> 
+  <dt>MD_above_time</dt><dd><p>Time at which the maximum deviation above was reached 
+  first</p></dd>
+  <dt>MD_below</dt><dd><p>Maximum deviation below the direct path</p></dd> 
+  <dt>MD_below_time</dt><dd><p>Time at which the maximum deviation below was reached 
+  first</p></dd>
+  <dt>AD</dt><dd><p>Average deviation from direct path</p></dd>
+  <dt>AUC</dt><dd><p>Area under curve, the geometric area between the actual
+  trajectory and the direct path where areas below the direct path have been
+  subtracted</p></dd>
+  <dt>xpos_flips</dt><dd><p>Number of directional changes along x-axis (exceeding the
+  distance specified in <code>flip_threshold</code>)</p></dd>
+  <dt>ypos_flips</dt><dd><p>Number of directional changes along y-axis (exceeding the
+  distance specified in <code>flip_threshold</code>)</p></dd>
+  <dt>xpos_reversals</dt><dd><p>Number of crossings of the y-axis</p></dd> 
+  <dt>ypos_reversals</dt><dd><p>Number of crossings of the x-axis</p></dd>
+  <dt>RT</dt><dd><p>Response time, time at which tracking stopped</p></dd>
+  <dt>initiation_time</dt><dd><p>Time at which first mouse movement was initiated</p></dd>
+  <dt>idle_time</dt><dd><p>Total time without mouse movement across the entirety of
+  the trial</p></dd>
+  <dt>hover_time</dt><dd><p>Total time of all periods without movement in a trial 
+  (whose duration exceeds the value specified in <code>hover_threshold</code>)</p></dd> 
+  <dt>hovers</dt><dd><p>Number of periods without movement in a trial (whose duration
+  exceeds the value specified in <code>hover_threshold</code>)</p></dd>
+  <dt>total_dist</dt><dd><p>Total distance covered by the trajectory</p></dd>
+  <dt>vel_max</dt><dd><p>Maximum velocity</p></dd>
+  <dt>vel_max_time</dt><dd><p>Time at which maximum velocity occurred first</p></dd>
+  <dt>vel_min</dt><dd><p>Minimum velocity</p></dd> 
+  <dt>vel_min_time</dt><dd><p>Time at which minimum velocity occurred first</p></dd> 
+  <dt>acc_max</dt><dd><p>Maximum acceleration</p></dd>
+  <dt>acc_max_time</dt><dd><p>Time at which maximum acceleration occurred first</p></dd>
+  <dt>acc_min</dt><dd><p>Minimum acceleration</p></dd> 
+  <dt>acc_min_time</dt><dd><p>Time at which minimum acceleration occurred first</p></dd>
+
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Note that some measures are only returned if distance, velocity and 
 acceleration are calculated using <a href='mt_derivatives.html'>mt_derivatives</a> before 
 running <code>mt_measures</code>. Besides, the meaning of these measures
-depends on the values of the arguments in <a href='mt_derivatives.html'>mt_derivatives</a>.</p>
-    <p>If the deviations from the idealized response trajectory have been calculated
+depends on the values of the arguments in <a href='mt_derivatives.html'>mt_derivatives</a>.
+    If the deviations from the idealized response trajectory have been calculated
 using <a href='mt_deviations.html'>mt_deviations</a> before running
 <code>mt_measures</code>, the corresponding data in the trajectory array
 will be used. If not, <code>mt_measures</code> will calculate these
 deviations automatically.</p>
-    <p>The calculation of most measures can be deduced directly from their 
+<p>The calculation of most measures can be deduced directly from their 
 definition (see Value). For several more complex measures, a few details are 
 provided in the following.</p>
-    <p>The <strong>maximum absolute deviation</strong> (<code>MAD</code>) is the maximum 
+<p>The signed <strong>maximum absolute deviation</strong> (<code>MAD</code>) is the maximum 
 perpendicular deviation from the straight path connecting start and end point
 of the trajectory (e.g., Freeman &amp; Ambady, 2010). If the <code>MAD</code> occurs 
 above the direct path, this is denoted by a positive value. If it occurs 
 below the direct path, this is denoted by a negative value. This assumes that
 the complete movement in the trial was from bottom to top (i.e., the end 
 point has a higher y-position than the start point). In case the movement was
-from top to bottom, <code>mt_measures</code> automatically flips the signs. Both
+from top to bottom, <code>mt_measures</code> automatically flips the signs. Both 
 <code>MD_above</code> and  <code>MD_below</code> are also reported separately.</p>
-    <p>The <strong>average deviation</strong> (<code>AD</code>) is the average of all deviations 
+<p>The <strong>average deviation</strong> (<code>AD</code>) is the average of all deviations 
 across the trial. Note that <code>AD</code> ignores the timestamps when calculating
 this average. This implicitly assumes that the time passed between each 
 recording of the mouse is the same within each individual trajectory. If the 
@@ -173,12 +239,12 @@ usually justified (<a href='mt_check_resolution.html'>mt_check_resolution</a> ca
 Alternatively, the <code>AD</code> can be calculated based on time-normalized 
 trajectories; these can be computed using <a href='mt_time_normalize.html'>mt_time_normalize</a> which 
 creates equidistant time steps within each trajectory.</p>
-    <p>The <code>AUC</code> represents the <strong>area under curve</strong>, i.e., the geometric
+<p>The <code>AUC</code> represents the <strong>area under curve</strong>, i.e., the geometric
 area between the actual trajectory and the direct path. Areas above the
 direct path are added and areas below are subtracted. The <code>AUC</code> is
 calculated using the <a href='http://www.rdocumentation.org/packages/pracma/topics/polyarea'>polyarea</a> function from the pracma
 package.</p>
-    <p>Note that all <strong>time</strong> related measures (except <code>idle_time</code> and
+<p>Note that all <strong>time</strong> related measures (except <code>idle_time</code> and
 <code>hover_time</code>) are reported using the timestamp metric as present in the
 data. To interpret the timestamp values as time since tracking start, the
 assumption has to be made that for each trajectory the tracking started at
@@ -187,27 +253,27 @@ start. Therefore, all timestamps should be reset during data import by
 subtracting the value of the first timestamp from all timestamps within a
 trial (assuming that the first timestamp corresponds to the time when
 tracking started). Timestamps are reset by default when importing the data
-using one of the mt_import fuctions (e.g., <a href='mt_import_mousetrap.html'>mt_import_mousetrap</a>).</p>
+using one of the mt_import functions (e.g., <a href='mt_import_mousetrap.html'>mt_import_mousetrap</a>).</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Kieslich, P. J., Wulff, D. U., Henninger, F., Haslbeck, J. M. B.,
-  &amp; Schulte-Mecklenbeck, M. (2017). Analyzing mouse- and hand-tracking data:
-  Methodological considerations and an open-source implementation. Manuscript
-  in preparation.</p>
-    <p>Freeman, J. B., &amp; Ambady, N. (2010). MouseTracker: Software for studying 
+  &amp; Schulte-Mecklenbeck, M. (2017). Mouse- and hand-tracking as a window to
+  cognition: A tutorial on implementation, analysis, and visualization.
+  Manuscript in preparation.</p>
+<p>Freeman, J. B., &amp; Ambady, N. (2010). MouseTracker: Software for studying 
   real-time mental processing using a computer mouse-tracking method. 
   <em>Behavior Research Methods, 42</em>(1), 226-241.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p><a href='mt_sample_entropy.html'>mt_sample_entropy</a> for calculating sample entropy.</p>
-    <p><a href='mt_standardize.html'>mt_standardize</a> for standardizing the measures per subject.</p>
-    <p><a href='mt_check_bimodality.html'>mt_check_bimodality</a> for checking bimodality of the measures using
-different methods.</p>
-    <p><a href='mt_aggregate.html'>mt_aggregate</a> and <a href='mt_aggregate_per_subject.html'>mt_aggregate_per_subject</a> for aggregating the
-measures.</p>
-    <p><a href='http://www.rdocumentation.org/packages/dplyr/topics/join'>inner_join</a> for merging data using the <code>dplyr</code> package.</p>
+<p><a href='mt_standardize.html'>mt_standardize</a> for standardizing the measures per subject.</p>
+<p><a href='mt_check_bimodality.html'>mt_check_bimodality</a> for checking bimodality of the measures using
+  different methods.</p>
+<p><a href='mt_aggregate.html'>mt_aggregate</a> and <a href='mt_aggregate_per_subject.html'>mt_aggregate_per_subject</a> for aggregating the
+  measures.</p>
+<p><a href='http://www.rdocumentation.org/packages/dplyr/topics/join'>inner_join</a> for merging data using the <code>dplyr</code> package.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -87,25 +89,34 @@ mouse-tracking experiment. It is specifically designed so that the arguments
 from the <code>mousetrap_response</code> plugin in OpenSesame can be used.</p>
     
 
-    <pre><span class='fu'>mt_plot_add_rect</span>(<span class='no'>rect</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>mt_plot_add_rect</span>(<span class='no'>rect</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>rect</dt>
-      <dd>a data.frame or matrix with one row per box. For each rectangle,
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>rect</th>
+      <td><p>a data.frame or matrix with one row per box. For each rectangle,
 the x-position (<code>x</code>), y-position (<code>y</code>), width (<code>w</code>), and
 height (<code>h</code>) needs to be provided. If columns are not labeled, the
-order <code>x, y, w, h</code> is assumed.</dd>
-      <dt>color</dt>
-      <dd>argument passed on to <a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_tile'>geom_rect</a>. Specifies the
-color of the border of the rectangles.</dd>
-      <dt>fill</dt>
-      <dd>argument passed on to <a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_tile'>geom_rect</a>. Specifies the
+order <code>x, y, w, h</code> is assumed.</p></td>
+    </tr>
+    <tr>
+      <th>color</th>
+      <td><p>argument passed on to <a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_tile'>geom_rect</a>. Specifies the
+color of the border of the rectangles.</p></td>
+    </tr>
+    <tr>
+      <th>fill</th>
+      <td><p>argument passed on to <a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_tile'>geom_rect</a>. Specifies the
 color of the interior of the rectangles. If <code>NA</code> (the default),
-rectangles are unfilled.</dd>
-      <dt>...</dt>
-      <dd>additional arguments passed on to <a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_tile'>geom_rect</a>.</dd>
-    </dl>
+rectangles are unfilled.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>additional arguments passed on to <a href='http://www.rdocumentation.org/packages/ggplot2/topics/geom_tile'>geom_rect</a>.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 

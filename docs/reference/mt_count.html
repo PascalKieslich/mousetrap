@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -86,35 +88,44 @@ in the trajectory array. This is mostly a helper function used by other
 functions in this package.</p>
     
 
-    <pre><span class='fu'>mt_count</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='st'>"measures"</span>,
+    <pre class="usage"><span class='fu'>mt_count</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='st'>"measures"</span>,
   <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='st'>"xpos"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>data</dt>
-      <dd>a mousetrap data object created using one of the mt_import
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>data</th>
+      <td><p>a mousetrap data object created using one of the mt_import
 functions (see <a href='mt_example.html'>mt_example</a> for details). Alternatively, a trajectory
-array can be provided directly (in this case <code>use</code> will be ignored).</dd>
-      <dt>use</dt>
-      <dd>a character string specifying which trajectory data should be
-used.</dd>
-      <dt>save_as</dt>
-      <dd>a character string specifying where the resulting trajectory
-data should be stored.</dd>
-      <dt>dimensions</dt>
-      <dd>a character vector specifying the name of the dimension(s)
+array can be provided directly (in this case <code>use</code> will be ignored).</p></td>
+    </tr>
+    <tr>
+      <th>use</th>
+      <td><p>a character string specifying which trajectory data should be
+used.</p></td>
+    </tr>
+    <tr>
+      <th>save_as</th>
+      <td><p>a character string specifying where the resulting trajectory
+data should be stored.</p></td>
+    </tr>
+    <tr>
+      <th>dimensions</th>
+      <td><p>a character vector specifying the name of the dimension(s)
 that should be used for counting the number of observations. If several
-dimensions are specified, the number of complete observations are reported.</dd>
-    </dl>
+dimensions are specified, the number of complete observations are reported.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A mousetrap data object (see <a href='mt_example.html'>mt_example</a>).</p>
-    <p>If a data.frame with label specified in <code>save_as</code> (by default 
-  &quot;measures&quot;) already exists, the number of obervations (called <code>nobs</code>)
+<p>If a data.frame with label specified in <code>save_as</code> (by default 
+  "measures") already exists, the number of observations (called <code>nobs</code>)
   are added as additional column. If not, an additional data.frame
   will be added.</p>
-    <p>If a trajectory array was provided directly as <code>data</code>, only a named
+<p>If a trajectory array was provided directly as <code>data</code>, only a named
   character vector will be returned.</p>
     
 

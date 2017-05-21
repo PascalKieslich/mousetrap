@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -94,52 +96,73 @@ an array (called <code>trajectories</code>), and all other data as a data.frame
 functions within this package (see <a href='mousetrap.html'>mousetrap</a> for an overview).</p>
     
 
-    <pre><span class='fu'>mt_import_long</span>(<span class='no'>raw_data</span>, <span class='kw'>xpos_label</span> <span class='kw'>=</span> <span class='st'>"xpos"</span>, <span class='kw'>ypos_label</span> <span class='kw'>=</span> <span class='st'>"ypos"</span>,
+    <pre class="usage"><span class='fu'>mt_import_long</span>(<span class='no'>raw_data</span>, <span class='kw'>xpos_label</span> <span class='kw'>=</span> <span class='st'>"xpos"</span>, <span class='kw'>ypos_label</span> <span class='kw'>=</span> <span class='st'>"ypos"</span>,
   <span class='kw'>zpos_label</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>timestamps_label</span> <span class='kw'>=</span> <span class='st'>"timestamps"</span>, <span class='kw'>add_labels</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>mt_id_label</span> <span class='kw'>=</span> <span class='st'>"mt_id"</span>, <span class='kw'>mt_seq_label</span> <span class='kw'>=</span> <span class='st'>"mt_seq"</span>, <span class='kw'>reset_timestamps</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>raw_data</dt>
-      <dd>a data.frame in long format, containing the raw data.</dd>
-      <dt>xpos_label</dt>
-      <dd>a character string specifying the column containing the
-x-positions.</dd>
-      <dt>ypos_label</dt>
-      <dd>a character string specifying the column containing the
-y-positions.</dd>
-      <dt>zpos_label</dt>
-      <dd>an optional character string specifying the column
-containing the z-positions.</dd>
-      <dt>timestamps_label</dt>
-      <dd>a character string specifying the column containing
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>raw_data</th>
+      <td><p>a data.frame in long format, containing the raw data.</p></td>
+    </tr>
+    <tr>
+      <th>xpos_label</th>
+      <td><p>a character string specifying the column containing the
+x-positions.</p></td>
+    </tr>
+    <tr>
+      <th>ypos_label</th>
+      <td><p>a character string specifying the column containing the
+y-positions.</p></td>
+    </tr>
+    <tr>
+      <th>zpos_label</th>
+      <td><p>an optional character string specifying the column
+containing the z-positions.</p></td>
+    </tr>
+    <tr>
+      <th>timestamps_label</th>
+      <td><p>a character string specifying the column containing
 the timestamps. If no timestamps are found in the data, a timestamps
 variable with increasing integers will be created (assuming equidistant
-time steps).</dd>
-      <dt>add_labels</dt>
-      <dd>a character vector specifying columns containing additional
-mouse-tracking variables.</dd>
-      <dt>mt_id_label</dt>
-      <dd>a character string (or vector) specifying the name of the
+time steps).</p></td>
+    </tr>
+    <tr>
+      <th>add_labels</th>
+      <td><p>a character vector specifying columns containing additional
+mouse-tracking variables.</p></td>
+    </tr>
+    <tr>
+      <th>mt_id_label</th>
+      <td><p>a character string (or vector) specifying the name of the
 column that provides a unique ID for every trial (the trial identifier). If
 more than one variable name is provided, a new ID variable will be created
 by combining the values of each variable. The trial identifier will be set
 as the rownames of the resulting trajectories and trial data, and
-additionally be stored in the column &quot;mt_id&quot; in the trial data.</dd>
-      <dt>mt_seq_label</dt>
-      <dd>a character string specifying the column that indicates
+additionally be stored in the column "mt_id" in the trial data.</p></td>
+    </tr>
+    <tr>
+      <th>mt_seq_label</th>
+      <td><p>a character string specifying the column that indicates
 the order of the logged coordinates within a trial. If no column of the
 specified name is found in the data.frame, the coordinates will be imported
-in the order in which they were stored in <code>raw_data</code>.</dd>
-      <dt>reset_timestamps</dt>
-      <dd>logical indicating if the first timestamp should be
+in the order in which they were stored in <code>raw_data</code>.</p></td>
+    </tr>
+    <tr>
+      <th>reset_timestamps</th>
+      <td><p>logical indicating if the first timestamp should be
 subtracted from all timestamps within a trial. Default is <code>TRUE</code> as it
-is recommended for all following analyses in mousetrap.</dd>
-      <dt>verbose</dt>
-      <dd>logical indicating whether function should report its
-progress.</dd>
-    </dl>
+is recommended for all following analyses in mousetrap.</p></td>
+    </tr>
+    <tr>
+      <th>verbose</th>
+      <td><p>logical indicating whether function should report its
+progress.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
@@ -149,11 +172,11 @@ progress.</dd>
 
     <p>The default arguments are set so that no adjustments have to be made when
 importing a data.frame that was created using <a href='mt_export_long.html'>mt_export_long</a>.</p>
-    <p>The coordinates are ordered according to the values in the column provided in
+<p>The coordinates are ordered according to the values in the column provided in
 the <code>mt_seq_label</code> parameter (<code>mt_seq</code> by default). If the
 corresponding column does not exist, the coordinates will be imported in the
 order in which they were stored in the raw_data.</p>
-    <p>If no timestamps are found in the data, <code>mt_import_long</code> automatically
+<p>If no timestamps are found in the data, <code>mt_import_long</code> automatically
 creates a timestamps variable with increasing integers (starting with 0)
 assuming equally spaced sampling intervals.</p>
     
@@ -172,12 +195,12 @@ assuming equally spaced sampling intervals.</p>
 <span class='no'>mt_data</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_import_long</span>(<span class='no'>mt_data_long</span>)
 
 
-<span class='co'>## Not run: ------------------------------------</span>
-<span class='co'># # Import a hypothetical dataset that contains the</span>
-<span class='co'># # custom mouse-tracking variables angle and velocity</span>
-<span class='co'># mt_data &lt;- mt_import_long(exp_data,</span>
-<span class='co'>#   add_labels= c("angle", "velocity"))</span>
-<span class='co'>## ---------------------------------------------</span></div></pre>
+<span class='fu'>not_run</span>({
+  <span class='co'># Import a hypothetical dataset that contains the</span>
+  <span class='co'># custom mouse-tracking variables angle and velocity</span>
+  <span class='no'>mt_data</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_import_long</span>(<span class='no'>exp_data</span>,
+    <span class='kw'>add_labels</span><span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"angle"</span>, <span class='st'>"velocity"</span>))
+})</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

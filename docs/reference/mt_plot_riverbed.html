@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -85,50 +87,67 @@
 trajectory variable (e.g., the x-positions or velocity) per time step.</p>
     
 
-    <pre><span class='fu'>mt_plot_riverbed</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"tn_trajectories"</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='st'>"xpos"</span>,
+    <pre class="usage"><span class='fu'>mt_plot_riverbed</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"tn_trajectories"</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='st'>"xpos"</span>,
   <span class='kw'>y_range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>y_bins</span> <span class='kw'>=</span> <span class='fl'>250</span>, <span class='kw'>facet_row</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>facet_col</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>facet_data</span> <span class='kw'>=</span> <span class='st'>"data"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>data</dt>
-      <dd>mousetrap data object containing the data to be plotted.</dd>
-      <dt>use</dt>
-      <dd>character string specifying the set of trajectories to use in the
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>data</th>
+      <td><p>mousetrap data object containing the data to be plotted.</p></td>
+    </tr>
+    <tr>
+      <th>use</th>
+      <td><p>character string specifying the set of trajectories to use in the
 plot. The steps of this set will constitute the x axis. Defaults to
-&#39;tn_trajectories&#39;, which results in time steps being plotted on the x axis.</dd>
-      <dt>y</dt>
-      <dd>variable in the mousetrap data object to be plotted on the 
-output&#39;s y dimension. Defaults to &#39;xpos&#39;, the cursor&#39;s x coordinate.</dd>
-      <dt>y_range</dt>
-      <dd>numerical vector containing two values that represent the 
+'tn_trajectories', which results in time steps being plotted on the x axis.</p></td>
+    </tr>
+    <tr>
+      <th>y</th>
+      <td><p>variable in the mousetrap data object to be plotted on the 
+output's y dimension. Defaults to 'xpos', the cursor's x coordinate.</p></td>
+    </tr>
+    <tr>
+      <th>y_range</th>
+      <td><p>numerical vector containing two values that represent the 
 upper and lower ends of the y axis. By default, the range is calculated 
-from the data provided.</dd>
-      <dt>y_bins</dt>
-      <dd>number of bins to distribute along the y axis (defaults to
-250).</dd>
-      <dt>facet_row</dt>
-      <dd>an optional character string specifying a variable in 
+from the data provided.</p></td>
+    </tr>
+    <tr>
+      <th>y_bins</th>
+      <td><p>number of bins to distribute along the y axis (defaults to
+250).</p></td>
+    </tr>
+    <tr>
+      <th>facet_row</th>
+      <td><p>an optional character string specifying a variable in 
 <code>data[[facet_data]]</code> that should be used for (row-wise) faceting. If 
 specified, separate riverbed plots for each level of the variable will be 
-created.</dd>
-      <dt>facet_col</dt>
-      <dd>an optional character string specifying a variable in 
+created.</p></td>
+    </tr>
+    <tr>
+      <th>facet_col</th>
+      <td><p>an optional character string specifying a variable in 
 <code>data[[facet_data]]</code> that should be used for (column-wise) faceting.
 If specified, separate riverbed plots for each level of the variable will
-be created.</dd>
-      <dt>facet_data</dt>
-      <dd>a character string specifying where the (optional) data
-containing the faceting variables can be found.</dd>
-    </dl>
+be created.</p></td>
+    </tr>
+    <tr>
+      <th>facet_data</th>
+      <td><p>a character string specifying where the (optional) data
+containing the faceting variables can be found.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>This function plots the relative frequency of the values of a trajectory 
 variable separately for each of a series of time steps. This type of plot has
 been used in previous research to visualize the distribution of x-positions
-per time step (e.g., Scherbaum et al., 2010).</p>
-    <p><code>mt_plot_riverbed</code> usually is applied to time-normalized trajectory data
+per time step (e.g., Scherbaum et al., 2010).
+    <code>mt_plot_riverbed</code> usually is applied to time-normalized trajectory data
 as all trajectories must contain the same number of values.</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
@@ -140,30 +159,30 @@ as all trajectories must contain the same number of values.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p><a href='mt_plot.html'>mt_plot</a> for plotting trajectory data.</p>
-    <p><a href='mt_time_normalize.html'>mt_time_normalize</a> for time-normalizing trajectories.</p>
+<p><a href='mt_time_normalize.html'>mt_time_normalize</a> for time-normalizing trajectories.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Time-normalize trajectories</span>
-<span class='no'>mt_example</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_time_normalize.html'>mt_time_normalize</a></span>(<span class='no'>mt_example</span>)
+<span class='no'>KH2017</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_time_normalize.html'>mt_time_normalize</a></span>(<span class='no'>KH2017</span>)
 
 <span class='co'># Create riverbed plot for all trials</span>
-<span class='fu'>mt_plot_riverbed</span>(<span class='no'>mt_example</span>)</div><img src='mt_plot_riverbed-2.png' alt='' width='540' height='400' /><div class='input'>
-<span class='co'>## Not run: ------------------------------------</span>
-<span class='co'># # Create separate plots for typical and atypical trials</span>
-<span class='co'># mt_plot_riverbed(mt_example, facet_col="Condition")</span>
-<span class='co'># </span>
-<span class='co'># </span>
-<span class='co'># # Create riverbed plot for all trials with custom x and y axis labels</span>
-<span class='co'># mt_plot_riverbed(mt_example) +</span>
-<span class='co'>#   ggplot2::xlab("Time step") + ggplot2::ylab("X coordinate")</span>
-<span class='co'># </span>
-<span class='co'># # Note that it is also possible to replace the</span>
-<span class='co'># # default scale for fill with a custom scale</span>
-<span class='co'># mt_plot_riverbed(mt_example, facet_col="Condition") +</span>
-<span class='co'>#   ggplot2::scale_fill_gradientn(colours=grDevices::heat.colors(9),</span>
-<span class='co'>#     name="Frequency", trans="log", labels=scales::percent)</span>
-<span class='co'>## ---------------------------------------------</span></div></pre>
+<span class='fu'>mt_plot_riverbed</span>(<span class='no'>KH2017</span>)</div><img src='mt_plot_riverbed-2.png' alt='' width='540' height='400' /><div class='input'>
+<span class='fu'>not_run</span>({
+  <span class='co'># Create separate plots for typical and atypical trials</span>
+  <span class='fu'>mt_plot_riverbed</span>(<span class='no'>mt_example</span>, <span class='kw'>facet_col</span><span class='kw'>=</span><span class='st'>"Condition"</span>)
+
+
+  <span class='co'># Create riverbed plot for all trials with custom x and y axis labels</span>
+  <span class='fu'>mt_plot_riverbed</span>(<span class='no'>mt_example</span>) +
+    <span class='kw'>ggplot2</span><span class='kw'>::</span><span class='fu'>xlab</span>(<span class='st'>"Time step"</span>) + <span class='kw'>ggplot2</span><span class='kw'>::</span><span class='fu'>ylab</span>(<span class='st'>"X coordinate"</span>)
+
+  <span class='co'># Note that it is also possible to replace the</span>
+  <span class='co'># default scale for fill with a custom scale</span>
+  <span class='fu'>mt_plot_riverbed</span>(<span class='no'>mt_example</span>, <span class='kw'>facet_col</span><span class='kw'>=</span><span class='st'>"Condition"</span>) +
+    <span class='kw'>ggplot2</span><span class='kw'>::</span><span class='fu'>scale_fill_gradientn</span>(<span class='kw'>colours</span><span class='kw'>=</span><span class='kw'>grDevices</span><span class='kw'>::</span><span class='fu'>heat.colors</span>(<span class='fl'>9</span>),
+      <span class='kw'>name</span><span class='kw'>=</span><span class='st'>"Frequency"</span>, <span class='kw'>trans</span><span class='kw'>=</span><span class='st'>"log"</span>, <span class='kw'>labels</span><span class='kw'>=</span><span class='kw'>scales</span><span class='kw'>::</span><span class='no'>percent</span>)
+})</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

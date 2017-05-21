@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -86,38 +88,51 @@ system. In doing so, <code>mt_remap_symmetric</code> assumes a centered coordina
 system and a symmetric design of the response buttons (see Details).</p>
     
 
-    <pre><span class='fu'>mt_remap_symmetric</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='no'>use</span>,
+    <pre class="usage"><span class='fu'>mt_remap_symmetric</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='no'>use</span>,
   <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>), <span class='kw'>remap_xpos</span> <span class='kw'>=</span> <span class='st'>"left"</span>, <span class='kw'>remap_ypos</span> <span class='kw'>=</span> <span class='st'>"up"</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>data</dt>
-      <dd>a mousetrap data object created using one of the mt_import
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>data</th>
+      <td><p>a mousetrap data object created using one of the mt_import
 functions (see <a href='mt_example.html'>mt_example</a> for details). Alternatively, a trajectory
-array can be provided directly (in this case <code>use</code> will be ignored).</dd>
-      <dt>use</dt>
-      <dd>a character string specifying which trajectory data should be
-used.</dd>
-      <dt>save_as</dt>
-      <dd>a character string specifying where the resulting trajectory
-data should be stored.</dd>
-      <dt>dimensions</dt>
-      <dd>a character vector specifying the two dimensions in the
+array can be provided directly (in this case <code>use</code> will be ignored).</p></td>
+    </tr>
+    <tr>
+      <th>use</th>
+      <td><p>a character string specifying which trajectory data should be
+used.</p></td>
+    </tr>
+    <tr>
+      <th>save_as</th>
+      <td><p>a character string specifying where the resulting trajectory
+data should be stored.</p></td>
+    </tr>
+    <tr>
+      <th>dimensions</th>
+      <td><p>a character vector specifying the two dimensions in the
 trajectory array that contain the mouse positions, the first value
-corresponding to the x-positions, the second to the y-positions.</dd>
-      <dt>remap_xpos</dt>
-      <dd>character string indicating the direction in which to remap
-values on the x axis. If set to &quot;left&quot; (as per default), trajectories with
+corresponding to the x-positions, the second to the y-positions.</p></td>
+    </tr>
+    <tr>
+      <th>remap_xpos</th>
+      <td><p>character string indicating the direction in which to remap
+values on the x axis. If set to "left" (as per default), trajectories with
 an endpoint on the right (i.e. with a positive x-value) will be remapped to
-the left. The alternatives are &quot;right&quot; which has the reverse effect, and
-&quot;no&quot;, which disables remapping on the horizontal dimension.</dd>
-      <dt>remap_ypos</dt>
-      <dd>character string defining whether tracks directed downwards
+the left. The alternatives are "right" which has the reverse effect, and
+"no", which disables remapping on the horizontal dimension.</p></td>
+    </tr>
+    <tr>
+      <th>remap_ypos</th>
+      <td><p>character string defining whether tracks directed downwards
 on the y axis should be remapped so that they end with a positive y value.
-This will be performed if this parameter is set to &quot;up&quot; (which is the
-default), and the reverse occurs if the parameter is set to &quot;down&quot;. If it
-is set to &quot;no&quot;, y-values remain untouched.</dd>
-    </dl>
+This will be performed if this parameter is set to "up" (which is the
+default), and the reverse occurs if the parameter is set to "down". If it
+is set to "no", y-values remain untouched.</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
@@ -130,13 +145,13 @@ is set to &quot;no&quot;, y-values remain untouched.</dd>
     <p>When mouse trajectories are compared across different conditions, it is
 typically desirable that the endpoints of the trajectories share the same
 direction (e.g., diagonally up and left). This way, the trajectories can be
-compared regardless of the button they were directed at.</p>
-    <p><code>mt_remap_symmetric</code> can be used to achieve this provided that two
+compared regardless of the button they were directed at.
+    <code>mt_remap_symmetric</code> can be used to achieve this provided that two
 assumptions hold:</p>
-    <p>First, this function assumes a centered coordinate system, i.e. the
+<p>First, this function assumes a centered coordinate system, i.e. the
 coordinate system is centered on the screen center. This is the case when the
 data is produced by the mousetrap plug-ins in OpenSesame.</p>
-    <p>Second, it assumes that the response buttons in the mouse-tracking experiment
+<p>Second, it assumes that the response buttons in the mouse-tracking experiment
 are symmetric, in that they all are equally distant from the screen center.</p>
     
 

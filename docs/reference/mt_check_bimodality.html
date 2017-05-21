@@ -25,12 +25,14 @@
 <script src="../pkgdown.js"></script>
 
 <!-- mathjax -->
-<script src='https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
+<script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
   </head>
 
   <body>
@@ -82,42 +84,57 @@
 
     
     <p>Assess bimodality of the distribution of mouse-tracking measures using the 
-bimodality coefficient and Hartigan&#39;s dip statistic (see Details). If 
+bimodality coefficient and Hartigan's dip statistic (see Details). If 
 bimodality should be assessed separately for different conditions, the 
 corresponding variables can be specified under <code>grouping_variables</code>.</p>
     
 
-    <pre><span class='fu'>mt_check_bimodality</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"measures"</span>, <span class='kw'>use_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+    <pre class="usage"><span class='fu'>mt_check_bimodality</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"measures"</span>, <span class='kw'>use_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>methods</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"BC"</span>, <span class='st'>"HDS"</span>), <span class='kw'>B</span> <span class='kw'>=</span> <span class='fl'>2000</span>, <span class='kw'>grouping_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <dl class="dl-horizontal">
-      <dt>data</dt>
-      <dd>a mousetrap data object created using one of the mt_import 
-functions (see <a href='mt_example.html'>mt_example</a> for details).</dd>
-      <dt>use</dt>
-      <dd>a character string specifying which data should be used. By
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>data</th>
+      <td><p>a mousetrap data object created using one of the mt_import 
+functions (see <a href='mt_example.html'>mt_example</a> for details).</p></td>
+    </tr>
+    <tr>
+      <th>use</th>
+      <td><p>a character string specifying which data should be used. By
 default, points to the <code>measures</code> data.frame created using
-<a href='mt_measures.html'>mt_measures</a>.</dd>
-      <dt>use_variables</dt>
-      <dd>a vector specifying for which mouse-tracking measures
-bimodality should be assessed.</dd>
-      <dt>methods</dt>
-      <dd>a character string (or vector) specifying which methods should
-be used for assessing bimodality (see Details).</dd>
-      <dt>B</dt>
-      <dd>an integer specifying the number of replicates used in the Monte
-Carlo test (only relevant if &quot;HDS_sim&quot; is included in methods, see
-Details).</dd>
-      <dt>grouping_variables</dt>
-      <dd>a character string (or vector) specifying one or
-more variables in <code>data[[&quot;data&quot;]]</code>. If specified, bimodality will be
+<a href='mt_measures.html'>mt_measures</a>.</p></td>
+    </tr>
+    <tr>
+      <th>use_variables</th>
+      <td><p>a vector specifying for which mouse-tracking measures
+bimodality should be assessed.</p></td>
+    </tr>
+    <tr>
+      <th>methods</th>
+      <td><p>a character string (or vector) specifying which methods should
+be used for assessing bimodality (see Details).</p></td>
+    </tr>
+    <tr>
+      <th>B</th>
+      <td><p>an integer specifying the number of replicates used in the Monte
+Carlo test (only relevant if "HDS_sim" is included in methods, see
+Details).</p></td>
+    </tr>
+    <tr>
+      <th>grouping_variables</th>
+      <td><p>a character string (or vector) specifying one or
+more variables in <code>data[["data"]]</code>. If specified, bimodality will be
 assessed separately for each level of the variable. If unspecified (the
-default), bimodality is checked across all trials.</dd>
-      <dt>...</dt>
-      <dd>additional arguments passed on to <a href='mt_reshape.html'>mt_reshape</a> (such as
-<code>subset</code>).</dd>
-    </dl>
+default), bimodality is checked across all trials.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>additional arguments passed on to <a href='mt_reshape.html'>mt_reshape</a> (such as
+<code>subset</code>).</p></td>
+    </tr>
+    </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
@@ -131,19 +148,19 @@ default), bimodality is checked across all trials.</dd>
     <p>Different methods have been suggested for assessing the bimodality of 
 mouse-tracking measure distributions, each of which has advantages and
 disadvantages (see Freeman &amp; Dale, 2013).</p>
-    <p>Hehman et al. (2015) focus on two specific methods (bimodality coefficient 
-and Hartigan&#39;s dip statistic) which are implemented here.</p>
-    <p>If <code>methods</code> include <code>BC</code>, the bimodality coefficient is calculated
+<p>Hehman et al. (2015) focus on two specific methods (bimodality coefficient 
+and Hartigan's dip statistic) which are implemented here.</p>
+<p>If <code>methods</code> include <code>BC</code>, the bimodality coefficient is calculated
 using the <a href='bimodality_coefficient.html'>bimodality_coefficient</a> function in this package. According 
 to Freeman and Ambady (2010), a distribution is considered bimodal if 
 <code>BC &gt; 0.555</code>.</p>
-    <p>Note that MouseTracker (Freeman &amp; Ambady, 2010) standardizes variables within
+<p>Note that MouseTracker (Freeman &amp; Ambady, 2010) standardizes variables within
 each subject before computing the BC. This is also possible here using
 <a href='mt_standardize.html'>mt_standardize</a> (see Examples).</p>
-    <p>If <code>methods</code> include <code>HDS</code>, Hartigan&#39;s dip statistic is calculated 
+<p>If <code>methods</code> include <code>HDS</code>, Hartigan's dip statistic is calculated 
 using the <a href='http://www.rdocumentation.org/packages/diptest/topics/dip.test'>dip.test</a> function of the <code>diptest</code> package. 
 The corresponding p value (computed via linear interpolation) is returned.</p>
-    <p>If <code>methods</code> include <code>HDS_sim</code>, Hartigan&#39;s dip statistic is 
+<p>If <code>methods</code> include <code>HDS_sim</code>, Hartigan's dip statistic is 
 calculated using the <a href='http://www.rdocumentation.org/packages/diptest/topics/dip.test'>dip.test</a> function with the additional 
 argument <code>simulate.p.values=TRUE</code>. In this case, the p value is computed
 from a Monte Carlo simulation of a uniform distribution with B (default: 
@@ -154,18 +171,18 @@ from a Monte Carlo simulation of a uniform distribution with B (default:
     <p>Freeman, J. B., &amp; Ambady, N. (2010). MouseTracker: Software for studying
 real-time mental processing using a computer mouse-tracking method.
 <em>Behavior Research Methods, 42</em>(1), 226-241.</p>
-    <p>Freeman, J. B., &amp; Dale, R. (2013).
+<p>Freeman, J. B., &amp; Dale, R. (2013).
 Assessing bimodality to detect the presence of a dual cognitive process.
 <em>Behavior Research Methods, 45</em>(1), 83-97.</p>
-    <p>Hehman, E., Stolier, R. M., &amp; Freeman, J. B. (2015). Advanced mouse-tracking
+<p>Hehman, E., Stolier, R. M., &amp; Freeman, J. B. (2015). Advanced mouse-tracking
 analytic techniques for enhancing psychological science. <em>Group
 Processes &amp; Intergroup Relations, 18</em>(3), 384-401.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <p><a href='bimodality_coefficient.html'>bimodality_coefficient</a> for more information about the bimodality
-coefficient.</p>
-    <p><a href='http://www.rdocumentation.org/packages/diptest/topics/dip.test'>dip.test</a> for more information about Hartigan&#39;s dip test.</p>
+  coefficient.</p>
+<p><a href='http://www.rdocumentation.org/packages/diptest/topics/dip.test'>dip.test</a> for more information about Hartigan's dip test.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -190,35 +207,35 @@ coefficient.</p>
 <span class='fu'>mt_check_bimodality</span>(<span class='no'>mt_example</span>,
   <span class='kw'>use_variables</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='st'>"z_MAD"</span>, <span class='st'>"z_AD"</span>))</div><div class='output co'>#&gt; $BC
 #&gt;       z_MAD      z_AD
-#&gt; 1 0.5099593 0.7212444
+#&gt; 1 0.6239962 0.7714127
 #&gt; 
 #&gt; $HDS_p_value
-#&gt;       z_MAD      z_AD
-#&gt; 1 0.7749003 0.7463675
+#&gt;      z_MAD      z_AD
+#&gt; 1 0.949304 0.9805709
 #&gt; </div><div class='input'>
 <span class='co'># Assess bimodality with simulated p values for HDS</span>
 <span class='fu'>mt_check_bimodality</span>(<span class='no'>mt_example</span>,
   <span class='kw'>use_variables</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='st'>"z_MAD"</span>, <span class='st'>"z_AD"</span>),
   <span class='kw'>methods</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='st'>"BC"</span>, <span class='st'>"HDS_sim"</span>))</div><div class='output co'>#&gt; $BC
 #&gt;       z_MAD      z_AD
-#&gt; 1 0.5099593 0.7212444
+#&gt; 1 0.6239962 0.7714127
 #&gt; 
 #&gt; $HDS_simulated_p_value
-#&gt;    z_MAD  z_AD
-#&gt; 1 0.7775 0.752
+#&gt;    z_MAD   z_AD
+#&gt; 1 0.9515 0.9825
 #&gt; </div><div class='input'>
 <span class='co'># Assess bimodality per condition</span>
 <span class='fu'>mt_check_bimodality</span>(<span class='no'>mt_example</span>,
   <span class='kw'>use_variables</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='st'>"z_MAD"</span>, <span class='st'>"z_AD"</span>),
   <span class='kw'>grouping_variables</span><span class='kw'>=</span><span class='st'>"Condition"</span>)</div><div class='output co'>#&gt; $BC
 #&gt;   Condition     z_MAD      z_AD
-#&gt; 1  Atypical 0.4056693 0.3430277
-#&gt; 2   Typical 0.4842767 0.7781194
+#&gt; 1  Atypical 0.4147261 0.4690223
+#&gt; 2   Typical 0.4589313 0.7214087
 #&gt; 
 #&gt; $HDS_p_value
-#&gt;   Condition     z_MAD      z_AD
-#&gt; 1  Atypical 0.3458943 0.4716631
-#&gt; 2   Typical 0.9831558 0.9923261
+#&gt;   Condition      z_MAD      z_AD
+#&gt; 1  Atypical 0.04777624 0.2248369
+#&gt; 2   Typical 0.95528251 0.8180812
 #&gt; </div><div class='input'>                    
 </div></pre>
   </div>
