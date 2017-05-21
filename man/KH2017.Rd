@@ -51,7 +51,7 @@ and their starting point was aligned to a common value (0,0) using
 Kieslich, P. J., & Henninger, F. (in press). Mousetrap: An 
   integrated, open-source mouse-tracking package. \emph{Behavior Research 
   Methods}. doi:10.3758/s13428-017-0900-z
-  
+
   Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor responses in the
   time course of categorizing atypical exemplars. \emph{Memory & Cognition,
   35}(1), 15-28.

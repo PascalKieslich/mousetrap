@@ -229,8 +229,8 @@ visualizing mouse trajectories. For additional flexibility, we recommend that
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Load ggplot2</span>
-<span class='fu'>library</span>(<span class='no'>ggplot2</span>)</div><div class='output co'>#&gt; <span class='message'>Stackoverflow is a great place to get help:</span>
-#&gt; <span class='message'>http://stackoverflow.com/tags/ggplot2.</span></div><div class='input'>
+<span class='fu'>library</span>(<span class='no'>ggplot2</span>)
+
 
 <span class='co'>## Plot individual example trajectories</span>
 
@@ -240,20 +240,20 @@ visualizing mouse trajectories. For additional flexibility, we recommend that
 <span class='co'># Plot all time-normalized trajectories</span>
 <span class='co'># varying the color depending on the condition</span>
 <span class='fu'>mt_plot</span>(<span class='no'>mt_example</span>, <span class='kw'>use</span><span class='kw'>=</span><span class='st'>"tn_trajectories"</span>,
-  <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"Condition"</span>)</div><img src='mt_plot-4.png' alt='' width='540' height='400' /><div class='input'>
+  <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"Condition"</span>)</div><img src='mt_plot-2.png' alt='' width='540' height='400' /><div class='input'>
 <span class='co'># ... with custom colors</span>
 <span class='fu'>mt_plot</span>(<span class='no'>mt_example</span>, <span class='kw'>use</span><span class='kw'>=</span><span class='st'>"tn_trajectories"</span>,
   <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"Condition"</span>) +
-  <span class='kw'>ggplot2</span><span class='kw'>::</span><span class='fu'>scale_color_brewer</span>(<span class='kw'>type</span><span class='kw'>=</span><span class='st'>"qual"</span>)</div><img src='mt_plot-6.png' alt='' width='540' height='400' /><div class='input'>
+  <span class='kw'>ggplot2</span><span class='kw'>::</span><span class='fu'>scale_color_brewer</span>(<span class='kw'>type</span><span class='kw'>=</span><span class='st'>"qual"</span>)</div><img src='mt_plot-4.png' alt='' width='540' height='400' /><div class='input'>
 <span class='co'># Create separate plots per Condition</span>
 <span class='fu'>mt_plot</span>(<span class='no'>mt_example</span>, <span class='kw'>use</span><span class='kw'>=</span><span class='st'>"tn_trajectories"</span>,
-  <span class='kw'>facet_col</span><span class='kw'>=</span><span class='st'>"Condition"</span>)</div><img src='mt_plot-8.png' alt='' width='540' height='400' /><div class='input'>
+  <span class='kw'>facet_col</span><span class='kw'>=</span><span class='st'>"Condition"</span>)</div><img src='mt_plot-6.png' alt='' width='540' height='400' /><div class='input'>
 <span class='co'># Plot velocity profiles based on the averaged trajectories</span>
 <span class='co'># varying the color depending on the condition</span>
 <span class='no'>mt_example</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_derivatives.html'>mt_derivatives</a></span>(<span class='no'>mt_example</span>)
 <span class='no'>mt_example</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_average.html'>mt_average</a></span>(<span class='no'>mt_example</span>, <span class='kw'>interval_size</span> <span class='kw'>=</span> <span class='fl'>100</span>)
 <span class='fu'>mt_plot</span>(<span class='no'>mt_example</span>, <span class='kw'>use</span><span class='kw'>=</span><span class='st'>"av_trajectories"</span>,
-  <span class='kw'>x</span><span class='kw'>=</span><span class='st'>"timestamps"</span>, <span class='kw'>y</span><span class='kw'>=</span><span class='st'>"vel"</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"Condition"</span>)</div><img src='mt_plot-10.png' alt='' width='540' height='400' /><div class='input'>
+  <span class='kw'>x</span><span class='kw'>=</span><span class='st'>"timestamps"</span>, <span class='kw'>y</span><span class='kw'>=</span><span class='st'>"vel"</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"Condition"</span>)</div><img src='mt_plot-8.png' alt='' width='540' height='400' /><div class='input'>
 
 <span class='co'>## Plot aggregate trajectories for KH2017 data</span>
 
@@ -262,13 +262,13 @@ visualizing mouse trajectories. For additional flexibility, we recommend that
 
 <span class='co'># Plot aggregated time-normalized trajectories per condition</span>
 <span class='fu'>mt_plot_aggregate</span>(<span class='no'>KH2017</span>, <span class='kw'>use</span><span class='kw'>=</span><span class='st'>"tn_trajectories"</span>,
-  <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"Condition"</span>)</div><img src='mt_plot-12.png' alt='' width='540' height='400' /><div class='input'>
+  <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"Condition"</span>)</div><img src='mt_plot-10.png' alt='' width='540' height='400' /><div class='input'>
 <span class='co'># ... first aggregating trajectories within subjects</span>
 <span class='fu'>mt_plot_aggregate</span>(<span class='no'>KH2017</span>, <span class='kw'>use</span><span class='kw'>=</span><span class='st'>"tn_trajectories"</span>,
-  <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"Condition"</span>, <span class='kw'>subject_id</span><span class='kw'>=</span><span class='st'>"subject_nr"</span>)</div><img src='mt_plot-14.png' alt='' width='540' height='400' /><div class='input'>
+  <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"Condition"</span>, <span class='kw'>subject_id</span><span class='kw'>=</span><span class='st'>"subject_nr"</span>)</div><img src='mt_plot-12.png' alt='' width='540' height='400' /><div class='input'>
 <span class='co'># ... adding points for each position to the plot</span>
 <span class='fu'>mt_plot_aggregate</span>(<span class='no'>KH2017</span>, <span class='kw'>use</span><span class='kw'>=</span><span class='st'>"tn_trajectories"</span>,
-  <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"Condition"</span>, <span class='kw'>points</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><img src='mt_plot-16.png' alt='' width='540' height='400' /><div class='input'>
+  <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"Condition"</span>, <span class='kw'>points</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><img src='mt_plot-14.png' alt='' width='540' height='400' /><div class='input'>
 <span class='fu'>not_run</span>({
   <span class='co'># Create customized aggregate trajectory plot</span>
   <span class='co'># by using only_ggplot option to return a ggplot object without geoms</span>
