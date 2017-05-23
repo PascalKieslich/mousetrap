@@ -32,6 +32,11 @@
 #'   be created.
 #' @param facet_data a character string specifying where the (optional) data
 #'   containing the faceting variables can be found.
+#' @param grid_colors a character string or vector of length 2 specifying the
+#'   grid color(s). If a single value is provided, this will be used as the grid
+#'   color. If a vector of length 2 is provided, the first value will be used as
+#'   the color for the major grid lines, the second value for the minor grid
+#'   lines. If set to \code{NA}, no grid lines are plotted.
 #'   
 #' @references Scherbaum, S., Dshemuchadse, M., Fischer, R., & Goschke, T.
 #'   (2010). How decisions evolve: The temporal dynamics of action selection.
@@ -72,10 +77,16 @@
 #' @export
 mt_plot_riverbed <- function(data, use='tn_trajectories', 
                              y='xpos', y_range=NULL, y_bins=250,
-                             facet_row=NULL, facet_col=NULL, facet_data='data') {
+                             facet_row=NULL, facet_col=NULL, facet_data='data',
+                             grid_colors=c("gray30","gray10")) {
   
   # Extract data from mousetrap data object
   trajectories <- extract_data(data=data, use=use)
+  
+  # Set grid colors
+  if(length(grid_colors)==1){
+    grid_colors <- c(grid_colors,grid_colors)
+  }
   
   # Calculate range of values on y axis,
   # if not specified explicitly
@@ -175,8 +186,8 @@ mt_plot_riverbed <- function(data, use='tn_trajectories',
     ggplot2::xlab('Steps') + ggplot2::ylab(y) +
     ggplot2::theme(
       panel.background = ggplot2::element_rect(fill='black'),
-      panel.grid.major = ggplot2::element_line(colour='gray30'),
-      panel.grid.minor = ggplot2::element_line(colour='gray10')
+      panel.grid.major = ggplot2::element_line(colour=grid_colors[1]),
+      panel.grid.minor = ggplot2::element_line(colour=grid_colors[2])
     )
   
   # Return output with / without facets depending on the specified variables

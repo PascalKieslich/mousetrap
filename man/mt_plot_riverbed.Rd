@@ -6,7 +6,7 @@
 \usage{
 mt_plot_riverbed(data, use = "tn_trajectories", y = "xpos",
   y_range = NULL, y_bins = 250, facet_row = NULL, facet_col = NULL,
-  facet_data = "data")
+  facet_data = "data", grid_colors = c("gray30", "gray10"))
 }
 \arguments{
 \item{data}{mousetrap data object containing the data to be plotted.}
@@ -37,6 +37,12 @@ be created.}
 
 \item{facet_data}{a character string specifying where the (optional) data
 containing the faceting variables can be found.}
+
+\item{grid_colors}{a character string or vector of length 2 specifying the
+grid color(s). If a single value is provided, this will be used as the grid
+color. If a vector of length 2 is provided, the first value will be used as
+the color for the major grid lines, the second value for the minor grid
+lines. If set to \code{NA}, no grid lines are plotted.}
 }
 \description{
 \code{mt_plot_riverbed} creates a plot showing the distribution of one
