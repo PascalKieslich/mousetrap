@@ -89,7 +89,7 @@ trajectory variable (e.g., the x-positions or velocity) per time step.</p>
 
     <pre class="usage"><span class='fu'>mt_plot_riverbed</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"tn_trajectories"</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='st'>"xpos"</span>,
   <span class='kw'>y_range</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>y_bins</span> <span class='kw'>=</span> <span class='fl'>250</span>, <span class='kw'>facet_row</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>facet_col</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>facet_data</span> <span class='kw'>=</span> <span class='st'>"data"</span>)</pre>
+  <span class='kw'>facet_data</span> <span class='kw'>=</span> <span class='st'>"data"</span>, <span class='kw'>grid_colors</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"gray30"</span>, <span class='st'>"gray10"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -138,6 +138,14 @@ be created.</p></td>
       <th>facet_data</th>
       <td><p>a character string specifying where the (optional) data
 containing the faceting variables can be found.</p></td>
+    </tr>
+    <tr>
+      <th>grid_colors</th>
+      <td><p>a character string or vector of length 2 specifying the
+grid color(s). If a single value is provided, this will be used as the grid
+color. If a vector of length 2 is provided, the first value will be used as
+the color for the major grid lines, the second value for the minor grid
+lines. If set to <code>NA</code>, no grid lines are plotted.</p></td>
     </tr>
     </table>
     

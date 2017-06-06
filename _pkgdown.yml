@@ -12,6 +12,7 @@ reference:
       Below you find all mousetrap functions in alphabetical order.
     contents:
     - starts_with("mt_")
+    - print.mt_heatmap_raw
   - title: Helper functions
     desc:
      A number of additional helper functions are provided.
@@ -20,6 +21,14 @@ reference:
     - bimodality_coefficient
     - scale_within
     - read_mt
+  - title: Mouse-tracking datasets
+    desc:
+      Below you find all datasets included in the mousetrap package in alphabetical order.
+    contents:
+    - KH2017
+    - KH2017_raw
+    - mt_example
+    - mt_example_raw
 navbar:
   title: ~
   type: default
