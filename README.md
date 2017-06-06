@@ -3,7 +3,7 @@
 mousetrap
 =========
 
-[![cran version](http://www.r-pkg.org/badges/version/mousetrap)](https://CRAN.R-project.org/package=mousetrap) [![DOI](https://zenodo.org/badge/22029/PascalKieslich/mousetrap.svg)](https://zenodo.org/badge/latestdoi/22029/PascalKieslich/mousetrap)
+[![cran version](http://www.r-pkg.org/badges/version/mousetrap)](https://CRAN.R-project.org/package=mousetrap) [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.596640.svg)](https://doi.org/10.5281/zenodo.596640)
 
 Mouse-tracking, the analysis of mouse movements in computerized experiments, is a method that is becoming increasingly popular in the cognitive sciences. The `mousetrap` package offers functions for importing, preprocessing, analyzing, aggregating, and visualizing mouse-tracking data.
 
@@ -33,7 +33,7 @@ Citation
 
 If you use the `mousetrap` package in your published research, we kindly ask that you cite it as follows:
 
-Kieslich, P. J., Wulff, D. U., Henninger, F., & Haslbeck, J. M. B. (2017). Mousetrap: An R package for processing and analyzing mouse-tracking data (Version 3.1.0). doi: [10.5281/zenodo.581591](https://doi.org/10.5281/zenodo.581591)
+Kieslich, P. J., Wulff, D. U., Henninger, F., & Haslbeck, J. M. B. (2017). Mousetrap: An R package for processing and analyzing mouse-tracking data. <https://doi.org/10.5281/zenodo.596640>
 
 Acknowledgments
 ---------------
