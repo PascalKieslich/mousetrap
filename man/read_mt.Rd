@@ -44,7 +44,7 @@ mt_data_raw <- read_mt("example.mt")
 # Use read_bulk to read all raw data files ending with ".mt" that are
 # stored in the folder "raw_data" (in the current working directory)
 library(readbulk)
-mt_data_raw <- read_bulk("raw_data", fun=read_mt)
+mt_data_raw <- read_bulk("raw_data", fun=read_mt, extension=".mt")
 
 # Import the data into mousetrap
 mt_data <- mt_import_wide(mt_data_raw)

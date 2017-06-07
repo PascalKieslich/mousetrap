@@ -149,7 +149,7 @@ combining multiple raw data files.
   <span class='co'># Use read_bulk to read all raw data files ending with ".mt" that are</span>
   <span class='co'># stored in the folder "raw_data" (in the current working directory)</span>
   <span class='fu'>library</span>(<span class='no'>readbulk</span>)
-  <span class='no'>mt_data_raw</span> <span class='kw'>&lt;-</span> <span class='fu'>read_bulk</span>(<span class='st'>"raw_data"</span>, <span class='kw'>fun</span><span class='kw'>=</span><span class='no'>read_mt</span>)
+  <span class='no'>mt_data_raw</span> <span class='kw'>&lt;-</span> <span class='fu'>read_bulk</span>(<span class='st'>"raw_data"</span>, <span class='kw'>fun</span><span class='kw'>=</span><span class='no'>read_mt</span>, <span class='kw'>extension</span><span class='kw'>=</span><span class='st'>".mt"</span>)
 
   <span class='co'># Import the data into mousetrap</span>
   <span class='no'>mt_data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_import_wide.html'>mt_import_wide</a></span>(<span class='no'>mt_data_raw</span>)
