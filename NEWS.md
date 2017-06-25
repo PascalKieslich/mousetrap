@@ -1,8 +1,10 @@
 # mousetrap 3.1.0
 
 ## Announcements
-* A first paper on the mousetrap software packages has been accepted for publication. It presents the mousetrap plugin for creating mouse-tracking experiments in OpenSesame and also includes a short demonstration of basic analyses using the mousetrap R package.
-* Reference: Kieslich, P. J., & Henninger, F. (in press). Mousetrap: An integrated, open-source mouse-tracking package. _Behavior Research Methods_. doi:10.3758/s13428-017-0900-z
+* A first paper on the mousetrap software packages has been accepted for publication. It presents the mousetrap plugin for creating mouse-tracking experiments in OpenSesame and also includes a short demonstration of basic analyses using the mousetrap R package. Please cite it as follows when using the mousetrap plugin in your research.
+* Kieslich, P. J., & Henninger, F. (in press). Mousetrap: An integrated, open-source mouse-tracking package. _Behavior Research Methods_. https://doi.org/10.3758/s13428-017-0900-z
+* The reference for the mousetrap R package has been updated as Zenodo now supports version independent DOIs.
+* Kieslich, P. J., Wulff, D. U., Henninger, F., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. (2016). Mousetrap: An R package for processing and analyzing mouse-tracking data. https://doi.org/10.5281/zenodo.596640
 
 ## Changes in specific functions
 * `mt_derivatives`: now always reports acceleration as difference in absolute velocity (the argument `acc_on_abs_vel` has been removed). Besides, the argument `absolute` has been introduced that indicates if absolute values for distances and velocities should be reported (by default, this is not the case). All of this is only relevant if a single dimension is specified in `dimensions`. 
