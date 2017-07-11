@@ -304,7 +304,7 @@ mt_reshape <- function(data,
       grouping_variables <- c(subject_id, use2_variables, mt_seq)
 
       dataset <- dplyr::group_by_(dataset, .dots=grouping_variables)
-      dataset <- dplyr::summarize_at(dataset, .funs=.funs, .cols=use_variables)
+      dataset <- dplyr::summarize_at(dataset, .funs=.funs, .vars=use_variables)
 
       if (aggregate_subjects_only == FALSE){
         if(length(.funs) > 1) {
@@ -328,7 +328,7 @@ mt_reshape <- function(data,
       }
 
       # Perform aggregation
-      dataset <- dplyr::summarize_at(dataset, .funs=.funs, .cols=use_variables)
+      dataset <- dplyr::summarize_at(dataset, .funs=.funs, .vars=use_variables)
 
     }
   }
