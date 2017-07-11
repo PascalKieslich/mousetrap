@@ -2,170 +2,170 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 cleanAngles <- function(as) {
-    .Call('mousetrap_cleanAngles', PACKAGE = 'mousetrap', as)
+    .Call(mousetrap_cleanAngles, as)
 }
 
 distMat <- function(x, y, power = 2L) {
-    .Call('mousetrap_distMat', PACKAGE = 'mousetrap', x, y, power)
+    .Call(mousetrap_distMat, x, y, power)
 }
 
 distMatV <- function(x, y, power = 2L) {
-    .Call('mousetrap_distMatV', PACKAGE = 'mousetrap', x, y, power)
+    .Call(mousetrap_distMatV, x, y, power)
 }
 
 distMat3d <- function(x, y, z, power = 2L) {
-    .Call('mousetrap_distMat3d', PACKAGE = 'mousetrap', x, y, z, power)
+    .Call(mousetrap_distMat3d, x, y, z, power)
 }
 
 distMat3dV <- function(x, y, z, power = 2L) {
-    .Call('mousetrap_distMat3dV', PACKAGE = 'mousetrap', x, y, z, power)
+    .Call(mousetrap_distMat3dV, x, y, z, power)
 }
 
 select_max <- function(x, y) {
-    .Call('mousetrap_select_max', PACKAGE = 'mousetrap', x, y)
+    .Call(mousetrap_select_max, x, y)
 }
 
 computeNorm <- function(r) {
-    .Call('mousetrap_computeNorm', PACKAGE = 'mousetrap', r)
+    .Call(mousetrap_computeNorm, r)
 }
 
 gaussBlurSlow <- function(source, target, w, h, r) {
-    .Call('mousetrap_gaussBlurSlow', PACKAGE = 'mousetrap', source, target, w, h, r)
+    .Call(mousetrap_gaussBlurSlow, source, target, w, h, r)
 }
 
 gaussBlur <- function(source, target, w, h, r) {
-    .Call('mousetrap_gaussBlur', PACKAGE = 'mousetrap', source, target, w, h, r)
+    .Call(mousetrap_gaussBlur, source, target, w, h, r)
 }
 
 boxBlur <- function(source, target, w, h, r) {
-    .Call('mousetrap_boxBlur', PACKAGE = 'mousetrap', source, target, w, h, r)
+    .Call(mousetrap_boxBlur, source, target, w, h, r)
 }
 
 getAngleP <- function(x, y) {
-    .Call('mousetrap_getAngleP', PACKAGE = 'mousetrap', x, y)
+    .Call(mousetrap_getAngleP, x, y)
 }
 
 getAngleV <- function(x, y) {
-    .Call('mousetrap_getAngleV', PACKAGE = 'mousetrap', x, y)
+    .Call(mousetrap_getAngleV, x, y)
 }
 
 getAnglesP <- function(xs, ys) {
-    .Call('mousetrap_getAnglesP', PACKAGE = 'mousetrap', xs, ys)
+    .Call(mousetrap_getAnglesP, xs, ys)
 }
 
 getAnglesV <- function(xs, ys) {
-    .Call('mousetrap_getAnglesV', PACKAGE = 'mousetrap', xs, ys)
+    .Call(mousetrap_getAnglesV, xs, ys)
 }
 
 getlast <- function(trajectories) {
-    .Call('mousetrap_getlast', PACKAGE = 'mousetrap', trajectories)
+    .Call(mousetrap_getlast, trajectories)
 }
 
 getLength <- function(x, y) {
-    .Call('mousetrap_getLength', PACKAGE = 'mousetrap', x, y)
+    .Call(mousetrap_getLength, x, y)
 }
 
 getLength3d <- function(x, y, z) {
-    .Call('mousetrap_getLength3d', PACKAGE = 'mousetrap', x, y, z)
+    .Call(mousetrap_getLength3d, x, y, z)
 }
 
 getLengths <- function(xs, ys) {
-    .Call('mousetrap_getLengths', PACKAGE = 'mousetrap', xs, ys)
+    .Call(mousetrap_getLengths, xs, ys)
 }
 
 getLengths3d <- function(xs, ys, zs) {
-    .Call('mousetrap_getLengths3d', PACKAGE = 'mousetrap', xs, ys, zs)
+    .Call(mousetrap_getLengths3d, xs, ys, zs)
 }
 
 getVelocity <- function(x, y) {
-    .Call('mousetrap_getVelocity', PACKAGE = 'mousetrap', x, y)
+    .Call(mousetrap_getVelocity, x, y)
 }
 
 getVelocity3d <- function(x, y, z) {
-    .Call('mousetrap_getVelocity3d', PACKAGE = 'mousetrap', x, y, z)
+    .Call(mousetrap_getVelocity3d, x, y, z)
 }
 
 getVelocities <- function(xs, ys) {
-    .Call('mousetrap_getVelocities', PACKAGE = 'mousetrap', xs, ys)
+    .Call(mousetrap_getVelocities, xs, ys)
 }
 
 getVelocities3d <- function(xs, ys, zs) {
-    .Call('mousetrap_getVelocities3d', PACKAGE = 'mousetrap', xs, ys, zs)
+    .Call(mousetrap_getVelocities3d, xs, ys, zs)
 }
 
 spatialize <- function(x, y, npts) {
-    .Call('mousetrap_spatialize', PACKAGE = 'mousetrap', x, y, npts)
+    .Call(mousetrap_spatialize, x, y, npts)
 }
 
 spatialize3d <- function(x, y, z, npts) {
-    .Call('mousetrap_spatialize3d', PACKAGE = 'mousetrap', x, y, z, npts)
+    .Call(mousetrap_spatialize3d, x, y, z, npts)
 }
 
 spatialize4d <- function(x, y, z1, z2, npts) {
-    .Call('mousetrap_spatialize4d', PACKAGE = 'mousetrap', x, y, z1, z2, npts)
+    .Call(mousetrap_spatialize4d, x, y, z1, z2, npts)
 }
 
 spatializeArray <- function(xs, ys, n_pts) {
-    .Call('mousetrap_spatializeArray', PACKAGE = 'mousetrap', xs, ys, n_pts)
+    .Call(mousetrap_spatializeArray, xs, ys, n_pts)
 }
 
 spatializeArrayToLong <- function(xs, ys, n_pts) {
-    .Call('mousetrap_spatializeArrayToLong', PACKAGE = 'mousetrap', xs, ys, n_pts)
+    .Call(mousetrap_spatializeArrayToLong, xs, ys, n_pts)
 }
 
 spatializeArray3d <- function(xs, ys, zs, n_pts) {
-    .Call('mousetrap_spatializeArray3d', PACKAGE = 'mousetrap', xs, ys, zs, n_pts)
+    .Call(mousetrap_spatializeArray3d, xs, ys, zs, n_pts)
 }
 
 spatializeArrayToLong3d <- function(xs, ys, zs, n_pts) {
-    .Call('mousetrap_spatializeArrayToLong3d', PACKAGE = 'mousetrap', xs, ys, zs, n_pts)
+    .Call(mousetrap_spatializeArrayToLong3d, xs, ys, zs, n_pts)
 }
 
 spatializeArrayToLong4d <- function(xs, ys, z1s, z2s, n_pts) {
-    .Call('mousetrap_spatializeArrayToLong4d', PACKAGE = 'mousetrap', xs, ys, z1s, z2s, n_pts)
+    .Call(mousetrap_spatializeArrayToLong4d, xs, ys, z1s, z2s, n_pts)
 }
 
 sd_mat <- function(mat) {
-    .Call('mousetrap_sd_mat', PACKAGE = 'mousetrap', mat)
+    .Call(mousetrap_sd_mat, mat)
 }
 
 moments_mat <- function(mat) {
-    .Call('mousetrap_moments_mat', PACKAGE = 'mousetrap', mat)
+    .Call(mousetrap_moments_mat, mat)
 }
 
 scale_rows <- function(mat, center = TRUE, scale = TRUE) {
-    .Call('mousetrap_scale_rows', PACKAGE = 'mousetrap', mat, center, scale)
+    .Call(mousetrap_scale_rows, mat, center, scale)
 }
 
 trans_rows <- function(mat, scale, center = TRUE) {
-    .Call('mousetrap_trans_rows', PACKAGE = 'mousetrap', mat, scale, center)
+    .Call(mousetrap_trans_rows, mat, scale, center)
 }
 
 scale_mat <- function(mat, center = TRUE, scale = TRUE) {
-    .Call('mousetrap_scale_mat', PACKAGE = 'mousetrap', mat, center, scale)
+    .Call(mousetrap_scale_mat, mat, center, scale)
 }
 
 trans_mat <- function(mat, scale, center = TRUE) {
-    .Call('mousetrap_trans_mat', PACKAGE = 'mousetrap', mat, scale, center)
+    .Call(mousetrap_trans_mat, mat, scale, center)
 }
 
 tab <- function(v1, v2) {
-    .Call('mousetrap_tab', PACKAGE = 'mousetrap', v1, v2)
+    .Call(mousetrap_tab, v1, v2)
 }
 
 tab_sum <- function(v1, v2, a) {
-    .Call('mousetrap_tab_sum', PACKAGE = 'mousetrap', v1, v2, a)
+    .Call(mousetrap_tab_sum, v1, v2, a)
 }
 
 tab_mean <- function(v1, v2, a) {
-    .Call('mousetrap_tab_mean', PACKAGE = 'mousetrap', v1, v2, a)
+    .Call(mousetrap_tab_mean, v1, v2, a)
 }
 
 trajAlign <- function(xs, ys, start, end, coordinates) {
-    .Call('mousetrap_trajAlign', PACKAGE = 'mousetrap', xs, ys, start, end, coordinates)
+    .Call(mousetrap_trajAlign, xs, ys, start, end, coordinates)
 }
 
 trajAlign3d <- function(xs, ys, zs, start, end, coordinates) {
-    .Call('mousetrap_trajAlign3d', PACKAGE = 'mousetrap', xs, ys, zs, start, end, coordinates)
+    .Call(mousetrap_trajAlign3d, xs, ys, zs, start, end, coordinates)
 }
 
