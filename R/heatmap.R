@@ -589,7 +589,7 @@ mt_heatmap <- function(
 #' see \link{mt_heatmap_raw}.
 #' 
 #' @inheritParams mt_heatmap_raw
-#' @param ... arguments passed to \link{mt_heatmap}.
+#' @param ... arguments passed to \link{mt_heatmap_raw}.
 #' 
 #' @author
 #' Felix Henninger

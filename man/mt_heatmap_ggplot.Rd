@@ -14,7 +14,7 @@ array can be provided directly (in this case \code{use} will be ignored).}
 \item{use}{a character string specifying which trajectory data should be
 used.}
 
-\item{...}{arguments passed to \link{mt_heatmap}.}
+\item{...}{arguments passed to \link{mt_heatmap_raw}.}
 }
 \description{
 \code{mt_heatmap_ggplot} plots high resolution raw trajectory maps. Note that
