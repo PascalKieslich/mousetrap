@@ -694,7 +694,8 @@ print.mt_heatmap_raw = function(x,...){
 #' @author
 #' Dirk U. Wulff (\email{dirk.wulff@@gmail.com})
 #' 
-#' \link{mt_heatmap} and  \link{mt_heatmap_ggplot} for plotting trajectory
+#' @seealso
+#' \link{mt_heatmap} and \link{mt_heatmap_ggplot} for plotting trajectory 
 #' heatmaps.
 #' 
 #' @examples

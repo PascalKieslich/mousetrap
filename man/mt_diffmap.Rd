@@ -88,9 +88,10 @@ mt_diffmap(KH2017, condition=KH2017$data$Condition=="Typical",
   xres=400, smooth_radius=6, n_shades=5)
 
 }
+\seealso{
+\link{mt_heatmap} and \link{mt_heatmap_ggplot} for plotting trajectory 
+heatmaps.
+}
 \author{
 Dirk U. Wulff (\email{dirk.wulff@gmail.com})
-
-\link{mt_heatmap} and  \link{mt_heatmap_ggplot} for plotting trajectory
-heatmaps.
 }

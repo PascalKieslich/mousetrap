@@ -499,14 +499,15 @@ mt_align_start_end <- function(
   
   # If no start coordinates are provided, compute them
   if(is.null(start)){
-    start <- colMeans(trajectories[,1,dimensions,drop=FALSE])
+    start <- as.vector(colMeans(trajectories[,1,dimensions,drop=FALSE]))
+    names(start) <- dimensions
     if(verbose) {
       message("No start coordinates were provided. ",
               "Aligning to: ",paste(start,collapse=","))
     }
   }
   
-  # If no start coordinates are provided, compute them
+  # If no end coordinates are provided, compute them
   if(is.null(end)){
     end <- colMeans(trajectories_last)
     if(verbose) {
@@ -514,7 +515,6 @@ mt_align_start_end <- function(
               "Aligning to: ",paste(end,collapse=","))
     }
   }
-  
   
   # Perform alignment
   for (j in 1:length(dimensions)) {
@@ -584,7 +584,8 @@ mt_align_start <- function(
   
   # If no start coordinates are provided, compute them
   if(is.null(start)){
-    start <- colMeans(trajectories[,1,dimensions,drop=FALSE])
+    start <- as.vector(colMeans(trajectories[,1,dimensions,drop=FALSE]))
+    names(start) <- dimensions
     if(verbose) {
       message("No start coordinates were provided. ",
               "Aligning to: ",paste(start,collapse=","))
