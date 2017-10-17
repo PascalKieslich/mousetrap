@@ -3,7 +3,7 @@
 #' An exemplary mouse-tracking dataset collected 
 #' \href{http://osdoc.cogsci.nl/}{OpenSesame} using the 
 #' \href{https://github.com/pascalkieslich/mousetrap-os}{mousetrap plugin} 
-#' (Kieslich & Henninger, in press). A preprocessed (as opposed to raw) version of
+#' (Kieslich & Henninger, 2017). A preprocessed (as opposed to raw) version of
 #' the same data can be found in \link{mt_example}.
 #'
 #' The data stem from a study based on experiment 1 by Dale et al. (2007). In
@@ -23,13 +23,13 @@
 #' Please note that \code{mt_example_raw} should only be used for exploring the
 #' features of the mousetrap package and not for any substantive analysis.
 #'
-#'@references Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor 
-#'  responses in the time course of categorizing atypical exemplars. 
-#'  \emph{Memory & Cognition, 35}(1), 15-28.
+#' @references Kieslich, P. J., & Henninger, F. (2017). Mousetrap: An
+#'   integrated, open-source mouse-tracking package. \emph{Behavior Research
+#'   Methods, 49}(5), 1652-1667. \url{https://doi.org/10.3758/s13428-017-0900-z}
 #'
-#'  Kieslich, P. J., & Henninger, F. (in press). Mousetrap: An integrated,
-#'  open-source mouse-tracking package. \emph{Behavior Research Methods}.
-#'  doi:10.3758/s13428-017-0900-z
+#'   Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor responses in the
+#'   time course of categorizing atypical exemplars. \emph{Memory & Cognition,
+#'   35}(1), 15-28. \url{https://doi.org/10.3758/BF03195938}
 #'   
 #' @format A \link{data.frame} with 38 rows and 19 variables. The data.frame is 
 #'   based on the combined raw data that were created using 
@@ -98,14 +98,14 @@
 "mt_example"
 
 
-#' Raw mouse-tracking dataset from Kieslich & Henninger (in press)
+#' Raw mouse-tracking dataset from Kieslich & Henninger (2017)
 #'
-#' Raw mouse-tracking dataset from Kieslich & Henninger (in press), an experiment
+#' Raw mouse-tracking dataset from Kieslich & Henninger (2017), an experiment
 #' using the material and procedure of experiment 1 by Dale et al. (2007). A
 #' preprocessed (as opposed to raw) version of the same data can be found in 
 #' \link{KH2017}.
 #'
-#' The data stem from a study by Kieslich & Henninger (in press) which used the 
+#' The data stem from a study by Kieslich & Henninger (2017) which used the 
 #' material and procedure of experiment 1 by Dale et al. (2007). In this 
 #' experiment, participants have to assign exemplars (e.g., "whale") to one of 
 #' two categories (e.g., "fish" or "mammal") by clicking on the button 
@@ -114,7 +114,7 @@
 #'
 #' The data was collected in \href{http://osdoc.cogsci.nl/}{OpenSesame} using
 #' the \href{https://github.com/pascalkieslich/mousetrap-os}{mousetrap plugin} 
-#' (Kieslich & Henninger, in press).
+#' (Kieslich & Henninger, 2017).
 #' 
 #' Across the 19 trials of the experiment, 60 participants categorized 13
 #' exemplars that were typical of their category and 6 atypical exemplars for
@@ -124,13 +124,13 @@
 #' trajectories deviate more towards the competing category for the atypical 
 #' exemplars, indicating increased conflict between the response options.
 #'
-#' @references Kieslich, P. J., & Henninger, F. (in press). Mousetrap: An 
-#'   integrated, open-source mouse-tracking package. \emph{Behavior Research 
-#'   Methods}. doi:10.3758/s13428-017-0900-z
+#' @references Kieslich, P. J., & Henninger, F. (2017). Mousetrap: An
+#'   integrated, open-source mouse-tracking package. \emph{Behavior Research
+#'   Methods, 49}(5), 1652-1667. \url{https://doi.org/10.3758/s13428-017-0900-z}
 #'
 #'   Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor responses in the
 #'   time course of categorizing atypical exemplars. \emph{Memory & Cognition,
-#'   35}(1), 15-28.
+#'   35}(1), 15-28. \url{https://doi.org/10.3758/BF03195938}
 #'
 #' @format A \link{data.frame} with 1140 rows and 19 variables. The data.frame is 
 #'   based on the combined raw data that were created using 
@@ -156,10 +156,10 @@
 #'
 "KH2017_raw"
 
-#' Mouse-tracking dataset from Kieslich & Henninger (in press)
+#' Mouse-tracking dataset from Kieslich & Henninger (2017)
 #'
 #' A data object of class "mousetrap" with the imported and preprocessed
-#' mouse-tracking data from Kieslich & Henninger (in press). More information about
+#' mouse-tracking data from Kieslich & Henninger (2017). More information about
 #' the study and raw data can be found in \link{KH2017_raw}.
 #'
 #' The raw dataset (\link{KH2017_raw}) was filtered keeping only correctly 
@@ -169,13 +169,13 @@
 #' and their starting point was aligned to a common value (0,0) using
 #' \link{mt_align_start}.
 #'
-#' @references Kieslich, P. J., & Henninger, F. (in press). Mousetrap: An 
+#' @references Kieslich, P. J., & Henninger, F. (2017). Mousetrap: An 
 #'   integrated, open-source mouse-tracking package. \emph{Behavior Research 
-#'   Methods}. doi:10.3758/s13428-017-0900-z
-#'
-#'   Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor responses in the
-#'   time course of categorizing atypical exemplars. \emph{Memory & Cognition,
-#'   35}(1), 15-28.
+#'   Methods, 49}(5), 1652-1667. \url{https://doi.org/10.3758/s13428-017-0900-z}
+#'   
+#'   Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor responses in the 
+#'   time course of categorizing atypical exemplars. \emph{Memory & Cognition, 
+#'   35}(1), 15-28. \url{https://doi.org/10.3758/BF03195938}
 #'   
 #' @format A mousetrap data object is a \link{list} containing  at least the
 #'   following objects:

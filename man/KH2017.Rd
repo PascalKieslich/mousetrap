@@ -3,7 +3,7 @@
 \docType{data}
 \name{KH2017}
 \alias{KH2017}
-\title{Mouse-tracking dataset from Kieslich & Henninger (in press)}
+\title{Mouse-tracking dataset from Kieslich & Henninger (2017)}
 \format{A mousetrap data object is a \link{list} containing  at least the
   following objects:
   \itemize{
@@ -36,7 +36,7 @@ KH2017
 }
 \description{
 A data object of class "mousetrap" with the imported and preprocessed
-mouse-tracking data from Kieslich & Henninger (in press). More information about
+mouse-tracking data from Kieslich & Henninger (2017). More information about
 the study and raw data can be found in \link{KH2017_raw}.
 }
 \details{
@@ -48,12 +48,12 @@ and their starting point was aligned to a common value (0,0) using
 \link{mt_align_start}.
 }
 \references{
-Kieslich, P. J., & Henninger, F. (in press). Mousetrap: An 
+Kieslich, P. J., & Henninger, F. (2017). Mousetrap: An 
   integrated, open-source mouse-tracking package. \emph{Behavior Research 
-  Methods}. doi:10.3758/s13428-017-0900-z
-
-  Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor responses in the
-  time course of categorizing atypical exemplars. \emph{Memory & Cognition,
-  35}(1), 15-28.
+  Methods, 49}(5), 1652-1667. \url{https://doi.org/10.3758/s13428-017-0900-z}
+  
+  Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor responses in the 
+  time course of categorizing atypical exemplars. \emph{Memory & Cognition, 
+  35}(1), 15-28. \url{https://doi.org/10.3758/BF03195938}
 }
 \keyword{datasets}

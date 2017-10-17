@@ -223,7 +223,7 @@ following, a brief overview of the functions in this package is given.
   example dataset for demonstrations using the \code{mousetrap} package.
 
   \link{KH2017} and \link{KH2017_raw} contain a mouse-tracking dataset from
-  Kieslich & Henninger (in press).
+  Kieslich & Henninger (2017).
 }
 
 \examples{
