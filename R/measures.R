@@ -2,8 +2,11 @@
 #' 
 #' Calculate a number of mouse-tracking measures for each trajectory, such as 
 #' minima, maxima, and flips for each dimension, and different measures for 
-#' curvature (e.g., \code{MAD}, \code{AD}, and \code{AUC}). More information on
-#' the different measures can be found in the Details and Values sections.
+#' curvature (e.g., \code{MAD}, \code{AD}, and \code{AUC}). Note that some
+#' measures are only returned if distance, velocity and acceleration are
+#' calculated using \link{mt_derivatives} before running \code{mt_measures}. 
+#' More information on the different measures can be found in the Details and
+#' Values sections.
 #' 
 #' Note that some measures are only returned if distance, velocity and 
 #' acceleration are calculated using \link{mt_derivatives} before 

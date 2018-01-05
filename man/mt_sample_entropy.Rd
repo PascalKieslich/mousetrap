@@ -58,7 +58,7 @@ time-normalized trajectories so all trajectories have the same length.
 
 Sample entropy is computed by comparing windows of a fixed size (specified 
 using \code{m}) across all recorded positions. Sample entropy is the 
-negative natural logarithm of the conditional probability that this windows 
+negative natural logarithm of the conditional probability that this window 
 remains similar across the trial (Hehman et al., 2015). A window is 
 considered to be similar to another if their distance is smaller than a 
 specified tolerance value (which can be specified using \code{r}). Hehman et 
