@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // cleanAngles
 NumericMatrix cleanAngles(NumericMatrix as);
-RcppExport SEXP mousetrap_cleanAngles(SEXP asSEXP) {
+RcppExport SEXP _mousetrap_cleanAngles(SEXP asSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -18,7 +18,7 @@ END_RCPP
 }
 // distMat
 NumericMatrix distMat(NumericMatrix x, NumericMatrix y, int power);
-RcppExport SEXP mousetrap_distMat(SEXP xSEXP, SEXP ySEXP, SEXP powerSEXP) {
+RcppExport SEXP _mousetrap_distMat(SEXP xSEXP, SEXP ySEXP, SEXP powerSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -31,7 +31,7 @@ END_RCPP
 }
 // distMatV
 NumericMatrix distMatV(NumericMatrix x, NumericMatrix y, int power);
-RcppExport SEXP mousetrap_distMatV(SEXP xSEXP, SEXP ySEXP, SEXP powerSEXP) {
+RcppExport SEXP _mousetrap_distMatV(SEXP xSEXP, SEXP ySEXP, SEXP powerSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -44,7 +44,7 @@ END_RCPP
 }
 // distMat3d
 NumericMatrix distMat3d(NumericMatrix x, NumericMatrix y, NumericMatrix z, int power);
-RcppExport SEXP mousetrap_distMat3d(SEXP xSEXP, SEXP ySEXP, SEXP zSEXP, SEXP powerSEXP) {
+RcppExport SEXP _mousetrap_distMat3d(SEXP xSEXP, SEXP ySEXP, SEXP zSEXP, SEXP powerSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -58,7 +58,7 @@ END_RCPP
 }
 // distMat3dV
 NumericMatrix distMat3dV(NumericMatrix x, NumericMatrix y, NumericMatrix z, int power);
-RcppExport SEXP mousetrap_distMat3dV(SEXP xSEXP, SEXP ySEXP, SEXP zSEXP, SEXP powerSEXP) {
+RcppExport SEXP _mousetrap_distMat3dV(SEXP xSEXP, SEXP ySEXP, SEXP zSEXP, SEXP powerSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -72,7 +72,7 @@ END_RCPP
 }
 // select_max
 NumericVector select_max(NumericVector x, NumericVector y);
-RcppExport SEXP mousetrap_select_max(SEXP xSEXP, SEXP ySEXP) {
+RcppExport SEXP _mousetrap_select_max(SEXP xSEXP, SEXP ySEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -84,7 +84,7 @@ END_RCPP
 }
 // computeNorm
 std::vector<double> computeNorm(double r);
-RcppExport SEXP mousetrap_computeNorm(SEXP rSEXP) {
+RcppExport SEXP _mousetrap_computeNorm(SEXP rSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -95,7 +95,7 @@ END_RCPP
 }
 // gaussBlurSlow
 std::vector<double> gaussBlurSlow(std::vector<double> source, std::vector<double> target, double w, double h, double r);
-RcppExport SEXP mousetrap_gaussBlurSlow(SEXP sourceSEXP, SEXP targetSEXP, SEXP wSEXP, SEXP hSEXP, SEXP rSEXP) {
+RcppExport SEXP _mousetrap_gaussBlurSlow(SEXP sourceSEXP, SEXP targetSEXP, SEXP wSEXP, SEXP hSEXP, SEXP rSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -110,7 +110,7 @@ END_RCPP
 }
 // gaussBlur
 std::vector<double> gaussBlur(std::vector<double> source, std::vector<double> target, double w, double h, double r);
-RcppExport SEXP mousetrap_gaussBlur(SEXP sourceSEXP, SEXP targetSEXP, SEXP wSEXP, SEXP hSEXP, SEXP rSEXP) {
+RcppExport SEXP _mousetrap_gaussBlur(SEXP sourceSEXP, SEXP targetSEXP, SEXP wSEXP, SEXP hSEXP, SEXP rSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -125,7 +125,7 @@ END_RCPP
 }
 // boxBlur
 std::vector<double> boxBlur(std::vector<double> source, std::vector<double> target, double w, double h, double r);
-RcppExport SEXP mousetrap_boxBlur(SEXP sourceSEXP, SEXP targetSEXP, SEXP wSEXP, SEXP hSEXP, SEXP rSEXP) {
+RcppExport SEXP _mousetrap_boxBlur(SEXP sourceSEXP, SEXP targetSEXP, SEXP wSEXP, SEXP hSEXP, SEXP rSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -140,7 +140,7 @@ END_RCPP
 }
 // getAngleP
 NumericVector getAngleP(NumericVector x, NumericVector y);
-RcppExport SEXP mousetrap_getAngleP(SEXP xSEXP, SEXP ySEXP) {
+RcppExport SEXP _mousetrap_getAngleP(SEXP xSEXP, SEXP ySEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -152,7 +152,7 @@ END_RCPP
 }
 // getAngleV
 NumericVector getAngleV(NumericVector x, NumericVector y);
-RcppExport SEXP mousetrap_getAngleV(SEXP xSEXP, SEXP ySEXP) {
+RcppExport SEXP _mousetrap_getAngleV(SEXP xSEXP, SEXP ySEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -164,7 +164,7 @@ END_RCPP
 }
 // getAnglesP
 NumericMatrix getAnglesP(NumericMatrix xs, NumericMatrix ys);
-RcppExport SEXP mousetrap_getAnglesP(SEXP xsSEXP, SEXP ysSEXP) {
+RcppExport SEXP _mousetrap_getAnglesP(SEXP xsSEXP, SEXP ysSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -176,7 +176,7 @@ END_RCPP
 }
 // getAnglesV
 NumericMatrix getAnglesV(NumericMatrix xs, NumericMatrix ys);
-RcppExport SEXP mousetrap_getAnglesV(SEXP xsSEXP, SEXP ysSEXP) {
+RcppExport SEXP _mousetrap_getAnglesV(SEXP xsSEXP, SEXP ysSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -188,7 +188,7 @@ END_RCPP
 }
 // getlast
 NumericVector getlast(NumericMatrix trajectories);
-RcppExport SEXP mousetrap_getlast(SEXP trajectoriesSEXP) {
+RcppExport SEXP _mousetrap_getlast(SEXP trajectoriesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -199,7 +199,7 @@ END_RCPP
 }
 // getLength
 double getLength(NumericVector x, NumericVector y);
-RcppExport SEXP mousetrap_getLength(SEXP xSEXP, SEXP ySEXP) {
+RcppExport SEXP _mousetrap_getLength(SEXP xSEXP, SEXP ySEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -211,7 +211,7 @@ END_RCPP
 }
 // getLength3d
 double getLength3d(NumericVector x, NumericVector y, NumericVector z);
-RcppExport SEXP mousetrap_getLength3d(SEXP xSEXP, SEXP ySEXP, SEXP zSEXP) {
+RcppExport SEXP _mousetrap_getLength3d(SEXP xSEXP, SEXP ySEXP, SEXP zSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -224,7 +224,7 @@ END_RCPP
 }
 // getLengths
 NumericVector getLengths(NumericMatrix xs, NumericMatrix ys);
-RcppExport SEXP mousetrap_getLengths(SEXP xsSEXP, SEXP ysSEXP) {
+RcppExport SEXP _mousetrap_getLengths(SEXP xsSEXP, SEXP ysSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -236,7 +236,7 @@ END_RCPP
 }
 // getLengths3d
 NumericVector getLengths3d(NumericMatrix xs, NumericMatrix ys, NumericMatrix zs);
-RcppExport SEXP mousetrap_getLengths3d(SEXP xsSEXP, SEXP ysSEXP, SEXP zsSEXP) {
+RcppExport SEXP _mousetrap_getLengths3d(SEXP xsSEXP, SEXP ysSEXP, SEXP zsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -249,7 +249,7 @@ END_RCPP
 }
 // getVelocity
 NumericVector getVelocity(NumericVector x, NumericVector y);
-RcppExport SEXP mousetrap_getVelocity(SEXP xSEXP, SEXP ySEXP) {
+RcppExport SEXP _mousetrap_getVelocity(SEXP xSEXP, SEXP ySEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -261,7 +261,7 @@ END_RCPP
 }
 // getVelocity3d
 NumericVector getVelocity3d(NumericVector x, NumericVector y, NumericVector z);
-RcppExport SEXP mousetrap_getVelocity3d(SEXP xSEXP, SEXP ySEXP, SEXP zSEXP) {
+RcppExport SEXP _mousetrap_getVelocity3d(SEXP xSEXP, SEXP ySEXP, SEXP zSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -274,7 +274,7 @@ END_RCPP
 }
 // getVelocities
 NumericMatrix getVelocities(NumericMatrix xs, NumericMatrix ys);
-RcppExport SEXP mousetrap_getVelocities(SEXP xsSEXP, SEXP ysSEXP) {
+RcppExport SEXP _mousetrap_getVelocities(SEXP xsSEXP, SEXP ysSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -286,7 +286,7 @@ END_RCPP
 }
 // getVelocities3d
 NumericMatrix getVelocities3d(NumericMatrix xs, NumericMatrix ys, NumericMatrix zs);
-RcppExport SEXP mousetrap_getVelocities3d(SEXP xsSEXP, SEXP ysSEXP, SEXP zsSEXP) {
+RcppExport SEXP _mousetrap_getVelocities3d(SEXP xsSEXP, SEXP ysSEXP, SEXP zsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -299,7 +299,7 @@ END_RCPP
 }
 // spatialize
 NumericMatrix spatialize(NumericVector x, NumericVector y, int npts);
-RcppExport SEXP mousetrap_spatialize(SEXP xSEXP, SEXP ySEXP, SEXP nptsSEXP) {
+RcppExport SEXP _mousetrap_spatialize(SEXP xSEXP, SEXP ySEXP, SEXP nptsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -312,7 +312,7 @@ END_RCPP
 }
 // spatialize3d
 NumericMatrix spatialize3d(NumericVector x, NumericVector y, NumericVector z, int npts);
-RcppExport SEXP mousetrap_spatialize3d(SEXP xSEXP, SEXP ySEXP, SEXP zSEXP, SEXP nptsSEXP) {
+RcppExport SEXP _mousetrap_spatialize3d(SEXP xSEXP, SEXP ySEXP, SEXP zSEXP, SEXP nptsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -326,7 +326,7 @@ END_RCPP
 }
 // spatialize4d
 NumericMatrix spatialize4d(NumericVector x, NumericVector y, NumericVector z1, NumericVector z2, int npts);
-RcppExport SEXP mousetrap_spatialize4d(SEXP xSEXP, SEXP ySEXP, SEXP z1SEXP, SEXP z2SEXP, SEXP nptsSEXP) {
+RcppExport SEXP _mousetrap_spatialize4d(SEXP xSEXP, SEXP ySEXP, SEXP z1SEXP, SEXP z2SEXP, SEXP nptsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -341,7 +341,7 @@ END_RCPP
 }
 // spatializeArray
 GenericVector spatializeArray(NumericMatrix xs, NumericMatrix ys, NumericVector n_pts);
-RcppExport SEXP mousetrap_spatializeArray(SEXP xsSEXP, SEXP ysSEXP, SEXP n_ptsSEXP) {
+RcppExport SEXP _mousetrap_spatializeArray(SEXP xsSEXP, SEXP ysSEXP, SEXP n_ptsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -354,7 +354,7 @@ END_RCPP
 }
 // spatializeArrayToLong
 NumericMatrix spatializeArrayToLong(NumericMatrix xs, NumericMatrix ys, NumericVector n_pts);
-RcppExport SEXP mousetrap_spatializeArrayToLong(SEXP xsSEXP, SEXP ysSEXP, SEXP n_ptsSEXP) {
+RcppExport SEXP _mousetrap_spatializeArrayToLong(SEXP xsSEXP, SEXP ysSEXP, SEXP n_ptsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -367,7 +367,7 @@ END_RCPP
 }
 // spatializeArray3d
 GenericVector spatializeArray3d(NumericMatrix xs, NumericMatrix ys, NumericMatrix zs, NumericVector n_pts);
-RcppExport SEXP mousetrap_spatializeArray3d(SEXP xsSEXP, SEXP ysSEXP, SEXP zsSEXP, SEXP n_ptsSEXP) {
+RcppExport SEXP _mousetrap_spatializeArray3d(SEXP xsSEXP, SEXP ysSEXP, SEXP zsSEXP, SEXP n_ptsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -381,7 +381,7 @@ END_RCPP
 }
 // spatializeArrayToLong3d
 NumericMatrix spatializeArrayToLong3d(NumericMatrix xs, NumericMatrix ys, NumericMatrix zs, NumericVector n_pts);
-RcppExport SEXP mousetrap_spatializeArrayToLong3d(SEXP xsSEXP, SEXP ysSEXP, SEXP zsSEXP, SEXP n_ptsSEXP) {
+RcppExport SEXP _mousetrap_spatializeArrayToLong3d(SEXP xsSEXP, SEXP ysSEXP, SEXP zsSEXP, SEXP n_ptsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -395,7 +395,7 @@ END_RCPP
 }
 // spatializeArrayToLong4d
 NumericMatrix spatializeArrayToLong4d(NumericMatrix xs, NumericMatrix ys, NumericMatrix z1s, NumericMatrix z2s, NumericVector n_pts);
-RcppExport SEXP mousetrap_spatializeArrayToLong4d(SEXP xsSEXP, SEXP ysSEXP, SEXP z1sSEXP, SEXP z2sSEXP, SEXP n_ptsSEXP) {
+RcppExport SEXP _mousetrap_spatializeArrayToLong4d(SEXP xsSEXP, SEXP ysSEXP, SEXP z1sSEXP, SEXP z2sSEXP, SEXP n_ptsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -410,7 +410,7 @@ END_RCPP
 }
 // sd_mat
 double sd_mat(NumericMatrix mat);
-RcppExport SEXP mousetrap_sd_mat(SEXP matSEXP) {
+RcppExport SEXP _mousetrap_sd_mat(SEXP matSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -421,7 +421,7 @@ END_RCPP
 }
 // moments_mat
 NumericVector moments_mat(NumericMatrix mat);
-RcppExport SEXP mousetrap_moments_mat(SEXP matSEXP) {
+RcppExport SEXP _mousetrap_moments_mat(SEXP matSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -432,7 +432,7 @@ END_RCPP
 }
 // scale_rows
 NumericVector scale_rows(NumericMatrix mat, bool center, bool scale);
-RcppExport SEXP mousetrap_scale_rows(SEXP matSEXP, SEXP centerSEXP, SEXP scaleSEXP) {
+RcppExport SEXP _mousetrap_scale_rows(SEXP matSEXP, SEXP centerSEXP, SEXP scaleSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -445,7 +445,7 @@ END_RCPP
 }
 // trans_rows
 NumericVector trans_rows(NumericMatrix mat, double scale, bool center);
-RcppExport SEXP mousetrap_trans_rows(SEXP matSEXP, SEXP scaleSEXP, SEXP centerSEXP) {
+RcppExport SEXP _mousetrap_trans_rows(SEXP matSEXP, SEXP scaleSEXP, SEXP centerSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -458,7 +458,7 @@ END_RCPP
 }
 // scale_mat
 NumericMatrix scale_mat(NumericMatrix mat, bool center, bool scale);
-RcppExport SEXP mousetrap_scale_mat(SEXP matSEXP, SEXP centerSEXP, SEXP scaleSEXP) {
+RcppExport SEXP _mousetrap_scale_mat(SEXP matSEXP, SEXP centerSEXP, SEXP scaleSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -471,7 +471,7 @@ END_RCPP
 }
 // trans_mat
 NumericMatrix trans_mat(NumericMatrix mat, double scale, bool center);
-RcppExport SEXP mousetrap_trans_mat(SEXP matSEXP, SEXP scaleSEXP, SEXP centerSEXP) {
+RcppExport SEXP _mousetrap_trans_mat(SEXP matSEXP, SEXP scaleSEXP, SEXP centerSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -484,7 +484,7 @@ END_RCPP
 }
 // tab
 NumericMatrix tab(std::vector<double> v1, std::vector<double> v2);
-RcppExport SEXP mousetrap_tab(SEXP v1SEXP, SEXP v2SEXP) {
+RcppExport SEXP _mousetrap_tab(SEXP v1SEXP, SEXP v2SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -496,7 +496,7 @@ END_RCPP
 }
 // tab_sum
 NumericMatrix tab_sum(std::vector<double> v1, std::vector<double> v2, std::vector<double> a);
-RcppExport SEXP mousetrap_tab_sum(SEXP v1SEXP, SEXP v2SEXP, SEXP aSEXP) {
+RcppExport SEXP _mousetrap_tab_sum(SEXP v1SEXP, SEXP v2SEXP, SEXP aSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -509,7 +509,7 @@ END_RCPP
 }
 // tab_mean
 NumericMatrix tab_mean(std::vector<double> v1, std::vector<double> v2, std::vector<double> a);
-RcppExport SEXP mousetrap_tab_mean(SEXP v1SEXP, SEXP v2SEXP, SEXP aSEXP) {
+RcppExport SEXP _mousetrap_tab_mean(SEXP v1SEXP, SEXP v2SEXP, SEXP aSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -522,7 +522,7 @@ END_RCPP
 }
 // trajAlign
 GenericVector trajAlign(NumericMatrix xs, NumericMatrix ys, bool start, bool end, NumericVector coordinates);
-RcppExport SEXP mousetrap_trajAlign(SEXP xsSEXP, SEXP ysSEXP, SEXP startSEXP, SEXP endSEXP, SEXP coordinatesSEXP) {
+RcppExport SEXP _mousetrap_trajAlign(SEXP xsSEXP, SEXP ysSEXP, SEXP startSEXP, SEXP endSEXP, SEXP coordinatesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -537,7 +537,7 @@ END_RCPP
 }
 // trajAlign3d
 GenericVector trajAlign3d(NumericMatrix xs, NumericMatrix ys, NumericMatrix zs, bool start, bool end, NumericVector coordinates);
-RcppExport SEXP mousetrap_trajAlign3d(SEXP xsSEXP, SEXP ysSEXP, SEXP zsSEXP, SEXP startSEXP, SEXP endSEXP, SEXP coordinatesSEXP) {
+RcppExport SEXP _mousetrap_trajAlign3d(SEXP xsSEXP, SEXP ysSEXP, SEXP zsSEXP, SEXP startSEXP, SEXP endSEXP, SEXP coordinatesSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -550,4 +550,55 @@ BEGIN_RCPP
     rcpp_result_gen = Rcpp::wrap(trajAlign3d(xs, ys, zs, start, end, coordinates));
     return rcpp_result_gen;
 END_RCPP
+}
+
+static const R_CallMethodDef CallEntries[] = {
+    {"_mousetrap_cleanAngles", (DL_FUNC) &_mousetrap_cleanAngles, 1},
+    {"_mousetrap_distMat", (DL_FUNC) &_mousetrap_distMat, 3},
+    {"_mousetrap_distMatV", (DL_FUNC) &_mousetrap_distMatV, 3},
+    {"_mousetrap_distMat3d", (DL_FUNC) &_mousetrap_distMat3d, 4},
+    {"_mousetrap_distMat3dV", (DL_FUNC) &_mousetrap_distMat3dV, 4},
+    {"_mousetrap_select_max", (DL_FUNC) &_mousetrap_select_max, 2},
+    {"_mousetrap_computeNorm", (DL_FUNC) &_mousetrap_computeNorm, 1},
+    {"_mousetrap_gaussBlurSlow", (DL_FUNC) &_mousetrap_gaussBlurSlow, 5},
+    {"_mousetrap_gaussBlur", (DL_FUNC) &_mousetrap_gaussBlur, 5},
+    {"_mousetrap_boxBlur", (DL_FUNC) &_mousetrap_boxBlur, 5},
+    {"_mousetrap_getAngleP", (DL_FUNC) &_mousetrap_getAngleP, 2},
+    {"_mousetrap_getAngleV", (DL_FUNC) &_mousetrap_getAngleV, 2},
+    {"_mousetrap_getAnglesP", (DL_FUNC) &_mousetrap_getAnglesP, 2},
+    {"_mousetrap_getAnglesV", (DL_FUNC) &_mousetrap_getAnglesV, 2},
+    {"_mousetrap_getlast", (DL_FUNC) &_mousetrap_getlast, 1},
+    {"_mousetrap_getLength", (DL_FUNC) &_mousetrap_getLength, 2},
+    {"_mousetrap_getLength3d", (DL_FUNC) &_mousetrap_getLength3d, 3},
+    {"_mousetrap_getLengths", (DL_FUNC) &_mousetrap_getLengths, 2},
+    {"_mousetrap_getLengths3d", (DL_FUNC) &_mousetrap_getLengths3d, 3},
+    {"_mousetrap_getVelocity", (DL_FUNC) &_mousetrap_getVelocity, 2},
+    {"_mousetrap_getVelocity3d", (DL_FUNC) &_mousetrap_getVelocity3d, 3},
+    {"_mousetrap_getVelocities", (DL_FUNC) &_mousetrap_getVelocities, 2},
+    {"_mousetrap_getVelocities3d", (DL_FUNC) &_mousetrap_getVelocities3d, 3},
+    {"_mousetrap_spatialize", (DL_FUNC) &_mousetrap_spatialize, 3},
+    {"_mousetrap_spatialize3d", (DL_FUNC) &_mousetrap_spatialize3d, 4},
+    {"_mousetrap_spatialize4d", (DL_FUNC) &_mousetrap_spatialize4d, 5},
+    {"_mousetrap_spatializeArray", (DL_FUNC) &_mousetrap_spatializeArray, 3},
+    {"_mousetrap_spatializeArrayToLong", (DL_FUNC) &_mousetrap_spatializeArrayToLong, 3},
+    {"_mousetrap_spatializeArray3d", (DL_FUNC) &_mousetrap_spatializeArray3d, 4},
+    {"_mousetrap_spatializeArrayToLong3d", (DL_FUNC) &_mousetrap_spatializeArrayToLong3d, 4},
+    {"_mousetrap_spatializeArrayToLong4d", (DL_FUNC) &_mousetrap_spatializeArrayToLong4d, 5},
+    {"_mousetrap_sd_mat", (DL_FUNC) &_mousetrap_sd_mat, 1},
+    {"_mousetrap_moments_mat", (DL_FUNC) &_mousetrap_moments_mat, 1},
+    {"_mousetrap_scale_rows", (DL_FUNC) &_mousetrap_scale_rows, 3},
+    {"_mousetrap_trans_rows", (DL_FUNC) &_mousetrap_trans_rows, 3},
+    {"_mousetrap_scale_mat", (DL_FUNC) &_mousetrap_scale_mat, 3},
+    {"_mousetrap_trans_mat", (DL_FUNC) &_mousetrap_trans_mat, 3},
+    {"_mousetrap_tab", (DL_FUNC) &_mousetrap_tab, 2},
+    {"_mousetrap_tab_sum", (DL_FUNC) &_mousetrap_tab_sum, 3},
+    {"_mousetrap_tab_mean", (DL_FUNC) &_mousetrap_tab_mean, 3},
+    {"_mousetrap_trajAlign", (DL_FUNC) &_mousetrap_trajAlign, 5},
+    {"_mousetrap_trajAlign3d", (DL_FUNC) &_mousetrap_trajAlign3d, 6},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_mousetrap(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
 }
