@@ -744,12 +744,16 @@ print.mt_heatmap_raw = function(x,...){
 #'   \code{array}, or an object of class \code{mt_heatmap_raw} (as created by
 #'   \link{mt_heatmap_raw}). The class of \code{y} must match the class of 
 #'   \code{x}, unless \code{y} is \code{NULL}.
-#' @param condition logical vector matching the number of trajectories in 
-#'   \code{use}. \code{mt_diffmap} will create a difference-heatmap comparing 
-#'   all trajectories for which \code{condition==TRUE} to all trajectories for
-#'   which \code{condition==FALSE}. If \code{condition} is specified, \code{y}
-#'   will be ignored (unless \code{x} and \code{y} are of class
+#' @param condition either a character value specifying which variable codes the
+#'   two conditions (in \code{x[[use2]]}) that should be compared - or a vector
+#'   matching the number of trajectories in \code{x[[use]]} that has exactly two
+#'   levels. \code{mt_diffmap} will create a difference-heatmap comparing all
+#'   trajectories between the two conditions. If \code{condition} is specified,
+#'   \code{y} will be ignored (unless \code{x} and \code{y} are of class
 #'   \code{heatmap_raw}).
+#' @param use2 an optional character string specifying where the data that
+#'   contain the condition variable can be found. Defaults to "data" as
+#'   \code{x[["data"]]} usually contains all non mouse-tracking trial data.
 #' @param colors a character vector specifying the colors used to color
 #'   cases of \code{image1 > image2, image1 ~ image2, image1 < image2},
 #'   respectively. Note that the colors are used in that specific order.
@@ -766,12 +770,14 @@ print.mt_heatmap_raw = function(x,...){
 #' @author
 #' Dirk U. Wulff (\email{dirk.wulff@@gmail.com})
 #' 
+#' Pascal J. Kieslich
+#' 
 #' @seealso
 #' \link{mt_heatmap} and \link{mt_heatmap_ggplot} for plotting trajectory 
 #' heatmaps.
 #' 
 #' @examples
-#' mt_diffmap(KH2017, condition=KH2017$data$Condition=="Typical",
+#' mt_diffmap(KH2017, condition="Condition",
 #'   xres=400, smooth_radius=6, n_shades=5)
 #' 
 #' @export
@@ -781,6 +787,7 @@ mt_diffmap <- function(
   condition = NULL,
   use = 'trajectories',
   dimensions = c('xpos','ypos'),
+  use2 = 'data',
   filename = NULL,
   bounds = NULL,
   xres = 500,
@@ -815,6 +822,19 @@ mt_diffmap <- function(
     if(is.array(x)) if(!all(dimensions %in% dimnames(x)[[3]])) stop('Not all dimensions found in x.')
     if(!is.null(y) == !is.null(condition)) stop('Specify either y or condition, but not both.')
     if(!is.null(condition)){
+      
+      # If condition label is provided, extract condition values
+      if(length(condition)==1){
+        condition <- x[[use2]][,condition]
+      }
+      
+      # If condition values are not of class logical, convert them
+      if(class(condition) != "logical"){
+        condition_levels <- levels(factor(condition))
+        if (length(condition_levels)!=2) stop('The condition variable can only have two levels.')
+        condition <- condition==condition_levels[1]
+      }
+      
       y = x[[use]][!condition,,] 
       x = x[[use]][ condition,,] 
     }

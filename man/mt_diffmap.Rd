@@ -5,10 +5,10 @@
 \title{Creates a difference-heatmap of two trajectory heatmap images.}
 \usage{
 mt_diffmap(x, y = NULL, condition = NULL, use = "trajectories",
-  dimensions = c("xpos", "ypos"), filename = NULL, bounds = NULL,
-  xres = 500, upscale = 4, smooth_radius = 10, colors = c("#00863F",
-  "#000000", "#FF1900"), n_shades = 1000, plot = TRUE, ...,
-  verbose = TRUE)
+  dimensions = c("xpos", "ypos"), use2 = "data", filename = NULL,
+  bounds = NULL, xres = 500, upscale = 4, smooth_radius = 10,
+  colors = c("#00863F", "#000000", "#FF1900"), n_shades = 1000,
+  plot = TRUE, ..., verbose = TRUE)
 }
 \arguments{
 \item{x}{an object of class \code{mousetrap}), a trajectory object of class 
@@ -20,11 +20,12 @@ mt_diffmap(x, y = NULL, condition = NULL, use = "trajectories",
 \link{mt_heatmap_raw}). The class of \code{y} must match the class of 
 \code{x}, unless \code{y} is \code{NULL}.}
 
-\item{condition}{logical vector matching the number of trajectories in 
-\code{use}. \code{mt_diffmap} will create a difference-heatmap comparing 
-all trajectories for which \code{condition==TRUE} to all trajectories for
-which \code{condition==FALSE}. If \code{condition} is specified, \code{y}
-will be ignored (unless \code{x} and \code{y} are of class
+\item{condition}{either a character value specifying which variable codes the
+two conditions (in \code{x[[use2]]}) that should be compared - or a vector
+matching the number of trajectories in \code{x[[use]]} that has exactly two
+levels. \code{mt_diffmap} will create a difference-heatmap comparing all
+trajectories between the two conditions. If \code{condition} is specified,
+\code{y} will be ignored (unless \code{x} and \code{y} are of class
 \code{heatmap_raw}).}
 
 \item{use}{a character string specifying which trajectory data should be
@@ -33,6 +34,10 @@ used.}
 \item{dimensions}{a character vector specifying the trajectory variables used
 to create the heatmap. The first two entries are used as x and 
 y-coordinates, the third, if provided, will be added as color information.}
+
+\item{use2}{an optional character string specifying where the data that
+contain the condition variable can be found. Defaults to "data" as
+\code{x[["data"]]} usually contains all non mouse-tracking trial data.}
 
 \item{filename}{a character string giving the name of the file. If 
 \code{NULL} (the default), the R standard device is used for plotting.
@@ -84,7 +89,7 @@ or from which trajectory heatmaps can be computed. Difference-heatmaps are
 constructed analogously to \link{mt_heatmap_raw}.
 }
 \examples{
-mt_diffmap(KH2017, condition=KH2017$data$Condition=="Typical",
+mt_diffmap(KH2017, condition="Condition",
   xres=400, smooth_radius=6, n_shades=5)
 
 }
@@ -94,4 +99,6 @@ heatmaps.
 }
 \author{
 Dirk U. Wulff (\email{dirk.wulff@gmail.com})
+
+Pascal J. Kieslich
 }
