@@ -21,8 +21,8 @@
 #' trajectories share the same direction, e.g., that all trajectories end in the
 #' top-left corner of the coordinate system (\link{mt_remap_symmetric} or
 #' \link{mt_align} can be used to achieve this). Furthermore, it is recommended
-#' to use spatialized trajectories (see \link{mt_spatialize}; Haslbeck, Wulff,
-#' Kieslich, Henninger, & Schulte-Mecklenbeck, 2017).
+#' to use spatialized trajectories (see \link{mt_spatialize}; Wulff et al., in
+#' press; Haslbeck et al., 2018).
 #'
 #' @inheritParams mt_cluster
 #' @param kseq a numeric vector specifying set of candidates for k. Defaults to
@@ -76,11 +76,17 @@
 #'   Clusters via Normalized Cluster Instability. \emph{arXiv preprint}
 #'   arXiv:1608.07494.
 #'
-#'   Haslbeck, J. M. B., Wulff, D. U., Kieslich, P. J., Henninger, F., &
-#'   Schulte-Mecklenbeck, M. (2017). Advanced mouse- and hand-tracking analysis:
-#'   Detecting and visualizing clusters in movement trajectories. Manuscript in
-#'   preparation.
+#'   Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F., &
+#'   Schulte-Mecklenbeck, M. (in press). Mouse-tracking: Detecting types in
+#'   movement trajectories. In M. Schulte-Mecklenbeck, A. Kuehberger, & J. G.
+#'   Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York:
+#'   Taylor & Francis.
 #'
+#'   Haslbeck, J. M. B., Wulff, D. U., Kieslich, P. J., Henninger, F., &
+#'   Schulte-Mecklenbeck, M. (2018). \emph{Advanced mouse- and hand-tracking
+#'   analysis: Detecting and visualizing clusters in movement trajectories}.
+#'   Manuscript in preparation.
+#'   
 #'   Tibshirani, R., Walther, G., & Hastie, T. (2001). Estimating the number of
 #'   clusters in a data set via the gap statistic. \emph{Journal of the Royal
 #'   Statistical Society: Series B (Statistical Methodology), 63}(2), 411-423.

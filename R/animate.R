@@ -132,7 +132,7 @@
 #' 
 #' }
 #' 
-#' @author Dirk U. Wulff <dirk.wulff@gmail.com>
+#' @author Dirk U. Wulff (\email{dirk.wulff@@gmail.com})
 #' 
 #' @export
 

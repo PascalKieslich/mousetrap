@@ -91,10 +91,9 @@ the resulting dissimilarity matrix using a predefined number of clusters.
 Cluster estimation using \link[fastcluster]{hclust} relies on distances 
 computed by \link{mt_distmat}.
 
-Mouse trajectories often occur in distinct, qualitative types (see Wulff, 
-Haslbeck, Schulte-Mecklenbeck, 2017; Haslbeck, Wulff, Kieslich, Henninger, & 
-Schulte-Mecklenbeck, 2017). Common trajectory types are linear trajectories, 
-mildly and strongly curved trajctories, and single and multiple 
+Mouse trajectories often occur in distinct, qualitative types (see Wulff et
+al., in press; Wulff et al., 2018). Common trajectory types are linear
+trajectories, mildly and strongly curved trajctories, and single and multiple
 change-of-mind trials (see also \link{mt_map}). \code{mt_cluster} can tease
 these types apart.
 
@@ -114,8 +113,8 @@ For clustering trajectories, it is often useful that the endpoints of all
 trajectories share the same direction, e.g., that all trajectories end in the
 top-left corner of the coordinate system (\link{mt_remap_symmetric} or
 \link{mt_align} can be used to achieve this). Furthermore, it is recommended
-to use spatialized trajectories (see \link{mt_spatialize}; Haslbeck, Wulff,
-Kieslich, Henninger, & Schulte-Mecklenbeck, 2017).
+to use spatialized trajectories (see \link{mt_spatialize}; Wulff et al., in
+press; Haslbeck et al., 2018).
 }
 \examples{
 # Spatialize trajectories
@@ -130,13 +129,20 @@ mt_plot(KH2017,use="sp_trajectories",
 
 }
 \references{
-Wulff, D. U., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. 
-  (2017). Measuring the (dis-)continuous mind. Manuscript in preparation.
+Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F.,
+  & Schulte-Mecklenbeck, M. (in press). Mouse-tracking: Detecting types in
+  movement trajectories. In M. Schulte-Mecklenbeck, A. Kuehberger, & J. G.
+  Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York:
+  Taylor & Francis.
+   
+  Wulff, D. U., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. (2018).
+  \emph{Measuring the (dis-)continuous mind: What movement trajectories
+  reveal about cognition}. Manuscript in preparation.
 
-  Haslbeck, J. M. B., Wulff, D. U., Kieslich, P. J., Henninger, F., & 
-  Schulte-Mecklenbeck, M. (2017). Advanced mouse- and hand-tracking analysis:
-  Detecting and visualizing clusters in movement trajectories. Manuscript in 
-  preparation.
+  Haslbeck, J. M. B., Wulff, D. U., Kieslich, P. J., Henninger, F., &
+  Schulte-Mecklenbeck, M. (2018). \emph{Advanced mouse- and hand-tracking
+  analysis: Detecting and visualizing clusters in movement trajectories}.
+  Manuscript in preparation.
 }
 \seealso{
 \link{mt_distmat} for more information about how the distance matrix is 

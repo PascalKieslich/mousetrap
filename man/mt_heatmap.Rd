@@ -49,9 +49,25 @@ how the trajectory heatmaps are constructed, see \link{mt_heatmap_raw}.
 mt_heatmap(KH2017, xres=500, n_shades=5, mean_image=0.2)
 
 }
+\references{
+Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F.,
+  & Schulte-Mecklenbeck, M. (in press). Mouse-tracking: Detecting types in
+  movement trajectories. In M. Schulte-Mecklenbeck, A. Kuehberger, & J. G.
+  Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York:
+  Taylor & Francis.
+
+  Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B., &
+  Schulte-Mecklenbeck, M. (in press). Mouse-tracking: A practical guide to
+  implementation and analysis. In M. Schulte-Mecklenbeck, A. Kuehberger, & J.
+  G. Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York:
+  Taylor & Francis.
+}
 \seealso{
 \link{mt_heatmap_ggplot} for plotting a trajectory heatmap using
   ggplot2.
 
   \link{mt_diffmap} for plotting trajectory difference-heatmaps.
+}
+\author{
+Dirk U. Wulff (\email{dirk.wulff@gmail.com})
 }

@@ -120,6 +120,19 @@ are visible. In order to do this, specify a third variable label in
 \code{dimensions} and control its appearance using the \code{color} and 
 \code{mean_color} arguments.
 }
+\references{
+Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F.,
+  & Schulte-Mecklenbeck, M. (in press). Mouse-tracking: Detecting types in
+  movement trajectories. In M. Schulte-Mecklenbeck, A. Kuehberger, & J. G.
+  Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York:
+  Taylor & Francis.
+
+  Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B., &
+  Schulte-Mecklenbeck, M. (in press). Mouse-tracking: A practical guide to
+  implementation and analysis. In M. Schulte-Mecklenbeck, A. Kuehberger, & J.
+  G. Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York:
+  Taylor & Francis.
+}
 \seealso{
 \link{mt_heatmap} and  \link{mt_heatmap_ggplot} for plotting
   trajectory heatmaps.

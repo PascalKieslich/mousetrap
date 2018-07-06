@@ -140,9 +140,15 @@
 #'   \item{acc_min}{Minimum acceleration} 
 #'   \item{acc_min_time}{Time at which minimum acceleration occurred first} 
 #'   
-#' @references Kieslich, P. J., Wulff, D. U., Henninger, F., Haslbeck, J. M. B.,
-#'   & Schulte-Mecklenbeck, M. (2017). Mouse- and hand-tracking as a window to
-#'   cognition: A tutorial on implementation, analysis, and visualization.
+#' @references Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B.,
+#'   & Schulte-Mecklenbeck, M. (in press). Mouse-tracking: A practical guide to
+#'   implementation and analysis. In M. Schulte-Mecklenbeck, A. Kuehberger, & J.
+#'   G. Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York:
+#'   Taylor & Francis.
+#'   
+#'   Kieslich, P. J., Wulff, D. U., Henninger, F., Haslbeck, J. M. B., &
+#'   Schulte-Mecklenbeck, M. (2018). \emph{Mouse- and hand-tracking as a window
+#'   to cognition: A tutorial on implementation, analysis, and visualization}.
 #'   Manuscript in preparation.
 #'
 #'   Freeman, J. B., & Ambady, N. (2010). MouseTracker: Software for studying 

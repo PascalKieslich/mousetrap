@@ -86,6 +86,18 @@
 #'
 #'   \link{mt_diffmap} for plotting trajectory difference-heatmaps.
 #' 
+#' @references Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F.,
+#'   & Schulte-Mecklenbeck, M. (in press). Mouse-tracking: Detecting types in
+#'   movement trajectories. In M. Schulte-Mecklenbeck, A. Kuehberger, & J. G.
+#'   Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York:
+#'   Taylor & Francis.
+#'
+#'   Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B., &
+#'   Schulte-Mecklenbeck, M. (in press). Mouse-tracking: A practical guide to
+#'   implementation and analysis. In M. Schulte-Mecklenbeck, A. Kuehberger, & J.
+#'   G. Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York:
+#'   Taylor & Francis.
+#'   
 #' @export
 mt_heatmap_raw <- function(
   data,
@@ -441,6 +453,20 @@ mt_heatmap_raw <- function(
 #'
 #'   \link{mt_diffmap} for plotting trajectory difference-heatmaps.
 #' 
+#' @author Dirk U. Wulff (\email{dirk.wulff@@gmail.com})
+#' 
+#' @references Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F.,
+#'   & Schulte-Mecklenbeck, M. (in press). Mouse-tracking: Detecting types in
+#'   movement trajectories. In M. Schulte-Mecklenbeck, A. Kuehberger, & J. G.
+#'   Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York:
+#'   Taylor & Francis.
+#'
+#'   Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B., &
+#'   Schulte-Mecklenbeck, M. (in press). Mouse-tracking: A practical guide to
+#'   implementation and analysis. In M. Schulte-Mecklenbeck, A. Kuehberger, & J.
+#'   G. Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York:
+#'   Taylor & Francis.
+#'    
 #' @examples
 #' mt_heatmap(KH2017, xres=500, n_shades=5, mean_image=0.2)
 #' 
@@ -603,7 +629,7 @@ mt_heatmap <- function(
 #' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
 #'
 #' Felix Henninger
-#' 
+#'
 #' Dirk U. Wulff
 #' 
 #' @seealso \link{mt_heatmap} for plotting a trajectory heatmap using base
@@ -611,6 +637,18 @@ mt_heatmap <- function(
 #'
 #'   \link{mt_diffmap} for plotting trajectory difference-heatmaps.
 #' 
+#' @references Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F.,
+#'   & Schulte-Mecklenbeck, M. (in press). Mouse-tracking: Detecting types in
+#'   movement trajectories. In M. Schulte-Mecklenbeck, A. Kuehberger, & J. G.
+#'   Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York:
+#'   Taylor & Francis.
+#'
+#'   Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B., &
+#'   Schulte-Mecklenbeck, M. (in press). Mouse-tracking: A practical guide to
+#'   implementation and analysis. In M. Schulte-Mecklenbeck, A. Kuehberger, & J.
+#'   G. Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York:
+#'   Taylor & Francis.
+#'   
 #' @examples
 #' mt_heatmap_ggplot(KH2017, xres=500, n_shades=5, mean_image=0.2)
 #' 
@@ -769,13 +807,25 @@ print.mt_heatmap_raw = function(x,...){
 #'
 #' @author
 #' Dirk U. Wulff (\email{dirk.wulff@@gmail.com})
-#' 
+#'
 #' Pascal J. Kieslich
 #' 
 #' @seealso
 #' \link{mt_heatmap} and \link{mt_heatmap_ggplot} for plotting trajectory 
 #' heatmaps.
 #' 
+#' @references Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F.,
+#'   & Schulte-Mecklenbeck, M. (in press). Mouse-tracking: Detecting types in
+#'   movement trajectories. In M. Schulte-Mecklenbeck, A. Kuehberger, & J. G.
+#'   Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York:
+#'   Taylor & Francis.
+#'
+#'   Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B., &
+#'   Schulte-Mecklenbeck, M. (in press). Mouse-tracking: A practical guide to
+#'   implementation and analysis. In M. Schulte-Mecklenbeck, A. Kuehberger, & J.
+#'   G. Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York:
+#'   Taylor & Francis.
+#'   
 #' @examples
 #' mt_diffmap(KH2017, condition="Condition",
 #'   xres=400, smooth_radius=6, n_shades=5)

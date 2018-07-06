@@ -174,5 +174,5 @@ mt_animate(mt_example,filename = "MyMovie.gif",
 
 }
 \author{
-Dirk U. Wulff <dirk.wulff@gmail.com>
+Dirk U. Wulff (\email{dirk.wulff@gmail.com})
 }

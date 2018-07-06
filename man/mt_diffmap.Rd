@@ -93,6 +93,19 @@ mt_diffmap(KH2017, condition="Condition",
   xres=400, smooth_radius=6, n_shades=5)
 
 }
+\references{
+Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F.,
+  & Schulte-Mecklenbeck, M. (in press). Mouse-tracking: Detecting types in
+  movement trajectories. In M. Schulte-Mecklenbeck, A. Kuehberger, & J. G.
+  Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York:
+  Taylor & Francis.
+
+  Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B., &
+  Schulte-Mecklenbeck, M. (in press). Mouse-tracking: A practical guide to
+  implementation and analysis. In M. Schulte-Mecklenbeck, A. Kuehberger, & J.
+  G. Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York:
+  Taylor & Francis.
+}
 \seealso{
 \link{mt_heatmap} and \link{mt_heatmap_ggplot} for plotting trajectory 
 heatmaps.

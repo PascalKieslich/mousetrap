@@ -41,6 +41,10 @@
 #' @references Scherbaum, S., Dshemuchadse, M., Fischer, R., & Goschke, T.
 #'   (2010). How decisions evolve: The temporal dynamics of action selection.
 #'   \emph{Cognition, 115}(3), 407-416.
+#'
+#'   Scherbaum, S., & Kieslich, P. J. (in press). Stuck at the starting line: How
+#'   the starting procedure influences mouse-tracking data. \emph{Behavior
+#'   Research Methods}.
 #' 
 #' @seealso \link{mt_plot} for plotting trajectory data.
 #'
@@ -71,7 +75,7 @@
 #' 
 #' @author
 #' Felix Henninger (\email{mailbox@@felixhenninger.com})
-#' 
+#'
 #' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
 #' 
 #' @export
