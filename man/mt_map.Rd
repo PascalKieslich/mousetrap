@@ -7,7 +7,7 @@
 mt_map(data, use = "sp_trajectories", save_as = "prototyping",
   dimensions = c("xpos", "ypos"), prototypes = mousetrap::mt_prototypes,
   weights = rep(1, length(dimensions)), pointwise = TRUE, na_rm = FALSE,
-  minkowski_p = 2)
+  minkowski_p = 2, use2 = "data", grouping_variables = NULL)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import
@@ -51,6 +51,17 @@ between trajectories.}
 \code{minkowski_p = 1} computes the city-block distance, \code{minkowski_p 
 = 2} (the default) computes the Euclidian distance, \code{minkowski_p = 3} 
 the cubic distance, etc.}
+
+\item{use2}{an optional character string specifying where the data that
+contain the variables used for grouping can be found (in case
+\code{grouping_variables} are specified). Defaults to "data" as
+\code{data[["data"]]} usually contains all non mouse-tracking trial data.}
+
+\item{grouping_variables}{a character string (or vector) specifying one or
+more variables in \code{use2}. If specified, prototypes will be rescaled
+separately to match the coordinate system of the trajectories for each
+level of the variable(s). If unspecified (the default), the prototypes are
+rescaled in the same way across all trajectories.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) with an additional 
@@ -145,4 +156,6 @@ Wulff, D. U., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M.
 Dirk U. Wulff (\email{dirk.wulff@gmail.com})
 
 Jonas M. B. Haslbeck (\email{jonas.haslbeck@gmail.com})
+
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
 }

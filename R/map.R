@@ -31,6 +31,15 @@
 #'   trajectories are mapped to. As a starting point, the trajectories stored in
 #'   \link{mt_prototypes} can be used. See Details and Examples for selecting 
 #'   prototypes and creating new ones.
+#' @param use2 an optional character string specifying where the data that
+#'   contain the variables used for grouping can be found (in case
+#'   \code{grouping_variables} are specified). Defaults to "data" as
+#'   \code{data[["data"]]} usually contains all non mouse-tracking trial data.
+#' @param grouping_variables a character string (or vector) specifying one or
+#'   more variables in \code{use2}. If specified, prototypes will be rescaled
+#'   separately to match the coordinate system of the trajectories for each
+#'   level of the variable(s). If unspecified (the default), the prototypes are
+#'   rescaled in the same way across all trajectories.
 #'
 #' @return A mousetrap data object (see \link{mt_example}) with an additional 
 #'   \link{data.frame} (by default called \code{prototyping}) that contains the 
@@ -94,6 +103,8 @@
 #' Dirk U. Wulff (\email{dirk.wulff@@gmail.com})
 #' 
 #' Jonas M. B. Haslbeck (\email{jonas.haslbeck@@gmail.com})
+#' 
+#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
 #'
 #' @export
 mt_map <- function(
@@ -109,7 +120,11 @@ mt_map <- function(
   weights = rep(1, length(dimensions)),
   pointwise = TRUE,
   na_rm = FALSE,  
-  minkowski_p = 2
+  minkowski_p = 2,
+  
+  # arguments if prototype rescaling should be performed separately
+  use2 = "data",
+  grouping_variables=NULL
   ){
 
   # Extract trajectories
@@ -128,41 +143,75 @@ mt_map <- function(
   # check prototype dimensionality
   if(!all(dimensions %in% dimnames(prototypes)[[3]])) stop(paste0('Not all dimensions found in prototypes.'))
   
-  # Align and rescale prototypes and combine them with trajectories
-  n_points <- dim(trajectories)[2]
-  n_proto  <- dim(prototypes)[1]
-  prototypes <- mt_align(prototypes,coordinates = c(
-    colMeans(trajectories[,1,dimensions]),colMeans(trajectories[,n_points,dimensions])
+  
+  # Extract factor levels if grouping variables are specified
+  factor_levels <- unique(data[[use2]][,grouping_variables,drop=FALSE])
+  for (var in grouping_variables){
+    factor_levels <- factor_levels[order(factor_levels[,var]),,drop=FALSE]
+  }
+  
+  results <- data.frame()
+  
+  for (i in 1:ifelse(is.null(grouping_variables),1,nrow(factor_levels))){
+    
+    # Select all trajectories if no grouping variables are specified
+    if (is.null(grouping_variables)){
+      current_trajectories <- trajectories
+      
+    # Select the relevant trajectories if grouping variables are specified
+    } else{
+      keep <- rep(TRUE,nrow(data[[use2]]))
+      for (var in grouping_variables){
+        keep <- keep & data[[use2]][,var]==factor_levels[i,var]
+      }
+      current_trajectories <- trajectories[rownames(trajectories) %in% rownames(data[[use2]])[keep],,,drop=FALSE]
+    }
+    
+    # Align and rescale prototypes and combine them with trajectories
+    n_points <- dim(current_trajectories)[2]
+    n_proto  <- dim(prototypes)[1]
+    al_prototypes <- mt_align(prototypes,coordinates = c(
+      colMeans(current_trajectories[,1,dimensions]),colMeans(current_trajectories[,n_points,dimensions])
     ))
-  prototypes <- mt_spatialize(prototypes,n_points = n_points, dimensions = dimensions)
-  joint_array <- mt_bind(prototypes,trajectories,verbose=FALSE)
+    al_prototypes <- mt_spatialize(al_prototypes,n_points = n_points, dimensions = dimensions)
+    joint_array <- mt_bind(al_prototypes,current_trajectories,verbose=FALSE)
+    
+    # limit trajectories to dimensions
+    joint_array <- joint_array[,,dimensions]
+    
+    # prepare trajectories
+    joint_array = prepare_trajectories(trajectories = joint_array, 
+                                       dimensions = dimensions, 
+                                       weights = weights,
+                                       na_rm = na_rm)  
+    
+    # ---- compute distance & closest prototype
+    distm <-  mt_distmat(
+      joint_array,
+      dimensions = dimensions,
+      weights = NULL,
+      pointwise = pointwise,
+      minkowski_p = minkowski_p)
+    
+    dists <- distm[1:n_proto,-c(1:n_proto)]
+    min_dist <- apply(dists,2,min)
+    prototype <- apply(dists,2,function(x) which(x == min(x)))
+    prototype_label <- factor(rownames(prototypes)[prototype],levels=rownames(prototypes))
+    
+    
+    results <- rbind(results,
+                     data.frame(mt_id=rownames(current_trajectories),min_dist,prototype,prototype_label))
+  }
   
-  # limit trajectories to dimensions
-  joint_array <- joint_array[,,dimensions]
   
-  # prepare trajectories
-  joint_array = prepare_trajectories(trajectories = joint_array, 
-                                      dimensions = dimensions, 
-                                      weights = weights,
-                                      na_rm = na_rm)  
-
-  # ---- compute distance & closest prototype
-  distm <-  mt_distmat(
-    joint_array,
-    dimensions = dimensions,
-    weights = NULL,
-    pointwise = pointwise,
-    minkowski_p = minkowski_p)
+  # Reorder results according to original order in trajectories
+  rownames(results) <- results[,1]
+  results <- results[rownames(trajectories),]
   
-  dists <- distm[1:n_proto,-c(1:n_proto)]
-  min_dist <- apply(dists,2,min)
-  prototype <- apply(dists,2,function(x) which(x == min(x)))
-  prototype_label <- factor(rownames(prototypes)[prototype],levels=rownames(prototypes))
-
   # Save data
   return(create_results(
-    data=data, results=data.frame(prototype,prototype_label,min_dist), 
+    data=data, results=results[,-1], 
     use=use, save_as=save_as,
-    ids=rownames(trajectories), overwrite=FALSE))
+    ids=results[,1], overwrite=FALSE))
   
 }
