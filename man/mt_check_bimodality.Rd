@@ -80,9 +80,9 @@ mt_example <- mt_measures(mt_example)
 mt_check_bimodality(mt_example,
   use_variables=c("MAD", "AD"))
 
-# Standardize variables
+# Standardize variables per participant
 mt_example <- mt_standardize(mt_example,
-  use_variables=c("MAD", "AD"))
+  use_variables=c("MAD", "AD"), within="subject_nr")
   
 # Assess bimodality for standardized variables
 mt_check_bimodality(mt_example,
