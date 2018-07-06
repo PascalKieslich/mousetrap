@@ -581,63 +581,135 @@ mt_heatmap <- function(
 #' 
 #' \code{mt_heatmap_ggplot} plots high resolution raw trajectory maps. Note that
 #' this function has beta status.
-#' 
-#' \code{mt_heatmap_ggplot} wraps \link{mt_heatmap_raw} and returns a ggplot 
-#' object containing the plot. In contrast to \code{mt_heatmap_plot} plots 
-#' created by \code{mt_heatmap_ggplot} can be extended using ggplot's \code{+} 
+#'
+#' \code{mt_heatmap_ggplot} wraps \link{mt_heatmap_raw} and returns a ggplot
+#' object containing the plot. In contrast to \code{mt_heatmap_plot} plots
+#' created by \code{mt_heatmap_ggplot} can be extended using ggplot's \code{+}
 #' operator. For further details on how the trajectory heatmaps are constructed,
 #' see \link{mt_heatmap_raw}.
-#' 
+#'
 #' @inheritParams mt_heatmap_raw
+#' @param use2 an optional character string specifying where the data that
+#'   contain the variables used for faceting can be found (in case these
+#'   arguments are specified). Defaults to "data" as \code{data[["data"]]}
+#'   usually contains all non mouse-tracking trial data.
+#' @param facet_row an optional character string specifying a variable in
+#'   \code{data[[use2]]} that should be used for (row-wise) faceting.
+#' @param facet_col an optional character string specifying a variable in
+#'   \code{data[[use2]]} that should be used for (column-wise) faceting.
 #' @param ... arguments passed to \link{mt_heatmap_raw}.
 #' 
 #' @author
-#' Felix Henninger
-#' 
-#' Dirk U. Wulff (\email{dirk.wulff@@gmail.com})
-#' 
 #' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
 #'
+#' Felix Henninger
+#' 
+#' Dirk U. Wulff
+#' 
 #' @seealso \link{mt_heatmap} for plotting a trajectory heatmap using base
 #'   plots.
 #'
 #'   \link{mt_diffmap} for plotting trajectory difference-heatmaps.
 #' 
 #' @examples
-#' mt_heatmap_ggplot(KH2017, xres=500, n_shades=5,mean_image=0.2)
+#' mt_heatmap_ggplot(KH2017, xres=500, n_shades=5, mean_image=0.2)
 #' 
 #' @export
-mt_heatmap_ggplot <- function(data, use="trajectories", ...) {
+mt_heatmap_ggplot <- function(data,
+  use="trajectories",
+  dimensions = c("xpos", "ypos"),
+  use2="data",
+  facet_row=NULL, facet_col=NULL,
+  ...) {
   
-  plot_data <- mt_heatmap_raw(data=data,use=use,...)
+  # Extract trajectory data
+  trajectories <- extract_data(data=data,use=use)
   
-  return(
-    ggplot2::ggplot(
-      ggplot2::aes_string(x="x", y="y"),
-      data=plot_data$img
+  # Setup bounds (code taken from mt_heatmap_raw)
+  range_x <- range(trajectories[,,dimensions[1]],na.rm=TRUE)
+  range_y <- range(trajectories[,,dimensions[2]],na.rm=TRUE)
+  mid_x <- range_x[1] + diff(range_x) / 2
+  mid_y <- range_y[1] + diff(range_y) / 2
+  range_x <- mid_x + (range_x - mid_x) * 1.02
+  range_y <- mid_y + (range_y - mid_y) * 1.02
+  bounds <- c(range_x[1],range_y[1],range_x[2],range_y[2])
+  
+  # Combine faceting variables
+  use2_variables <- c(facet_col,facet_row)
+  
+  # If faceting variables are specified, create separate heatmaps per facet level
+  if (is.null(use2_variables) == FALSE) {
+    
+    factor_levels <- unique(data[[use2]][,use2_variables,drop=FALSE])
+    for (var in use2_variables){
+      factor_levels <- factor_levels[order(factor_levels[,var]),,drop=FALSE]
+    }
+    
+    plot_data <- data.frame()
+
+    for (i in 1:nrow(factor_levels)){
+      
+      # Select the relevant trajectories
+      keep <- rep(TRUE,nrow(data[[use2]]))
+      for (var in use2_variables){
+        keep <- keep & data[[use2]][,var]==factor_levels[i,var]
+      }
+      current_trajectories <- trajectories[rownames(trajectories) %in% rownames(data[[use2]])[keep],,,drop=FALSE]
+      
+      # Create heatmap
+      current_plot_data <- mt_heatmap_raw(data=current_trajectories,use=use,dimensions=dimensions,bounds=bounds,...)
+      current_plot_data$img[,use2_variables] <- factor_levels[i,use2_variables]
+      plot_data <- rbind(plot_data,current_plot_data$img)
+    }
+    
+    
+  # If no facets are specified, create a single heatmap
+  } else{
+    
+    
+    plot_data <- mt_heatmap_raw(data=data,use=use,dimensions=dimensions,bounds=bounds,...)
+    plot_data <- plot_data$img
+    
+  }
+  
+  
+  
+  # Setup plot
+  current_plot <- ggplot2::ggplot(
+    ggplot2::aes_string(x="x", y="y"),
+    data=plot_data
+  ) +
+    ggplot2::scale_x_continuous(
+      expand=c(0,0), limits=range(plot_data$x)
     ) +
-      ggplot2::scale_x_continuous(
-        expand=c(0,0), limits=range(plot_data$img$x)
-      ) +
-      ggplot2::scale_y_continuous(
-        expand=c(0,0), limits=range(plot_data$img$y)
-      ) +
-      ggplot2::geom_raster(
-        fill=plot_data$img$col
-      ) +
-      ggplot2::theme(
-        panel.grid=ggplot2::element_blank(),
-        panel.border=ggplot2::element_blank(),
-        plot.margin=ggplot2::unit(c(0,0,0,0), "lines"),
-        axis.title.x=ggplot2::element_blank(),
-        axis.text.x=ggplot2::element_blank(),
-        axis.ticks.x=ggplot2::element_blank(),
-        axis.title.y=ggplot2::element_blank(),
-        axis.text.y=ggplot2::element_blank(),
-        axis.ticks.y=ggplot2::element_blank()
-      ) +
-      ggplot2::labs(x=NULL, y=NULL)
-  )
+    ggplot2::scale_y_continuous(
+      expand=c(0,0), limits=range(plot_data$y)
+    ) +
+    ggplot2::geom_raster(
+      fill=plot_data$col
+    ) +
+    ggplot2::theme(
+      panel.grid=ggplot2::element_blank(),
+      panel.border=ggplot2::element_blank(),
+      plot.margin=ggplot2::unit(c(0,0,0,0), "lines"),
+      axis.title=ggplot2::element_blank(),
+      axis.text=ggplot2::element_blank(),
+      axis.ticks=ggplot2::element_blank(),
+      axis.line =ggplot2::element_blank()
+    ) +
+    ggplot2::labs(x=NULL, y=NULL)
+  
+
+  # Add facets (optional)
+  if(is.null(use2_variables) == FALSE) {
+    facet_row <- ifelse(is.null(facet_row),".",facet_row)
+    facet_col <- ifelse(is.null(facet_col),".",facet_col)
+    facet_formula <- stats::as.formula(paste(facet_row,facet_col,sep="~"))
+    current_plot <- current_plot + ggplot2::facet_grid(facet_formula)
+  }
+
+  
+  return(current_plot)
 }
 
 #' Generic print for class mt_heatmap_raw 

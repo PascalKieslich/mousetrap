@@ -4,7 +4,8 @@
 \alias{mt_heatmap_ggplot}
 \title{Plot trajectory heatmap using ggplot.}
 \usage{
-mt_heatmap_ggplot(data, use = "trajectories", ...)
+mt_heatmap_ggplot(data, use = "trajectories", dimensions = c("xpos",
+  "ypos"), use2 = "data", facet_row = NULL, facet_col = NULL, ...)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import
@@ -14,6 +15,21 @@ array can be provided directly (in this case \code{use} will be ignored).}
 \item{use}{a character string specifying which trajectory data should be
 used.}
 
+\item{dimensions}{a character vector specifying the trajectory variables used
+to create the heatmap. The first two entries are used as x and 
+y-coordinates, the third, if provided, will be added as color information.}
+
+\item{use2}{an optional character string specifying where the data that
+contain the variables used for faceting can be found (in case these
+arguments are specified). Defaults to "data" as \code{data[["data"]]}
+usually contains all non mouse-tracking trial data.}
+
+\item{facet_row}{an optional character string specifying a variable in
+\code{data[[use2]]} that should be used for (row-wise) faceting.}
+
+\item{facet_col}{an optional character string specifying a variable in
+\code{data[[use2]]} that should be used for (column-wise) faceting.}
+
 \item{...}{arguments passed to \link{mt_heatmap_raw}.}
 }
 \description{
@@ -21,14 +37,14 @@ used.}
 this function has beta status.
 }
 \details{
-\code{mt_heatmap_ggplot} wraps \link{mt_heatmap_raw} and returns a ggplot 
-object containing the plot. In contrast to \code{mt_heatmap_plot} plots 
-created by \code{mt_heatmap_ggplot} can be extended using ggplot's \code{+} 
+\code{mt_heatmap_ggplot} wraps \link{mt_heatmap_raw} and returns a ggplot
+object containing the plot. In contrast to \code{mt_heatmap_plot} plots
+created by \code{mt_heatmap_ggplot} can be extended using ggplot's \code{+}
 operator. For further details on how the trajectory heatmaps are constructed,
 see \link{mt_heatmap_raw}.
 }
 \examples{
-mt_heatmap_ggplot(KH2017, xres=500, n_shades=5,mean_image=0.2)
+mt_heatmap_ggplot(KH2017, xres=500, n_shades=5, mean_image=0.2)
 
 }
 \seealso{
@@ -38,9 +54,9 @@ mt_heatmap_ggplot(KH2017, xres=500, n_shades=5,mean_image=0.2)
   \link{mt_diffmap} for plotting trajectory difference-heatmaps.
 }
 \author{
+Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
+
 Felix Henninger
 
-Dirk U. Wulff (\email{dirk.wulff@gmail.com})
-
-Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
+Dirk U. Wulff
 }
