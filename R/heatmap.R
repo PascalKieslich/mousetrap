@@ -64,7 +64,7 @@
 #'   third dimension's color intensity across the entire image. Defaults to 0.1.
 #'   Only relevant if a third dimension is specified in \code{colors}.
 #' @param aggregate_lwd an integer specifying the width of the aggregate 
-#'   trajectory. If \code{aggregate_lwd} is > 0 (the default), the aggregate 
+#'   trajectory. If \code{aggregate_lwd} is 0 (the default), the aggregate 
 #'   trajectory is omitted.
 #' @param aggregate_col a character value specifying the color of the aggregate 
 #'   trajectory.
@@ -442,7 +442,7 @@ mt_heatmap_raw <- function(
 #'   \link{mt_diffmap} for plotting trajectory difference-heatmaps.
 #' 
 #' @examples
-#' mt_heatmap(KH2017, xres=500, n_shades=5,mean_image=0.2)
+#' mt_heatmap(KH2017, xres=500, n_shades=5, mean_image=0.2)
 #' 
 #' @export
 mt_heatmap <- function(

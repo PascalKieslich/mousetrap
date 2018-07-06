@@ -71,7 +71,7 @@ third dimension's color intensity across the entire image. Defaults to 0.1.
 Only relevant if a third dimension is specified in \code{colors}.}
 
 \item{aggregate_lwd}{an integer specifying the width of the aggregate 
-trajectory. If \code{aggregate_lwd} is > 0 (the default), the aggregate 
+trajectory. If \code{aggregate_lwd} is 0 (the default), the aggregate 
 trajectory is omitted.}
 
 \item{aggregate_col}{a character value specifying the color of the aggregate 
