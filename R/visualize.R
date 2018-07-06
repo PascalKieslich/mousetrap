@@ -363,7 +363,10 @@ mt_plot_add_rect <- function(rect,
         color=NULL, linetype=NULL
       ),
       inherit.aes = FALSE,
-      color=color, fill=fill, ...
+      color=color, fill=fill,
+      # ensure that this function does not influence the legend
+      show.legend=FALSE,
+      ...
     )
   )
 }
