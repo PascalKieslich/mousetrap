@@ -6,14 +6,14 @@
 \title{Plot trajectory data.}
 \usage{
 mt_plot(data, use = "trajectories", use2 = "data", x = "xpos",
-  y = "ypos", color = NULL, linetype = NULL, facet_row = NULL,
-  facet_col = NULL, points = FALSE, only_ggplot = FALSE,
-  mt_id = "mt_id", ...)
+  y = "ypos", color = NULL, linetype = NULL, alpha = NA, size = 0.5,
+  facet_row = NULL, facet_col = NULL, points = FALSE,
+  only_ggplot = FALSE, mt_id = "mt_id", ...)
 
 mt_plot_aggregate(data, use = "trajectories", use2 = "data", x = "xpos",
-  y = "ypos", color = NULL, linetype = NULL, facet_row = NULL,
-  facet_col = NULL, points = FALSE, only_ggplot = FALSE,
-  subject_id = NULL, ...)
+  y = "ypos", color = NULL, linetype = NULL, alpha = NA, size = 0.5,
+  facet_row = NULL, facet_col = NULL, points = FALSE,
+  only_ggplot = FALSE, subject_id = NULL, ...)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import
@@ -44,6 +44,12 @@ array should be displayed on the y-axis (defaults to ypos).}
 \item{linetype}{an optional character string specifying which variable in
 \code{data[[use2]]} should be used for varying the linetype of the
 trajectories.}
+
+\item{alpha}{an optional numeric value between 0 and 1 that can be used to
+make the plotted lines (and points) semitransparent.}
+
+\item{size}{an optional numeric value that can be used to vary the width of
+the plotted trajectory lines.}
 
 \item{facet_row}{an optional character string specifying a variable in 
 \code{data[[use2]]} that should be used for (row-wise) faceting.}
@@ -128,7 +134,7 @@ mt_plot(mt_example, use="tn_trajectories",
 mt_plot(mt_example, use="tn_trajectories",
   color="Condition") +
   ggplot2::scale_color_brewer(type="qual")
-  
+
 # Create separate plots per Condition
 mt_plot(mt_example, use="tn_trajectories",
   facet_col="Condition")

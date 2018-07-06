@@ -51,6 +51,10 @@
 #' @param linetype an optional character string specifying which variable in
 #'   \code{data[[use2]]} should be used for varying the linetype of the
 #'   trajectories.
+#' @param alpha an optional numeric value between 0 and 1 that can be used to
+#'   make the plotted lines (and points) semitransparent.
+#' @param size an optional numeric value that can be used to vary the width of
+#'   the plotted trajectory lines.
 #' @param facet_row an optional character string specifying a variable in 
 #'   \code{data[[use2]]} that should be used for (row-wise) faceting.
 #' @param facet_col an optional character string specifying a variable in 
@@ -99,7 +103,7 @@
 #' mt_plot(mt_example, use="tn_trajectories",
 #'   color="Condition") +
 #'   ggplot2::scale_color_brewer(type="qual")
-#'   
+#' 
 #' # Create separate plots per Condition
 #' mt_plot(mt_example, use="tn_trajectories",
 #'   facet_col="Condition")
@@ -156,6 +160,7 @@ mt_plot <- function(data,
   use="trajectories", use2="data",
   x="xpos", y="ypos",
   color=NULL, linetype=NULL,
+  alpha = NA, size = 0.5,
   facet_row=NULL, facet_col=NULL,
   points=FALSE,
   only_ggplot=FALSE, mt_id="mt_id", ...) {
@@ -202,12 +207,12 @@ mt_plot <- function(data,
 
     # Add path geom to plot
     current_plot <- current_plot +
-      ggplot2::geom_path()
+      ggplot2::geom_path(alpha=alpha, size=size)
 
     # Add points to plot (optional)
     if (points) {
       current_plot <- current_plot +
-        ggplot2::geom_point()
+        ggplot2::geom_point(alpha=alpha)
     }
 
     return(current_plot)
@@ -222,6 +227,7 @@ mt_plot <- function(data,
 mt_plot_aggregate <- function(data,
   use="trajectories", use2="data",
   x="xpos", y="ypos", color=NULL, linetype=NULL,
+  alpha = NA, size = 0.5,
   facet_row=NULL, facet_col=NULL,
   points=FALSE,
   only_ggplot=FALSE, subject_id=NULL, ...) {
@@ -265,12 +271,12 @@ mt_plot_aggregate <- function(data,
 
     # Add path geom to plot
     current_plot <- current_plot +
-      ggplot2::geom_path()
+      ggplot2::geom_path(alpha = alpha, size = size)
 
     # Add points to plot (optional)
     if (points) {
       current_plot <- current_plot +
-        ggplot2::geom_point()
+        ggplot2::geom_point(alpha = alpha)
     }
 
     return(current_plot)
