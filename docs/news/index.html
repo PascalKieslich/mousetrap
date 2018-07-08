@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>All news • mousetrap</title>
+<title>Changelog • mousetrap</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -18,11 +18,21 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
+<meta property="og:title" content="Changelog" />
+
+
 
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -46,8 +56,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">mousetrap</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">mousetrap</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">3.1.1</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -69,6 +83,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -76,26 +91,26 @@
       
       </header>
 
-      <div class="row">
-
-  <div class="col-md-9">
+<div class="row">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Change log <small>All releases</small></h1>
+      <h1>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/pascalkieslich/mousetrap/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div class="contents">
-    <div id="mousetrap-3-1-0" class="section level1">
-<h1 class="hasAnchor">
-<a href="#mousetrap-3-1-0" class="anchor"></a>mousetrap 3.1.0</h1>
+    <div id="mousetrap-3-1-1" class="section level1">
+<h1 class="page-header">
+<a href="#mousetrap-3-1-1" class="anchor"></a>mousetrap 3.1.1<small> 2018-07-06 </small>
+</h1>
 <div id="announcements" class="section level2">
 <h2 class="hasAnchor">
 <a href="#announcements" class="anchor"></a>Announcements</h2>
 <ul>
-<li>A first paper on the mousetrap software packages has been accepted for publication. It presents the mousetrap plugin for creating mouse-tracking experiments in OpenSesame and also includes a short demonstration of basic analyses using the mousetrap R package. Please cite it as follows when using the mousetrap plugin in your research.</li>
-<li>Kieslich, P. J., &amp; Henninger, F. (in press). Mousetrap: An integrated, open-source mouse-tracking package. <em>Behavior Research Methods</em>. <a href="https://doi.org/10.3758/s13428-017-0900-z" class="uri">https://doi.org/10.3758/s13428-017-0900-z</a>
-</li>
-<li>The reference for the mousetrap R package has been updated as Zenodo now supports version independent DOIs.</li>
-<li>Kieslich, P. J., Wulff, D. U., Henninger, F., Haslbeck, J. M. B., &amp; Schulte-Mecklenbeck, M. (2016). Mousetrap: An R package for processing and analyzing mouse-tracking data. <a href="https://doi.org/10.5281/zenodo.596640" class="uri">https://doi.org/10.5281/zenodo.596640</a>
+<li>A book chapter on the mousetrap software packages has been accepted for publication. It covers many common analyses using the mousetrap R package. Please cite it as follows when using mousetrap in your research:</li>
+<li>Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B., &amp; Schulte-Mecklenbeck, M. (in press). Mouse-tracking: A practical guide to implementation and analysis. In M. Schulte-Mecklenbeck, A. Kühberger, &amp; J. G. Johnson (Eds.), <em>A Handbook of Process Tracing Methods</em>. New York: Taylor &amp; Francis.</li>
+<li>Besides, if you use functions for clustering and mapping trajectories, please also include the following reference:</li>
+<li>Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F., &amp; Schulte-Mecklenbeck, M. (in press). Mouse-tracking: Detecting types in movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, &amp; J. G. Johnson (Eds.), <em>A Handbook of Process Tracing Methods</em>. New York: Taylor &amp; Francis.</li>
+<li>If you have any questions when using mousetrap, you can now ask them in the mousetrap forum at <a href="http://forum.cogsci.nl/index.php?p=/categories/mousetrap" class="uri">http://forum.cogsci.nl/index.php?p=/categories/mousetrap</a>
 </li>
 </ul>
 </div>
@@ -104,15 +119,54 @@
 <a href="#changes-in-specific-functions" class="anchor"></a>Changes in specific functions</h2>
 <ul>
 <li>
+<code>mt_map</code>: now allows for mapping trajectories onto prototypes separately for different groups of trajectories (the prototypes will be rescaled separately to match the coordinate system of each group).</li>
+<li>
+<code>mt_heatmap_ggplot</code>: now allows for faceting using the <code>facet_row</code> and <code>facet_col</code> arguments.</li>
+<li>
+<code>mt_diffmap</code>: the <code>condition</code> can now simply be specified by providing the corresponding variable name (and the condition values can now be any type, provided that they only contain two levels).</li>
+<li>
+<code>mt_plot</code> and <code>mt_plot_aggregate</code>: transparency and line width can now be varied via the <code>alpha</code> and <code>size</code> arguments.</li>
+<li>
+<code>mt_plot_riverbed</code>: introduced <code>grid_colors</code> argument for setting the grid colors (use <code>grid_colors = NA</code> to omit grid lines).</li>
+<li>
+<code>mt_reshape</code>: internal changes reflecting changes in <code><a href="http://dplyr.tidyverse.org/reference/summarise_all.html">dplyr::summarize_at</a></code>.</li>
+<li>
+<code>mt_align_start</code> and <code>mt_align_start_end</code>: if <code>start</code> is computed internally, it is now ensured that it is a named vector.</li>
+<li>
+<code>mt_plot_add_rect</code>: it is now ensured that this function does not influence the legend (previously, this could happen if the <code>linetype</code> argument was used in <code>mt_plot</code>)</li>
+</ul>
+</div>
+</div>
+    <div id="mousetrap-3-1-0" class="section level1">
+<h1 class="page-header">
+<a href="#mousetrap-3-1-0" class="anchor"></a>mousetrap 3.1.0<small> 2017-05-20 </small>
+</h1>
+<div id="announcements-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#announcements-1" class="anchor"></a>Announcements</h2>
+<ul>
+<li>A first paper on the mousetrap software packages has been published. It presents the mousetrap plugin for creating mouse-tracking experiments in OpenSesame and also includes a short demonstration of basic analyses using the mousetrap R package. Please cite it as follows when using the mousetrap plugin in your research.</li>
+<li>Kieslich, P. J., &amp; Henninger, F. (2017). Mousetrap: An integrated, open-source mouse-tracking package. <em>Behavior Research Methods, 49</em>(5), 1652-1667. <a href="https://doi.org/10.3758/s13428-017-0900-z" class="uri">https://doi.org/10.3758/s13428-017-0900-z</a>
+</li>
+<li>The reference for the mousetrap R package has been updated as Zenodo now supports version independent DOIs.</li>
+<li>Kieslich, P. J., Wulff, D. U., Henninger, F., Haslbeck, J. M. B., &amp; Schulte-Mecklenbeck, M. (2016). Mousetrap: An R package for processing and analyzing mouse-tracking data. <a href="https://doi.org/10.5281/zenodo.596640" class="uri">https://doi.org/10.5281/zenodo.596640</a>
+</li>
+</ul>
+</div>
+<div id="changes-in-specific-functions-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#changes-in-specific-functions-1" class="anchor"></a>Changes in specific functions</h2>
+<ul>
+<li>
 <code>mt_derivatives</code>: now always reports acceleration as difference in absolute velocity (the argument <code>acc_on_abs_vel</code> has been removed). Besides, the argument <code>absolute</code> has been introduced that indicates if absolute values for distances and velocities should be reported (by default, this is not the case). All of this is only relevant if a single dimension is specified in <code>dimensions</code>.</li>
 <li>
-<code>mt_sample_entropy</code>: the default values reported have changed (cf. bug fix below). <code>mt_sample_entropy</code> now only uses a custom function for computing sample entropy (which is faster and produces virtually identical results as <code>pracma::sample_entropy</code> if the same parameters are used). Therefore, the <code>method</code> argument has been removed. Besides, the <code>lag</code> argument has been renamed to <code>m</code>.</li>
+<code>mt_sample_entropy</code>: the default values reported have changed (cf. bug fix below). <code>mt_sample_entropy</code> now only uses a custom function for computing sample entropy (which is faster and produces virtually identical results as <code><a href="http://www.rdocumentation.org/packages/pracma/topics/entropy">pracma::sample_entropy</a></code> if the same parameters are used). Therefore, the <code>method</code> argument has been removed. Besides, the <code>lag</code> argument has been renamed to <code>m</code>.</li>
 <li>
 <code>mt_distmat</code>, <code>mt_cluster</code>, <code>mt_cluster_k</code>, and <code>mt_map</code>: now provide the option to remove trajectory points containing missing values (by setting the <code>na_rm</code> argument to <code>TRUE</code>). Removal is done column-wise. That is, if any trajectory has a missing value at, e.g., the 10th recorded position, the 10th position is removed for all trajectories.</li>
 <li>
 <code>mt_distmat</code>, <code>mt_cluster</code>, <code>mt_cluster_k</code>, and <code>mt_map</code>: now allow for specifying the relative importance of each trajectory dimension via the <code>weights</code> argument. Technically, each variable is rescaled so that the standard deviation matches the corresponding value in <code>weights</code>. By default, <code>weights</code> is a vector of 1s implying equal importance of each dimension (i.e., all dimensions are standardized to a standard deviation of 1). This changes the default behavior of the functions compared to the previous release where the original variables were used without standardization. To use the original variables, set <code>weights = NULL</code>.</li>
 <li>
-<code>mt_map</code>: uses <code>mousetrap::mt_prototypes</code> as default for <code>prototypes</code> if no prototypes are provided.</li>
+<code>mt_map</code>: uses <code><a href="../reference/mt_prototypes.html">mousetrap::mt_prototypes</a></code> as default for <code>prototypes</code> if no prototypes are provided.</li>
 <li>
 <code>mt_average</code>: now internally replaces NaNs with NAs. NaNs only occur if a specific dimension contains only NAs for an interval (which in practice only happens for acc values if the trial stops at the interval boundary).</li>
 <li>
@@ -124,7 +178,7 @@
 <a href="#bugs-fixed" class="anchor"></a>Bugs fixed</h2>
 <ul>
 <li>
-<code>mt_sample_entropy</code>: Bug fixed for <code>method="pracma"</code> (the default method): The window size argument (which used to be specified using the <code>lag</code> argument - now this has been renamed to <code>m</code>) was incorrectly passed on to the <code>tau</code> argument of <code>pracma::sample_entropy</code>. It should have beend passed on to the <code>edim</code> argument. After fixing this, both methods in <code>mt_sample_entropy</code> provided virtually identical results (which is why the <code>method</code> argument has been dropped, see above).</li>
+<code>mt_sample_entropy</code>: Bug fixed for <code>method="pracma"</code> (the default method): The window size argument (which used to be specified using the <code>lag</code> argument - now this has been renamed to <code>m</code>) was incorrectly passed on to the <code>tau</code> argument of <code><a href="http://www.rdocumentation.org/packages/pracma/topics/entropy">pracma::sample_entropy</a></code>. It should have beend passed on to the <code>edim</code> argument. After fixing this, both methods in <code>mt_sample_entropy</code> provided virtually identical results (which is why the <code>method</code> argument has been dropped, see above).</li>
 </ul>
 </div>
 <div id="new-functions" class="section level2">
@@ -160,11 +214,12 @@
 </div>
 </div>
     <div id="mousetrap-3-0-0" class="section level1">
-<h1 class="hasAnchor">
-<a href="#mousetrap-3-0-0" class="anchor"></a>mousetrap 3.0.0</h1>
-<div id="announcements-1" class="section level2">
+<h1 class="page-header">
+<a href="#mousetrap-3-0-0" class="anchor"></a>mousetrap 3.0.0<small> 2017-02-10 </small>
+</h1>
+<div id="announcements-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#announcements-1" class="anchor"></a>Announcements</h2>
+<a href="#announcements-2" class="anchor"></a>Announcements</h2>
 <ul>
 <li>We are delighted that Dirk Wulff and Jonas Haslbeck have joined the <code>mousetrap</code> team! They are contributing a number of new functions, particularly for clustering and visualization.</li>
 <li>The documentation of the <code>mousetrap</code> package can now also be found online at <a href="http://pascalkieslich.github.io/mousetrap/" class="uri">http://pascalkieslich.github.io/mousetrap/</a>
@@ -182,20 +237,20 @@
 <li>Arguments that were already deprecated and replaced (e.g., <code>show_progress</code> was replaced with <code>verbose</code>) have been removed.</li>
 </ul>
 </div>
-<div id="changes-in-specific-functions-1" class="section level2">
+<div id="changes-in-specific-functions-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-in-specific-functions-1" class="anchor"></a>Changes in specific functions</h2>
+<a href="#changes-in-specific-functions-2" class="anchor"></a>Changes in specific functions</h2>
 <ul>
 <li>
 <code>mt_align_start</code>: function is now vectorized and allows for optionally aligning to mean start position across trials; default for <code>save_as</code> argument is set to <code>use</code>.</li>
 <li>
 <code>mt_space_normalize</code>: function is deprecated and replaced with <code>mt_align_start_end</code>. It offers similar functionality but is vectorized and allows for optionally aligning to mean start/end position across trials.</li>
 <li>
-<code>mt_resample</code>: now provides option to perform partial constant interpolation. Thanks to @sbrockhaus for the suggestion (cf. #7, #9).</li>
+<code>mt_resample</code>: now provides option to perform partial constant interpolation. Thanks to <a href='http://github.com/sbrockhaus'>@sbrockhaus</a> for the suggestion (cf. <a href='https://github.com/pascalkieslich/mousetrap/issues/7'>#7</a>, <a href='https://github.com/pascalkieslich/mousetrap/issues/9'>#9</a>).</li>
 <li>
 <code>mt_derivatives</code>: now provides option to additionally return timestamp differences.</li>
 <li>
-<code>mt_measures</code>: now optionally determines the number and duration of hovers (cf. #9), improved documentation and report of time measures (cf. #6).</li>
+<code>mt_measures</code>: now optionally determines the number and duration of hovers (cf. <a href='https://github.com/pascalkieslich/mousetrap/issues/9'>#9</a>), improved documentation and report of time measures (cf. <a href='https://github.com/pascalkieslich/mousetrap/issues/6'>#6</a>).</li>
 <li>
 <code>mt_plot</code>: introduced <code>facet_row</code> and <code>facet_col</code> arguments for faceting.</li>
 <li>
@@ -258,8 +313,9 @@
 </div>
 </div>
     <div id="mousetrap-2-0-0" class="section level1">
-<h1 class="hasAnchor">
-<a href="#mousetrap-2-0-0" class="anchor"></a>mousetrap 2.0.0</h1>
+<h1 class="page-header">
+<a href="#mousetrap-2-0-0" class="anchor"></a>mousetrap 2.0.0<small> 2016-10-25 </small>
+</h1>
 <div id="general-changes-to-all-existing-functions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#general-changes-to-all-existing-functions" class="anchor"></a>General changes to all existing functions</h2>
@@ -271,19 +327,19 @@
 <li>As a consequence of the previous changes: Removal of the internal variables <code>mt_variable_labels</code> and <code>mt_id</code>.</li>
 <li>Removed <code>calculate</code> from all mt_calculate functions: <code>mt_calculate_measures</code>, <code>mt_calculate_derivatives</code>, <code>mt_calculate_deviations</code> are now called <code>mt_measures</code>, <code>mt_derivatives</code>, <code>mt_deviations</code>.</li>
 <li>Introduction of internal utils function <code>create_results</code> (that simplifies including the newly created trajectories or measures in the existing mousetrap data object).</li>
-<li>Performance improvement of reshaping, aggregation, and visualization functions through internal changes in <code>mt_reshape</code>: <code>base::merge</code> and <code>reshape2</code> functions are replaced with functions from the <code>tidyr</code> and <code>dplyr</code> packages (and custom functions). Package dependencies were adjusted accordingly. As the <code>dplyr</code> functions may introduce additional classes for the reshaped data (such as <code>grouped_df</code> and <code>tbl_df</code>), a new argument (<code>convert_df</code>) is introduced that converts the reshaped data to pure data.frames by default (thereby dropping additional classes).</li>
+<li>Performance improvement of reshaping, aggregation, and visualization functions through internal changes in <code>mt_reshape</code>: <code><a href="http://www.rdocumentation.org/packages/base/topics/merge">base::merge</a></code> and <code>reshape2</code> functions are replaced with functions from the <code>tidyr</code> and <code>dplyr</code> packages (and custom functions). Package dependencies were adjusted accordingly. As the <code>dplyr</code> functions may introduce additional classes for the reshaped data (such as <code>grouped_df</code> and <code>tbl_df</code>), a new argument (<code>convert_df</code>) is introduced that converts the reshaped data to pure data.frames by default (thereby dropping additional classes).</li>
 </ul>
 </div>
-<div id="changes-in-specific-functions-2" class="section level2">
+<div id="changes-in-specific-functions-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-in-specific-functions-2" class="anchor"></a>Changes in specific functions</h2>
+<a href="#changes-in-specific-functions-3" class="anchor"></a>Changes in specific functions</h2>
 <ul>
 <li>
 <code>mt_import_mousetrap</code>, <code>mt_import_long</code>, <code>mt_import_wide</code>: Allow specifying several variables for the trial identifier in <code>mt_id_label</code>. A new ID variable will be created by combining the values of each variable.</li>
 <li>
-<code>mt_import_mousetrap</code>: Make import more robust against variables with empty logs (warning message is returned in the end) (closes #5, thanks to @sbrockhaus).</li>
+<code>mt_import_mousetrap</code>: Make import more robust against variables with empty logs (warning message is returned in the end) (closes <a href='https://github.com/pascalkieslich/mousetrap/issues/5'>#5</a>, thanks to <a href='http://github.com/sbrockhaus'>@sbrockhaus</a>).</li>
 <li>
-<code>mt_import_long</code>, <code>mt_import_wide</code>: Import any number of additional variables using <code>add_labels</code> (closes #4).</li>
+<code>mt_import_long</code>, <code>mt_import_wide</code>: Import any number of additional variables using <code>add_labels</code> (closes <a href='https://github.com/pascalkieslich/mousetrap/issues/4'>#4</a>).</li>
 <li>
 <code>mt_import_long</code>: Timestamps are no longer used for ordering if <code>mt_seq_label</code> is not provided. Instead, data will be imported in the order in which they were stored in <code>raw_data</code>.</li>
 <li>
@@ -293,7 +349,7 @@
 <li>
 <code>mt_derivatives</code>: Rename <code>dimension</code> argument to <code>dimensions</code>, enable function to work with an arbitrary number of dimensions.</li>
 <li>
-<code>mt_deviations</code>: Vectorized function <code>point_to_line</code> for time speed up (closes #2, thanks to @sbrockhaus).</li>
+<code>mt_deviations</code>: Vectorized function <code>point_to_line</code> for time speed up (closes <a href='https://github.com/pascalkieslich/mousetrap/issues/2'>#2</a>, thanks to <a href='http://github.com/sbrockhaus'>@sbrockhaus</a>).</li>
 <li>
 <code>mt_measures</code>: Allow for flexible dimension labels and rename all measures columns relating only to x- or y-positions depending on the values in dimensions (e.g., <code>x_max</code> becomes <code>xpos_max</code>, <code>x_flips</code> becomes <code>xpos_flips</code>). Change column label <code>xy_dist</code> to <code>total_dist</code>.</li>
 <li>
@@ -332,8 +388,9 @@
 </div>
 </div>
     <div id="mousetrap-1-2-0" class="section level1">
-<h1 class="hasAnchor">
-<a href="#mousetrap-1-2-0" class="anchor"></a>mousetrap 1.2.0</h1>
+<h1 class="page-header">
+<a href="#mousetrap-1-2-0" class="anchor"></a>mousetrap 1.2.0<small> 2016-07-09 </small>
+</h1>
 <ul>
 <li>New function <code>mt_align_start</code> adjusts trajectories so that they have the same start position (wrapper for <code>mt_space_normalize</code>)</li>
 <li>New function <code>mt_calculate_deviations</code> calculates the idealized trajectory and the perpendicular deviations of the actual trajectory from it for each position in the trajectory array</li>
@@ -347,8 +404,9 @@
 </ul>
 </div>
     <div id="mousetrap-1-1-0" class="section level1">
-<h1 class="hasAnchor">
-<a href="#mousetrap-1-1-0" class="anchor"></a>mousetrap 1.1.0</h1>
+<h1 class="page-header">
+<a href="#mousetrap-1-1-0" class="anchor"></a>mousetrap 1.1.0<small> 2016-06-09 </small>
+</h1>
 <ul>
 <li>
 <code>mt_import_mousetrap</code> now offers possibility to combine several variables in mouse-tracking raw data</li>
@@ -361,24 +419,25 @@
 <li>Change of default scale for fill in <code>mt_plot_riverbed</code>
 </li>
 <li>Custom x and y axis labels for <code>mt_plot_riverbed</code> can no longer be set via <code>x_label</code> and <code>y_label</code> (but can be added using the <code>ggplot2</code> functions <code>xlab()</code> and <code>ylab()</code>, see Examples)</li>
-<li>Minor fix in package documentation (#1) (thanks to @sbrockhaus)</li>
+<li>Minor fix in package documentation (<a href='https://github.com/pascalkieslich/mousetrap/issues/1'>#1</a>) (thanks to <a href='http://github.com/sbrockhaus'>@sbrockhaus</a>)</li>
 <li>Minor fix in documentation of x/y reversals (thanks to Barnabas Szaszi)</li>
 </ul>
 </div>
     <div id="mousetrap-1-0-0" class="section level1">
-<h1 class="hasAnchor">
-<a href="#mousetrap-1-0-0" class="anchor"></a>mousetrap 1.0.0</h1>
+<h1 class="page-header">
+<a href="#mousetrap-1-0-0" class="anchor"></a>mousetrap 1.0.0<small> 2016-03-19 </small>
+</h1>
 <ul>
 <li>First release</li>
 </ul>
 </div>
-    </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#mousetrap-3-1-1">3.1.1</a></li>
         <li><a href="#mousetrap-3-1-0">3.1.0</a></li>
         <li><a href="#mousetrap-3-0-0">3.0.0</a></li>
         <li><a href="#mousetrap-2-0-0">2.0.0</a></li>
@@ -397,11 +456,14 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

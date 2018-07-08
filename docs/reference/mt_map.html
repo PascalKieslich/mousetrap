@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>mt_map • mousetrap</title>
+<title>Map trajectories to prototypes. — mt_map • mousetrap</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -18,11 +18,27 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
+<meta property="og:title" content="Map trajectories to prototypes. — mt_map" />
+
+<meta property="og:description" content="mt_map maps trajectories onto a predefined set of prototype 
+trajectories. It first computes distances between the trajectories and each 
+of the supplied trajectory types and then assigns each trajectory to the 
+prototype that produced the smallest distance." />
+<meta name="twitter:card" content="summary" />
+
+
 
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -46,8 +62,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">mousetrap</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">mousetrap</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">3.1.1</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -69,6 +89,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -76,25 +97,29 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Map trajectories to prototypes.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/pascalkieslich/mousetrap/blob/master/R/map.R'><code>R/map.R</code></a></small>
+    <div class="hidden name"><code>mt_map.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p><code>mt_map</code> maps trajectories onto a predefined set of prototype 
 trajectories. It first computes distances between the trajectories and each 
 of the supplied trajectory types and then assigns each trajectory to the 
 prototype that produced the smallest distance.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>mt_map</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"sp_trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='st'>"prototyping"</span>,
-  <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>), <span class='kw'>prototypes</span> <span class='kw'>=</span> <span class='kw'>mousetrap</span><span class='kw'>::</span><span class='no'>mt_prototypes</span>,
+  <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>), <span class='kw'>prototypes</span> <span class='kw'>=</span> <span class='kw pkg'>mousetrap</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/mousetrap/topics/mt_prototypes'>mt_prototypes</a></span>,
   <span class='kw'>weights</span> <span class='kw'>=</span> <span class='fu'>rep</span>(<span class='fl'>1</span>, <span class='fu'>length</span>(<span class='no'>dimensions</span>)), <span class='kw'>pointwise</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>na_rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>minkowski_p</span> <span class='kw'>=</span> <span class='fl'>2</span>)</pre>
+  <span class='kw'>minkowski_p</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>use2</span> <span class='kw'>=</span> <span class='st'>"data"</span>, <span class='kw'>grouping_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -157,6 +182,21 @@ between trajectories.</p></td>
 = 2</code> (the default) computes the Euclidian distance, <code>minkowski_p = 3</code> 
 the cubic distance, etc.</p></td>
     </tr>
+    <tr>
+      <th>use2</th>
+      <td><p>an optional character string specifying where the data that
+contain the variables used for grouping can be found (in case
+<code>grouping_variables</code> are specified). Defaults to "data" as
+<code>data[["data"]]</code> usually contains all non mouse-tracking trial data.</p></td>
+    </tr>
+    <tr>
+      <th>grouping_variables</th>
+      <td><p>a character string (or vector) specifying one or
+more variables in <code>use2</code>. If specified, prototypes will be rescaled
+separately to match the coordinate system of the trajectories for each
+level of the variable(s). If unspecified (the default), the prototypes are
+rescaled in the same way across all trajectories.</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -172,10 +212,9 @@ the cubic distance, etc.</p></td>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Mouse trajectories often occur in distinct, qualitative types (see Wulff, 
-Haslbeck, Schulte-Mecklenbeck, 2017; Haslbeck, Wulff, Kieslich, Henninger, &amp; 
-Schulte-Mecklenbeck, 2017). Common trajectory types are linear trajectories, 
-mildly and strongly curved trajctories, and single and multiple 
+    <p>Mouse trajectories often occur in distinct, qualitative types (see Wulff et
+al., in press; Wulff et al., 2018). Common trajectory types are linear
+trajectories, mildly and strongly curved trajctories, and single and multiple
 change-of-mind trials. <code>mt_map</code> allows to map trajectories to a
 predefined set of trajectory types.</p>
 <p>First, <code>mt_map</code> adjusts prototypes to match the coordinate system of the
@@ -188,17 +227,22 @@ trajectories (and added prototypes) share the same direction, i.e., that all
 trajectories end in the top-left corner of the coordinate system
 (<a href='mt_remap_symmetric.html'>mt_remap_symmetric</a> or <a href='mt_align.html'>mt_align</a> can be used to achieve this).
 Furthermore, it is recommended to use spatialized trajectories (see
-<a href='mt_spatialize.html'>mt_spatialize</a>; Haslbeck, Wulff, Kieslich, Henninger, &amp;
-Schulte-Mecklenbeck, 2017).</p>
+<a href='mt_spatialize.html'>mt_spatialize</a>; Wulff et al., in press; Haslbeck et al., 2018).</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Wulff, D. U., Haslbeck, J. M. B., &amp; Schulte-Mecklenbeck, M. 
-  (2017). Measuring the (dis-)continuous mind. Manuscript in preparation.</p>
-<p>Haslbeck, J. M. B., Wulff, D. U., Kieslich, P. J., Henninger, F., &amp; 
-  Schulte-Mecklenbeck, M. (2017). Advanced mouse- and hand-tracking analysis:
-  Detecting and visualizing clusters in movement trajectories. Manuscript in 
-  preparation.</p>
+    <p>Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F.,
+  &amp; Schulte-Mecklenbeck, M. (in press). Mouse-tracking: Detecting types in
+  movement trajectories. In M. Schulte-Mecklenbeck, A. Kuehberger, &amp; J. G.
+  Johnson (Eds.), <em>A Handbook of Process Tracing Methods</em>. New York:
+  Taylor &amp; Francis.</p>   
+<p>Wulff, D. U., Haslbeck, J. M. B., &amp; Schulte-Mecklenbeck, M. (2018).
+  <em>Measuring the (dis-)continuous mind: What movement trajectories
+  reveal about cognition</em>. Manuscript in preparation.</p>
+<p>Haslbeck, J. M. B., Wulff, D. U., Kieslich, P. J., Henninger, F., &amp;
+  Schulte-Mecklenbeck, M. (2018). <em>Advanced mouse- and hand-tracking
+  analysis: Detecting and visualizing clusters in movement trajectories</em>.
+  Manuscript in preparation.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -212,10 +256,10 @@ Schulte-Mecklenbeck, 2017).</p>
 
 <span class='co'># Plot prototypes</span>
 <span class='fu'><a href='mt_plot.html'>mt_plot</a></span>(<span class='no'>mt_prototypes</span>,<span class='kw'>facet_col</span><span class='kw'>=</span><span class='st'>"mt_id"</span>) +
-  <span class='kw'>ggplot2</span><span class='kw'>::</span><span class='fu'>facet_grid</span>(<span class='no'>.</span>~<span class='fu'>factor</span>(<span class='no'>mt_id</span>,<span class='kw'>levels</span><span class='kw'>=</span><span class='fu'>unique</span>(<span class='no'>mt_id</span>)))</div><img src='mt_map-2.png' alt='' width='540' height='400' /><div class='input'>
+  <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/ggplot2/topics/facet_grid'>facet_grid</a></span>(<span class='no'>.</span>~<span class='fu'>factor</span>(<span class='no'>mt_id</span>,<span class='kw'>levels</span><span class='kw'>=</span><span class='fu'>unique</span>(<span class='no'>mt_id</span>)))</div><div class='img'><img src='mt_map-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Plot trajectories per assigned prototype</span>
 <span class='fu'><a href='mt_plot.html'>mt_plot</a></span>(<span class='no'>KH2017</span>,<span class='kw'>use</span><span class='kw'>=</span><span class='st'>"sp_trajectories"</span>,
-  <span class='kw'>use2</span><span class='kw'>=</span><span class='st'>"prototyping"</span>,<span class='kw'>facet_col</span><span class='kw'>=</span><span class='st'>"prototype_label"</span>)</div><img src='mt_map-4.png' alt='' width='540' height='400' /><div class='input'>
+  <span class='kw'>use2</span><span class='kw'>=</span><span class='st'>"prototyping"</span>,<span class='kw'>facet_col</span><span class='kw'>=</span><span class='st'>"prototype_label"</span>)</div><div class='img'><img src='mt_map-2.png' alt='' width='700' height='433' /></div><div class='input'>
 
 <span class='co'># Map trajectories onto reduced prototype set</span>
 <span class='no'>KH2017</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_map</span>(<span class='no'>KH2017</span>,
@@ -259,6 +303,8 @@ Dirk U. Wulff (<a href='mailto:dirk.wulff@gmail.com'>dirk.wulff@gmail.com</a>)
 
 Jonas M. B. Haslbeck (<a href='mailto:jonas.haslbeck@gmail.com'>jonas.haslbeck@gmail.com</a>)
 
+Pascal J. Kieslich (<a href='mailto:kieslich@psychologie.uni-mannheim.de'>kieslich@psychologie.uni-mannheim.de</a>)
+
   </div>
 </div>
 
@@ -268,11 +314,14 @@ Jonas M. B. Haslbeck (<a href='mailto:jonas.haslbeck@gmail.com'>jonas.haslbeck@g
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

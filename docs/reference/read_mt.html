@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>read_mt • mousetrap</title>
+<title>Read MouseTracker raw data. — read_mt • mousetrap</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -18,11 +18,33 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
+<meta property="og:title" content="Read MouseTracker raw data. — read_mt" />
+
+<meta property="og:description" content="read_mt reads raw data that was collected using 
+MouseTracker (Freeman &amp;amp; Ambady, 2010) 
+and stored as a file in the &quot;.mt&quot; format. If multiple files should be read 
+into R, read_mt can be used in combination with the 
+read_bulk function from the
+readbulk package (see 
+Examples). After reading the data into R, mt_import_wide can be used 
+to prepare the trajectory data for analyses using the mousetrap library. The 
+current version of read_mt has been tested with data from MouseTracker
+Version 2.84 - but please be sure to double-check." />
+<meta name="twitter:card" content="summary" />
+
+
 
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -46,8 +68,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">mousetrap</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">mousetrap</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">3.1.1</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -69,6 +95,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -76,28 +103,32 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Read MouseTracker raw data.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/pascalkieslich/mousetrap/blob/master/R/read_mt.R'><code>R/read_mt.R</code></a></small>
+    <div class="hidden name"><code>read_mt.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p><code>read_mt</code> reads raw data that was collected using 
-<a href = 'http://www.mousetracker.org/'>MouseTracker</a> (Freeman &amp; Ambady, 2010) 
+<a href='http://www.mousetracker.org/'>MouseTracker</a> (Freeman &amp; Ambady, 2010) 
 and stored as a file in the ".mt" format. If multiple files should be read 
 into R, <code>read_mt</code> can be used in combination with the 
 <a href='http://www.rdocumentation.org/packages/readbulk/topics/read_bulk'>read_bulk</a> function from the
-<a href = 'http://pascalkieslich.github.io/readbulk/'>readbulk</a> package (see 
+<a href='http://pascalkieslich.github.io/readbulk/'>readbulk</a> package (see 
 Examples). After reading the data into R, <a href='mt_import_wide.html'>mt_import_wide</a> can be used 
 to prepare the trajectory data for analyses using the mousetrap library. The 
 current version of <code>read_mt</code> has been tested with data from MouseTracker
 Version 2.84 - but please be sure to double-check.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>read_mt</span>(<span class='no'>file</span>, <span class='kw'>columns</span> <span class='kw'>=</span> <span class='st'>"all"</span>, <span class='kw'>add_trialid</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>add_filename</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -135,25 +166,27 @@ containing the file name should be added.</p></td>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><a href='http://www.rdocumentation.org/packages/readbulk/topics/read_bulk'>read_bulk</a> from the <code>readbulk</code> package for reading and 
-combining multiple raw data files.
-    <a href='mt_import_wide.html'>mt_import_wide</a> to prepare the imported data for analyses in mousetrap.</p>
+    <div class='dont-index'><p><a href='http://www.rdocumentation.org/packages/readbulk/topics/read_bulk'>read_bulk</a> from the <code>readbulk</code> package for reading and 
+combining multiple raw data files.</p>
+<p><a href='mt_import_wide.html'>mt_import_wide</a> to prepare the imported data for analyses in mousetrap.</p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>not_run</span>({
-  <span class='co'># Read a single raw data file from MouseTracker</span>
-  <span class='co'># (stored in the current working directory)</span>
-  <span class='no'>mt_data_raw</span> <span class='kw'>&lt;-</span> <span class='fu'>read_mt</span>(<span class='st'>"example.mt"</span>)
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='co'># Read a single raw data file from MouseTracker</span>
+<span class='co'># (stored in the current working directory)</span>
+<span class='no'>mt_data_raw</span> <span class='kw'>&lt;-</span> <span class='fu'>read_mt</span>(<span class='st'>"example.mt"</span>)
 
-  <span class='co'># Use read_bulk to read all raw data files ending with ".mt" that are</span>
-  <span class='co'># stored in the folder "raw_data" (in the current working directory)</span>
-  <span class='fu'>library</span>(<span class='no'>readbulk</span>)
-  <span class='no'>mt_data_raw</span> <span class='kw'>&lt;-</span> <span class='fu'>read_bulk</span>(<span class='st'>"raw_data"</span>, <span class='kw'>fun</span><span class='kw'>=</span><span class='no'>read_mt</span>, <span class='kw'>extension</span><span class='kw'>=</span><span class='st'>".mt"</span>)
+<span class='co'># Use read_bulk to read all raw data files ending with ".mt" that are</span>
+<span class='co'># stored in the folder "raw_data" (in the current working directory)</span>
+<span class='fu'>library</span>(<span class='no'>readbulk</span>)
+<span class='no'>mt_data_raw</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='http://www.rdocumentation.org/packages/readbulk/topics/read_bulk'>read_bulk</a></span>(<span class='st'>"raw_data"</span>, <span class='kw'>fun</span><span class='kw'>=</span><span class='no'>read_mt</span>, <span class='kw'>extension</span><span class='kw'>=</span><span class='st'>".mt"</span>)
 
-  <span class='co'># Import the data into mousetrap</span>
-  <span class='no'>mt_data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_import_wide.html'>mt_import_wide</a></span>(<span class='no'>mt_data_raw</span>)
-})</div></pre>
+<span class='co'># Import the data into mousetrap</span>
+<span class='no'>mt_data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_import_wide.html'>mt_import_wide</a></span>(<span class='no'>mt_data_raw</span>)
+<span class='co'># }</span><div class='input'>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -182,11 +215,14 @@ Dirk U. Wulff (<a href='mailto:dirk.wulff@gmail.com'>dirk.wulff@gmail.com</a>)
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

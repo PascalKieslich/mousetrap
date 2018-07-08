@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>mt_example_raw • mousetrap</title>
+<title>Raw mouse-tracking dataset for demonstrations of the mousetrap package — mt_example_raw • mousetrap</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -18,11 +18,28 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
+<meta property="og:title" content="Raw mouse-tracking dataset for demonstrations of the mousetrap package — mt_example_raw" />
+
+<meta property="og:description" content="An exemplary mouse-tracking dataset collected 
+OpenSesame using the 
+mousetrap plugin 
+(Kieslich &amp;amp; Henninger, 2017). A preprocessed (as opposed to raw) version of
+the same data can be found in mt_example." />
+<meta name="twitter:card" content="summary" />
+
+
 
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -46,8 +63,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">mousetrap</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">mousetrap</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">3.1.1</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -69,6 +90,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -76,19 +98,23 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Raw mouse-tracking dataset for demonstrations of the mousetrap package</h1>
+    <small class="dont-index">Source: <a href='https://github.com/pascalkieslich/mousetrap/blob/master/R/data.R'><code>R/data.R</code></a></small>
+    <div class="hidden name"><code>mt_example_raw.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>An exemplary mouse-tracking dataset collected 
-<a href = 'http://osdoc.cogsci.nl/'>OpenSesame</a> using the 
-<a href = 'https://github.com/pascalkieslich/mousetrap-os'>mousetrap plugin</a> 
-(Kieslich &amp; Henninger, in press). A preprocessed (as opposed to raw) version of
+<a href='http://osdoc.cogsci.nl/'>OpenSesame</a> using the 
+<a href='https://github.com/pascalkieslich/mousetrap-os'>mousetrap plugin</a> 
+(Kieslich &amp; Henninger, 2017). A preprocessed (as opposed to raw) version of
 the same data can be found in <a href='mt_example.html'>mt_example</a>.</p>
     
+    </div>
 
     <pre class="usage"><span class='no'>mt_example_raw</span></pre>
         
@@ -97,7 +123,7 @@ the same data can be found in <a href='mt_example.html'>mt_example</a>.</p>
     <p>A data.frame with 38 rows and 19 variables. The data.frame is 
   based on the combined raw data that were created using 
   <a href='http://www.rdocumentation.org/packages/readbulk/topics/read_opensesame'>read_opensesame</a> from the 
-  <a href = 'http://pascalkieslich.github.io/readbulk/'>readbulk</a> library. For 
+  <a href='http://pascalkieslich.github.io/readbulk/'>readbulk</a> library. For 
   ease of use, unnecessary columns were excluded.</p>
 <p>The variables included relate to the item that was presented
   (<code>Exemplar</code>), the answer categories (<code>Category1</code> and
@@ -135,12 +161,12 @@ features of the mousetrap package and not for any substantive analysis.</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Dale, R., Kehoe, C., &amp; Spivey, M. J. (2007). Graded motor 
- responses in the time course of categorizing atypical exemplars. 
- <em>Memory &amp; Cognition, 35</em>(1), 15-28.</p>
-<p>Kieslich, P. J., &amp; Henninger, F. (in press). Mousetrap: An integrated,
- open-source mouse-tracking package. <em>Behavior Research Methods</em>.
- doi:10.3758/s13428-017-0900-z</p>
+    <p>Kieslich, P. J., &amp; Henninger, F. (2017). Mousetrap: An
+  integrated, open-source mouse-tracking package. <em>Behavior Research
+  Methods, 49</em>(5), 1652-1667. <a href='https://doi.org/10.3758/s13428-017-0900-z'>https://doi.org/10.3758/s13428-017-0900-z</a></p>
+<p>Dale, R., Kehoe, C., &amp; Spivey, M. J. (2007). Graded motor responses in the
+  time course of categorizing atypical exemplars. <em>Memory &amp; Cognition,
+  35</em>(1), 15-28. <a href='https://doi.org/10.3758/BF03195938'>https://doi.org/10.3758/BF03195938</a></p>
     
 
   </div>
@@ -164,11 +190,14 @@ features of the mousetrap package and not for any substantive analysis.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

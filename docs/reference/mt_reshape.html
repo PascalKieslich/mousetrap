@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>mt_reshape • mousetrap</title>
+<title>General-purpose reshape and aggregation function for mousetrap data. — mt_reshape • mousetrap</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -18,11 +18,28 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
+<meta property="og:title" content="General-purpose reshape and aggregation function for mousetrap data. — mt_reshape" />
+
+<meta property="og:description" content="mt_reshape is the general function used in the mousetrap
+package for filtering, merging, reshaping, and aggregating mouse-tracking
+measures or trajectories in combination with other trial data. Several
+additional (wrapper) functions for more specific purposes (cf. &quot;See Also&quot;)
+are available." />
+<meta name="twitter:card" content="summary" />
+
+
 
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -46,8 +63,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">mousetrap</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">mousetrap</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">3.1.1</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -69,6 +90,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -76,12 +98,15 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>General-purpose reshape and aggregation function for mousetrap data.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/pascalkieslich/mousetrap/blob/master/R/reshape.R'><code>R/reshape.R</code></a></small>
+    <div class="hidden name"><code>mt_reshape.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p><code>mt_reshape</code> is the general function used in the <code>mousetrap</code>
 package for filtering, merging, reshaping, and aggregating mouse-tracking
@@ -89,6 +114,7 @@ measures or trajectories in combination with other trial data. Several
 additional (wrapper) functions for more specific purposes (cf. "See Also")
 are available.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>mt_reshape</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>use_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>use2</span> <span class='kw'>=</span> <span class='st'>"data"</span>, <span class='kw'>use2_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>subset</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -96,7 +122,7 @@ are available.</p>
   <span class='kw'>.funs</span> <span class='kw'>=</span> <span class='st'>"mean"</span>, <span class='kw'>trajectories_long</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>convert_df</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>mt_id</span> <span class='kw'>=</span> <span class='st'>"mt_id"</span>, <span class='kw'>mt_seq</span> <span class='kw'>=</span> <span class='st'>"mt_seq"</span>, <span class='kw'>aggregation_function</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -135,7 +161,7 @@ be provided directly.</p></td>
 variables (in <code>data[[use2]]</code>) that should be merged with the data. If
 <code>aggregate==TRUE</code>, the trajectories / measures will be aggregated
 separately for each of the levels of these variables using
-<a href='http://www.rdocumentation.org/packages/dplyr/topics/summarise_all'>summarize_at</a>.</p></td>
+<a href='http://dplyr.tidyverse.org/reference/summarise_all.html'>summarize_at</a>.</p></td>
     </tr>
     <tr>
       <th>subset</th>
@@ -166,7 +192,7 @@ aggregated per subject (if <code>subject_id</code> is specified and
     <tr>
       <th>.funs</th>
       <td><p>the aggregation function(s) passed on to
-<code><a href='http://www.rdocumentation.org/packages/dplyr/topics/summarise_all'>summarize_at</a></code>. By default, the <code>mean</code> is
+<code><a href='http://dplyr.tidyverse.org/reference/summarise_all.html'>summarize_at</a></code>. By default, the <code>mean</code> is
 calculated.</p></td>
     </tr>
     <tr>
@@ -185,7 +211,7 @@ trajectories.</p></td>
       <td><p>logical indicating if the reshaped data should be converted
 to a <code>data.frame</code> using <code>as.data.frame</code>. This will
 drop potentially existing additional classes (such as
-<code><a href='http://www.rdocumentation.org/packages/dplyr/topics/tbl_df'>tbl_df</a></code>) that result from the internally used
+<code><a href='http://dplyr.tidyverse.org/reference/tbl_df.html'>tbl_df</a></code>) that result from the internally used
 <code>dplyr</code> functions for data grouping and aggregation. As these
 additional classes might - on rare occasions - cause problems with
 functions from other packages, the reshaped data are converted to "pure"
@@ -244,14 +270,14 @@ and aggregate, or through the R packages <code>dplyr</code> or
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><a href='mt_aggregate.html'>mt_aggregate</a> for aggregating mouse-tracking measures and
+    <div class='dont-index'><p><a href='mt_aggregate.html'>mt_aggregate</a> for aggregating mouse-tracking measures and
   trajectories.</p>
 <p><a href='mt_aggregate_per_subject.html'>mt_aggregate_per_subject</a> for aggregating mouse-tracking measures and
   trajectories per subject.</p>
 <p><a href='mt_export_long.html'>mt_export_long</a> for exporting mouse-tracking data in long format.</p>
 <p><a href='mt_export_long.html'>mt_export_wide</a> for exporting mouse-tracking data in wide format.</p>
-<p><a href='http://www.rdocumentation.org/packages/dplyr/topics/join'>inner_join</a> for merging data and <code><a href='http://www.rdocumentation.org/packages/dplyr/topics/summarise_all'>summarize_at</a></code>
-  for aggregating data using the <code>dplyr</code> package.</p>
+<p><a href='http://dplyr.tidyverse.org/reference/join.html'>inner_join</a> for merging data and <code><a href='http://dplyr.tidyverse.org/reference/summarise_all.html'>summarize_at</a></code>
+  for aggregating data using the <code>dplyr</code> package.</p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -303,11 +329,14 @@ Felix Henninger
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

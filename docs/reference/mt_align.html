@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>mt_align • mousetrap</title>
+<title>Align trajectories. — mt_align • mousetrap</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -18,11 +18,25 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
+<meta property="og:title" content="Align trajectories. — mt_align" />
+
+<meta property="og:description" content="mt_align aligns trajectories to a common start point, end point, and /
+or coordinate system." />
+<meta name="twitter:card" content="summary" />
+
+
 
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -46,8 +60,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">mousetrap</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">mousetrap</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">3.1.1</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -69,6 +87,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -76,22 +95,26 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Align trajectories.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/pascalkieslich/mousetrap/blob/master/R/align.R'><code>R/align.R</code></a></small>
+    <div class="hidden name"><code>mt_align.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p><code>mt_align</code> aligns trajectories to a common start point, end point, and /
 or coordinate system.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>mt_align</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='no'>use</span>, <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"xpos"</span>,
   <span class='st'>"ypos"</span>), <span class='kw'>coordinates</span> <span class='kw'>=</span> <span class='st'>"isotropic"</span>, <span class='kw'>align_start</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>align_end</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>align_side</span> <span class='kw'>=</span> <span class='st'>"no"</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -173,20 +196,20 @@ refer to the hypothetical case where all trajectories are mapped to one side.</p
 point of each trajectory is set to the exact position specified in
 <code>coordinates</code>. <code>align_start</code> and <code>align_end</code> can be set
 completely independently of one another, i.e., one can align only end points,
-only start points, none, or both.
-    If <code>align_start</code> is set to <code>"left"</code> or <code>"right"</code> trajectories 
+only start points, none, or both.</p>   
+<p>If <code>align_start</code> is set to <code>"left"</code> or <code>"right"</code> trajectories 
 will be flipped to the lower or upper spectrum of the first dimensions, 
 respectively. If the first dimension is the x-coordinate this is equivalent
 to flipping the trajectories to the left and right side, respectively.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><a href='mt_align_start.html'>mt_align_start</a> for aligning all trajectories to a common
+    <div class='dont-index'><p><a href='mt_align_start.html'>mt_align_start</a> for aligning all trajectories to a common
   start position.</p>
 <p><a href='mt_align_start_end.html'>mt_align_start_end</a> for aligning all trajectories so that they share
   a common initial and final coordinate.</p>
 <p><a href='mt_remap_symmetric.html'>mt_remap_symmetric</a> for remapping trajectories to one side (or one 
-  quadrant) of the coordinate system.</p>
+  quadrant) of the coordinate system.</p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -221,11 +244,14 @@ Dirk U. Wulff (<a href='mailto:dirk.wulff@gmail.com'>dirk.wulff@gmail.com</a>)
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>mt_check_bimodality • mousetrap</title>
+<title>Assess bimodality of mouse-tracking measure distributions. — mt_check_bimodality • mousetrap</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -18,11 +18,27 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
+<meta property="og:title" content="Assess bimodality of mouse-tracking measure distributions. — mt_check_bimodality" />
+
+<meta property="og:description" content="Assess bimodality of the distribution of mouse-tracking measures using the 
+bimodality coefficient and Hartigan's dip statistic (see Details). If 
+bimodality should be assessed separately for different conditions, the 
+corresponding variables can be specified under grouping_variables." />
+<meta name="twitter:card" content="summary" />
+
+
 
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -46,8 +62,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">mousetrap</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">mousetrap</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">3.1.1</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -69,6 +89,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -76,23 +97,27 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Assess bimodality of mouse-tracking measure distributions.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/pascalkieslich/mousetrap/blob/master/R/bimodality.R'><code>R/bimodality.R</code></a></small>
+    <div class="hidden name"><code>mt_check_bimodality.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Assess bimodality of the distribution of mouse-tracking measures using the 
 bimodality coefficient and Hartigan's dip statistic (see Details). If 
 bimodality should be assessed separately for different conditions, the 
 corresponding variables can be specified under <code>grouping_variables</code>.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>mt_check_bimodality</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"measures"</span>, <span class='kw'>use_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>methods</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"BC"</span>, <span class='st'>"HDS"</span>), <span class='kw'>B</span> <span class='kw'>=</span> <span class='fl'>2000</span>, <span class='kw'>grouping_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -180,9 +205,9 @@ Processes &amp; Intergroup Relations, 18</em>(3), 384-401.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><a href='bimodality_coefficient.html'>bimodality_coefficient</a> for more information about the bimodality
+    <div class='dont-index'><p><a href='bimodality_coefficient.html'>bimodality_coefficient</a> for more information about the bimodality
   coefficient.</p>
-<p><a href='http://www.rdocumentation.org/packages/diptest/topics/dip.test'>dip.test</a> for more information about Hartigan's dip test.</p>
+<p><a href='http://www.rdocumentation.org/packages/diptest/topics/dip.test'>dip.test</a> for more information about Hartigan's dip test.</p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -199,43 +224,43 @@ Processes &amp; Intergroup Relations, 18</em>(3), 384-401.</p>
 #&gt;        MAD        AD
 #&gt; 1 0.949304 0.9805709
 #&gt; </div><div class='input'>
-<span class='co'># Standardize variables</span>
+<span class='co'># Standardize variables per participant</span>
 <span class='no'>mt_example</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_standardize.html'>mt_standardize</a></span>(<span class='no'>mt_example</span>,
-  <span class='kw'>use_variables</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='st'>"MAD"</span>, <span class='st'>"AD"</span>))
+  <span class='kw'>use_variables</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='st'>"MAD"</span>, <span class='st'>"AD"</span>), <span class='kw'>within</span><span class='kw'>=</span><span class='st'>"subject_nr"</span>)
 
 <span class='co'># Assess bimodality for standardized variables</span>
 <span class='fu'>mt_check_bimodality</span>(<span class='no'>mt_example</span>,
   <span class='kw'>use_variables</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='st'>"z_MAD"</span>, <span class='st'>"z_AD"</span>))</div><div class='output co'>#&gt; $BC
 #&gt;       z_MAD      z_AD
-#&gt; 1 0.6239962 0.7714127
+#&gt; 1 0.5099593 0.7212444
 #&gt; 
 #&gt; $HDS_p_value
-#&gt;      z_MAD      z_AD
-#&gt; 1 0.949304 0.9805709
+#&gt;       z_MAD      z_AD
+#&gt; 1 0.7749003 0.7463675
 #&gt; </div><div class='input'>
 <span class='co'># Assess bimodality with simulated p values for HDS</span>
 <span class='fu'>mt_check_bimodality</span>(<span class='no'>mt_example</span>,
   <span class='kw'>use_variables</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='st'>"z_MAD"</span>, <span class='st'>"z_AD"</span>),
   <span class='kw'>methods</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='st'>"BC"</span>, <span class='st'>"HDS_sim"</span>))</div><div class='output co'>#&gt; $BC
 #&gt;       z_MAD      z_AD
-#&gt; 1 0.6239962 0.7714127
+#&gt; 1 0.5099593 0.7212444
 #&gt; 
 #&gt; $HDS_simulated_p_value
-#&gt;    z_MAD   z_AD
-#&gt; 1 0.9515 0.9825
+#&gt;    z_MAD  z_AD
+#&gt; 1 0.7775 0.752
 #&gt; </div><div class='input'>
 <span class='co'># Assess bimodality per condition</span>
 <span class='fu'>mt_check_bimodality</span>(<span class='no'>mt_example</span>,
   <span class='kw'>use_variables</span><span class='kw'>=</span><span class='fu'>c</span>(<span class='st'>"z_MAD"</span>, <span class='st'>"z_AD"</span>),
   <span class='kw'>grouping_variables</span><span class='kw'>=</span><span class='st'>"Condition"</span>)</div><div class='output co'>#&gt; $BC
 #&gt;   Condition     z_MAD      z_AD
-#&gt; 1  Atypical 0.4147261 0.4690223
-#&gt; 2   Typical 0.4589313 0.7214087
+#&gt; 1  Atypical 0.4056693 0.3430277
+#&gt; 2   Typical 0.4842767 0.7781194
 #&gt; 
 #&gt; $HDS_p_value
-#&gt;   Condition      z_MAD      z_AD
-#&gt; 1  Atypical 0.04777624 0.2248369
-#&gt; 2   Typical 0.95528251 0.8180812
+#&gt;   Condition     z_MAD      z_AD
+#&gt; 1  Atypical 0.3458943 0.4716631
+#&gt; 2   Typical 0.9831558 0.9923261
 #&gt; </div><div class='input'>                    
 </div></pre>
   </div>
@@ -270,11 +295,14 @@ Felix Henninger
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

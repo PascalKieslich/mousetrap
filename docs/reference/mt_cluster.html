@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>mt_cluster • mousetrap</title>
+<title>Cluster trajectories. — mt_cluster • mousetrap</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -18,11 +18,26 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
+<meta property="og:title" content="Cluster trajectories. — mt_cluster" />
+
+<meta property="og:description" content="Performs trajectory clustering. It first computes distances between each pair
+of trajectories and then applies off-the-shelf clustering tools to explain 
+the resulting dissimilarity matrix using a predefined number of clusters." />
+<meta name="twitter:card" content="summary" />
+
+
 
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -46,8 +61,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">mousetrap</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">mousetrap</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">3.1.1</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -69,6 +88,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -76,17 +96,21 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Cluster trajectories.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/pascalkieslich/mousetrap/blob/master/R/cluster.R'><code>R/cluster.R</code></a></small>
+    <div class="hidden name"><code>mt_cluster.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Performs trajectory clustering. It first computes distances between each pair
 of trajectories and then applies off-the-shelf clustering tools to explain 
 the resulting dissimilarity matrix using a predefined number of clusters.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>mt_cluster</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"sp_trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='st'>"clustering"</span>,
   <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>), <span class='kw'>n_cluster</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"hclust"</span>,
@@ -94,7 +118,7 @@ the resulting dissimilarity matrix using a predefined number of clusters.</p>
   <span class='kw'>hclust_method</span> <span class='kw'>=</span> <span class='st'>"ward.D"</span>, <span class='kw'>kmeans_nstart</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>na_rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>cluster_output</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -203,13 +227,12 @@ progress.</p></td>
 <a href='http://www.rdocumentation.org/packages/fastcluster/topics/hclust'>hclust</a> and <a href='http://www.rdocumentation.org/packages/stats/topics/kmeans'>kmeans</a>, for cluster estimation. 
 Cluster estimation using <a href='http://www.rdocumentation.org/packages/fastcluster/topics/hclust'>hclust</a> relies on distances 
 computed by <a href='mt_distmat.html'>mt_distmat</a>.</p>
-<p>Mouse trajectories often occur in distinct, qualitative types (see Wulff, 
-Haslbeck, Schulte-Mecklenbeck, 2017; Haslbeck, Wulff, Kieslich, Henninger, &amp; 
-Schulte-Mecklenbeck, 2017). Common trajectory types are linear trajectories, 
-mildly and strongly curved trajctories, and single and multiple 
+<p>Mouse trajectories often occur in distinct, qualitative types (see Wulff et
+al., in press; Wulff et al., 2018). Common trajectory types are linear
+trajectories, mildly and strongly curved trajctories, and single and multiple
 change-of-mind trials (see also <a href='mt_map.html'>mt_map</a>). <code>mt_cluster</code> can tease
-these types apart.
-    <code>mt_cluster</code> uses <a href='http://www.rdocumentation.org/packages/fastcluster/topics/hclust'>hclust</a> or <a href='http://www.rdocumentation.org/packages/stats/topics/kmeans'>kmeans</a> to 
+these types apart.</p>
+<p><code>mt_cluster</code> uses <a href='http://www.rdocumentation.org/packages/fastcluster/topics/hclust'>hclust</a> or <a href='http://www.rdocumentation.org/packages/stats/topics/kmeans'>kmeans</a> to 
 explain the distances between every pair of trajectories using a predefined 
 number of clusters. If method is "hclust", <code>mt_cluster</code> computes the 
 dissimiliarity matrix for all trajectory pairs using <a href='mt_distmat.html'>mt_distmat</a>. If
@@ -223,23 +246,29 @@ and trajectory outliers found in the majority of datasets best.</p>
 trajectories share the same direction, e.g., that all trajectories end in the
 top-left corner of the coordinate system (<a href='mt_remap_symmetric.html'>mt_remap_symmetric</a> or
 <a href='mt_align.html'>mt_align</a> can be used to achieve this). Furthermore, it is recommended
-to use spatialized trajectories (see <a href='mt_spatialize.html'>mt_spatialize</a>; Haslbeck, Wulff,
-Kieslich, Henninger, &amp; Schulte-Mecklenbeck, 2017).</p>
+to use spatialized trajectories (see <a href='mt_spatialize.html'>mt_spatialize</a>; Wulff et al., in
+press; Haslbeck et al., 2018).</p>
     
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Wulff, D. U., Haslbeck, J. M. B., &amp; Schulte-Mecklenbeck, M. 
-  (2017). Measuring the (dis-)continuous mind. Manuscript in preparation.</p>
-<p>Haslbeck, J. M. B., Wulff, D. U., Kieslich, P. J., Henninger, F., &amp; 
-  Schulte-Mecklenbeck, M. (2017). Advanced mouse- and hand-tracking analysis:
-  Detecting and visualizing clusters in movement trajectories. Manuscript in 
-  preparation.</p>
+    <p>Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F.,
+  &amp; Schulte-Mecklenbeck, M. (in press). Mouse-tracking: Detecting types in
+  movement trajectories. In M. Schulte-Mecklenbeck, A. Kuehberger, &amp; J. G.
+  Johnson (Eds.), <em>A Handbook of Process Tracing Methods</em>. New York:
+  Taylor &amp; Francis.</p>   
+<p>Wulff, D. U., Haslbeck, J. M. B., &amp; Schulte-Mecklenbeck, M. (2018).
+  <em>Measuring the (dis-)continuous mind: What movement trajectories
+  reveal about cognition</em>. Manuscript in preparation.</p>
+<p>Haslbeck, J. M. B., Wulff, D. U., Kieslich, P. J., Henninger, F., &amp;
+  Schulte-Mecklenbeck, M. (2018). <em>Advanced mouse- and hand-tracking
+  analysis: Detecting and visualizing clusters in movement trajectories</em>.
+  Manuscript in preparation.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><a href='mt_distmat.html'>mt_distmat</a> for more information about how the distance matrix is 
+    <div class='dont-index'><p><a href='mt_distmat.html'>mt_distmat</a> for more information about how the distance matrix is 
   computed when the hclust method is used.</p>
-<p><a href='mt_cluster_k.html'>mt_cluster_k</a> for estimating the optimal number of clusters.</p>
+<p><a href='mt_cluster_k.html'>mt_cluster_k</a> for estimating the optimal number of clusters.</p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -251,7 +280,7 @@ Kieslich, Henninger, &amp; Schulte-Mecklenbeck, 2017).</p>
 
 <span class='co'># Plot clustered trajectories</span>
 <span class='fu'><a href='mt_plot.html'>mt_plot</a></span>(<span class='no'>KH2017</span>,<span class='kw'>use</span><span class='kw'>=</span><span class='st'>"sp_trajectories"</span>,
-  <span class='kw'>use2</span><span class='kw'>=</span><span class='st'>"clustering"</span>,<span class='kw'>facet_col</span><span class='kw'>=</span><span class='st'>"cluster"</span>)</div><img src='mt_cluster-2.png' alt='' width='540' height='400' /><div class='input'>
+  <span class='kw'>use2</span><span class='kw'>=</span><span class='st'>"clustering"</span>,<span class='kw'>facet_col</span><span class='kw'>=</span><span class='st'>"cluster"</span>)</div><div class='img'><img src='mt_cluster-1.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -285,11 +314,14 @@ Jonas M. B. Haslbeck (<a href='mailto:jonas.haslbeck@gmail.com'>jonas.haslbeck@g
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

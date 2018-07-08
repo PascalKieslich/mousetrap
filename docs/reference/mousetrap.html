@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>mousetrap • mousetrap</title>
+<title>Process and analyze mouse-tracking data — mousetrap • mousetrap</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -18,11 +18,26 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
+<meta property="og:title" content="Process and analyze mouse-tracking data — mousetrap" />
+
+<meta property="og:description" content="The mousetrap package provides functions for importing, preprocessing, 
+analyzing, aggregating, and visualizing mouse-tracking data. In the 
+following, a brief overview of the functions in this package is given." />
+<meta name="twitter:card" content="summary" />
+
+
 
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
@@ -46,8 +61,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">mousetrap</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">mousetrap</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">3.1.1</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -69,6 +88,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -76,17 +96,21 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Process and analyze mouse-tracking data</h1>
+    <small class="dont-index">Source: <a href='https://github.com/pascalkieslich/mousetrap/blob/master/R/mousetrap.R'><code>R/mousetrap.R</code></a></small>
+    <div class="hidden name"><code>mousetrap.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>The mousetrap package provides functions for importing, preprocessing, 
 analyzing, aggregating, and visualizing mouse-tracking data. In the 
 following, a brief overview of the functions in this package is given.</p>
     
+    </div>
 
         
     <h2 class="hasAnchor" id="read-functions"><a class="anchor" href="#read-functions"></a>Read functions</h2>
@@ -96,13 +120,13 @@ following, a brief overview of the functions in this package is given.</p>
   files into R can be used (e.g., <a href='http://www.rdocumentation.org/packages/utils/topics/read.table'>read.table</a> or 
   <a href='http://www.rdocumentation.org/packages/utils/topics/read.table'>read.csv</a>).</p>
 <p>If raw data were collected using
-  <a href = 'http://www.mousetracker.org/'>MouseTracker</a>, the mousetrap package 
+  <a href='http://www.mousetracker.org/'>MouseTracker</a>, the mousetrap package 
   provides the <a href='read_mt.html'>read_mt</a> function to read files in the ".mt" format.</p>
 <p>If several raw data files should be read and merged, the 
   <a href='http://www.rdocumentation.org/packages/readbulk/topics/read_bulk'>read_bulk</a> function from the 
-  <a href = 'http://pascalkieslich.github.io/readbulk/'>readbulk</a> package can be
+  <a href='http://pascalkieslich.github.io/readbulk/'>readbulk</a> package can be
   used (or the <a href='http://www.rdocumentation.org/packages/readbulk/topics/read_opensesame'>read_opensesame</a> function, if data were 
-  collected using <a href = 'http://osdoc.cogsci.nl/'>OpenSesame</a>).</p>
+  collected using <a href='http://osdoc.cogsci.nl/'>OpenSesame</a>).</p>
     
     <h2 class="hasAnchor" id="import-functions"><a class="anchor" href="#import-functions"></a>Import functions</h2>
 
@@ -112,11 +136,11 @@ following, a brief overview of the functions in this package is given.</p>
   the following functions can be used. A detailed description (and example)
   of the resulting mousetrap data object can be found in <a href='mt_example.html'>mt_example</a>.</p>
 <p><a href='mt_import_mousetrap.html'>mt_import_mousetrap</a> imports mouse-tracking data that were recorded 
-  using the <a href = 'https://github.com/pascalkieslich/mousetrap-os'>mousetrap
-  plugin</a> for <a href = 'http://osdoc.cogsci.nl/'>OpenSesame</a>.</p>
+  using the <a href='https://github.com/pascalkieslich/mousetrap-os'>mousetrap
+  plugin</a> for <a href='http://osdoc.cogsci.nl/'>OpenSesame</a>.</p>
 <p><a href='mt_import_wide.html'>mt_import_wide</a> imports mouse-tracking data saved in a wide format 
   (e.g., data collected using
-  <a href = 'http://www.mousetracker.org/'>MouseTracker</a>).</p>
+  <a href='http://www.mousetracker.org/'>MouseTracker</a>).</p>
 <p><a href='mt_import_long.html'>mt_import_long</a> imports mouse-tracking data saved in a long format. 
   (e.g., trajectories exported using <a href='mt_export_long.html'>mt_export_long</a>).</p>
     
@@ -244,16 +268,15 @@ following, a brief overview of the functions in this package is given.</p>
     <p><a href='mt_example.html'>mt_example</a> and <a href='mt_example_raw.html'>mt_example_raw</a> contain a mouse-tracking
   example dataset for demonstrations using the <code>mousetrap</code> package.</p>
 <p><a href='KH2017.html'>KH2017</a> and <a href='KH2017_raw.html'>KH2017_raw</a> contain a mouse-tracking dataset from
-  Kieslich &amp; Henninger (in press).</p>
+  Kieslich &amp; Henninger (2017).</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>not_run</span>({
-  <span class='no'>KH2017</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_import_mousetrap.html'>mt_import_mousetrap</a></span>(<span class='fu'>subset</span>(<span class='no'>KH2017_raw</span>,<span class='no'>correct</span><span class='kw'>==</span><span class='fl'>1</span>))
-  <span class='no'>KH2017</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_remap_symmetric.html'>mt_remap_symmetric</a></span>(<span class='no'>KH2017</span>)
-  <span class='no'>KH2017</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_align_start.html'>mt_align_start</a></span>(<span class='no'>KH2017</span>)
-})
-
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='no'>KH2017</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_import_mousetrap.html'>mt_import_mousetrap</a></span>(<span class='fu'>subset</span>(<span class='no'>KH2017_raw</span>,<span class='no'>correct</span><span class='kw'>==</span><span class='fl'>1</span>))
+<span class='no'>KH2017</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_remap_symmetric.html'>mt_remap_symmetric</a></span>(<span class='no'>KH2017</span>)
+<span class='no'>KH2017</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_align_start.html'>mt_align_start</a></span>(<span class='no'>KH2017</span>)
+<span class='co'># }</span><div class='input'>
 <span class='no'>KH2017</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_time_normalize.html'>mt_time_normalize</a></span>(<span class='no'>KH2017</span>)
 <span class='no'>KH2017</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_measures.html'>mt_measures</a></span>(<span class='no'>KH2017</span>)
 
@@ -269,13 +292,14 @@ following, a brief overview of the functions in this package is given.</p>
   <span class='kw'>use</span><span class='kw'>=</span><span class='st'>"tn_trajectories"</span>,
   <span class='kw'>x</span><span class='kw'>=</span><span class='st'>"xpos"</span>, <span class='kw'>y</span><span class='kw'>=</span><span class='st'>"ypos"</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"Condition"</span>,
   <span class='kw'>subject_id</span><span class='kw'>=</span><span class='st'>"subject_nr"</span>
-)</div><img src='mousetrap-4.png' alt='' width='540' height='400' /><div class='input'>
-<span class='fu'>not_run</span>({
-  <span class='fu'><a href='mt_plot.html'>mt_plot</a></span>(<span class='no'>KH2017</span>,
-    <span class='kw'>use</span><span class='kw'>=</span><span class='st'>"tn_trajectories"</span>,
-    <span class='kw'>x</span><span class='kw'>=</span><span class='st'>"xpos"</span>, <span class='kw'>y</span><span class='kw'>=</span><span class='st'>"ypos"</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"Condition"</span>
-  )
-})</div></pre>
+)</div><div class='img'><img src='mousetrap-1.png' alt='' width='700' height='433' /></div><div class='input'>
+</div><span class='co'># NOT RUN {</span>
+<span class='fu'><a href='mt_plot.html'>mt_plot</a></span>(<span class='no'>KH2017</span>,
+  <span class='kw'>use</span><span class='kw'>=</span><span class='st'>"tn_trajectories"</span>,
+  <span class='kw'>x</span><span class='kw'>=</span><span class='st'>"xpos"</span>, <span class='kw'>y</span><span class='kw'>=</span><span class='st'>"ypos"</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"Condition"</span>
+)
+<span class='co'># }</span><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -315,11 +339,14 @@ following, a brief overview of the functions in this package is given.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+
