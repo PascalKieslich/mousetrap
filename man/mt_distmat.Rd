@@ -62,10 +62,10 @@ pairs of trajectories. Point-wise dissimilarity refers to computing the
 distance metric defined by \code{minkowski_p} for every point of the 
 trajectory and then summing the results. That is, if \code{minkowski_p = 2} 
 the point-wise dissimilarity between two trajectories, each defined by a set 
-of x and y coordinates, is calculated as \code{sum(sqrt(x^2 + y^2))}. 
+of x and y coordinates, is calculated as \code{sum(sqrt((x_i-x_j)^2 + (y_i-y_j)^2))}. 
 Vector-wise dissimilarity, on the other hand refers to computing the distance
 metric once for the entire trajectory. That is, vector-wise dissimilarity is 
-computed as \code{sqrt(sum(x^2 + y^2))}.
+computed as \code{sqrt(sum((x_i-x_j)^2 + (y_i-y_j)^2))}.
 }
 \examples{
 # Spatialize trajectories
