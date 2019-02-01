@@ -1,0 +1,28 @@
+citHeader("If you use mousetrap in your publications, please cite it as follows:")
+
+bibentry(
+  bibtype = "InCollection",
+  title = "Mouse-tracking: {A} practical guide to implementation and analysis",
+	author  = c(
+    person(c("Pascal","J."), "Kieslich"),
+    person("Felix", "Henninger"),
+    person(c("Dirk","U."), "Wulff"),
+    person(c("Jonas","M. B."), "Haslbeck"),
+    person("Michael", "Schulte-Mecklenbeck")
+    ),
+  year = "in press",
+  booktitle = "A {Handbook} of {Process} {Tracing} {Methods}",
+	address = "New York, NY",
+	publisher = "Routledge",
+  editor  = c(
+    person("Michael", "Schulte-Mecklenbeck"),
+    person("Anton","Kühberger"),
+    person(c("Joseph","G."),"Johnson")
+    ),
+  textVersion  =
+  paste("Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. (in press).",
+        "Mouse-tracking: A practical guide to implementation and analysis.",
+        "In M. Schulte-Mecklenbeck, A. Kühberger, & J. G. Johnson (Eds.),",
+        "A Handbook of Process Tracing Methods.",
+        "New York, NY: Routledge.")
+)
