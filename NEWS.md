@@ -1,11 +1,20 @@
-# mousetrap 3.1.1
+# mousetrap 3.1.2
 
 ## Announcements
 * A book chapter on the mousetrap software packages has been accepted for publication. It covers many common analyses using the mousetrap R package. Please cite it as follows when using mousetrap in your research:
-* Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. (in press). Mouse-tracking: A practical guide to implementation and analysis. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G. Johnson (Eds.), _A Handbook of Process Tracing Methods_. New York: Taylor & Francis.
+* Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. (in press). Mouse-tracking: A practical guide to implementation and analysis. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G. Johnson (Eds.), _A Handbook of Process Tracing Methods_. New York, NY: Routledge.
 * Besides, if you use functions for clustering and mapping trajectories, please also include the following reference:
-* Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F., & Schulte-Mecklenbeck, M. (in press). Mouse-tracking: Detecting types in movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G. Johnson (Eds.), _A Handbook of Process Tracing Methods_. New York: Taylor & Francis.
+* Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F., & Schulte-Mecklenbeck, M. (in press). Mouse-tracking: Detecting types in movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G. Johnson (Eds.), _A Handbook of Process Tracing Methods_. New York, NY: Routledge.
 * If you have any questions when using mousetrap, you can now ask them in the mousetrap forum at http://forum.cogsci.nl/index.php?p=/categories/mousetrap
+
+## Changes in documentation
+* `citation("mousetrap")` now returns the correct citation for the `mousetrap` package.
+* Updated mousetrap book chapter citations (see announcements above for correct citation).
+
+## Changes in specific functions
+* `mt_import_long`: internal change (prefix `row_number()` function with dplyr) to accomodate changes in most recent dplyr release.
+
+# mousetrap 3.1.1
 
 ## Changes in specific functions
 * `mt_map`: now allows for mapping trajectories onto prototypes separately for different groups of trajectories (the prototypes will be rescaled separately to match the coordinate system of each group).
