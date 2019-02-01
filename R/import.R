@@ -722,7 +722,7 @@ mt_import_long <- function(raw_data,
   # Create mt_seq variable
   raw_data <- raw_data %>%
     dplyr::group_by(mt_id) %>%
-    dplyr::mutate_(.dots = stats::setNames(list("row_number()"), "mt_seq")) %>%
+    dplyr::mutate_(.dots = stats::setNames(list("dplyr::row_number()"), "mt_seq")) %>%
     dplyr::ungroup()
 
   # Collect and rename variables
