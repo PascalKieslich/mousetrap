@@ -1,7 +1,8 @@
+Encoding: UTF-8
 Package: mousetrap
 Type: Package
-Version: 3.1.1
-Date: 2018-07-06
+Version: 3.1.2
+Date: 2019-02-02
 Title: Process and Analyze Mouse-Tracking Data
 Description: Mouse-tracking, the analysis of mouse movements in computerized
     experiments, is a method that is becoming increasingly popular in the
@@ -10,11 +11,14 @@ Description: Mouse-tracking, the analysis of mouse movements in computerized
 Maintainer: Pascal J. Kieslich <kieslich@psychologie.uni-mannheim.de>
 Authors@R: c(
     person(c("Pascal","J."), "Kieslich", role= c("aut", "cre"),
-            email= "kieslich@psychologie.uni-mannheim.de"),
+            email= "kieslich@psychologie.uni-mannheim.de",
+            comment = c(ORCID = "0000-0002-0853-9364")),
     person(c("Dirk","U."), "Wulff", role = "aut",
-    		email = "dirk.wulff@gmail.com"),
+    		email = "dirk.wulff@gmail.com",
+    		comment = c(ORCID = "0000-0002-4008-8022")),
     person("Felix", "Henninger", role = "aut",
-            email= "mailbox@felixhenninger.com"),
+        email= "mailbox@felixhenninger.com",
+        comment = c(ORCID = "0000-0002-7730-9511")),
     person(c("Jonas","M. B."), "Haslbeck", role = "aut",
     		email = "jonas.haslbeck@googlemail.com"),
     person("Sarah", "Brockhaus", role = "ctb")
@@ -48,4 +52,4 @@ Suggests:
     testthat
 LinkingTo: Rcpp
 LazyData: TRUE
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
