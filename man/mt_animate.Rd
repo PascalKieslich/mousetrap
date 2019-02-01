@@ -6,11 +6,12 @@
 \usage{
 mt_animate(data, use = "trajectories", dimensions = c("xpos", "ypos"),
   timestamps = "timestamps", filename = "trajectory_animation.gif",
-  xres = 1000, seconds = 3, framerate = 24, speed = 0.5, density = 3,
-  jitter = TRUE, remove = FALSE, bg = "black", col = "white", lwd = 1,
-  loop = FALSE, bounds = NULL, norm = FALSE, upscale = 1, decay = 10,
-  max_intensity = 5, discard_images = TRUE, im_path = NULL,
-  parallel = TRUE, verbose = FALSE)
+  xres = 1000, seconds = 3, framerate = 24, speed = 0.5,
+  density = 3, jitter = TRUE, remove = FALSE, bg = "black",
+  col = "white", lwd = 1, loop = FALSE, bounds = NULL,
+  norm = FALSE, upscale = 1, decay = 10, max_intensity = 5,
+  discard_images = TRUE, im_path = NULL, parallel = TRUE,
+  verbose = FALSE)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import

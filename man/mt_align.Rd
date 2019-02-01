@@ -4,9 +4,10 @@
 \alias{mt_align}
 \title{Align trajectories.}
 \usage{
-mt_align(data, use = "trajectories", save_as = use, dimensions = c("xpos",
-  "ypos"), coordinates = "isotropic", align_start = FALSE,
-  align_end = FALSE, align_side = "no", verbose = FALSE)
+mt_align(data, use = "trajectories", save_as = use,
+  dimensions = c("xpos", "ypos"), coordinates = "isotropic",
+  align_start = FALSE, align_end = FALSE, align_side = "no",
+  verbose = FALSE)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import

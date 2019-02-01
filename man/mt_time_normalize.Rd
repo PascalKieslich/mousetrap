@@ -4,9 +4,9 @@
 \alias{mt_time_normalize}
 \title{Time normalize trajectories.}
 \usage{
-mt_time_normalize(data, use = "trajectories", save_as = "tn_trajectories",
-  dimensions = c("xpos", "ypos"), timestamps = "timestamps", nsteps = 101,
-  verbose = FALSE)
+mt_time_normalize(data, use = "trajectories",
+  save_as = "tn_trajectories", dimensions = c("xpos", "ypos"),
+  timestamps = "timestamps", nsteps = 101, verbose = FALSE)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import

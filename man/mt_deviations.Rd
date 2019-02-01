@@ -5,8 +5,8 @@
 \title{Calculate deviations from idealized trajectory.}
 \usage{
 mt_deviations(data, use = "trajectories", save_as = use,
-  dimensions = c("xpos", "ypos"), start_ideal = NULL, end_ideal = NULL,
-  prefix = "", verbose = FALSE)
+  dimensions = c("xpos", "ypos"), start_ideal = NULL,
+  end_ideal = NULL, prefix = "", verbose = FALSE)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import

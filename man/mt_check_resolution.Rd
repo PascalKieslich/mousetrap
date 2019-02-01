@@ -4,8 +4,8 @@
 \alias{mt_check_resolution}
 \title{Check logging resolution by looking at timestamp differences.}
 \usage{
-mt_check_resolution(data, use = "trajectories", timestamps = "timestamps",
-  desired = NULL)
+mt_check_resolution(data, use = "trajectories",
+  timestamps = "timestamps", desired = NULL)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import

@@ -4,7 +4,8 @@
 \alias{read_mt}
 \title{Read MouseTracker raw data.}
 \usage{
-read_mt(file, columns = "all", add_trialid = FALSE, add_filename = FALSE)
+read_mt(file, columns = "all", add_trialid = FALSE,
+  add_filename = FALSE)
 }
 \arguments{
 \item{file}{a character string specifying the filename of the .mt file.}

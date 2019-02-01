@@ -6,14 +6,14 @@
 \title{Plot trajectory data.}
 \usage{
 mt_plot(data, use = "trajectories", use2 = "data", x = "xpos",
-  y = "ypos", color = NULL, linetype = NULL, alpha = NA, size = 0.5,
-  facet_row = NULL, facet_col = NULL, points = FALSE,
+  y = "ypos", color = NULL, linetype = NULL, alpha = NA,
+  size = 0.5, facet_row = NULL, facet_col = NULL, points = FALSE,
   only_ggplot = FALSE, mt_id = "mt_id", ...)
 
-mt_plot_aggregate(data, use = "trajectories", use2 = "data", x = "xpos",
-  y = "ypos", color = NULL, linetype = NULL, alpha = NA, size = 0.5,
-  facet_row = NULL, facet_col = NULL, points = FALSE,
-  only_ggplot = FALSE, subject_id = NULL, ...)
+mt_plot_aggregate(data, use = "trajectories", use2 = "data",
+  x = "xpos", y = "ypos", color = NULL, linetype = NULL,
+  alpha = NA, size = 0.5, facet_row = NULL, facet_col = NULL,
+  points = FALSE, only_ggplot = FALSE, subject_id = NULL, ...)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import

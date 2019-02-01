@@ -6,7 +6,8 @@
 \usage{
 mt_import_mousetrap(raw_data, xpos_label = "xpos", ypos_label = "ypos",
   timestamps_label = "timestamps", mt_id_label = NULL, split = ",",
-  duplicates = "remove_first", reset_timestamps = TRUE, verbose = FALSE)
+  duplicates = "remove_first", reset_timestamps = TRUE,
+  verbose = FALSE)
 }
 \arguments{
 \item{raw_data}{a data.frame containing the raw data.}

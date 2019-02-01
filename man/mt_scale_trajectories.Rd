@@ -4,9 +4,9 @@
 \alias{mt_scale_trajectories}
 \title{Standardize variables in mouse trajectory array.}
 \usage{
-mt_scale_trajectories(data, use = "trajectories", save_as = use, var_names,
-  center = TRUE, scale = TRUE, within_trajectory = FALSE, prefix = "z_",
-  transform = NULL)
+mt_scale_trajectories(data, use = "trajectories", save_as = use,
+  var_names, center = TRUE, scale = TRUE, within_trajectory = FALSE,
+  prefix = "z_", transform = NULL)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import

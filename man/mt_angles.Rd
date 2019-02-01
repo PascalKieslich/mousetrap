@@ -5,7 +5,8 @@
 \title{Calculate movement angles.}
 \usage{
 mt_angles(data, use = "trajectories", dimensions = c("xpos", "ypos"),
-  save_as = use, na_replace = FALSE, unit = "radian", verbose = FALSE)
+  save_as = use, na_replace = FALSE, unit = "radian",
+  verbose = FALSE)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import

@@ -5,8 +5,9 @@
 \title{Calculate distance, velocity, and acceleration.}
 \usage{
 mt_derivatives(data, use = "trajectories", save_as = use,
-  dimensions = c("xpos", "ypos"), timestamps = "timestamps", prefix = "",
-  absolute = FALSE, return_delta_time = FALSE, verbose = FALSE)
+  dimensions = c("xpos", "ypos"), timestamps = "timestamps",
+  prefix = "", absolute = FALSE, return_delta_time = FALSE,
+  verbose = FALSE)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import

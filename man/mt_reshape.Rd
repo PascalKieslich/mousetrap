@@ -6,9 +6,10 @@
 \usage{
 mt_reshape(data, use = "trajectories", use_variables = NULL,
   use2 = "data", use2_variables = NULL, subset = NULL,
-  subject_id = NULL, aggregate = FALSE, aggregate_subjects_only = FALSE,
-  .funs = "mean", trajectories_long = TRUE, convert_df = TRUE,
-  mt_id = "mt_id", mt_seq = "mt_seq", aggregation_function = NULL)
+  subject_id = NULL, aggregate = FALSE,
+  aggregate_subjects_only = FALSE, .funs = "mean",
+  trajectories_long = TRUE, convert_df = TRUE, mt_id = "mt_id",
+  mt_seq = "mt_seq", aggregation_function = NULL)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import
