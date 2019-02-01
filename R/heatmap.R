@@ -88,15 +88,15 @@
 #' 
 #' @references Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F.,
 #'   & Schulte-Mecklenbeck, M. (in press). Mouse-tracking: Detecting types in
-#'   movement trajectories. In M. Schulte-Mecklenbeck, A. Kuehberger, & J. G.
-#'   Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York:
-#'   Taylor & Francis.
+#'   movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G.
+#'   Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York, NY:
+#'   Routledge.
 #'
 #'   Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B., &
 #'   Schulte-Mecklenbeck, M. (in press). Mouse-tracking: A practical guide to
-#'   implementation and analysis. In M. Schulte-Mecklenbeck, A. Kuehberger, & J.
-#'   G. Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York:
-#'   Taylor & Francis.
+#'   implementation and analysis. In M. Schulte-Mecklenbeck, A. Kühberger, & J.
+#'   G. Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York,
+#'   NY: Routledge.
 #'   
 #' @export
 mt_heatmap_raw <- function(
@@ -457,15 +457,15 @@ mt_heatmap_raw <- function(
 #' 
 #' @references Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F.,
 #'   & Schulte-Mecklenbeck, M. (in press). Mouse-tracking: Detecting types in
-#'   movement trajectories. In M. Schulte-Mecklenbeck, A. Kuehberger, & J. G.
-#'   Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York:
-#'   Taylor & Francis.
+#'   movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G.
+#'   Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York, NY:
+#'   Routledge.
 #'
 #'   Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B., &
 #'   Schulte-Mecklenbeck, M. (in press). Mouse-tracking: A practical guide to
-#'   implementation and analysis. In M. Schulte-Mecklenbeck, A. Kuehberger, & J.
-#'   G. Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York:
-#'   Taylor & Francis.
+#'   implementation and analysis. In M. Schulte-Mecklenbeck, A. Kühberger, & J.
+#'   G. Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York,
+#'   NY: Routledge.
 #'    
 #' @examples
 #' mt_heatmap(KH2017, xres=500, n_shades=5, mean_image=0.2)
@@ -639,15 +639,15 @@ mt_heatmap <- function(
 #' 
 #' @references Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F.,
 #'   & Schulte-Mecklenbeck, M. (in press). Mouse-tracking: Detecting types in
-#'   movement trajectories. In M. Schulte-Mecklenbeck, A. Kuehberger, & J. G.
-#'   Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York:
-#'   Taylor & Francis.
+#'   movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G.
+#'   Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York, NY:
+#'   Routledge.
 #'
 #'   Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B., &
 #'   Schulte-Mecklenbeck, M. (in press). Mouse-tracking: A practical guide to
-#'   implementation and analysis. In M. Schulte-Mecklenbeck, A. Kuehberger, & J.
-#'   G. Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York:
-#'   Taylor & Francis.
+#'   implementation and analysis. In M. Schulte-Mecklenbeck, A. Kühberger, & J.
+#'   G. Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York,
+#'   NY: Routledge.
 #'   
 #' @examples
 #' mt_heatmap_ggplot(KH2017, xres=500, n_shades=5, mean_image=0.2)
@@ -816,16 +816,16 @@ print.mt_heatmap_raw = function(x,...){
 #' 
 #' @references Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F.,
 #'   & Schulte-Mecklenbeck, M. (in press). Mouse-tracking: Detecting types in
-#'   movement trajectories. In M. Schulte-Mecklenbeck, A. Kuehberger, & J. G.
-#'   Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York:
-#'   Taylor & Francis.
+#'   movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G.
+#'   Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York, NY:
+#'   Routledge.
 #'
 #'   Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B., &
 #'   Schulte-Mecklenbeck, M. (in press). Mouse-tracking: A practical guide to
-#'   implementation and analysis. In M. Schulte-Mecklenbeck, A. Kuehberger, & J.
-#'   G. Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York:
-#'   Taylor & Francis.
-#'   
+#'   implementation and analysis. In M. Schulte-Mecklenbeck, A. Kühberger, & J.
+#'   G. Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York,
+#'   NY: Routledge.
+#' 
 #' @examples
 #' mt_diffmap(KH2017, condition="Condition",
 #'   xres=400, smooth_radius=6, n_shades=5)

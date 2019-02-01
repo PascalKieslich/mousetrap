@@ -5,8 +5,9 @@
 \title{Map trajectories to prototypes.}
 \usage{
 mt_map(data, use = "sp_trajectories", save_as = "prototyping",
-  dimensions = c("xpos", "ypos"), prototypes = mousetrap::mt_prototypes,
-  weights = rep(1, length(dimensions)), pointwise = TRUE, na_rm = FALSE,
+  dimensions = c("xpos", "ypos"),
+  prototypes = mousetrap::mt_prototypes, weights = rep(1,
+  length(dimensions)), pointwise = TRUE, na_rm = FALSE,
   minkowski_p = 2, use2 = "data", grouping_variables = NULL)
 }
 \arguments{
@@ -144,9 +145,9 @@ KH2017 <- mt_map(KH2017,
 \references{
 Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F.,
   & Schulte-Mecklenbeck, M. (in press). Mouse-tracking: Detecting types in
-  movement trajectories. In M. Schulte-Mecklenbeck, A. Kuehberger, & J. G.
-  Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York:
-  Taylor & Francis.
+  movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G.
+  Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York, NY:
+  Routledge.
    
   Wulff, D. U., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. (2018).
   \emph{Measuring the (dis-)continuous mind: What movement trajectories

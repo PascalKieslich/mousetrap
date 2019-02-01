@@ -59,8 +59,8 @@ ask that you cite it as follows:
 Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B., &
 Schulte-Mecklenbeck, M. (in press). Mouse-tracking: A practical guide to
 implementation and analysis. In M. Schulte-Mecklenbeck, A. Kühberger, &
-J. G. Johnson (Eds.), *A Handbook of Process Tracing Methods*. New York:
-Taylor & Francis.
+J. G. Johnson (Eds.), *A Handbook of Process Tracing Methods*. New York,
+NY: Routledge.
 
 Besides, if you use functions for clustering and mapping trajectories,
 please also include the following reference:
@@ -68,8 +68,8 @@ please also include the following reference:
 Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F., &
 Schulte-Mecklenbeck, M. (in press). Mouse-tracking: Detecting types in
 movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G.
-Johnson (Eds.), *A Handbook of Process Tracing Methods*. New York:
-Taylor & Francis.
+Johnson (Eds.), *A Handbook of Process Tracing Methods*. New York, NY:
+Routledge.
 
 ## Acknowledgments
 

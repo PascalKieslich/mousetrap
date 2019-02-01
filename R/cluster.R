@@ -85,9 +85,9 @@
 #'
 #' @references Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F.,
 #'   & Schulte-Mecklenbeck, M. (in press). Mouse-tracking: Detecting types in
-#'   movement trajectories. In M. Schulte-Mecklenbeck, A. Kuehberger, & J. G.
-#'   Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York:
-#'   Taylor & Francis.
+#'   movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G.
+#'   Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York, NY:
+#'   Routledge.
 #'    
 #'   Wulff, D. U., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. (2018).
 #'   \emph{Measuring the (dis-)continuous mind: What movement trajectories

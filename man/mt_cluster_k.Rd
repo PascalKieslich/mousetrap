@@ -4,12 +4,12 @@
 \alias{mt_cluster_k}
 \title{Estimate optimal number of clusters.}
 \usage{
-mt_cluster_k(data, use = "sp_trajectories", dimensions = c("xpos", "ypos"),
-  kseq = 2:15, compute = c("stability", "gap", "jump", "slope"),
-  method = "hclust", weights = rep(1, length(dimensions)),
+mt_cluster_k(data, use = "sp_trajectories", dimensions = c("xpos",
+  "ypos"), kseq = 2:15, compute = c("stability", "gap", "jump",
+  "slope"), method = "hclust", weights = rep(1, length(dimensions)),
   pointwise = TRUE, minkowski_p = 2, hclust_method = "ward.D",
-  kmeans_nstart = 10, n_bootstrap = 10, model_based = FALSE, n_gap = 10,
-  na_rm = FALSE, verbose = FALSE)
+  kmeans_nstart = 10, n_bootstrap = 10, model_based = FALSE,
+  n_gap = 10, na_rm = FALSE, verbose = FALSE)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import
@@ -137,9 +137,9 @@ Haslbeck, J., & Wulff, D. U. (2016). Estimating the Number of
 
   Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F., &
   Schulte-Mecklenbeck, M. (in press). Mouse-tracking: Detecting types in
-  movement trajectories. In M. Schulte-Mecklenbeck, A. Kuehberger, & J. G.
-  Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York:
-  Taylor & Francis.
+  movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G.
+  Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York, NY:
+  Routledge.
 
   Haslbeck, J. M. B., Wulff, D. U., Kieslich, P. J., Henninger, F., &
   Schulte-Mecklenbeck, M. (2018). \emph{Advanced mouse- and hand-tracking

@@ -6,9 +6,9 @@
 \usage{
 mt_cluster(data, use = "sp_trajectories", save_as = "clustering",
   dimensions = c("xpos", "ypos"), n_cluster = 5, method = "hclust",
-  weights = rep(1, length(dimensions)), pointwise = TRUE, minkowski_p = 2,
-  hclust_method = "ward.D", kmeans_nstart = 10, na_rm = FALSE,
-  cluster_output = FALSE, verbose = FALSE)
+  weights = rep(1, length(dimensions)), pointwise = TRUE,
+  minkowski_p = 2, hclust_method = "ward.D", kmeans_nstart = 10,
+  na_rm = FALSE, cluster_output = FALSE, verbose = FALSE)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import
@@ -131,9 +131,9 @@ mt_plot(KH2017,use="sp_trajectories",
 \references{
 Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F.,
   & Schulte-Mecklenbeck, M. (in press). Mouse-tracking: Detecting types in
-  movement trajectories. In M. Schulte-Mecklenbeck, A. Kuehberger, & J. G.
-  Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York:
-  Taylor & Francis.
+  movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G.
+  Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York, NY:
+  Routledge.
    
   Wulff, D. U., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. (2018).
   \emph{Measuring the (dis-)continuous mind: What movement trajectories

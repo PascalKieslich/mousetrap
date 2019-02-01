@@ -142,9 +142,9 @@
 #'   
 #' @references Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B.,
 #'   & Schulte-Mecklenbeck, M. (in press). Mouse-tracking: A practical guide to
-#'   implementation and analysis. In M. Schulte-Mecklenbeck, A. Kuehberger, & J.
-#'   G. Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York:
-#'   Taylor & Francis.
+#'   implementation and analysis. In M. Schulte-Mecklenbeck, A. Kühberger, & J.
+#'   G. Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York,
+#'   NY: Routledge.
 #'   
 #'   Kieslich, P. J., Wulff, D. U., Henninger, F., Haslbeck, J. M. B., &
 #'   Schulte-Mecklenbeck, M. (2018). \emph{Mouse- and hand-tracking as a window
