@@ -12,7 +12,7 @@
 * Updated mousetrap book chapter citations (see announcements above for correct citation).
 
 ## Changes in specific functions
-* `mt_import_long`: internal change (prefix `row_number()` function with dplyr) to accomodate changes in most recent dplyr release.
+* `mt_import_long`: internal change (prefix `row_number()` function with dplyr) to accomodate changes in dplyr 0.8.0.
 
 # mousetrap 3.1.1
 
