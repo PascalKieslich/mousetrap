@@ -1,6 +1,6 @@
 ## Test environments
-* R 3.5.1 (stable) Windows 7
-* R 3.5.0 (stable) Ubuntu/Linux
+* R 3.5.2 (stable) Windows 7
+* R-devel (2018-12-23) r75892 Ubuntu/Linux
 
 ## R CMD check results
 There were no ERRORs, WARNINGs, or NOTEs.
