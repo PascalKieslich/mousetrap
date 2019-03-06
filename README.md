@@ -6,6 +6,7 @@
 [![cran
 version](http://www.r-pkg.org/badges/version/mousetrap)](https://CRAN.R-project.org/package=mousetrap)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.596640.svg)](https://doi.org/10.5281/zenodo.596640)
+[![downloads](https://cranlogs.r-pkg.org/badges/grand-total/mousetrap?color=yellow)](https://CRAN.R-project.org/package=mousetrap)
 
 Mouse-tracking, the analysis of mouse movements in computerized
 experiments, is a method that is becoming increasingly popular in the
