@@ -10,7 +10,8 @@ bibentry(
     person(c("Jonas","M. B."), "Haslbeck"),
     person("Michael", "Schulte-Mecklenbeck")
     ),
-  year = "in press",
+  year = "2019",
+  pages = "111-130",
   booktitle = "A {Handbook} of {Process} {Tracing} {Methods}",
 	address = "New York, NY",
 	publisher = "Routledge",
@@ -20,9 +21,9 @@ bibentry(
     person(c("Joseph","G."),"Johnson")
     ),
   textVersion  =
-  paste("Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. (in press).",
+  paste("Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. (2019).",
         "Mouse-tracking: A practical guide to implementation and analysis.",
         "In M. Schulte-Mecklenbeck, A. Kühberger, & J. G. Johnson (Eds.),",
-        "A Handbook of Process Tracing Methods.",
+        "A Handbook of Process Tracing Methods (pp. 111-130).",
         "New York, NY: Routledge.")
 )

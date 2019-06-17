@@ -235,9 +235,9 @@ Furthermore, it is recommended to use spatialized trajectories (see
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F.,
-  &amp; Schulte-Mecklenbeck, M. (in press). Mouse-tracking: Detecting types in
+  &amp; Schulte-Mecklenbeck, M. (2019). Mouse-tracking: Detecting types in
   movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, &amp; J. G.
-  Johnson (Eds.), <em>A Handbook of Process Tracing Methods</em>. New York, NY:
+  Johnson (Eds.), <em>A Handbook of Process Tracing Methods</em> (pp. 131-145). New York, NY:
   Routledge.</p>   
 <p>Wulff, D. U., Haslbeck, J. M. B., &amp; Schulte-Mecklenbeck, M. (2018).
   <em>Measuring the (dis-)continuous mind: What movement trajectories
@@ -259,7 +259,7 @@ Furthermore, it is recommended to use spatialized trajectories (see
 
 <span class='co'># Plot prototypes</span>
 <span class='fu'><a href='mt_plot.html'>mt_plot</a></span>(<span class='no'>mt_prototypes</span>,<span class='kw'>facet_col</span><span class='kw'>=</span><span class='st'>"mt_id"</span>) +
-  <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_grid.html'>facet_grid</a></span>(<span class='no'>.</span>~<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/factor'>factor</a></span>(<span class='no'>mt_id</span>,<span class='kw'>levels</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unique'>unique</a></span>(<span class='no'>mt_id</span>)))</div><div class='img'><img src='mt_map-1.png' alt='' width='700' height='433' /></div><div class='input'>
+  <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/facet_grid'>facet_grid</a></span>(<span class='no'>.</span>~<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/factor'>factor</a></span>(<span class='no'>mt_id</span>,<span class='kw'>levels</span><span class='kw'>=</span><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/unique'>unique</a></span>(<span class='no'>mt_id</span>)))</div><div class='img'><img src='mt_map-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Plot trajectories per assigned prototype</span>
 <span class='fu'><a href='mt_plot.html'>mt_plot</a></span>(<span class='no'>KH2017</span>,<span class='kw'>use</span><span class='kw'>=</span><span class='st'>"sp_trajectories"</span>,
   <span class='kw'>use2</span><span class='kw'>=</span><span class='st'>"prototyping"</span>,<span class='kw'>facet_col</span><span class='kw'>=</span><span class='st'>"prototype_label"</span>)</div><div class='img'><img src='mt_map-2.png' alt='' width='700' height='433' /></div><div class='input'>

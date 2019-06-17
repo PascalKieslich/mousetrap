@@ -77,10 +77,10 @@
 #'   arXiv:1608.07494.
 #'
 #'   Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F., &
-#'   Schulte-Mecklenbeck, M. (in press). Mouse-tracking: Detecting types in
-#'   movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G.
-#'   Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York, NY:
-#'   Routledge.
+#'   Schulte-Mecklenbeck, M. (2019). Mouse-tracking: Detecting types in movement
+#'   trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G. Johnson
+#'   (Eds.), \emph{A Handbook of Process Tracing Methods} (pp. 131-145). New
+#'   York, NY: Routledge.
 #'
 #'   Haslbeck, J. M. B., Wulff, D. U., Kieslich, P. J., Henninger, F., &
 #'   Schulte-Mecklenbeck, M. (2018). \emph{Advanced mouse- and hand-tracking

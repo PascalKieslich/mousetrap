@@ -211,12 +211,12 @@ as all trajectories must contain the same number of values.</p>
 
 <span class='co'># Create riverbed plot for all trials with custom x and y axis labels</span>
 <span class='fu'>mt_plot_riverbed</span>(<span class='no'>mt_example</span>) +
-  <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>xlab</a></span>(<span class='st'>"Time step"</span>) + <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>ylab</a></span>(<span class='st'>"X coordinate"</span>)
+  <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/labs'>xlab</a></span>(<span class='st'>"Time step"</span>) + <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/labs'>ylab</a></span>(<span class='st'>"X coordinate"</span>)
 
 <span class='co'># Note that it is also possible to replace the</span>
 <span class='co'># default scale for fill with a custom scale</span>
 <span class='fu'>mt_plot_riverbed</span>(<span class='no'>mt_example</span>, <span class='kw'>facet_col</span><span class='kw'>=</span><span class='st'>"Condition"</span>) +
-  <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_gradient.html'>scale_fill_gradientn</a></span>(<span class='kw'>colours</span><span class='kw'>=</span><span class='kw pkg'>grDevices</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/palettes'>heat.colors</a></span>(<span class='fl'>9</span>),
+  <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/scale_gradient'>scale_fill_gradientn</a></span>(<span class='kw'>colours</span><span class='kw'>=</span><span class='kw pkg'>grDevices</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grDevices/topics/palettes'>heat.colors</a></span>(<span class='fl'>9</span>),
     <span class='kw'>name</span><span class='kw'>=</span><span class='st'>"Frequency"</span>, <span class='kw'>trans</span><span class='kw'>=</span><span class='st'>"log"</span>, <span class='kw'>labels</span><span class='kw'>=</span><span class='kw pkg'>scales</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/scales/topics/number_format'>percent</a></span>)
 <span class='co'># }</span><div class='input'>
 </div></pre>

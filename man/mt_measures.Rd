@@ -176,10 +176,10 @@ mt_example_results <- dplyr::inner_join(
 }
 \references{
 Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B.,
-  & Schulte-Mecklenbeck, M. (in press). Mouse-tracking: A practical guide to
+  & Schulte-Mecklenbeck, M. (2019). Mouse-tracking: A practical guide to
   implementation and analysis. In M. Schulte-Mecklenbeck, A. Kühberger, & J.
-  G. Johnson (Eds.), \emph{A Handbook of Process Tracing Methods}. New York,
-  NY: Routledge.
+  G. Johnson (Eds.), \emph{A Handbook of Process Tracing Methods} (pp.
+  111-130). New York, NY: Routledge.
   
   Kieslich, P. J., Wulff, D. U., Henninger, F., Haslbeck, J. M. B., &
   Schulte-Mecklenbeck, M. (2018). \emph{Mouse- and hand-tracking as a window
