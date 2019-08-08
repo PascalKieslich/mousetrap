@@ -5,7 +5,8 @@
 \title{Calculate sample entropy.}
 \usage{
 mt_sample_entropy(data, use = "tn_trajectories", save_as = "measures",
-  dimension = "xpos", m = 3, r = NULL, verbose = FALSE)
+  dimension = "xpos", m = 3, r = NULL, use_diff = TRUE,
+  verbose = FALSE)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import
@@ -26,6 +27,10 @@ used.}
 
 \item{r}{a numeric value passed on to the sample entropy function (see
 Details).}
+
+\item{use_diff}{logical indicating if the differences of the dimension values
+should be computed before calculating sample entropy (which is done by
+default, see Details).}
 
 \item{verbose}{logical indicating whether function should report its
 progress.}

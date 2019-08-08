@@ -33,6 +33,9 @@
 #' @param m an integer passed on to the sample entropy function (see Details).
 #' @param r a numeric value passed on to the sample entropy function (see
 #'   Details).
+#' @param use_diff logical indicating if the differences of the dimension values
+#'   should be computed before calculating sample entropy (which is done by
+#'   default, see Details).
 #'   
 #' @return A mousetrap data object (see \link{mt_example}).
 #'   
@@ -78,14 +81,20 @@
 mt_sample_entropy <- function(data,
   use="tn_trajectories", save_as="measures",
   dimension="xpos", m=3, r=NULL,
+  use_diff=TRUE,
   verbose=FALSE) {
   
   # Function to calculate sample entropy
   # based on Hehman et al. (2015)
   sample_entropy <- function(x, m, r) {
     
-    if (length(x) >= m + 3) { # check if number of logs is sufficient
-      dx = diff(x)
+    if (length(x) >= (m + 2 + use_diff)) { # check if number of logs is sufficient
+      
+      if (use_diff) {
+        dx <- diff(x)
+      } else {
+        dx <- x
+      }
       
       # Note: original windowmaker Python function by Hehman et al.
       # excludes last 2 elements of vector
@@ -137,9 +146,22 @@ mt_sample_entropy <- function(data,
   # cf. Dale et al., 2007, p. 20
   if (is.null(r)) {
     if (length(nlogs) == 1) {
-      r <- .2 * stats::sd(diff(trajectories[,,dimension]), na.rm=TRUE)
+      
+      if (use_diff){
+        r <- .2 * stats::sd(diff(trajectories[,,dimension]), na.rm=TRUE)
+      } else {
+        r <- .2 * stats::sd(trajectories[,,dimension], na.rm=TRUE)
+      }
+      
+      
     } else {
-      r <- .2 * stats::sd(diff(t(trajectories[,,dimension])), na.rm=TRUE)
+      
+      if (use_diff){
+        r <- .2 * stats::sd(diff(t(trajectories[,,dimension])), na.rm=TRUE)
+      } else {
+        r <- .2 * stats::sd(trajectories[,,dimension], na.rm=TRUE)
+      }
+      
     }
   }
   
