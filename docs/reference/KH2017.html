@@ -8,21 +8,25 @@
 
 <title>Mouse-tracking dataset from Kieslich &amp; Henninger (2017) — KH2017 • mousetrap</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,12 +34,13 @@
 
 
 
-<meta property="og:title" content="Mouse-tracking dataset from Kieslich &amp; Henninger (2017) — KH2017" />
 
+<meta property="og:title" content="Mouse-tracking dataset from Kieslich &amp; Henninger (2017) — KH2017" />
 <meta property="og:description" content="A data object of class &quot;mousetrap&quot; with the imported and preprocessed
 mouse-tracking data from Kieslich &amp;amp; Henninger (2017). More information about
 the study and raw data can be found in KH2017_raw." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -47,6 +52,7 @@ the study and raw data can be found in KH2017_raw." />
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 
 
   </head>
@@ -65,7 +71,7 @@ the study and raw data can be found in KH2017_raw." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.3</span>
       </span>
     </div>
 
@@ -81,7 +87,6 @@ the study and raw data can be found in KH2017_raw." />
   <a href="../news/index.html">News</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/pascalkieslich/mousetrap">
@@ -96,6 +101,7 @@ the study and raw data can be found in KH2017_raw." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -107,43 +113,42 @@ the study and raw data can be found in KH2017_raw." />
     </div>
 
     <div class="ref-description">
-    
     <p>A data object of class "mousetrap" with the imported and preprocessed
 mouse-tracking data from Kieslich &amp; Henninger (2017). More information about
 the study and raw data can be found in <a href='KH2017_raw.html'>KH2017_raw</a>.</p>
-    
     </div>
 
     <pre class="usage"><span class='no'>KH2017</span></pre>
-        
+
+
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A mousetrap data object is a <a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a> containing  at least the
+    <p>A mousetrap data object is a <a href='https://rdrr.io/r/base/list.html'>list</a> containing  at least the
   following objects:</p><ul>
-<li><p><code>data</code>: a <a href='https://www.rdocumentation.org/packages/base/topics/data.frame'>data.frame</a> containing the trial data (from 
+<li><p><code>data</code>: a <a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a> containing the trial data (from 
     which the mouse-tracking data columns have been removed). More 
     information about the content of the trial data in <code>KH2017</code> can 
-    be found in <a href='KH2017_raw.html'>KH2017_raw</a>. The <a href='https://www.rdocumentation.org/packages/base/topics/colnames'>rownames</a> of <code>data</code> 
+    be found in <a href='KH2017_raw.html'>KH2017_raw</a>. The <a href='https://rdrr.io/r/base/colnames.html'>rownames</a> of <code>data</code> 
     correspond to the trial identifier. For convenience, the trial identifier
     is also stored in an additional column called "mt_id".</p></li>
-<li><p><code>trajectories</code>: an <a href='https://www.rdocumentation.org/packages/base/topics/array'>array</a> containing the raw 
+<li><p><code>trajectories</code>: an <a href='https://rdrr.io/r/base/array.html'>array</a> containing the raw 
     mouse-tracking trajectories. The first dimension represents the different
     trials and the dimension names (which can be accessed using 
-    <a href='https://www.rdocumentation.org/packages/base/topics/colnames'>rownames</a>) correspond to the trial identifier (the same identifier 
+    <a href='https://rdrr.io/r/base/colnames.html'>rownames</a>) correspond to the trial identifier (the same identifier 
     that is used as the <code>rownames</code> in <code>data</code>). The second dimension
     corresponds to the samples taken over time which are included in
     chronological order. The third dimension corresponds to the different
     mouse-tracking variables (timestamps, x-positions, y-positions) which are
     usually called <code>timestamps</code>, <code>xpos</code>, and <code>ypos</code>.</p></li>
 </ul>
-    <p>Some functions in this package (e.g., <a href='mt_time_normalize.html'>mt_time_normalize</a> and
+
+<p>Some functions in this package (e.g., <a href='mt_time_normalize.html'>mt_time_normalize</a> and
   <a href='mt_average.html'>mt_average</a>) add additional trajectory arrays (e.g.,
   <code>tn_trajectories</code> and <code>av_trajectories</code>) to the mousetrap data
   object. Other functions modify the existing arrays (e.g.,
   <a href='mt_derivatives.html'>mt_derivatives</a> adds distance, velocity, and acceleration
   to an existing dataset). Finally <a href='mt_measures.html'>mt_measures</a> adds an
   additional data.frame with mouse-tracking measures to it.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The raw dataset (<a href='KH2017_raw.html'>KH2017_raw</a>) was filtered keeping only correctly 
@@ -152,7 +157,6 @@ answered trials. The filtered dataset was imported using
 <a href='mt_remap_symmetric.html'>mt_remap_symmetric</a> so that all trajectories end in the top-left corner
 and their starting point was aligned to a common value (0,0) using
 <a href='mt_align_start.html'>mt_align_start</a>.</p>
-    
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Kieslich, P. J., &amp; Henninger, F. (2017). Mousetrap: An 
@@ -161,22 +165,19 @@ and their starting point was aligned to a common value (0,0) using
 <p>Dale, R., Kehoe, C., &amp; Spivey, M. J. (2007). Graded motor responses in the 
   time course of categorizing atypical exemplars. <em>Memory &amp; Cognition, 
   35</em>(1), 15-28. <a href='https://doi.org/10.3758/BF03195938'>https://doi.org/10.3758/BF03195938</a></p>
-    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      
       <li><a href="#format">Format</a></li>
-
       <li><a href="#details">Details</a></li>
-
       <li><a href="#references">References</a></li>
-          </ul>
+    </ul>
 
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -184,13 +185,16 @@ and their starting point was aligned to a common value (0,0) using
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

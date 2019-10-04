@@ -8,21 +8,25 @@
 
 <title>Remap mouse trajectories. — mt_remap_symmetric • mousetrap</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,12 +34,13 @@
 
 
 
-<meta property="og:title" content="Remap mouse trajectories. — mt_remap_symmetric" />
 
+<meta property="og:title" content="Remap mouse trajectories. — mt_remap_symmetric" />
 <meta property="og:description" content="Remap all trajectories to one side (or one quadrant) of the coordinate
 system. In doing so, mt_remap_symmetric assumes a centered coordinate
 system and a symmetric design of the response buttons (see Details)." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -47,6 +52,7 @@ system and a symmetric design of the response buttons (see Details)." />
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 
 
   </head>
@@ -65,7 +71,7 @@ system and a symmetric design of the response buttons (see Details)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.3</span>
       </span>
     </div>
 
@@ -81,7 +87,6 @@ system and a symmetric design of the response buttons (see Details)." />
   <a href="../news/index.html">News</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/pascalkieslich/mousetrap">
@@ -96,6 +101,7 @@ system and a symmetric design of the response buttons (see Details)." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -107,17 +113,15 @@ system and a symmetric design of the response buttons (see Details)." />
     </div>
 
     <div class="ref-description">
-    
     <p>Remap all trajectories to one side (or one quadrant) of the coordinate
 system. In doing so, <code>mt_remap_symmetric</code> assumes a centered coordinate
 system and a symmetric design of the response buttons (see Details).</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>mt_remap_symmetric</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='no'>use</span>,
-  <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>), <span class='kw'>remap_xpos</span> <span class='kw'>=</span> <span class='st'>"left"</span>,
+  <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>), <span class='kw'>remap_xpos</span> <span class='kw'>=</span> <span class='st'>"left"</span>,
   <span class='kw'>remap_ypos</span> <span class='kw'>=</span> <span class='st'>"up"</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -160,13 +164,12 @@ default), and the reverse occurs if the parameter is set to "down". If it
 is set to "no", y-values remain untouched.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A mousetrap data object (see <a href='mt_example.html'>mt_example</a>) with remapped
   trajectories. If the trajectory array was provided directly as <code>data</code>,
   only the trajectory array will be returned.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>When mouse trajectories are compared across different conditions, it is
@@ -180,7 +183,6 @@ coordinate system is centered on the screen center. This is the case when the
 data is produced by the mousetrap plug-ins in OpenSesame.</p>
 <p>Second, it assumes that the response buttons in the mouse-tracking experiment
 are symmetric, in that they all are equally distant from the screen center.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Remap trajectories so that all trajectories</span>
@@ -198,11 +200,8 @@ are symmetric, in that they all are equally distant from the screen center.</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
@@ -212,19 +211,23 @@ are symmetric, in that they all are equally distant from the screen center.</p>
   </div>
 </div>
 
+
       <footer>
       <div class="copyright">
   <p>Developed by Pascal J. Kieslich, Dirk U. Wulff, Felix Henninger, Jonas M. B. Haslbeck.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

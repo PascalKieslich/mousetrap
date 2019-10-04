@@ -8,21 +8,25 @@
 
 <title>Cluster trajectories. — mt_cluster • mousetrap</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,12 +34,13 @@
 
 
 
-<meta property="og:title" content="Cluster trajectories. — mt_cluster" />
 
+<meta property="og:title" content="Cluster trajectories. — mt_cluster" />
 <meta property="og:description" content="Performs trajectory clustering. It first computes distances between each pair
 of trajectories and then applies off-the-shelf clustering tools to explain 
 the resulting dissimilarity matrix using a predefined number of clusters." />
 <meta name="twitter:card" content="summary" />
+
 
 
 
@@ -47,6 +52,7 @@ the resulting dissimilarity matrix using a predefined number of clusters." />
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
 
 
   </head>
@@ -65,7 +71,7 @@ the resulting dissimilarity matrix using a predefined number of clusters." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.3</span>
       </span>
     </div>
 
@@ -81,7 +87,6 @@ the resulting dissimilarity matrix using a predefined number of clusters." />
   <a href="../news/index.html">News</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/pascalkieslich/mousetrap">
@@ -96,6 +101,7 @@ the resulting dissimilarity matrix using a predefined number of clusters." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -107,19 +113,17 @@ the resulting dissimilarity matrix using a predefined number of clusters." />
     </div>
 
     <div class="ref-description">
-    
     <p>Performs trajectory clustering. It first computes distances between each pair
 of trajectories and then applies off-the-shelf clustering tools to explain 
 the resulting dissimilarity matrix using a predefined number of clusters.</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>mt_cluster</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"sp_trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='st'>"clustering"</span>,
-  <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>), <span class='kw'>n_cluster</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"hclust"</span>,
-  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/rep'>rep</a></span>(<span class='fl'>1</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/length'>length</a></span>(<span class='no'>dimensions</span>)), <span class='kw'>pointwise</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>), <span class='kw'>n_cluster</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"hclust"</span>,
+  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>dimensions</span>)), <span class='kw'>pointwise</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>minkowski_p</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>hclust_method</span> <span class='kw'>=</span> <span class='st'>"ward.D"</span>, <span class='kw'>kmeans_nstart</span> <span class='kw'>=</span> <span class='fl'>10</span>,
   <span class='kw'>na_rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>cluster_output</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -152,7 +156,7 @@ three-dimensional trajectories respectively.</p></td>
     <tr>
       <th>method</th>
       <td><p>character string specifying the clustering procedure. Either
-<a href='https://www.rdocumentation.org/packages/fastcluster/topics/hclust'>hclust</a> (the default) or <a href='https://www.rdocumentation.org/packages/stats/topics/kmeans'>kmeans</a>.</p></td>
+<a href='https://rdrr.io/pkg/fastcluster/man/hclust.html'>hclust</a> (the default) or <a href='https://rdrr.io/r/stats/kmeans.html'>kmeans</a>.</p></td>
     </tr>
     <tr>
       <th>weights</th>
@@ -183,14 +187,14 @@ solution. <code>minkowski_p = 1</code> computes the city-block distance,
     <tr>
       <th>hclust_method</th>
       <td><p>character string specifying the linkage criterion used. 
-Passed on to the <code>method</code> argument of <a href='https://www.rdocumentation.org/packages/stats/topics/hclust'>hclust</a>. Default is
+Passed on to the <code>method</code> argument of <a href='https://rdrr.io/r/stats/hclust.html'>hclust</a>. Default is
 set to <code>ward.D</code>. Only relevant if <code>method</code> is "hclust".</p></td>
     </tr>
     <tr>
       <th>kmeans_nstart</th>
       <td><p>integer specifying the number of reruns of the kmeans 
 procedure. Larger numbers minimize the risk of finding local minima. Passed
-on to the <code>nstart</code> argument of <a href='https://www.rdocumentation.org/packages/stats/topics/kmeans'>kmeans</a>. Only relevant if 
+on to the <code>nstart</code> argument of <a href='https://rdrr.io/r/stats/kmeans.html'>kmeans</a>. Only relevant if 
 <code>method</code> is "kmeans".</p></td>
     </tr>
     <tr>
@@ -214,34 +218,33 @@ data object with the cluster assignments is returned (see Value). If
 progress.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A mousetrap data object (see <a href='mt_example.html'>mt_example</a>) with an additional
-  <a href='https://www.rdocumentation.org/packages/base/topics/data.frame'>data.frame</a> added to it (by default called <code>clustering</code>) that
+  <a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a> added to it (by default called <code>clustering</code>) that
   contains the cluster assignments. If a trajectory array was provided
   directly as <code>data</code>, only the clustering <code>data.frame</code> will be
   returned.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p><code>mt_cluster</code> uses off-the-shelf clustering tools, i.e., 
-<a href='https://www.rdocumentation.org/packages/fastcluster/topics/hclust'>hclust</a> and <a href='https://www.rdocumentation.org/packages/stats/topics/kmeans'>kmeans</a>, for cluster estimation. 
-Cluster estimation using <a href='https://www.rdocumentation.org/packages/fastcluster/topics/hclust'>hclust</a> relies on distances 
+<a href='https://rdrr.io/pkg/fastcluster/man/hclust.html'>hclust</a> and <a href='https://rdrr.io/r/stats/kmeans.html'>kmeans</a>, for cluster estimation. 
+Cluster estimation using <a href='https://rdrr.io/pkg/fastcluster/man/hclust.html'>hclust</a> relies on distances 
 computed by <a href='mt_distmat.html'>mt_distmat</a>.</p>
 <p>Mouse trajectories often occur in distinct, qualitative types (see Wulff et
 al., in press; Wulff et al., 2018). Common trajectory types are linear
 trajectories, mildly and strongly curved trajctories, and single and multiple
 change-of-mind trials (see also <a href='mt_map.html'>mt_map</a>). <code>mt_cluster</code> can tease
 these types apart.</p>
-<p><code>mt_cluster</code> uses <a href='https://www.rdocumentation.org/packages/fastcluster/topics/hclust'>hclust</a> or <a href='https://www.rdocumentation.org/packages/stats/topics/kmeans'>kmeans</a> to 
+<p><code>mt_cluster</code> uses <a href='https://rdrr.io/pkg/fastcluster/man/hclust.html'>hclust</a> or <a href='https://rdrr.io/r/stats/kmeans.html'>kmeans</a> to 
 explain the distances between every pair of trajectories using a predefined 
 number of clusters. If method is "hclust", <code>mt_cluster</code> computes the 
 dissimiliarity matrix for all trajectory pairs using <a href='mt_distmat.html'>mt_distmat</a>. If
-method is "kmeans", this is done internally by <a href='https://www.rdocumentation.org/packages/stats/topics/kmeans'>kmeans</a>.</p>
-<p>We recommend setting <code>method</code> to <a href='https://www.rdocumentation.org/packages/fastcluster/topics/hclust'>hclust</a> using 
+method is "kmeans", this is done internally by <a href='https://rdrr.io/r/stats/kmeans.html'>kmeans</a>.</p>
+<p>We recommend setting <code>method</code> to <a href='https://rdrr.io/pkg/fastcluster/man/hclust.html'>hclust</a> using 
 <code>ward.D</code> as the linkage criterion (via <code>hclust_method</code>). Relative 
-to <a href='https://www.rdocumentation.org/packages/stats/topics/kmeans'>kmeans</a>, the other implemented clustering method, and other 
+to <a href='https://rdrr.io/r/stats/kmeans.html'>kmeans</a>, the other implemented clustering method, and other 
 linkage criteria, this setup handles the skewed distribution cluster sizes 
 and trajectory outliers found in the majority of datasets best.</p>
 <p>For clustering trajectories, it is often useful that the endpoints of all
@@ -250,7 +253,6 @@ top-left corner of the coordinate system (<a href='mt_remap_symmetric.html'>mt_r
 <a href='mt_align.html'>mt_align</a> can be used to achieve this). Furthermore, it is recommended
 to use spatialized trajectories (see <a href='mt_spatialize.html'>mt_spatialize</a>; Wulff et al., in
 press; Haslbeck et al., 2018).</p>
-    
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F.,
@@ -265,13 +267,11 @@ press; Haslbeck et al., 2018).</p>
   Schulte-Mecklenbeck, M. (2018). <em>Advanced mouse- and hand-tracking
   analysis: Detecting and visualizing clusters in movement trajectories</em>.
   Manuscript in preparation.</p>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><a href='mt_distmat.html'>mt_distmat</a> for more information about how the distance matrix is 
   computed when the hclust method is used.</p>
 <p><a href='mt_cluster_k.html'>mt_cluster_k</a> for estimating the optimal number of clusters.</p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Spatialize trajectories</span>
@@ -289,15 +289,10 @@ press; Haslbeck et al., 2018).</p>
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
       <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
-
       <li><a href="#references">References</a></li>
-
       <li><a href="#see-also">See also</a></li>
-      
       <li><a href="#examples">Examples</a></li>
     </ul>
 
@@ -307,19 +302,23 @@ press; Haslbeck et al., 2018).</p>
   </div>
 </div>
 
+
       <footer>
       <div class="copyright">
   <p>Developed by Pascal J. Kieslich, Dirk U. Wulff, Felix Henninger, Jonas M. B. Haslbeck.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 
