@@ -519,6 +519,15 @@ mt_align_start_end <- function(
   # Perform alignment
   for (j in 1:length(dimensions)) {
     
+    # check for identical start and end coordinates
+    if(any((trajectories[, 1, dimensions[[j]]]-trajectories_last[,dimensions[[j]]])==0)){
+      warning(
+        "NaN/Inf/-Inf values returned in some trials",
+        " for the dimension ", dimensions[[j]],
+        " as their start and end coordinate was identical."
+      )
+    }
+    
     trajectories[, , dimensions[[j]]] <- 
       ((trajectories[, , dimensions[[j]]] - trajectories[, 1, dimensions[[j]]])/
         (trajectories_last[,dimensions[[j]]] - trajectories[, 1, dimensions[[j]]]))*
