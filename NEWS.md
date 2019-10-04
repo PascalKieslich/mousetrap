@@ -8,7 +8,7 @@
 
 ## Changes in specific functions
 * `mt_sample_entropy`: By default, sample entropy is calculated based on the differences of the position values (following Hehman et al., 2015). An optional argument `use_diff` now has been introduced to allow users to override this behavior and use the untransformed values instead, by setting `use_diff=FALSE`.
-* `mt_align_start_end`: Now checks, if start and end points are equal for a trial (separately per dimension). If so, returns a warning message as the aligned trajectory values for the respective will be `NaN`/`Inf`/`-Inf`.
+* `mt_align_start_end`: Now checks, if start and end points are equal for a trial (separately per dimension). If so, returns a warning message as the aligned trajectory values for the respective dimension will be `NaN`/`Inf`/`-Inf`.
 
 # mousetrap 3.1.2
 
