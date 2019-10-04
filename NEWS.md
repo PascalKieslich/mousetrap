@@ -1,11 +1,16 @@
-# mousetrap 3.1.2
+# mousetrap 3.1.3
 
 ## Announcements
-* A book chapter on the mousetrap software packages has been accepted for publication. It covers many common analyses using the mousetrap R package. Please cite it as follows when using mousetrap in your research:
+* A book chapter on the mousetrap software packages has been published. It covers many common analyses using the mousetrap R package. Please cite it as follows when using mousetrap in your research:
 * Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. (2019). Mouse-tracking: A practical guide to implementation and analysis. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G. Johnson (Eds.), _A Handbook of Process Tracing Methods_ (pp. 111-130). New York, NY: Routledge.
 * Besides, if you use functions for clustering and mapping trajectories, please also include the following reference:
 * Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F., & Schulte-Mecklenbeck, M. (2019). Mouse-tracking: Detecting types in movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G. Johnson (Eds.), _A Handbook of Process Tracing Methods_ (pp. 131-145). New York, NY: Routledge.
-* If you have any questions when using mousetrap, you can now ask them in the mousetrap forum at http://forum.cogsci.nl/index.php?p=/categories/mousetrap
+
+## Changes in specific functions
+* `mt_sample_entropy`: By default, sample entropy is calculated based on the differences of the position values (following Hehman et al., 2015). An optional argument `use_diff` now has been introduced to allow users to override this behavior and use the untransformed values instead, by setting `use_diff=FALSE`.
+* `mt_align_start_end`: Now checks, if start and end points are equal for a trial (separately per dimension). If so, returns a warning message as the aligned trajectory values for the respective will be `NaN`/`Inf`/`-Inf`.
+
+# mousetrap 3.1.2
 
 ## Changes in documentation
 * `citation("mousetrap")` now returns the correct citation for the `mousetrap` package.
@@ -16,6 +21,10 @@
 
 # mousetrap 3.1.1
 
+## Announcements
+* Book chapters on the mousetrap software packages have been accepted for publication. See version 3.1.3 above for updated references (as the book chapters meanwhile have been published).
+* If you have any questions when using mousetrap, you can now ask them in the mousetrap forum at http://forum.cogsci.nl/index.php?p=/categories/mousetrap
+
 ## Changes in specific functions
 * `mt_map`: now allows for mapping trajectories onto prototypes separately for different groups of trajectories (the prototypes will be rescaled separately to match the coordinate system of each group).
 * `mt_heatmap_ggplot`: now allows for faceting using the `facet_row` and `facet_col` arguments.
@@ -25,7 +34,6 @@
 * `mt_reshape`: internal changes reflecting changes in `dplyr::summarize_at`.
 * `mt_align_start` and `mt_align_start_end`: if `start` is computed internally, it is now ensured that it is a named vector.
 * `mt_plot_add_rect`: it is now ensured that this function does not influence the legend (previously, this could happen if the `linetype` argument was used in `mt_plot`)
-
 
 # mousetrap 3.1.0
 
