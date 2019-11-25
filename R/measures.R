@@ -72,9 +72,11 @@
 #'   (\code{xpos}) and the second to the y-positions (\code{ypos}).
 #' @param timestamps a character string specifying the trajectory dimension
 #'   containing the timestamps.
-#' @param flip_threshold a numeric value specifying the distance that needs to 
+#' @param flip_threshold a numeric value specifying the distance that needs to
 #'   be exceeded in one direction so that a change in direction counts as a
-#'   flip.
+#'   flip. If several thresholds are specified, flips will be returned in
+#'   separate variables for each threshold value (the variable name will be
+#'   suffixed with the threshold value).
 #' @param hover_threshold an optional numeric value. If specified, \code{hovers}
 #'   (and \code{hover_time})  will be calculated as the number (and total time)
 #'   of periods without movement in a trial (whose duration exceeds the value
@@ -236,8 +238,20 @@ mt_measures <- function(
       "MAD", "MAD_time",
       "MD_above", "MD_above_time",
       "MD_below", "MD_below_time",
-      "AD", "AUC",
-      paste0(dimensions,"_flips"),
+      "AD", "AUC"
+    )
+    
+    if (length(flip_threshold)==1){
+      mt_measures <- c(
+        mt_measures,
+        paste0(dimensions,"_flips")
+      )
+    } else {
+      mt_measures <- c(mt_measures, paste(paste0(dimensions,"_flips"),rep(flip_threshold,each=2),sep="_"))
+    }
+    
+    mt_measures <- c(
+      mt_measures,
       paste0(dimensions,"_reversals"),
       "RT", "initiation_time", "idle_time"
     )
@@ -268,13 +282,27 @@ mt_measures <- function(
       "No timestamps were found in trajectory array. ",
       "Not computing the corresponding measures."
     )
+
     mt_measures <- c(
       paste0(dim1,c("_max","_min")),paste0(dim2,c("_max","_min")),
       "MAD", "MD_above", "MD_below",
-      "AD", "AUC",
-      paste0(dimensions,"_flips"),
+      "AD", "AUC"
+    )
+    
+    if (length(flip_threshold)==1){
+      mt_measures <- c(
+        mt_measures,
+        paste0(dimensions,"_flips")
+      )
+    } else {
+      mt_measures <- c(mt_measures, paste(paste0(dimensions,"_flips"),rep(flip_threshold,each=2),sep="_"))
+    }
+    
+    mt_measures <- c(
+      mt_measures,
       paste0(dimensions,"_reversals")
     )
+    
   }
   
   # Add distance, velocity and acceleration-based measures
@@ -357,9 +385,11 @@ mt_measures <- function(
     
     
     # Calculate number of x_flips and y_flips
-    measures[i,paste0(dim1,"_flips")] <- count_changes(current_dim1, threshold=flip_threshold)
-    measures[i,paste0(dim2,"_flips")] <- count_changes(current_dim2, threshold=flip_threshold)
-    
+    measures[i,grep(paste0(dim1,"_flips"),mt_measures)] <-
+      sapply(flip_threshold,count_changes,pos=current_dim1)
+    measures[i,grep(paste0(dim2,"_flips"),mt_measures)] <-
+      sapply(flip_threshold,count_changes,pos=current_dim2)
+
     # Calculate x_reversals
     # number of crossings of the y-axis (ignoring points exactly on y axis)
     yside <- current_dim1[current_dim1!=0] > 0

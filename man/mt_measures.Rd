@@ -28,9 +28,11 @@ default), the first value in the vector corresponds to the x-positions
 \item{timestamps}{a character string specifying the trajectory dimension
 containing the timestamps.}
 
-\item{flip_threshold}{a numeric value specifying the distance that needs to 
+\item{flip_threshold}{a numeric value specifying the distance that needs to
 be exceeded in one direction so that a change in direction counts as a
-flip.}
+flip. If several thresholds are specified, flips will be returned in
+separate variables for each threshold value (the variable name will be
+suffixed with the threshold value).}
 
 \item{hover_threshold}{an optional numeric value. If specified, \code{hovers}
 (and \code{hover_time})  will be calculated as the number (and total time)
