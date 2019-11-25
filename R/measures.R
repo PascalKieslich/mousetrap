@@ -80,7 +80,10 @@
 #' @param hover_threshold an optional numeric value. If specified, \code{hovers}
 #'   (and \code{hover_time})  will be calculated as the number (and total time)
 #'   of periods without movement in a trial (whose duration exceeds the value
-#'   specified in \code{hover_threshold}).
+#'   specified in \code{hover_threshold}). If several thresholds are specified,
+#'   hovers and hover_time will be returned in separate variables for each
+#'   threshold value (the variable name will be suffixed with the threshold
+#'   value).
 #' @param hover_incl_initial logical indicating if the calculation of hovers
 #'   should include a potential initial phase in the trial without mouse
 #'   movements (this initial phase is included by default).
@@ -257,7 +260,11 @@ mt_measures <- function(
     )
     
     if(!is.null(hover_threshold)){
-      mt_measures <- c(mt_measures, "hover_time", "hovers")
+      if (length(hover_threshold)==1){
+        mt_measures <- c(mt_measures, "hover_time", "hovers")
+      } else {
+        mt_measures <- c(mt_measures, paste(c("hover_time", "hovers"),rep(hover_threshold,each=2),sep="_"))
+      }
     }
     
     # Check if there are trajectories where first timestamp is > 0:
@@ -418,8 +425,10 @@ mt_measures <- function(
         measures[i,"initiation_time"] <- current_timestamps[1]
         measures[i,"idle_time"] <- current_timestamps[1]
         if (!is.null(hover_threshold)){
-          measures[i,"hover_time"] <- ifelse(current_timestamps[1]>hover_threshold,current_timestamps[1],0)
-          measures[i,"hovers"] <- 0
+          measures[i,grep("hover_time",mt_measures)] <- 
+            ifelse(current_timestamps[1]>hover_threshold,current_timestamps[1],0)
+          
+          measures[i,grep("hovers",mt_measures)] <- 0
         }
         
       } else if (all(pos_constant == TRUE)) {
@@ -427,8 +436,12 @@ mt_measures <- function(
         measures[i,"initiation_time"] <- measures[i,"RT"]
         measures[i,"idle_time"] <- measures[i,"RT"]
         if (!is.null(hover_threshold)){
-          measures[i,"hover_time"] <- ifelse(measures[i,"RT"]>hover_threshold,measures[i,"RT"],0)
-          measures[i,"hovers"] <- ifelse(measures[i,"RT"]>hover_threshold,1,0)
+          
+          measures[i,grep("hover_time",mt_measures)] <- 
+            ifelse(measures[i,"RT"]>hover_threshold,measures[i,"RT"],0)
+          
+          measures[i,grep("hovers",mt_measures)] <- 
+            ifelse(measures[i,"RT"]>hover_threshold,1,0)
         }
         
       } else {
@@ -456,18 +469,22 @@ mt_measures <- function(
           }
           
           # Calculate number of periods without movement that exceed the threshold and their total time
-          measures[i,"hover_time"] <-  sum(time_diffs[time_diffs>hover_threshold])
-          measures[i,"hovers"] <-  sum(time_diffs>hover_threshold)
+          measures[i,grep("hover_time",mt_measures)] <-
+            sapply(hover_threshold,function(threshold) sum(time_diffs[time_diffs>threshold]))
+          
+          measures[i,grep("hovers",mt_measures)] <-
+            sapply(hover_threshold, function(threshold) sum(time_diffs>threshold))
+          
         }
       
       }
       
       if (!is.null(hover_threshold) & (hover_incl_initial==FALSE)){
         
-        measures[i,"hover_time"] <- measures[i,"hover_time"]-
+        measures[i,grep("hover_time",mt_measures)] <- measures[i,grep("hover_time",mt_measures)]-
           ifelse(measures[i,"initiation_time"]>hover_threshold,measures[i,"initiation_time"],0)
         
-        measures[i,"hovers"] <- measures[i,"hovers"]-
+        measures[i,grep("hovers",mt_measures)] <- measures[i,grep("hovers",mt_measures)]-
           ifelse(measures[i,"initiation_time"]>hover_threshold,1,0)
         
       }

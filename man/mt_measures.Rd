@@ -37,7 +37,10 @@ suffixed with the threshold value).}
 \item{hover_threshold}{an optional numeric value. If specified, \code{hovers}
 (and \code{hover_time})  will be calculated as the number (and total time)
 of periods without movement in a trial (whose duration exceeds the value
-specified in \code{hover_threshold}).}
+specified in \code{hover_threshold}). If several thresholds are specified,
+hovers and hover_time will be returned in separate variables for each
+threshold value (the variable name will be suffixed with the threshold
+value).}
 
 \item{hover_incl_initial}{logical indicating if the calculation of hovers
 should include a potential initial phase in the trial without mouse
