@@ -79,6 +79,9 @@
 #'   (and \code{hover_time})  will be calculated as the number (and total time)
 #'   of periods without movement in a trial (whose duration exceeds the value
 #'   specified in \code{hover_threshold}).
+#' @param hover_incl_initial logical indicating if the calculation of hovers
+#'   should include a potential initial phase in the trial without mouse
+#'   movements (this initial phase is included by default).
 #'   
 #' @return A mousetrap data object (see \link{mt_example}) where an additional 
 #'   \link{data.frame} has been added (by default called "measures") containing 
@@ -190,7 +193,7 @@ mt_measures <- function(
   data,
   use="trajectories", save_as="measures",
   dimensions=c("xpos","ypos"), timestamps="timestamps",
-  flip_threshold=0, hover_threshold=NULL,
+  flip_threshold=0, hover_threshold=NULL, hover_incl_initial=TRUE,
   verbose=FALSE) {
   
   if(length(dimensions)!=2){
@@ -428,6 +431,17 @@ mt_measures <- function(
         }
       
       }
+      
+      if (!is.null(hover_threshold) & (hover_incl_initial==FALSE)){
+        
+        measures[i,"hover_time"] <- measures[i,"hover_time"]-
+          ifelse(measures[i,"initiation_time"]>hover_threshold,measures[i,"initiation_time"],0)
+        
+        measures[i,"hovers"] <- measures[i,"hovers"]-
+          ifelse(measures[i,"initiation_time"]>hover_threshold,1,0)
+        
+      }
+      
       
       # notes: timestamps (e.g., for MAD) always correspond
       # to the first time the max/min value was reached

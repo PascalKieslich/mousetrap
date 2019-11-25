@@ -6,7 +6,8 @@
 \usage{
 mt_measures(data, use = "trajectories", save_as = "measures",
   dimensions = c("xpos", "ypos"), timestamps = "timestamps",
-  flip_threshold = 0, hover_threshold = NULL, verbose = FALSE)
+  flip_threshold = 0, hover_threshold = NULL,
+  hover_incl_initial = TRUE, verbose = FALSE)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import
@@ -35,6 +36,10 @@ flip.}
 (and \code{hover_time})  will be calculated as the number (and total time)
 of periods without movement in a trial (whose duration exceeds the value
 specified in \code{hover_threshold}).}
+
+\item{hover_incl_initial}{logical indicating if the calculation of hovers
+should include a potential initial phase in the trial without mouse
+movements (this initial phase is included by default).}
 
 \item{verbose}{logical indicating whether function should report its
 progress.}
