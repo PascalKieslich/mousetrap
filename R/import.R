@@ -223,7 +223,7 @@ mt_import_mousetrap <- function(raw_data,
   data_list <- apply(raw_data[,columns], c(1, 2), split_raw_data)
 
   # Determine maximum number of logs
-  if (class(data_list) == "matrix") {
+  if (inherits(data_list,"matrix")) {
     max_logs <- max(sapply(data_list,length))
   } else {
     max_logs <- dim(data_list)[1]
@@ -237,7 +237,7 @@ mt_import_mousetrap <- function(raw_data,
 
   for (i in 1:dim(trajectories)[1]) {
     # Extract data from list (regular case)
-    if (class(data_list) == "matrix") {
+    if (inherits(data_list,"matrix")) {
       for (j in names(mt_labels)) {
         mt_l <- columns[mt_labels[j]]
 

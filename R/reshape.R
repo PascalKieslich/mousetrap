@@ -173,7 +173,7 @@ mt_reshape <- function(data,
   # (this allows that trajectories can be reshaped directly)
   if(is_mousetrap_data(data)==FALSE){
     
-    if(class(use2) %in% c("NULL","character")) {
+    if(inherits(use2,"character") | inherits(use2,"NULL")) {
       data_use2 <- data.frame(mt_id=rownames(data),row.names = rownames(data))
     } else {
       data_use2 <- use2
@@ -186,7 +186,7 @@ mt_reshape <- function(data,
   }
 
   # Assume trajectories are provided in case class is an array
-  type_trajectories <- (class(data[[use]]) == "array")
+  type_trajectories <- inherits(data[[use]],"array")
 
   # Extract relevant data for trajectories
   if (type_trajectories) {
@@ -254,7 +254,7 @@ mt_reshape <- function(data,
 
     # Retrieve data for filtering and merging
     # and merge it with trajectory data
-    if(class(use2) == "character") {
+    if(inherits(use2,"character")) {
       data <- extract_data(data=data,use=use2)
     } else {
       data <- use2

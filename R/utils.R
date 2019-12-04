@@ -4,7 +4,7 @@ magrittr::`%>%`
 # Check that data is a mousetrap object
 is_mousetrap_data <- function(data){
 
-  return(class(data)=="mousetrap")
+  return(inherits(data,"mousetrap"))
 
 }
 

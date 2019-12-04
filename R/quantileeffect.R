@@ -73,7 +73,7 @@ mt_qeffect = function(
       }
     
     # if compare is class mousetrap  
-    } else if(class(data) == 'mousetrap'){
+    } else if(is_mousetrap_data(data)){
       
       # extract use
       if(measure %in% names(compare[[use]])){

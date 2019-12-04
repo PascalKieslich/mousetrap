@@ -1066,7 +1066,7 @@ mt_subset <- function(data, subset, check="data") {
     if (length(dim(data[[use]])) == 2) {
       
       # for special case of square matrices (e.g., distmat) remove both columns and rows
-      if(class(data[[use]])[1]=="matrix" & dim(data[[use]])[1]==dim(data[[use]])[2]){
+      if(inherits(data[[use]],"matrix") & dim(data[[use]])[1]==dim(data[[use]])[2]){
         data[[use]] <- data[[use]][
           rownames(data[[use]]) %in% rownames(data[[check]]),
           rownames(data[[use]]) %in% rownames(data[[check]]),

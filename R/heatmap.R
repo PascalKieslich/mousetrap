@@ -498,14 +498,14 @@ mt_heatmap <- function(
   
   # --------- get heatmap
   agg = NULL
-  if(class(x) == 'mousetrap' | is.array(x)){
-    if(class(x) == 'mousetrap') x = extract_data(data = x, use = use)
+  if(is_mousetrap_data(x) | is.array(x)){
+    if(is_mousetrap_data(x)) x = extract_data(data = x, use = use)
     if(!all(dimensions %in% dimnames(x)[[3]])) stop('Not all dimensions found.')
     heatmap = mt_heatmap_raw(x,use,dimensions,...)
     img = heatmap$img
     agg = heatmap$agg
     bg  = heatmap$colors[1]
-  } else if(class(x) == 'mt_heatmap_raw'){
+  } else if(inherits(x,'mt_heatmap_raw')){
     img = x$img
     agg = x$agg
     bg  = heatmap$colors[1]
@@ -867,8 +867,8 @@ mt_diffmap <- function(
   # --------- collect heatmaps
   agg_x = NULL; agg_y = NULL
   if(is.null(y) & is.null(condition)) stop('Either y or condition must be specified.')
-  if((class(x) == 'mousetrap' | is.array(x)) &
-     ((class(y) == 'mousetrap' | is.array(y)) | !is.null(condition))){
+  if((is_mousetrap_data(x)| is.array(x)) &
+     ((is_mousetrap_data(y) | is.array(y)) | !is.null(condition))){
     if(is.array(x)) if(!all(dimensions %in% dimnames(x)[[3]])) stop('Not all dimensions found in x.')
     if(!is.null(y) == !is.null(condition)) stop('Specify either y or condition, but not both.')
     if(!is.null(condition)){
@@ -879,7 +879,7 @@ mt_diffmap <- function(
       }
       
       # If condition values are not of class logical, convert them
-      if(class(condition) != "logical"){
+      if(inherits(condition,"logical") == FALSE){
         condition_levels <- levels(factor(condition))
         if (length(condition_levels)!=2) stop('The condition variable can only have two levels.')
         condition <- condition==condition_levels[1]
@@ -888,9 +888,9 @@ mt_diffmap <- function(
       y = x[[use]][!condition,,] 
       x = x[[use]][ condition,,] 
     }
-  } else if(class(x) == 'mt_heatmap_raw') {
+  } else if(inherits(x,'mt_heatmap_raw')) {
     if(!is.null(class(y))) stop('y must must be specified, if x is a heatmap object.')
-    if(class(y) != 'mt_heatmap_raw') stop('y must match class of x.')
+    if(inherits(y,'mt_heatmap_raw')==FALSE) stop('y must match class of x.')
   }
   
   # --------- extract data
