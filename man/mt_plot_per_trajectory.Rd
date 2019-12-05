@@ -4,10 +4,22 @@
 \alias{mt_plot_per_trajectory}
 \title{Create PDF with separate plots per trajectory.}
 \usage{
-mt_plot_per_trajectory(file, data, use = "trajectories", x = "xpos",
-  y = "ypos", xlim = NULL, ylim = NULL, axes_exact = FALSE,
-  points = FALSE, rect = NULL, color = "black", fill = NA,
-  verbose = FALSE, ...)
+mt_plot_per_trajectory(
+  file,
+  data,
+  use = "trajectories",
+  x = "xpos",
+  y = "ypos",
+  xlim = NULL,
+  ylim = NULL,
+  axes_exact = FALSE,
+  points = FALSE,
+  rect = NULL,
+  color = "black",
+  fill = NA,
+  verbose = FALSE,
+  ...
+)
 }
 \arguments{
 \item{file}{a character string specifying the name of the PDF file. Passed on

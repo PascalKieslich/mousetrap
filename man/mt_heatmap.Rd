@@ -4,9 +4,16 @@
 \alias{mt_heatmap}
 \title{Plot trajectory heatmap.}
 \usage{
-mt_heatmap(x, use = "trajectories", dimensions = c("xpos", "ypos"),
-  filename = NULL, ..., upscale = 1, plot_dims = FALSE,
-  verbose = TRUE)
+mt_heatmap(
+  x,
+  use = "trajectories",
+  dimensions = c("xpos", "ypos"),
+  filename = NULL,
+  ...,
+  upscale = 1,
+  plot_dims = FALSE,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{x}{usually an object of class \code{mousetrap}. Alternatively, a

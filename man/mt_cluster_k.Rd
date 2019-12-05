@@ -4,12 +4,24 @@
 \alias{mt_cluster_k}
 \title{Estimate optimal number of clusters.}
 \usage{
-mt_cluster_k(data, use = "sp_trajectories", dimensions = c("xpos",
-  "ypos"), kseq = 2:15, compute = c("stability", "gap", "jump",
-  "slope"), method = "hclust", weights = rep(1, length(dimensions)),
-  pointwise = TRUE, minkowski_p = 2, hclust_method = "ward.D",
-  kmeans_nstart = 10, n_bootstrap = 10, model_based = FALSE,
-  n_gap = 10, na_rm = FALSE, verbose = FALSE)
+mt_cluster_k(
+  data,
+  use = "sp_trajectories",
+  dimensions = c("xpos", "ypos"),
+  kseq = 2:15,
+  compute = c("stability", "gap", "jump", "slope"),
+  method = "hclust",
+  weights = rep(1, length(dimensions)),
+  pointwise = TRUE,
+  minkowski_p = 2,
+  hclust_method = "ward.D",
+  kmeans_nstart = 10,
+  n_bootstrap = 10,
+  model_based = FALSE,
+  n_gap = 10,
+  na_rm = FALSE,
+  verbose = FALSE
+)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import

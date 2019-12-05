@@ -4,8 +4,14 @@
 \alias{mt_align_start}
 \title{Align start position of trajectories.}
 \usage{
-mt_align_start(data, use = "trajectories", save_as = use,
-  dimensions = c("xpos", "ypos"), start = c(0, 0), verbose = FALSE)
+mt_align_start(
+  data,
+  use = "trajectories",
+  save_as = use,
+  dimensions = c("xpos", "ypos"),
+  start = c(0, 0),
+  verbose = FALSE
+)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import

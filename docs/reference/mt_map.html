@@ -72,7 +72,7 @@ prototype that produced the smallest distance." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.4</span>
       </span>
     </div>
 
@@ -120,11 +120,19 @@ of the supplied trajectory types and then assigns each trajectory to the
 prototype that produced the smallest distance.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mt_map</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"sp_trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='st'>"prototyping"</span>,
+    <pre class="usage"><span class='fu'>mt_map</span>(
+  <span class='no'>data</span>,
+  <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"sp_trajectories"</span>,
+  <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='st'>"prototyping"</span>,
   <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>),
-  <span class='kw'>prototypes</span> <span class='kw'>=</span> <span class='kw pkg'>mousetrap</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/mousetrap/man/mt_prototypes.html'>mt_prototypes</a></span>, <span class='kw'>weights</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>,
-  <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>dimensions</span>)), <span class='kw'>pointwise</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>na_rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>minkowski_p</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>use2</span> <span class='kw'>=</span> <span class='st'>"data"</span>, <span class='kw'>grouping_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+  <span class='kw'>prototypes</span> <span class='kw'>=</span> <span class='kw pkg'>mousetrap</span><span class='kw ns'>::</span><span class='no'><a href='https://rdrr.io/pkg/mousetrap/man/mt_prototypes.html'>mt_prototypes</a></span>,
+  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>dimensions</span>)),
+  <span class='kw'>pointwise</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>na_rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>minkowski_p</span> <span class='kw'>=</span> <span class='fl'>2</span>,
+  <span class='kw'>use2</span> <span class='kw'>=</span> <span class='st'>"data"</span>,
+  <span class='kw'>grouping_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

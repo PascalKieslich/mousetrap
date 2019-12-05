@@ -4,11 +4,24 @@
 \alias{mt_diffmap}
 \title{Creates a difference-heatmap of two trajectory heatmap images.}
 \usage{
-mt_diffmap(x, y = NULL, condition = NULL, use = "trajectories",
-  dimensions = c("xpos", "ypos"), use2 = "data", filename = NULL,
-  bounds = NULL, xres = 500, upscale = 4, smooth_radius = 10,
-  colors = c("#00863F", "#000000", "#FF1900"), n_shades = 1000,
-  plot = TRUE, ..., verbose = TRUE)
+mt_diffmap(
+  x,
+  y = NULL,
+  condition = NULL,
+  use = "trajectories",
+  dimensions = c("xpos", "ypos"),
+  use2 = "data",
+  filename = NULL,
+  bounds = NULL,
+  xres = 500,
+  upscale = 4,
+  smooth_radius = 10,
+  colors = c("#00863F", "#000000", "#FF1900"),
+  n_shades = 1000,
+  plot = TRUE,
+  ...,
+  verbose = TRUE
+)
 }
 \arguments{
 \item{x}{an object of class \code{mousetrap}), a trajectory object of class 

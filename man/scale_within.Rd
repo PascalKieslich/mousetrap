@@ -4,8 +4,14 @@
 \alias{scale_within}
 \title{Scale and center variables within the levels of another variable.}
 \usage{
-scale_within(data, variables = NULL, within = NULL, prefix = "",
-  center = TRUE, scale = TRUE)
+scale_within(
+  data,
+  variables = NULL,
+  within = NULL,
+  prefix = "",
+  center = TRUE,
+  scale = TRUE
+)
 }
 \arguments{
 \item{data}{a \link{data.frame}.}

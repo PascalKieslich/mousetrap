@@ -73,7 +73,7 @@ mt_export_wide are wrapper functions for mt_reshape." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.4</span>
       </span>
     </div>
 
@@ -122,11 +122,23 @@ the trajectory data before export. <code>mt_export_long</code> and
 <code>mt_export_wide</code> are wrapper functions for <a href='mt_reshape.html'>mt_reshape</a>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mt_export_long</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>use_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>use2</span> <span class='kw'>=</span> <span class='st'>"data"</span>, <span class='kw'>use2_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>mt_export_long</span>(
+  <span class='no'>data</span>,
+  <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>,
+  <span class='kw'>use_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>use2</span> <span class='kw'>=</span> <span class='st'>"data"</span>,
+  <span class='kw'>use2_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>...</span>
+)
 
-<span class='fu'>mt_export_wide</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>use_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>use2</span> <span class='kw'>=</span> <span class='st'>"data"</span>, <span class='kw'>use2_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>mt_export_wide</span>(
+  <span class='no'>data</span>,
+  <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>,
+  <span class='kw'>use_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>use2</span> <span class='kw'>=</span> <span class='st'>"data"</span>,
+  <span class='kw'>use2_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

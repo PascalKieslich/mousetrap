@@ -67,7 +67,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.4</span>
       </span>
     </div>
 
@@ -107,9 +107,9 @@
       <small>Source: <a href='https://github.com/pascalkieslich/mousetrap/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="mousetrap-313" class="section level1">
+    <div id="mousetrap-314" class="section level1">
 <h1 class="page-header">
-<a href="#mousetrap-313" class="anchor"></a>mousetrap 3.1.3<small> 2019-10-04 </small>
+<a href="#mousetrap-314" class="anchor"></a>mousetrap 3.1.4<small> Unreleased </small>
 </h1>
 <div id="announcements" class="section level2">
 <h2 class="hasAnchor">
@@ -124,6 +124,30 @@
 <div id="changes-in-specific-functions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#changes-in-specific-functions" class="anchor"></a>Changes in specific functions</h2>
+<ul>
+<li>
+<code>mt_measures</code>: Introduced <code>hover_incl_intial</code> argument to make inclusion of a potential initial phase without movement optional when calculating hovers. By default, this initial phase is included (as in previous versions).</li>
+<li>
+<code>mt_measures</code>: Multiple values can now be specified in the <code>hover_threshold</code> argument. If this is done, hovers and hover_time will be returned in separate variables for each threshold value (the variable name will be suffixed with the threshold value).</li>
+<li>
+<code>mt_measures</code>: Multiple values can now be specified in the <code>flip_threshold</code> argument. If this is done, flips (e.g., xpos_flips) will be returned in separate variables for each threshold value (the variable name will be suffixed with the threshold value).</li>
+</ul>
+</div>
+<div id="internal-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#internal-changes" class="anchor"></a>Internal changes</h2>
+<ul>
+<li>When checking the class of an object, <code>inherits</code> is now used consistently instead of the <code>class</code> function to avoid problems with future R releases (&gt;=4.0.0).</li>
+</ul>
+</div>
+</div>
+    <div id="mousetrap-313" class="section level1">
+<h1 class="page-header">
+<a href="#mousetrap-313" class="anchor"></a>mousetrap 3.1.3<small> 2019-10-04 </small>
+</h1>
+<div id="changes-in-specific-functions-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#changes-in-specific-functions-1" class="anchor"></a>Changes in specific functions</h2>
 <ul>
 <li>
 <code>mt_sample_entropy</code>: By default, sample entropy is calculated based on the differences of the position values (following Hehman et al., 2015). An optional argument <code>use_diff</code> now has been introduced to allow users to override this behavior and use the untransformed values instead, by setting <code>use_diff=FALSE</code>.</li>
@@ -145,9 +169,9 @@
 <li>Updated mousetrap book chapter citations (see announcements above for correct citation).</li>
 </ul>
 </div>
-<div id="changes-in-specific-functions-1" class="section level2">
+<div id="changes-in-specific-functions-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-in-specific-functions-1" class="anchor"></a>Changes in specific functions</h2>
+<a href="#changes-in-specific-functions-2" class="anchor"></a>Changes in specific functions</h2>
 <ul>
 <li>
 <code>mt_import_long</code>: internal change (prefix <code>row_number()</code> function with dplyr) to accomodate changes in dplyr 0.8.0.</li>
@@ -167,9 +191,9 @@
 </li>
 </ul>
 </div>
-<div id="changes-in-specific-functions-2" class="section level2">
+<div id="changes-in-specific-functions-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-in-specific-functions-2" class="anchor"></a>Changes in specific functions</h2>
+<a href="#changes-in-specific-functions-3" class="anchor"></a>Changes in specific functions</h2>
 <ul>
 <li>
 <code>mt_map</code>: now allows for mapping trajectories onto prototypes separately for different groups of trajectories (the prototypes will be rescaled separately to match the coordinate system of each group).</li>
@@ -206,9 +230,9 @@
 </li>
 </ul>
 </div>
-<div id="changes-in-specific-functions-3" class="section level2">
+<div id="changes-in-specific-functions-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-in-specific-functions-3" class="anchor"></a>Changes in specific functions</h2>
+<a href="#changes-in-specific-functions-4" class="anchor"></a>Changes in specific functions</h2>
 <ul>
 <li>
 <code>mt_derivatives</code>: now always reports acceleration as difference in absolute velocity (the argument <code>acc_on_abs_vel</code> has been removed). Besides, the argument <code>absolute</code> has been introduced that indicates if absolute values for distances and velocities should be reported (by default, this is not the case). All of this is only relevant if a single dimension is specified in <code>dimensions</code>.</li>
@@ -290,9 +314,9 @@
 <li>Arguments that were already deprecated and replaced (e.g., <code>show_progress</code> was replaced with <code>verbose</code>) have been removed.</li>
 </ul>
 </div>
-<div id="changes-in-specific-functions-4" class="section level2">
+<div id="changes-in-specific-functions-5" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-in-specific-functions-4" class="anchor"></a>Changes in specific functions</h2>
+<a href="#changes-in-specific-functions-5" class="anchor"></a>Changes in specific functions</h2>
 <ul>
 <li>
 <code>mt_align_start</code>: function is now vectorized and allows for optionally aligning to mean start position across trials; default for <code>save_as</code> argument is set to <code>use</code>.</li>
@@ -383,9 +407,9 @@
 <li>Performance improvement of reshaping, aggregation, and visualization functions through internal changes in <code>mt_reshape</code>: <code><a href="https://rdrr.io/r/base/merge.html">base::merge</a></code> and <code>reshape2</code> functions are replaced with functions from the <code>tidyr</code> and <code>dplyr</code> packages (and custom functions). Package dependencies were adjusted accordingly. As the <code>dplyr</code> functions may introduce additional classes for the reshaped data (such as <code>grouped_df</code> and <code>tbl_df</code>), a new argument (<code>convert_df</code>) is introduced that converts the reshaped data to pure data.frames by default (thereby dropping additional classes).</li>
 </ul>
 </div>
-<div id="changes-in-specific-functions-5" class="section level2">
+<div id="changes-in-specific-functions-6" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-in-specific-functions-5" class="anchor"></a>Changes in specific functions</h2>
+<a href="#changes-in-specific-functions-6" class="anchor"></a>Changes in specific functions</h2>
 <ul>
 <li>
 <code>mt_import_mousetrap</code>, <code>mt_import_long</code>, <code>mt_import_wide</code>: Allow specifying several variables for the trial identifier in <code>mt_id_label</code>. A new ID variable will be created by combining the values of each variable.</li>
@@ -490,6 +514,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#mousetrap-314">3.1.4</a></li>
         <li><a href="#mousetrap-313">3.1.3</a></li>
         <li><a href="#mousetrap-312">3.1.2</a></li>
         <li><a href="#mousetrap-311">3.1.1</a></li>

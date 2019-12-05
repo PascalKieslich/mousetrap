@@ -3,7 +3,6 @@
 \docType{package}
 \name{mousetrap}
 \alias{mousetrap}
-\alias{mousetrap-package}
 \title{Process and analyze mouse-tracking data}
 \description{
 The mousetrap package provides functions for importing, preprocessing, 

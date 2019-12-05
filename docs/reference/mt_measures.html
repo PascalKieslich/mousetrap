@@ -75,7 +75,7 @@ Values sections." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.4</span>
       </span>
     </div>
 
@@ -126,9 +126,17 @@ More information on the different measures can be found in the Details and
 Values sections.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mt_measures</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='st'>"measures"</span>,
-  <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>), <span class='kw'>timestamps</span> <span class='kw'>=</span> <span class='st'>"timestamps"</span>,
-  <span class='kw'>flip_threshold</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>hover_threshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>mt_measures</span>(
+  <span class='no'>data</span>,
+  <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>,
+  <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='st'>"measures"</span>,
+  <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>),
+  <span class='kw'>timestamps</span> <span class='kw'>=</span> <span class='st'>"timestamps"</span>,
+  <span class='kw'>flip_threshold</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>hover_threshold</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>hover_incl_initial</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -163,16 +171,27 @@ containing the timestamps.</p></td>
     </tr>
     <tr>
       <th>flip_threshold</th>
-      <td><p>a numeric value specifying the distance that needs to 
+      <td><p>a numeric value specifying the distance that needs to
 be exceeded in one direction so that a change in direction counts as a
-flip.</p></td>
+flip. If several thresholds are specified, flips will be returned in
+separate variables for each threshold value (the variable name will be
+suffixed with the threshold value).</p></td>
     </tr>
     <tr>
       <th>hover_threshold</th>
       <td><p>an optional numeric value. If specified, <code>hovers</code>
 (and <code>hover_time</code>)  will be calculated as the number (and total time)
 of periods without movement in a trial (whose duration exceeds the value
-specified in <code>hover_threshold</code>).</p></td>
+specified in <code>hover_threshold</code>). If several thresholds are specified,
+hovers and hover_time will be returned in separate variables for each
+threshold value (the variable name will be suffixed with the threshold
+value).</p></td>
+    </tr>
+    <tr>
+      <th>hover_incl_initial</th>
+      <td><p>logical indicating if the calculation of hovers
+should include a potential initial phase in the trial without mouse
+movements (this initial phase is included by default).</p></td>
     </tr>
     <tr>
       <th>verbose</th>

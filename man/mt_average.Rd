@@ -4,10 +4,18 @@
 \alias{mt_average}
 \title{Average trajectories across intervals.}
 \usage{
-mt_average(data, use = "trajectories", save_as = "av_trajectories",
-  dimensions = "all", av_dimension = "timestamps", intervals = NULL,
-  interval_size = 100, max_interval = NULL, verbose = FALSE,
-  dimension = NULL)
+mt_average(
+  data,
+  use = "trajectories",
+  save_as = "av_trajectories",
+  dimensions = "all",
+  av_dimension = "timestamps",
+  intervals = NULL,
+  interval_size = 100,
+  max_interval = NULL,
+  verbose = FALSE,
+  dimension = NULL
+)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import

@@ -70,7 +70,7 @@ gaussian smoothing. Note that this function has beta status." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.4</span>
       </span>
     </div>
 
@@ -116,11 +116,24 @@ gaussian smoothing. Note that this function has beta status." />
 gaussian smoothing. Note that this function has beta status.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mt_diffmap</span>(<span class='no'>x</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>condition</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>,
-  <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>), <span class='kw'>use2</span> <span class='kw'>=</span> <span class='st'>"data"</span>, <span class='kw'>filename</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>bounds</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>xres</span> <span class='kw'>=</span> <span class='fl'>500</span>, <span class='kw'>upscale</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>smooth_radius</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-  <span class='kw'>colors</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"#00863F"</span>, <span class='st'>"#000000"</span>, <span class='st'>"#FF1900"</span>), <span class='kw'>n_shades</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-  <span class='kw'>plot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>mt_diffmap</span>(
+  <span class='no'>x</span>,
+  <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>condition</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>,
+  <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>),
+  <span class='kw'>use2</span> <span class='kw'>=</span> <span class='st'>"data"</span>,
+  <span class='kw'>filename</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>bounds</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>xres</span> <span class='kw'>=</span> <span class='fl'>500</span>,
+  <span class='kw'>upscale</span> <span class='kw'>=</span> <span class='fl'>4</span>,
+  <span class='kw'>smooth_radius</span> <span class='kw'>=</span> <span class='fl'>10</span>,
+  <span class='kw'>colors</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"#00863F"</span>, <span class='st'>"#000000"</span>, <span class='st'>"#FF1900"</span>),
+  <span class='kw'>n_shades</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
+  <span class='kw'>plot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='no'>...</span>,
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

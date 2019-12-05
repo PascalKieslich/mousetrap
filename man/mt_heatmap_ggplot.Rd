@@ -4,8 +4,15 @@
 \alias{mt_heatmap_ggplot}
 \title{Plot trajectory heatmap using ggplot.}
 \usage{
-mt_heatmap_ggplot(data, use = "trajectories", dimensions = c("xpos",
-  "ypos"), use2 = "data", facet_row = NULL, facet_col = NULL, ...)
+mt_heatmap_ggplot(
+  data,
+  use = "trajectories",
+  dimensions = c("xpos", "ypos"),
+  use2 = "data",
+  facet_row = NULL,
+  facet_col = NULL,
+  ...
+)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import

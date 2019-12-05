@@ -52,4 +52,4 @@ Suggests:
 LinkingTo: Rcpp
 Encoding: UTF-8
 LazyData: TRUE
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2

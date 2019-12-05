@@ -4,9 +4,16 @@
 \alias{mt_sample_entropy}
 \title{Calculate sample entropy.}
 \usage{
-mt_sample_entropy(data, use = "tn_trajectories", save_as = "measures",
-  dimension = "xpos", m = 3, r = NULL, use_diff = TRUE,
-  verbose = FALSE)
+mt_sample_entropy(
+  data,
+  use = "tn_trajectories",
+  save_as = "measures",
+  dimension = "xpos",
+  m = 3,
+  r = NULL,
+  use_diff = TRUE,
+  verbose = FALSE
+)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import

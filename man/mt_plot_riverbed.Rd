@@ -4,9 +4,17 @@
 \alias{mt_plot_riverbed}
 \title{Plot density of mouse positions across time steps.}
 \usage{
-mt_plot_riverbed(data, use = "tn_trajectories", y = "xpos",
-  y_range = NULL, y_bins = 250, facet_row = NULL, facet_col = NULL,
-  facet_data = "data", grid_colors = c("gray30", "gray10"))
+mt_plot_riverbed(
+  data,
+  use = "tn_trajectories",
+  y = "xpos",
+  y_range = NULL,
+  y_bins = 250,
+  facet_row = NULL,
+  facet_col = NULL,
+  facet_data = "data",
+  grid_colors = c("gray30", "gray10")
+)
 }
 \arguments{
 \item{data}{mousetrap data object containing the data to be plotted.}

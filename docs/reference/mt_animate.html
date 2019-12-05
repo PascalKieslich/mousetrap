@@ -70,7 +70,7 @@ that this function has beta status." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.4</span>
       </span>
     </div>
 
@@ -116,14 +116,33 @@ that this function has beta status." />
 that this function has beta status.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mt_animate</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>),
-  <span class='kw'>timestamps</span> <span class='kw'>=</span> <span class='st'>"timestamps"</span>, <span class='kw'>filename</span> <span class='kw'>=</span> <span class='st'>"trajectory_animation.gif"</span>,
-  <span class='kw'>xres</span> <span class='kw'>=</span> <span class='fl'>1000</span>, <span class='kw'>seconds</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>framerate</span> <span class='kw'>=</span> <span class='fl'>24</span>, <span class='kw'>speed</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
-  <span class='kw'>density</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>jitter</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>remove</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>bg</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
-  <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"white"</span>, <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>loop</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>bounds</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>norm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>upscale</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>decay</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>max_intensity</span> <span class='kw'>=</span> <span class='fl'>5</span>,
-  <span class='kw'>discard_images</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>im_path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>parallel</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>mt_animate</span>(
+  <span class='no'>data</span>,
+  <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>,
+  <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>),
+  <span class='kw'>timestamps</span> <span class='kw'>=</span> <span class='st'>"timestamps"</span>,
+  <span class='kw'>filename</span> <span class='kw'>=</span> <span class='st'>"trajectory_animation.gif"</span>,
+  <span class='kw'>xres</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
+  <span class='kw'>seconds</span> <span class='kw'>=</span> <span class='fl'>3</span>,
+  <span class='kw'>framerate</span> <span class='kw'>=</span> <span class='fl'>24</span>,
+  <span class='kw'>speed</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
+  <span class='kw'>density</span> <span class='kw'>=</span> <span class='fl'>3</span>,
+  <span class='kw'>jitter</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>remove</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>bg</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
+  <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"white"</span>,
+  <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>loop</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>bounds</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>norm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>upscale</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>decay</span> <span class='kw'>=</span> <span class='fl'>10</span>,
+  <span class='kw'>max_intensity</span> <span class='kw'>=</span> <span class='fl'>5</span>,
+  <span class='kw'>discard_images</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>im_path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>parallel</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

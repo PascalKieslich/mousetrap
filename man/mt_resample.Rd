@@ -4,10 +4,17 @@
 \alias{mt_resample}
 \title{Resample trajectories using a constant time interval.}
 \usage{
-mt_resample(data, use = "trajectories", save_as = "rs_trajectories",
-  dimensions = c("xpos", "ypos"), timestamps = "timestamps",
-  step_size = 10, exact_last_timestamp = TRUE,
-  constant_interpolation = NULL, verbose = FALSE)
+mt_resample(
+  data,
+  use = "trajectories",
+  save_as = "rs_trajectories",
+  dimensions = c("xpos", "ypos"),
+  timestamps = "timestamps",
+  step_size = 10,
+  exact_last_timestamp = TRUE,
+  constant_interpolation = NULL,
+  verbose = FALSE
+)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import

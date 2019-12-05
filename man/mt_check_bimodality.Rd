@@ -4,8 +4,15 @@
 \alias{mt_check_bimodality}
 \title{Assess bimodality of mouse-tracking measure distributions.}
 \usage{
-mt_check_bimodality(data, use = "measures", use_variables = NULL,
-  methods = c("BC", "HDS"), B = 2000, grouping_variables = NULL, ...)
+mt_check_bimodality(
+  data,
+  use = "measures",
+  use_variables = NULL,
+  methods = c("BC", "HDS"),
+  B = 2000,
+  grouping_variables = NULL,
+  ...
+)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import 

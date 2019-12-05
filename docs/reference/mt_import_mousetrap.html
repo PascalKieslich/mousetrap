@@ -79,7 +79,7 @@ functions within this package (see mousetrap for an overview)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.4</span>
       </span>
     </div>
 
@@ -134,10 +134,17 @@ an array (called <code>trajectories</code>), and all other data as a data.frame
 functions within this package (see <a href='mousetrap.html'>mousetrap</a> for an overview).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mt_import_mousetrap</span>(<span class='no'>raw_data</span>, <span class='kw'>xpos_label</span> <span class='kw'>=</span> <span class='st'>"xpos"</span>, <span class='kw'>ypos_label</span> <span class='kw'>=</span> <span class='st'>"ypos"</span>,
-  <span class='kw'>timestamps_label</span> <span class='kw'>=</span> <span class='st'>"timestamps"</span>, <span class='kw'>mt_id_label</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>split</span> <span class='kw'>=</span> <span class='st'>","</span>,
-  <span class='kw'>duplicates</span> <span class='kw'>=</span> <span class='st'>"remove_first"</span>, <span class='kw'>reset_timestamps</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>mt_import_mousetrap</span>(
+  <span class='no'>raw_data</span>,
+  <span class='kw'>xpos_label</span> <span class='kw'>=</span> <span class='st'>"xpos"</span>,
+  <span class='kw'>ypos_label</span> <span class='kw'>=</span> <span class='st'>"ypos"</span>,
+  <span class='kw'>timestamps_label</span> <span class='kw'>=</span> <span class='st'>"timestamps"</span>,
+  <span class='kw'>mt_id_label</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>split</span> <span class='kw'>=</span> <span class='st'>","</span>,
+  <span class='kw'>duplicates</span> <span class='kw'>=</span> <span class='st'>"remove_first"</span>,
+  <span class='kw'>reset_timestamps</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

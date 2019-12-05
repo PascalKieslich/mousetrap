@@ -72,7 +72,7 @@ corresponding variables can be specified under grouping_variables." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.4</span>
       </span>
     </div>
 
@@ -120,8 +120,15 @@ bimodality should be assessed separately for different conditions, the
 corresponding variables can be specified under <code>grouping_variables</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mt_check_bimodality</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"measures"</span>, <span class='kw'>use_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>methods</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"BC"</span>, <span class='st'>"HDS"</span>), <span class='kw'>B</span> <span class='kw'>=</span> <span class='fl'>2000</span>, <span class='kw'>grouping_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>mt_check_bimodality</span>(
+  <span class='no'>data</span>,
+  <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"measures"</span>,
+  <span class='kw'>use_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>methods</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"BC"</span>, <span class='st'>"HDS"</span>),
+  <span class='kw'>B</span> <span class='kw'>=</span> <span class='fl'>2000</span>,
+  <span class='kw'>grouping_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

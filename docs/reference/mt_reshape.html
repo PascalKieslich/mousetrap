@@ -73,7 +73,7 @@ are available." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.4</span>
       </span>
     </div>
 
@@ -122,12 +122,23 @@ additional (wrapper) functions for more specific purposes (cf. "See Also")
 are available.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mt_reshape</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>use_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>use2</span> <span class='kw'>=</span> <span class='st'>"data"</span>, <span class='kw'>use2_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>subset</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>subject_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>aggregate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>aggregate_subjects_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>.funs</span> <span class='kw'>=</span> <span class='st'>"mean"</span>,
-  <span class='kw'>trajectories_long</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>convert_df</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>mt_id</span> <span class='kw'>=</span> <span class='st'>"mt_id"</span>,
-  <span class='kw'>mt_seq</span> <span class='kw'>=</span> <span class='st'>"mt_seq"</span>, <span class='kw'>aggregation_function</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>mt_reshape</span>(
+  <span class='no'>data</span>,
+  <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>,
+  <span class='kw'>use_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>use2</span> <span class='kw'>=</span> <span class='st'>"data"</span>,
+  <span class='kw'>use2_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>subset</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>subject_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>aggregate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>aggregate_subjects_only</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>.funs</span> <span class='kw'>=</span> <span class='st'>"mean"</span>,
+  <span class='kw'>trajectories_long</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>convert_df</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>mt_id</span> <span class='kw'>=</span> <span class='st'>"mt_id"</span>,
+  <span class='kw'>mt_seq</span> <span class='kw'>=</span> <span class='st'>"mt_seq"</span>,
+  <span class='kw'>aggregation_function</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

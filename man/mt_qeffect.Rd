@@ -4,8 +4,16 @@
 \alias{mt_qeffect}
 \title{Create quantile-effect plot}
 \usage{
-mt_qeffect(data, compare, use = "measures", measure = "MAD",
-  direction = "upward", n_steps = 100, return_data = FALSE, ...)
+mt_qeffect(
+  data,
+  compare,
+  use = "measures",
+  measure = "MAD",
+  direction = "upward",
+  n_steps = 100,
+  return_data = FALSE,
+  ...
+)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import

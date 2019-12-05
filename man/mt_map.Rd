@@ -4,11 +4,19 @@
 \alias{mt_map}
 \title{Map trajectories to prototypes.}
 \usage{
-mt_map(data, use = "sp_trajectories", save_as = "prototyping",
+mt_map(
+  data,
+  use = "sp_trajectories",
+  save_as = "prototyping",
   dimensions = c("xpos", "ypos"),
-  prototypes = mousetrap::mt_prototypes, weights = rep(1,
-  length(dimensions)), pointwise = TRUE, na_rm = FALSE,
-  minkowski_p = 2, use2 = "data", grouping_variables = NULL)
+  prototypes = mousetrap::mt_prototypes,
+  weights = rep(1, length(dimensions)),
+  pointwise = TRUE,
+  na_rm = FALSE,
+  minkowski_p = 2,
+  use2 = "data",
+  grouping_variables = NULL
+)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import

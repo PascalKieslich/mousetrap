@@ -4,9 +4,14 @@
 \alias{mt_remap_symmetric}
 \title{Remap mouse trajectories.}
 \usage{
-mt_remap_symmetric(data, use = "trajectories", save_as = use,
-  dimensions = c("xpos", "ypos"), remap_xpos = "left",
-  remap_ypos = "up")
+mt_remap_symmetric(
+  data,
+  use = "trajectories",
+  save_as = use,
+  dimensions = c("xpos", "ypos"),
+  remap_xpos = "left",
+  remap_ypos = "up"
+)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import

@@ -74,7 +74,7 @@ for plotting velocity and acceleration profiles." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.4</span>
       </span>
     </div>
 
@@ -124,15 +124,41 @@ variables using the <code>color</code> and <code>linetype</code> arguments. If t
 for plotting velocity and acceleration profiles.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mt_plot</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>use2</span> <span class='kw'>=</span> <span class='st'>"data"</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"xpos"</span>,
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='st'>"ypos"</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>linetype</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>facet_row</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>facet_col</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>points</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>only_ggplot</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>mt_id</span> <span class='kw'>=</span> <span class='st'>"mt_id"</span>, <span class='no'>...</span>)
+    <pre class="usage"><span class='fu'>mt_plot</span>(
+  <span class='no'>data</span>,
+  <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>,
+  <span class='kw'>use2</span> <span class='kw'>=</span> <span class='st'>"data"</span>,
+  <span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"xpos"</span>,
+  <span class='kw'>y</span> <span class='kw'>=</span> <span class='st'>"ypos"</span>,
+  <span class='kw'>color</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>linetype</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
+  <span class='kw'>facet_row</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>facet_col</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>points</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>only_ggplot</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>mt_id</span> <span class='kw'>=</span> <span class='st'>"mt_id"</span>,
+  <span class='no'>...</span>
+)
 
-<span class='fu'>mt_plot_aggregate</span>(<span class='no'>data</span>, <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>, <span class='kw'>use2</span> <span class='kw'>=</span> <span class='st'>"data"</span>,
-  <span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"xpos"</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='st'>"ypos"</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>linetype</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>facet_row</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>facet_col</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>points</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>only_ggplot</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>subject_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>mt_plot_aggregate</span>(
+  <span class='no'>data</span>,
+  <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>,
+  <span class='kw'>use2</span> <span class='kw'>=</span> <span class='st'>"data"</span>,
+  <span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"xpos"</span>,
+  <span class='kw'>y</span> <span class='kw'>=</span> <span class='st'>"ypos"</span>,
+  <span class='kw'>color</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>linetype</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
+  <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
+  <span class='kw'>facet_row</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>facet_col</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>points</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>only_ggplot</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>subject_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

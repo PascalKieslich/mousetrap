@@ -4,10 +4,17 @@
 \alias{mt_measures}
 \title{Calculate mouse-tracking measures.}
 \usage{
-mt_measures(data, use = "trajectories", save_as = "measures",
-  dimensions = c("xpos", "ypos"), timestamps = "timestamps",
-  flip_threshold = 0, hover_threshold = NULL,
-  hover_incl_initial = TRUE, verbose = FALSE)
+mt_measures(
+  data,
+  use = "trajectories",
+  save_as = "measures",
+  dimensions = c("xpos", "ypos"),
+  timestamps = "timestamps",
+  flip_threshold = 0,
+  hover_threshold = NULL,
+  hover_incl_initial = TRUE,
+  verbose = FALSE
+)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import

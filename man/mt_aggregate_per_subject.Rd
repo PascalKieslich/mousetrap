@@ -4,9 +4,16 @@
 \alias{mt_aggregate_per_subject}
 \title{Aggregate mouse-tracking data per condition separately for each subject.}
 \usage{
-mt_aggregate_per_subject(data, use = "measures", use_variables = NULL,
-  use2 = "data", use2_variables = NULL, subject_id,
-  trajectories_long = TRUE, ...)
+mt_aggregate_per_subject(
+  data,
+  use = "measures",
+  use_variables = NULL,
+  use2 = "data",
+  use2_variables = NULL,
+  subject_id,
+  trajectories_long = TRUE,
+  ...
+)
 }
 \arguments{
 \item{data}{a mousetrap data object created using one of the mt_import
