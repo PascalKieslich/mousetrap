@@ -59,7 +59,9 @@
 #' subtracting the value of the first timestamp from all timestamps within a
 #' trial (assuming that the first timestamp corresponds to the time when
 #' tracking started). Timestamps are reset by default when importing the data
-#' using one of the mt_import functions (e.g., \link{mt_import_mousetrap}).
+#' using one of the mt_import functions (e.g., \link{mt_import_mousetrap}). Note
+#' that \code{initiation_time} is defined as the last timestamp before the
+#' \code{initiation_threshold} was crossed.
 #' 
 #' 
 #' 
@@ -87,6 +89,11 @@
 #' @param hover_incl_initial logical indicating if the calculation of hovers
 #'   should include a potential initial phase in the trial without mouse
 #'   movements (this initial phase is included by default).
+#' @param initiation_threshold a numeric value specifying the distance from the
+#'   start point of the trajectory that needs to be exceeded for calculating the
+#'   initiation time. By default, it is 0, meaning that any movement counts as
+#'   movement initiation.
+#'   
 #'   
 #' @return A mousetrap data object (see \link{mt_example}) where an additional 
 #'   \link{data.frame} has been added (by default called "measures") containing 
@@ -199,6 +206,7 @@ mt_measures <- function(
   use="trajectories", save_as="measures",
   dimensions=c("xpos","ypos"), timestamps="timestamps",
   flip_threshold=0, hover_threshold=NULL, hover_incl_initial=TRUE,
+  initiation_threshold=0,
   verbose=FALSE) {
   
   if(length(dimensions)!=2){
@@ -415,6 +423,12 @@ mt_measures <- function(
       
       measures[i,"RT"] <- current_timestamps[current_nlogs]
       
+      dist_from_start <- sqrt((current_dim1-current_dim1[1])^2+(current_dim2-current_dim2[1])^2)
+      measures[i,"initiation_time"] <- current_timestamps[which(dist_from_start>initiation_threshold)[1]-1]
+      if (is.na(measures[i,"initiation_time"])){
+        measures[i,"initiation_time"] <- measures[i,"RT"]
+      } 
+      
       # Calculate variables for phases with and without movement
       time_diffs <- diff(current_timestamps)
       # Indicate for each sample whether the position changed
@@ -422,7 +436,6 @@ mt_measures <- function(
 
       if (all(pos_constant == FALSE)) {
         # Continuous movement
-        measures[i,"initiation_time"] <- current_timestamps[1]
         measures[i,"idle_time"] <- current_timestamps[1]
         if (!is.null(hover_threshold)){
           measures[i,grep("hover_time",mt_measures)] <- 
@@ -433,7 +446,6 @@ mt_measures <- function(
         
       } else if (all(pos_constant == TRUE)) {
         # No movement at all
-        measures[i,"initiation_time"] <- measures[i,"RT"]
         measures[i,"idle_time"] <- measures[i,"RT"]
         if (!is.null(hover_threshold)){
           
@@ -446,11 +458,7 @@ mt_measures <- function(
         
       } else {
         # Intermittent movement
-        measures[i,"initiation_time"] <- ifelse(
-          !pos_constant[1],
-          current_timestamps[1],
-          current_timestamps[1]+sum(time_diffs[1:(which(pos_constant == FALSE)[1]-1)])
-        )
+        
         measures[i,"idle_time"] <- sum(time_diffs[pos_constant])
         
         

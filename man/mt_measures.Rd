@@ -13,6 +13,7 @@ mt_measures(
   flip_threshold = 0,
   hover_threshold = NULL,
   hover_incl_initial = TRUE,
+  initiation_threshold = 0,
   verbose = FALSE
 )
 }
@@ -52,6 +53,11 @@ value).}
 \item{hover_incl_initial}{logical indicating if the calculation of hovers
 should include a potential initial phase in the trial without mouse
 movements (this initial phase is included by default).}
+
+\item{initiation_threshold}{a numeric value specifying the distance from the
+start point of the trajectory that needs to be exceeded for calculating the
+initiation time. By default, it is 0, meaning that any movement counts as
+movement initiation.}
 
 \item{verbose}{logical indicating whether function should report its
 progress.}
@@ -178,7 +184,9 @@ start. Therefore, all timestamps should be reset during data import by
 subtracting the value of the first timestamp from all timestamps within a
 trial (assuming that the first timestamp corresponds to the time when
 tracking started). Timestamps are reset by default when importing the data
-using one of the mt_import functions (e.g., \link{mt_import_mousetrap}).
+using one of the mt_import functions (e.g., \link{mt_import_mousetrap}). Note
+that \code{initiation_time} is defined as the last timestamp before the
+\code{initiation_threshold} was crossed.
 }
 \examples{
 mt_example <- mt_derivatives(mt_example)
