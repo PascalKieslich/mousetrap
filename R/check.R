@@ -21,6 +21,9 @@
 #' @param desired an optional integer. If specified, additional statistics are
 #'   computed concerning the (relative) frequencies with which exactly the
 #'   desired timestamp difference (with tolerance 1e-12) occurred.
+#' @param digits an optional integer. If specified, timestamps will be rounded
+#'   before performing any checks. Potentially useful if timestamps are recorded
+#'   with submillisecond precision.
 #'   
 #' @return A list with various descriptive statistics. For convenience, the
 #'   relative frequencies are rounded to 4 decimal places.
@@ -35,9 +38,15 @@
 #' 
 #' @export
 mt_check_resolution <- function(data, use="trajectories",
-  timestamps="timestamps", desired=NULL) {
+  timestamps="timestamps", desired=NULL,
+  digits=NULL) {
   
   trajectories <- extract_data(data=data,use=use)
+  
+  # Round timestamps (optional)
+  if (!is.null(digits)){
+    trajectories[, , timestamps] <- round(trajectories[, , timestamps],digits=digits)
+  }
 
   # Compute steps in the timestamps
   if(dim( trajectories )[1] == 1) {

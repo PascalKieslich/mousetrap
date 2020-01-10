@@ -8,7 +8,8 @@ mt_check_resolution(
   data,
   use = "trajectories",
   timestamps = "timestamps",
-  desired = NULL
+  desired = NULL,
+  digits = NULL
 )
 }
 \arguments{
@@ -25,6 +26,10 @@ containing the timestamps.}
 \item{desired}{an optional integer. If specified, additional statistics are
 computed concerning the (relative) frequencies with which exactly the
 desired timestamp difference (with tolerance 1e-12) occurred.}
+
+\item{digits}{an optional integer. If specified, timestamps will be rounded
+before performing any checks. Potentially useful if timestamps are recorded
+with submillisecond precision.}
 }
 \value{
 A list with various descriptive statistics. For convenience, the
