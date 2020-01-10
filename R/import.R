@@ -64,6 +64,9 @@
 #' @param reset_timestamps logical indicating if the first timestamp should be
 #'   subtracted from all timestamps within a trial. Default is \code{TRUE} as it
 #'   is recommended for all following analyses in mousetrap.
+#' @param digits an optional integer. If specified, timestamps will be rounded.
+#'   Potentially useful if timestamps are recorded with submillisecond
+#'   precision.
 #' @param verbose logical indicating whether function should report its
 #'   progress.
 #'
@@ -98,6 +101,7 @@ mt_import_mousetrap <- function(raw_data,
   mt_id_label=NULL,
   split=",", duplicates="remove_first",
   reset_timestamps=TRUE,
+  digits=NULL,
   verbose=FALSE) {
   
   # Set labels
@@ -323,6 +327,11 @@ mt_import_mousetrap <- function(raw_data,
   # Subtract first timestamp for each trial
   if (reset_timestamps) {
     trajectories[,,timestamps] <- trajectories[,,timestamps] - trajectories[,1,timestamps]
+  }
+  
+  # Round timestamps (optional)
+  if (!is.null(digits)){
+    trajectories[, , timestamps] <- round(trajectories[, , timestamps],digits=digits)
   }
 
   # Drop raw data columns

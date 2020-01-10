@@ -13,6 +13,7 @@ mt_import_mousetrap(
   split = ",",
   duplicates = "remove_first",
   reset_timestamps = TRUE,
+  digits = NULL,
   verbose = FALSE
 )
 }
@@ -46,6 +47,10 @@ within a trial are handled (see Details).}
 \item{reset_timestamps}{logical indicating if the first timestamp should be
 subtracted from all timestamps within a trial. Default is \code{TRUE} as it
 is recommended for all following analyses in mousetrap.}
+
+\item{digits}{an optional integer. If specified, timestamps will be rounded.
+Potentially useful if timestamps are recorded with submillisecond
+precision.}
 
 \item{verbose}{logical indicating whether function should report its
 progress.}
