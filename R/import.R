@@ -37,10 +37,21 @@
 #' other trials).
 #'
 #' \code{duplicates} allows for different options to handle duplicate timestamps
-#' within a trial: \itemize{ \item{\code{remove_first}: First timestamp and
-#' corresponding x-/y-positions are removed (the default).}
+#' within a trial: \itemize{
+#' \item{\code{remove_first}: First timestamp and corresponding x-/y-positions
+#' are removed (the default).}
 #' \item{\code{remove_last}: Last timestamp and corresponding x-/y-positions are
-#' removed.} \item{\code{ignore}: Duplicates are kept.} }
+#' removed.}
+#' \item{\code{ignore}: Duplicates are kept.} }
+#'
+#' \code{unordered} allows for different options to handle unordered, that is,
+#' non-monotonically increasing timestamps, within a trial: \itemize{
+#' \item{\code{warn}: A warning is issued if unordered timestamps are
+#' encountered in a trial (the default).}
+#' \item{\code{remove}: Unordered timestamps within a trial are removed. This
+#' means that any timestamp that is smaller than its predecessor will be removed
+#' along with the corresponding x-/y-position.}
+#' \item{\code{ignore}: Unordered timestamps are kept and no warning is issued.} }
 #'
 #' @param raw_data a data.frame containing the raw data.
 #' @param xpos_label a character string specifying the name of the column(s) in
@@ -61,6 +72,9 @@
 #'   coordinates within a trial are separated.
 #' @param duplicates a character string indicating how duplicate timestamps
 #'   within a trial are handled (see Details).
+#' @param unordered a character string indicating how unordered (i.e.,
+#'   non-monotonically increasing) timestamps within a trial are handled (see
+#'   Details).
 #' @param reset_timestamps logical indicating if the first timestamp should be
 #'   subtracted from all timestamps within a trial. Default is \code{TRUE} as it
 #'   is recommended for all following analyses in mousetrap.
@@ -99,7 +113,9 @@ mt_import_mousetrap <- function(raw_data,
   xpos_label="xpos", ypos_label="ypos",
   timestamps_label="timestamps",
   mt_id_label=NULL,
-  split=",", duplicates="remove_first",
+  split=",",
+  duplicates="remove_first",
+  unordered="warn",
   reset_timestamps=TRUE,
   digits=NULL,
   verbose=FALSE) {
@@ -264,10 +280,38 @@ mt_import_mousetrap <- function(raw_data,
     current_timestamps <- current_timestamps[1:sum(!is.na(current_timestamps))]
 
     # Check that timestamps are monotonically increasing
-    if (any(diff(current_timestamps) < 0)) {
-      warning(
-        "For some trajectories, timestamps are not monotonically increasing."
-      )
+    if (unordered != "ignore") {
+      
+      if (unordered %in% c("warn", "remove")) {
+        
+        if (any(diff(current_timestamps) < 0)) {
+          if (unordered=="warn"){
+            warning(
+              "Trajectory encountered where timestamps are not monotonically increasing."
+            )
+            
+          } else{
+            current_xpos <- trajectories[i, 1:length(current_timestamps), xpos]
+            current_ypos <- trajectories[i, 1:length(current_timestamps), ypos]
+            trajectories[i,,] <- NA
+            keep <- c(TRUE,diff(current_timestamps) >= 0)
+            current_timestamps <- current_timestamps[keep]
+            trajectories[i,1:length(current_timestamps),timestamps] <- current_timestamps
+            trajectories[i,1:length(current_timestamps),xpos] <- current_xpos[keep]
+            trajectories[i,1:length(current_timestamps),ypos] <- current_ypos[keep]
+            warning(
+              "Trajectory encountered where timestamps are not monotonically increasing. ",
+              "The corresponding timestamps were removed."
+            )
+          }
+        }
+        
+      } else {
+        stop(
+          "Please specify correct value for unordered: ",
+          "warn, remove, or ignore"
+        )
+      }
     }
 
     # Check for duplicates

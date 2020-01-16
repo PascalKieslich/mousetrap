@@ -12,6 +12,7 @@ mt_import_mousetrap(
   mt_id_label = NULL,
   split = ",",
   duplicates = "remove_first",
+  unordered = "warn",
   reset_timestamps = TRUE,
   digits = NULL,
   verbose = FALSE
@@ -43,6 +44,10 @@ coordinates within a trial are separated.}
 
 \item{duplicates}{a character string indicating how duplicate timestamps
 within a trial are handled (see Details).}
+
+\item{unordered}{a character string indicating how unordered (i.e.,
+non-monotonically increasing) timestamps within a trial are handled (see
+Details).}
 
 \item{reset_timestamps}{logical indicating if the first timestamp should be
 subtracted from all timestamps within a trial. Default is \code{TRUE} as it
@@ -100,10 +105,21 @@ these cases will be ignored (this covers the special case that, e.g.,
 other trials).
 
 \code{duplicates} allows for different options to handle duplicate timestamps
-within a trial: \itemize{ \item{\code{remove_first}: First timestamp and
-corresponding x-/y-positions are removed (the default).}
+within a trial: \itemize{
+\item{\code{remove_first}: First timestamp and corresponding x-/y-positions
+are removed (the default).}
 \item{\code{remove_last}: Last timestamp and corresponding x-/y-positions are
-removed.} \item{\code{ignore}: Duplicates are kept.} }
+removed.}
+\item{\code{ignore}: Duplicates are kept.} }
+
+\code{unordered} allows for different options to handle unordered, that is,
+non-monotonically increasing timestamps, within a trial: \itemize{
+\item{\code{warn}: A warning is issued if unordered timestamps are
+encountered in a trial (the default).}
+\item{\code{remove}: Unordered timestamps within a trial are removed. This
+means that any timestamp that is smaller than its predecessor will be removed
+along with the corresponding x-/y-position.}
+\item{\code{ignore}: Unordered timestamps are kept and no warning is issued.} }
 }
 \examples{
 mt_data <- mt_import_mousetrap(mt_example_raw)
