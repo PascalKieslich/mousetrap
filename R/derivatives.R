@@ -24,9 +24,9 @@
 #'
 #' If the distance is calculated across both horizontal and vertical (x and y) 
 #' dimensions, distance and velocity is always positive (or 0). If only one 
-#' dimension is used, by default (\code{absolute=TRUE}), increases in x (or y)
+#' dimension is used, by default (\code{absolute=FALSE}), increases in x (or y)
 #' values result in positive distances and velocity values, decreases in
-#' negative distances and velocity values. If \code{absolute=FALSE}, absolute
+#' negative distances and velocity values. If \code{absolute=TRUE}, absolute
 #' values for distance and velocity are reported.
 #'
 #' @inheritParams mt_time_normalize
