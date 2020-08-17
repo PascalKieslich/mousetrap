@@ -17,6 +17,8 @@ mt_plot(
   size = 0.5,
   facet_row = NULL,
   facet_col = NULL,
+  wrap_var = NULL,
+  wrap_ncol = NULL,
   points = FALSE,
   only_ggplot = FALSE,
   mt_id = "mt_id",
@@ -35,6 +37,8 @@ mt_plot_aggregate(
   size = 0.5,
   facet_row = NULL,
   facet_col = NULL,
+  wrap_var = NULL,
+  wrap_ncol = NULL,
   points = FALSE,
   only_ggplot = FALSE,
   subject_id = NULL,
@@ -82,6 +86,12 @@ the plotted trajectory lines.}
 
 \item{facet_col}{an optional character string specifying a variable in 
 \code{data[[use2]]} that should be used for (column-wise) faceting.}
+
+\item{wrap_var}{an optional character string specifying variable(s) in 
+\code{data[[use2]]} that should be used for wrapping.}
+
+\item{wrap_ncol}{an optional integer specifying the number of columns if
+wrapping is used.}
 
 \item{points}{logical. If \code{TRUE}, points will be added to the plot using
 \link[ggplot2]{geom_point}.}
