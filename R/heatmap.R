@@ -723,7 +723,7 @@ mt_heatmap_ggplot <- function(data,
     ggplot2::scale_y_continuous(
       expand=c(0,0), limits=range(plot_data$y)
     ) +
-    ggplot2::geom_raster(
+    ggplot2::geom_tile(
       fill=plot_data$col
     ) +
     ggplot2::theme(
