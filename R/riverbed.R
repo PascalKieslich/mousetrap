@@ -183,7 +183,7 @@ mt_plot_riverbed <- function(data, use='tn_trajectories',
   # Create plot output
   output <- ggplot2::ggplot(ggplot2::aes_string(x='value_x', y='value_y', 
       fill='frequency'), data=riverbed) +
-    ggplot2::geom_raster() +
+    ggplot2::geom_tile() +
     ggplot2::scale_fill_gradientn(colours=rev(RColorBrewer::brewer.pal(9, "YlOrRd")),
       name='Frequency', trans='log', labels=scales::percent) +
     ggplot2::scale_alpha_manual(values=c(0, 1), guide='none') +
