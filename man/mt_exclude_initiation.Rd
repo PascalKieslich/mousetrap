@@ -73,7 +73,7 @@ mt_example <- mt_exclude_initiation(mt_example,
 \link{mt_measures} for calculating the initiation time.
 }
 \author{
-Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
+Pascal J. Kieslich (\email{pascal.kieslich@gmail.com})
 
 Felix Henninger
 }

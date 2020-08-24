@@ -56,7 +56,7 @@ ChickWeight_scaled <-  scale_within(
    \link{mt_standardize} for standardizing measures in a mousetrap data object.
 }
 \author{
-Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
+Pascal J. Kieslich (\email{pascal.kieslich@gmail.com})
 
 Felix Henninger
 }

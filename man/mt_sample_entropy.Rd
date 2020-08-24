@@ -105,7 +105,7 @@ Processes & Intergroup Relations, 18}(3), 384-401.
 measures.
 }
 \author{
-Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
+Pascal J. Kieslich (\email{pascal.kieslich@gmail.com})
 
 Dirk Wulff
 

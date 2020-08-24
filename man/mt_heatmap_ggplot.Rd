@@ -74,7 +74,7 @@ Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F.,
   \link{mt_diffmap} for plotting trajectory difference-heatmaps.
 }
 \author{
-Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
+Pascal J. Kieslich (\email{pascal.kieslich@gmail.com})
 
 Felix Henninger
 

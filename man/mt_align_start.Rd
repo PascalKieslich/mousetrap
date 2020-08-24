@@ -72,7 +72,7 @@ mt_example <- mt_align_start(mt_example,
 \link{mt_remap_symmetric} for remapping trajectories.
 }
 \author{
-Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
+Pascal J. Kieslich (\email{pascal.kieslich@gmail.com})
 
 Felix Henninger
 }

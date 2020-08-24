@@ -41,7 +41,7 @@
 #'   use2_variables=c("subject_nr","Condition"))
 #' 
 #' @author
-#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' Pascal J. Kieslich (\email{pascal.kieslich@@gmail.com})
 #' 
 #' Felix Henninger
 #' 

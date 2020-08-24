@@ -52,7 +52,7 @@ mt_prototypes_ext <- mt_add_trajectory(mt_prototypes,
 
 }
 \author{
-Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
+Pascal J. Kieslich (\email{pascal.kieslich@gmail.com})
 
 Felix Henninger
 }

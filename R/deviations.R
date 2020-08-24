@@ -55,7 +55,7 @@
 #'   start_ideal=c(0,0), end_ideal=c(-665,974))
 #' 
 #' @author
-#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' Pascal J. Kieslich (\email{pascal.kieslich@@gmail.com})
 #' 
 #' Felix Henninger
 #' 

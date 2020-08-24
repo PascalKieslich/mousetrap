@@ -33,7 +33,7 @@
 #' bimodality_coefficient(pfister_data_b) #.79
 #' 
 #' @author
-#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' Pascal J. Kieslich (\email{pascal.kieslich@@gmail.com})
 #' 
 #' Felix Henninger
 #' 
@@ -169,7 +169,7 @@ bimodality_coefficient <- function(x, na.rm=FALSE) {
 #'   grouping_variables="Condition")
 #'                     
 #' @author
-#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' Pascal J. Kieslich (\email{pascal.kieslich@@gmail.com})
 #' 
 #' Felix Henninger
 #' 

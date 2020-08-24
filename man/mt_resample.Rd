@@ -101,7 +101,7 @@ mt_example <- mt_resample(mt_example,
   \link{mt_time_normalize} for time-normalizing trajectories.
 }
 \author{
-Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
+Pascal J. Kieslich (\email{pascal.kieslich@gmail.com})
 
 Felix Henninger
 }

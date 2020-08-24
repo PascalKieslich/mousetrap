@@ -21,7 +21,7 @@
 #' )
 #'
 #' @author
-#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' Pascal J. Kieslich (\email{pascal.kieslich@@gmail.com})
 #' 
 #' Felix Henninger
 #' 
@@ -96,7 +96,7 @@ mt_add_trajectory <- function(
 #' )
 #' 
 #' @author
-#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' Pascal J. Kieslich (\email{pascal.kieslich@@gmail.com})
 #' 
 #' Felix Henninger
 #' 
@@ -198,7 +198,7 @@ mt_bind <- function(
 #'   variables=list(xy_sum=xy_sum, xy_prod=xy_prod))
 #'
 #' @author
-#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' Pascal J. Kieslich (\email{pascal.kieslich@@gmail.com})
 #' 
 #' Felix Henninger
 #' 

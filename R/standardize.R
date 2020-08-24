@@ -33,7 +33,7 @@
 #'  within="Chick", prefix="z_")
 #'  
 #' @author
-#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' Pascal J. Kieslich (\email{pascal.kieslich@@gmail.com})
 #' 
 #' Felix Henninger
 #' 
@@ -152,7 +152,7 @@ scale_within <-function(data,
 #'   prefix="z_")
 #'   
 #' @author
-#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' Pascal J. Kieslich (\email{pascal.kieslich@@gmail.com})
 #' 
 #' Felix Henninger
 #'   

@@ -229,7 +229,7 @@ Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B.,
   \link[dplyr:mutate-joins]{inner_join} for merging data using the \code{dplyr} package.
 }
 \author{
-Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
+Pascal J. Kieslich (\email{pascal.kieslich@gmail.com})
 
 Felix Henninger
 }

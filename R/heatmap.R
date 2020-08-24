@@ -626,7 +626,7 @@ mt_heatmap <- function(
 #' @param ... arguments passed to \link{mt_heatmap_raw}.
 #' 
 #' @author
-#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' Pascal J. Kieslich (\email{pascal.kieslich@@gmail.com})
 #'
 #' Felix Henninger
 #'

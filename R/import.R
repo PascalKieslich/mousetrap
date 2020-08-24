@@ -104,7 +104,7 @@
 #' mt_data <- mt_import_mousetrap(mt_example_raw)
 #'
 #' @author
-#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' Pascal J. Kieslich (\email{pascal.kieslich@@gmail.com})
 #' 
 #' Felix Henninger
 #' 
@@ -467,7 +467,7 @@ mt_import_mousetrap <- function(raw_data,
 #'   timestamps_label="timestamps")
 #' 
 #' @author
-#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' Pascal J. Kieslich (\email{pascal.kieslich@@gmail.com})
 #' 
 #' Felix Henninger
 #' 
@@ -719,7 +719,7 @@ mt_import_wide <- function(raw_data,
 #' }
 #' 
 #' @author
-#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' Pascal J. Kieslich (\email{pascal.kieslich@@gmail.com})
 #' 
 #' Felix Henninger
 #' 

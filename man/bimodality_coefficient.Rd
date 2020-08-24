@@ -46,7 +46,7 @@ Good things peak in pairs: A note on the bimodality coefficient.
   a mousetrap data object.
 }
 \author{
-Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
+Pascal J. Kieslich (\email{pascal.kieslich@gmail.com})
 
 Felix Henninger
 }

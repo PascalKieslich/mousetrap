@@ -84,7 +84,7 @@ Spivey, M. J., Grosjean, M., & Knoblich, G. (2005). Continuous
   interval.
 }
 \author{
-Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
+Pascal J. Kieslich (\email{pascal.kieslich@gmail.com})
 
 Felix Henninger
 }

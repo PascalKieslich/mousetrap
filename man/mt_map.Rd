@@ -171,5 +171,5 @@ Dirk U. Wulff (\email{dirk.wulff@gmail.com})
 
 Jonas M. B. Haslbeck (\email{jonas.haslbeck@gmail.com})
 
-Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
+Pascal J. Kieslich (\email{pascal.kieslich@gmail.com})
 }

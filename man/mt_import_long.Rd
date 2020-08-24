@@ -107,7 +107,7 @@ mt_data <- mt_import_long(exp_data,
   mouse-tracking data in other formats.
 }
 \author{
-Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
+Pascal J. Kieslich (\email{pascal.kieslich@gmail.com})
 
 Felix Henninger
 }

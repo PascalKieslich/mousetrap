@@ -106,7 +106,7 @@ mt_example <- mt_derivatives(mt_example,
   measures.
 }
 \author{
-Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
+Pascal J. Kieslich (\email{pascal.kieslich@gmail.com})
 
 Felix Henninger
 }

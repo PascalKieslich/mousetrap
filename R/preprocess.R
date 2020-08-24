@@ -57,7 +57,7 @@
 #'   save_as="tn_trajectories", nsteps=101)
 #'
 #' @author
-#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' Pascal J. Kieslich (\email{pascal.kieslich@@gmail.com})
 #' 
 #' Felix Henninger
 #' 
@@ -170,7 +170,7 @@ mt_time_normalize <- function(data,
 #'   remap_xpos="no", remap_ypos="up")
 #'   
 #' @author
-#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' Pascal J. Kieslich (\email{pascal.kieslich@@gmail.com})
 #' 
 #' Felix Henninger
 #'
@@ -267,7 +267,7 @@ mt_remap_symmetric <- function(
 #'   save_as="mod_trajectories")
 #'
 #' @author
-#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' Pascal J. Kieslich (\email{pascal.kieslich@@gmail.com})
 #' 
 #' Felix Henninger
 #' 
@@ -375,7 +375,7 @@ mt_exclude_initiation <- function(data,
 #' }
 #'   
 #' @author
-#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' Pascal J. Kieslich (\email{pascal.kieslich@@gmail.com})
 #' 
 #' Felix Henninger
 #'
@@ -477,7 +477,7 @@ mt_space_normalize <- function(
 #' 
 #'   
 #' @author
-#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' Pascal J. Kieslich (\email{pascal.kieslich@@gmail.com})
 #' 
 #' Felix Henninger
 #'
@@ -577,7 +577,7 @@ mt_align_start_end <- function(
 #'   start=NULL)
 #'   
 #' @author
-#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' Pascal J. Kieslich (\email{pascal.kieslich@@gmail.com})
 #' 
 #' Felix Henninger
 #' 
@@ -677,7 +677,7 @@ mt_align_start <- function(
 #'   step_size=50)
 #'
 #' @author
-#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' Pascal J. Kieslich (\email{pascal.kieslich@@gmail.com})
 #' 
 #' Felix Henninger
 #' 
@@ -853,7 +853,7 @@ mt_resample <- function(data,
 #'   interval.
 #' 
 #' @author
-#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' Pascal J. Kieslich (\email{pascal.kieslich@@gmail.com})
 #' 
 #' Felix Henninger
 #'
@@ -1045,7 +1045,7 @@ mt_average <- function(data,
 #' mt_example_mad_sub <- mt_subset(mt_example, MAD<400, check="measures")
 #'
 #' @author
-#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' Pascal J. Kieslich (\email{pascal.kieslich@@gmail.com})
 #' 
 #' Felix Henninger
 #' 
@@ -1117,7 +1117,7 @@ mt_subset <- function(data, subset, check="data") {
 #' mt_count(mt_example$trajectories)
 #'
 #' @author
-#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' Pascal J. Kieslich (\email{pascal.kieslich@@gmail.com})
 #' 
 #' @export
 mt_count <- function(data,

@@ -43,5 +43,5 @@ mt_count(mt_example$trajectories)
 
 }
 \author{
-Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})
+Pascal J. Kieslich (\email{pascal.kieslich@gmail.com})
 }
