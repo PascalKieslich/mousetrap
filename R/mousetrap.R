@@ -18,7 +18,7 @@
 #'   \link[readbulk]{read_bulk} function from the 
 #'   \href{http://pascalkieslich.github.io/readbulk/}{readbulk} package can be
 #'   used (or the \link[readbulk]{read_opensesame} function, if data were 
-#'   collected using \href{http://osdoc.cogsci.nl/}{OpenSesame}).
+#'   collected using \href{https://osdoc.cogsci.nl/}{OpenSesame}).
 #'   
 #' @section Import functions:
 #'
@@ -29,7 +29,7 @@
 #'
 #'   \link{mt_import_mousetrap} imports mouse-tracking data that were recorded 
 #'   using the \href{https://github.com/pascalkieslich/mousetrap-os}{mousetrap
-#'   plugin} for \href{http://osdoc.cogsci.nl/}{OpenSesame}.
+#'   plugin} for \href{https://osdoc.cogsci.nl/}{OpenSesame}.
 #'
 #'   \link{mt_import_wide} imports mouse-tracking data saved in a wide format 
 #'   (e.g., data collected using

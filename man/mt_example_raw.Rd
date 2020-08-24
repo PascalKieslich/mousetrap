@@ -34,7 +34,7 @@ mt_example_raw
 }
 \description{
 An exemplary mouse-tracking dataset collected 
-\href{http://osdoc.cogsci.nl/}{OpenSesame} using the 
+\href{https://osdoc.cogsci.nl/}{OpenSesame} using the 
 \href{https://github.com/pascalkieslich/mousetrap-os}{mousetrap plugin} 
 (Kieslich & Henninger, 2017). A preprocessed (as opposed to raw) version of
 the same data can be found in \link{mt_example}.

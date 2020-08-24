@@ -24,15 +24,15 @@ An overview of the functions in this package can be found
 [online](http://pascalkieslich.github.io/mousetrap/reference/mousetrap.html).
 It can also be accessed from within R using `package?mousetrap` once the
 package has been installed. Please see
-[news](http://pascalkieslich.github.io/mousetrap/news) for a summary of
+[news](http://pascalkieslich.github.io/mousetrap/news/) for a summary of
 changes in the package. Questions about using `mousetrap` can be asked
 in the
-[forum](http://forum.cogsci.nl/index.php?p=/categories/mousetrap).
+[forum](https://forum.cogsci.nl/index.php?p=/categories/mousetrap).
 
 The `mousetrap` package offers functions for importing mouse-tracking
 data in different formats and from various sources. One option to
 collect mouse-tracking data is by using the open-source graphical
-experiment builder [OpenSesame](http://osdoc.cogsci.nl/) in combination
+experiment builder [OpenSesame](https://osdoc.cogsci.nl/) in combination
 with the [mousetrap-os
 plugin](https://github.com/pascalkieslich/mousetrap-os).
 
@@ -50,7 +50,7 @@ To install the latest development version from GitHub, you need the
 If you would like to receive information about new releases, you can add
 your email to the [mailing list](http://eepurl.com/co1AqX). Questions
 about using `mousetrap` can be asked in the
-[forum](http://forum.cogsci.nl/index.php?p=/categories/mousetrap).
+[forum](https://forum.cogsci.nl/index.php?p=/categories/mousetrap).
 
 ## Citation
 

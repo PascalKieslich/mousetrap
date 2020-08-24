@@ -1,7 +1,7 @@
 #' Raw mouse-tracking dataset for demonstrations of the mousetrap package
 #'
 #' An exemplary mouse-tracking dataset collected 
-#' \href{http://osdoc.cogsci.nl/}{OpenSesame} using the 
+#' \href{https://osdoc.cogsci.nl/}{OpenSesame} using the 
 #' \href{https://github.com/pascalkieslich/mousetrap-os}{mousetrap plugin} 
 #' (Kieslich & Henninger, 2017). A preprocessed (as opposed to raw) version of
 #' the same data can be found in \link{mt_example}.
@@ -112,7 +112,7 @@
 #' corresponding to the correct category. All exemplars and categories from the
 #' original study were translated to and presented in German.
 #'
-#' The data was collected in \href{http://osdoc.cogsci.nl/}{OpenSesame} using
+#' The data was collected in \href{https://osdoc.cogsci.nl/}{OpenSesame} using
 #' the \href{https://github.com/pascalkieslich/mousetrap-os}{mousetrap plugin} 
 #' (Kieslich & Henninger, 2017).
 #' 

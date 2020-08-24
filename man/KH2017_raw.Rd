@@ -44,7 +44,7 @@ two categories (e.g., "fish" or "mammal") by clicking on the button
 corresponding to the correct category. All exemplars and categories from the
 original study were translated to and presented in German.
 
-The data was collected in \href{http://osdoc.cogsci.nl/}{OpenSesame} using
+The data was collected in \href{https://osdoc.cogsci.nl/}{OpenSesame} using
 the \href{https://github.com/pascalkieslich/mousetrap-os}{mousetrap plugin} 
 (Kieslich & Henninger, 2017).
 

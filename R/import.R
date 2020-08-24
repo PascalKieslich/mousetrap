@@ -2,7 +2,7 @@
 #'
 #' \code{mt_import_mousetrap} accepts a data.frame of (merged) raw data from a 
 #' mouse-tracking experiment implemented in 
-#' \href{http://osdoc.cogsci.nl/}{OpenSesame} using the 
+#' \href{https://osdoc.cogsci.nl/}{OpenSesame} using the 
 #' \href{https://github.com/pascalkieslich/mousetrap-os}{mousetrap plugin} 
 #' (Kieslich & Henninger, 2017). From this data.frame, 
 #' \code{mt_import_mousetrap} creates a mousetrap data object containing the 

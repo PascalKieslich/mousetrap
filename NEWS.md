@@ -34,7 +34,7 @@
 
 ## Announcements
 * Book chapters on the mousetrap software packages have been accepted for publication. See version 3.1.3 above for updated references (as the book chapters meanwhile have been published).
-* If you have any questions when using mousetrap, you can now ask them in the mousetrap forum at http://forum.cogsci.nl/index.php?p=/categories/mousetrap
+* If you have any questions when using mousetrap, you can now ask them in the mousetrap forum at https://forum.cogsci.nl/index.php?p=/categories/mousetrap
 
 ## Changes in specific functions
 * `mt_map`: now allows for mapping trajectories onto prototypes separately for different groups of trajectories (the prototypes will be rescaled separately to match the coordinate system of each group).
