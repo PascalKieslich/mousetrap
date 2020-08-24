@@ -1,16 +1,16 @@
 Package: mousetrap
 Type: Package
-Version: 3.1.4
-Date: 2019-12-05
+Version: 3.1.5
+Date: 2020-08-24
 Title: Process and Analyze Mouse-Tracking Data
 Description: Mouse-tracking, the analysis of mouse movements in computerized
     experiments, is a method that is becoming increasingly popular in the
     cognitive sciences. The mousetrap package offers functions for importing,
     preprocessing, analyzing, aggregating, and visualizing mouse-tracking data.
-Maintainer: Pascal J. Kieslich <kieslich@psychologie.uni-mannheim.de>
+Maintainer: Pascal J. Kieslich <pascal.kieslich@gmail.com>
 Authors@R: c(
     person(c("Pascal","J."), "Kieslich", role= c("aut", "cre"),
-            email= "kieslich@psychologie.uni-mannheim.de",
+            email= "pascal.kieslich@gmail.com",
             comment = c(ORCID = "0000-0002-0853-9364")),
     person(c("Dirk","U."), "Wulff", role = "aut",
     		email = "dirk.wulff@gmail.com",
@@ -52,4 +52,4 @@ Suggests:
 LinkingTo: Rcpp
 Encoding: UTF-8
 LazyData: TRUE
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.1
