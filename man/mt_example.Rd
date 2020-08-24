@@ -4,7 +4,8 @@
 \name{mt_example}
 \alias{mt_example}
 \title{A mousetrap data object.}
-\format{A mousetrap data object is a \link{list} containing  at least the
+\format{
+A mousetrap data object is a \link{list} containing  at least the
   following objects:
   \itemize{
     \item{\code{data}: a \link{data.frame} containing the trial data (from 
@@ -30,7 +31,8 @@
   object. Other functions modify the existing arrays (e.g.,
   \link{mt_derivatives} adds distance, velocity, and acceleration
   to an existing dataset). Finally \link{mt_measures} adds an
-  additional data.frame with mouse-tracking measures to it.}
+  additional data.frame with mouse-tracking measures to it.
+}
 \usage{
 mt_example
 }

@@ -12,14 +12,14 @@ the x-position (\code{x}), y-position (\code{y}), width (\code{w}), and
 height (\code{h}) needs to be provided. If columns are not labeled, the
 order \code{x, y, w, h} is assumed.}
 
-\item{color}{argument passed on to \link[ggplot2]{geom_rect}. Specifies the
+\item{color}{argument passed on to \link[ggplot2:geom_tile]{geom_rect}. Specifies the
 color of the border of the rectangles.}
 
-\item{fill}{argument passed on to \link[ggplot2]{geom_rect}. Specifies the
+\item{fill}{argument passed on to \link[ggplot2:geom_tile]{geom_rect}. Specifies the
 color of the interior of the rectangles. If \code{NA} (the default),
 rectangles are unfilled.}
 
-\item{...}{additional arguments passed on to \link[ggplot2]{geom_rect}.}
+\item{...}{additional arguments passed on to \link[ggplot2:geom_tile]{geom_rect}.}
 }
 \description{
 \code{mt_plot_add_rect} adds one or several rectangles to a mousetrap plot.
@@ -28,7 +28,7 @@ mouse-tracking experiment. It is specifically designed so that the arguments
 from the \code{mousetrap_response} plugin in OpenSesame can be used.
 }
 \details{
-\code{mt_plot_add_rect} internally uses \link[ggplot2]{geom_rect} of the
+\code{mt_plot_add_rect} internally uses \link[ggplot2:geom_tile]{geom_rect} of the
 \code{ggplot2} package for plotting.
 }
 \examples{

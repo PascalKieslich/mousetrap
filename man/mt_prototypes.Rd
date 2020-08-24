@@ -4,7 +4,9 @@
 \name{mt_prototypes}
 \alias{mt_prototypes}
 \title{Mouse trajectory prototypes.}
-\format{An object of class \code{array} of dimension 5 x 100 x 2.}
+\format{
+An object of class \code{array} of dimension 5 x 100 x 2.
+}
 \usage{
 mt_prototypes
 }

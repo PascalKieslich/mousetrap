@@ -55,7 +55,7 @@ contain the condition variable can be found. Defaults to "data" as
 \item{filename}{a character string giving the name of the file. If 
 \code{NULL} (the default), the R standard device is used for plotting.
 Otherwise, the plotting device is inferred from the file extension. Only
-supports devices \link[grDevices]{tiff}, \link[grDevices]{png},
+supports devices \link[grDevices:png]{tiff}, \link[grDevices]{png},
 \link[grDevices]{pdf}.}
 
 \item{bounds}{numeric vector specifying the corners (xmin, ymin, xmax, ymax) 

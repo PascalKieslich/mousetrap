@@ -4,7 +4,8 @@
 \name{KH2017}
 \alias{KH2017}
 \title{Mouse-tracking dataset from Kieslich & Henninger (2017)}
-\format{A mousetrap data object is a \link{list} containing  at least the
+\format{
+A mousetrap data object is a \link{list} containing  at least the
   following objects:
   \itemize{
     \item{\code{data}: a \link{data.frame} containing the trial data (from 
@@ -30,7 +31,8 @@
   object. Other functions modify the existing arrays (e.g.,
   \link{mt_derivatives} adds distance, velocity, and acceleration
   to an existing dataset). Finally \link{mt_measures} adds an
-  additional data.frame with mouse-tracking measures to it.}
+  additional data.frame with mouse-tracking measures to it.
+}
 \usage{
 KH2017
 }

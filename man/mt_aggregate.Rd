@@ -41,7 +41,7 @@ Alternatively, a data.frame can be provided directly.}
 \item{use2_variables}{a character string (or vector) specifying the variables
 (in \code{data[[use2]]}) across which the trajectories / measures will be
 aggregated. For each combination of levels of the grouping variable(s),
-aggregation will be performed separately using \link[dplyr]{summarize_at}.}
+aggregation will be performed separately using \link[dplyr:summarise_all]{summarize_at}.}
 
 \item{subject_id}{an optional character string specifying the column that
 contains the subject identifier. If specified, aggregation will be
@@ -103,7 +103,7 @@ average_measures <- mt_aggregate(mt_example,
 \link{mt_aggregate_per_subject} for aggregating mouse-tracking
   measures and trajectories per subject.
 
-  \link[dplyr]{summarize_at} for aggregating data using the \code{dplyr} 
+  \link[dplyr:summarise_all]{summarize_at} for aggregating data using the \code{dplyr} 
   package.
 }
 \author{

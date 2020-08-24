@@ -430,7 +430,7 @@ mt_heatmap_raw <- function(
 #' function has beta status.
 #' 
 #' \code{mt_heatmap} wraps \link{mt_heatmap_raw} and provides direct plotting 
-#' output in \link[grDevices]{tiff}, \link[grDevices]{png},
+#' output in \link[grDevices:png]{tiff}, \link[grDevices]{png},
 #' \link[grDevices]{pdf}, or R's default window output. For further details on
 #' how the trajectory heatmaps are constructed, see \link{mt_heatmap_raw}.
 #' 
@@ -440,7 +440,7 @@ mt_heatmap_raw <- function(
 #' @param filename a character string giving the name of the file. If 
 #'   \code{NULL} (the default), the R standard device is used for plotting.
 #'   Otherwise, the plotting device is inferred from the file extension. Only
-#'   supports devices \link[grDevices]{tiff}, \link[grDevices]{png},
+#'   supports devices \link[grDevices:png]{tiff}, \link[grDevices]{png},
 #'   \link[grDevices]{pdf}.
 #' @param ... arguments passed to \link{mt_heatmap_raw}.
 #' @param upscale a numeric value by which the output resolution of the image is

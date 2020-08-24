@@ -61,7 +61,7 @@
 #'   x 10 x 24 x .5 = 1200 trajectories.
 #' @param jitter logical specifying whether the density should be jittered. If 
 #'   \code{TRUE}, \code{density} varies according to
-#'   \link[stats]{rgeom}(\code{1/density}).
+#'   \link[stats:Geometric]{rgeom} (\code{1/density}).
 #' @param remove logical specifying whether trajectories that reached their end 
 #'   points should be removed from the rest of the animation. Defaults to 
 #'   \code{FALSE} implying that all finished trajectories remain visible.
@@ -104,7 +104,7 @@
 #'   Windows (see Details and Examples).
 #' @param parallel logical specifying whether the temporary \emph{.png} images
 #'   should be created using parallel processing (uses
-#'   \link[parallel]{clusterApplyLB}). Process will be run on the maximum
+#'   \link[parallel:clusterApply]{clusterApplyLB}). Process will be run on the maximum
 #'   number of available cores (as determined by \link[parallel]{detectCores}).
 #' @param verbose logical indicating whether function should report its 
 #'   progress.

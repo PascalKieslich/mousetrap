@@ -46,7 +46,7 @@
 #'   National Academy of Sciences of the United States of America, 102}(29),
 #'   10393-10398.
 #'
-#' @seealso \link[stats]{approx} for information about the function used for
+#' @seealso \link[stats:approxfun]{approx} for information about the function used for
 #'   linear interpolation.
 #'
 #'   \link{mt_resample} for resampling trajectories using a constant time
@@ -664,7 +664,7 @@ mt_align_start <- function(
 #'   trajectories. If a trajectory array was provided directly as \code{data},
 #'   only the resampled trajectories will be returned.
 #'
-#' @seealso \link[stats]{approx} for information about the function used for
+#' @seealso \link[stats:approxfun]{approx} for information about the function used for
 #'   linear interpolation.
 #'
 #'   \link{mt_average} for averaging trajectories across constant time intervals.

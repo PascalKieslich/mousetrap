@@ -25,7 +25,7 @@
 #' @param use2_variables a character string (or vector) specifying the variables
 #'   (in \code{data[[use2]]}) across which the trajectories / measures will be
 #'   aggregated. For each combination of levels of the grouping variable(s),
-#'   aggregation will be performed separately using \link[dplyr]{summarize_at}.
+#'   aggregation will be performed separately using \link[dplyr:summarise_all]{summarize_at}.
 #' @param subject_id an optional character string specifying the column that
 #'   contains the subject identifier. If specified, aggregation will be
 #'   performed within subjects first (i.e., within subjects for all available
@@ -38,7 +38,7 @@
 #' @seealso \link{mt_aggregate_per_subject} for aggregating mouse-tracking
 #'   measures and trajectories per subject.
 #'
-#'   \link[dplyr]{summarize_at} for aggregating data using the \code{dplyr} 
+#'   \link[dplyr:summarise_all]{summarize_at} for aggregating data using the \code{dplyr} 
 #'   package.
 #'
 #' @examples
@@ -110,7 +110,7 @@ mt_aggregate <- function(data,
 #' @seealso \link{mt_aggregate} for aggregating mouse-tracking measures and
 #'   trajectories per condition.
 #'
-#'   \link[dplyr]{summarize_at} for aggregating data using the \code{dplyr} 
+#'   \link[dplyr:summarise_all]{summarize_at} for aggregating data using the \code{dplyr} 
 #'   package.
 #'
 #' @examples

@@ -59,7 +59,7 @@
 #'   variables (in \code{data[[use2]]}) that should be merged with the data. If
 #'   \code{aggregate==TRUE}, the trajectories / measures will be aggregated
 #'   separately for each of the levels of these variables using
-#'   \link[dplyr]{summarize_at}.
+#'   \link[dplyr:summarise_all]{summarize_at}.
 #' @param subset a logical expression (passed on to \link{subset}) indicating
 #'   elements or rows to keep. If specified, \code{data[[use2]]} will be
 #'   subsetted using this expression, and, afterwards, \code{data[[use]]} will
@@ -75,7 +75,7 @@
 #'   aggregated per subject (if \code{subject_id} is specified and
 #'   \code{aggregate==TRUE}).
 #' @param .funs the aggregation function(s) passed on to
-#'   \code{\link[dplyr]{summarize_at}}. By default, the \code{\link{mean}} is
+#'   \code{\link[dplyr:summarise_all]{summarize_at}}. By default, the \code{\link{mean}} is
 #'   calculated.
 #' @param trajectories_long logical indicating if the reshaped trajectories
 #'   should be returned in long or wide format. If \code{TRUE}, every recorded
@@ -115,7 +115,7 @@
 #'
 #'   \link{mt_export_wide} for exporting mouse-tracking data in wide format.
 #'
-#'   \link[dplyr]{inner_join} for merging data and \code{\link[dplyr]{summarize_at}}
+#'   \link[dplyr:mutate-joins]{inner_join} for merging data and \code{\link[dplyr:summarise_all]{summarize_at}}
 #'   for aggregating data using the \code{dplyr} package.
 #'
 #'

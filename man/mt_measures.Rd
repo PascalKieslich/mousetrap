@@ -226,7 +226,7 @@ Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B.,
   \link{mt_aggregate} and \link{mt_aggregate_per_subject} for aggregating the
   measures.
 
-  \link[dplyr]{inner_join} for merging data using the \code{dplyr} package.
+  \link[dplyr:mutate-joins]{inner_join} for merging data using the \code{dplyr} package.
 }
 \author{
 Pascal J. Kieslich (\email{kieslich@psychologie.uni-mannheim.de})

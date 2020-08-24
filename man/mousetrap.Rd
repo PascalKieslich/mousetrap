@@ -14,7 +14,7 @@ following, a brief overview of the functions in this package is given.
   
   Depending on the file format, one of the standard R functions for reading 
   files into R can be used (e.g., \link[utils]{read.table} or 
-  \link[utils]{read.csv}).
+  \link[utils:read.table]{read.csv}).
 
   If raw data were collected using
   \href{http://www.mousetracker.org/}{MouseTracker}, the mousetrap package 
