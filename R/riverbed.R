@@ -9,7 +9,8 @@
 #' per time step (e.g., Scherbaum et al., 2010).
 #' 
 #' \code{mt_plot_riverbed} usually is applied to time-normalized trajectory data
-#' as all trajectories must contain the same number of values.
+#' as all trajectories must contain the same number of values (if
+#' \code{na.rm=FALSE}, the default).
 #' 
 #' @param data mousetrap data object containing the data to be plotted.
 #' @param use character string specifying the set of trajectories to use in the
@@ -37,6 +38,11 @@
 #'   color. If a vector of length 2 is provided, the first value will be used as
 #'   the color for the major grid lines, the second value for the minor grid
 #'   lines. If set to \code{NA}, no grid lines are plotted.
+#' @param na.rm logical specifying whether missing values should be removed.
+#'   This is not done by default, because generally riverbed plots are generated
+#'   from preprocess trajectories (e.g., time-normalized trajectories) that all
+#'   have the same length (i.e., the same number of steps).
+#' 
 #'   
 #' @references Scherbaum, S., Dshemuchadse, M., Fischer, R., & Goschke, T.
 #'   (2010). How decisions evolve: The temporal dynamics of action selection.
@@ -76,13 +82,13 @@
 #' @author
 #' Felix Henninger (\email{mailbox@@felixhenninger.com})
 #'
-#' Pascal J. Kieslich (\email{kieslich@@psychologie.uni-mannheim.de})
+#' Pascal J. Kieslich (\email{pascal.kieslich@@gmail.com})
 #' 
 #' @export
 mt_plot_riverbed <- function(data, use='tn_trajectories', 
                              y='xpos', y_range=NULL, y_bins=250,
                              facet_row=NULL, facet_col=NULL, facet_data='data',
-                             grid_colors=c("gray30","gray10")) {
+                             grid_colors=c("gray30","gray10"), na.rm=FALSE) {
   
   # Extract data from mousetrap data object
   trajectories <- extract_data(data=data, use=use)
@@ -95,7 +101,7 @@ mt_plot_riverbed <- function(data, use='tn_trajectories',
   # Calculate range of values on y axis,
   # if not specified explicitly
   if (is.null(y_range)) {
-    y_range <- range(trajectories[,,y])
+    y_range <- range(trajectories[,,y],na.rm=na.rm)
   }
   
   # Compute breaks based on the number of bins required
@@ -176,6 +182,9 @@ mt_plot_riverbed <- function(data, use='tn_trajectories',
       riverbed[,'facet_col'] <- factor(riverbed[,'facet_col'],levels=levels(data[[facet_data]][,facet_col]))
     }
   }
+  
+  # Remove NAs
+  riverbed <- riverbed[is.na(riverbed[,"alpha"])==FALSE,]
   
   # Remove zero frequencies (coded in alpha)
   riverbed <- riverbed[riverbed[,"alpha"]==TRUE,]
