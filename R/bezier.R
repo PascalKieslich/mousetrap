@@ -27,7 +27,7 @@
 #' mt_plot(bezier_curves)
 #'    
 #' @author
-#' Dirk U. Wulff (\email{dirk.wulff@@gmail.com})
+#' Dirk U. Wulff
 #' 
 #' @export    
 bezier <- function(x = c(0,1,-1), y = c(0,1.5,1.5), w = 1, resol = 100){

@@ -53,7 +53,7 @@ mt_example <- mt_add_variables(mt_example,
 
 }
 \author{
-Pascal J. Kieslich (\email{pascal.kieslich@gmail.com})
+Pascal J. Kieslich
 
 Felix Henninger
 }

@@ -105,7 +105,7 @@ average_measures <- mt_aggregate_per_subject(
   package.
 }
 \author{
-Pascal J. Kieslich (\email{pascal.kieslich@gmail.com})
+Pascal J. Kieslich
 
 Felix Henninger
 }

@@ -43,5 +43,5 @@ mt_count(mt_example$trajectories)
 
 }
 \author{
-Pascal J. Kieslich (\email{pascal.kieslich@gmail.com})
+Pascal J. Kieslich
 }

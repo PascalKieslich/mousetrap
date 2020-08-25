@@ -167,9 +167,9 @@ Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F.,
   Manuscript in preparation.
 }
 \author{
-Dirk U. Wulff (\email{dirk.wulff@gmail.com})
+Dirk U. Wulff
 
-Jonas M. B. Haslbeck (\email{jonas.haslbeck@gmail.com})
+Jonas M. B. Haslbeck
 
-Pascal J. Kieslich (\email{pascal.kieslich@gmail.com})
+Pascal J. Kieslich
 }

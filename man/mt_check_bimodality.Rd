@@ -126,7 +126,7 @@ Processes & Intergroup Relations, 18}(3), 384-401.
   \link[diptest]{dip.test} for more information about Hartigan's dip test.
 }
 \author{
-Pascal J. Kieslich (\email{pascal.kieslich@gmail.com})
+Pascal J. Kieslich
 
 Felix Henninger
 }

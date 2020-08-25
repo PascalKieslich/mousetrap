@@ -154,7 +154,7 @@
 #' }
 #'
 #' @author
-#' Pascal J. Kieslich (\email{pascal.kieslich@@gmail.com})
+#' Pascal J. Kieslich
 #' 
 #' Felix Henninger
 #' 
@@ -335,7 +335,7 @@ mt_plot_aggregate <- function(data,
 #' \link{mt_plot} for plotting trajectory data.
 #'
 #' @author
-#' Pascal J. Kieslich (\email{pascal.kieslich@@gmail.com})
+#' Pascal J. Kieslich
 #' 
 #' Felix Henninger
 #' 
@@ -449,7 +449,7 @@ mt_plot_add_rect <- function(rect,
 #' }
 #'
 #' @author
-#' Pascal J. Kieslich (\email{pascal.kieslich@@gmail.com})
+#' Pascal J. Kieslich
 #' 
 #' Felix Henninger
 #' 

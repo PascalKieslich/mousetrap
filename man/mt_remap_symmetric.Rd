@@ -80,7 +80,7 @@ mt_example <- mt_remap_symmetric(mt_example,
   
 }
 \author{
-Pascal J. Kieslich (\email{pascal.kieslich@gmail.com})
+Pascal J. Kieslich
 
 Felix Henninger
 }

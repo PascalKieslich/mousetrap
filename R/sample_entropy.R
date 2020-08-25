@@ -71,7 +71,7 @@
 #'   dimension="xpos", m=3)
 #' 
 #' @author
-#' Pascal J. Kieslich (\email{pascal.kieslich@@gmail.com})
+#' Pascal J. Kieslich
 #' 
 #' Dirk Wulff
 #' 

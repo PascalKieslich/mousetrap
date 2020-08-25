@@ -72,7 +72,7 @@ mt_example <- mt_standardize(mt_example,
   \link{scale} for the R base scale function.
 }
 \author{
-Pascal J. Kieslich (\email{pascal.kieslich@gmail.com})
+Pascal J. Kieslich
 
 Felix Henninger
 }

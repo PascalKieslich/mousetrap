@@ -80,9 +80,9 @@
 #' }
 #' 
 #' @author
-#' Felix Henninger (\email{mailbox@@felixhenninger.com})
+#' Felix Henninger
 #'
-#' Pascal J. Kieslich (\email{pascal.kieslich@@gmail.com})
+#' Pascal J. Kieslich
 #' 
 #' @export
 mt_plot_riverbed <- function(data, use='tn_trajectories', 

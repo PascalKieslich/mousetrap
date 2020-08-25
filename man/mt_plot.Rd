@@ -228,7 +228,7 @@ mt_plot(KH2017, use="tn_trajectories", only_ggplot=TRUE) +
   individual pdf files.
 }
 \author{
-Pascal J. Kieslich (\email{pascal.kieslich@gmail.com})
+Pascal J. Kieslich
 
 Felix Henninger
 }

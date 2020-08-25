@@ -155,5 +155,5 @@ Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F.,
   \link{mt_diffmap} for plotting trajectory difference-heatmaps.
 }
 \author{
-Dirk U. Wulff (\email{dirk.wulff@gmail.com})
+Dirk U. Wulff
 }

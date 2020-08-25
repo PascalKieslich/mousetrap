@@ -25,7 +25,7 @@
 #' # Plot heatmap using velocity
 #' #mt_heatmap(SpiveyEtAl2005)
 #' 
-#' @author Dirk U. Wulff (\email{dirk.wulff@@gmail.com})
+#' @author Dirk U. Wulff
 #' 
 #' @return Nothing, when image is plotted using an external device. Otherwise an
 #'   object of class \code{mt_object_raw} containing in a matrix format the

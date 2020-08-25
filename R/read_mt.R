@@ -51,7 +51,7 @@
 #'
 #'
 #' @author
-#' Dirk U. Wulff (\email{dirk.wulff@@gmail.com})
+#' Dirk U. Wulff
 #'
 #' @export
 

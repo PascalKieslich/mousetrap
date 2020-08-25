@@ -64,5 +64,5 @@ combining multiple raw data files.
 \link{mt_import_wide} to prepare the imported data for analyses in mousetrap.
 }
 \author{
-Dirk U. Wulff (\email{dirk.wulff@gmail.com})
+Dirk U. Wulff
 }

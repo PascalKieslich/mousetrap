@@ -180,7 +180,7 @@ trajectories_wide <- mt_reshape(mt_example,
   for aggregating data using the \code{dplyr} package.
 }
 \author{
-Pascal J. Kieslich (\email{pascal.kieslich@gmail.com})
+Pascal J. Kieslich
 
 Felix Henninger
 }

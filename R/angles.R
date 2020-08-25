@@ -36,7 +36,7 @@
 #'   "radian", alternative is "degree".
 #
 #' @author
-#' Dirk U. Wulff (\email{dirk.wulff@@gmail.com})
+#' Dirk U. Wulff
 #'
 #' @return A mousetrap data object (see \link{mt_example}) with point-based and 
 #'   vertical-based angles added as additional variables to the trajectory array

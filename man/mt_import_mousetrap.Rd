@@ -139,7 +139,7 @@ Kieslich, P. J., & Henninger, F. (2017). Mousetrap: An
 data from other sources.
 }
 \author{
-Pascal J. Kieslich (\email{pascal.kieslich@gmail.com})
+Pascal J. Kieslich
 
 Felix Henninger
 }

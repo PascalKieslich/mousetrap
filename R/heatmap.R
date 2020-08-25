@@ -76,7 +76,7 @@
 #' @param seed an optional integer specifying the seed used for the trajectory 
 #'   sampling.
 #' 
-#' @author Dirk U. Wulff (\email{dirk.wulff@@gmail.com})
+#' @author Dirk U. Wulff
 #' 
 #' @return An object of class \code{mt_object_raw} containing in a matrix format
 #'   the image's pixel information, the aggregate trajectory, and the colors.
@@ -453,7 +453,7 @@ mt_heatmap_raw <- function(
 #'
 #'   \link{mt_diffmap} for plotting trajectory difference-heatmaps.
 #' 
-#' @author Dirk U. Wulff (\email{dirk.wulff@@gmail.com})
+#' @author Dirk U. Wulff
 #' 
 #' @references Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F.,
 #'   & Schulte-Mecklenbeck, M. (2019). Mouse-tracking: Detecting types in
@@ -626,7 +626,7 @@ mt_heatmap <- function(
 #' @param ... arguments passed to \link{mt_heatmap_raw}.
 #' 
 #' @author
-#' Pascal J. Kieslich (\email{pascal.kieslich@@gmail.com})
+#' Pascal J. Kieslich
 #'
 #' Felix Henninger
 #'
@@ -806,7 +806,7 @@ print.mt_heatmap_raw = function(x,...){
 #' @param ... arguments passed to \link{mt_heatmap_raw}.
 #'
 #' @author
-#' Dirk U. Wulff (\email{dirk.wulff@@gmail.com})
+#' Dirk U. Wulff
 #'
 #' Pascal J. Kieslich
 #' 

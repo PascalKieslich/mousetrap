@@ -88,7 +88,7 @@ Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor
   \link{mt_remap_symmetric} for remapping trajectories.
 }
 \author{
-Pascal J. Kieslich (\email{pascal.kieslich@gmail.com})
+Pascal J. Kieslich
 
 Felix Henninger
 }

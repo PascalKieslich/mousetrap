@@ -92,7 +92,7 @@ Freeman, J. B., & Ambady, N. (2010). MouseTracker: Software for
   mouse-tracking measures.
 }
 \author{
-Pascal J. Kieslich (\email{pascal.kieslich@gmail.com})
+Pascal J. Kieslich
 
 Felix Henninger
 }

@@ -97,7 +97,7 @@ mt_plot_per_trajectory(mt_example,
 \link{mt_plot} for plotting trajectory data.
 }
 \author{
-Pascal J. Kieslich (\email{pascal.kieslich@gmail.com})
+Pascal J. Kieslich
 
 Felix Henninger
 }

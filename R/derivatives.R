@@ -68,7 +68,7 @@
 #'   dimensions="xpos", absolute=TRUE)
 #'
 #' @author
-#' Pascal J. Kieslich (\email{pascal.kieslich@@gmail.com})
+#' Pascal J. Kieslich
 #' 
 #' Felix Henninger
 #' 

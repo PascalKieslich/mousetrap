@@ -52,9 +52,9 @@
 #' mt_example <- mt_distmat(mt_example, use="sp_trajectories")
 #'
 #' @author
-#' Dirk U. Wulff (\email{dirk.wulff@@gmail.com})
+#' Dirk U. Wulff
 #' 
-#' Jonas M. B. Haslbeck (\email{jonas.haslbeck@@gmail.com})
+#' Jonas M. B. Haslbeck
 #'
 #' @export
 mt_distmat <- function(data,

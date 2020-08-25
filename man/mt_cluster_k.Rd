@@ -178,7 +178,7 @@ Haslbeck, J., & Wulff, D. U. (2016). Estimating the Number of
   number of clusters.
 }
 \author{
-Dirk U. Wulff (\email{dirk.wulff@gmail.com})
+Dirk U. Wulff
 
-Jonas M. B. Haslbeck (\email{jonas.haslbeck@gmail.com})
+Jonas M. B. Haslbeck
 }

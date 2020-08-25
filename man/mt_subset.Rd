@@ -60,7 +60,7 @@ mt_example_mad_sub <- mt_subset(mt_example, MAD<400, check="measures")
   mousetrap functions.
 }
 \author{
-Pascal J. Kieslich (\email{pascal.kieslich@gmail.com})
+Pascal J. Kieslich
 
 Felix Henninger
 }

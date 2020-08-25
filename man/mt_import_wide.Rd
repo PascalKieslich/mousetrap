@@ -119,7 +119,7 @@ studying real-time mental processing using a computer mouse-tracking method.
 mouse-tracking data in other formats.
 }
 \author{
-Pascal J. Kieslich (\email{pascal.kieslich@gmail.com})
+Pascal J. Kieslich
 
 Felix Henninger
 }

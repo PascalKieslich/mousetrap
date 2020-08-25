@@ -162,7 +162,7 @@ Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F.,
   \link{mt_cluster_k} for estimating the optimal number of clusters.
 }
 \author{
-Dirk U. Wulff (\email{dirk.wulff@gmail.com})
+Dirk U. Wulff
 
-Jonas M. B. Haslbeck (\email{jonas.haslbeck@gmail.com})
+Jonas M. B. Haslbeck
 }

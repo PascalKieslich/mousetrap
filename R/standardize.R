@@ -33,7 +33,7 @@
 #'  within="Chick", prefix="z_")
 #'  
 #' @author
-#' Pascal J. Kieslich (\email{pascal.kieslich@@gmail.com})
+#' Pascal J. Kieslich
 #' 
 #' Felix Henninger
 #' 
@@ -152,7 +152,7 @@ scale_within <-function(data,
 #'   prefix="z_")
 #'   
 #' @author
-#' Pascal J. Kieslich (\email{pascal.kieslich@@gmail.com})
+#' Pascal J. Kieslich
 #' 
 #' Felix Henninger
 #'   
@@ -236,7 +236,7 @@ mt_standardize <-function(data, use="measures",
 #' # Standardize velocity across trajectories
 #' mt_example <- mt_scale_trajectories(mt_example,var_names = "vel")
 #' 
-#' @author  Dirk U. Wulff (\email{dirk.wulff@@gmail.com})
+#' @author  Dirk U. Wulff
 #'  
 #' @return A mousetrap data object (see \link{mt_example}) with an additional 
 #'   variable containing the standardized trajectory variable added to the 

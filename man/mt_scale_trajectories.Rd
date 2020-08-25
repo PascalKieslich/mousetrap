@@ -82,5 +82,5 @@ mt_example <- mt_scale_trajectories(mt_example,var_names = "vel")
 other variables.
 }
 \author{
-Dirk U. Wulff (\email{dirk.wulff@gmail.com})
+Dirk U. Wulff
 }

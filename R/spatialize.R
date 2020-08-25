@@ -31,9 +31,9 @@
 #'   n_points = 20)
 #'
 #' @author
-#' Dirk U. Wulff (\email{dirk.wulff@@gmail.com})
+#' Dirk U. Wulff
 #'
-#' Jonas M. B. Haslbeck (\email{jonas.haslbeck@@gmail.com})
+#' Jonas M. B. Haslbeck
 #'
 #' @export
 

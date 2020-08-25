@@ -104,5 +104,5 @@ mt_example <- mt_align(mt_example,
   quadrant) of the coordinate system.
 }
 \author{
-Dirk U. Wulff (\email{dirk.wulff@gmail.com})
+Dirk U. Wulff
 }

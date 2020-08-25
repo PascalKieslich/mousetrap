@@ -70,7 +70,7 @@
 #' )
 #'
 #' @author
-#' Pascal J. Kieslich (\email{pascal.kieslich@@gmail.com})
+#' Pascal J. Kieslich
 #' 
 #' Felix Henninger
 #' 
@@ -141,7 +141,7 @@ mt_aggregate <- function(data,
 #' )
 #'
 #' @author
-#' Pascal J. Kieslich (\email{pascal.kieslich@@gmail.com})
+#' Pascal J. Kieslich
 #' 
 #' Felix Henninger
 #' 

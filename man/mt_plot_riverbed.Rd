@@ -111,7 +111,7 @@ Scherbaum, S., Dshemuchadse, M., Fischer, R., & Goschke, T.
   \link{mt_time_normalize} for time-normalizing trajectories.
 }
 \author{
-Felix Henninger (\email{mailbox@felixhenninger.com})
+Felix Henninger
 
-Pascal J. Kieslich (\email{pascal.kieslich@gmail.com})
+Pascal J. Kieslich
 }
