@@ -144,6 +144,7 @@
 #' 
 #' Felix Henninger
 #' 
+#' @importFrom rlang .data
 #' @export
 mt_reshape <- function(data,
   use="trajectories", use_variables=NULL,
@@ -297,14 +298,16 @@ mt_reshape <- function(data,
         )
       }
     }
-
+    
     # If subject variable is specified, always aggregate within subjects first
     if (is.null(subject_id) == FALSE) {
 
       grouping_variables <- c(subject_id, use2_variables, mt_seq)
 
-      dataset <- dplyr::group_by_(dataset, .dots=grouping_variables)
-      dataset <- dplyr::summarize_at(dataset, .funs=.funs, .vars=use_variables)
+      dataset <- dataset %>%
+        dplyr::group_by(dplyr::across(dplyr::all_of(grouping_variables))) %>%
+        dplyr::summarize_at(.funs=.funs, .vars=use_variables) %>% 
+        dplyr::ungroup()
 
       if (aggregate_subjects_only == FALSE){
         if(length(.funs) > 1) {
@@ -324,24 +327,28 @@ mt_reshape <- function(data,
       # Optionally group data
       grouping_variables <- c(use2_variables, mt_seq)
       if(is.null(grouping_variables) == FALSE) {
-        dataset <- dplyr::group_by_(dataset, .dots=grouping_variables)
+        dataset <- dplyr::group_by(dataset, dplyr::across(dplyr::all_of(grouping_variables)))
       }
 
       # Perform aggregation
       dataset <- dplyr::summarize_at(dataset, .funs=.funs, .vars=use_variables)
+      
+      if(is.null(grouping_variables) == FALSE) {
+        dataset <- dplyr::ungroup(dataset)
+      }
 
     }
   }
 
   # Convert to wide format if specified
   if (trajectories_long == FALSE) {
-
-    dataset <- tidyr::gather_(dataset, key_col="key", value_col="val", gather_cols=use_variables)
-    dataset <- tidyr::unite_(dataset, col="key", from=c("key", mt_seq), sep="_")
-    # convert to factor to ensure correct column order
-    dataset$key <- factor(dataset$key, levels=unique(dataset$key))
-    dataset <- tidyr::spread_(dataset, key_col="key", value_col="val")
-
+    dataset <- dataset %>%
+      tidyr::pivot_longer(dplyr::all_of(use_variables),names_to="key", values_to="val") %>%
+      dplyr::arrange(.data$key) %>%
+      tidyr::unite(col="key", .data$key, {{mt_seq}}, sep="_") %>%
+      # convert to factor to ensure correct column order
+      dplyr::mutate(key=factor(.data$key, levels=unique(.data$key))) %>%
+      tidyr::pivot_wider(names_from=.data$key, values_from=.data$val)
   }
 
   if(convert_df) {
