@@ -45,7 +45,8 @@ Imports:
     cstab,
     fastcluster,
     parallel,
-    fields
+    fields,
+    rlang
 Suggests:
     readbulk,
     testthat

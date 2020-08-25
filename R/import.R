@@ -723,6 +723,7 @@ mt_import_wide <- function(raw_data,
 #' 
 #' Felix Henninger
 #' 
+#' @importFrom rlang .data
 #' @export
 mt_import_long <- function(raw_data,
   xpos_label="xpos", ypos_label="ypos", zpos_label=NULL,
@@ -771,11 +772,11 @@ mt_import_long <- function(raw_data,
     # Remove mt_seq_label
     raw_data <- raw_data[,colnames(raw_data)!=mt_seq_label]
   }
-
+  
   # Create mt_seq variable
   raw_data <- raw_data %>%
-    dplyr::group_by(mt_id) %>%
-    dplyr::mutate_(.dots = stats::setNames(list("dplyr::row_number()"), "mt_seq")) %>%
+    dplyr::group_by(.data$mt_id) %>%
+    dplyr::mutate(mt_seq=dplyr::row_number()) %>%
     dplyr::ungroup()
 
   # Collect and rename variables
@@ -802,18 +803,18 @@ mt_import_long <- function(raw_data,
 
 
   # Create array for selected variables
-  n_logs <- dplyr::count(raw_data, mt_id)
+  n_logs <- dplyr::count(raw_data, .data$mt_id)
   n_max <- max(n_logs$n)
 
   trajectories <- array(
     dim = c(nrow(n_logs),n_max, length(mt_include)),
     dimnames = list(n_logs$mt_id, NULL, mt_include))
-
+  
   for (var in mt_include) {
     reshaped_data <- raw_data %>%
-      dplyr::select_(.dots=c("mt_id", "mt_seq", var)) %>%
-      tidyr::spread_("mt_seq", var)
-    trajectories[,,var] <- as.matrix(reshaped_data[,-1])
+      dplyr::select(.data$mt_id, .data$mt_seq, {{var}}) %>%
+      tidyr::pivot_wider(id_cols=.data$mt_id,names_from=.data$mt_seq,values_from={{var}})
+      trajectories[,,var] <- as.matrix(reshaped_data[,-1])
     }
 
   # If no timestamps are found in the data, create timestamps
