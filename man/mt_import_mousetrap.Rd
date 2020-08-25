@@ -113,7 +113,7 @@ removed.}
 \item{\code{ignore}: Duplicates are kept.} }
 
 \code{unordered} allows for different options to handle unordered, that is,
-non-monotonically increasing timestamps, within a trial: \itemize{
+non-monotonically increasing timestamps within a trial: \itemize{
 \item{\code{warn}: A warning is issued if unordered timestamps are
 encountered in a trial (the default).}
 \item{\code{remove}: Unordered timestamps within a trial are removed. This
