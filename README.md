@@ -22,8 +22,8 @@ General Public License (version 3).
 
 An overview of the functions in this package can be found
 [online](http://pascalkieslich.github.io/mousetrap/reference/mousetrap.html).
-It can also be accessed from within R using `package?mousetrap` once the
-package has been installed. Please see
+It can also be accessed from within R using `?mousetrap` once the
+package has been loaded. Please see
 [news](http://pascalkieslich.github.io/mousetrap/news/) for a summary of
 changes in the package. Questions about using `mousetrap` can be asked
 in the

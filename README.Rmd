@@ -27,7 +27,7 @@ The `mousetrap` package offers functions for importing, preprocessing, analyzing
 The `mousetrap` package is developed by Pascal Kieslich, Dirk Wulff, Felix Henninger, and Jonas Haslbeck. It is published under the GNU General Public License (version 3).
 
 An overview of the functions in this package can be found [online](http://pascalkieslich.github.io/mousetrap/reference/mousetrap.html).
-It can also be accessed from within R using `package?mousetrap` once the package has been installed.
+It can also be accessed from within R using `?mousetrap` once the package has been loaded.
 Please see [news](http://pascalkieslich.github.io/mousetrap/news/) for a summary of changes in the package. Questions about using `mousetrap` can be asked in the [forum](https://forum.cogsci.nl/index.php?p=/categories/mousetrap).
 
 The `mousetrap` package offers functions for importing mouse-tracking data in different formats and from various sources. One option to collect mouse-tracking data is by using the open-source graphical experiment builder [OpenSesame](https://osdoc.cogsci.nl/) in combination with the [mousetrap-os plugin](https://github.com/pascalkieslich/mousetrap-os).
