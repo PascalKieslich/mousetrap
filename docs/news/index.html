@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -53,7 +57,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -67,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.5</span>
       </span>
     </div>
 
@@ -103,12 +107,46 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Changelog <small></small></h1>
+      <h1 data-toc-skip>Changelog <small></small></h1>
       <small>Source: <a href='https://github.com/pascalkieslich/mousetrap/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="mousetrap-315" class="section level1">
+<h1 class="page-header" data-toc-text="3.1.5">
+<a href="#mousetrap-315" class="anchor"></a>mousetrap 3.1.5<small> Unreleased </small>
+</h1>
+<div id="changes-in-specific-functions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#changes-in-specific-functions" class="anchor"></a>Changes in specific functions</h2>
+<ul>
+<li>
+<code>mt_measures</code>: Introduced <code>initiation_threshold</code> argument to allow specifying a minimum distance from the start point of the trajectory that needs to be exceeded for calculating the initiation time.</li>
+<li>
+<code>mt_import_mousetrap</code> and <code>mt_check_resolution</code>: Introduced <code>digits</code> argument. If specified, timestamps will be rounded which can potentially be useful if timestamps are recorded with submillisecond precision.</li>
+<li>
+<code>mt_import_mousetrap</code>: Introduced <code>unordered</code> argument that allows for different options to handle unordered, that is, non-monotonically increasing timestamps within a trial.</li>
+<li>
+<code>mt_plot</code> and <code>mt_plot_aggregate</code>: Introduced <code>wrap_var</code> and <code>wrap_ncol</code> arguments that add wrapping to trajectory plots (i.e., splitting a plot across multiple columns and rows based on the levels of a single variable or a combination of variables).</li>
+<li>
+<code>mt_plot_riverbed</code>: Introduced <code>na.rm</code> argument which, if set to <code>TRUE</code>, allows the creation of riverbed plots from trajectories with unequal length (whether this is in practice desirable or not is an open question).</li>
+</ul>
+</div>
+<div id="internal-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#internal-changes" class="anchor"></a>Internal changes</h2>
+<ul>
+<li>
+<code>mt_import_long</code>: Replaced dplyr/tidyr standard evaluation functions by using embracing and pivoting.</li>
+<li>
+<code>mt_reshape</code>: Replaced dplyr/tidyr standard evaluation functions by using embracing and pivoting.</li>
+<li>
+<code>mt_plot_riverbed</code> and <code>mt_heatmap_ggplot</code>: Replaced geom_raster with geom_tile.</li>
+<li>Minor updates in documentation regarding function links and author information.</li>
+</ul>
+</div>
+</div>
     <div id="mousetrap-314" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="3.1.4">
 <a href="#mousetrap-314" class="anchor"></a>mousetrap 3.1.4<small> 2019-12-05 </small>
 </h1>
 <div id="announcements" class="section level2">
@@ -121,9 +159,9 @@
 <li>Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F., &amp; Schulte-Mecklenbeck, M. (2019). Mouse-tracking: Detecting types in movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, &amp; J. G. Johnson (Eds.), <em>A Handbook of Process Tracing Methods</em> (pp. 131-145). New York, NY: Routledge.</li>
 </ul>
 </div>
-<div id="changes-in-specific-functions" class="section level2">
+<div id="changes-in-specific-functions-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-in-specific-functions" class="anchor"></a>Changes in specific functions</h2>
+<a href="#changes-in-specific-functions-1" class="anchor"></a>Changes in specific functions</h2>
 <ul>
 <li>
 <code>mt_measures</code>: Introduced <code>hover_incl_intial</code> argument to make inclusion of a potential initial phase without movement optional when calculating hovers. By default, this initial phase is included (as in previous versions).</li>
@@ -133,21 +171,21 @@
 <code>mt_measures</code>: Multiple values can now be specified in the <code>flip_threshold</code> argument. If this is done, flips (e.g., xpos_flips) will be returned in separate variables for each threshold value (the variable name will be suffixed with the threshold value).</li>
 </ul>
 </div>
-<div id="internal-changes" class="section level2">
+<div id="internal-changes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#internal-changes" class="anchor"></a>Internal changes</h2>
+<a href="#internal-changes-1" class="anchor"></a>Internal changes</h2>
 <ul>
 <li>When checking the class of an object, <code>inherits</code> is now used consistently instead of the <code>class</code> function to avoid problems with future R releases (&gt;=4.0.0).</li>
 </ul>
 </div>
 </div>
     <div id="mousetrap-313" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="3.1.3">
 <a href="#mousetrap-313" class="anchor"></a>mousetrap 3.1.3<small> 2019-10-04 </small>
 </h1>
-<div id="changes-in-specific-functions-1" class="section level2">
+<div id="changes-in-specific-functions-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-in-specific-functions-1" class="anchor"></a>Changes in specific functions</h2>
+<a href="#changes-in-specific-functions-2" class="anchor"></a>Changes in specific functions</h2>
 <ul>
 <li>
 <code>mt_sample_entropy</code>: By default, sample entropy is calculated based on the differences of the position values (following Hehman et al., 2015). An optional argument <code>use_diff</code> now has been introduced to allow users to override this behavior and use the untransformed values instead, by setting <code>use_diff=FALSE</code>.</li>
@@ -157,7 +195,7 @@
 </div>
 </div>
     <div id="mousetrap-312" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="3.1.2">
 <a href="#mousetrap-312" class="anchor"></a>mousetrap 3.1.2<small> 2019-02-02 </small>
 </h1>
 <div id="changes-in-documentation" class="section level2">
@@ -169,9 +207,9 @@
 <li>Updated mousetrap book chapter citations (see announcements above for correct citation).</li>
 </ul>
 </div>
-<div id="changes-in-specific-functions-2" class="section level2">
+<div id="changes-in-specific-functions-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-in-specific-functions-2" class="anchor"></a>Changes in specific functions</h2>
+<a href="#changes-in-specific-functions-3" class="anchor"></a>Changes in specific functions</h2>
 <ul>
 <li>
 <code>mt_import_long</code>: internal change (prefix <code>row_number()</code> function with dplyr) to accomodate changes in dplyr 0.8.0.</li>
@@ -179,7 +217,7 @@
 </div>
 </div>
     <div id="mousetrap-311" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="3.1.1">
 <a href="#mousetrap-311" class="anchor"></a>mousetrap 3.1.1<small> 2018-07-06 </small>
 </h1>
 <div id="announcements-1" class="section level2">
@@ -187,13 +225,13 @@
 <a href="#announcements-1" class="anchor"></a>Announcements</h2>
 <ul>
 <li>Book chapters on the mousetrap software packages have been accepted for publication. See version 3.1.3 above for updated references (as the book chapters meanwhile have been published).</li>
-<li>If you have any questions when using mousetrap, you can now ask them in the mousetrap forum at <a href="http://forum.cogsci.nl/index.php?p=/categories/mousetrap" class="uri">http://forum.cogsci.nl/index.php?p=/categories/mousetrap</a>
+<li>If you have any questions when using mousetrap, you can now ask them in the mousetrap forum at <a href="https://forum.cogsci.nl/index.php?p=/categories/mousetrap" class="uri">https://forum.cogsci.nl/index.php?p=/categories/mousetrap</a>
 </li>
 </ul>
 </div>
-<div id="changes-in-specific-functions-3" class="section level2">
+<div id="changes-in-specific-functions-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-in-specific-functions-3" class="anchor"></a>Changes in specific functions</h2>
+<a href="#changes-in-specific-functions-4" class="anchor"></a>Changes in specific functions</h2>
 <ul>
 <li>
 <code>mt_map</code>: now allows for mapping trajectories onto prototypes separately for different groups of trajectories (the prototypes will be rescaled separately to match the coordinate system of each group).</li>
@@ -215,7 +253,7 @@
 </div>
 </div>
     <div id="mousetrap-310" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="3.1.0">
 <a href="#mousetrap-310" class="anchor"></a>mousetrap 3.1.0<small> 2017-05-20 </small>
 </h1>
 <div id="announcements-2" class="section level2">
@@ -230,9 +268,9 @@
 </li>
 </ul>
 </div>
-<div id="changes-in-specific-functions-4" class="section level2">
+<div id="changes-in-specific-functions-5" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-in-specific-functions-4" class="anchor"></a>Changes in specific functions</h2>
+<a href="#changes-in-specific-functions-5" class="anchor"></a>Changes in specific functions</h2>
 <ul>
 <li>
 <code>mt_derivatives</code>: now always reports acceleration as difference in absolute velocity (the argument <code>acc_on_abs_vel</code> has been removed). Besides, the argument <code>absolute</code> has been introduced that indicates if absolute values for distances and velocities should be reported (by default, this is not the case). All of this is only relevant if a single dimension is specified in <code>dimensions</code>.</li>
@@ -291,7 +329,7 @@
 </div>
 </div>
     <div id="mousetrap-300" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="3.0.0">
 <a href="#mousetrap-300" class="anchor"></a>mousetrap 3.0.0<small> 2017-02-10 </small>
 </h1>
 <div id="announcements-3" class="section level2">
@@ -314,9 +352,9 @@
 <li>Arguments that were already deprecated and replaced (e.g., <code>show_progress</code> was replaced with <code>verbose</code>) have been removed.</li>
 </ul>
 </div>
-<div id="changes-in-specific-functions-5" class="section level2">
+<div id="changes-in-specific-functions-6" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-in-specific-functions-5" class="anchor"></a>Changes in specific functions</h2>
+<a href="#changes-in-specific-functions-6" class="anchor"></a>Changes in specific functions</h2>
 <ul>
 <li>
 <code>mt_align_start</code>: function is now vectorized and allows for optionally aligning to mean start position across trials; default for <code>save_as</code> argument is set to <code>use</code>.</li>
@@ -390,7 +428,7 @@
 </div>
 </div>
     <div id="mousetrap-200" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="2.0.0">
 <a href="#mousetrap-200" class="anchor"></a>mousetrap 2.0.0<small> 2016-10-25 </small>
 </h1>
 <div id="general-changes-to-all-existing-functions" class="section level2">
@@ -407,9 +445,9 @@
 <li>Performance improvement of reshaping, aggregation, and visualization functions through internal changes in <code>mt_reshape</code>: <code><a href="https://rdrr.io/r/base/merge.html">base::merge</a></code> and <code>reshape2</code> functions are replaced with functions from the <code>tidyr</code> and <code>dplyr</code> packages (and custom functions). Package dependencies were adjusted accordingly. As the <code>dplyr</code> functions may introduce additional classes for the reshaped data (such as <code>grouped_df</code> and <code>tbl_df</code>), a new argument (<code>convert_df</code>) is introduced that converts the reshaped data to pure data.frames by default (thereby dropping additional classes).</li>
 </ul>
 </div>
-<div id="changes-in-specific-functions-6" class="section level2">
+<div id="changes-in-specific-functions-7" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-in-specific-functions-6" class="anchor"></a>Changes in specific functions</h2>
+<a href="#changes-in-specific-functions-7" class="anchor"></a>Changes in specific functions</h2>
 <ul>
 <li>
 <code>mt_import_mousetrap</code>, <code>mt_import_long</code>, <code>mt_import_wide</code>: Allow specifying several variables for the trial identifier in <code>mt_id_label</code>. A new ID variable will be created by combining the values of each variable.</li>
@@ -465,7 +503,7 @@
 </div>
 </div>
     <div id="mousetrap-120" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.2.0">
 <a href="#mousetrap-120" class="anchor"></a>mousetrap 1.2.0<small> 2016-07-09 </small>
 </h1>
 <ul>
@@ -481,7 +519,7 @@
 </ul>
 </div>
     <div id="mousetrap-110" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.1.0">
 <a href="#mousetrap-110" class="anchor"></a>mousetrap 1.1.0<small> 2016-06-09 </small>
 </h1>
 <ul>
@@ -501,7 +539,7 @@
 </ul>
 </div>
     <div id="mousetrap-100" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.0.0">
 <a href="#mousetrap-100" class="anchor"></a>mousetrap 1.0.0<small> 2016-03-19 </small>
 </h1>
 <ul>
@@ -510,22 +548,10 @@
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#mousetrap-314">3.1.4</a></li>
-        <li><a href="#mousetrap-313">3.1.3</a></li>
-        <li><a href="#mousetrap-312">3.1.2</a></li>
-        <li><a href="#mousetrap-311">3.1.1</a></li>
-        <li><a href="#mousetrap-310">3.1.0</a></li>
-        <li><a href="#mousetrap-300">3.0.0</a></li>
-        <li><a href="#mousetrap-200">2.0.0</a></li>
-        <li><a href="#mousetrap-120">1.2.0</a></li>
-        <li><a href="#mousetrap-110">1.1.0</a></li>
-        <li><a href="#mousetrap-100">1.0.0</a></li>
-      </ul>
-    </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 
 </div>
@@ -537,7 +563,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

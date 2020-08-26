@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -38,7 +42,6 @@
 <meta property="og:title" content="Plot density of mouse positions across time steps. — mt_plot_riverbed" />
 <meta property="og:description" content="mt_plot_riverbed creates a plot showing the distribution of one
 trajectory variable (e.g., the x-positions or velocity) per time step." />
-<meta name="twitter:card" content="summary" />
 
 
 
@@ -56,7 +59,7 @@ trajectory variable (e.g., the x-positions or velocity) per time step." />
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -70,7 +73,7 @@ trajectory variable (e.g., the x-positions or velocity) per time step." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.5</span>
       </span>
     </div>
 
@@ -125,7 +128,8 @@ trajectory variable (e.g., the x-positions or velocity) per time step.</p>
   <span class='kw'>facet_row</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>facet_col</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>facet_data</span> <span class='kw'>=</span> <span class='st'>"data"</span>,
-  <span class='kw'>grid_colors</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"gray30"</span>, <span class='st'>"gray10"</span>)
+  <span class='kw'>grid_colors</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"gray30"</span>, <span class='st'>"gray10"</span>),
+  <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -184,6 +188,13 @@ color. If a vector of length 2 is provided, the first value will be used as
 the color for the major grid lines, the second value for the minor grid
 lines. If set to <code>NA</code>, no grid lines are plotted.</p></td>
     </tr>
+    <tr>
+      <th>na.rm</th>
+      <td><p>logical specifying whether missing values should be removed.
+This is not done by default, because generally riverbed plots are generated
+from preprocess trajectories (e.g., time-normalized trajectories) that all
+have the same length (i.e., the same number of steps).</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -193,7 +204,8 @@ variable separately for each of a series of time steps. This type of plot has
 been used in previous research to visualize the distribution of x-positions
 per time step (e.g., Scherbaum et al., 2010).</p>
 <p><code>mt_plot_riverbed</code> usually is applied to time-normalized trajectory data
-as all trajectories must contain the same number of values.</p>
+as all trajectories must contain the same number of values (if
+<code>na.rm=FALSE</code>, the default).</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Scherbaum, S., Dshemuchadse, M., Fischer, R., &amp; Goschke, T.
@@ -212,7 +224,7 @@ as all trajectories must contain the same number of values.</p>
 <span class='no'>KH2017</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_time_normalize.html'>mt_time_normalize</a></span>(<span class='no'>KH2017</span>)
 
 <span class='co'># Create riverbed plot for all trials</span>
-<span class='fu'>mt_plot_riverbed</span>(<span class='no'>KH2017</span>)</div><div class='output co'>#&gt; <span class='warning'>Warning: Raster pixels are placed at uneven vertical intervals and will be shifted. Consider using geom_tile() instead.</span></div><div class='img'><img src='mt_plot_riverbed-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>mt_plot_riverbed</span>(<span class='no'>KH2017</span>)</div><div class='img'><img src='mt_plot_riverbed-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'># Create separate plots for typical and atypical trials</span>
 <span class='fu'>mt_plot_riverbed</span>(<span class='no'>mt_example</span>, <span class='kw'>facet_col</span><span class='kw'>=</span><span class='st'>"Condition"</span>)
@@ -229,19 +241,10 @@ as all trajectories must contain the same number of values.</p>
     <span class='kw'>name</span><span class='kw'>=</span><span class='st'>"Frequency"</span>, <span class='kw'>trans</span><span class='kw'>=</span><span class='st'>"log"</span>, <span class='kw'>labels</span><span class='kw'>=</span><span class='kw pkg'>scales</span><span class='kw ns'>::</span><span class='no'><a href='https://scales.r-lib.org//reference/label_percent.html'>percent</a></span>)
 }</div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#details">Details</a></li>
-      <li><a href="#references">References</a></li>
-      <li><a href="#see-also">See also</a></li>
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
-    <h2>Author</h2>
-    <p>Felix Henninger (<a href='mailto:mailbox@felixhenninger.com'>mailbox@felixhenninger.com</a>)</p>
-<p>Pascal J. Kieslich (<a href='mailto:kieslich@psychologie.uni-mannheim.de'>kieslich@psychologie.uni-mannheim.de</a>)</p>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
 
@@ -252,7 +255,7 @@ as all trajectories must contain the same number of values.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
