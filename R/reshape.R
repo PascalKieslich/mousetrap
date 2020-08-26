@@ -305,8 +305,8 @@ mt_reshape <- function(data,
       grouping_variables <- c(subject_id, use2_variables, mt_seq)
 
       dataset <- dataset %>%
-        dplyr::group_by(dplyr::across(dplyr::all_of(grouping_variables))) %>%
-        dplyr::summarize_at(.funs=.funs, .vars=use_variables) %>% 
+        dplyr::group_by(dplyr::across({{grouping_variables}})) %>%
+        dplyr::summarize_at(.funs=.funs, .vars=use_variables) %>%
         dplyr::ungroup()
 
       if (aggregate_subjects_only == FALSE){
@@ -327,7 +327,7 @@ mt_reshape <- function(data,
       # Optionally group data
       grouping_variables <- c(use2_variables, mt_seq)
       if(is.null(grouping_variables) == FALSE) {
-        dataset <- dplyr::group_by(dataset, dplyr::across(dplyr::all_of(grouping_variables)))
+        dataset <- dplyr::group_by(dataset, dplyr::across({{grouping_variables}}))
       }
 
       # Perform aggregation
@@ -343,12 +343,12 @@ mt_reshape <- function(data,
   # Convert to wide format if specified
   if (trajectories_long == FALSE) {
     dataset <- dataset %>%
-      tidyr::pivot_longer(dplyr::all_of(use_variables),names_to="key", values_to="val") %>%
-      dplyr::arrange(.data$key) %>%
-      tidyr::unite(col="key", .data$key, {{mt_seq}}, sep="_") %>%
+      tidyr::pivot_longer(cols=use_variables) %>%
+      dplyr::arrange(.data$name) %>%
+      tidyr::unite(col="name", .data$name, {{mt_seq}}, sep="_") %>%
       # convert to factor to ensure correct column order
-      dplyr::mutate(key=factor(.data$key, levels=unique(.data$key))) %>%
-      tidyr::pivot_wider(names_from=.data$key, values_from=.data$val)
+      dplyr::mutate(name=factor(.data$name, levels=unique(.data$name))) %>%
+      tidyr::pivot_wider(names_from=.data$name, values_from=.data$value)
   }
 
   if(convert_df) {
