@@ -4,7 +4,7 @@
 * `mt_measures`: Introduced `initiation_threshold` argument to allow specifying a minimum distance from the start point of the trajectory that needs to be exceeded for calculating the initiation time.
 * `mt_import_mousetrap` and `mt_check_resolution`: Introduced `digits` argument. If specified, timestamps will be rounded which can potentially be useful if timestamps are recorded with submillisecond precision.
 * `mt_import_mousetrap`: Introduced `unordered` argument that allows for different options to handle unordered, that is, non-monotonically increasing timestamps within a trial.
-* `mt_plot` and `mt_plot_aggregate`: Introduced `wrap_var` and `wrap_ncol` arguments that add wrapping to trajectory plots (i.e., splitting a plot across multiple columns and rows based on the levels of a single variable).
+* `mt_plot` and `mt_plot_aggregate`: Introduced `wrap_var` and `wrap_ncol` arguments that add wrapping to trajectory plots (i.e., splitting a plot across multiple columns and rows based on the levels of a single variable or a combination of variables).
 * `mt_plot_riverbed`: Introduced `na.rm` argument which, if set to `TRUE`, allows the creation of riverbed plots from trajectories with unequal length (whether this is in practice desirable or not is an open question).
 
 ## Internal changes
