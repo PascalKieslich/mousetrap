@@ -307,6 +307,9 @@ mt_reshape <- function(data,
       dataset <- dataset %>%
         dplyr::group_by(dplyr::across({{grouping_variables}})) %>%
         dplyr::summarize_at(.funs=.funs, .vars=use_variables) %>%
+        # alternative implementation as summarize_at is superseded (if this implementation
+        # is used, the .funs input needs to be changed, e.g., to .funs=mean):
+        # dplyr::summarize(dplyr::across({{use_variables}},.fns = .funs)) %>% 
         dplyr::ungroup()
 
       if (aggregate_subjects_only == FALSE){
@@ -332,6 +335,9 @@ mt_reshape <- function(data,
 
       # Perform aggregation
       dataset <- dplyr::summarize_at(dataset, .funs=.funs, .vars=use_variables)
+      # alternative implementation as summarize_at is superseded (if this implementation
+      # is used, the .funs input needs to be changed, e.g., to .funs=mean):
+      # dataset <- dplyr::summarize(dataset, dplyr::across({{use_variables}},.fns = .funs))
       
       if(is.null(grouping_variables) == FALSE) {
         dataset <- dplyr::ungroup(dataset)
