@@ -7,6 +7,9 @@ Description: Mouse-tracking, the analysis of mouse movements in computerized
     experiments, is a method that is becoming increasingly popular in the
     cognitive sciences. The mousetrap package offers functions for importing,
     preprocessing, analyzing, aggregating, and visualizing mouse-tracking data.
+    An introduction into mouse-tracking analyses using mousetrap can be found
+    in Kieslich, Henninger, Wulff, Haslbeck, & Schulte-Mecklenbeck (2019)
+    <doi: 10.4324/9781315160559-9> (preprint: https://psyarxiv.com/zuvqa/).
 Maintainer: Pascal J. Kieslich <pascal.kieslich@gmail.com>
 Authors@R: c(
     person(c("Pascal","J."), "Kieslich", role= c("aut", "cre"),
