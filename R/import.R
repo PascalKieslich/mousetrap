@@ -227,7 +227,7 @@ mt_import_mousetrap <- function(raw_data,
   split_raw_data <- function(x) {
 
     # Remove all irrelevant characters
-    x <- gsub(pattern=paste0("[^-0123456789.",split,"]"),replacement = "", x)
+    x <- gsub(pattern=paste0("[^-e0123456789.",split,"]"),replacement = "", x)
 
     # Remove leading / end / double split characters
     x <- gsub(pattern=paste0("^",split),replacement = "", x)
