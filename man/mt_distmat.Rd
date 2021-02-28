@@ -6,7 +6,7 @@
 \usage{
 mt_distmat(
   data,
-  use = "sp_trajectories",
+  use = "ln_trajectories",
   save_as = "distmat",
   dimensions = c("xpos", "ypos"),
   weights = rep(1, length(dimensions)),
@@ -75,11 +75,11 @@ metric once for the entire trajectory. That is, vector-wise dissimilarity is
 computed as \code{sqrt(sum((x_i-x_j)^2 + (y_i-y_j)^2))}.
 }
 \examples{
-# Spatialize trajectories
-mt_example <- mt_spatialize(mt_example)
+# Length normalize trajectories
+mt_example <- mt_length_normalize(mt_example)
  
 # Compute distance matrix
-mt_example <- mt_distmat(mt_example, use="sp_trajectories")
+mt_example <- mt_distmat(mt_example, use="ln_trajectories")
 
 }
 \author{

@@ -6,7 +6,7 @@
 \usage{
 mt_cluster(
   data,
-  use = "sp_trajectories",
+  use = "ln_trajectories",
   save_as = "clustering",
   dimensions = c("xpos", "ypos"),
   n_cluster = 5,
@@ -124,18 +124,18 @@ For clustering trajectories, it is often useful that the endpoints of all
 trajectories share the same direction, e.g., that all trajectories end in the
 top-left corner of the coordinate system (\link{mt_remap_symmetric} or
 \link{mt_align} can be used to achieve this). Furthermore, it is recommended
-to use spatialized trajectories (see \link{mt_spatialize}; Wulff et al., in
+to use length normalized trajectories (see \link{mt_length_normalize}; Wulff et al., in
 press; Haslbeck et al., 2018).
 }
 \examples{
-# Spatialize trajectories
-KH2017 <- mt_spatialize(KH2017)
+# Length normalize trajectories
+KH2017 <- mt_length_normalize(KH2017)
 
 # Cluster trajectories
-KH2017 <- mt_cluster(KH2017, use="sp_trajectories")
+KH2017 <- mt_cluster(KH2017, use="ln_trajectories")
 
 # Plot clustered trajectories
-mt_plot(KH2017,use="sp_trajectories",
+mt_plot(KH2017,use="ln_trajectories",
   use2="clustering",facet_col="cluster")
 
 }

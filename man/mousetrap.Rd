@@ -86,7 +86,7 @@ following, a brief overview of the functions in this package is given.
   \link{mt_average} averages trajectory coordinates (and related variables)
   for time bins of constant duration.
 
-  \link{mt_spatialize} re-represents each trajectory spatially so that
+  \link{mt_length_normalize} re-represents each trajectory spatially so that
   adjacent points on the trajectory become equidistant to each other.
 }
 

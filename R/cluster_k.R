@@ -21,8 +21,8 @@
 #' trajectories share the same direction, e.g., that all trajectories end in the
 #' top-left corner of the coordinate system (\link{mt_remap_symmetric} or
 #' \link{mt_align} can be used to achieve this). Furthermore, it is recommended
-#' to use spatialized trajectories (see \link{mt_spatialize}; Wulff et al., in
-#' press; Haslbeck et al., 2018).
+#' to use length normalized trajectories (see \link{mt_length_normalize}; Wulff
+#' et al., 2019; Haslbeck et al., 2018).
 #'
 #' @inheritParams mt_cluster
 #' @param kseq a numeric vector specifying set of candidates for k. Defaults to
@@ -56,11 +56,11 @@
 #' @examples
 #'
 #' \dontrun{
-#' # Spatialize trajectories
-#' KH2017 <- mt_spatialize(KH2017)
+#' # Length normalize trajectories
+#' KH2017 <- mt_length_normalize(KH2017)
 #'
 #' # Find k
-#' results <- mt_cluster_k(KH2017, use="sp_trajectories")
+#' results <- mt_cluster_k(KH2017, use="ln_trajectories")
 #'
 #' # Retrieve results
 #' results$kopt
@@ -102,7 +102,7 @@
 #' @export
 mt_cluster_k <- function(
   data,
-  use = 'sp_trajectories',
+  use = 'ln_trajectories',
   dimensions = c('xpos','ypos'),
 
   # k-selection type
