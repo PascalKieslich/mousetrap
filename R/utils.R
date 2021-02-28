@@ -15,8 +15,34 @@ extract_data <- function(data, use) {
   if (is_mousetrap_data(data)){
 
     extracted <- data[[use]]
+    
     if(is.null(extracted)){
-      stop("No data called '",use,"' found.")
+      
+      # Cover special cases due to the replacement of 
+      # mt_spatialize with mt_length_normalize
+      if (use == "ln_trajectories" & "sp_trajectories" %in% names(data)){
+        warning(
+          "Instead of ln_trajectories only sp_trajectories were found. ",
+          "These will be used. ",
+          "Please note that the mt_spatialize function has been deprecated ",
+          "and that the mt_length_normalize function should be used instead."
+          )
+        return(data[["sp_trajectories"]])
+        
+      } else if (use == "sp_trajectories" & "ln_trajectories" %in% names(data)){
+        warning(
+          "Instead of sp_trajectories only ln_trajectories were found. ",
+          "These will be used. ",
+          "Please note that since the mt_spatialize function has been replaced ",
+          "with the mt_length_normalize function, the resulting trajectories ",
+          "are now called ln_trajectories instead of sp_trajectories."
+        )
+        return(data[["ln_trajectories"]])
+        
+      } else {
+        stop("No data called '",use,"' found.")
+      }
+      
     }
     return(extracted)
 
