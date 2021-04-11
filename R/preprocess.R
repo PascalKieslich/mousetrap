@@ -298,7 +298,7 @@ mt_exclude_initiation <- function(data,
     current_points <- current_trajectories[,dimensions,drop=FALSE]
 
     # Vector indicating if mouse has not left the starting point
-    on_start <- cumsum(rowSums(abs(current_points - current_points[1,]))) == 0
+    on_start <- cumsum(rowSums(abs(t(t(current_points) - current_points[1,])))) == 0
 
     # Change last element where mouse is still on starting point so that this
     # point is included in the calculations
