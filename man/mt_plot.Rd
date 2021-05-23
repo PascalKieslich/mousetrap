@@ -20,8 +20,9 @@ mt_plot(
   wrap_var = NULL,
   wrap_ncol = NULL,
   points = FALSE,
-  only_ggplot = FALSE,
+  return_type = "plot",
   mt_id = "mt_id",
+  only_ggplot = NULL,
   ...
 )
 
@@ -40,8 +41,9 @@ mt_plot_aggregate(
   wrap_var = NULL,
   wrap_ncol = NULL,
   points = FALSE,
-  only_ggplot = FALSE,
+  return_type = "plot",
   subject_id = NULL,
+  only_ggplot = NULL,
   ...
 )
 }
@@ -96,13 +98,18 @@ wrapping is used.}
 \item{points}{logical. If \code{TRUE}, points will be added to the plot using
 \link[ggplot2]{geom_point}.}
 
-\item{only_ggplot}{logical. If \code{TRUE}, only the ggplot object without
-geoms is returned. If \code{FALSE} (the default), the trajectories are
-plotted using \link[ggplot2]{geom_path}.}
+\item{return_type}{a character string specifying which type of object should
+be returned. If \code{"plot"} (the default), a new ggplot is created and
+the trajectories are plotted using \link[ggplot2]{geom_path}. If
+\code{"mapping"}, only the ggplot object containing the mapping but without
+any geoms is returned. If \code{"geoms"}, only the geoms are returned,
+which allows adding the plotted trajectories to an existing ggplot.}
 
 \item{mt_id}{a character string specifying the internal label used for the
 trial identifier (passed on to the group aesthetic). Only relevant for
 \code{mt_plot}.}
+
+\item{only_ggplot}{Deprecated. Please use \code{return_type} instead.}
 
 \item{...}{additional arguments passed on to \link{mt_reshape} (such as
 \code{subset}).}
@@ -129,12 +136,14 @@ into a long format. Next, it creates a ggplot object using the
 etc.; in addition, the group mapping is set to the internal trial identifier
 (by default called "mt_id").
 
-If \code{only_ggplot==FALSE}, the trajectories are plotted using the 
-\link[ggplot2]{geom_path} function of the \code{ggplot2} package. If 
-\code{only_ggplot==TRUE}, the ggplot object is returned without layers, which
-can be used to further customize the plot, e.g., to specify a custom size for
-the lines or to create semitransparent lines by specifying an alpha level < 1
-(see Examples).
+If \code{return_type == "plot"} (the default), a new ggplot is created and
+the trajectories are plotted using the \link[ggplot2]{geom_path} function of
+the \code{ggplot2} package. If \code{return_type == "mapping"}, the ggplot
+object is returned without layers, which can be used to further customize the
+plot (see Examples). If \code{return_type == "geoms"}, only the geoms are
+returned, which allows adding the plotted trajectories to an existing ggplot
+(e.g., adding aggregate trajectories on top of the individual trajectories,
+see Examples).
 
 \code{mt_plot_aggregate} works similarly, but uses \link{mt_aggregate} for
 reshaping and aggregating trajectories prior to plotting.
@@ -165,6 +174,10 @@ mt_example <- mt_time_normalize(mt_example)
 # varying the color depending on the condition
 mt_plot(mt_example, use="tn_trajectories",
   color="Condition")
+
+# ... setting alpha < 1 for semi-transparency
+mt_plot(mt_example, use="tn_trajectories",
+  color="Condition", alpha = .2)
 
 # ... with custom colors
 mt_plot(mt_example, use="tn_trajectories",
@@ -201,19 +214,20 @@ mt_plot_aggregate(KH2017, use="tn_trajectories",
   color="Condition", points=TRUE)
 
 \dontrun{
-# Create customized aggregate trajectory plot
-# by using only_ggplot option to return a ggplot object without geoms
-# and by adding a geom to it with a custom line width
+# Create customized aggregate trajectory plot by setting the return_type
+# option to "mapping" to setup an empty plot. In a next step, a geom
+# is added - in this example, only points are plotted.
 mt_plot_aggregate(KH2017, use="tn_trajectories",
-  color="Condition", only_ggplot=TRUE) + 
-  geom_path(size=1.5)
+  color="Condition", return_type="mapping") + 
+  geom_point()
   
-# Create customized plot of individual trajectories
-# by using only_ggplot option to return a ggplot object without geoms
-# and by adding a geom to it with semitransparent lines 
-# (by specifying alpha < 1)
-mt_plot(KH2017, use="tn_trajectories", only_ggplot=TRUE) + 
-  geom_path(alpha=0.2)
+# Create combined plot of individual and aggregate trajectories
+# by first plotting the individual trajectories using mt_plot.
+# In a next step, the aggregate trajectories are added using the
+# mt_plot_aggregate function with the return_type argument set to "geom".
+mt_plot(KH2017, use="tn_trajectories", color="Condition", alpha=.05) + 
+  mt_plot_aggregate(KH2017, use="tn_trajectories",
+    color="Condition", return_type="geom", size = 2)
 }
 
 }
