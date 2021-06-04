@@ -95,10 +95,6 @@
 #'   individual pdf files.
 #'
 #' @examples
-#' # Load ggplot2
-#' library(ggplot2)
-#' 
-#' 
 #' ## Plot individual example trajectories
 #'
 #' # Time-normalize trajectories
@@ -111,7 +107,7 @@
 #'
 #' # ... setting alpha < 1 for semi-transparency
 #' mt_plot(mt_example, use="tn_trajectories",
-#'   color="Condition", alpha = .2)
+#'   color="Condition", alpha=.2)
 #'
 #' # ... with custom colors
 #' mt_plot(mt_example, use="tn_trajectories",
@@ -122,10 +118,17 @@
 #' mt_plot(mt_example, use="tn_trajectories",
 #'   facet_col="Condition")
 #'
+#' # Create customized plot by setting the return_type option to "mapping"
+#' # to setup an empty plot. In a next step, a geom is added.
+#' # In this example, only points are plotted.
+#' mt_plot(mt_example, use="tn_trajectories",
+#'   color="Condition", return_type="mapping") + 
+#'   ggplot2::geom_point()
+#' 
 #' # Plot velocity profiles based on the averaged trajectories
 #' # varying the color depending on the condition
 #' mt_example <- mt_derivatives(mt_example)
-#' mt_example <- mt_average(mt_example, interval_size = 100)
+#' mt_example <- mt_average(mt_example, interval_size=100)
 #' mt_plot(mt_example, use="av_trajectories",
 #'   x="timestamps", y="vel", color="Condition")
 #'
@@ -148,12 +151,6 @@
 #'   color="Condition", points=TRUE)
 #'
 #' \dontrun{
-#' # Create customized aggregate trajectory plot by setting the return_type
-#' # option to "mapping" to setup an empty plot. In a next step, a geom
-#' # is added - in this example, only points are plotted.
-#' mt_plot_aggregate(KH2017, use="tn_trajectories",
-#'   color="Condition", return_type="mapping") + 
-#'   geom_point()
 #'   
 #' # Create combined plot of individual and aggregate trajectories
 #' # by first plotting the individual trajectories using mt_plot.
@@ -161,7 +158,7 @@
 #' # mt_plot_aggregate function with the return_type argument set to "geom".
 #' mt_plot(KH2017, use="tn_trajectories", color="Condition", alpha=.05) + 
 #'   mt_plot_aggregate(KH2017, use="tn_trajectories",
-#'     color="Condition", return_type="geom", size = 2)
+#'     color="Condition", return_type="geom", size=2)
 #' }
 #'
 #' @author
