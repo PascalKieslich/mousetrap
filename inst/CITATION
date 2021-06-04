@@ -3,7 +3,7 @@ citHeader("If you use mousetrap in your publications, please cite it as follows:
 bibentry(
   bibtype = "InCollection",
   title = "Mouse-tracking: {A} practical guide to implementation and analysis",
-	author  = c(
+	author = c(
     person(c("Pascal","J."), "Kieslich"),
     person("Felix", "Henninger"),
     person(c("Dirk","U."), "Wulff"),
@@ -20,10 +20,11 @@ bibentry(
     person("Anton","Kühberger"),
     person(c("Joseph","G."),"Johnson")
     ),
+  doi = "10.4324/9781315160559-9",
   textVersion  =
   paste("Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. (2019).",
         "Mouse-tracking: A practical guide to implementation and analysis.",
         "In M. Schulte-Mecklenbeck, A. Kühberger, & J. G. Johnson (Eds.),",
         "A Handbook of Process Tracing Methods (pp. 111-130).",
-        "New York, NY: Routledge.")
+        "New York, NY: Routledge. https://doi.org/10.4324/9781315160559-9")
 )
