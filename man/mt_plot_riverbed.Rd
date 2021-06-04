@@ -101,9 +101,9 @@ Scherbaum, S., Dshemuchadse, M., Fischer, R., & Goschke, T.
   (2010). How decisions evolve: The temporal dynamics of action selection.
   \emph{Cognition, 115}(3), 407-416.
 
-  Scherbaum, S., & Kieslich, P. J. (in press). Stuck at the starting line: How
+  Scherbaum, S., & Kieslich, P. J. (2018). Stuck at the starting line: How
   the starting procedure influences mouse-tracking data. \emph{Behavior
-  Research Methods}.
+  Research Methods, 50}(5), 2097–2110.
 }
 \seealso{
 \link{mt_plot} for plotting trajectory data.

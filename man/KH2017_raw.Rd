@@ -59,10 +59,10 @@ exemplars, indicating increased conflict between the response options.
 \references{
 Kieslich, P. J., & Henninger, F. (2017). Mousetrap: An
   integrated, open-source mouse-tracking package. \emph{Behavior Research
-  Methods, 49}(5), 1652-1667. \url{https://doi.org/10.3758/s13428-017-0900-z}
+  Methods, 49}(5), 1652-1667. \doi{10.3758/s13428-017-0900-z}
 
   Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor responses in the
   time course of categorizing atypical exemplars. \emph{Memory & Cognition,
-  35}(1), 15-28. \url{https://doi.org/10.3758/BF03195938}
+  35}(1), 15-28. \doi{10.3758/BF03195938}
 }
 \keyword{datasets}

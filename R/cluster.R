@@ -10,7 +10,7 @@
 #' computed by \link{mt_distmat}.
 #' 
 #' Mouse trajectories often occur in distinct, qualitative types (see Wulff et
-#' al., in press; Wulff et al., 2018). Common trajectory types are linear
+#' al., 2019; Wulff et al., 2021). Common trajectory types are linear
 #' trajectories, mildly and strongly curved trajctories, and single and multiple
 #' change-of-mind trials (see also \link{mt_map}). \code{mt_cluster} can tease
 #' these types apart.
@@ -31,8 +31,8 @@
 #' trajectories share the same direction, e.g., that all trajectories end in the
 #' top-left corner of the coordinate system (\link{mt_remap_symmetric} or
 #' \link{mt_align} can be used to achieve this). Furthermore, it is recommended
-#' to use length normalized trajectories (see \link{mt_length_normalize}; Wulff et al., in
-#' press; Haslbeck et al., 2018).
+#' to use length normalized trajectories (see \link{mt_length_normalize}; Wulff
+#' et al., 2019).
 #'
 #' @inheritParams mt_time_normalize
 #' @param save_as a character string specifying where the resulting data should
@@ -89,14 +89,9 @@
 #'   Johnson (Eds.), \emph{A Handbook of Process Tracing Methods} (pp. 131-145). New York, NY:
 #'   Routledge.
 #'    
-#'   Wulff, D. U., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. (2018).
+#'   Wulff, D. U., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. (2021).
 #'   \emph{Measuring the (dis-)continuous mind: What movement trajectories
 #'   reveal about cognition}. Manuscript in preparation.
-#'
-#'   Haslbeck, J. M. B., Wulff, D. U., Kieslich, P. J., Henninger, F., &
-#'   Schulte-Mecklenbeck, M. (2018). \emph{Advanced mouse- and hand-tracking
-#'   analysis: Detecting and visualizing clusters in movement trajectories}.
-#'   Manuscript in preparation.
 #'
 #' @seealso \link{mt_distmat} for more information about how the distance matrix is 
 #'   computed when the hclust method is used.

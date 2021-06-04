@@ -37,7 +37,7 @@ bimodality_coefficient(pfister_data_b) #.79
 Pfister, R., Schwarz, K. A., Janczyk, M., Dale, R., & Freeman, J. B. (2013).
 Good things peak in pairs: A note on the bimodality coefficient.
 \emph{Frontiers in Psychology, 4}, 700.
-\url{http://dx.doi.org/10.3389/fpsyg.2013.00700}
+\doi{10.3389/fpsyg.2013.00700}
 }
 \seealso{
 \link[psych]{skew} for calculating skewness and kurtosis.
