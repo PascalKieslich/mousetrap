@@ -62,6 +62,8 @@ Schulte-Mecklenbeck, M. (2019). Mouse-tracking: A practical guide to
 implementation and analysis. In M. Schulte-Mecklenbeck, A. Kühberger, &
 J. G. Johnson (Eds.), *A Handbook of Process Tracing Methods*
 (pp. 111-130). New York, NY: Routledge.
+<https://doi.org/10.4324/9781315160559-9>
+([preprint](https://psyarxiv.com/zuvqa/))
 
 Besides, if you use functions for clustering and mapping trajectories,
 please also include the following reference:
@@ -70,7 +72,8 @@ Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F., &
 Schulte-Mecklenbeck, M. (2019). Mouse-tracking: Detecting types in
 movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G.
 Johnson (Eds.), *A Handbook of Process Tracing Methods* (pp. 131-145).
-New York, NY: Routledge.
+New York, NY: Routledge. <https://doi.org/10.4324/9781315160559-10>
+([preprint](https://psyarxiv.com/6edca/))
 
 ## Acknowledgments
 
