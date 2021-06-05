@@ -77,7 +77,7 @@ for plotting velocity and acceleration profiles." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.2.0</span>
       </span>
     </div>
 
@@ -96,7 +96,7 @@ for plotting velocity and acceleration profiles." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/pascalkieslich/mousetrap">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -127,45 +127,47 @@ variables using the <code>color</code> and <code>linetype</code> arguments. If t
 for plotting velocity and acceleration profiles.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mt_plot</span>(
-  <span class='no'>data</span>,
-  <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>,
-  <span class='kw'>use2</span> <span class='kw'>=</span> <span class='st'>"data"</span>,
-  <span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"xpos"</span>,
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='st'>"ypos"</span>,
-  <span class='kw'>color</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>linetype</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
-  <span class='kw'>facet_row</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>facet_col</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>wrap_var</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>wrap_ncol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>points</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>only_ggplot</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>mt_id</span> <span class='kw'>=</span> <span class='st'>"mt_id"</span>,
-  <span class='no'>...</span>
-)
+    <pre class="usage"><span class='fu'>mt_plot</span><span class='op'>(</span>
+  <span class='va'>data</span>,
+  use <span class='op'>=</span> <span class='st'>"trajectories"</span>,
+  use2 <span class='op'>=</span> <span class='st'>"data"</span>,
+  x <span class='op'>=</span> <span class='st'>"xpos"</span>,
+  y <span class='op'>=</span> <span class='st'>"ypos"</span>,
+  color <span class='op'>=</span> <span class='cn'>NULL</span>,
+  linetype <span class='op'>=</span> <span class='cn'>NULL</span>,
+  alpha <span class='op'>=</span> <span class='cn'>NA</span>,
+  size <span class='op'>=</span> <span class='fl'>0.5</span>,
+  facet_row <span class='op'>=</span> <span class='cn'>NULL</span>,
+  facet_col <span class='op'>=</span> <span class='cn'>NULL</span>,
+  wrap_var <span class='op'>=</span> <span class='cn'>NULL</span>,
+  wrap_ncol <span class='op'>=</span> <span class='cn'>NULL</span>,
+  points <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  return_type <span class='op'>=</span> <span class='st'>"plot"</span>,
+  mt_id <span class='op'>=</span> <span class='st'>"mt_id"</span>,
+  only_ggplot <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
-<span class='fu'>mt_plot_aggregate</span>(
-  <span class='no'>data</span>,
-  <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>,
-  <span class='kw'>use2</span> <span class='kw'>=</span> <span class='st'>"data"</span>,
-  <span class='kw'>x</span> <span class='kw'>=</span> <span class='st'>"xpos"</span>,
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='st'>"ypos"</span>,
-  <span class='kw'>color</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>linetype</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
-  <span class='kw'>facet_row</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>facet_col</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>wrap_var</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>wrap_ncol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>points</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>only_ggplot</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>subject_id</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='no'>...</span>
-)</pre>
+<span class='fu'>mt_plot_aggregate</span><span class='op'>(</span>
+  <span class='va'>data</span>,
+  use <span class='op'>=</span> <span class='st'>"trajectories"</span>,
+  use2 <span class='op'>=</span> <span class='st'>"data"</span>,
+  x <span class='op'>=</span> <span class='st'>"xpos"</span>,
+  y <span class='op'>=</span> <span class='st'>"ypos"</span>,
+  color <span class='op'>=</span> <span class='cn'>NULL</span>,
+  linetype <span class='op'>=</span> <span class='cn'>NULL</span>,
+  alpha <span class='op'>=</span> <span class='cn'>NA</span>,
+  size <span class='op'>=</span> <span class='fl'>0.5</span>,
+  facet_row <span class='op'>=</span> <span class='cn'>NULL</span>,
+  facet_col <span class='op'>=</span> <span class='cn'>NULL</span>,
+  wrap_var <span class='op'>=</span> <span class='cn'>NULL</span>,
+  wrap_ncol <span class='op'>=</span> <span class='cn'>NULL</span>,
+  points <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  return_type <span class='op'>=</span> <span class='st'>"plot"</span>,
+  subject_id <span class='op'>=</span> <span class='cn'>NULL</span>,
+  only_ggplot <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -249,16 +251,23 @@ wrapping is used.</p></td>
 <a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a>.</p></td>
     </tr>
     <tr>
-      <th>only_ggplot</th>
-      <td><p>logical. If <code>TRUE</code>, only the ggplot object without
-geoms is returned. If <code>FALSE</code> (the default), the trajectories are
-plotted using <a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_path</a>.</p></td>
+      <th>return_type</th>
+      <td><p>a character string specifying which type of object should
+be returned. If <code>"plot"</code> (the default), a new ggplot is created and
+the trajectories are plotted using <a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_path</a>. If
+<code>"mapping"</code>, only the ggplot object containing the mapping but without
+any geoms is returned. If <code>"geoms"</code>, only the geoms are returned,
+which allows adding the plotted trajectories to an existing ggplot.</p></td>
     </tr>
     <tr>
       <th>mt_id</th>
       <td><p>a character string specifying the internal label used for the
 trial identifier (passed on to the group aesthetic). Only relevant for
 <code>mt_plot</code>.</p></td>
+    </tr>
+    <tr>
+      <th>only_ggplot</th>
+      <td><p>Deprecated. Please use <code>return_type</code> instead.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -283,12 +292,14 @@ into a long format. Next, it creates a ggplot object using the
 <a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a> mappings are taken from the function arguments for x, y
 etc.; in addition, the group mapping is set to the internal trial identifier
 (by default called "mt_id").</p>
-<p>If <code>only_ggplot==FALSE</code>, the trajectories are plotted using the 
-<a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_path</a> function of the <code>ggplot2</code> package. If 
-<code>only_ggplot==TRUE</code>, the ggplot object is returned without layers, which
-can be used to further customize the plot, e.g., to specify a custom size for
-the lines or to create semitransparent lines by specifying an alpha level &lt; 1
-(see Examples).</p>
+<p>If <code>return_type == "plot"</code> (the default), a new ggplot is created and
+the trajectories are plotted using the <a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_path</a> function of
+the <code>ggplot2</code> package. If <code>return_type == "mapping"</code>, the ggplot
+object is returned without layers, which can be used to further customize the
+plot (see Examples). If <code>return_type == "geoms"</code>, only the geoms are
+returned, which allows adding the plotted trajectories to an existing ggplot
+(e.g., adding aggregate trajectories on top of the individual trajectories,
+see Examples).</p>
 <p><code>mt_plot_aggregate</code> works similarly, but uses <a href='mt_aggregate.html'>mt_aggregate</a> for
 reshaping and aggregating trajectories prior to plotting.</p>
 <p>Please note that this function is intended as a quick and easy solution for
@@ -310,64 +321,79 @@ visualizing mouse trajectories. For additional flexibility, we recommend that
   variable across time.</p>
 <p><a href='mt_plot_per_trajectory.html'>mt_plot_per_trajectory</a> for individually plotting all trajectories as
   individual pdf files.</p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Pascal J. Kieslich</p>
+<p>Felix Henninger</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Load ggplot2</span>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
-
-
-<span class='co'>## Plot individual example trajectories</span>
+    <pre class="examples"><div class='input'><span class='co'>## Plot individual example trajectories</span>
 
 <span class='co'># Time-normalize trajectories</span>
-<span class='no'>mt_example</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_time_normalize.html'>mt_time_normalize</a></span>(<span class='no'>mt_example</span>)
+<span class='va'>mt_example</span> <span class='op'>&lt;-</span> <span class='fu'><a href='mt_time_normalize.html'>mt_time_normalize</a></span><span class='op'>(</span><span class='va'>mt_example</span><span class='op'>)</span>
 
 <span class='co'># Plot all time-normalized trajectories</span>
 <span class='co'># varying the color depending on the condition</span>
-<span class='fu'>mt_plot</span>(<span class='no'>mt_example</span>, <span class='kw'>use</span><span class='kw'>=</span><span class='st'>"tn_trajectories"</span>,
-  <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"Condition"</span>)</div><div class='img'><img src='mt_plot-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>mt_plot</span><span class='op'>(</span><span class='va'>mt_example</span>, use<span class='op'>=</span><span class='st'>"tn_trajectories"</span>,
+  color<span class='op'>=</span><span class='st'>"Condition"</span><span class='op'>)</span>
+</div><div class='img'><img src='mt_plot-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># ... setting alpha &lt; 1 for semi-transparency</span>
+<span class='fu'>mt_plot</span><span class='op'>(</span><span class='va'>mt_example</span>, use<span class='op'>=</span><span class='st'>"tn_trajectories"</span>,
+  color<span class='op'>=</span><span class='st'>"Condition"</span>, alpha<span class='op'>=</span><span class='fl'>.2</span><span class='op'>)</span>
+</div><div class='img'><img src='mt_plot-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># ... with custom colors</span>
-<span class='fu'>mt_plot</span>(<span class='no'>mt_example</span>, <span class='kw'>use</span><span class='kw'>=</span><span class='st'>"tn_trajectories"</span>,
-  <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"Condition"</span>) +
-  <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_brewer.html'>scale_color_brewer</a></span>(<span class='kw'>type</span><span class='kw'>=</span><span class='st'>"qual"</span>)</div><div class='img'><img src='mt_plot-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>mt_plot</span><span class='op'>(</span><span class='va'>mt_example</span>, use<span class='op'>=</span><span class='st'>"tn_trajectories"</span>,
+  color<span class='op'>=</span><span class='st'>"Condition"</span><span class='op'>)</span> <span class='op'>+</span>
+  <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_brewer.html'>scale_color_brewer</a></span><span class='op'>(</span>type<span class='op'>=</span><span class='st'>"qual"</span><span class='op'>)</span>
+</div><div class='img'><img src='mt_plot-3.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Create separate plots per Condition</span>
-<span class='fu'>mt_plot</span>(<span class='no'>mt_example</span>, <span class='kw'>use</span><span class='kw'>=</span><span class='st'>"tn_trajectories"</span>,
-  <span class='kw'>facet_col</span><span class='kw'>=</span><span class='st'>"Condition"</span>)</div><div class='img'><img src='mt_plot-3.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>mt_plot</span><span class='op'>(</span><span class='va'>mt_example</span>, use<span class='op'>=</span><span class='st'>"tn_trajectories"</span>,
+  facet_col<span class='op'>=</span><span class='st'>"Condition"</span><span class='op'>)</span>
+</div><div class='img'><img src='mt_plot-4.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># Create customized plot by setting the return_type option to "mapping"</span>
+<span class='co'># to setup an empty plot. In a next step, a geom is added.</span>
+<span class='co'># In this example, only points are plotted.</span>
+<span class='fu'>mt_plot</span><span class='op'>(</span><span class='va'>mt_example</span>, use<span class='op'>=</span><span class='st'>"tn_trajectories"</span>,
+  color<span class='op'>=</span><span class='st'>"Condition"</span>, return_type<span class='op'>=</span><span class='st'>"mapping"</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span><span class='op'>(</span><span class='op'>)</span>
+</div><div class='img'><img src='mt_plot-5.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Plot velocity profiles based on the averaged trajectories</span>
 <span class='co'># varying the color depending on the condition</span>
-<span class='no'>mt_example</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_derivatives.html'>mt_derivatives</a></span>(<span class='no'>mt_example</span>)
-<span class='no'>mt_example</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_average.html'>mt_average</a></span>(<span class='no'>mt_example</span>, <span class='kw'>interval_size</span> <span class='kw'>=</span> <span class='fl'>100</span>)
-<span class='fu'>mt_plot</span>(<span class='no'>mt_example</span>, <span class='kw'>use</span><span class='kw'>=</span><span class='st'>"av_trajectories"</span>,
-  <span class='kw'>x</span><span class='kw'>=</span><span class='st'>"timestamps"</span>, <span class='kw'>y</span><span class='kw'>=</span><span class='st'>"vel"</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"Condition"</span>)</div><div class='img'><img src='mt_plot-4.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='va'>mt_example</span> <span class='op'>&lt;-</span> <span class='fu'><a href='mt_derivatives.html'>mt_derivatives</a></span><span class='op'>(</span><span class='va'>mt_example</span><span class='op'>)</span>
+<span class='va'>mt_example</span> <span class='op'>&lt;-</span> <span class='fu'><a href='mt_average.html'>mt_average</a></span><span class='op'>(</span><span class='va'>mt_example</span>, interval_size<span class='op'>=</span><span class='fl'>100</span><span class='op'>)</span>
+<span class='fu'>mt_plot</span><span class='op'>(</span><span class='va'>mt_example</span>, use<span class='op'>=</span><span class='st'>"av_trajectories"</span>,
+  x<span class='op'>=</span><span class='st'>"timestamps"</span>, y<span class='op'>=</span><span class='st'>"vel"</span>, color<span class='op'>=</span><span class='st'>"Condition"</span><span class='op'>)</span>
+</div><div class='img'><img src='mt_plot-6.png' alt='' width='700' height='433' /></div><div class='input'>
 
 <span class='co'>## Plot aggregate trajectories for KH2017 data</span>
 
 <span class='co'># Time-normalize trajectories</span>
-<span class='no'>KH2017</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_time_normalize.html'>mt_time_normalize</a></span>(<span class='no'>KH2017</span>)
+<span class='va'>KH2017</span> <span class='op'>&lt;-</span> <span class='fu'><a href='mt_time_normalize.html'>mt_time_normalize</a></span><span class='op'>(</span><span class='va'>KH2017</span><span class='op'>)</span>
 
 <span class='co'># Plot aggregated time-normalized trajectories per condition</span>
-<span class='fu'>mt_plot_aggregate</span>(<span class='no'>KH2017</span>, <span class='kw'>use</span><span class='kw'>=</span><span class='st'>"tn_trajectories"</span>,
-  <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"Condition"</span>)</div><div class='img'><img src='mt_plot-5.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>mt_plot_aggregate</span><span class='op'>(</span><span class='va'>KH2017</span>, use<span class='op'>=</span><span class='st'>"tn_trajectories"</span>,
+  color<span class='op'>=</span><span class='st'>"Condition"</span><span class='op'>)</span>
+</div><div class='img'><img src='mt_plot-7.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># ... first aggregating trajectories within subjects</span>
-<span class='fu'>mt_plot_aggregate</span>(<span class='no'>KH2017</span>, <span class='kw'>use</span><span class='kw'>=</span><span class='st'>"tn_trajectories"</span>,
-  <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"Condition"</span>, <span class='kw'>subject_id</span><span class='kw'>=</span><span class='st'>"subject_nr"</span>)</div><div class='img'><img src='mt_plot-6.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'>mt_plot_aggregate</span><span class='op'>(</span><span class='va'>KH2017</span>, use<span class='op'>=</span><span class='st'>"tn_trajectories"</span>,
+  color<span class='op'>=</span><span class='st'>"Condition"</span>, subject_id<span class='op'>=</span><span class='st'>"subject_nr"</span><span class='op'>)</span>
+</div><div class='img'><img src='mt_plot-8.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># ... adding points for each position to the plot</span>
-<span class='fu'>mt_plot_aggregate</span>(<span class='no'>KH2017</span>, <span class='kw'>use</span><span class='kw'>=</span><span class='st'>"tn_trajectories"</span>,
-  <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"Condition"</span>, <span class='kw'>points</span><span class='kw'>=</span><span class='fl'>TRUE</span>)</div><div class='img'><img src='mt_plot-7.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='co'># Create customized aggregate trajectory plot</span>
-<span class='co'># by using only_ggplot option to return a ggplot object without geoms</span>
-<span class='co'># and by adding a geom to it with a custom line width</span>
-<span class='fu'>mt_plot_aggregate</span>(<span class='no'>KH2017</span>, <span class='kw'>use</span><span class='kw'>=</span><span class='st'>"tn_trajectories"</span>,
-  <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"Condition"</span>, <span class='kw'>only_ggplot</span><span class='kw'>=</span><span class='fl'>TRUE</span>) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_path</a></span>(<span class='kw'>size</span><span class='kw'>=</span><span class='fl'>1.5</span>)
+<span class='fu'>mt_plot_aggregate</span><span class='op'>(</span><span class='va'>KH2017</span>, use<span class='op'>=</span><span class='st'>"tn_trajectories"</span>,
+  color<span class='op'>=</span><span class='st'>"Condition"</span>, points<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='img'><img src='mt_plot-9.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+  
+<span class='co'># Create combined plot of individual and aggregate trajectories</span>
+<span class='co'># by first plotting the individual trajectories using mt_plot.</span>
+<span class='co'># In a next step, the aggregate trajectories are added using the</span>
+<span class='co'># mt_plot_aggregate function with the return_type argument set to "geom".</span>
+<span class='fu'>mt_plot</span><span class='op'>(</span><span class='va'>KH2017</span>, use<span class='op'>=</span><span class='st'>"tn_trajectories"</span>, color<span class='op'>=</span><span class='st'>"Condition"</span>, alpha<span class='op'>=</span><span class='fl'>.05</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'>mt_plot_aggregate</span><span class='op'>(</span><span class='va'>KH2017</span>, use<span class='op'>=</span><span class='st'>"tn_trajectories"</span>,
+    color<span class='op'>=</span><span class='st'>"Condition"</span>, return_type<span class='op'>=</span><span class='st'>"geom"</span>, size<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
+<span class='op'>}</span>
 
-<span class='co'># Create customized plot of individual trajectories</span>
-<span class='co'># by using only_ggplot option to return a ggplot object without geoms</span>
-<span class='co'># and by adding a geom to it with semitransparent lines </span>
-<span class='co'># (by specifying alpha &lt; 1)</span>
-<span class='fu'>mt_plot</span>(<span class='no'>KH2017</span>, <span class='kw'>use</span><span class='kw'>=</span><span class='st'>"tn_trajectories"</span>, <span class='kw'>only_ggplot</span><span class='kw'>=</span><span class='fl'>TRUE</span>) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_path</a></span>(<span class='kw'>alpha</span><span class='kw'>=</span><span class='fl'>0.2</span>)
-}</div></pre>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -383,7 +409,7 @@ visualizing mouse trajectories. For additional flexibility, we recommend that
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

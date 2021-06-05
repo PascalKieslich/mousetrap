@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add new trajectory to trajectory array. — mt_add_trajectory • mousetrap</title>
+<title>Length normalize trajectories. — mt_length_normalize • mousetrap</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,9 @@
 
 
 
-<meta property="og:title" content="Add new trajectory to trajectory array. — mt_add_trajectory" />
-<meta property="og:description" content="Add a single new trajectory to trajectory array." />
+<meta property="og:title" content="Length normalize trajectories. — mt_length_normalize" />
+<meta property="og:description" content="Re-represent each trajectory spatially using a constant number of points so 
+that adjacent points on the trajectory become equidistant to each other." />
 
 
 
@@ -108,23 +109,22 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Add new trajectory to trajectory array.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/pascalkieslich/mousetrap/blob/master/R/add.R'><code>R/add.R</code></a></small>
-    <div class="hidden name"><code>mt_add_trajectory.Rd</code></div>
+    <h1>Length normalize trajectories.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/pascalkieslich/mousetrap/blob/master/R/spatialize.R'><code>R/spatialize.R</code></a></small>
+    <div class="hidden name"><code>mt_length_normalize.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Add a single new trajectory to trajectory array.</p>
+    <p>Re-represent each trajectory spatially using a constant number of points so 
+that adjacent points on the trajectory become equidistant to each other.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mt_add_trajectory</span><span class='op'>(</span>
+    <pre class="usage"><span class='fu'>mt_length_normalize</span><span class='op'>(</span>
   <span class='va'>data</span>,
   use <span class='op'>=</span> <span class='st'>"trajectories"</span>,
-  save_as <span class='op'>=</span> <span class='va'>use</span>,
-  xpos <span class='op'>=</span> <span class='cn'>NULL</span>,
-  ypos <span class='op'>=</span> <span class='cn'>NULL</span>,
-  xypos <span class='op'>=</span> <span class='cn'>NULL</span>,
-  id <span class='op'>=</span> <span class='st'>"new"</span>
+  dimensions <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"xpos"</span>, <span class='st'>"ypos"</span><span class='op'>)</span>,
+  save_as <span class='op'>=</span> <span class='st'>"ln_trajectories"</span>,
+  n_points <span class='op'>=</span> <span class='fl'>20</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -142,46 +142,50 @@ array can be provided directly (in this case <code>use</code> will be ignored).<
 used.</p></td>
     </tr>
     <tr>
+      <th>dimensions</th>
+      <td><p>a character string specifying which trajectory variables 
+should be used. Can be of length 2 or 3 for two-dimensional or 
+three-dimensional data.</p></td>
+    </tr>
+    <tr>
       <th>save_as</th>
       <td><p>a character string specifying where the resulting trajectory
 data should be stored.</p></td>
     </tr>
     <tr>
-      <th>xpos</th>
-      <td><p>a vector of x positions. Ignored, if <code>xypos</code> is provided.</p></td>
-    </tr>
-    <tr>
-      <th>ypos</th>
-      <td><p>a vector of y positions. Ignored, if <code>xypos</code> is provided.</p></td>
-    </tr>
-    <tr>
-      <th>xypos</th>
-      <td><p>a matrix, the first column corresponding to the x positions, the
-second to the y positions.</p></td>
-    </tr>
-    <tr>
-      <th>id</th>
-      <td><p>a character string specifying the identifier of the to be added
-trajectory.</p></td>
+      <th>n_points</th>
+      <td><p>an integer or vector of integers specifying the number of 
+points used to represent the spatially rescaled trajectories. If a single 
+integer is provided, the number of points will be constant across 
+trajectories. Alternatively, a vector of integers can provided that specify
+the number of points for each trajectory individually.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A mousetrap data object (see <a href='mt_example.html'>mt_example</a>) where the new 
-  trajectory has been added.
-  If the trajectory array was provided directly as <code>data</code>, only the
-  trajectory array will be returned.</p>
+    <p>A mousetrap data object (see <a href='mt_example.html'>mt_example</a>) with an additional
+  array (by default called <code>ln_trajectories</code>) containing the length
+  normalized trajectories. If a trajectory array was provided directly as
+  <code>data</code>, only the length normalized trajectories will be returned.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p><code>mt_length_normalize</code> is used to emphasize the trajectories' shape.
+Usually, the vast majority of points of a raw or a time-normalized trajectory
+lie close to the start and end point. <code>mt_length_normalize</code>
+re-distributes these points so that the spatial distribution is uniform
+across the entire trajectory. <code>mt_length_normalize</code> is mainly used to
+improve the results of clustering (in particular <a href='mt_cluster.html'>mt_cluster</a>) and
+visualization.</p>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
-    <p>Pascal J. Kieslich</p>
-<p>Felix Henninger</p>
+    <p>Dirk U. Wulff</p>
+<p>Jonas M. B. Haslbeck</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Add additional prototype to mt_prototypes</span>
-<span class='va'>mt_prototypes_ext</span> <span class='op'>&lt;-</span> <span class='fu'>mt_add_trajectory</span><span class='op'>(</span><span class='va'>mt_prototypes</span>,
-   xpos <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>1</span>,<span class='op'>-</span><span class='fl'>1</span>,<span class='fl'>1</span>,<span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span>, ypos <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>1.5</span>,<span class='fl'>1.5</span>,<span class='fl'>1.5</span>,<span class='fl'>1.5</span><span class='op'>)</span>, id <span class='op'>=</span> <span class='st'>"dCoM3"</span>
-<span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='va'>KH2017</span> <span class='op'>&lt;-</span> <span class='fu'>mt_length_normalize</span><span class='op'>(</span>data<span class='op'>=</span><span class='va'>KH2017</span>,
+  dimensions <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'xpos'</span>,<span class='st'>'ypos'</span><span class='op'>)</span>,
+  n_points <span class='op'>=</span> <span class='fl'>20</span><span class='op'>)</span>
 
 </div></pre>
   </div>

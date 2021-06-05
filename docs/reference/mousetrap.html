@@ -74,7 +74,7 @@ following, a brief overview of the functions in this package is given." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.2.0</span>
       </span>
     </div>
 
@@ -93,7 +93,7 @@ following, a brief overview of the functions in this package is given." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/pascalkieslich/mousetrap">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -188,7 +188,7 @@ following, a brief overview of the functions in this package is given.</p>
   intervals of a specified length.</p>
 <p><a href='mt_average.html'>mt_average</a> averages trajectory coordinates (and related variables)
   for time bins of constant duration.</p>
-<p><a href='mt_spatialize.html'>mt_spatialize</a> re-represents each trajectory spatially so that
+<p><a href='mt_length_normalize.html'>mt_length_normalize</a> re-represents each trajectory spatially so that
   adjacent points on the trajectory become equidistant to each other.</p>
     <h2 class="hasAnchor" id="data-handling-functions"><a class="anchor" href="#data-handling-functions"></a>Data handling functions</h2>
 
@@ -293,34 +293,38 @@ following, a brief overview of the functions in this package is given.</p>
   Kieslich &amp; Henninger (2017).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='no'>KH2017</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_import_mousetrap.html'>mt_import_mousetrap</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span>(<span class='no'>KH2017_raw</span>,<span class='no'>correct</span><span class='kw'>==</span><span class='fl'>1</span>))
-<span class='no'>KH2017</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_remap_symmetric.html'>mt_remap_symmetric</a></span>(<span class='no'>KH2017</span>)
-<span class='no'>KH2017</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_align_start.html'>mt_align_start</a></span>(<span class='no'>KH2017</span>)
-}
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='va'>KH2017</span> <span class='op'>&lt;-</span> <span class='fu'><a href='mt_import_mousetrap.html'>mt_import_mousetrap</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/subset.html'>subset</a></span><span class='op'>(</span><span class='va'>KH2017_raw</span>,<span class='va'>correct</span><span class='op'>==</span><span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>KH2017</span> <span class='op'>&lt;-</span> <span class='fu'><a href='mt_remap_symmetric.html'>mt_remap_symmetric</a></span><span class='op'>(</span><span class='va'>KH2017</span><span class='op'>)</span>
+<span class='va'>KH2017</span> <span class='op'>&lt;-</span> <span class='fu'><a href='mt_align_start.html'>mt_align_start</a></span><span class='op'>(</span><span class='va'>KH2017</span><span class='op'>)</span>
+<span class='op'>}</span>
 
-<span class='no'>KH2017</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_time_normalize.html'>mt_time_normalize</a></span>(<span class='no'>KH2017</span>)
-<span class='no'>KH2017</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_measures.html'>mt_measures</a></span>(<span class='no'>KH2017</span>)
+<span class='va'>KH2017</span> <span class='op'>&lt;-</span> <span class='fu'><a href='mt_time_normalize.html'>mt_time_normalize</a></span><span class='op'>(</span><span class='va'>KH2017</span><span class='op'>)</span>
+<span class='va'>KH2017</span> <span class='op'>&lt;-</span> <span class='fu'><a href='mt_measures.html'>mt_measures</a></span><span class='op'>(</span><span class='va'>KH2017</span><span class='op'>)</span>
 
-<span class='fu'><a href='mt_aggregate.html'>mt_aggregate</a></span>(
-  <span class='no'>KH2017</span>, <span class='kw'>use</span><span class='kw'>=</span><span class='st'>"measures"</span>,
-  <span class='kw'>use_variables</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"MAD"</span>, <span class='st'>"AD"</span>),
-  <span class='kw'>use2_variables</span><span class='kw'>=</span><span class='st'>"Condition"</span>,
-  <span class='kw'>subject_id</span><span class='kw'>=</span><span class='st'>"subject_nr"</span>
-)</div><div class='output co'>#&gt;   Condition      MAD        AD
+<span class='fu'><a href='mt_aggregate.html'>mt_aggregate</a></span><span class='op'>(</span>
+  <span class='va'>KH2017</span>, use<span class='op'>=</span><span class='st'>"measures"</span>,
+  use_variables<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"MAD"</span>, <span class='st'>"AD"</span><span class='op'>)</span>,
+  use2_variables<span class='op'>=</span><span class='st'>"Condition"</span>,
+  subject_id<span class='op'>=</span><span class='st'>"subject_nr"</span>
+<span class='op'>)</span>
+</div><div class='output co'>#&gt;   Condition      MAD        AD
 #&gt; 1  Atypical 343.7954 100.36799
 #&gt; 2   Typical 172.2093  39.72137</div><div class='input'>
-<span class='fu'><a href='mt_plot.html'>mt_plot_aggregate</a></span>(<span class='no'>KH2017</span>,
-  <span class='kw'>use</span><span class='kw'>=</span><span class='st'>"tn_trajectories"</span>,
-  <span class='kw'>x</span><span class='kw'>=</span><span class='st'>"xpos"</span>, <span class='kw'>y</span><span class='kw'>=</span><span class='st'>"ypos"</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"Condition"</span>,
-  <span class='kw'>subject_id</span><span class='kw'>=</span><span class='st'>"subject_nr"</span>
-)</div><div class='img'><img src='mousetrap-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'><a href='mt_plot.html'>mt_plot</a></span>(<span class='no'>KH2017</span>,
-  <span class='kw'>use</span><span class='kw'>=</span><span class='st'>"tn_trajectories"</span>,
-  <span class='kw'>x</span><span class='kw'>=</span><span class='st'>"xpos"</span>, <span class='kw'>y</span><span class='kw'>=</span><span class='st'>"ypos"</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='st'>"Condition"</span>
-)
-}</div></pre>
+<span class='fu'><a href='mt_plot.html'>mt_plot_aggregate</a></span><span class='op'>(</span><span class='va'>KH2017</span>,
+  use<span class='op'>=</span><span class='st'>"tn_trajectories"</span>,
+  x<span class='op'>=</span><span class='st'>"xpos"</span>, y<span class='op'>=</span><span class='st'>"ypos"</span>, color<span class='op'>=</span><span class='st'>"Condition"</span>,
+  subject_id<span class='op'>=</span><span class='st'>"subject_nr"</span>
+<span class='op'>)</span>
+</div><div class='img'><img src='mousetrap-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
+<span class='fu'><a href='mt_plot.html'>mt_plot</a></span><span class='op'>(</span><span class='va'>KH2017</span>,
+  use<span class='op'>=</span><span class='st'>"tn_trajectories"</span>,
+  x<span class='op'>=</span><span class='st'>"xpos"</span>, y<span class='op'>=</span><span class='st'>"ypos"</span>, color<span class='op'>=</span><span class='st'>"Condition"</span>
+<span class='op'>)</span>
+<span class='op'>}</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -336,7 +340,7 @@ following, a brief overview of the functions in this package is given.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

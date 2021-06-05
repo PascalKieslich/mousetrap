@@ -77,7 +77,7 @@ mt_reshape." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.2.0</span>
       </span>
     </div>
 
@@ -96,7 +96,7 @@ mt_reshape." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/pascalkieslich/mousetrap">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -127,16 +127,16 @@ variables. <code>mt_aggregate_per_subject</code> is a wrapper function for
 <a href='mt_reshape.html'>mt_reshape</a>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mt_aggregate_per_subject</span>(
-  <span class='no'>data</span>,
-  <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"measures"</span>,
-  <span class='kw'>use_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>use2</span> <span class='kw'>=</span> <span class='st'>"data"</span>,
-  <span class='kw'>use2_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='no'>subject_id</span>,
-  <span class='kw'>trajectories_long</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>mt_aggregate_per_subject</span><span class='op'>(</span>
+  <span class='va'>data</span>,
+  use <span class='op'>=</span> <span class='st'>"measures"</span>,
+  use_variables <span class='op'>=</span> <span class='cn'>NULL</span>,
+  use2 <span class='op'>=</span> <span class='st'>"data"</span>,
+  use2_variables <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>subject_id</span>,
+  trajectories_long <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -210,33 +210,39 @@ trajectories.</p></td>
   trajectories per condition.</p>
 <p><a href='https://dplyr.tidyverse.org/reference/summarise_all.html'>summarize_at</a> for aggregating data using the <code>dplyr</code> 
   package.</p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Pascal J. Kieslich</p>
+<p>Felix Henninger</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Time-normalize trajectories</span>
-<span class='no'>mt_example</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_time_normalize.html'>mt_time_normalize</a></span>(<span class='no'>mt_example</span>)
+<span class='va'>mt_example</span> <span class='op'>&lt;-</span> <span class='fu'><a href='mt_time_normalize.html'>mt_time_normalize</a></span><span class='op'>(</span><span class='va'>mt_example</span><span class='op'>)</span>
 
 <span class='co'># Aggregate time-normalized trajectories per condition</span>
 <span class='co'># separately per subject</span>
-<span class='no'>average_trajectories</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_aggregate_per_subject</span>(
-  <span class='no'>mt_example</span>,
-  <span class='kw'>use</span><span class='kw'>=</span><span class='st'>"tn_trajectories"</span>,
-  <span class='kw'>use2_variables</span><span class='kw'>=</span><span class='st'>"Condition"</span>,
-  <span class='kw'>subject_id</span><span class='kw'>=</span><span class='st'>"subject_nr"</span>
-)
+<span class='va'>average_trajectories</span> <span class='op'>&lt;-</span> <span class='fu'>mt_aggregate_per_subject</span><span class='op'>(</span>
+  <span class='va'>mt_example</span>,
+  use<span class='op'>=</span><span class='st'>"tn_trajectories"</span>,
+  use2_variables<span class='op'>=</span><span class='st'>"Condition"</span>,
+  subject_id<span class='op'>=</span><span class='st'>"subject_nr"</span>
+<span class='op'>)</span>
 
 
 <span class='co'># Calculate mouse-tracking measures</span>
-<span class='no'>mt_example</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_measures.html'>mt_measures</a></span>(<span class='no'>mt_example</span>)
+<span class='va'>mt_example</span> <span class='op'>&lt;-</span> <span class='fu'><a href='mt_measures.html'>mt_measures</a></span><span class='op'>(</span><span class='va'>mt_example</span><span class='op'>)</span>
 
 <span class='co'># Aggregate measures per condition</span>
 <span class='co'># separately per subject</span>
-<span class='no'>average_measures</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_aggregate_per_subject</span>(
-  <span class='no'>mt_example</span>,
-  <span class='kw'>use</span><span class='kw'>=</span><span class='st'>"measures"</span>,
-  <span class='kw'>use_variables</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"MAD"</span>, <span class='st'>"AD"</span>),
-  <span class='kw'>use2_variables</span><span class='kw'>=</span><span class='st'>"Condition"</span>,
-  <span class='kw'>subject_id</span><span class='kw'>=</span><span class='st'>"subject_nr"</span>
-)</div></pre>
+<span class='va'>average_measures</span> <span class='op'>&lt;-</span> <span class='fu'>mt_aggregate_per_subject</span><span class='op'>(</span>
+  <span class='va'>mt_example</span>,
+  use<span class='op'>=</span><span class='st'>"measures"</span>,
+  use_variables<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"MAD"</span>, <span class='st'>"AD"</span><span class='op'>)</span>,
+  use2_variables<span class='op'>=</span><span class='st'>"Condition"</span>,
+  subject_id<span class='op'>=</span><span class='st'>"subject_nr"</span>
+<span class='op'>)</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -252,7 +258,7 @@ trajectories.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

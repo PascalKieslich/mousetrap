@@ -81,7 +81,7 @@ Version 2.84 - but please be sure to double-check." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.2.0</span>
       </span>
     </div>
 
@@ -100,7 +100,7 @@ Version 2.84 - but please be sure to double-check." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/pascalkieslich/mousetrap">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -135,7 +135,7 @@ current version of <code>read_mt</code> has been tested with data from MouseTrac
 Version 2.84 - but please be sure to double-check.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>read_mt</span>(<span class='no'>file</span>, <span class='kw'>columns</span> <span class='kw'>=</span> <span class='st'>"all"</span>, <span class='kw'>add_trialid</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>add_filename</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>read_mt</span><span class='op'>(</span><span class='va'>file</span>, columns <span class='op'>=</span> <span class='st'>"all"</span>, add_trialid <span class='op'>=</span> <span class='cn'>FALSE</span>, add_filename <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -176,21 +176,27 @@ containing the file name should be added.</p></td>
     <div class='dont-index'><p><a href='https://rdrr.io/pkg/readbulk/man/read_bulk.html'>read_bulk</a> from the <code>readbulk</code> package for reading and 
 combining multiple raw data files.</p>
 <p><a href='mt_import_wide.html'>mt_import_wide</a> to prepare the imported data for analyses in mousetrap.</p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Dirk U. Wulff</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'># Read a single raw data file from MouseTracker</span>
 <span class='co'># (stored in the current working directory)</span>
-<span class='no'>mt_data_raw</span> <span class='kw'>&lt;-</span> <span class='fu'>read_mt</span>(<span class='st'>"example.mt"</span>)
+<span class='va'>mt_data_raw</span> <span class='op'>&lt;-</span> <span class='fu'>read_mt</span><span class='op'>(</span><span class='st'>"example.mt"</span><span class='op'>)</span>
 
 <span class='co'># Use read_bulk to read all raw data files ending with ".mt" that are</span>
 <span class='co'># stored in the folder "raw_data" (in the current working directory)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>readbulk</span>)
-<span class='no'>mt_data_raw</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/readbulk/man/read_bulk.html'>read_bulk</a></span>(<span class='st'>"raw_data"</span>, <span class='kw'>fun</span><span class='kw'>=</span><span class='no'>read_mt</span>, <span class='kw'>extension</span><span class='kw'>=</span><span class='st'>".mt"</span>)
+<span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/pascalkieslich/readbulk'>readbulk</a></span><span class='op'>)</span>
+<span class='va'>mt_data_raw</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/readbulk/man/read_bulk.html'>read_bulk</a></span><span class='op'>(</span><span class='st'>"raw_data"</span>, fun<span class='op'>=</span><span class='va'>read_mt</span>, extension<span class='op'>=</span><span class='st'>".mt"</span><span class='op'>)</span>
 
 <span class='co'># Import the data into mousetrap</span>
-<span class='no'>mt_data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_import_wide.html'>mt_import_wide</a></span>(<span class='no'>mt_data_raw</span>)
-}</div></pre>
+<span class='va'>mt_data</span> <span class='op'>&lt;-</span> <span class='fu'><a href='mt_import_wide.html'>mt_import_wide</a></span><span class='op'>(</span><span class='va'>mt_data_raw</span><span class='op'>)</span>
+<span class='op'>}</span>
+
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -206,7 +212,7 @@ combining multiple raw data files.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

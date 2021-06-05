@@ -73,7 +73,7 @@ that this function has beta status." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.2.0</span>
       </span>
     </div>
 
@@ -92,7 +92,7 @@ that this function has beta status." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/pascalkieslich/mousetrap">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -119,33 +119,33 @@ that this function has beta status." />
 that this function has beta status.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mt_animate</span>(
-  <span class='no'>data</span>,
-  <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>,
-  <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>),
-  <span class='kw'>timestamps</span> <span class='kw'>=</span> <span class='st'>"timestamps"</span>,
-  <span class='kw'>filename</span> <span class='kw'>=</span> <span class='st'>"trajectory_animation.gif"</span>,
-  <span class='kw'>xres</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-  <span class='kw'>seconds</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-  <span class='kw'>framerate</span> <span class='kw'>=</span> <span class='fl'>24</span>,
-  <span class='kw'>speed</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
-  <span class='kw'>density</span> <span class='kw'>=</span> <span class='fl'>3</span>,
-  <span class='kw'>jitter</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>remove</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>bg</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
-  <span class='kw'>col</span> <span class='kw'>=</span> <span class='st'>"white"</span>,
-  <span class='kw'>lwd</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>loop</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>bounds</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>norm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>upscale</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>decay</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-  <span class='kw'>max_intensity</span> <span class='kw'>=</span> <span class='fl'>5</span>,
-  <span class='kw'>discard_images</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>im_path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>parallel</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>mt_animate</span><span class='op'>(</span>
+  <span class='va'>data</span>,
+  use <span class='op'>=</span> <span class='st'>"trajectories"</span>,
+  dimensions <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"xpos"</span>, <span class='st'>"ypos"</span><span class='op'>)</span>,
+  timestamps <span class='op'>=</span> <span class='st'>"timestamps"</span>,
+  filename <span class='op'>=</span> <span class='st'>"trajectory_animation.gif"</span>,
+  xres <span class='op'>=</span> <span class='fl'>1000</span>,
+  seconds <span class='op'>=</span> <span class='fl'>3</span>,
+  framerate <span class='op'>=</span> <span class='fl'>24</span>,
+  speed <span class='op'>=</span> <span class='fl'>0.5</span>,
+  density <span class='op'>=</span> <span class='fl'>3</span>,
+  jitter <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  remove <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  bg <span class='op'>=</span> <span class='st'>"black"</span>,
+  col <span class='op'>=</span> <span class='st'>"white"</span>,
+  lwd <span class='op'>=</span> <span class='fl'>1</span>,
+  loop <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  bounds <span class='op'>=</span> <span class='cn'>NULL</span>,
+  norm <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  upscale <span class='op'>=</span> <span class='fl'>1</span>,
+  decay <span class='op'>=</span> <span class='fl'>10</span>,
+  max_intensity <span class='op'>=</span> <span class='fl'>5</span>,
+  discard_images <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  im_path <span class='op'>=</span> <span class='cn'>NULL</span>,
+  parallel <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  verbose <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -331,27 +331,32 @@ time increase <code>upscale</code> in favor of <code>xres</code>. However, note 
 will decrease the sharpness of the image.</p>
 <p>In order to increase or decrease the overall color intensity decrease or
 increase the <code>max_intensity</code>, respectively.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Dirk U. Wulff</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'># Preprocess trajectory data</span>
-<span class='no'>mt_example</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_align_start.html'>mt_align_start</a></span>(<span class='no'>mt_example</span>)
-<span class='no'>mt_example</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_remap_symmetric.html'>mt_remap_symmetric</a></span>(<span class='no'>mt_example</span>)
+<span class='va'>mt_example</span> <span class='op'>&lt;-</span> <span class='fu'><a href='mt_align_start.html'>mt_align_start</a></span><span class='op'>(</span><span class='va'>mt_example</span><span class='op'>)</span>
+<span class='va'>mt_example</span> <span class='op'>&lt;-</span> <span class='fu'><a href='mt_remap_symmetric.html'>mt_remap_symmetric</a></span><span class='op'>(</span><span class='va'>mt_example</span><span class='op'>)</span> 
 
 <span class='co'># Create animated trajectory gif</span>
 <span class='co'># (under Linux / OSX)</span>
-<span class='fu'>mt_animate</span>(<span class='no'>mt_example</span>,<span class='kw'>filename</span> <span class='kw'>=</span> <span class='st'>"MyMovie.gif"</span>)
+<span class='fu'>mt_animate</span><span class='op'>(</span><span class='va'>mt_example</span>,filename <span class='op'>=</span> <span class='st'>"MyMovie.gif"</span><span class='op'>)</span>
 
 <span class='co'># Increase duration and density while decreasing speed</span>
-<span class='fu'>mt_animate</span>(<span class='no'>mt_example</span>, <span class='kw'>filename</span> <span class='kw'>=</span> <span class='st'>"MyMovie2.gif"</span>,
-  <span class='kw'>seconds</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>speed</span> <span class='kw'>=</span> <span class='fl'>.3</span>, <span class='kw'>density</span> <span class='kw'>=</span> <span class='fl'>10</span>)
+<span class='fu'>mt_animate</span><span class='op'>(</span><span class='va'>mt_example</span>, filename <span class='op'>=</span> <span class='st'>"MyMovie2.gif"</span>,
+  seconds <span class='op'>=</span> <span class='fl'>10</span>, speed <span class='op'>=</span> <span class='fl'>.3</span>, density <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span>
 
 <span class='co'># Create animated trajectory gif</span>
 <span class='co'># (under Windows - ImageMagick version specific example)</span>
-<span class='fu'>mt_animate</span>(<span class='no'>mt_example</span>,<span class='kw'>filename</span> <span class='kw'>=</span> <span class='st'>"MyMovie.gif"</span>,
-  <span class='kw'>im_path</span> <span class='kw'>=</span> <span class='st'>"C:/Program Files/ImageMagick-7.0.5-Q16/convert.exe"</span>)
+<span class='fu'>mt_animate</span><span class='op'>(</span><span class='va'>mt_example</span>,filename <span class='op'>=</span> <span class='st'>"MyMovie.gif"</span>,
+  im_path <span class='op'>=</span> <span class='st'>"C:/Program Files/ImageMagick-7.0.5-Q16/convert.exe"</span><span class='op'>)</span>
 
-}</div></pre>
+<span class='op'>}</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -367,7 +372,7 @@ increase the <code>max_intensity</code>, respectively.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

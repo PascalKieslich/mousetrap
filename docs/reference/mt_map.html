@@ -75,7 +75,7 @@ prototype that produced the smallest distance." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.2.0</span>
       </span>
     </div>
 
@@ -94,7 +94,7 @@ prototype that produced the smallest distance." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/pascalkieslich/mousetrap">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -123,19 +123,19 @@ of the supplied trajectory types and then assigns each trajectory to the
 prototype that produced the smallest distance.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mt_map</span>(
-  <span class='no'>data</span>,
-  <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"sp_trajectories"</span>,
-  <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='st'>"prototyping"</span>,
-  <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>),
-  <span class='kw'>prototypes</span> <span class='kw'>=</span> <span class='kw pkg'>mousetrap</span><span class='kw ns'>::</span><span class='no'><a href='mt_prototypes.html'>mt_prototypes</a></span>,
-  <span class='kw'>weights</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>dimensions</span>)),
-  <span class='kw'>pointwise</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>na_rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>minkowski_p</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>use2</span> <span class='kw'>=</span> <span class='st'>"data"</span>,
-  <span class='kw'>grouping_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>mt_map</span><span class='op'>(</span>
+  <span class='va'>data</span>,
+  use <span class='op'>=</span> <span class='st'>"ln_trajectories"</span>,
+  save_as <span class='op'>=</span> <span class='st'>"prototyping"</span>,
+  dimensions <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"xpos"</span>, <span class='st'>"ypos"</span><span class='op'>)</span>,
+  prototypes <span class='op'>=</span> <span class='fu'>mousetrap</span><span class='fu'>::</span><span class='va'><a href='mt_prototypes.html'>mt_prototypes</a></span>,
+  weights <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span>, <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>dimensions</span><span class='op'>)</span><span class='op'>)</span>,
+  pointwise <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  na_rm <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  minkowski_p <span class='op'>=</span> <span class='fl'>2</span>,
+  use2 <span class='op'>=</span> <span class='st'>"data"</span>,
+  grouping_variables <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -230,9 +230,9 @@ rescaled in the same way across all trajectories.</p></td>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Mouse trajectories often occur in distinct, qualitative types (see Wulff et
-al., in press; Wulff et al., 2018). Common trajectory types are linear
-trajectories, mildly and strongly curved trajctories, and single and multiple
-change-of-mind trials. <code>mt_map</code> allows to map trajectories to a
+al., 2019; Wulff et al., 2021). Common trajectory types are linear
+trajectories, mildly and strongly curved trajectories, and single and
+multiple change-of-mind trials. <code>mt_map</code> allows to map trajectories to a
 predefined set of trajectory types.</p>
 <p>First, <code>mt_map</code> adjusts prototypes to match the coordinate system of the
 trajectories specified by <code>use</code>. Next, <code>mt_map</code> computes the 
@@ -243,8 +243,8 @@ distances between each trajectory and each of the supplied prototypes (see
 trajectories (and added prototypes) share the same direction, i.e., that all
 trajectories end in the top-left corner of the coordinate system
 (<a href='mt_remap_symmetric.html'>mt_remap_symmetric</a> or <a href='mt_align.html'>mt_align</a> can be used to achieve this).
-Furthermore, it is recommended to use spatialized trajectories (see
-<a href='mt_spatialize.html'>mt_spatialize</a>; Wulff et al., in press; Haslbeck et al., 2018).</p>
+Furthermore, it is recommended to use length normalized trajectories (see
+<a href='mt_length_normalize.html'>mt_length_normalize</a>; Wulff et al., 2019).</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F.,
@@ -252,51 +252,57 @@ Furthermore, it is recommended to use spatialized trajectories (see
   movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, &amp; J. G.
   Johnson (Eds.), <em>A Handbook of Process Tracing Methods</em> (pp. 131-145). New York, NY:
   Routledge.</p>   
-<p>Wulff, D. U., Haslbeck, J. M. B., &amp; Schulte-Mecklenbeck, M. (2018).
+<p>Wulff, D. U., Haslbeck, J. M. B., &amp; Schulte-Mecklenbeck, M. (2021).
   <em>Measuring the (dis-)continuous mind: What movement trajectories
   reveal about cognition</em>. Manuscript in preparation.</p>
-<p>Haslbeck, J. M. B., Wulff, D. U., Kieslich, P. J., Henninger, F., &amp;
-  Schulte-Mecklenbeck, M. (2018). <em>Advanced mouse- and hand-tracking
-  analysis: Detecting and visualizing clusters in movement trajectories</em>.
-  Manuscript in preparation.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Dirk U. Wulff</p>
+<p>Jonas M. B. Haslbeck</p>
+<p>Pascal J. Kieslich</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># Spatialize trajectories</span>
-<span class='no'>KH2017</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_spatialize.html'>mt_spatialize</a></span>(<span class='no'>KH2017</span>)
+    <pre class="examples"><div class='input'><span class='co'># Length normalize trajectories</span>
+<span class='va'>KH2017</span> <span class='op'>&lt;-</span> <span class='fu'><a href='mt_length_normalize.html'>mt_length_normalize</a></span><span class='op'>(</span><span class='va'>KH2017</span><span class='op'>)</span>
 
 <span class='co'># Map trajectories onto standard prototype set</span>
-<span class='no'>KH2017</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_map</span>(<span class='no'>KH2017</span>,
-  <span class='kw'>use</span><span class='kw'>=</span><span class='st'>"sp_trajectories"</span>)
+<span class='va'>KH2017</span> <span class='op'>&lt;-</span> <span class='fu'>mt_map</span><span class='op'>(</span><span class='va'>KH2017</span>,
+  use<span class='op'>=</span><span class='st'>"ln_trajectories"</span><span class='op'>)</span>
 
 
 <span class='co'># Plot prototypes</span>
-<span class='fu'><a href='mt_plot.html'>mt_plot</a></span>(<span class='no'>mt_prototypes</span>,<span class='kw'>facet_col</span><span class='kw'>=</span><span class='st'>"mt_id"</span>) +
-  <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_grid.html'>facet_grid</a></span>(<span class='no'>.</span>~<span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='no'>mt_id</span>,<span class='kw'>levels</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span>(<span class='no'>mt_id</span>)))</div><div class='img'><img src='mt_map-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='mt_plot.html'>mt_plot</a></span><span class='op'>(</span><span class='va'>mt_prototypes</span>,facet_col<span class='op'>=</span><span class='st'>"mt_id"</span><span class='op'>)</span> <span class='op'>+</span> 
+  <span class='fu'>ggplot2</span><span class='fu'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_grid.html'>facet_grid</a></span><span class='op'>(</span><span class='va'>.</span><span class='op'>~</span><span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span><span class='op'>(</span><span class='va'>mt_id</span>,levels<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span><span class='op'>(</span><span class='va'>mt_id</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='img'><img src='mt_map-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Plot trajectories per assigned prototype</span>
-<span class='fu'><a href='mt_plot.html'>mt_plot</a></span>(<span class='no'>KH2017</span>,<span class='kw'>use</span><span class='kw'>=</span><span class='st'>"sp_trajectories"</span>,
-  <span class='kw'>use2</span><span class='kw'>=</span><span class='st'>"prototyping"</span>,<span class='kw'>facet_col</span><span class='kw'>=</span><span class='st'>"prototype_label"</span>)</div><div class='img'><img src='mt_map-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='mt_plot.html'>mt_plot</a></span><span class='op'>(</span><span class='va'>KH2017</span>,use<span class='op'>=</span><span class='st'>"ln_trajectories"</span>,
+  use2<span class='op'>=</span><span class='st'>"prototyping"</span>,facet_col<span class='op'>=</span><span class='st'>"prototype_label"</span><span class='op'>)</span>
+</div><div class='img'><img src='mt_map-2.png' alt='' width='700' height='433' /></div><div class='input'>
 
 <span class='co'># Map trajectories onto reduced prototype set</span>
-<span class='no'>KH2017</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_map</span>(<span class='no'>KH2017</span>,
-  <span class='kw'>use</span><span class='kw'>=</span><span class='st'>"sp_trajectories"</span>,
-  <span class='kw'>prototypes</span><span class='kw'>=</span><span class='no'>mt_prototypes</span>[<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"straight"</span>,<span class='st'>"curved"</span>,<span class='st'>"cCoM"</span>),,],
-  <span class='kw'>save_as</span><span class='kw'>=</span><span class='st'>"prototyping_red"</span>)
+<span class='va'>KH2017</span> <span class='op'>&lt;-</span> <span class='fu'>mt_map</span><span class='op'>(</span><span class='va'>KH2017</span>,
+  use<span class='op'>=</span><span class='st'>"ln_trajectories"</span>,
+  prototypes<span class='op'>=</span><span class='va'>mt_prototypes</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"straight"</span>,<span class='st'>"curved"</span>,<span class='st'>"cCoM"</span><span class='op'>)</span>,,<span class='op'>]</span>,
+  save_as<span class='op'>=</span><span class='st'>"prototyping_red"</span><span class='op'>)</span>
 
 
 <span class='co'># Map trajectories onto extended prototype set</span>
 
 <span class='co'># Add additional prototypes</span>
-<span class='no'>mt_prototypes_ext</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_add_trajectory.html'>mt_add_trajectory</a></span>(<span class='no'>mt_prototypes</span>,
-   <span class='kw'>xpos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>1</span>,-<span class='fl'>1</span>,<span class='fl'>1</span>,-<span class='fl'>1</span>), <span class='kw'>ypos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>1.5</span>,<span class='fl'>1.5</span>,<span class='fl'>1.5</span>,<span class='fl'>1.5</span>), <span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"dCoM3"</span>
-)
-<span class='no'>mt_prototypes_ext</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_add_trajectory.html'>mt_add_trajectory</a></span>(<span class='no'>mt_prototypes_ext</span>,
-   <span class='kw'>xpos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>0</span>,-<span class='fl'>1</span>), <span class='kw'>ypos</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>,<span class='fl'>1.5</span>,<span class='fl'>1.5</span>), <span class='kw'>id</span> <span class='kw'>=</span> <span class='st'>"neutral"</span>
-)
+<span class='va'>mt_prototypes_ext</span> <span class='op'>&lt;-</span> <span class='fu'><a href='mt_add_trajectory.html'>mt_add_trajectory</a></span><span class='op'>(</span><span class='va'>mt_prototypes</span>,
+   xpos <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>1</span>,<span class='op'>-</span><span class='fl'>1</span>,<span class='fl'>1</span>,<span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span>, ypos <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>1.5</span>,<span class='fl'>1.5</span>,<span class='fl'>1.5</span>,<span class='fl'>1.5</span><span class='op'>)</span>, id <span class='op'>=</span> <span class='st'>"dCoM3"</span>
+<span class='op'>)</span>
+<span class='va'>mt_prototypes_ext</span> <span class='op'>&lt;-</span> <span class='fu'><a href='mt_add_trajectory.html'>mt_add_trajectory</a></span><span class='op'>(</span><span class='va'>mt_prototypes_ext</span>,
+   xpos <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>0</span>,<span class='op'>-</span><span class='fl'>1</span><span class='op'>)</span>, ypos <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fl'>1.5</span>,<span class='fl'>1.5</span><span class='op'>)</span>, id <span class='op'>=</span> <span class='st'>"neutral"</span>
+<span class='op'>)</span>
 
 <span class='co'># Map trajectories</span>
-<span class='no'>KH2017</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_map</span>(<span class='no'>KH2017</span>,
-  <span class='kw'>use</span><span class='kw'>=</span><span class='st'>"sp_trajectories"</span>, <span class='kw'>prototypes</span><span class='kw'>=</span><span class='no'>mt_prototypes_ext</span>,
-  <span class='kw'>save_as</span><span class='kw'>=</span><span class='st'>"prototyping_ext"</span>)</div></pre>
+<span class='va'>KH2017</span> <span class='op'>&lt;-</span> <span class='fu'>mt_map</span><span class='op'>(</span><span class='va'>KH2017</span>,
+  use<span class='op'>=</span><span class='st'>"ln_trajectories"</span>, prototypes<span class='op'>=</span><span class='va'>mt_prototypes_ext</span>,
+  save_as<span class='op'>=</span><span class='st'>"prototyping_ext"</span><span class='op'>)</span>
+
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -312,7 +318,7 @@ Furthermore, it is recommended to use spatialized trajectories (see
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

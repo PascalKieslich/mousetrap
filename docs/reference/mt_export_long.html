@@ -76,7 +76,7 @@ mt_export_wide are wrapper functions for mt_reshape." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.2.0</span>
       </span>
     </div>
 
@@ -95,7 +95,7 @@ mt_export_wide are wrapper functions for mt_reshape." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/pascalkieslich/mousetrap">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -125,23 +125,23 @@ the trajectory data before export. <code>mt_export_long</code> and
 <code>mt_export_wide</code> are wrapper functions for <a href='mt_reshape.html'>mt_reshape</a>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mt_export_long</span>(
-  <span class='no'>data</span>,
-  <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>,
-  <span class='kw'>use_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>use2</span> <span class='kw'>=</span> <span class='st'>"data"</span>,
-  <span class='kw'>use2_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='no'>...</span>
-)
+    <pre class="usage"><span class='fu'>mt_export_long</span><span class='op'>(</span>
+  <span class='va'>data</span>,
+  use <span class='op'>=</span> <span class='st'>"trajectories"</span>,
+  use_variables <span class='op'>=</span> <span class='cn'>NULL</span>,
+  use2 <span class='op'>=</span> <span class='st'>"data"</span>,
+  use2_variables <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
 
-<span class='fu'>mt_export_wide</span>(
-  <span class='no'>data</span>,
-  <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>,
-  <span class='kw'>use_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>use2</span> <span class='kw'>=</span> <span class='st'>"data"</span>,
-  <span class='kw'>use2_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='no'>...</span>
-)</pre>
+<span class='fu'>mt_export_wide</span><span class='op'>(</span>
+  <span class='va'>data</span>,
+  use <span class='op'>=</span> <span class='st'>"trajectories"</span>,
+  use_variables <span class='op'>=</span> <span class='cn'>NULL</span>,
+  use2 <span class='op'>=</span> <span class='st'>"data"</span>,
+  use2_variables <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -202,17 +202,23 @@ variables (in <code>data[[use2]]</code>) that should be merged with the data.</p
   long format.</p>
 <p><a href='mt_import_wide.html'>mt_import_wide</a> for importing mouse-tracking data saved in a wide 
   format.</p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Pascal J. Kieslich</p>
+<p>Felix Henninger</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Export data in long format</span>
 <span class='co'># (and include information about condition and subject_nr)</span>
-<span class='no'>mt_data_long</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_export_long</span>(<span class='no'>mt_example</span>,
-  <span class='kw'>use2_variables</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"subject_nr"</span>,<span class='st'>"Condition"</span>))
+<span class='va'>mt_data_long</span> <span class='op'>&lt;-</span> <span class='fu'>mt_export_long</span><span class='op'>(</span><span class='va'>mt_example</span>,
+  use2_variables<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"subject_nr"</span>,<span class='st'>"Condition"</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='co'># Export data in wide format</span>
 <span class='co'># (and include information about condition and subject_nr)</span>
-<span class='no'>mt_data_wide</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_export_wide</span>(<span class='no'>mt_example</span>,
-  <span class='kw'>use2_variables</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"subject_nr"</span>,<span class='st'>"Condition"</span>))</div></pre>
+<span class='va'>mt_data_wide</span> <span class='op'>&lt;-</span> <span class='fu'>mt_export_wide</span><span class='op'>(</span><span class='va'>mt_example</span>,
+  use2_variables<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"subject_nr"</span>,<span class='st'>"Condition"</span><span class='op'>)</span><span class='op'>)</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -228,7 +234,7 @@ variables (in <code>data[[use2]]</code>) that should be merged with the data.</p
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

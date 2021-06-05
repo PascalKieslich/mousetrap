@@ -73,7 +73,7 @@ or coordinate system." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.2.0</span>
       </span>
     </div>
 
@@ -92,7 +92,7 @@ or coordinate system." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/pascalkieslich/mousetrap">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -119,17 +119,17 @@ or coordinate system." />
 or coordinate system.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mt_align</span>(
-  <span class='no'>data</span>,
-  <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>,
-  <span class='kw'>save_as</span> <span class='kw'>=</span> <span class='no'>use</span>,
-  <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>),
-  <span class='kw'>coordinates</span> <span class='kw'>=</span> <span class='st'>"isotropic"</span>,
-  <span class='kw'>align_start</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>align_end</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>align_side</span> <span class='kw'>=</span> <span class='st'>"no"</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>mt_align</span><span class='op'>(</span>
+  <span class='va'>data</span>,
+  use <span class='op'>=</span> <span class='st'>"trajectories"</span>,
+  save_as <span class='op'>=</span> <span class='va'>use</span>,
+  dimensions <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"xpos"</span>, <span class='st'>"ypos"</span><span class='op'>)</span>,
+  coordinates <span class='op'>=</span> <span class='st'>"isotropic"</span>,
+  align_start <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  align_end <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  align_side <span class='op'>=</span> <span class='st'>"no"</span>,
+  verbose <span class='op'>=</span> <span class='cn'>FALSE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -225,11 +225,16 @@ to flipping the trajectories to the left and right side, respectively.</p>
   a common initial and final coordinate.</p>
 <p><a href='mt_remap_symmetric.html'>mt_remap_symmetric</a> for remapping trajectories to one side (or one 
   quadrant) of the coordinate system.</p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Dirk U. Wulff</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>mt_example</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_align</span>(<span class='no'>mt_example</span>,
-  <span class='kw'>align_start</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>align_end</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>coordinates</span> <span class='kw'>=</span> <span class='st'>'mt'</span>)</div></pre>
+    <pre class="examples"><div class='input'><span class='va'>mt_example</span> <span class='op'>&lt;-</span> <span class='fu'>mt_align</span><span class='op'>(</span><span class='va'>mt_example</span>,
+  align_start <span class='op'>=</span> <span class='cn'>TRUE</span>, align_end <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  coordinates <span class='op'>=</span> <span class='st'>'mt'</span><span class='op'>)</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -245,7 +250,7 @@ to flipping the trajectories to the left and right side, respectively.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -74,7 +74,7 @@ the logging resolution." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.2.0</span>
       </span>
     </div>
 
@@ -93,7 +93,7 @@ the logging resolution." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/pascalkieslich/mousetrap">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -121,13 +121,13 @@ the logging resolution. It provides various descriptive statistics to check
 the logging resolution.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mt_check_resolution</span>(
-  <span class='no'>data</span>,
-  <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>,
-  <span class='kw'>timestamps</span> <span class='kw'>=</span> <span class='st'>"timestamps"</span>,
-  <span class='kw'>desired</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>digits</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
+    <pre class="usage"><span class='fu'>mt_check_resolution</span><span class='op'>(</span>
+  <span class='va'>data</span>,
+  use <span class='op'>=</span> <span class='st'>"trajectories"</span>,
+  timestamps <span class='op'>=</span> <span class='st'>"timestamps"</span>,
+  desired <span class='op'>=</span> <span class='cn'>NULL</span>,
+  digits <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -177,9 +177,14 @@ As the actual resolution achieved depends on the performance of the hardware,
 it makes sense to check the logging resolution using 
 <code>mt_check_resolution</code>. Note that delays smaller than the specified delay
 typically result from mouse clicks in the experiment.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Pascal J. Kieslich</p>
+<p>Felix Henninger</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>mt_check_resolution</span>(<span class='no'>mt_example</span>)</div><div class='output co'>#&gt; $summary
+    <pre class="examples"><div class='input'><span class='fu'>mt_check_resolution</span><span class='op'>(</span><span class='va'>mt_example</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $summary
 #&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 #&gt;   1.000  10.000  10.000   9.977  10.000  14.000 
 #&gt; 
@@ -212,7 +217,7 @@ typically result from mouse clicks in the experiment.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

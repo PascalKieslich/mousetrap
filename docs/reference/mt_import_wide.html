@@ -83,7 +83,7 @@ within this package (see mousetrap for an overview)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.2.0</span>
       </span>
     </div>
 
@@ -102,7 +102,7 @@ within this package (see mousetrap for an overview)." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/pascalkieslich/mousetrap">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -139,19 +139,19 @@ list that includes the trajectory data as an array (called
 within this package (see <a href='mousetrap.html'>mousetrap</a> for an overview).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mt_import_wide</span>(
-  <span class='no'>raw_data</span>,
-  <span class='kw'>xpos_label</span> <span class='kw'>=</span> <span class='st'>"X"</span>,
-  <span class='kw'>ypos_label</span> <span class='kw'>=</span> <span class='st'>"Y"</span>,
-  <span class='kw'>zpos_label</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>timestamps_label</span> <span class='kw'>=</span> <span class='st'>"T"</span>,
-  <span class='kw'>add_labels</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>mt_id_label</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>pos_sep</span> <span class='kw'>=</span> <span class='st'>"_"</span>,
-  <span class='kw'>pos_ids</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>reset_timestamps</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>mt_import_wide</span><span class='op'>(</span>
+  <span class='va'>raw_data</span>,
+  xpos_label <span class='op'>=</span> <span class='st'>"X"</span>,
+  ypos_label <span class='op'>=</span> <span class='st'>"Y"</span>,
+  zpos_label <span class='op'>=</span> <span class='cn'>NULL</span>,
+  timestamps_label <span class='op'>=</span> <span class='st'>"T"</span>,
+  add_labels <span class='op'>=</span> <span class='cn'>NULL</span>,
+  mt_id_label <span class='op'>=</span> <span class='cn'>NULL</span>,
+  pos_sep <span class='op'>=</span> <span class='st'>"_"</span>,
+  pos_ids <span class='op'>=</span> <span class='cn'>NULL</span>,
+  reset_timestamps <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -251,16 +251,21 @@ studying real-time mental processing using a computer mouse-tracking method.
   format.</p>
 <p><a href='mt_import_mousetrap.html'>mt_import_mousetrap</a> and <a href='mt_import_long.html'>mt_import_long</a> for importing
 mouse-tracking data in other formats.</p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Pascal J. Kieslich</p>
+<p>Felix Henninger</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Create data in wide format for test purposes</span>
-<span class='no'>mt_data_wide</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_export_long.html'>mt_export_wide</a></span>(<span class='no'>mt_example</span>,
-  <span class='kw'>use2_variables</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"subject_nr"</span>, <span class='st'>"Condition"</span>))
+<span class='va'>mt_data_wide</span> <span class='op'>&lt;-</span> <span class='fu'><a href='mt_export_long.html'>mt_export_wide</a></span><span class='op'>(</span><span class='va'>mt_example</span>,
+  use2_variables<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"subject_nr"</span>, <span class='st'>"Condition"</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='co'># Import the data using mt_import_wide</span>
-<span class='no'>mt_data</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_import_wide</span>(<span class='no'>mt_data_wide</span>,
-  <span class='kw'>xpos_label</span><span class='kw'>=</span><span class='st'>"xpos"</span>, <span class='kw'>ypos_label</span><span class='kw'>=</span><span class='st'>"ypos"</span>,
-  <span class='kw'>timestamps_label</span><span class='kw'>=</span><span class='st'>"timestamps"</span>)</div><div class='output co'>#&gt; <span class='message'>No mt_id_label provided. A new trial identifying variable called mt_id was created.</span></div><div class='output co'>#&gt; <span class='message'>No pos_ids provided. The following variables were found using grep:</span></div><div class='output co'>#&gt; <span class='message'>465 variables found for timestamps.</span></div><div class='output co'>#&gt; <span class='message'>465 variables found for xpos.</span></div><div class='output co'>#&gt; <span class='message'>465 variables found for ypos.</span></div><div class='input'>
+<span class='va'>mt_data</span> <span class='op'>&lt;-</span> <span class='fu'>mt_import_wide</span><span class='op'>(</span><span class='va'>mt_data_wide</span>,
+  xpos_label<span class='op'>=</span><span class='st'>"xpos"</span>, ypos_label<span class='op'>=</span><span class='st'>"ypos"</span>,
+  timestamps_label<span class='op'>=</span><span class='st'>"timestamps"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>No mt_id_label provided. A new trial identifying variable called mt_id was created.</span></div><div class='output co'>#&gt; <span class='message'>No pos_ids provided. The following variables were found using grep:</span></div><div class='output co'>#&gt; <span class='message'>465 variables found for timestamps.</span></div><div class='output co'>#&gt; <span class='message'>465 variables found for xpos.</span></div><div class='output co'>#&gt; <span class='message'>465 variables found for ypos.</span></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -277,7 +282,7 @@ mouse-tracking data in other formats.</p></div>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

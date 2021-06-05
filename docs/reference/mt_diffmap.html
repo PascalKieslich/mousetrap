@@ -73,7 +73,7 @@ gaussian smoothing. Note that this function has beta status." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.2.0</span>
       </span>
     </div>
 
@@ -92,7 +92,7 @@ gaussian smoothing. Note that this function has beta status." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/pascalkieslich/mousetrap">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -119,24 +119,24 @@ gaussian smoothing. Note that this function has beta status." />
 gaussian smoothing. Note that this function has beta status.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mt_diffmap</span>(
-  <span class='no'>x</span>,
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>condition</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"trajectories"</span>,
-  <span class='kw'>dimensions</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"xpos"</span>, <span class='st'>"ypos"</span>),
-  <span class='kw'>use2</span> <span class='kw'>=</span> <span class='st'>"data"</span>,
-  <span class='kw'>filename</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>bounds</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>xres</span> <span class='kw'>=</span> <span class='fl'>500</span>,
-  <span class='kw'>upscale</span> <span class='kw'>=</span> <span class='fl'>4</span>,
-  <span class='kw'>smooth_radius</span> <span class='kw'>=</span> <span class='fl'>10</span>,
-  <span class='kw'>colors</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"#00863F"</span>, <span class='st'>"#000000"</span>, <span class='st'>"#FF1900"</span>),
-  <span class='kw'>n_shades</span> <span class='kw'>=</span> <span class='fl'>1000</span>,
-  <span class='kw'>plot</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='no'>...</span>,
-  <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>mt_diffmap</span><span class='op'>(</span>
+  <span class='va'>x</span>,
+  y <span class='op'>=</span> <span class='cn'>NULL</span>,
+  condition <span class='op'>=</span> <span class='cn'>NULL</span>,
+  use <span class='op'>=</span> <span class='st'>"trajectories"</span>,
+  dimensions <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"xpos"</span>, <span class='st'>"ypos"</span><span class='op'>)</span>,
+  use2 <span class='op'>=</span> <span class='st'>"data"</span>,
+  filename <span class='op'>=</span> <span class='cn'>NULL</span>,
+  bounds <span class='op'>=</span> <span class='cn'>NULL</span>,
+  xres <span class='op'>=</span> <span class='fl'>500</span>,
+  upscale <span class='op'>=</span> <span class='fl'>4</span>,
+  smooth_radius <span class='op'>=</span> <span class='fl'>10</span>,
+  colors <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"#00863F"</span>, <span class='st'>"#000000"</span>, <span class='st'>"#FF1900"</span><span class='op'>)</span>,
+  n_shades <span class='op'>=</span> <span class='fl'>1000</span>,
+  plot <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  <span class='va'>...</span>,
+  verbose <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -264,10 +264,15 @@ constructed analogously to <a href='mt_heatmap_raw.html'>mt_heatmap_raw</a>.</p>
 
     <div class='dont-index'><p><a href='mt_heatmap.html'>mt_heatmap</a> and <a href='mt_heatmap_ggplot.html'>mt_heatmap_ggplot</a> for plotting trajectory 
 heatmaps.</p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Dirk U. Wulff</p>
+<p>Pascal J. Kieslich</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>mt_diffmap</span>(<span class='no'>KH2017</span>, <span class='kw'>condition</span><span class='kw'>=</span><span class='st'>"Condition"</span>,
-  <span class='kw'>xres</span><span class='kw'>=</span><span class='fl'>400</span>, <span class='kw'>smooth_radius</span><span class='kw'>=</span><span class='fl'>6</span>, <span class='kw'>n_shades</span><span class='kw'>=</span><span class='fl'>5</span>)</div><div class='output co'>#&gt; Determine joint bounds 
+    <pre class="examples"><div class='input'><span class='fu'>mt_diffmap</span><span class='op'>(</span><span class='va'>KH2017</span>, condition<span class='op'>=</span><span class='st'>"Condition"</span>,
+  xres<span class='op'>=</span><span class='fl'>400</span>, smooth_radius<span class='op'>=</span><span class='fl'>6</span>, n_shades<span class='op'>=</span><span class='fl'>5</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; Determine joint bounds 
 #&gt; Calculating heatmap for x 
 #&gt; Calculating heatmap for y 
 #&gt; smooth image 
@@ -288,7 +293,7 @@ heatmaps.</p></div>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

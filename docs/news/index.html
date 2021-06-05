@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.2.0</span>
       </span>
     </div>
 
@@ -90,7 +90,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/pascalkieslich/mousetrap">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -111,13 +111,46 @@
       <small>Source: <a href='https://github.com/pascalkieslich/mousetrap/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="mousetrap-320" class="section level1">
+<h1 class="page-header" data-toc-text="3.2.0">
+<a href="#mousetrap-320" class="anchor"></a>mousetrap 3.2.0<small> 2021-06-05 </small>
+</h1>
+<div id="general-changes-to-existing-functions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#general-changes-to-existing-functions" class="anchor"></a>General changes to existing functions</h2>
+<ul>
+<li>The <code>mt_spatialize</code> function has been replaced with <code>mt_length_normalize</code> (to achieve consistent naming analogous to <code>mt_time_normalize</code>). The new function offers the same functionality with the exception that the created trajectories are now by default called <code>ln_trajectories</code> (instead of <code>sp_trajectories</code>), which stands for length-normalized trajectories and should ensure consistency in naming with time-normalized trajectories.</li>
+<li>Because of the renaming of <code>sp_trajectories</code> to <code>ln_trajectories</code>, all functions that by default were using the <code>sp_trajectories</code> are now by default using <code>ln_trajectories</code> (e.g., <code>mt_cluster</code> and <code>mt_map</code>). Additionally, to ease the transition many mousetrap functions now internally flexibly exchange <code>ln_trajectories</code> and <code>sp_trajectories</code> in the <code>use</code> argument (if the specified trajectories are missing and the other trajectories are found) and throw a warning if they replace one with the other.</li>
+</ul>
+</div>
+<div id="changes-in-specific-functions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#changes-in-specific-functions" class="anchor"></a>Changes in specific functions</h2>
+<ul>
+<li>
+<code>mt_spatialize</code>: function is deprecated and replaced with <code>mt_length_normalize</code>. The reason for this is to achieve consistent naming analogous to <code>mt_time_normalize</code>. The <code>mt_length_normalize</code> function offers the same functionality as <code>mt_spatialize</code> with the exception that the created trajectories are now by default called <code>ln_trajectories</code> (instead of <code>sp_trajectories</code>), which stands for length-normalized trajectories and should ensure consistency in naming with time-normalized trajectories.</li>
+<li>
+<code>mt_import_mousetrap</code>: Now can also import trajectory coordinates when they are stored in scientific notation in the raw data (e.g., <code>2.98e-8</code>).</li>
+<li>
+<code>mt_plot</code> and <code>mt_plot_aggregate</code>: Replaced <code>only_ggplot</code> with <code>return_type</code> argument. The new <code>return_type</code> argument allows for further customization of the plots: <code>If return_type == "plot"</code> (the default), a new ggplot is created and the trajectories are plotted using <code>geom_path</code> (corresponds to the old default behavior, where <code>only_ggplot</code> was set to <code>FALSE</code>). If <code>return_type == "mapping"</code>, only the ggplot object containing the mapping but without any geoms is returned (corresponds to the old behavior where <code>only_ggplot</code> was set to <code>TRUE</code>). If <code>return_type == "geoms"</code>, only the geoms are returned, which allows adding the plotted trajectories to an existing ggplot (new functionality).</li>
+</ul>
+</div>
+<div id="bugs-fixed" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bugs-fixed" class="anchor"></a>Bugs fixed</h2>
+<ul>
+<li>
+<code>mt_exclude_initiation</code>: Bug fixed so that the correct initial position is used when removing the initial period without movement in a trial. Previously, <code>mt_exclude_initiation</code> was only behaving as intended when the initial position was (0,0), which probably was the case in many settings (in particular, if the trajectories were aligned using <code>mt_align_start</code> with default start values). If the initial position in a trial corresponded to a different value, the initial period without movement in most cases was simply not removed. This has now been fixed (closes <a href='https://github.com/pascalkieslich/mousetrap/issues/14'>#14</a>).</li>
+</ul>
+</div>
+</div>
     <div id="mousetrap-315" class="section level1">
 <h1 class="page-header" data-toc-text="3.1.5">
 <a href="#mousetrap-315" class="anchor"></a>mousetrap 3.1.5<small> 2020-08-26 </small>
 </h1>
-<div id="changes-in-specific-functions" class="section level2">
+<div id="changes-in-specific-functions-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-in-specific-functions" class="anchor"></a>Changes in specific functions</h2>
+<a href="#changes-in-specific-functions-1" class="anchor"></a>Changes in specific functions</h2>
 <ul>
 <li>
 <code>mt_measures</code>: Introduced <code>initiation_threshold</code> argument to allow specifying a minimum distance from the start point of the trajectory that needs to be exceeded for calculating the initiation time.</li>
@@ -159,9 +192,9 @@
 <li>Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F., &amp; Schulte-Mecklenbeck, M. (2019). Mouse-tracking: Detecting types in movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, &amp; J. G. Johnson (Eds.), <em>A Handbook of Process Tracing Methods</em> (pp. 131-145). New York, NY: Routledge.</li>
 </ul>
 </div>
-<div id="changes-in-specific-functions-1" class="section level2">
+<div id="changes-in-specific-functions-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-in-specific-functions-1" class="anchor"></a>Changes in specific functions</h2>
+<a href="#changes-in-specific-functions-2" class="anchor"></a>Changes in specific functions</h2>
 <ul>
 <li>
 <code>mt_measures</code>: Introduced <code>hover_incl_intial</code> argument to make inclusion of a potential initial phase without movement optional when calculating hovers. By default, this initial phase is included (as in previous versions).</li>
@@ -183,9 +216,9 @@
 <h1 class="page-header" data-toc-text="3.1.3">
 <a href="#mousetrap-313" class="anchor"></a>mousetrap 3.1.3<small> 2019-10-04 </small>
 </h1>
-<div id="changes-in-specific-functions-2" class="section level2">
+<div id="changes-in-specific-functions-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-in-specific-functions-2" class="anchor"></a>Changes in specific functions</h2>
+<a href="#changes-in-specific-functions-3" class="anchor"></a>Changes in specific functions</h2>
 <ul>
 <li>
 <code>mt_sample_entropy</code>: By default, sample entropy is calculated based on the differences of the position values (following Hehman et al., 2015). An optional argument <code>use_diff</code> now has been introduced to allow users to override this behavior and use the untransformed values instead, by setting <code>use_diff=FALSE</code>.</li>
@@ -207,9 +240,9 @@
 <li>Updated mousetrap book chapter citations (see announcements above for correct citation).</li>
 </ul>
 </div>
-<div id="changes-in-specific-functions-3" class="section level2">
+<div id="changes-in-specific-functions-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-in-specific-functions-3" class="anchor"></a>Changes in specific functions</h2>
+<a href="#changes-in-specific-functions-4" class="anchor"></a>Changes in specific functions</h2>
 <ul>
 <li>
 <code>mt_import_long</code>: internal change (prefix <code>row_number()</code> function with dplyr) to accomodate changes in dplyr 0.8.0.</li>
@@ -229,9 +262,9 @@
 </li>
 </ul>
 </div>
-<div id="changes-in-specific-functions-4" class="section level2">
+<div id="changes-in-specific-functions-5" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-in-specific-functions-4" class="anchor"></a>Changes in specific functions</h2>
+<a href="#changes-in-specific-functions-5" class="anchor"></a>Changes in specific functions</h2>
 <ul>
 <li>
 <code>mt_map</code>: now allows for mapping trajectories onto prototypes separately for different groups of trajectories (the prototypes will be rescaled separately to match the coordinate system of each group).</li>
@@ -268,9 +301,9 @@
 </li>
 </ul>
 </div>
-<div id="changes-in-specific-functions-5" class="section level2">
+<div id="changes-in-specific-functions-6" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-in-specific-functions-5" class="anchor"></a>Changes in specific functions</h2>
+<a href="#changes-in-specific-functions-6" class="anchor"></a>Changes in specific functions</h2>
 <ul>
 <li>
 <code>mt_derivatives</code>: now always reports acceleration as difference in absolute velocity (the argument <code>acc_on_abs_vel</code> has been removed). Besides, the argument <code>absolute</code> has been introduced that indicates if absolute values for distances and velocities should be reported (by default, this is not the case). All of this is only relevant if a single dimension is specified in <code>dimensions</code>.</li>
@@ -288,9 +321,9 @@
 <code>mt_standardize</code>: now by default standardizes mouse-tracking measures across all trials if no <code>within</code> variable is specified.</li>
 </ul>
 </div>
-<div id="bugs-fixed" class="section level2">
+<div id="bugs-fixed-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bugs-fixed" class="anchor"></a>Bugs fixed</h2>
+<a href="#bugs-fixed-1" class="anchor"></a>Bugs fixed</h2>
 <ul>
 <li>
 <code>mt_sample_entropy</code>: Bug fixed for <code>method="pracma"</code> (the default method): The window size argument (which used to be specified using the <code>lag</code> argument - now this has been renamed to <code>m</code>) was incorrectly passed on to the <code>tau</code> argument of <code><a href="https://rdrr.io/pkg/pracma/man/entropy.html">pracma::sample_entropy</a></code>. It should have beend passed on to the <code>edim</code> argument. After fixing this, both methods in <code>mt_sample_entropy</code> provided virtually identical results (which is why the <code>method</code> argument has been dropped, see above).</li>
@@ -341,9 +374,9 @@
 </li>
 </ul>
 </div>
-<div id="general-changes-to-existing-functions" class="section level2">
+<div id="general-changes-to-existing-functions-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#general-changes-to-existing-functions" class="anchor"></a>General changes to existing functions</h2>
+<a href="#general-changes-to-existing-functions-1" class="anchor"></a>General changes to existing functions</h2>
 <ul>
 <li>Introduction of class <code>mousetrap</code> for mousetrap data objects (such as <code>mt_example</code>). This facilitates, among other things, checking of the data class.</li>
 <li>Change of dimension order for all trajectory arrays: The old order was 1) trials, 2) variables, 3) samples. The new order is 1) trials, 2) samples, 3) variables. All functions and example data have been modified accordingly.</li>
@@ -352,9 +385,9 @@
 <li>Arguments that were already deprecated and replaced (e.g., <code>show_progress</code> was replaced with <code>verbose</code>) have been removed.</li>
 </ul>
 </div>
-<div id="changes-in-specific-functions-6" class="section level2">
+<div id="changes-in-specific-functions-7" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-in-specific-functions-6" class="anchor"></a>Changes in specific functions</h2>
+<a href="#changes-in-specific-functions-7" class="anchor"></a>Changes in specific functions</h2>
 <ul>
 <li>
 <code>mt_align_start</code>: function is now vectorized and allows for optionally aligning to mean start position across trials; default for <code>save_as</code> argument is set to <code>use</code>.</li>
@@ -402,9 +435,9 @@
 <code>mt_map</code>: map trajectories onto a predefined set of prototype trajectories (a core set is provided in <code>mt_prototypes</code>).</li>
 </ul>
 </div>
-<div id="bugs-fixed-1" class="section level2">
+<div id="bugs-fixed-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bugs-fixed-1" class="anchor"></a>Bugs fixed</h2>
+<a href="#bugs-fixed-2" class="anchor"></a>Bugs fixed</h2>
 <ul>
 <li>
 <code>mt_measures</code>: make checks for timestamps &gt; 0 and &lt; 0 independent. Thanks to Regina Köhler for pointing this out.</li>
@@ -445,9 +478,9 @@
 <li>Performance improvement of reshaping, aggregation, and visualization functions through internal changes in <code>mt_reshape</code>: <code><a href="https://rdrr.io/r/base/merge.html">base::merge</a></code> and <code>reshape2</code> functions are replaced with functions from the <code>tidyr</code> and <code>dplyr</code> packages (and custom functions). Package dependencies were adjusted accordingly. As the <code>dplyr</code> functions may introduce additional classes for the reshaped data (such as <code>grouped_df</code> and <code>tbl_df</code>), a new argument (<code>convert_df</code>) is introduced that converts the reshaped data to pure data.frames by default (thereby dropping additional classes).</li>
 </ul>
 </div>
-<div id="changes-in-specific-functions-7" class="section level2">
+<div id="changes-in-specific-functions-8" class="section level2">
 <h2 class="hasAnchor">
-<a href="#changes-in-specific-functions-7" class="anchor"></a>Changes in specific functions</h2>
+<a href="#changes-in-specific-functions-8" class="anchor"></a>Changes in specific functions</h2>
 <ul>
 <li>
 <code>mt_import_mousetrap</code>, <code>mt_import_long</code>, <code>mt_import_wide</code>: Allow specifying several variables for the trial identifier in <code>mt_id_label</code>. A new ID variable will be created by combining the values of each variable.</li>
@@ -491,9 +524,9 @@
 <code>mt_export_wide</code>: export mouse-tracking data in wide format (wrapper for <code>mt_reshape</code>).</li>
 </ul>
 </div>
-<div id="bugs-fixed-2" class="section level2">
+<div id="bugs-fixed-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bugs-fixed-2" class="anchor"></a>Bugs fixed</h2>
+<a href="#bugs-fixed-3" class="anchor"></a>Bugs fixed</h2>
 <ul>
 <li>
 <code>mt_align_start</code>: Fixed bug that <code>xpos_start</code> (instead of <code>ypos_start</code>) was passed on as <code>ypos_start</code> to <code>mt_space_normalize</code>.</li>
@@ -533,7 +566,7 @@
 </li>
 <li>Change of default scale for fill in <code>mt_plot_riverbed</code>
 </li>
-<li>Custom x and y axis labels for <code>mt_plot_riverbed</code> can no longer be set via <code>x_label</code> and <code>y_label</code> (but can be added using the <code>ggplot2</code> functions <code>xlab()</code> and <code>ylab()</code>, see Examples)</li>
+<li>Custom x and y axis labels for <code>mt_plot_riverbed</code> can no longer be set via <code>x_label</code> and <code>y_label</code> (but can be added using the <code>ggplot2</code> functions <code><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab()</a></code> and <code><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab()</a></code>, see Examples)</li>
 <li>Minor fix in package documentation (<a href='https://github.com/pascalkieslich/mousetrap/issues/1'>#1</a>) (thanks to <a href='https://github.com/sbrockhaus'>@sbrockhaus</a>)</li>
 <li>Minor fix in documentation of x/y reversals (thanks to Barnabas Szaszi)</li>
 </ul>
@@ -563,7 +596,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

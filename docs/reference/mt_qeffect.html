@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.2.0</span>
       </span>
     </div>
 
@@ -91,7 +91,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/pascalkieslich/mousetrap">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -117,16 +117,16 @@
     <p>Function in beta and currently only for internal purposes.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mt_qeffect</span>(
-  <span class='no'>data</span>,
-  <span class='no'>compare</span>,
-  <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"measures"</span>,
-  <span class='kw'>measure</span> <span class='kw'>=</span> <span class='st'>"MAD"</span>,
-  <span class='kw'>direction</span> <span class='kw'>=</span> <span class='st'>"upward"</span>,
-  <span class='kw'>n_steps</span> <span class='kw'>=</span> <span class='fl'>100</span>,
-  <span class='kw'>return_data</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>mt_qeffect</span><span class='op'>(</span>
+  <span class='va'>data</span>,
+  <span class='va'>compare</span>,
+  use <span class='op'>=</span> <span class='st'>"measures"</span>,
+  measure <span class='op'>=</span> <span class='st'>"MAD"</span>,
+  direction <span class='op'>=</span> <span class='st'>"upward"</span>,
+  n_steps <span class='op'>=</span> <span class='fl'>100</span>,
+  return_data <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -174,19 +174,22 @@ effect between</p></td>
     <p>Nothing, when image is plotted using an external device. Otherwise an
   object of class <code>mt_object_raw</code> containing in a matrix format the
   image's pixel information.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Dirk U. Wulff</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'># Plot regular heatmap
-#SpiveyEtAl2005 = mt_import_long(SpiveyEtAl2005_raw,'x','y',NULL,'t',
-#mt_id_label = c('ptp','trial'))
-#heatmap = mt_heatmap_raw(SpiveyEtAl2005,xres = 2000)
-#mt_heatmap(heatmap,file = NULL)
+    <pre class="examples"><div class='input'><span class='co'># Plot regular heatmap</span>
+<span class='co'>#SpiveyEtAl2005 = mt_import_long(SpiveyEtAl2005_raw,'x','y',NULL,'t',</span>
+<span class='co'>#mt_id_label = c('ptp','trial'))</span>
+<span class='co'>#heatmap = mt_heatmap_raw(SpiveyEtAl2005,xres = 2000)</span>
+<span class='co'>#mt_heatmap(heatmap,file = NULL)</span>
 
-# compute measures
-#SpiveyEtAl2005 = mt_measures(SpiveyEtAl2005)
+<span class='co'># compute measures</span>
+<span class='co'>#SpiveyEtAl2005 = mt_measures(SpiveyEtAl2005)</span>
 
-# Plot heatmap using velocity
-#mt_heatmap(SpiveyEtAl2005)
+<span class='co'># Plot heatmap using velocity</span>
+<span class='co'>#mt_heatmap(SpiveyEtAl2005)</span>
 
 </div></pre>
   </div>
@@ -204,7 +207,7 @@ effect between</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

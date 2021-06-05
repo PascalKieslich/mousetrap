@@ -75,7 +75,7 @@ stored in a mousetrap data object." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.1.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.2.0</span>
       </span>
     </div>
 
@@ -94,7 +94,7 @@ stored in a mousetrap data object." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/pascalkieslich/mousetrap">
-    <span class="fa fa-github fa-lg"></span>
+    <span class="fas fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -123,15 +123,15 @@ is a thin wrapper around <a href='scale_within.html'>scale_within</a>, focussed 
 stored in a mousetrap data object.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>mt_standardize</span>(
-  <span class='no'>data</span>,
-  <span class='kw'>use</span> <span class='kw'>=</span> <span class='st'>"measures"</span>,
-  <span class='kw'>use_variables</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>within</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>prefix</span> <span class='kw'>=</span> <span class='st'>"z_"</span>,
-  <span class='kw'>center</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>mt_standardize</span><span class='op'>(</span>
+  <span class='va'>data</span>,
+  use <span class='op'>=</span> <span class='st'>"measures"</span>,
+  use_variables <span class='op'>=</span> <span class='cn'>NULL</span>,
+  within <span class='op'>=</span> <span class='cn'>NULL</span>,
+  prefix <span class='op'>=</span> <span class='st'>"z_"</span>,
+  center <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  scale <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -185,20 +185,26 @@ including the standardized measures.</p>
   trajectory arrays.</p>
 <p><a href='scale_within.html'>scale_within</a> which is called by <code>mt_standardize</code>.</p>
 <p><a href='https://rdrr.io/r/base/scale.html'>scale</a> for the R base scale function.</p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Pascal J. Kieslich</p>
+<p>Felix Henninger</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>mt_example</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='mt_measures.html'>mt_measures</a></span>(<span class='no'>mt_example</span>)
+    <pre class="examples"><div class='input'><span class='va'>mt_example</span> <span class='op'>&lt;-</span> <span class='fu'><a href='mt_measures.html'>mt_measures</a></span><span class='op'>(</span><span class='va'>mt_example</span><span class='op'>)</span>
 
 <span class='co'># Standardize MAD and AD per subject</span>
-<span class='no'>mt_example</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_standardize</span>(<span class='no'>mt_example</span>,
-  <span class='kw'>use_variables</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"MAD"</span>, <span class='st'>"AD"</span>),
-  <span class='kw'>within</span><span class='kw'>=</span><span class='st'>"subject_nr"</span>, <span class='kw'>prefix</span><span class='kw'>=</span><span class='st'>"z_"</span>)
+<span class='va'>mt_example</span> <span class='op'>&lt;-</span> <span class='fu'>mt_standardize</span><span class='op'>(</span><span class='va'>mt_example</span>,
+  use_variables<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"MAD"</span>, <span class='st'>"AD"</span><span class='op'>)</span>,
+  within<span class='op'>=</span><span class='st'>"subject_nr"</span>, prefix<span class='op'>=</span><span class='st'>"z_"</span><span class='op'>)</span>
 
 <span class='co'># Standardize MAD and AD per subject and Condition</span>
-<span class='no'>mt_example</span> <span class='kw'>&lt;-</span> <span class='fu'>mt_standardize</span>(<span class='no'>mt_example</span>,
-  <span class='kw'>use_variables</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"MAD"</span>, <span class='st'>"AD"</span>),
-  <span class='kw'>within</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"subject_nr"</span>, <span class='st'>"Condition"</span>),
-  <span class='kw'>prefix</span><span class='kw'>=</span><span class='st'>"z_"</span>)</div></pre>
+<span class='va'>mt_example</span> <span class='op'>&lt;-</span> <span class='fu'>mt_standardize</span><span class='op'>(</span><span class='va'>mt_example</span>,
+  use_variables<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"MAD"</span>, <span class='st'>"AD"</span><span class='op'>)</span>,
+  within<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"subject_nr"</span>, <span class='st'>"Condition"</span><span class='op'>)</span>,
+  prefix<span class='op'>=</span><span class='st'>"z_"</span><span class='op'>)</span>
+  
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -214,7 +220,7 @@ including the standardized measures.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
