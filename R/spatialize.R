@@ -105,11 +105,15 @@ mt_length_normalize <- function(
 
 #' Spatialize trajectories.
 #' 
+#' @description 
+#' `r lifecycle::badge("deprecated")`
+#' 
 #' Re-represent each trajectory spatially using a constant number of points so
 #' that adjacent points on the trajectory become equidistant to each other.
 #' Please note that this function is \strong{deprecated} and that
 #' \link{mt_length_normalize} should be used instead.
 #' 
+#' @details 
 #' \code{mt_spatialize} is used to emphasize the trajectories' shape. Usually, 
 #' the vast majority of points of a raw or a time-normalized trajectory lie
 #' close to the start and end point. \code{mt_spatialize} re-distributes these
