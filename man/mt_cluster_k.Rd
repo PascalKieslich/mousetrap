@@ -31,8 +31,8 @@ array can be provided directly (in this case \code{use} will be ignored).}
 \item{use}{a character string specifying which trajectory data should be
 used.}
 
-\item{dimensions}{a character vector specifying which trajectory variables 
-should be used. Can be of length 2 or 3, for two-dimensional or 
+\item{dimensions}{a character vector specifying which trajectory variables
+should be used. Can be of length 2 or 3, for two-dimensional or
 three-dimensional trajectories respectively.}
 
 \item{kseq}{a numeric vector specifying set of candidates for k. Defaults to
@@ -45,8 +45,8 @@ be any subset of \code{c("stability","gap","jump","slope")}.}
 \item{method}{character string specifying the type of clustering procedure
 for the stability-based method. Either \code{hclust} or \code{kmeans}.}
 
-\item{weights}{numeric vector specifying the relative importance of the 
-variables specified in \code{dimensions}. Defaults to a vector of 1s 
+\item{weights}{numeric vector specifying the relative importance of the
+variables specified in \code{dimensions}. Defaults to a vector of 1s
 implying equal importance. Technically, each variable is rescaled so that
 the standard deviation matches the corresponding value in \code{weights}.
 To use the original variables, set \code{weights = NULL}.}
@@ -65,13 +65,13 @@ solution. \code{minkowski_p = 1} computes the city-block distance,
 \code{minkowski_p = 3} the cubic distance, etc. Only relevant if
 \code{method} is "hclust". See \link{mt_distmat} for further details.}
 
-\item{hclust_method}{character string specifying the linkage criterion used. 
+\item{hclust_method}{character string specifying the linkage criterion used.
 Passed on to the \code{method} argument of \link[stats]{hclust}. Default is
 set to \code{ward.D}. Only relevant if \code{method} is "hclust".}
 
-\item{kmeans_nstart}{integer specifying the number of reruns of the kmeans 
+\item{kmeans_nstart}{integer specifying the number of reruns of the kmeans
 procedure. Larger numbers minimize the risk of finding local minima. Passed
-on to the \code{nstart} argument of \link[stats]{kmeans}. Only relevant if 
+on to the \code{nstart} argument of \link[stats]{kmeans}. Only relevant if
 \code{method} is "kmeans".}
 
 \item{n_bootstrap}{an integer specifying the number of bootstrap comparisons
@@ -84,8 +84,8 @@ model-free should be used by \code{stability}, when method is
 \item{n_gap}{integer specifying the number of simulated datasets used by
 \code{gap}. See Tibshirani et al. (2001).}
 
-\item{na_rm}{logical specifying whether trajectory points containing NAs 
-should be removed. Removal is done column-wise. That is, if any trajectory 
+\item{na_rm}{logical specifying whether trajectory points containing NAs
+should be removed. Removal is done column-wise. That is, if any trajectory
 has a missing value at, e.g., the 10th recorded position, the 10th position
 is removed for all trajectories. This is necessary to compute distance
 between trajectories.}
@@ -95,11 +95,11 @@ progress.}
 }
 \value{
 A list containing two lists that store the results of the different
-  methods. \code{kopt} contains the estimated \code{k} for each of the
-  methods specified in \code{compute}. \code{paths} contains the values for
-  each \code{k} in \code{kseq} as computed by each of the methods specified
-  in \code{compute}. The values in \code{kopt} are optima for each of the
-  vectors in \code{paths}.
+methods. \code{kopt} contains the estimated \code{k} for each of the
+methods specified in \code{compute}. \code{paths} contains the values for
+each \code{k} in \code{kseq} as computed by each of the methods specified
+in \code{compute}. The values in \code{kopt} are optima for each of the
+vectors in \code{paths}.
 }
 \description{
 Estimates the optimal number of clusters (\code{k}) using various methods.
@@ -144,33 +144,33 @@ results$paths
 }
 \references{
 Haslbeck, J. M. B., & Wulff, D. U. (2020). Estimating the Number
-  of Clusters via a Corrected Clustering Instability. \emph{Computational
-  Statistics, 35}, 1879–1894.
+of Clusters via a Corrected Clustering Instability. \emph{Computational
+Statistics, 35}, 1879–1894.
 
-  Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F., &
-  Schulte-Mecklenbeck, M. (2019). Mouse-tracking: Detecting types in movement
-  trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G. Johnson
-  (Eds.), \emph{A Handbook of Process Tracing Methods} (pp. 131-145). New
-  York, NY: Routledge.
-  
-  Tibshirani, R., Walther, G., & Hastie, T. (2001). Estimating the number of
-  clusters in a data set via the gap statistic. \emph{Journal of the Royal
-  Statistical Society: Series B (Statistical Methodology), 63}(2), 411-423.
+Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F., &
+Schulte-Mecklenbeck, M. (2019). Mouse-tracking: Detecting types in movement
+trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G. Johnson
+(Eds.), \emph{A Handbook of Process Tracing Methods} (pp. 131-145). New
+York, NY: Routledge.
 
-  Sugar, C. A., & James, G. M. (2013). Finding the number of clusters in a
-  dataset. \emph{Journal of the American Statistical Association, 98}(463),
-  750-763.
+Tibshirani, R., Walther, G., & Hastie, T. (2001). Estimating the number of
+clusters in a data set via the gap statistic. \emph{Journal of the Royal
+Statistical Society: Series B (Statistical Methodology), 63}(2), 411-423.
 
-  Fujita, A., Takahashi, D. Y., & Patriota, A. G. (2014). A non-parametric
-  method to estimate the number of clusters. \emph{Computational Statistics &
-  Data Analysis, 73}, 27-39.
+Sugar, C. A., & James, G. M. (2013). Finding the number of clusters in a
+dataset. \emph{Journal of the American Statistical Association, 98}(463),
+750-763.
+
+Fujita, A., Takahashi, D. Y., & Patriota, A. G. (2014). A non-parametric
+method to estimate the number of clusters. \emph{Computational Statistics &
+Data Analysis, 73}, 27-39.
 }
 \seealso{
 \link{mt_distmat} for more information about how the distance matrix
-  is computed when the hclust method is used.
+is computed when the hclust method is used.
 
-  \link{mt_cluster} for performing trajectory clustering with a specified
-  number of clusters.
+\link{mt_cluster} for performing trajectory clustering with a specified
+number of clusters.
 }
 \author{
 Dirk U. Wulff

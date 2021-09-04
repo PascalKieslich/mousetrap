@@ -56,15 +56,15 @@ progress.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) with an additional
-  array (by default called \code{av_trajectories}) that contains the average
-  trajectory data per dimension interval. If a trajectory array was provided
-  directly as \code{data}, only the average trajectories will be returned.
+array (by default called \code{av_trajectories}) that contains the average
+trajectory data per dimension interval. If a trajectory array was provided
+directly as \code{data}, only the average trajectories will be returned.
 
-  For the dimension values used for averaging (specified in
-  \code{av_dimension}), the mid point of the respective interval is reported,
-  which is helpful for plotting the trajectory data later on. However, this
-  value does not necessarily correspond to the empirical mean of the
-  dimension values in the interval.
+For the dimension values used for averaging (specified in
+\code{av_dimension}), the mid point of the respective interval is reported,
+which is helpful for plotting the trajectory data later on. However, this
+value does not necessarily correspond to the empirical mean of the
+dimension values in the interval.
 }
 \description{
 Average trajectory data across specified intervals (e.g., constant time
@@ -112,10 +112,10 @@ mt_example <- mt_average(mt_example,
 }
 \seealso{
 \link{mt_derivatives} for calculating velocity and
-  acceleration.
+acceleration.
 
-  \link{mt_resample} for resampling trajectories using a constant time
-  interval.
+\link{mt_resample} for resampling trajectories using a constant time
+interval.
 }
 \author{
 Pascal J. Kieslich

@@ -25,11 +25,11 @@ array can be provided directly (in this case \code{use} will be ignored).}
 \item{use}{a character string specifying which trajectory data should be
 used.}
 
-\item{save_as}{a character string specifying where the calculated measures 
+\item{save_as}{a character string specifying where the calculated measures
 should be stored.}
 
-\item{dimensions}{a character vector specifying the two dimensions in the 
-trajectory array that contain the mouse positions. Usually (and by 
+\item{dimensions}{a character vector specifying the two dimensions in the
+trajectory array that contain the mouse positions. Usually (and by
 default), the first value in the vector corresponds to the x-positions
 (\code{xpos}) and the second to the y-positions (\code{ypos}).}
 
@@ -63,110 +63,110 @@ movement initiation.}
 progress.}
 }
 \value{
-A mousetrap data object (see \link{mt_example}) where an additional 
-  \link{data.frame} has been added (by default called "measures") containing 
-  the per-trial mouse-tracking measures. Each row in the data.frame 
-  corresponds to one trajectory (the corresponding trajectory is identified 
-  via the rownames and, additionally, in the column "mt_id"). Each column in 
-  the data.frame corresponds to one of the measures. If a trajectory array 
-  was provided directly as \code{data}, only the measures data.frame will be 
-  returned.
+A mousetrap data object (see \link{mt_example}) where an additional
+\link{data.frame} has been added (by default called "measures") containing
+the per-trial mouse-tracking measures. Each row in the data.frame
+corresponds to one trajectory (the corresponding trajectory is identified
+via the rownames and, additionally, in the column "mt_id"). Each column in
+the data.frame corresponds to one of the measures. If a trajectory array
+was provided directly as \code{data}, only the measures data.frame will be
+returned.
 
-  The following measures are computed for each trajectory (the labels 
-  relating to x- and y-positions will be adapted depending on the values 
-  specified in \code{dimensions}). Please note that additional information is
-  provided in the Details section.
+The following measures are computed for each trajectory (the labels
+relating to x- and y-positions will be adapted depending on the values
+specified in \code{dimensions}). Please note that additional information is
+provided in the Details section.
 
-  \item{mt_id}{Trial ID (can be used for merging measures data.frame with
-  other trial-level data)}
-  \item{xpos_max}{Maximum x-position} 
-  \item{xpos_min}{Minimum x-position}
-  \item{ypos_max}{Maximum y-position} 
-  \item{ypos_min}{Minimum y-position}
-  \item{MAD}{Signed Maximum absolute deviation from the direct path
-  connecting start and end point of the trajectory (straight line).
-  If the \code{MAD} occurs above the direct path, this is denoted by
-  a positive value; if it occurs below, by a negative value.}
-  \item{MAD_time}{Time at which the maximum absolute deviation was reached
-  first}
-  \item{MD_above}{Maximum deviation above the direct path} 
-  \item{MD_above_time}{Time at which the maximum deviation above was reached 
-  first}
-  \item{MD_below}{Maximum deviation below the direct path} 
-  \item{MD_below_time}{Time at which the maximum deviation below was reached 
-  first}
-  \item{AD}{Average deviation from direct path}
-  \item{AUC}{Area under curve, the geometric area between the actual
-  trajectory and the direct path where areas below the direct path have been
-  subtracted}
-  \item{xpos_flips}{Number of directional changes along x-axis (exceeding the
-  distance specified in \code{flip_threshold})}
-  \item{ypos_flips}{Number of directional changes along y-axis (exceeding the
-  distance specified in \code{flip_threshold})}
-  \item{xpos_reversals}{Number of crossings of the y-axis} 
-  \item{ypos_reversals}{Number of crossings of the x-axis}
-  \item{RT}{Response time, time at which tracking stopped}
-  \item{initiation_time}{Time at which first mouse movement was initiated}
-  \item{idle_time}{Total time without mouse movement across the entirety of
-  the trial}
-  \item{hover_time}{Total time of all periods without movement in a trial 
-  (whose duration exceeds the value specified in \code{hover_threshold})} 
-  \item{hovers}{Number of periods without movement in a trial (whose duration
-  exceeds the value specified in \code{hover_threshold})}
-  \item{total_dist}{Total distance covered by the trajectory}
-  \item{vel_max}{Maximum velocity}
-  \item{vel_max_time}{Time at which maximum velocity occurred first}
-  \item{vel_min}{Minimum velocity} 
-  \item{vel_min_time}{Time at which minimum velocity occurred first} 
-  \item{acc_max}{Maximum acceleration}
-  \item{acc_max_time}{Time at which maximum acceleration occurred first}
-  \item{acc_min}{Minimum acceleration} 
-  \item{acc_min_time}{Time at which minimum acceleration occurred first}
+\item{mt_id}{Trial ID (can be used for merging measures data.frame with
+other trial-level data)}
+\item{xpos_max}{Maximum x-position}
+\item{xpos_min}{Minimum x-position}
+\item{ypos_max}{Maximum y-position}
+\item{ypos_min}{Minimum y-position}
+\item{MAD}{Signed Maximum absolute deviation from the direct path
+connecting start and end point of the trajectory (straight line).
+If the \code{MAD} occurs above the direct path, this is denoted by
+a positive value; if it occurs below, by a negative value.}
+\item{MAD_time}{Time at which the maximum absolute deviation was reached
+first}
+\item{MD_above}{Maximum deviation above the direct path}
+\item{MD_above_time}{Time at which the maximum deviation above was reached
+first}
+\item{MD_below}{Maximum deviation below the direct path}
+\item{MD_below_time}{Time at which the maximum deviation below was reached
+first}
+\item{AD}{Average deviation from direct path}
+\item{AUC}{Area under curve, the geometric area between the actual
+trajectory and the direct path where areas below the direct path have been
+subtracted}
+\item{xpos_flips}{Number of directional changes along x-axis (exceeding the
+distance specified in \code{flip_threshold})}
+\item{ypos_flips}{Number of directional changes along y-axis (exceeding the
+distance specified in \code{flip_threshold})}
+\item{xpos_reversals}{Number of crossings of the y-axis}
+\item{ypos_reversals}{Number of crossings of the x-axis}
+\item{RT}{Response time, time at which tracking stopped}
+\item{initiation_time}{Time at which first mouse movement was initiated}
+\item{idle_time}{Total time without mouse movement across the entirety of
+the trial}
+\item{hover_time}{Total time of all periods without movement in a trial
+(whose duration exceeds the value specified in \code{hover_threshold})}
+\item{hovers}{Number of periods without movement in a trial (whose duration
+exceeds the value specified in \code{hover_threshold})}
+\item{total_dist}{Total distance covered by the trajectory}
+\item{vel_max}{Maximum velocity}
+\item{vel_max_time}{Time at which maximum velocity occurred first}
+\item{vel_min}{Minimum velocity}
+\item{vel_min_time}{Time at which minimum velocity occurred first}
+\item{acc_max}{Maximum acceleration}
+\item{acc_max_time}{Time at which maximum acceleration occurred first}
+\item{acc_min}{Minimum acceleration}
+\item{acc_min_time}{Time at which minimum acceleration occurred first}
 }
 \description{
-Calculate a number of mouse-tracking measures for each trajectory, such as 
-minima, maxima, and flips for each dimension, and different measures for 
+Calculate a number of mouse-tracking measures for each trajectory, such as
+minima, maxima, and flips for each dimension, and different measures for
 curvature (e.g., \code{MAD}, \code{AD}, and \code{AUC}). Note that some
 measures are only returned if distance, velocity and acceleration are
-calculated using \link{mt_derivatives} before running \code{mt_measures}. 
+calculated using \link{mt_derivatives} before running \code{mt_measures}.
 More information on the different measures can be found in the Details and
 Values sections.
 }
 \details{
-Note that some measures are only returned if distance, velocity and 
-acceleration are calculated using \link{mt_derivatives} before 
+Note that some measures are only returned if distance, velocity and
+acceleration are calculated using \link{mt_derivatives} before
 running \code{mt_measures}. Besides, the meaning of these measures
 depends on the values of the arguments in \link{mt_derivatives}.
-  
+
 If the deviations from the idealized response trajectory have been calculated
 using \link{mt_deviations} before running
 \code{mt_measures}, the corresponding data in the trajectory array
 will be used. If not, \code{mt_measures} will calculate these
 deviations automatically.
 
-The calculation of most measures can be deduced directly from their 
-definition (see Value). For several more complex measures, a few details are 
+The calculation of most measures can be deduced directly from their
+definition (see Value). For several more complex measures, a few details are
 provided in the following.
 
-The signed \strong{maximum absolute deviation} (\code{MAD}) is the maximum 
+The signed \strong{maximum absolute deviation} (\code{MAD}) is the maximum
 perpendicular deviation from the straight path connecting start and end point
-of the trajectory (e.g., Freeman & Ambady, 2010). If the \code{MAD} occurs 
-above the direct path, this is denoted by a positive value. If it occurs 
+of the trajectory (e.g., Freeman & Ambady, 2010). If the \code{MAD} occurs
+above the direct path, this is denoted by a positive value. If it occurs
 below the direct path, this is denoted by a negative value. This assumes that
-the complete movement in the trial was from bottom to top (i.e., the end 
+the complete movement in the trial was from bottom to top (i.e., the end
 point has a higher y-position than the start point). In case the movement was
-from top to bottom, \code{mt_measures} automatically flips the signs. Both 
+from top to bottom, \code{mt_measures} automatically flips the signs. Both
 \code{MD_above} and  \code{MD_below} are also reported separately.
 
-The \strong{average deviation} (\code{AD}) is the average of all deviations 
+The \strong{average deviation} (\code{AD}) is the average of all deviations
 across the trial. Note that \code{AD} ignores the timestamps when calculating
-this average. This implicitly assumes that the time passed between each 
-recording of the mouse is the same within each individual trajectory. If the 
-\code{AD} is calculated using raw data that were obtained with an 
+this average. This implicitly assumes that the time passed between each
+recording of the mouse is the same within each individual trajectory. If the
+\code{AD} is calculated using raw data that were obtained with an
 approximately constant logging resolution (sampling rate), this assumption is
-usually justified (\link{mt_check_resolution} can be used to check this). 
-Alternatively, the \code{AD} can be calculated based on time-normalized 
-trajectories; these can be computed using \link{mt_time_normalize} which 
+usually justified (\link{mt_check_resolution} can be used to check this).
+Alternatively, the \code{AD} can be calculated based on time-normalized
+trajectories; these can be computed using \link{mt_time_normalize} which
 creates equidistant time steps within each trajectory.
 
 The \code{AUC} represents the \strong{area under curve}, i.e., the geometric
@@ -201,27 +201,27 @@ mt_example_results <- dplyr::inner_join(
 }
 \references{
 Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B.,
-  & Schulte-Mecklenbeck, M. (2019). Mouse-tracking: A practical guide to
-  implementation and analysis. In M. Schulte-Mecklenbeck, A. Kühberger, & J.
-  G. Johnson (Eds.), \emph{A Handbook of Process Tracing Methods} (pp.
-  111-130). New York, NY: Routledge.
+& Schulte-Mecklenbeck, M. (2019). Mouse-tracking: A practical guide to
+implementation and analysis. In M. Schulte-Mecklenbeck, A. Kühberger, & J.
+G. Johnson (Eds.), \emph{A Handbook of Process Tracing Methods} (pp.
+111-130). New York, NY: Routledge.
 
-  Freeman, J. B., & Ambady, N. (2010). MouseTracker: Software for studying 
-  real-time mental processing using a computer mouse-tracking method. 
-  \emph{Behavior Research Methods, 42}(1), 226-241.
+Freeman, J. B., & Ambady, N. (2010). MouseTracker: Software for studying
+real-time mental processing using a computer mouse-tracking method.
+\emph{Behavior Research Methods, 42}(1), 226-241.
 }
 \seealso{
 \link{mt_sample_entropy} for calculating sample entropy.
 
-  \link{mt_standardize} for standardizing the measures per subject.
+\link{mt_standardize} for standardizing the measures per subject.
 
-  \link{mt_check_bimodality} for checking bimodality of the measures using
-  different methods.
+\link{mt_check_bimodality} for checking bimodality of the measures using
+different methods.
 
-  \link{mt_aggregate} and \link{mt_aggregate_per_subject} for aggregating the
-  measures.
+\link{mt_aggregate} and \link{mt_aggregate_per_subject} for aggregating the
+measures.
 
-  \link[dplyr:mutate-joins]{inner_join} for merging data using the \code{dplyr} package.
+\link[dplyr:mutate-joins]{inner_join} for merging data using the \code{dplyr} package.
 }
 \author{
 Pascal J. Kieslich

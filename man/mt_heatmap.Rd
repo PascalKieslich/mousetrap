@@ -23,10 +23,10 @@ trajectory array or an object of class \code{mt_heatmap_raw}.}
 used.}
 
 \item{dimensions}{a character vector specifying the trajectory variables used
-to create the heatmap. The first two entries are used as x and 
+to create the heatmap. The first two entries are used as x and
 y-coordinates, the third, if provided, will be added as color information.}
 
-\item{filename}{a character string giving the name of the file. If 
+\item{filename}{a character string giving the name of the file. If
 \code{NULL} (the default), the R standard device is used for plotting.
 Otherwise, the plotting device is inferred from the file extension. Only
 supports devices \link[grDevices:png]{tiff}, \link[grDevices]{png},
@@ -37,18 +37,20 @@ supports devices \link[grDevices:png]{tiff}, \link[grDevices]{png},
 \item{upscale}{a numeric value by which the output resolution of the image is
 increased or decreased. Only applies if device is one of tiff, png, or pdf.}
 
-\item{plot_dims}{adds the coordinates of the four image corners to the plot. 
+\item{plot_dims}{adds the coordinates of the four image corners to the plot.
 Helps setting \code{bounds}.}
 
 \item{verbose}{logical indicating whether function should report its
 progress.}
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
 \code{mt_heatmap} plots high resolution raw trajectory maps. Note that this
 function has beta status.
 }
 \details{
-\code{mt_heatmap} wraps \link{mt_heatmap_raw} and provides direct plotting 
+\code{mt_heatmap} wraps \link{mt_heatmap_raw} and provides direct plotting
 output in \link[grDevices:png]{tiff}, \link[grDevices]{png},
 \link[grDevices]{pdf}, or R's default window output. For further details on
 how the trajectory heatmaps are constructed, see \link{mt_heatmap_raw}.
@@ -59,22 +61,22 @@ mt_heatmap(KH2017, xres=500, n_shades=5, mean_image=0.2)
 }
 \references{
 Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F.,
-  & Schulte-Mecklenbeck, M. (2019). Mouse-tracking: Detecting types in
-  movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G.
-  Johnson (Eds.), \emph{A Handbook of Process Tracing Methods} (pp. 131-145). New York, NY:
-  Routledge.
+& Schulte-Mecklenbeck, M. (2019). Mouse-tracking: Detecting types in
+movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G.
+Johnson (Eds.), \emph{A Handbook of Process Tracing Methods} (pp. 131-145). New York, NY:
+Routledge.
 
-  Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B., &
-  Schulte-Mecklenbeck, M. (2019). Mouse-tracking: A practical guide to
-  implementation and analysis. In M. Schulte-Mecklenbeck, A. Kühberger, & J.
-  G. Johnson (Eds.), \emph{A Handbook of Process Tracing Methods} (pp.
-  111-130). New York, NY: Routledge.
+Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B., &
+Schulte-Mecklenbeck, M. (2019). Mouse-tracking: A practical guide to
+implementation and analysis. In M. Schulte-Mecklenbeck, A. Kühberger, & J.
+G. Johnson (Eds.), \emph{A Handbook of Process Tracing Methods} (pp.
+111-130). New York, NY: Routledge.
 }
 \seealso{
 \link{mt_heatmap_ggplot} for plotting a trajectory heatmap using
-  ggplot2.
+ggplot2.
 
-  \link{mt_diffmap} for plotting trajectory difference-heatmaps.
+\link{mt_diffmap} for plotting trajectory difference-heatmaps.
 }
 \author{
 Dirk U. Wulff

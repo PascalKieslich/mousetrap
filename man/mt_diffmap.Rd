@@ -24,13 +24,13 @@ mt_diffmap(
 )
 }
 \arguments{
-\item{x}{an object of class \code{mousetrap}), a trajectory object of class 
+\item{x}{an object of class \code{mousetrap}), a trajectory object of class
 \code{array}, or an object of class \code{mt_heatmap_raw} (as created by
 \link{mt_heatmap_raw}).}
 
-\item{y}{an object of class \code{mousetrap}), a trajectory object of class 
+\item{y}{an object of class \code{mousetrap}), a trajectory object of class
 \code{array}, or an object of class \code{mt_heatmap_raw} (as created by
-\link{mt_heatmap_raw}). The class of \code{y} must match the class of 
+\link{mt_heatmap_raw}). The class of \code{y} must match the class of
 \code{x}, unless \code{y} is \code{NULL}.}
 
 \item{condition}{either a character value specifying which variable codes the
@@ -45,26 +45,26 @@ trajectories between the two conditions. If \code{condition} is specified,
 used.}
 
 \item{dimensions}{a character vector specifying the trajectory variables used
-to create the heatmap. The first two entries are used as x and 
+to create the heatmap. The first two entries are used as x and
 y-coordinates, the third, if provided, will be added as color information.}
 
 \item{use2}{an optional character string specifying where the data that
 contain the condition variable can be found. Defaults to "data" as
 \code{x[["data"]]} usually contains all non mouse-tracking trial data.}
 
-\item{filename}{a character string giving the name of the file. If 
+\item{filename}{a character string giving the name of the file. If
 \code{NULL} (the default), the R standard device is used for plotting.
 Otherwise, the plotting device is inferred from the file extension. Only
 supports devices \link[grDevices:png]{tiff}, \link[grDevices]{png},
 \link[grDevices]{pdf}.}
 
-\item{bounds}{numeric vector specifying the corners (xmin, ymin, xmax, ymax) 
-of the plot region. By default (\code{bounds = NULL}), bounds are 
+\item{bounds}{numeric vector specifying the corners (xmin, ymin, xmax, ymax)
+of the plot region. By default (\code{bounds = NULL}), bounds are
 determined based on the data input.}
 
 \item{xres}{an integer specifying the number of pixels along the x-dimension.
-An \code{xres} of 1000 implies an 1000*N px, where N is determined so that 
-the trajectories aspect ratio is preserved (provided the \code{bounds} are 
+An \code{xres} of 1000 implies an 1000*N px, where N is determined so that
+the trajectories aspect ratio is preserved (provided the \code{bounds} are
 unchanged).}
 
 \item{upscale}{a numeric value by which the output resolution of the image is
@@ -76,14 +76,14 @@ gaussian smoothing. If zero, smoothing is omitted.}
 \item{colors}{a character vector specifying the colors used to color
 cases of \code{image1 > image2, image1 ~ image2, image1 < image2},
 respectively. Note that the colors are used in that specific order.
-Defaults to c("#00863F", "#FFFFFF", "#FF1900") which specifies 
+Defaults to c("#00863F", "#FFFFFF", "#FF1900") which specifies
 a green-black-red color gradient.}
 
 \item{n_shades}{integer specifying the number of shades for the color
 gradient between the first and second, and the second and third color in
 \code{colors}.}
 
-\item{plot}{logical specifying whether resulting image should be plotted 
+\item{plot}{logical specifying whether resulting image should be plotted
 (\code{plot = TRUE}, the default). If (\code{plot = FALSE}), an object of
 class \code{mt_object_raw} is returned.}
 
@@ -93,6 +93,8 @@ class \code{mt_object_raw} is returned.}
 progress.}
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
 \code{mt_diffmap} creates a difference-heatmap of the trajectory data using
 gaussian smoothing. Note that this function has beta status.
 }
@@ -108,19 +110,19 @@ mt_diffmap(KH2017, condition="Condition",
 }
 \references{
 Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F.,
-  & Schulte-Mecklenbeck, M. (2019). Mouse-tracking: Detecting types in
-  movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G.
-  Johnson (Eds.), \emph{A Handbook of Process Tracing Methods} (pp. 131-145). New York, NY:
-  Routledge.
+& Schulte-Mecklenbeck, M. (2019). Mouse-tracking: Detecting types in
+movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G.
+Johnson (Eds.), \emph{A Handbook of Process Tracing Methods} (pp. 131-145). New York, NY:
+Routledge.
 
-  Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B., &
-  Schulte-Mecklenbeck, M. (2019). Mouse-tracking: A practical guide to
-  implementation and analysis. In M. Schulte-Mecklenbeck, A. Kühberger, & J.
-  G. Johnson (Eds.), \emph{A Handbook of Process Tracing Methods} (pp.
-  111-130). New York, NY: Routledge.
+Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B., &
+Schulte-Mecklenbeck, M. (2019). Mouse-tracking: A practical guide to
+implementation and analysis. In M. Schulte-Mecklenbeck, A. Kühberger, & J.
+G. Johnson (Eds.), \emph{A Handbook of Process Tracing Methods} (pp.
+111-130). New York, NY: Routledge.
 }
 \seealso{
-\link{mt_heatmap} and \link{mt_heatmap_ggplot} for plotting trajectory 
+\link{mt_heatmap} and \link{mt_heatmap_ggplot} for plotting trajectory
 heatmaps.
 }
 \author{

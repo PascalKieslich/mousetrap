@@ -27,18 +27,18 @@ used.}
 \item{save_as}{a character string specifying where the resulting trajectory
 data should be stored.}
 
-\item{dimensions}{a character string specifying which trajectory variables 
-should be used. Can be of length 2 or 3 for two-dimensional or 
+\item{dimensions}{a character string specifying which trajectory variables
+should be used. Can be of length 2 or 3 for two-dimensional or
 three-dimensional alignment respectively.}
 
-\item{coordinates}{either a numeric vector of length 4 specifying the xstart, 
-ystart, xend, yend coordinates of the trajectory start and end points. Can 
-also be \code{isotropic} (the default) to preserve the coordinates of dim1 
-and dim2, \code{isotropic-norm} to set the coordinates to 
-\code{c(0,0,-1,x)} where x is chosen to preserve the aspect ratio of dim1 
+\item{coordinates}{either a numeric vector of length 4 specifying the xstart,
+ystart, xend, yend coordinates of the trajectory start and end points. Can
+also be \code{isotropic} (the default) to preserve the coordinates of dim1
+and dim2, \code{isotropic-norm} to set the coordinates to
+\code{c(0,0,-1,x)} where x is chosen to preserve the aspect ratio of dim1
 and dim2, \code{mt} to set coordinates to \code{c(0,0,-1,1.5)}, \code{norm}
-to set coordinates  to \code{c(0,0,-1,1)}, and \code{wide} to set 
-coordinates  to \code{c(0,0,-1,1.2)}. In the three-dimensional case, 
+to set coordinates  to \code{c(0,0,-1,1)}, and \code{wide} to set
+coordinates  to \code{c(0,0,-1,1.2)}. In the three-dimensional case,
 \code{coordinates} is a vector of length 6.}
 
 \item{align_start}{boolean specifying whether the start points of all
@@ -46,7 +46,7 @@ trajectories should be aligned to the position specified in
 \code{coordinates}. See Details.}
 
 \item{align_end}{boolean specifying whether the end points of all trajectories
-should be aligned to the position specified in \code{coordinates}. See 
+should be aligned to the position specified in \code{coordinates}. See
 Details.}
 
 \item{align_side}{character string specifying whether all trajectories should
@@ -58,19 +58,19 @@ are the x positions.}
 progress.}
 }
 \value{
-A mousetrap data object (see \link{mt_example}) with aligned 
-  trajectories. Per default, the dimensions in the original trajectory array
-  will be replaced. If a different trajectory array is specified using
-  \code{save_as}, a new trajectory array will be created (including only the
-  aligned dimensions). If a trajectory array was provided directly as
-  \code{data}, only the aligned trajectories will be returned.
+A mousetrap data object (see \link{mt_example}) with aligned
+trajectories. Per default, the dimensions in the original trajectory array
+will be replaced. If a different trajectory array is specified using
+\code{save_as}, a new trajectory array will be created (including only the
+aligned dimensions). If a trajectory array was provided directly as
+\code{data}, only the aligned trajectories will be returned.
 }
 \description{
 \code{mt_align} aligns trajectories to a common start point, end point, and /
 or coordinate system.
 }
 \details{
-If \code{align_start} / \code{align_end} is \code{FALSE}, \code{coordinates} 
+If \code{align_start} / \code{align_end} is \code{FALSE}, \code{coordinates}
 define the position of the average start / end point across all trajectories.
 
 Note that if the end points of trajectories are not aligned, coordinates
@@ -80,10 +80,10 @@ If \code{align_start} / \code{align_end} is \code{TRUE}, the start / end
 point of each trajectory is set to the exact position specified in
 \code{coordinates}. \code{align_start} and \code{align_end} can be set
 completely independently of one another, i.e., one can align only end points,
-only start points, none, or both. 
-   
-If \code{align_start} is set to \code{"left"} or \code{"right"} trajectories 
-will be flipped to the lower or upper spectrum of the first dimensions, 
+only start points, none, or both.
+
+If \code{align_start} is set to \code{"left"} or \code{"right"} trajectories
+will be flipped to the lower or upper spectrum of the first dimensions,
 respectively. If the first dimension is the x-coordinate this is equivalent
 to flipping the trajectories to the left and right side, respectively.
 }
@@ -95,13 +95,13 @@ mt_example <- mt_align(mt_example,
 }
 \seealso{
 \link{mt_align_start} for aligning all trajectories to a common
-  start position.
+start position.
 
-  \link{mt_align_start_end} for aligning all trajectories so that they share
-  a common initial and final coordinate.
+\link{mt_align_start_end} for aligning all trajectories so that they share
+a common initial and final coordinate.
 
-  \link{mt_remap_symmetric} for remapping trajectories to one side (or one 
-  quadrant) of the coordinate system.
+\link{mt_remap_symmetric} for remapping trajectories to one side (or one
+quadrant) of the coordinate system.
 }
 \author{
 Dirk U. Wulff

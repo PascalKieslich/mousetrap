@@ -22,55 +22,55 @@ array can be provided directly (in this case \code{use} will be ignored).}
 \item{use}{a character string specifying which trajectory data should be
 used.}
 
-\item{dimensions}{a character string specifying which trajectory variables 
+\item{dimensions}{a character string specifying which trajectory variables
 should be used. Must be of length 2.}
 
 \item{save_as}{a character string specifying where the resulting trajectory
 data should be stored.}
 
-\item{na_replace}{logical specifying whether \code{NA}s in the angle values 
-should be replaced using the next existing angle value (see Details). 
+\item{na_replace}{logical specifying whether \code{NA}s in the angle values
+should be replaced using the next existing angle value (see Details).
 Defaults to \code{FALSE}.}
 
-\item{unit}{character specifying the unit for the angles. Default is 
+\item{unit}{character specifying the unit for the angles. Default is
 "radian", alternative is "degree".}
 
 \item{verbose}{logical indicating whether function should report its
 progress.}
 }
 \value{
-A mousetrap data object (see \link{mt_example}) with point-based and 
-  vertical-based angles added as additional variables to the trajectory array
-  (called \code{angle_p} and \code{angle_v}). If a trajectory array was 
-  provided directly as \code{data}, only the trajectory array will be 
-  returned.
+A mousetrap data object (see \link{mt_example}) with point-based and
+vertical-based angles added as additional variables to the trajectory array
+(called \code{angle_p} and \code{angle_v}). If a trajectory array was
+provided directly as \code{data}, only the trajectory array will be
+returned.
 }
 \description{
-Calculate point-based and vertical-based angles for the points in the 
-movement trajectory. Point-based angles are the angle defined by three 
-subsequent points on the trajectory. Vertical-based angles are the angles 
+Calculate point-based and vertical-based angles for the points in the
+movement trajectory. Point-based angles are the angle defined by three
+subsequent points on the trajectory. Vertical-based angles are the angles
 between two subsequent points and the vertical axis.
 }
 \details{
-By default, angles are reported in radians, the alternative is degrees. For 
-the first point in a trajectory, the angle values are always not defined 
+By default, angles are reported in radians, the alternative is degrees. For
+the first point in a trajectory, the angle values are always not defined
 (\code{NA}).
 
-For vertical-based angles (\code{angle_v}), positive values indicate a 
-movement to the left of the vertical, negative values to the right of the 
-vertical. If there was no movement across two consecutive points, 
-\code{angle_v} is not defined and, by default, \code{NA} is returned. If 
-\code{na_replace} is \code{TRUE}, the next existing angle value is reported 
+For vertical-based angles (\code{angle_v}), positive values indicate a
+movement to the left of the vertical, negative values to the right of the
+vertical. If there was no movement across two consecutive points,
+\code{angle_v} is not defined and, by default, \code{NA} is returned. If
+\code{na_replace} is \code{TRUE}, the next existing angle value is reported
 instead.
 
-For point-based angles (\code{angle_p}), angles indicate changes of movement 
+For point-based angles (\code{angle_p}), angles indicate changes of movement
 within three consecutive time steps. The reported angle is always the smaller
 one. A value of pi (= 3.14...) (for radians) or 180 (for degrees) indicates a
-constant movement direction, a value of 0 (both for radians and degrees) a 
-complete reversal. If there was no movement across two consecutive points, 
-\code{angle_p} is not defined and, by default, \code{NA} is returned. If 
-\code{na_replace} is \code{TRUE}, the next existing angle value is reported 
-instead. \code{angle_p} is also not defined for the last point of the 
+constant movement direction, a value of 0 (both for radians and degrees) a
+complete reversal. If there was no movement across two consecutive points,
+\code{angle_p} is not defined and, by default, \code{NA} is returned. If
+\code{na_replace} is \code{TRUE}, the next existing angle value is reported
+instead. \code{angle_p} is also not defined for the last point of the
 trajectory.
 }
 \examples{

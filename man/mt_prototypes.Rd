@@ -17,12 +17,12 @@ trajectory, the discrete change-of-mind trajectory, and the double discrete
 change-of-mind trajectory.
 }
 \details{
-Mouse- and hand-trajectories often occur in types (Wulff, Haslbeck, & 
+Mouse- and hand-trajectories often occur in types (Wulff, Haslbeck, &
 Schulte-Mecklenbeck, 2017). In such cases, movement trajectory data should be
 analyzed in terms of discrete type assignments. To this end \link{mt_map} can
 be used to map mouse- or hand-trajectory to the closest of several predefined
-prototypes. \code{mt_prototypes} provides a core set of prototypes that has 
-been shown to represent well a large fraction of empirical movement 
+prototypes. \code{mt_prototypes} provides a core set of prototypes that has
+been shown to represent well a large fraction of empirical movement
 trajectories.
 
 To tailor the set of prototypes to a given study, \code{mt_prototypes} can be
@@ -30,7 +30,7 @@ extended using \link{mt_add_trajectory}.
 }
 \references{
 Wulff, D. U., Haslbeck, J. M. B., Schulte-Mecklenbeck, M. (2018).
-  \emph{Measuring the (dis-)continuous mind: What movement trajectories
-  reveal about cognition}. Manuscript in preparation.
+\emph{Measuring the (dis-)continuous mind: What movement trajectories
+reveal about cognition}. Manuscript in preparation.
 }
 \keyword{datasets}

@@ -33,10 +33,10 @@ i.e., the values the first recorded position should have in every trial. If
 \code{NULL}, trajectories are aligned to the mean first position across all
 trials.}
 
-\item{end}{a numeric vector specifying the end values for each dimension, 
-i.e., the values the last recorded position should have in every trial. If 
-\code{NULL}, trajectories are aligned to the mean last position across all 
-trials. Note that in this case trajectories should be remapped to one side 
+\item{end}{a numeric vector specifying the end values for each dimension,
+i.e., the values the last recorded position should have in every trial. If
+\code{NULL}, trajectories are aligned to the mean last position across all
+trials. Note that in this case trajectories should be remapped to one side
 before alignment (e.g., using \link{mt_remap_symmetric}) so that the mean
 last position is meaningful.}
 
@@ -44,14 +44,14 @@ last position is meaningful.}
 progress.}
 }
 \value{
-A mousetrap data object (see \link{mt_example}) with aligned 
-  trajectories. All other trajectory dimensions not specified in
-  \code{dimensions} (e.g., timestamps) will be kept as is in the resulting
-  trajectory array. If the trajectory array was provided directly as
-  \code{data}, only the trajectory array will be returned.
+A mousetrap data object (see \link{mt_example}) with aligned
+trajectories. All other trajectory dimensions not specified in
+\code{dimensions} (e.g., timestamps) will be kept as is in the resulting
+trajectory array. If the trajectory array was provided directly as
+\code{data}, only the trajectory array will be returned.
 }
 \description{
-Adjust trajectories so that all trajectories have an identical start and end 
+Adjust trajectories so that all trajectories have an identical start and end
 point. In some articles, this is also referred to as space-normalization
 (e.g. Dale et al., 2007).
 }
@@ -75,17 +75,17 @@ mt_example <- mt_align_start_end(mt_example,
 }
 \references{
 Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor
-  responses in the time course of categorizing atypical exemplars.
-  \emph{Memory & Cognition, 35}(1), 15-28.
+responses in the time course of categorizing atypical exemplars.
+\emph{Memory & Cognition, 35}(1), 15-28.
 }
 \seealso{
-\link{mt_align_start} for aligning the start position of 
-  trajectories.
+\link{mt_align_start} for aligning the start position of
+trajectories.
 
-  \link{mt_align} as a general purpose function for aligning and rescaling 
-  trajectories.
+\link{mt_align} as a general purpose function for aligning and rescaling
+trajectories.
 
-  \link{mt_remap_symmetric} for remapping trajectories.
+\link{mt_remap_symmetric} for remapping trajectories.
 }
 \author{
 Pascal J. Kieslich

@@ -29,36 +29,36 @@ used.}
 \item{save_as}{a character string specifying where the resulting data should
 be stored.}
 
-\item{dimensions}{a character vector specifying which trajectory variables 
-should be used. Can be of length 2 or 3 for two-dimensional or 
+\item{dimensions}{a character vector specifying which trajectory variables
+should be used. Can be of length 2 or 3 for two-dimensional or
 three-dimensional trajectories respectively.}
 
-\item{prototypes}{a trajectory array containing the prototypes the 
+\item{prototypes}{a trajectory array containing the prototypes the
 trajectories are mapped to. As a starting point, the trajectories stored in
-\link{mt_prototypes} can be used. See Details and Examples for selecting 
+\link{mt_prototypes} can be used. See Details and Examples for selecting
 prototypes and creating new ones.}
 
-\item{weights}{numeric vector specifying the relative importance of the 
-variables specified in \code{dimensions}. Defaults to a vector of 1s 
+\item{weights}{numeric vector specifying the relative importance of the
+variables specified in \code{dimensions}. Defaults to a vector of 1s
 implying equal importance. Technically, each variable is rescaled so that
 the standard deviation matches the corresponding value in \code{weights}.
 To use the original variables, set \code{weights = NULL}.}
 
-\item{pointwise}{boolean specifying the way dissimilarity between the 
-trajectories is measured (see Details). If \code{TRUE} (the default), 
-\code{mt_distmat} measures the average dissimilarity and then sums the 
-results. If \code{FALSE}, \code{mt_distmat}  measures dissimilarity once 
+\item{pointwise}{boolean specifying the way dissimilarity between the
+trajectories is measured (see Details). If \code{TRUE} (the default),
+\code{mt_distmat} measures the average dissimilarity and then sums the
+results. If \code{FALSE}, \code{mt_distmat}  measures dissimilarity once
 (by treating the various points as independent dimensions).}
 
-\item{na_rm}{logical specifying whether trajectory points containing NAs 
-should be removed. Removal is done column-wise. That is, if any trajectory 
+\item{na_rm}{logical specifying whether trajectory points containing NAs
+should be removed. Removal is done column-wise. That is, if any trajectory
 has a missing value at, e.g., the 10th recorded position, the 10th position
 is removed for all trajectories. This is necessary to compute distance
 between trajectories.}
 
-\item{minkowski_p}{an integer specifying the distance metric. 
+\item{minkowski_p}{an integer specifying the distance metric.
 \code{minkowski_p = 1} computes the city-block distance, \code{minkowski_p 
-= 2} (the default) computes the Euclidian distance, \code{minkowski_p = 3} 
+  = 2} (the default) computes the Euclidian distance, \code{minkowski_p = 3}
 the cubic distance, etc.}
 
 \item{use2}{an optional character string specifying where the data that
@@ -73,19 +73,19 @@ level of the variable(s). If unspecified (the default), the prototypes are
 rescaled in the same way across all trajectories.}
 }
 \value{
-A mousetrap data object (see \link{mt_example}) with an additional 
-  \link{data.frame} (by default called \code{prototyping}) that contains the 
-  best fitting prototype for each trajectory (the number of the prototype is 
-  specified under \code{prototype}, the label of the prototype under 
-  \code{prototype_label}) and the distance of the trajectory to the best 
-  fitting prototype (\code{min_dist}). If a trajectory array was provided
-  directly as \code{data}, only the data.frame containing the results will be
-  returned.
+A mousetrap data object (see \link{mt_example}) with an additional
+\link{data.frame} (by default called \code{prototyping}) that contains the
+best fitting prototype for each trajectory (the number of the prototype is
+specified under \code{prototype}, the label of the prototype under
+\code{prototype_label}) and the distance of the trajectory to the best
+fitting prototype (\code{min_dist}). If a trajectory array was provided
+directly as \code{data}, only the data.frame containing the results will be
+returned.
 }
 \description{
-\code{mt_map} maps trajectories onto a predefined set of prototype 
-trajectories. It first computes distances between the trajectories and each 
-of the supplied trajectory types and then assigns each trajectory to the 
+\code{mt_map} maps trajectories onto a predefined set of prototype
+trajectories. It first computes distances between the trajectories and each
+of the supplied trajectory types and then assigns each trajectory to the
 prototype that produced the smallest distance.
 }
 \details{
@@ -96,8 +96,8 @@ multiple change-of-mind trials. \code{mt_map} allows to map trajectories to a
 predefined set of trajectory types.
 
 First, \code{mt_map} adjusts prototypes to match the coordinate system of the
-trajectories specified by \code{use}. Next, \code{mt_map} computes the 
-distances between each trajectory and each of the supplied prototypes (see 
+trajectories specified by \code{use}. Next, \code{mt_map} computes the
+distances between each trajectory and each of the supplied prototypes (see
 \link{mt_distmat}) and then assigns each trajectory to the closest prototype
 (i.e., the prototype that produced the smallest distance).
 
@@ -152,14 +152,14 @@ KH2017 <- mt_map(KH2017,
 }
 \references{
 Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F.,
-  & Schulte-Mecklenbeck, M. (2019). Mouse-tracking: Detecting types in
-  movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G.
-  Johnson (Eds.), \emph{A Handbook of Process Tracing Methods} (pp. 131-145). New York, NY:
-  Routledge.
-   
-  Wulff, D. U., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. (2021).
-  \emph{Measuring the (dis-)continuous mind: What movement trajectories
-  reveal about cognition}. Manuscript in preparation.
+& Schulte-Mecklenbeck, M. (2019). Mouse-tracking: Detecting types in
+movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G.
+Johnson (Eds.), \emph{A Handbook of Process Tracing Methods} (pp. 131-145). New York, NY:
+Routledge.
+
+Wulff, D. U., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. (2021).
+\emph{Measuring the (dis-)continuous mind: What movement trajectories
+reveal about cognition}. Manuscript in preparation.
 }
 \author{
 Dirk U. Wulff

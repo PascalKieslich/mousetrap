@@ -28,13 +28,13 @@ mt_export_wide(
 functions (see \link{mt_example} for details). Alternatively, a trajectory
 array can be provided directly (in this case \code{use} will be ignored).}
 
-\item{use}{a character string specifying which data should be exported. The 
-corresponding data are selected from data using \code{data[[use]]}. 
+\item{use}{a character string specifying which data should be exported. The
+corresponding data are selected from data using \code{data[[use]]}.
 Usually, this value corresponds to either "trajectories" or
 "tn_trajectories", depending on whether the raw or the time-normalized
 trajectories should be exported.}
 
-\item{use_variables}{a character vector specifying which mouse-tracking 
+\item{use_variables}{a character vector specifying which mouse-tracking
 variables should be exported. This corresponds to the labels of the
 trajectory array dimensions. If unspecified, all variables will be
 exported.}
@@ -47,17 +47,17 @@ be provided directly.}
 \item{use2_variables}{an optional character string (or vector) specifying the
 variables (in \code{data[[use2]]}) that should be merged with the data.}
 
-\item{...}{additional arguments passed on to \link{mt_reshape} (such as 
+\item{...}{additional arguments passed on to \link{mt_reshape} (such as
 \code{subset}).}
 }
 \value{
 A \link{data.frame} containing the exported data.
 }
 \description{
-\code{mt_export_long} and \code{mt_export_wide} can be used for exporting 
+\code{mt_export_long} and \code{mt_export_wide} can be used for exporting
 mouse-tracking data from a mousetrap data object in long or wide format. If
 desired, additional data (stored in \code{data[[use2]]}) can be merged with
-the trajectory data before export. \code{mt_export_long} and 
+the trajectory data before export. \code{mt_export_long} and
 \code{mt_export_wide} are wrapper functions for \link{mt_reshape}.
 }
 \section{Functions}{
@@ -81,10 +81,10 @@ mt_data_wide <- mt_export_wide(mt_example,
 }
 \seealso{
 \link{mt_import_long} for importing mouse-tracking data saved in a
-  long format.
+long format.
 
-  \link{mt_import_wide} for importing mouse-tracking data saved in a wide 
-  format.
+\link{mt_import_wide} for importing mouse-tracking data saved in a wide
+format.
 }
 \author{
 Pascal J. Kieslich

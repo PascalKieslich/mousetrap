@@ -36,10 +36,10 @@ second to the y positions.}
 trajectory.}
 }
 \value{
-A mousetrap data object (see \link{mt_example}) where the new 
-  trajectory has been added.
-  If the trajectory array was provided directly as \code{data}, only the
-  trajectory array will be returned.
+A mousetrap data object (see \link{mt_example}) where the new
+trajectory has been added.
+If the trajectory array was provided directly as \code{data}, only the
+trajectory array will be returned.
 }
 \description{
 Add a single new trajectory to trajectory array.

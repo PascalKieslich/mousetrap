@@ -18,8 +18,8 @@ progress.}
 A trajectory array.
 }
 \description{
-Join two trajectory arrays. This function is mainly used internally, but can 
-be helpful in those (relatively rare) occasions where additional processed 
+Join two trajectory arrays. This function is mainly used internally, but can
+be helpful in those (relatively rare) occasions where additional processed
 trajectory data should be added to another trajectory array.
 }
 \examples{

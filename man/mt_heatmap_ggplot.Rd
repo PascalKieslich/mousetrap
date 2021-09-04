@@ -23,7 +23,7 @@ array can be provided directly (in this case \code{use} will be ignored).}
 used.}
 
 \item{dimensions}{a character vector specifying the trajectory variables used
-to create the heatmap. The first two entries are used as x and 
+to create the heatmap. The first two entries are used as x and
 y-coordinates, the third, if provided, will be added as color information.}
 
 \item{use2}{an optional character string specifying where the data that
@@ -40,6 +40,8 @@ usually contains all non mouse-tracking trial data.}
 \item{...}{arguments passed to \link{mt_heatmap_raw}.}
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
 \code{mt_heatmap_ggplot} plots high resolution raw trajectory maps. Note that
 this function has beta status.
 }
@@ -56,22 +58,22 @@ mt_heatmap_ggplot(KH2017, xres=500, n_shades=5, mean_image=0.2)
 }
 \references{
 Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F.,
-  & Schulte-Mecklenbeck, M. (2019). Mouse-tracking: Detecting types in
-  movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G.
-  Johnson (Eds.), \emph{A Handbook of Process Tracing Methods} (pp. 131-145). New York, NY:
-  Routledge.
+& Schulte-Mecklenbeck, M. (2019). Mouse-tracking: Detecting types in
+movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G.
+Johnson (Eds.), \emph{A Handbook of Process Tracing Methods} (pp. 131-145). New York, NY:
+Routledge.
 
-  Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B., &
-  Schulte-Mecklenbeck, M. (2019). Mouse-tracking: A practical guide to
-  implementation and analysis. In M. Schulte-Mecklenbeck, A. Kühberger, & J.
-  G. Johnson (Eds.), \emph{A Handbook of Process Tracing Methods} (pp.
-  111-130). New York, NY: Routledge.
+Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B., &
+Schulte-Mecklenbeck, M. (2019). Mouse-tracking: A practical guide to
+implementation and analysis. In M. Schulte-Mecklenbeck, A. Kühberger, & J.
+G. Johnson (Eds.), \emph{A Handbook of Process Tracing Methods} (pp.
+111-130). New York, NY: Routledge.
 }
 \seealso{
 \link{mt_heatmap} for plotting a trajectory heatmap using base
-  plots.
+plots.
 
-  \link{mt_diffmap} for plotting trajectory difference-heatmaps.
+\link{mt_diffmap} for plotting trajectory difference-heatmaps.
 }
 \author{
 Pascal J. Kieslich

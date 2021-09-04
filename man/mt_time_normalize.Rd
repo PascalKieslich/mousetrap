@@ -39,11 +39,11 @@ progress.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) with an additional
-  array (by default called \code{tn_trajectories}) containing the
-  time-normalized trajectories. In this array, another dimension (called
-  \code{steps}) has been added with increasing integer values indexing the
-  time-normalized position. If a trajectory array was provided directly as
-  \code{data}, only the time-normalized trajectories will be returned.
+array (by default called \code{tn_trajectories}) containing the
+time-normalized trajectories. In this array, another dimension (called
+\code{steps}) has been added with increasing integer values indexing the
+time-normalized position. If a trajectory array was provided directly as
+\code{data}, only the time-normalized trajectories will be returned.
 }
 \description{
 Compute time-normalized trajectories using a constant number of equally sized
@@ -72,16 +72,16 @@ mt_example <- mt_time_normalize(mt_example,
 }
 \references{
 Spivey, M. J., Grosjean, M., & Knoblich, G. (2005). Continuous
-  attraction toward phonological competitors. \emph{Proceedings of the
-  National Academy of Sciences of the United States of America, 102}(29),
-  10393-10398.
+attraction toward phonological competitors. \emph{Proceedings of the
+National Academy of Sciences of the United States of America, 102}(29),
+10393-10398.
 }
 \seealso{
 \link[stats:approxfun]{approx} for information about the function used for
-  linear interpolation.
+linear interpolation.
 
-  \link{mt_resample} for resampling trajectories using a constant time
-  interval.
+\link{mt_resample} for resampling trajectories using a constant time
+interval.
 }
 \author{
 Pascal J. Kieslich

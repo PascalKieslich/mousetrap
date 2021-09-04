@@ -5,37 +5,39 @@
 \alias{mt_example_raw}
 \title{Raw mouse-tracking dataset for demonstrations of the mousetrap package}
 \format{
-A \link{data.frame} with 38 rows and 19 variables. The data.frame is 
-  based on the combined raw data that were created using 
-  \link[readbulk]{read_opensesame} from the 
-  \href{http://pascalkieslich.github.io/readbulk/}{readbulk} library. For 
-  ease of use, unnecessary columns were excluded.
+A \link{data.frame} with 38 rows and 19 variables. The data.frame is
+based on the combined raw data that were created using
+\link[readbulk]{read_opensesame} from the
+\href{http://pascalkieslich.github.io/readbulk/}{readbulk} library. For
+ease of use, unnecessary columns were excluded.
 
-  The variables included relate to the item that was presented
-  (\code{Exemplar}), the answer categories (\code{Category1} and
-  \code{Category2}), the subject identifier (\code{subject_nr}) the subjects'
-  response (\code{response_get_response}), as well as the mouse-tracking
-  variables (\code{timestamps_get_response}, \code{xpos_get_response} and
-  \code{ypos_get_response}). Besides, a number of additional variables are
-  included, e.g., some variables relating to the general settings of the
-  experiment (e.g., the \code{width} and \code{height} of the screen in
-  pixels).
+The variables included relate to the item that was presented
+(\code{Exemplar}), the answer categories (\code{Category1} and
+\code{Category2}), the subject identifier (\code{subject_nr}) the subjects'
+response (\code{response_get_response}), as well as the mouse-tracking
+variables (\code{timestamps_get_response}, \code{xpos_get_response} and
+\code{ypos_get_response}). Besides, a number of additional variables are
+included, e.g., some variables relating to the general settings of the
+experiment (e.g., the \code{width} and \code{height} of the screen in
+pixels).
 
-  Each mouse-tracking variable contains a list of values (separated by ', ')
-  - one entry for each recorded position of the mouse. The position
-  coordinates are given in pixels, such that values of zero for both
-  \code{xpos_get_response} and \code{ypos_get_response} indicate that the
-  cursor is located in the center of the screen. Both variables increase in
-  value as the mouse moves toward the bottom right. Timestamps are given in
-  milliseconds.
+Each mouse-tracking variable contains a list of values (separated by ', ')
+\itemize{
+\item one entry for each recorded position of the mouse. The position
+coordinates are given in pixels, such that values of zero for both
+\code{xpos_get_response} and \code{ypos_get_response} indicate that the
+cursor is located in the center of the screen. Both variables increase in
+value as the mouse moves toward the bottom right. Timestamps are given in
+milliseconds.
+}
 }
 \usage{
 mt_example_raw
 }
 \description{
-An exemplary mouse-tracking dataset collected 
-\href{https://osdoc.cogsci.nl/}{OpenSesame} using the 
-\href{https://github.com/pascalkieslich/mousetrap-os}{mousetrap plugin} 
+An exemplary mouse-tracking dataset collected
+\href{https://osdoc.cogsci.nl/}{OpenSesame} using the
+\href{https://github.com/pascalkieslich/mousetrap-os}{mousetrap plugin}
 (Kieslich & Henninger, 2017). A preprocessed (as opposed to raw) version of
 the same data can be found in \link{mt_example}.
 }
@@ -59,11 +61,11 @@ features of the mousetrap package and not for any substantive analysis.
 }
 \references{
 Kieslich, P. J., & Henninger, F. (2017). Mousetrap: An
-  integrated, open-source mouse-tracking package. \emph{Behavior Research
-  Methods, 49}(5), 1652-1667. \doi{10.3758/s13428-017-0900-z}
+integrated, open-source mouse-tracking package. \emph{Behavior Research
+Methods, 49}(5), 1652-1667. \doi{10.3758/s13428-017-0900-z}
 
-  Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor responses in the
-  time course of categorizing atypical exemplars. \emph{Memory & Cognition,
-  35}(1), 15-28. \doi{10.3758/BF03195938}
+Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor responses in the
+time course of categorizing atypical exemplars. \emph{Memory & Cognition,
+35}(1), 15-28. \doi{10.3758/BF03195938}
 }
 \keyword{datasets}

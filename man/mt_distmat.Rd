@@ -26,52 +26,52 @@ used.}
 \item{save_as}{a character string specifying where the resulting data should
 be stored.}
 
-\item{dimensions}{a character vector specifying which trajectory variables 
-should be used. Can be of length 2 or 3 for two-dimensional or 
+\item{dimensions}{a character vector specifying which trajectory variables
+should be used. Can be of length 2 or 3 for two-dimensional or
 three-dimensional trajectories respectively.}
 
-\item{weights}{numeric vector specifying the relative importance of the 
-variables specified in \code{dimensions}. Defaults to a vector of 1s 
+\item{weights}{numeric vector specifying the relative importance of the
+variables specified in \code{dimensions}. Defaults to a vector of 1s
 implying equal importance. Technically, each variable is rescaled so that
 the standard deviation matches the corresponding value in \code{weights}.
 To use the original variables, set \code{weights = NULL}.}
 
-\item{pointwise}{boolean specifying the way dissimilarity between the 
-trajectories is measured (see Details). If \code{TRUE} (the default), 
-\code{mt_distmat} measures the average dissimilarity and then sums the 
-results. If \code{FALSE}, \code{mt_distmat}  measures dissimilarity once 
+\item{pointwise}{boolean specifying the way dissimilarity between the
+trajectories is measured (see Details). If \code{TRUE} (the default),
+\code{mt_distmat} measures the average dissimilarity and then sums the
+results. If \code{FALSE}, \code{mt_distmat}  measures dissimilarity once
 (by treating the various points as independent dimensions).}
 
-\item{minkowski_p}{an integer specifying the distance metric. 
+\item{minkowski_p}{an integer specifying the distance metric.
 \code{minkowski_p = 1} computes the city-block distance, \code{minkowski_p 
-= 2} (the default) computes the Euclidian distance, \code{minkowski_p = 3} 
+  = 2} (the default) computes the Euclidian distance, \code{minkowski_p = 3}
 the cubic distance, etc.}
 
-\item{na_rm}{logical specifying whether trajectory points containing NAs 
-should be removed. Removal is done column-wise. That is, if any trajectory 
+\item{na_rm}{logical specifying whether trajectory points containing NAs
+should be removed. Removal is done column-wise. That is, if any trajectory
 has a missing value at, e.g., the 10th recorded position, the 10th position
 is removed for all trajectories. This is necessary to compute distance
 between trajectories.}
 }
 \value{
-A mousetrap data object (see \link{mt_example}) with an additional 
-  object added (by default called \code{distmat}) containing the distance 
-  matrix. If a trajectory array was provided directly as \code{data}, only 
-  the distance matrix will be returned.
+A mousetrap data object (see \link{mt_example}) with an additional
+object added (by default called \code{distmat}) containing the distance
+matrix. If a trajectory array was provided directly as \code{data}, only
+the distance matrix will be returned.
 }
 \description{
-Computes the point- or vector-wise dissimilarity between each pair of 
+Computes the point- or vector-wise dissimilarity between each pair of
 trajectories.
 }
 \details{
-\code{mt_distmat} computes point- or vector-wise dissimilarities between 
-pairs of trajectories. Point-wise dissimilarity refers to computing the 
-distance metric defined by \code{minkowski_p} for every point of the 
-trajectory and then summing the results. That is, if \code{minkowski_p = 2} 
-the point-wise dissimilarity between two trajectories, each defined by a set 
-of x and y coordinates, is calculated as \code{sum(sqrt((x_i-x_j)^2 + (y_i-y_j)^2))}. 
+\code{mt_distmat} computes point- or vector-wise dissimilarities between
+pairs of trajectories. Point-wise dissimilarity refers to computing the
+distance metric defined by \code{minkowski_p} for every point of the
+trajectory and then summing the results. That is, if \code{minkowski_p = 2}
+the point-wise dissimilarity between two trajectories, each defined by a set
+of x and y coordinates, is calculated as \code{sum(sqrt((x_i-x_j)^2 + (y_i-y_j)^2))}.
 Vector-wise dissimilarity, on the other hand refers to computing the distance
-metric once for the entire trajectory. That is, vector-wise dissimilarity is 
+metric once for the entire trajectory. That is, vector-wise dissimilarity is
 computed as \code{sqrt(sum((x_i-x_j)^2 + (y_i-y_j)^2))}.
 }
 \examples{

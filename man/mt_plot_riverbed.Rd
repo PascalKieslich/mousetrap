@@ -24,22 +24,22 @@ mt_plot_riverbed(
 plot. The steps of this set will constitute the x axis. Defaults to
 'tn_trajectories', which results in time steps being plotted on the x axis.}
 
-\item{y}{variable in the mousetrap data object to be plotted on the 
+\item{y}{variable in the mousetrap data object to be plotted on the
 output's y dimension. Defaults to 'xpos', the cursor's x coordinate.}
 
-\item{y_range}{numerical vector containing two values that represent the 
-upper and lower ends of the y axis. By default, the range is calculated 
+\item{y_range}{numerical vector containing two values that represent the
+upper and lower ends of the y axis. By default, the range is calculated
 from the data provided.}
 
 \item{y_bins}{number of bins to distribute along the y axis (defaults to
 250).}
 
-\item{facet_row}{an optional character string specifying a variable in 
-\code{data[[facet_data]]} that should be used for (row-wise) faceting. If 
-specified, separate riverbed plots for each level of the variable will be 
+\item{facet_row}{an optional character string specifying a variable in
+\code{data[[facet_data]]} that should be used for (row-wise) faceting. If
+specified, separate riverbed plots for each level of the variable will be
 created.}
 
-\item{facet_col}{an optional character string specifying a variable in 
+\item{facet_col}{an optional character string specifying a variable in
 \code{data[[facet_data]]} that should be used for (column-wise) faceting.
 If specified, separate riverbed plots for each level of the variable will
 be created.}
@@ -63,7 +63,7 @@ have the same length (i.e., the same number of steps).}
 trajectory variable (e.g., the x-positions or velocity) per time step.
 }
 \details{
-This function plots the relative frequency of the values of a trajectory 
+This function plots the relative frequency of the values of a trajectory
 variable separately for each of a series of time steps. This type of plot has
 been used in previous research to visualize the distribution of x-positions
 per time step (e.g., Scherbaum et al., 2010).
@@ -98,17 +98,17 @@ mt_plot_riverbed(mt_example, facet_col="Condition") +
 }
 \references{
 Scherbaum, S., Dshemuchadse, M., Fischer, R., & Goschke, T.
-  (2010). How decisions evolve: The temporal dynamics of action selection.
-  \emph{Cognition, 115}(3), 407-416.
+(2010). How decisions evolve: The temporal dynamics of action selection.
+\emph{Cognition, 115}(3), 407-416.
 
-  Scherbaum, S., & Kieslich, P. J. (2018). Stuck at the starting line: How
-  the starting procedure influences mouse-tracking data. \emph{Behavior
-  Research Methods, 50}(5), 2097–2110.
+Scherbaum, S., & Kieslich, P. J. (2018). Stuck at the starting line: How
+the starting procedure influences mouse-tracking data. \emph{Behavior
+Research Methods, 50}(5), 2097–2110.
 }
 \seealso{
 \link{mt_plot} for plotting trajectory data.
 
-  \link{mt_time_normalize} for time-normalizing trajectories.
+\link{mt_time_normalize} for time-normalizing trajectories.
 }
 \author{
 Felix Henninger

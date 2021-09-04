@@ -63,20 +63,20 @@ progress.}
 \value{
 A mousetrap data object (see \link{mt_example}).
 
-  If mouse-tracking data were recorded using the mousetrap plug-ins for
-  OpenSesame, the unit of the timestamps is milliseconds.
+If mouse-tracking data were recorded using the mousetrap plug-ins for
+OpenSesame, the unit of the timestamps is milliseconds.
 }
 \description{
-\code{mt_import_mousetrap} accepts a data.frame of (merged) raw data from a 
-mouse-tracking experiment implemented in 
-\href{https://osdoc.cogsci.nl/}{OpenSesame} using the 
-\href{https://github.com/pascalkieslich/mousetrap-os}{mousetrap plugin} 
-(Kieslich & Henninger, 2017). From this data.frame, 
-\code{mt_import_mousetrap} creates a mousetrap data object containing the 
-trajectories and additional data for further processing within the mousetrap 
+\code{mt_import_mousetrap} accepts a data.frame of (merged) raw data from a
+mouse-tracking experiment implemented in
+\href{https://osdoc.cogsci.nl/}{OpenSesame} using the
+\href{https://github.com/pascalkieslich/mousetrap-os}{mousetrap plugin}
+(Kieslich & Henninger, 2017). From this data.frame,
+\code{mt_import_mousetrap} creates a mousetrap data object containing the
+trajectories and additional data for further processing within the mousetrap
 package. Specifically, it returns a list that includes the trajectory data as
-an array (called \code{trajectories}), and all other data as a data.frame 
-(called \code{data}). This data structure can then be passed on to other 
+an array (called \code{trajectories}), and all other data as a data.frame
+(called \code{data}). This data structure can then be passed on to other
 functions within this package (see \link{mousetrap} for an overview).
 }
 \details{
@@ -127,13 +127,13 @@ mt_data <- mt_import_mousetrap(mt_example_raw)
 }
 \references{
 Kieslich, P. J., & Henninger, F. (2017). Mousetrap: An
-  integrated, open-source mouse-tracking package. \emph{Behavior Research
-  Methods, 49}(5), 1652-1667. \doi{10.3758/s13428-017-0900-z}
+integrated, open-source mouse-tracking package. \emph{Behavior Research
+Methods, 49}(5), 1652-1667. \doi{10.3758/s13428-017-0900-z}
 }
 \seealso{
 \link[readbulk]{read_opensesame} from the \code{readbulk} library
-  for reading and combining raw data files that were collected with
-  OpenSesame.
+for reading and combining raw data files that were collected with
+OpenSesame.
 
 \link{mt_import_wide} and \link{mt_import_long} for importing mouse-tracking
 data from other sources.

@@ -33,7 +33,7 @@ with submillisecond precision.}
 }
 \value{
 A list with various descriptive statistics. For convenience, the
-  relative frequencies are rounded to 4 decimal places.
+relative frequencies are rounded to 4 decimal places.
 }
 \description{
 \code{mt_check_resolution} computes the timestamp differences as a measure of
@@ -41,13 +41,13 @@ the logging resolution. It provides various descriptive statistics to check
 the logging resolution.
 }
 \details{
-If mouse-tracking experiments are conducted using the mousetrap plug-ins for 
-OpenSesame, the logging resolution can be specified explicitly in the 
-experiment under "Logging resolution", which corresponds to the delay (in 
-milliseconds) between recordings of the mouse position. By default, mouse 
+If mouse-tracking experiments are conducted using the mousetrap plug-ins for
+OpenSesame, the logging resolution can be specified explicitly in the
+experiment under "Logging resolution", which corresponds to the delay (in
+milliseconds) between recordings of the mouse position. By default, mouse
 positions are recorded every 10 ms (corresponding to a 100 Hz sampling rate).
 As the actual resolution achieved depends on the performance of the hardware,
-it makes sense to check the logging resolution using 
+it makes sense to check the logging resolution using
 \code{mt_check_resolution}. Note that delays smaller than the specified delay
 typically result from mouse clicks in the experiment.
 }

@@ -15,7 +15,7 @@ Bezier-points. Defaults to c(0,1,-1) matching the 'mt' format in
 Bezier-points. Defaults to c(0,1.5,1.5) matching the 'mt' format in
 \link{mt_align}.}
 
-\item{w}{a numeric value or vector specifying one or several Bezier curves, 
+\item{w}{a numeric value or vector specifying one or several Bezier curves,
 with \code{w} governing the pull towards the middle point. Each entry in
 \code{w} creates one Bezier-curve.}
 
@@ -27,9 +27,9 @@ curves. For example, \code{resol = 100} creates bezier curves comprised of
 A trajectory array containing the bezier curves.
 }
 \description{
-\code{bezier} creates 3-point Bezier-curves using the 
-  Bernstein approximation to simulate continuous competition 
-  in mouse- and hand-trajectories.
+\code{bezier} creates 3-point Bezier-curves using the
+Bernstein approximation to simulate continuous competition
+in mouse- and hand-trajectories.
 }
 \examples{
 # Generate range of Bezier-curves

@@ -21,7 +21,7 @@ variables that \link{scale} is applied to. If unspecified,
 \code{scale_within} will be applied to all variables in data.}
 
 \item{within}{an optional character string specifying the name of one or more
-variables in \code{data}. If specified, \link{scale} is applied separately 
+variables in \code{data}. If specified, \link{scale} is applied separately
 for each of the levels of the variable (or for each combination of levels,
 if more than one variable is specified). Alternatively, a vector directly
 containing the level values.}
@@ -35,13 +35,13 @@ variable. By default (empty string) the original variables are replaced.}
 }
 \value{
 The original data.frame including the centered and / or scaled
-  variables.
+variables.
 }
 \description{
-\code{scale_within} centers and/or scales variables in a data.frame (using 
-\link{scale}) depending on the levels of one or more other variables. By 
-default, variables are standardized (i.e., centered and scaled). A typical 
-application is the within-subject standardization of variables in a repeated 
+\code{scale_within} centers and/or scales variables in a data.frame (using
+\link{scale}) depending on the levels of one or more other variables. By
+default, variables are standardized (i.e., centered and scaled). A typical
+application is the within-subject standardization of variables in a repeated
 measures design.
 }
 \examples{
@@ -53,7 +53,7 @@ ChickWeight_scaled <-  scale_within(
 \seealso{
 \link{scale} for the R base scale function.
 
-   \link{mt_standardize} for standardizing measures in a mousetrap data object.
+\link{mt_standardize} for standardizing measures in a mousetrap data object.
 }
 \author{
 Pascal J. Kieslich

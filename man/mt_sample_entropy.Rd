@@ -44,15 +44,15 @@ progress.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}).
-  
-  If a data.frame with label specified in \code{save_as} (by default
-  "measures") already exists, the sample entropy values are added as
-  additional column.
-  
-  If not, an additional \link{data.frame} will be added.
-  
-  If a trajectory array was provided directly as \code{data}, only the 
-  data.frame will be returned.
+
+If a data.frame with label specified in \code{save_as} (by default
+"measures") already exists, the sample entropy values are added as
+additional column.
+
+If not, an additional \link{data.frame} will be added.
+
+If a trajectory array was provided directly as \code{data}, only the
+data.frame will be returned.
 }
 \description{
 Calculate sample entropy for each trajectory as a measure of the complexity
@@ -60,22 +60,22 @@ of movements along one specific dimension.
 }
 \details{
 \code{mt_sample_entropy} calculates the sample entropy for each trajectory as
-a measure of its complexity. Hehman et al (2015) provide details on how 
-sample entropy can be calculated and applied in mouse-tracking (following 
+a measure of its complexity. Hehman et al (2015) provide details on how
+sample entropy can be calculated and applied in mouse-tracking (following
 Dale et al., 2007). They apply the sample entropy measure to the
-differences between adjacent x-positions 
-(which is also the default here, as in a standard mouse-tracking task with 
+differences between adjacent x-positions
+(which is also the default here, as in a standard mouse-tracking task with
 buttons located in the top-left and right corners mostly the movements in the
-horizontal direction are of interest). Besides, they recommend using the 
+horizontal direction are of interest). Besides, they recommend using the
 time-normalized trajectories so all trajectories have the same length.
 
-Sample entropy is computed by comparing windows of a fixed size (specified 
-using \code{m}) across all recorded positions. Sample entropy is the 
-negative natural logarithm of the conditional probability that this window 
-remains similar across the trial (Hehman et al., 2015). A window is 
-considered to be similar to another if their distance is smaller than a 
-specified tolerance value (which can be specified using \code{r}). Hehman et 
-al. (2015) use a tolerance value of 0.2 * standard deviation of all 
+Sample entropy is computed by comparing windows of a fixed size (specified
+using \code{m}) across all recorded positions. Sample entropy is the
+negative natural logarithm of the conditional probability that this window
+remains similar across the trial (Hehman et al., 2015). A window is
+considered to be similar to another if their distance is smaller than a
+specified tolerance value (which can be specified using \code{r}). Hehman et
+al. (2015) use a tolerance value of 0.2 * standard deviation of all
 differences between adjacent x-positions in the dataset (which is the default
 implemented here).
 }
@@ -93,8 +93,8 @@ mt_example <- mt_sample_entropy(mt_example,
 }
 \references{
 Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor
-  responses in the time course of categorizing atypical exemplars.
-  \emph{Memory & Cognition, 35}(1), 15-28.
+responses in the time course of categorizing atypical exemplars.
+\emph{Memory & Cognition, 35}(1), 15-28.
 
 Hehman, E., Stolier, R. M., & Freeman, J. B. (2015). Advanced mouse-tracking
 analytic techniques for enhancing psychological science. \emph{Group

@@ -20,27 +20,27 @@ array can be provided directly (in this case \code{use} will be ignored).}
 \item{use}{a character string specifying which trajectory data should be
 used.}
 
-\item{dimensions}{a character string specifying which trajectory variables 
-should be used. Can be of length 2 or 3 for two-dimensional or 
+\item{dimensions}{a character string specifying which trajectory variables
+should be used. Can be of length 2 or 3 for two-dimensional or
 three-dimensional data.}
 
 \item{save_as}{a character string specifying where the resulting trajectory
 data should be stored.}
 
-\item{n_points}{an integer or vector of integers specifying the number of 
-points used to represent the spatially rescaled trajectories. If a single 
-integer is provided, the number of points will be constant across 
+\item{n_points}{an integer or vector of integers specifying the number of
+points used to represent the spatially rescaled trajectories. If a single
+integer is provided, the number of points will be constant across
 trajectories. Alternatively, a vector of integers can provided that specify
 the number of points for each trajectory individually.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) with an additional
-  array (by default called \code{ln_trajectories}) containing the length
-  normalized trajectories. If a trajectory array was provided directly as
-  \code{data}, only the length normalized trajectories will be returned.
+array (by default called \code{ln_trajectories}) containing the length
+normalized trajectories. If a trajectory array was provided directly as
+\code{data}, only the length normalized trajectories will be returned.
 }
 \description{
-Re-represent each trajectory spatially using a constant number of points so 
+Re-represent each trajectory spatially using a constant number of points so
 that adjacent points on the trajectory become equidistant to each other.
 }
 \details{

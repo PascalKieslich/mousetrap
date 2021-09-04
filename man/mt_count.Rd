@@ -24,13 +24,13 @@ dimensions are specified, the number of complete observations are reported.}
 \value{
 A mousetrap data object (see \link{mt_example}).
 
-  If a data.frame with label specified in \code{save_as} (by default 
-  "measures") already exists, the number of observations (called \code{nobs})
-  are added as additional column. If not, an additional \link{data.frame}
-  will be added.
+If a data.frame with label specified in \code{save_as} (by default
+"measures") already exists, the number of observations (called \code{nobs})
+are added as additional column. If not, an additional \link{data.frame}
+will be added.
 
-  If a trajectory array was provided directly as \code{data}, only a named
-  character vector will be returned.
+If a trajectory array was provided directly as \code{data}, only a named
+character vector will be returned.
 }
 \description{
 Count number of observations per trial for a specified dimension (or several)

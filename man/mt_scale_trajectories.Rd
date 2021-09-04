@@ -27,7 +27,7 @@ used.}
 \item{save_as}{a character string specifying where the resulting trajectory
 data should be stored.}
 
-\item{var_names}{character vector giving the labels of the to be 
+\item{var_names}{character vector giving the labels of the to be
 standardized variables.}
 
 \item{center}{logical specifying whether variables should be centered (i.e.,
@@ -39,12 +39,12 @@ logical, \code{scale = TRUE} normalizes the trajectory variable to sd = 1,
 whereas \code{scale = FALSE} leaves the variable on its original scale. When
 numeric, the trajectory variables are scaled by (i.e., divided by) the
 specific value in scale. Can also be a numeric vector, in which case the
-values of \code{scale} are mapped to the variables specified in 
+values of \code{scale} are mapped to the variables specified in
 \code{var_names}.}
 
 \item{within_trajectory}{logical specifying whether trajectory variables
 should be scaled within or across trajectories. If \code{within_trajectory
-== TRUE}, scaling trajectories to mean = 0 and sd = 1 means that every to
+  == TRUE}, scaling trajectories to mean = 0 and sd = 1 means that every to
 be standardized trajectory variable will have mean = 0 and sd = 1. If
 \code{within_trajectory == FALSE} (the default), mean = 0 and sd = 1 are
 only true in the aggregate (i.e., across all trajectories). Can be a
@@ -60,10 +60,10 @@ a numeric matrix of same size with transformed values. If \code{NULL} the
 original values are passed on to standardization.}
 }
 \value{
-A mousetrap data object (see \link{mt_example}) with an additional 
-  variable containing the standardized trajectory variable added to the 
-  trajectory array). If the trajectory array was provided directly as 
-  \code{data}, only the trajectory array will be returned.
+A mousetrap data object (see \link{mt_example}) with an additional
+variable containing the standardized trajectory variable added to the
+trajectory array). If the trajectory array was provided directly as
+\code{data}, only the trajectory array will be returned.
 }
 \description{
 \code{mt_scale_trajectories} centers and / or standardizes selected

@@ -83,13 +83,13 @@ make the plotted lines (and points) semitransparent.}
 \item{size}{an optional numeric value that can be used to vary the width of
 the plotted trajectory lines.}
 
-\item{facet_row}{an optional character string specifying a variable in 
+\item{facet_row}{an optional character string specifying a variable in
 \code{data[[use2]]} that should be used for (row-wise) faceting.}
 
-\item{facet_col}{an optional character string specifying a variable in 
+\item{facet_col}{an optional character string specifying a variable in
 \code{data[[use2]]} that should be used for (column-wise) faceting.}
 
-\item{wrap_var}{an optional character string specifying variable(s) in 
+\item{wrap_var}{an optional character string specifying variable(s) in
 \code{data[[use2]]} that should be used for wrapping.}
 
 \item{wrap_ncol}{an optional integer specifying the number of columns if
@@ -229,14 +229,14 @@ mt_plot(KH2017, use="tn_trajectories", color="Condition", alpha=.05) +
 
 }
 \seealso{
-\link{mt_plot_add_rect} for adding rectangles representing the 
-  response buttons to the plot.
+\link{mt_plot_add_rect} for adding rectangles representing the
+response buttons to the plot.
 
-  \link{mt_plot_riverbed} for plotting the relative frequency of a selected 
-  variable across time.
+\link{mt_plot_riverbed} for plotting the relative frequency of a selected
+variable across time.
 
-  \link{mt_plot_per_trajectory} for individually plotting all trajectories as
-  individual pdf files.
+\link{mt_plot_per_trajectory} for individually plotting all trajectories as
+individual pdf files.
 }
 \author{
 Pascal J. Kieslich

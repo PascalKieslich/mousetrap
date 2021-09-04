@@ -27,7 +27,7 @@ used.}
 data should be stored.}
 
 \item{dimensions}{a character vector specifying the two dimensions in the
-trajectory array that contain the mouse positions. By default 
+trajectory array that contain the mouse positions. By default
 (\code{c("xpos","ypos")}), the x- and y-positions are used.}
 
 \item{start_ideal}{an optional vector specifying the start position (see
@@ -38,20 +38,20 @@ the idealized trajectory (instead of the actual starting point).}
 Example). If specified, this position will be used as the end point of the
 idealized trajectory (instead of the actual end point).}
 
-\item{prefix}{an optional character string that is added as a prefix to the 
+\item{prefix}{an optional character string that is added as a prefix to the
 to be created new trajectory dimensions.}
 
 \item{verbose}{logical indicating whether function should report its
 progress.}
 }
 \value{
-A mousetrap data object (see \link{mt_example}) where the positions 
-  of the idealized trajectory (by default called \code{xpos_ideal} and 
-  \code{ypos_ideal}) and the perpendicular deviations of the actual 
-  trajectory from the idealized trajectory (by default called 
-  \code{dev_ideal}) have been added as additional variables to the trajectory
-  array. If the trajectory array was provided directly as \code{data}, only 
-  the trajectory array will be returned.
+A mousetrap data object (see \link{mt_example}) where the positions
+of the idealized trajectory (by default called \code{xpos_ideal} and
+\code{ypos_ideal}) and the perpendicular deviations of the actual
+trajectory from the idealized trajectory (by default called
+\code{dev_ideal}) have been added as additional variables to the trajectory
+array. If the trajectory array was provided directly as \code{data}, only
+the trajectory array will be returned.
 }
 \description{
 Calculate the idealized trajectory and the perpendicular deviations of the
@@ -59,16 +59,16 @@ actual trajectory from it for each logged position.
 }
 \details{
 The idealized trajectory is defined as the straight line connecting the start
-and end point of the actual trajectory (e.g., Freeman & Ambady, 2010). The 
-deviation for each position is calculated as the perpendicular deviation of 
+and end point of the actual trajectory (e.g., Freeman & Ambady, 2010). The
+deviation for each position is calculated as the perpendicular deviation of
 the actual trajectory from the idealized trajectory.
 
-If a deviation occurs above the direct path, this is denoted by a positive 
-value. If it occurs below the direct path, this is denoted by a negative 
-value. This assumes that the complete movement in the trial was from bottom 
+If a deviation occurs above the direct path, this is denoted by a positive
+value. If it occurs below the direct path, this is denoted by a negative
+value. This assumes that the complete movement in the trial was from bottom
 to top (i.e., the end point has a higher y-position than the start points). In
-case the movement was from top to bottom, \code{mt_deviations} 
-automatically flips the signs. Note that the second dimension specified in 
+case the movement was from top to bottom, \code{mt_deviations}
+automatically flips the signs. Note that the second dimension specified in
 \code{dimensions} is used for determining all this.
 }
 \examples{
@@ -84,12 +84,12 @@ mt_example <- mt_deviations(mt_example,
 }
 \references{
 Freeman, J. B., & Ambady, N. (2010). MouseTracker: Software for
-  studying real-time mental processing using a computer mouse-tracking
-  method. \emph{Behavior Research Methods, 42}(1), 226-241.
+studying real-time mental processing using a computer mouse-tracking
+method. \emph{Behavior Research Methods, 42}(1), 226-241.
 }
 \seealso{
 \link{mt_measures} for calculating per-trial
-  mouse-tracking measures.
+mouse-tracking measures.
 }
 \author{
 Pascal J. Kieslich

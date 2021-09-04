@@ -36,11 +36,11 @@ trials.}
 progress.}
 }
 \value{
-A mousetrap data object (see \link{mt_example}) with aligned 
-  trajectories. All other trajectory dimensions not specified in
-  \code{dimensions} (e.g., timestamps) will be kept as is in the resulting
-  trajectory array. If the trajectory array was provided directly as
-  \code{data}, only the trajectory array will be returned.
+A mousetrap data object (see \link{mt_example}) with aligned
+trajectories. All other trajectory dimensions not specified in
+\code{dimensions} (e.g., timestamps) will be kept as is in the resulting
+trajectory array. If the trajectory array was provided directly as
+\code{data}, only the trajectory array will be returned.
 }
 \description{
 Adjust trajectories so that all trajectories have the same start position.
@@ -64,10 +64,10 @@ mt_example <- mt_align_start(mt_example,
 }
 \seealso{
 \link{mt_align_start_end}  for aligning the start and end position
-  of trajectories.
+of trajectories.
 
-  \link{mt_align} as a general purpose function for aligning and rescaling 
-  trajectories.
+\link{mt_align} as a general purpose function for aligning and rescaling
+trajectories.
 
 \link{mt_remap_symmetric} for remapping trajectories.
 }

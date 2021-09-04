@@ -39,9 +39,9 @@ progress.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) from which the
-  initial phase without mouse movement was removed. If the trajectory array
-  was provided directly as \code{data}, only the trajectory array will be
-  returned.
+initial phase without mouse movement was removed. If the trajectory array
+was provided directly as \code{data}, only the trajectory array will be
+returned.
 }
 \description{
 Exclude the initial phase in a trial where the mouse was not moved. The
