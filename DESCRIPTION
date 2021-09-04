@@ -1,6 +1,6 @@
 Package: mousetrap
 Type: Package
-Version: 3.2.0
+Version: 3.2.0.9000
 Date: 2021-06-05
 Title: Process and Analyze Mouse-Tracking Data
 Description: Mouse-tracking, the analysis of mouse movements in computerized
@@ -49,7 +49,8 @@ Imports:
     fastcluster,
     parallel,
     fields,
-    rlang
+    rlang,
+    lifecycle
 Suggests:
     readbulk,
     testthat
@@ -57,3 +58,4 @@ LinkingTo: Rcpp
 Encoding: UTF-8
 LazyData: TRUE
 RoxygenNote: 7.1.1
+Roxygen: list(markdown = TRUE)
