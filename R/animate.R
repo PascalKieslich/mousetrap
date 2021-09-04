@@ -1,8 +1,12 @@
 #' Create gif trajectory animation.
 #' 
+#' @description 
+#' `r lifecycle::badge("experimental")`
+#' 
 #' \code{mt_animate} animates trajectories using the animation package. Note
 #' that this function has beta status.
 #' 
+#' @details 
 #' \code{mt_animate} produces a .gif file showing a continuous stream of 
 #' animated trajectories. The function first produces a series of \emph{.png} 
 #' images, which then are combined into a \emph{.gif} animation using 
