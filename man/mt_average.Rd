@@ -13,8 +13,7 @@ mt_average(
   intervals = NULL,
   interval_size = 100,
   max_interval = NULL,
-  verbose = FALSE,
-  dimension = NULL
+  verbose = FALSE
 )
 }
 \arguments{
@@ -51,8 +50,6 @@ If unspecified (the default), all values will be included.}
 
 \item{verbose}{logical indicating whether function should report its
 progress.}
-
-\item{dimension}{Deprecated. Please use \code{av_dimension} instead.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) with an additional

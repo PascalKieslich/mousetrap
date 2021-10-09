@@ -745,7 +745,6 @@ mt_resample <- function(data,
 #'   of the \code{interval_size}). If specified, only values will be used for
 #'   averaging where the dimension values are smaller than \code{max_interval}.
 #'   If unspecified (the default), all values will be included.
-#' @param dimension Deprecated. Please use \code{av_dimension} instead.
 #'
 #' @return A mousetrap data object (see \link{mt_example}) with an additional
 #'   array (by default called \code{av_trajectories}) that contains the average
@@ -788,18 +787,8 @@ mt_average <- function(data,
   use="trajectories", save_as="av_trajectories",
   dimensions="all", av_dimension="timestamps",
   intervals=NULL, interval_size=100, max_interval=NULL,
-  verbose=FALSE,
-  dimension=NULL) {
+  verbose=FALSE) {
   
-  if (is.null(dimension) == FALSE) {
-    warning(
-      "The argument dimension is deprecated. ",
-      "Please use av_dimension instead.",
-      call.=FALSE
-    )
-    av_dimension <- dimension
-  }
-
   trajectories <- extract_data(data=data,use=use)
 
   if (!av_dimension %in% dimnames(trajectories)[[3]]) {
