@@ -68,13 +68,13 @@ mt_time_normalize <- function(data,
                               nsteps=101,
                               verbose=FALSE) {
   
+  # Preparation
+  trajectories <- extract_data(data=data,use=use)
+  
   if (length(dimensions) == 1 & dimensions[[1]] == "all") {
     dimensions <- dimnames(trajectories)[[3]]
     dimensions <- dimensions[dimensions!=timestamps]
   }
-
-  # Preparation
-  trajectories <- extract_data(data=data,use=use)
 
   # Create empty array for output
   tn_trajectories <- array(
@@ -601,14 +601,14 @@ mt_resample <- function(data,
   constant_interpolation = NULL,
   verbose=FALSE) {
   
+  # Preparation
+  trajectories <- extract_data(data=data, use=use)
+
   if (length(dimensions) == 1 & dimensions[[1]] == "all") {
     dimensions <- dimnames(trajectories)[[3]]
     dimensions <- dimensions[dimensions != timestamps]
   }
-
-  # Preparation
-  trajectories <- extract_data(data=data, use=use)
-
+  
   # Calculate the number of steps after resampling
   max_steps <- ceiling(
     max(trajectories[,,timestamps], na.rm=TRUE) / step_size
