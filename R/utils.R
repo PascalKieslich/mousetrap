@@ -58,6 +58,34 @@ extract_data <- function(data, use) {
 
 }
 
+
+# Function for extracting dimensions from trajectory array
+# that also handles edge case of trajectory array with single trajectory
+extract_dimensions <- function(trajectories, dimensions){
+  
+  trajectories_dim <- dim(trajectories)
+  
+  # Standard case (no modification required)
+  if(trajectories_dim[1] != 1){
+    return(trajectories[,,dimensions])
+    
+  # Edge case of single trajectory
+  } else{
+    
+    # Use drop argument to prevent dropping of dimensions
+    trajectories <- trajectories[,,dimensions, drop = FALSE]
+    
+    # In case only a single dimension is extracted,
+    # drop third dimension from trajectory array
+    if(length(dimensions) == 1){
+      dim(trajectories) <- trajectories_dim[1:2]
+    }
+    
+    return(trajectories)
+  }
+}
+
+
 # Function to create results
 create_results <- function(data, results, use, save_as, ids=NULL, overwrite=TRUE) {
 
