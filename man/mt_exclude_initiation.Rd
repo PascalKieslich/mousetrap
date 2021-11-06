@@ -71,6 +71,9 @@ mt_example <- mt_exclude_initiation(mt_example,
 }
 \seealso{
 \link{mt_measures} for calculating the initiation time.
+
+\link{mt_exclude_finish} for removing a potential phase without mouse
+movement at the end of the trial.
 }
 \author{
 Pascal J. Kieslich

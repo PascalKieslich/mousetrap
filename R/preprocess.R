@@ -261,6 +261,9 @@ mt_remap_symmetric <- function(
 #'   returned.
 #'
 #' @seealso \link{mt_measures} for calculating the initiation time.
+#' 
+#' \link{mt_exclude_finish} for removing a potential phase without mouse
+#' movement at the end of the trial.
 #'
 #' @examples
 #' mt_example <- mt_exclude_initiation(mt_example,
@@ -329,6 +332,96 @@ mt_exclude_initiation <- function(data,
     trajectories[,,timestamps] <- trajectories[, , timestamps] - trajectories[, 1, timestamps]
   }
 
+  return(create_results(data=data, results=trajectories, use=use, save_as=save_as))
+}
+
+
+#' Exclude phase without mouse movement at end of trial.
+#'
+#' Exclude a potential phase at the end of a trial where the mouse was not moved. The
+#' corresponding samples (x- and y-positions and timestamps) in the trajectory
+#' data will be removed.
+#'
+#' \code{mt_exclude_finish} removes all samples (except the first) at the end of
+#' the trial during which the mouse was not moved compared to its final
+#' position. It returns only x- and y-positions as well as timestamps.
+#'
+#' Please note that this operation may result in changes in several
+#' mouse-tracking measures, for example, the response time (RT).
+#'
+#' @inheritParams mt_time_normalize
+#' @param dimensions a character vector specifying the dimensions in the
+#'   trajectory array that contain the mouse positions.
+#'
+#' @return A mousetrap data object (see \link{mt_example}) from which a
+#'   potential phase without mouse movement at the end of the trial was removed.
+#'   If the trajectory array was provided directly as \code{data}, only the
+#'   trajectory array will be returned.
+#'
+#' @seealso \link{mt_exclude_initiation} for removing a potential initial phase
+#'   without mouse movement.
+#'
+#' @examples
+#' mt_example <- mt_exclude_finish(mt_example,
+#'   save_as="mod_trajectories")
+#'
+#' @author
+#' Pascal J. Kieslich
+#' 
+#' Dirk U. Wulff
+#' 
+#' @export
+mt_exclude_finish <- function(data,
+  use="trajectories", save_as=use,
+  dimensions=c("xpos","ypos"), timestamps="timestamps",
+  verbose=FALSE) {
+  
+  # Gather necessary data
+  trajectories <- extract_data(data=data, use=use)
+  
+  # Only keep relevant dimensions
+  trajectories <- trajectories[,,c(timestamps, dimensions),drop=FALSE]
+  
+  # Calculate number of logs
+  nlogs <- mt_count(trajectories, dimensions = timestamps)
+  
+  # Exclude phase where mouse stayed on start coordinates
+  for (i in 1:nrow(trajectories)) {
+    
+    # Extract trajectory data
+    current_trajectories <- trajectories[i, 1:nlogs[i],]
+    
+    # Iterate over trajectories
+    current_timestamps <- current_trajectories[,timestamps]
+    current_points <- current_trajectories[,dimensions,drop=FALSE]
+    
+    # Reversed vector indicating if mouse is at the end point
+    on_end <- cumsum(rev(rowSums(abs(t(t(current_points) - current_points[nlogs[i],]))))) == 0
+    
+    # Change last (i.e., first) element where mouse is still on end point so that this
+    # point is included in the calculations
+    on_end[sum(on_end, na.rm=TRUE)] <- FALSE
+    
+    # Exclude data without movements
+    current_timestamps <- current_timestamps[!rev(on_end)]
+    current_points <- current_points[!rev(on_end),]
+    
+    # Clear data in array
+    trajectories[i,,] <- NA
+    
+    # Add data to array
+    trajectories[i, 1:length(current_timestamps), timestamps] <- current_timestamps
+    trajectories[i, 1:length(current_timestamps), dimensions] <- current_points
+    
+    if (verbose) {
+      if (i %% 100 == 0) message(paste(i, "trials finished"))
+    }
+  }
+  
+  if (verbose) {
+    message(paste("all", i, "trials finished"))
+  }
+  
   return(create_results(data=data, results=trajectories, use=use, save_as=save_as))
 }
 
