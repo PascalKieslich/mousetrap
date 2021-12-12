@@ -511,7 +511,7 @@ mt_heatmap <- function(
   if(is_mousetrap_data(x) | is.array(x)){
     if(is_mousetrap_data(x)) x = extract_data(data = x, use = use)
     if(!all(dimensions %in% dimnames(x)[[3]])) stop('Not all dimensions found.')
-    heatmap = mt_heatmap_raw(x,use,dimensions,...)
+    heatmap = mt_heatmap_raw(x,use,dimensions,verbose=verbose,...)
     img = heatmap$img
     agg = heatmap$agg
     bg  = heatmap$colors[1]
