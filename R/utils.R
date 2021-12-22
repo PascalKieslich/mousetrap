@@ -1,6 +1,9 @@
 #' @importFrom magrittr %>%
 magrittr::`%>%`
 
+# Suppress R CMD check note
+#' @importFrom lifecycle deprecate_soft
+
 # Check that data is a mousetrap object
 is_mousetrap_data <- function(data){
 
