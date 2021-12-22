@@ -1,6 +1,6 @@
 ## Test environments
-* R 4.1.0 (stable) Windows 10
-* R devel (2021-06-03 r80452) Fedora Linux, clang, gfortran
+* R 4.1.2 (stable) Windows 10
+* R devel (2021-12-22 r81402) Fedora Linux, clang, gfortran
 
 ## R CMD check results
 There were no ERRORs, WARNINGs, or NOTEs.
