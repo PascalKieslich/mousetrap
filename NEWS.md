@@ -1,6 +1,7 @@
 # mousetrap 3.2.1
 
-## General changes to existing functions
+## General changes
+* After more than 5 years, `mousetrap` finally has a logo (thanks to Dirk Wulff)
 * Introduction of lifecycle badges for experimental and deprecated functions using the `lifecycle` package
 * `mt_space_normalize` function that was already deprecated and replaced with `mt_align_start_end` has been removed
 
