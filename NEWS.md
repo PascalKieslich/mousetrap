@@ -1,3 +1,24 @@
+# mousetrap 3.2.1
+
+## General changes to existing functions
+* Introduction of lifecycle badges for experimental and deprecated functions using the `lifecycle` package
+* `mt_space_normalize` function that was already deprecated and replaced with `mt_align_start_end` has been removed
+
+## New functions
+* `mt_exclude_finish`: Remove a potential phase without mouse movement at the end of the trial
+
+## Changes in specific functions
+* `mt_average`: Removed `dimension` argument which was already deprecated and replaced with `av_dimension`
+
+## Bugs fixed
+* `mt_time_normalize` and `mt_resample`: Setting the `dimensions` argument to `"all"` now works (up to now, the functions simply returned an error when setting `dimensions = "all"`)
+* `mt_angles`: Now also works for the edge case that the trajectory array only contains a single trajectory (closes #15)
+* `mt_heatmap`: Now passes on the `verbose` argument to the internally used `mt_heatmap_raw` function to prevent messages from `mt_heatmap_raw` if `verbose = FALSE`
+
+## Internal changes
+* Added internal `extract_dimensions` function for extracting dimensions from trajectory array that also handles edge case of trajectory array with single trajectory
+
+
 # mousetrap 3.2.0
 
 ## General changes to existing functions
