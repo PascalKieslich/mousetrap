@@ -64,6 +64,8 @@
 #'   \link{mt_exclude_initiation}	excludes the initial phase of a trial without 
 #'   mouse movement.
 #'
+#'   \link{mt_exclude_finish}	excludes a potential phase without mouse movement at the end of a trial.
+#'
 #'   \link{mt_time_normalize}	performs time-normalization using equidistant time
 #'   intervals, resulting in an identical number of samples for all 
 #'   trajectories.
