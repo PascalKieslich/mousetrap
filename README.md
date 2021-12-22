@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# mousetrap
+# mousetrap <img src="man/figures/mousetrap.png" align="right" alt="" width="120" />
 
 [![cran
 version](http://www.r-pkg.org/badges/version/mousetrap)](https://CRAN.R-project.org/package=mousetrap)
@@ -55,7 +55,7 @@ about using `mousetrap` can be asked in the
 ## Citation
 
 If you use the `mousetrap` package in your published research, we kindly
-ask that you cite it as follows:
+ask that you cite the associated book chapter:
 
 Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B., &
 Schulte-Mecklenbeck, M. (2019). Mouse-tracking: A practical guide to
