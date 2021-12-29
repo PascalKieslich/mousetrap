@@ -1,30 +1,21 @@
 citHeader("If you use mousetrap in your publications, please cite it as follows:")
 
 bibentry(
-  bibtype = "InCollection",
-  title = "Mouse-tracking: {A} practical guide to implementation and analysis",
+  bibtype = "Misc",
+  title = "Movement tracking of cognitive processes: {A} tutorial using mousetrap",
 	author = c(
+    person(c("Dirk","U."), "Wulff"),
     person(c("Pascal","J."), "Kieslich"),
     person("Felix", "Henninger"),
-    person(c("Dirk","U."), "Wulff"),
     person(c("Jonas","M. B."), "Haslbeck"),
     person("Michael", "Schulte-Mecklenbeck")
     ),
-  year = "2019",
-  pages = "111-130",
-  booktitle = "A {Handbook} of {Process} {Tracing} {Methods}",
-	address = "New York, NY",
-	publisher = "Routledge",
-  editor  = c(
-    person("Michael", "Schulte-Mecklenbeck"),
-    person("Anton","Kühberger"),
-    person(c("Joseph","G."),"Johnson")
-    ),
-  doi = "10.4324/9781315160559-9",
+  year = "2021",
+  publisher = "PsyArXiv",
+	url = "https://psyarxiv.com/v685r",
+	doi = "10.31234/osf.io/v685r",
   textVersion  =
-  paste("Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. (2019).",
-        "Mouse-tracking: A practical guide to implementation and analysis.",
-        "In M. Schulte-Mecklenbeck, A. Kühberger, & J. G. Johnson (Eds.),",
-        "A Handbook of Process Tracing Methods (pp. 111-130).",
-        "New York, NY: Routledge. https://doi.org/10.4324/9781315160559-9")
+  paste("Wulff, D. U., Kieslich, P. J., Henninger, F., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. (2021).",
+        "Movement tracking of cognitive processes: A tutorial using mousetrap.",
+        "PsyArXiv. https://doi.org/10.31234/osf.io/v685r")
 )

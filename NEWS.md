@@ -1,7 +1,10 @@
 # mousetrap 3.2.1
 
-## General changes
+## Announcements
+* A tutorial to movement tracking of cognitive processes with the `mousetrap` R package has been published as a preprint. Please cite it as follows when using mousetrap in your research: Wulff, D. U., Kieslich, P. J., Henninger, F., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. (2021). _Movement tracking of cognitive processes: A tutorial using mousetrap._ PsyArXiv. https://doi.org/10.31234/osf.io/v685r
 * After more than 5 years, `mousetrap` finally has a logo (thanks to Dirk Wulff)
+
+## General changes to existing functions
 * Introduction of lifecycle badges for experimental and deprecated functions using the `lifecycle` package
 * `mt_space_normalize` function that was already deprecated and replaced with `mt_align_start_end` has been removed
 
