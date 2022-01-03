@@ -103,7 +103,7 @@ Cluster estimation using \link[fastcluster]{hclust} relies on distances
 computed by \link{mt_distmat}.
 
 Mouse trajectories often occur in distinct, qualitative types (see Wulff et
-al., 2019; Wulff et al., 2021). Common trajectory types are linear
+al., 2019; Wulff et al., 2022). Common trajectory types are linear
 trajectories, mildly and strongly curved trajctories, and single and multiple
 change-of-mind trials (see also \link{mt_map}). \code{mt_cluster} can tease
 these types apart.
@@ -125,7 +125,7 @@ trajectories share the same direction, e.g., that all trajectories end in the
 top-left corner of the coordinate system (\link{mt_remap_symmetric} or
 \link{mt_align} can be used to achieve this). Furthermore, it is recommended
 to use length normalized trajectories (see \link{mt_length_normalize}; Wulff
-et al., 2019).
+et al., 2019, Wulff et al., 2021).
 }
 \examples{
 # Length normalize trajectories
@@ -143,10 +143,15 @@ mt_plot(KH2017,use="ln_trajectories",
 Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F.,
 & Schulte-Mecklenbeck, M. (2019). Mouse-tracking: Detecting types in
 movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G.
-Johnson (Eds.), \emph{A Handbook of Process Tracing Methods} (pp. 131-145). New York, NY:
-Routledge.
+Johnson (Eds.), \emph{A Handbook of Process Tracing Methods} (pp. 131-145).
+New York, NY: Routledge.
 
-Wulff, D. U., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. (2021).
+Wulff, D. U., Kieslich, P. J., Henninger, F., Haslbeck, J. M. B., &
+Schulte-Mecklenbeck, M. (2021). \emph{Movement tracking of cognitive
+processes: A tutorial using mousetrap.} PsyArXiv.
+\doi{10.31234/osf.io/v685r}
+
+Wulff, D. U., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. (2022).
 \emph{Measuring the (dis-)continuous mind: What movement trajectories
 reveal about cognition}. Manuscript in preparation.
 }

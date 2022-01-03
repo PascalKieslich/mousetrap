@@ -35,6 +35,8 @@
 #' Dirk U. Wulff
 #'
 #' Jonas M. B. Haslbeck
+#' 
+#' Pascal J. Kieslich
 #'
 #' @export
 mt_length_normalize <- function(
