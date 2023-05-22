@@ -1,6 +1,6 @@
 Package: mousetrap
 Type: Package
-Version: 3.2.1
+Version: 3.2.1.9000
 Date: 2022-01-03
 Title: Process and Analyze Mouse-Tracking Data
 Description: Mouse-tracking, the analysis of mouse movements in computerized
