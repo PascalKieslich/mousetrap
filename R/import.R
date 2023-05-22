@@ -731,10 +731,10 @@ mt_import_long <- function(raw_data,
   mt_id_label="mt_id", mt_seq_label="mt_seq",
   reset_timestamps=TRUE,
   verbose=TRUE) {
-
+  
   # Ensure that raw_data is a data.frame
   raw_data <- as.data.frame(raw_data)
-
+  
   # Extract values of mt_id variable (and convert them to character)
   ids <- as.character(raw_data[,mt_id_label[[1]]])
 
@@ -746,13 +746,14 @@ mt_import_long <- function(raw_data,
     }
   }
 
-  # Add mt_id column to raw_data
-  raw_data[,"mt_id"] <- ids
+  # Add mt_id column to raw_data 
+  # and temporarily convert to factor (to preserve original order)
+  raw_data[,"mt_id"] <- factor(ids, levels = unique(ids))
   mt_id <- "mt_id"
-
+  
   # Get order of ids (to preserve original order)
   ids <- unique(ids)
-
+  
   # Look for mt_seq variable (that indicates the order of the logs)
   if (is.null(mt_seq_label) | (mt_seq_label %in% colnames(raw_data) == FALSE)) {
     if (verbose) {
@@ -764,11 +765,11 @@ mt_import_long <- function(raw_data,
 
     # Sort dataset according to mt_id
     raw_data <- raw_data[order(raw_data[,"mt_id"]),]
-
+    
   } else {
     # Sort dataset according to mt_id and mt_seq
     raw_data <- raw_data[order(raw_data[,"mt_id"], raw_data[,mt_seq_label]),]
-
+    
     # Remove mt_seq_label
     raw_data <- raw_data[,colnames(raw_data)!=mt_seq_label]
   }
@@ -852,7 +853,10 @@ mt_import_long <- function(raw_data,
   raw_data <- as.data.frame(
     unique(raw_data[,!colnames(raw_data) %in% c(mt_include, "mt_seq")])
   )
-
+  
+  # Convert mt_id to character
+  raw_data[,"mt_id"] <- as.character(raw_data[,"mt_id"])
+  
   if (max(table(raw_data[,"mt_id"])) > 1) {
     # Issue warning if more than one line per mt_id remains
     warning(
