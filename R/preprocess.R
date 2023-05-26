@@ -1138,5 +1138,117 @@ mt_count <- function(data,
       data=data, results=data.frame(nobs), use=use, save_as=save_as,
       ids=rownames(trajectories), overwrite=FALSE))
   }
-  
+
+}
+
+
+
+#' Smoothing of mousetracking data.
+#'
+#' Smoothing of mousetracking data by weighted averaging using a
+#' windowing function. By default a gausswindow of length 10 is
+#' and width 2.5 is used.
+#'
+#' @inheritParams mt_time_normalize
+#' @param dimensions a character vector specifying the name of the dimension(s)
+#'   that should smoothed.
+#' @param window The windowing function to be used. Should be a function taking
+#'   a length parameter and returning a single numeric vector. The entries of
+#'   the returned vector will be (after possible normalization) used as weights
+#'   for the weighted averaging. By default a non-causal (see caveat below)
+#'   Gausswindow is used for filtering.
+#' @param l length of the averaging window.
+#' @param normalize Whether the window should be normalized, i.e. if the weights
+#'   should add up to one.
+#' @param symmetric Should the window be made symmetric by using a zero-phase
+#'   forward-backward filtering algorithm? This is deactivated by default, to
+#'   avoid unexpected non-causal smoothing. Setting this parameter will
+#'   also result in an increased window length.
+#' @param causal Force the filtering to be causal by setting all elements
+#'   \eqn{t>l/2} of the window to zero. Requires the window length to
+#'   be odd. Also, causal filtering cannot be use for symmetric windows.
+#' @param ... Additional parameters passed to windowing function.
+#' @return A mousetrap data object (see \link{mt_example}).
+#'
+#' @return A mousetrap data object (see \link{mt_example}) with an additional
+#'   array (by default called \code{trajectories_sm}) that contains the average
+#'   trajectory data per dimension interval. If a trajectory array was provided
+#'   directly as \code{data}, only the average trajectories will be returned.
+#'
+#'   If a trajectory array was provided directly as \code{data}, only a named
+#'   character vector will be returned.
+#'
+#'   CAVEAT: If the window contains non-zero elements at indices \eqn{t> l/2},
+#'     or if \code{symmetric=TRUE}, then the smoothing is non-causal. I.e.
+#'     elements of the trajectories at time \eqn{t} may contain information
+#'     about elements at times \eqn{t'>t}. This is also the case if the
+#'     default Gausswindow is used.
+#'
+#' @examples
+#' # smooth the example data
+#' mt_smooth(mt_example)
+#'
+#' # smooth the example data using a different length
+#' mt_smooth(mt_example, l=5)
+#'
+#' @author
+#' Tillmann Nett
+#'
+#' @export
+mt_smooth <- function(data, use="trajectories", save_as="trajectories_sm",
+                      dimensions=c("xpos","ypos"), window=gausswindow, l=10,
+                      symmetric=FALSE, normalize=TRUE, causal=FALSE, ...) {
+
+   # Sanity check of parameters
+   if(l<=1) {
+      stop("Length of window must be larger 1 (was", l, ")")
+   }
+   if(causal && symmetric) {
+      stop("Cannot use causal smoothing for symmetric windows.")
+   }
+   if(causal && (l%%2) != 1) {
+      stop("Causal smoothing requires an odd window length (was", l, ")")
+   }
+
+   # Extract trajectories
+   trajectories <- extract_data(data, use)
+
+   # Smoothing of a single track
+   smooth_track <- function(track) {
+      wdw <- window(l,...)
+      if(causal) {
+         wdw[seq_along(wdw)>l/2] <- 0
+      }
+      # Normalize according to L1 Norm
+      if(normalize) {
+         wdw <- wdw/sum(abs(wdw))
+      }
+      # We pad the track with the initial and end values
+      # so we can later retrieve the middle portion, which will contain
+      # the correct part
+      tr <- c(rep(track[1],l-1),track,rep(track[length(track)],l-1))
+      if(symmetric) {
+         # Apply forward-backward filtering to make the
+         # window symmetric. This removes any phase-lag in
+         # the windowing function
+
+         # We need to scale the window appropriately
+         l1n <- sqrt( sum(abs(wdw)) )
+         tr <- stats::convolve(rev(tr),wdw/l1n,type="filter")
+         tr <- stats::convolve(rev(tr),wdw/l1n,type="filter")
+      }
+      else {
+         # Apply unidirectional filter and then select middle part
+         tr <- stats::convolve(tr,wdw,type="filter")
+         tr <- tr[ceiling(l/2):ceiling(length(tr)-l/2)]
+      }
+      tr
+   }
+
+   # Apply smoothing to all dimensions
+   for(d in dimensions) {
+      trajectories[,,d] <- t(apply(trajectories[,,d],1,smooth_track))
+   }
+   create_results(data = data, results = trajectories,
+                  use = use, save_as = save_as)
 }
