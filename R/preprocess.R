@@ -1142,6 +1142,42 @@ mt_count <- function(data,
 }
 
 
+# Smoothing of a single track (internal helper function)
+#
+# Factored out here for simpler testing
+#
+# @author
+# Tillmann Nett
+smooth_track <- function(track, window, l, symmetric, normalize, causal,...) {
+   wdw <- window(l,...)
+   if(causal) {
+      wdw[seq_along(wdw)>(l/2+1)] <- 0
+   }
+   # Normalize according to L1 Norm
+   if(normalize) {
+      wdw <- wdw/sum(abs(wdw))
+   }
+   # We pad the track with the initial and end values
+   # so we can later retrieve the middle portion, which will contain
+   # the correct part
+   tr <- c(rep(track[1],l-1),track,rep(track[length(track)],l-1))
+   if(symmetric) {
+      # Apply forward-backward filtering to make the
+      # window symmetric. This removes any phase-lag in
+      # the windowing function
+
+      # We need to scale the window appropriately
+      l1n <- sqrt( sum(abs(wdw)) )
+      tr <- stats::convolve(rev(tr),wdw/l1n,type="filter")
+      tr <- stats::convolve(rev(tr),wdw/l1n,type="filter")
+   }
+   else {
+      # Apply unidirectional filter and then select middle part
+      tr <- stats::convolve(tr,wdw,type="filter")
+      tr <- tr[ceiling(l/2):ceiling(length(tr)-l/2)]
+   }
+   tr
+}
 
 #' Smoothing of mousetracking data.
 #'
@@ -1213,41 +1249,11 @@ mt_smooth <- function(data, use="trajectories", save_as="trajectories_sm",
    # Extract trajectories
    trajectories <- extract_data(data, use)
 
-   # Smoothing of a single track
-   smooth_track <- function(track) {
-      wdw <- window(l,...)
-      if(causal) {
-         wdw[seq_along(wdw)>l/2] <- 0
-      }
-      # Normalize according to L1 Norm
-      if(normalize) {
-         wdw <- wdw/sum(abs(wdw))
-      }
-      # We pad the track with the initial and end values
-      # so we can later retrieve the middle portion, which will contain
-      # the correct part
-      tr <- c(rep(track[1],l-1),track,rep(track[length(track)],l-1))
-      if(symmetric) {
-         # Apply forward-backward filtering to make the
-         # window symmetric. This removes any phase-lag in
-         # the windowing function
-
-         # We need to scale the window appropriately
-         l1n <- sqrt( sum(abs(wdw)) )
-         tr <- stats::convolve(rev(tr),wdw/l1n,type="filter")
-         tr <- stats::convolve(rev(tr),wdw/l1n,type="filter")
-      }
-      else {
-         # Apply unidirectional filter and then select middle part
-         tr <- stats::convolve(tr,wdw,type="filter")
-         tr <- tr[ceiling(l/2):ceiling(length(tr)-l/2)]
-      }
-      tr
-   }
-
    # Apply smoothing to all dimensions
    for(d in dimensions) {
-      trajectories[,,d] <- t(apply(trajectories[,,d],1,smooth_track))
+      trajectories[,,d] <- t(apply(trajectories[,,d],1,
+                                   smooth_track, window, l, symmetric,
+                                   normalize, causal, ...))
    }
    create_results(data = data, results = trajectories,
                   use = use, save_as = save_as)
