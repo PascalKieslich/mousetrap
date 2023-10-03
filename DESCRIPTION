@@ -1,7 +1,6 @@
 Package: mousetrap
 Type: Package
 Version: 3.2.1.9000
-Date: 2022-01-03
 Title: Process and Analyze Mouse-Tracking Data
 Description: Mouse-tracking, the analysis of mouse movements in computerized
     experiments, is a method that is becoming increasingly popular in the
@@ -57,5 +56,5 @@ Suggests:
 LinkingTo: Rcpp
 Encoding: UTF-8
 LazyData: TRUE
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE)

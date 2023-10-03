@@ -229,8 +229,9 @@
 #'   x="xpos", y="ypos", color="Condition"
 #' )
 #' }
-#' 
-#' @docType package
-#' @name mousetrap
+#' @keywords internal
+"_PACKAGE"
+
+## usethis namespace: start
+## usethis namespace: end
 NULL
-#> NULL
