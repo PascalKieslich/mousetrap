@@ -19,7 +19,7 @@ change-of-mind trajectory.
 \details{
 Mouse- and hand-trajectories often occur in types. In such cases, movement
 trajectory data should be analyzed in terms of discrete type assignments
-(Wulff et al., 2021). To this end \link{mt_map} can be used to map mouse- or
+(Wulff et al., 2023). To this end \link{mt_map} can be used to map mouse- or
 hand-trajectory to the closest of several predefined prototypes.
 \code{mt_prototypes} provides a core set of prototypes that has been shown to
 represent well a large fraction of empirical movement trajectories (Wulff et
@@ -30,7 +30,7 @@ extended using \link{mt_add_trajectory}.
 }
 \references{
 Wulff, D. U., Kieslich, P. J., Henninger, F., Haslbeck, J. M.
-B., & Schulte-Mecklenbeck, M. (2021). \emph{Movement tracking of cognitive
+B., & Schulte-Mecklenbeck, M. (2023). \emph{Movement tracking of psychological
 processes: A tutorial using mousetrap.} PsyArXiv.
 \doi{10.31234/osf.io/v685r}
 

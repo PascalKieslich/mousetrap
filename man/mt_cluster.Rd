@@ -125,7 +125,7 @@ trajectories share the same direction, e.g., that all trajectories end in the
 top-left corner of the coordinate system (\link{mt_remap_symmetric} or
 \link{mt_align} can be used to achieve this). Furthermore, it is recommended
 to use length normalized trajectories (see \link{mt_length_normalize}; Wulff
-et al., 2019, Wulff et al., 2021).
+et al., 2019, Wulff et al., 2023).
 }
 \examples{
 # Length normalize trajectories
@@ -147,7 +147,7 @@ Johnson (Eds.), \emph{A Handbook of Process Tracing Methods} (pp. 131-145).
 New York, NY: Routledge.
 
 Wulff, D. U., Kieslich, P. J., Henninger, F., Haslbeck, J. M. B., &
-Schulte-Mecklenbeck, M. (2021). \emph{Movement tracking of cognitive
+Schulte-Mecklenbeck, M. (2023). \emph{Movement tracking of psychological
 processes: A tutorial using mousetrap.} PsyArXiv.
 \doi{10.31234/osf.io/v685r}
 

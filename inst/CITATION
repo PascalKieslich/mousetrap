@@ -2,7 +2,7 @@ citHeader("If you use mousetrap in your publications, please cite it as follows:
 
 bibentry(
   bibtype = "Misc",
-  title = "Movement tracking of cognitive processes: {A} tutorial using mousetrap",
+  title = "Movement tracking of psychological processes: {A} tutorial using mousetrap",
 	author = c(
     person(c("Dirk","U."), "Wulff"),
     person(c("Pascal","J."), "Kieslich"),
@@ -10,12 +10,12 @@ bibentry(
     person(c("Jonas","M. B."), "Haslbeck"),
     person("Michael", "Schulte-Mecklenbeck")
     ),
-  year = "2021",
+  year = "2023",
   publisher = "PsyArXiv",
-	url = "https://psyarxiv.com/v685r",
+	url = "https://osf.io/preprints/psyarxiv/v685r",
 	doi = "10.31234/osf.io/v685r",
   textVersion  =
-  paste("Wulff, D. U., Kieslich, P. J., Henninger, F., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. (2021).",
-        "Movement tracking of cognitive processes: A tutorial using mousetrap.",
+  paste("Wulff, D. U.*, Kieslich, P. J.*, Henninger, F., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. (2023).",
+        "Movement tracking of psychological processes: A tutorial using mousetrap.",
         "PsyArXiv. https://doi.org/10.31234/osf.io/v685r")
 )

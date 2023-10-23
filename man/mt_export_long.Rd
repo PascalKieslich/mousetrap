@@ -62,11 +62,11 @@ the trajectory data before export. \code{mt_export_long} and
 }
 \section{Functions}{
 \itemize{
-\item \code{mt_export_long}: Export mouse-tracking data in long format
+\item \code{mt_export_long()}: Export mouse-tracking data in long format
 
-\item \code{mt_export_wide}: Export mouse-tracking data in wide format
+\item \code{mt_export_wide()}: Export mouse-tracking data in wide format
+
 }}
-
 \examples{
 # Export data in long format
 # (and include information about condition and subject_nr)

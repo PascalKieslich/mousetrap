@@ -55,8 +55,8 @@ Questions about using `mousetrap` can be asked in the
 If you use the `mousetrap` package in your published research, we kindly
 ask that you cite the associated preprint:
 
-Wulff, D. U., Kieslich, P. J., Henninger, F., Haslbeck, J. M. B., &
-Schulte-Mecklenbeck, M. (2021). *Movement tracking of cognitive
+Wulff, D. U.\*, Kieslich, P. J.\*, Henninger, F., Haslbeck, J. M. B., &
+Schulte-Mecklenbeck, M. (2023). *Movement tracking of psychological
 processes: A tutorial using mousetrap.* PsyArXiv.
 <https://doi.org/10.31234/osf.io/v685r>
 

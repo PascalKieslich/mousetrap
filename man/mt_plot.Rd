@@ -155,11 +155,11 @@ visualizing mouse trajectories. For additional flexibility, we recommend that
 }
 \section{Functions}{
 \itemize{
-\item \code{mt_plot}: Plot individual trajectory data
+\item \code{mt_plot()}: Plot individual trajectory data
 
-\item \code{mt_plot_aggregate}: Plot aggregated trajectory data
+\item \code{mt_plot_aggregate()}: Plot aggregated trajectory data
+
 }}
-
 \examples{
 ## Plot individual example trajectories
 
