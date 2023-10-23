@@ -34,7 +34,7 @@ navbar:
   type: default
   left:
   - text: Overview
-    href: reference/mousetrap.html
+    href: reference/mousetrap-package.html
   - text: Reference
     href: reference/index.html
   - text: News

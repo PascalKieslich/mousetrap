@@ -19,13 +19,13 @@ that this function has beta status."><!-- mathjax --><script src="https://cdnjs.
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
-  <a href="../reference/mousetrap.html">Overview</a>
+  <a href="../reference/mousetrap-package.html">Overview</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -60,33 +60,33 @@ that this function has beta status.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">mt_animate</span><span class="op">(</span>
-  <span class="va">data</span>,
-  use <span class="op">=</span> <span class="st">"trajectories"</span>,
-  dimensions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"xpos"</span>, <span class="st">"ypos"</span><span class="op">)</span>,
-  timestamps <span class="op">=</span> <span class="st">"timestamps"</span>,
-  filename <span class="op">=</span> <span class="st">"trajectory_animation.gif"</span>,
-  xres <span class="op">=</span> <span class="fl">1000</span>,
-  seconds <span class="op">=</span> <span class="fl">3</span>,
-  framerate <span class="op">=</span> <span class="fl">24</span>,
-  speed <span class="op">=</span> <span class="fl">0.5</span>,
-  density <span class="op">=</span> <span class="fl">3</span>,
-  jitter <span class="op">=</span> <span class="cn">TRUE</span>,
-  remove <span class="op">=</span> <span class="cn">FALSE</span>,
-  bg <span class="op">=</span> <span class="st">"black"</span>,
-  col <span class="op">=</span> <span class="st">"white"</span>,
-  lwd <span class="op">=</span> <span class="fl">1</span>,
-  loop <span class="op">=</span> <span class="cn">FALSE</span>,
-  bounds <span class="op">=</span> <span class="cn">NULL</span>,
-  norm <span class="op">=</span> <span class="cn">FALSE</span>,
-  upscale <span class="op">=</span> <span class="fl">1</span>,
-  decay <span class="op">=</span> <span class="fl">10</span>,
-  max_intensity <span class="op">=</span> <span class="fl">5</span>,
-  discard_images <span class="op">=</span> <span class="cn">TRUE</span>,
-  im_path <span class="op">=</span> <span class="cn">NULL</span>,
-  parallel <span class="op">=</span> <span class="cn">TRUE</span>,
-  verbose <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">mt_animate</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  use <span class="op">=</span> <span class="st">"trajectories"</span>,</span>
+<span>  dimensions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"xpos"</span>, <span class="st">"ypos"</span><span class="op">)</span>,</span>
+<span>  timestamps <span class="op">=</span> <span class="st">"timestamps"</span>,</span>
+<span>  filename <span class="op">=</span> <span class="st">"trajectory_animation.gif"</span>,</span>
+<span>  xres <span class="op">=</span> <span class="fl">1000</span>,</span>
+<span>  seconds <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  framerate <span class="op">=</span> <span class="fl">24</span>,</span>
+<span>  speed <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  density <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  jitter <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  remove <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  bg <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>  col <span class="op">=</span> <span class="st">"white"</span>,</span>
+<span>  lwd <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  loop <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  bounds <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  norm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  upscale <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  decay <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  max_intensity <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>  discard_images <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  im_path <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  parallel <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -95,78 +95,118 @@ that this function has beta status.</p>
 <dd><p>a mousetrap data object created using one of the mt_import
 functions (see <a href="mt_example.html">mt_example</a> for details). Alternatively, a trajectory
 array can be provided directly (in this case <code>use</code> will be ignored).</p></dd>
+
+
 <dt>use</dt>
 <dd><p>a character string specifying which trajectory data should be
 used.</p></dd>
+
+
 <dt>dimensions</dt>
 <dd><p>a character vector specifying the two dimensions in the
 trajectory array that contain the mouse positions. Usually (and by
 default), the first value in the vector corresponds to the x-positions
 (<code>xpos</code>) and the second to the y-positions (<code>ypos</code>).</p></dd>
+
+
 <dt>timestamps</dt>
 <dd><p>a character string specifying the trajectory dimension
 containing the timestamps. If <code>NULL</code> linearly increasing timestamps
 are assumed, producing a perfectly constant timestamp interval.</p></dd>
+
+
 <dt>filename</dt>
 <dd><p>character string specifying the path and filename of the
 resulting <em>.gif</em>. If the extension of <code>filename</code> is not
 <em>.gif</em>, <em>.gif</em> is added at the end. Must not contain spaces.</p></dd>
+
+
 <dt>xres</dt>
 <dd><p>numeric specifying the resolution of the <em>.gif</em> file.</p></dd>
+
+
 <dt>seconds</dt>
 <dd><p>numeric specifying the duration of the <em>.gif</em> file.</p></dd>
+
+
 <dt>framerate</dt>
 <dd><p>numeric specifying the framerate of the <em>.gif</em> file.
 Defaults to 24 implying smooth non-discrete frame transitions for the human
 eye.</p></dd>
+
+
 <dt>speed</dt>
 <dd><p>numeric specifying the speed of the trajectories with regard to
 their original velocity profile. I.e., a value of .5 shows trajectories in
 half of the original velocities, whereas a value of 2 shows trajectories in
 double of the original velocities.</p></dd>
+
+
 <dt>density</dt>
 <dd><p>integer specifying the number of trajectories to be added
 each frame. I.e., if <code>density = 10</code>, <code>seconds = 10</code>,
 <code>framerate = 24</code> and <code>speed = .5</code> then the animation will show 10
 x 10 x 24 x .5 = 1200 trajectories.</p></dd>
+
+
 <dt>jitter</dt>
 <dd><p>logical specifying whether the density should be jittered. If
 <code>TRUE</code>, <code>density</code> varies according to
 <a href="https://rdrr.io/r/stats/Geometric.html" class="external-link">rgeom</a> (<code>1/density</code>).</p></dd>
+
+
 <dt>remove</dt>
 <dd><p>logical specifying whether trajectories that reached their end
 points should be removed from the rest of the animation. Defaults to
 <code>FALSE</code> implying that all finished trajectories remain visible.</p></dd>
+
+
 <dt>bg</dt>
 <dd><p>character string specifying the background color.</p></dd>
+
+
 <dt>col</dt>
 <dd><p>character string specifying the foreground color, i.e., the color
 used to draw the trajectories.</p></dd>
+
+
 <dt>lwd</dt>
 <dd><p>numeric specifying the line width of the trajectories.</p></dd>
+
+
 <dt>loop</dt>
 <dd><p>logical specifying whether gif should be looped. If <code>FALSE</code>
 (the default), the last frame will remain visible after the animation is
 finished. If <code>TRUE</code>, the gif will infinitely repeat itself.</p></dd>
+
+
 <dt>bounds</dt>
 <dd><p>numeric vector specifying the xleft, xright, ybottom, and ytop
 limits of the animation canvas. Defaults to <code>NULL</code> in which case the
 animation canvas is set to include all existing trajectory points,
 irrespective of how extreme they may be.</p></dd>
+
+
 <dt>norm</dt>
 <dd><p>logical specifying whether the trajectories should be remapped to
 the <em>mt-space</em>. See <a href="mt_align.html">mt_align</a>. Note that aligning often requires
 that that all trajectories are flipped to one side first (see
 <a href="mt_remap_symmetric.html">mt_remap_symmetric</a>).</p></dd>
+
+
 <dt>upscale</dt>
 <dd><p>numeric specifying a scaling factor for the animation
 resolution. E.g, <code>upscale = 2</code> implies that the x-resolution in
 <em>.gif</em> file is <code>2*xres</code>.</p></dd>
+
+
 <dt>decay</dt>
 <dd><p>numeric defining a within-trajectory gradient of color intensity.
 Specifically, values larger than 1 will give more recent movements higher
 color intensities than movements that lie longer in the past, and vice
 versa.</p></dd>
+
+
 <dt>max_intensity</dt>
 <dd><p>numeric specifying the maximum color intensity. A value
 of, e.g., 5, implies that color intensity is limited to 5 overlapping
@@ -175,24 +215,33 @@ case have a smaller color intensity than a point at which 5 trajectories
 overlap, but there will be no difference between the latter and a point at
 which 6 trajectories overlap. If <code>decay</code> is unequal 1, this metric
 refers to the most intense color point within the trajectory.</p></dd>
+
+
 <dt>discard_images</dt>
 <dd><p>logical specifying whether the temporary folder
 containing the temporary <em>.png</em> images should be deleted. Defaults to
 TRUE.</p></dd>
+
+
 <dt>im_path</dt>
 <dd><p>character string specifying the location of ImageMagick's
 <em>convert</em> function. If <code>NULL</code>, the <em>convert</em> function is
 expected in <code>'/usr/local/bin/convert'</code>, the default location for Linux
 and OSX operating systems. The location has to be specified explicitly for
 Windows (see Details and Examples).</p></dd>
+
+
 <dt>parallel</dt>
 <dd><p>logical specifying whether the temporary <em>.png</em> images
 should be created using parallel processing (uses
 <a href="https://rdrr.io/r/parallel/clusterApply.html" class="external-link">clusterApplyLB</a>). Process will be run on the maximum
 number of available cores (as determined by <a href="https://rdrr.io/r/parallel/detectCores.html" class="external-link">detectCores</a>).</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>logical indicating whether function should report its
 progress.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -229,26 +278,26 @@ increase the <code>max_intensity</code>, respectively.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># Preprocess trajectory data</span></span>
-<span class="r-in"><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_align_start.html">mt_align_start</a></span><span class="op">(</span><span class="va">mt_example</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_remap_symmetric.html">mt_remap_symmetric</a></span><span class="op">(</span><span class="va">mt_example</span><span class="op">)</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Create animated trajectory gif</span></span>
-<span class="r-in"><span class="co"># (under Linux / OSX)</span></span>
-<span class="r-in"><span class="fu">mt_animate</span><span class="op">(</span><span class="va">mt_example</span>,filename <span class="op">=</span> <span class="st">"MyMovie.gif"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Increase duration and density while decreasing speed</span></span>
-<span class="r-in"><span class="fu">mt_animate</span><span class="op">(</span><span class="va">mt_example</span>, filename <span class="op">=</span> <span class="st">"MyMovie2.gif"</span>,</span>
-<span class="r-in">  seconds <span class="op">=</span> <span class="fl">10</span>, speed <span class="op">=</span> <span class="fl">.3</span>, density <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Create animated trajectory gif</span></span>
-<span class="r-in"><span class="co"># (under Windows - ImageMagick version specific example)</span></span>
-<span class="r-in"><span class="fu">mt_animate</span><span class="op">(</span><span class="va">mt_example</span>,filename <span class="op">=</span> <span class="st">"MyMovie.gif"</span>,</span>
-<span class="r-in">  im_path <span class="op">=</span> <span class="st">"C:/Program Files/ImageMagick-7.0.5-Q16/convert.exe"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># Preprocess trajectory data</span></span></span>
+<span class="r-in"><span><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_align_start.html">mt_align_start</a></span><span class="op">(</span><span class="va">mt_example</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_remap_symmetric.html">mt_remap_symmetric</a></span><span class="op">(</span><span class="va">mt_example</span><span class="op">)</span> </span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Create animated trajectory gif</span></span></span>
+<span class="r-in"><span><span class="co"># (under Linux / OSX)</span></span></span>
+<span class="r-in"><span><span class="fu">mt_animate</span><span class="op">(</span><span class="va">mt_example</span>,filename <span class="op">=</span> <span class="st">"MyMovie.gif"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Increase duration and density while decreasing speed</span></span></span>
+<span class="r-in"><span><span class="fu">mt_animate</span><span class="op">(</span><span class="va">mt_example</span>, filename <span class="op">=</span> <span class="st">"MyMovie2.gif"</span>,</span></span>
+<span class="r-in"><span>  seconds <span class="op">=</span> <span class="fl">10</span>, speed <span class="op">=</span> <span class="fl">.3</span>, density <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Create animated trajectory gif</span></span></span>
+<span class="r-in"><span><span class="co"># (under Windows - ImageMagick version specific example)</span></span></span>
+<span class="r-in"><span><span class="fu">mt_animate</span><span class="op">(</span><span class="va">mt_example</span>,filename <span class="op">=</span> <span class="st">"MyMovie.gif"</span>,</span></span>
+<span class="r-in"><span>  im_path <span class="op">=</span> <span class="st">"C:/Program Files/ImageMagick-7.0.5-Q16/convert.exe"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -263,7 +312,7 @@ increase the <code>max_intensity</code>, respectively.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

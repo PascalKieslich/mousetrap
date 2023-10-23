@@ -18,13 +18,13 @@ Pfister et al. (2013)."><!-- mathjax --><script src="https://cdnjs.cloudflare.co
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
-  <a href="../reference/mousetrap.html">Overview</a>
+  <a href="../reference/mousetrap-package.html">Overview</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -58,19 +58,24 @@ Pfister et al. (2013).</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">bimodality_coefficient</span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">bimodality_coefficient</span><span class="op">(</span><span class="va">x</span>, na.rm <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>x</dt>
 <dd><p>a numeric vector.</p></dd>
+
+
 <dt>na.rm</dt>
 <dd><p>logical specifying whether missing values should be removed.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A numeric value.</p>
+    
+
+<p>A numeric value.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -86,7 +91,7 @@ Pfister et al. (2013).</p>
     <p>Pfister, R., Schwarz, K. A., Janczyk, M., Dale, R., &amp; Freeman, J. B. (2013).
 Good things peak in pairs: A note on the bimodality coefficient.
 <em>Frontiers in Psychology, 4</em>, 700.
-doi: <a href="https://doi.org/10.3389/fpsyg.2013.00700" class="external-link">10.3389/fpsyg.2013.00700</a></p>
+<a href="https://doi.org/10.3389/fpsyg.2013.00700" class="external-link">doi:10.3389/fpsyg.2013.00700</a></p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -102,13 +107,13 @@ a mousetrap data object.</p></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">pfister_data_a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">11</span>, times<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">10</span>,<span class="fl">17</span>,<span class="fl">20</span>,<span class="fl">17</span>,<span class="fl">10</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">bimodality_coefficient</span><span class="op">(</span><span class="va">pfister_data_a</span><span class="op">)</span> <span class="co">#.34</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">pfister_data_a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">11</span>, times<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">10</span>,<span class="fl">17</span>,<span class="fl">20</span>,<span class="fl">17</span>,<span class="fl">10</span>,<span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">bimodality_coefficient</span><span class="op">(</span><span class="va">pfister_data_a</span><span class="op">)</span> <span class="co">#.34</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.3360581</span>
-<span class="r-in"><span class="va">pfister_data_b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">11</span>, times<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">26</span>,<span class="fl">14</span>,<span class="fl">6</span>,<span class="fl">2</span>,<span class="fl">0</span>,<span class="fl">2</span>,<span class="fl">6</span>,<span class="fl">14</span>,<span class="fl">26</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">bimodality_coefficient</span><span class="op">(</span><span class="va">pfister_data_b</span><span class="op">)</span> <span class="co">#.79</span></span>
+<span class="r-in"><span><span class="va">pfister_data_b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">11</span>, times<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">26</span>,<span class="fl">14</span>,<span class="fl">6</span>,<span class="fl">2</span>,<span class="fl">0</span>,<span class="fl">2</span>,<span class="fl">6</span>,<span class="fl">14</span>,<span class="fl">26</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">bimodality_coefficient</span><span class="op">(</span><span class="va">pfister_data_b</span><span class="op">)</span> <span class="co">#.79</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7946887</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -123,7 +128,7 @@ a mousetrap data object.</p></div>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

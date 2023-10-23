@@ -21,13 +21,13 @@ are available.'><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/l
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
-  <a href="../reference/mousetrap.html">Overview</a>
+  <a href="../reference/mousetrap-package.html">Overview</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -64,23 +64,23 @@ are available.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">mt_reshape</span><span class="op">(</span>
-  <span class="va">data</span>,
-  use <span class="op">=</span> <span class="st">"trajectories"</span>,
-  use_variables <span class="op">=</span> <span class="cn">NULL</span>,
-  use2 <span class="op">=</span> <span class="st">"data"</span>,
-  use2_variables <span class="op">=</span> <span class="cn">NULL</span>,
-  subset <span class="op">=</span> <span class="cn">NULL</span>,
-  subject_id <span class="op">=</span> <span class="cn">NULL</span>,
-  aggregate <span class="op">=</span> <span class="cn">FALSE</span>,
-  aggregate_subjects_only <span class="op">=</span> <span class="cn">FALSE</span>,
-  .funs <span class="op">=</span> <span class="st">"mean"</span>,
-  trajectories_long <span class="op">=</span> <span class="cn">TRUE</span>,
-  convert_df <span class="op">=</span> <span class="cn">TRUE</span>,
-  mt_id <span class="op">=</span> <span class="st">"mt_id"</span>,
-  mt_seq <span class="op">=</span> <span class="st">"mt_seq"</span>,
-  aggregation_function <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">mt_reshape</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  use <span class="op">=</span> <span class="st">"trajectories"</span>,</span>
+<span>  use_variables <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  use2 <span class="op">=</span> <span class="st">"data"</span>,</span>
+<span>  use2_variables <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  subset <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  subject_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  aggregate <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  aggregate_subjects_only <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  .funs <span class="op">=</span> <span class="st">"mean"</span>,</span>
+<span>  trajectories_long <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  convert_df <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  mt_id <span class="op">=</span> <span class="st">"mt_id"</span>,</span>
+<span>  mt_seq <span class="op">=</span> <span class="st">"mt_seq"</span>,</span>
+<span>  aggregation_function <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -89,6 +89,8 @@ are available.</p>
 <dd><p>a mousetrap data object created using one of the mt_import
 functions (see <a href="mt_example.html">mt_example</a> for details). Alternatively, a trajectory
 array can be provided directly (in this case <code>use</code> will be ignored).</p></dd>
+
+
 <dt>use</dt>
 <dd><p>a character string specifying which data should be reshaped. The
 corresponding data are selected from data using <code>data[[use]]</code>.
@@ -96,45 +98,63 @@ Usually, this value corresponds to either "trajectories",
 "tn_trajectories", or "measures", depending on whether the analysis
 concerns raw trajectories, time-normalized trajectories, or derived
 measures.</p></dd>
+
+
 <dt>use_variables</dt>
 <dd><p>a character vector specifying which mouse-tracking
 variables should be reshaped. Corresponds to the column names in case a
 data.frame with mouse-tracking measures is provided. Corresponds to the
 labels of the array dimensions in case a trajectory array is provided. If
 unspecified, all variables will be reshaped.</p></dd>
+
+
 <dt>use2</dt>
 <dd><p>an optional character string specifying where the other trial
 data can be found. Defaults to "data" as <code>data[["data"]]</code> usually
 contains all non mouse-tracking trial data. Alternatively, a data.frame can
 be provided directly.</p></dd>
+
+
 <dt>use2_variables</dt>
 <dd><p>an optional character string (or vector) specifying the
 variables (in <code>data[[use2]]</code>) that should be merged with the data. If
 <code>aggregate==TRUE</code>, the trajectories / measures will be aggregated
 separately for each of the levels of these variables using
 <a href="https://dplyr.tidyverse.org/reference/summarise_all.html" class="external-link">summarize_at</a>.</p></dd>
+
+
 <dt>subset</dt>
 <dd><p>a logical expression (passed on to <a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a>) indicating
 elements or rows to keep. If specified, <code>data[[use2]]</code> will be
 subsetted using this expression, and, afterwards, <code>data[[use]]</code> will
 be filtered accordingly.</p></dd>
+
+
 <dt>subject_id</dt>
 <dd><p>an optional character string specifying which column
 contains the subject identifier in <code>data[[use2]]</code>. If specified and
 <code>aggregate==TRUE</code>, aggregation will be performed within subjects
 first.</p></dd>
+
+
 <dt>aggregate</dt>
 <dd><p>logical indicating whether data should be aggregated. If
 <code>use2_variables</code> are specified, aggregation will be performed
 separately for each of the levels of the <code>use2_variables</code>.</p></dd>
+
+
 <dt>aggregate_subjects_only</dt>
 <dd><p>logical indicating whether data should only be
 aggregated per subject (if <code>subject_id</code> is specified and
 <code>aggregate==TRUE</code>).</p></dd>
+
+
 <dt>.funs</dt>
 <dd><p>the aggregation function(s) passed on to
 <code><a href="https://dplyr.tidyverse.org/reference/summarise_all.html" class="external-link">summarize_at</a></code>. By default, the <code><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></code> is
 calculated.</p></dd>
+
+
 <dt>trajectories_long</dt>
 <dd><p>logical indicating if the reshaped trajectories
 should be returned in long or wide format. If <code>TRUE</code>, every recorded
@@ -144,6 +164,8 @@ trajectory is saved in wide format and the respective positions are indexed
 by adding an integer to the corresponding label (e.g., <code>xpos_1</code>,
 <code>xpos_2</code>, ...). Only relevant if <code>data[[use]]</code> contains
 trajectories.</p></dd>
+
+
 <dt>convert_df</dt>
 <dd><p>logical indicating if the reshaped data should be converted
 to a <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></code> using <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></code>. This will
@@ -153,22 +175,31 @@ drop potentially existing additional classes (such as
 additional classes might - on rare occasions - cause problems with
 functions from other packages, the reshaped data are converted to "pure"
 data.frames by default.</p></dd>
+
+
 <dt>mt_id</dt>
 <dd><p>a character string specifying the name of the column that will
 contain the trial identifier in the reshaped data. The values for the trial
 identifier correspond to the <code>rownames</code> of <code>data[[use]]</code> and
 <code>data[[use2]]</code>.</p></dd>
+
+
 <dt>mt_seq</dt>
 <dd><p>a character string specifying the name of the column that will
 contain the integers indicating the order of the mouse positions per
 trajectory in the reshaped data. Only relevant if <code>data[[use]]</code>
 contains trajectories and <code>trajectories_long==TRUE</code>.</p></dd>
+
+
 <dt>aggregation_function</dt>
 <dd><p>Deprecated. Please use <code>.funs</code> instead.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></code> containing the reshaped data.</p>
+    
+
+<p>A <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></code> containing the reshaped data.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -216,25 +247,25 @@ for aggregating data using the <code>dplyr</code> package.</p></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Time-normalize trajectories</span></span>
-<span class="r-in"><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_time_normalize.html">mt_time_normalize</a></span><span class="op">(</span><span class="va">mt_example</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Reshape time-normalized trajectories data into long format</span></span>
-<span class="r-in"><span class="co"># adding Condition variable</span></span>
-<span class="r-in"><span class="va">trajectories_long</span> <span class="op">&lt;-</span> <span class="fu">mt_reshape</span><span class="op">(</span><span class="va">mt_example</span>,</span>
-<span class="r-in"> use<span class="op">=</span><span class="st">"tn_trajectories"</span>,</span>
-<span class="r-in"> use2_variables<span class="op">=</span><span class="st">"Condition"</span></span>
-<span class="r-in"> <span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Reshape time-normalized trajectories data into wide format</span></span>
-<span class="r-in"><span class="co"># only keeping xpos and ypos</span></span>
-<span class="r-in"><span class="co"># and adding Condition variable</span></span>
-<span class="r-in"><span class="va">trajectories_wide</span> <span class="op">&lt;-</span> <span class="fu">mt_reshape</span><span class="op">(</span><span class="va">mt_example</span>,</span>
-<span class="r-in">  use<span class="op">=</span><span class="st">"tn_trajectories"</span>, use_variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"xpos"</span>,<span class="st">"ypos"</span><span class="op">)</span>,</span>
-<span class="r-in">  use2_variables <span class="op">=</span> <span class="st">"Condition"</span>,</span>
-<span class="r-in">  trajectories_long <span class="op">=</span> <span class="cn">FALSE</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Time-normalize trajectories</span></span></span>
+<span class="r-in"><span><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_time_normalize.html">mt_time_normalize</a></span><span class="op">(</span><span class="va">mt_example</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Reshape time-normalized trajectories data into long format</span></span></span>
+<span class="r-in"><span><span class="co"># adding Condition variable</span></span></span>
+<span class="r-in"><span><span class="va">trajectories_long</span> <span class="op">&lt;-</span> <span class="fu">mt_reshape</span><span class="op">(</span><span class="va">mt_example</span>,</span></span>
+<span class="r-in"><span> use<span class="op">=</span><span class="st">"tn_trajectories"</span>,</span></span>
+<span class="r-in"><span> use2_variables<span class="op">=</span><span class="st">"Condition"</span></span></span>
+<span class="r-in"><span> <span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Reshape time-normalized trajectories data into wide format</span></span></span>
+<span class="r-in"><span><span class="co"># only keeping xpos and ypos</span></span></span>
+<span class="r-in"><span><span class="co"># and adding Condition variable</span></span></span>
+<span class="r-in"><span><span class="va">trajectories_wide</span> <span class="op">&lt;-</span> <span class="fu">mt_reshape</span><span class="op">(</span><span class="va">mt_example</span>,</span></span>
+<span class="r-in"><span>  use<span class="op">=</span><span class="st">"tn_trajectories"</span>, use_variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"xpos"</span>,<span class="st">"ypos"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  use2_variables <span class="op">=</span> <span class="st">"Condition"</span>,</span></span>
+<span class="r-in"><span>  trajectories_long <span class="op">=</span> <span class="cn">FALSE</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -249,7 +280,7 @@ for aggregating data using the <code>dplyr</code> package.</p></div>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

@@ -20,13 +20,13 @@ from the mousetrap_response plugin in OpenSesame can be used."><!-- mathjax --><
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
-  <a href="../reference/mousetrap.html">Overview</a>
+  <a href="../reference/mousetrap-package.html">Overview</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -62,7 +62,7 @@ from the <code>mousetrap_response</code> plugin in OpenSesame can be used.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">mt_plot_add_rect</span><span class="op">(</span><span class="va">rect</span>, color <span class="op">=</span> <span class="st">"black"</span>, fill <span class="op">=</span> <span class="cn">NA</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">mt_plot_add_rect</span><span class="op">(</span><span class="va">rect</span>, color <span class="op">=</span> <span class="st">"black"</span>, fill <span class="op">=</span> <span class="cn">NA</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -72,15 +72,22 @@ from the <code>mousetrap_response</code> plugin in OpenSesame can be used.</p>
 the x-position (<code>x</code>), y-position (<code>y</code>), width (<code>w</code>), and
 height (<code>h</code>) needs to be provided. If columns are not labeled, the
 order <code>x, y, w, h</code> is assumed.</p></dd>
+
+
 <dt>color</dt>
 <dd><p>argument passed on to <a href="https://ggplot2.tidyverse.org/reference/geom_tile.html" class="external-link">geom_rect</a>. Specifies the
 color of the border of the rectangles.</p></dd>
+
+
 <dt>fill</dt>
 <dd><p>argument passed on to <a href="https://ggplot2.tidyverse.org/reference/geom_tile.html" class="external-link">geom_rect</a>. Specifies the
 color of the interior of the rectangles. If <code>NA</code> (the default),
 rectangles are unfilled.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>additional arguments passed on to <a href="https://ggplot2.tidyverse.org/reference/geom_tile.html" class="external-link">geom_rect</a>.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -99,36 +106,36 @@ rectangles are unfilled.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Load ggplot2</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Import, flip, and time-normalize raw trajectories</span></span>
-<span class="r-in"><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_import_mousetrap.html">mt_import_mousetrap</a></span><span class="op">(</span><span class="va">mt_example_raw</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_remap_symmetric.html">mt_remap_symmetric</a></span><span class="op">(</span><span class="va">mt_example</span>,remap_xpos<span class="op">=</span><span class="st">"no"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_time_normalize.html">mt_time_normalize</a></span><span class="op">(</span><span class="va">mt_example</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Create rectangles matrix</span></span>
-<span class="r-in"><span class="va">rectangles</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="co"># (The matrix is n x 4, and contains</span></span>
-<span class="r-in">  <span class="co"># all relevant data for every button,</span></span>
-<span class="r-in">  <span class="co"># (i.e. x, y, width and height values)</span></span>
-<span class="r-in">  <span class="co"># in separate rows)</span></span>
-<span class="r-in">  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span class="r-in">   <span class="op">-</span><span class="fl">840</span>, <span class="fl">525</span>,  <span class="fl">350</span>, <span class="op">-</span><span class="fl">170</span>,</span>
-<span class="r-in">    <span class="fl">840</span>, <span class="fl">525</span>, <span class="op">-</span><span class="fl">350</span>, <span class="op">-</span><span class="fl">170</span></span>
-<span class="r-in">  <span class="op">)</span>,</span>
-<span class="r-in">  ncol<span class="op">=</span><span class="fl">4</span>, byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Plot all time-normalized trajectories</span></span>
-<span class="r-in"><span class="co"># varying the color depending on the condition</span></span>
-<span class="r-in"><span class="co"># and add rectangles</span></span>
-<span class="r-in"><span class="fu"><a href="mt_plot.html">mt_plot</a></span><span class="op">(</span><span class="va">mt_example</span>,</span>
-<span class="r-in">  use<span class="op">=</span><span class="st">"trajectories"</span>,</span>
-<span class="r-in">  x<span class="op">=</span><span class="st">"xpos"</span>, y<span class="op">=</span><span class="st">"ypos"</span>, color<span class="op">=</span><span class="st">"Condition"</span></span>
-<span class="r-in"><span class="op">)</span> <span class="op">+</span> <span class="fu">mt_plot_add_rect</span><span class="op">(</span>rect<span class="op">=</span><span class="va">rectangles</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Load ggplot2</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Import, flip, and time-normalize raw trajectories</span></span></span>
+<span class="r-in"><span><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_import_mousetrap.html">mt_import_mousetrap</a></span><span class="op">(</span><span class="va">mt_example_raw</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_remap_symmetric.html">mt_remap_symmetric</a></span><span class="op">(</span><span class="va">mt_example</span>,remap_xpos<span class="op">=</span><span class="st">"no"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_time_normalize.html">mt_time_normalize</a></span><span class="op">(</span><span class="va">mt_example</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Create rectangles matrix</span></span></span>
+<span class="r-in"><span><span class="va">rectangles</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="co"># (The matrix is n x 4, and contains</span></span></span>
+<span class="r-in"><span>  <span class="co"># all relevant data for every button,</span></span></span>
+<span class="r-in"><span>  <span class="co"># (i.e. x, y, width and height values)</span></span></span>
+<span class="r-in"><span>  <span class="co"># in separate rows)</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>   <span class="op">-</span><span class="fl">840</span>, <span class="fl">525</span>,  <span class="fl">350</span>, <span class="op">-</span><span class="fl">170</span>,</span></span>
+<span class="r-in"><span>    <span class="fl">840</span>, <span class="fl">525</span>, <span class="op">-</span><span class="fl">350</span>, <span class="op">-</span><span class="fl">170</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span>,</span></span>
+<span class="r-in"><span>  ncol<span class="op">=</span><span class="fl">4</span>, byrow<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Plot all time-normalized trajectories</span></span></span>
+<span class="r-in"><span><span class="co"># varying the color depending on the condition</span></span></span>
+<span class="r-in"><span><span class="co"># and add rectangles</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="mt_plot.html">mt_plot</a></span><span class="op">(</span><span class="va">mt_example</span>,</span></span>
+<span class="r-in"><span>  use<span class="op">=</span><span class="st">"trajectories"</span>,</span></span>
+<span class="r-in"><span>  x<span class="op">=</span><span class="st">"xpos"</span>, y<span class="op">=</span><span class="st">"ypos"</span>, color<span class="op">=</span><span class="st">"Condition"</span></span></span>
+<span class="r-in"><span><span class="op">)</span> <span class="op">+</span> <span class="fu">mt_plot_add_rect</span><span class="op">(</span>rect<span class="op">=</span><span class="va">rectangles</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="mt_plot_add_rect-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -143,7 +150,7 @@ rectangles are unfilled.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

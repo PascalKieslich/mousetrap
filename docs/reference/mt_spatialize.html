@@ -21,13 +21,13 @@ mt_length_normalize should be used instead."><!-- mathjax --><script src="https:
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
-  <a href="../reference/mousetrap.html">Overview</a>
+  <a href="../reference/mousetrap-package.html">Overview</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -64,13 +64,13 @@ Please note that this function is <strong>deprecated</strong> and that
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">mt_spatialize</span><span class="op">(</span>
-  <span class="va">data</span>,
-  use <span class="op">=</span> <span class="st">"trajectories"</span>,
-  dimensions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"xpos"</span>, <span class="st">"ypos"</span><span class="op">)</span>,
-  save_as <span class="op">=</span> <span class="st">"sp_trajectories"</span>,
-  n_points <span class="op">=</span> <span class="fl">20</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">mt_spatialize</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  use <span class="op">=</span> <span class="st">"trajectories"</span>,</span>
+<span>  dimensions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"xpos"</span>, <span class="st">"ypos"</span><span class="op">)</span>,</span>
+<span>  save_as <span class="op">=</span> <span class="st">"sp_trajectories"</span>,</span>
+<span>  n_points <span class="op">=</span> <span class="fl">20</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -79,26 +79,37 @@ Please note that this function is <strong>deprecated</strong> and that
 <dd><p>a mousetrap data object created using one of the mt_import
 functions (see <a href="mt_example.html">mt_example</a> for details). Alternatively, a trajectory
 array can be provided directly (in this case <code>use</code> will be ignored).</p></dd>
+
+
 <dt>use</dt>
 <dd><p>a character string specifying which trajectory data should be
 used.</p></dd>
+
+
 <dt>dimensions</dt>
 <dd><p>a character string specifying which trajectory variables
 should be used. Can be of length 2 or 3 for two-dimensional or
 three-dimensional data.</p></dd>
+
+
 <dt>save_as</dt>
 <dd><p>a character string specifying where the resulting trajectory
 data should be stored.</p></dd>
+
+
 <dt>n_points</dt>
 <dd><p>an integer or vector of integers specifying the number of
 points used to represent the spatially rescaled trajectories. If a single
 integer is provided, the number of points will be constant across
 trajectories. Alternatively, a vector of integers can provided that specify
 the number of points for each trajectory individually.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A mousetrap data object (see <a href="mt_example.html">mt_example</a>) with an additional
+    
+
+<p>A mousetrap data object (see <a href="mt_example.html">mt_example</a>) with an additional
 array containing the spatialized trajectories. If a trajectory array was
 provided directly as <code>data</code>, only the spatialized trajectories will be
 returned.</p>
@@ -120,12 +131,12 @@ clustering (in particular <a href="mt_cluster.html">mt_cluster</a>) and visualiz
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="va">KH2017</span> <span class="op">&lt;-</span> <span class="fu">mt_spatialize</span><span class="op">(</span>data<span class="op">=</span><span class="va">KH2017</span>,</span>
-<span class="r-in">  dimensions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'xpos'</span>,<span class="st">'ypos'</span><span class="op">)</span>,</span>
-<span class="r-in">  n_points <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="va">KH2017</span> <span class="op">&lt;-</span> <span class="fu">mt_spatialize</span><span class="op">(</span>data<span class="op">=</span><span class="va">KH2017</span>,</span></span>
+<span class="r-in"><span>  dimensions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'xpos'</span>,<span class="st">'ypos'</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  n_points <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -140,7 +151,7 @@ clustering (in particular <a href="mt_cluster.html">mt_cluster</a>) and visualiz
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

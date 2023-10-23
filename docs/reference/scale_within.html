@@ -21,13 +21,13 @@ measures design."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
-  <a href="../reference/mousetrap.html">Overview</a>
+  <a href="../reference/mousetrap-package.html">Overview</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -64,41 +64,54 @@ measures design.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">scale_within</span><span class="op">(</span>
-  <span class="va">data</span>,
-  variables <span class="op">=</span> <span class="cn">NULL</span>,
-  within <span class="op">=</span> <span class="cn">NULL</span>,
-  prefix <span class="op">=</span> <span class="st">""</span>,
-  center <span class="op">=</span> <span class="cn">TRUE</span>,
-  scale <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">scale_within</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  variables <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  within <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  prefix <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  center <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  scale <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>data</dt>
 <dd><p>a <a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a>.</p></dd>
+
+
 <dt>variables</dt>
 <dd><p>a character string (or vector) specifying one or more
 variables that <a href="https://rdrr.io/r/base/scale.html" class="external-link">scale</a> is applied to. If unspecified,
 <code>scale_within</code> will be applied to all variables in data.</p></dd>
+
+
 <dt>within</dt>
 <dd><p>an optional character string specifying the name of one or more
 variables in <code>data</code>. If specified, <a href="https://rdrr.io/r/base/scale.html" class="external-link">scale</a> is applied separately
 for each of the levels of the variable (or for each combination of levels,
 if more than one variable is specified). Alternatively, a vector directly
 containing the level values.</p></dd>
+
+
 <dt>prefix</dt>
 <dd><p>a character string that is inserted before each scaled
 variable. By default (empty string) the original variables are replaced.</p></dd>
+
+
 <dt>center</dt>
 <dd><p>argument passed on to <a href="https://rdrr.io/r/base/scale.html" class="external-link">scale</a>.</p></dd>
+
+
 <dt>scale</dt>
 <dd><p>argument passed on to <a href="https://rdrr.io/r/base/scale.html" class="external-link">scale</a>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>The original data.frame including the centered and / or scaled
+    
+
+<p>The original data.frame including the centered and / or scaled
 variables.</p>
     </div>
     <div id="see-also">
@@ -114,10 +127,10 @@ variables.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">ChickWeight_scaled</span> <span class="op">&lt;-</span>  <span class="fu">scale_within</span><span class="op">(</span></span>
-<span class="r-in"> <span class="va">ChickWeight</span>, variables<span class="op">=</span><span class="st">"weight"</span>,</span>
-<span class="r-in"> within<span class="op">=</span><span class="st">"Chick"</span>, prefix<span class="op">=</span><span class="st">"z_"</span><span class="op">)</span></span>
-<span class="r-in"> </span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">ChickWeight_scaled</span> <span class="op">&lt;-</span>  <span class="fu">scale_within</span><span class="op">(</span></span></span>
+<span class="r-in"><span> <span class="va">ChickWeight</span>, variables<span class="op">=</span><span class="st">"weight"</span>,</span></span>
+<span class="r-in"><span> within<span class="op">=</span><span class="st">"Chick"</span>, prefix<span class="op">=</span><span class="st">"z_"</span><span class="op">)</span></span></span>
+<span class="r-in"><span> </span></span>
 </code></pre></div>
     </div>
   </div>
@@ -132,7 +145,7 @@ variables.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

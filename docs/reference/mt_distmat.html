@@ -18,13 +18,13 @@ trajectories."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/li
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
-  <a href="../reference/mousetrap.html">Overview</a>
+  <a href="../reference/mousetrap-package.html">Overview</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -58,16 +58,16 @@ trajectories.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">mt_distmat</span><span class="op">(</span>
-  <span class="va">data</span>,
-  use <span class="op">=</span> <span class="st">"ln_trajectories"</span>,
-  save_as <span class="op">=</span> <span class="st">"distmat"</span>,
-  dimensions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"xpos"</span>, <span class="st">"ypos"</span><span class="op">)</span>,
-  weights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">dimensions</span><span class="op">)</span><span class="op">)</span>,
-  pointwise <span class="op">=</span> <span class="cn">TRUE</span>,
-  minkowski_p <span class="op">=</span> <span class="fl">2</span>,
-  na_rm <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">mt_distmat</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  use <span class="op">=</span> <span class="st">"ln_trajectories"</span>,</span>
+<span>  save_as <span class="op">=</span> <span class="st">"distmat"</span>,</span>
+<span>  dimensions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"xpos"</span>, <span class="st">"ypos"</span><span class="op">)</span>,</span>
+<span>  weights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">dimensions</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  pointwise <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  minkowski_p <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  na_rm <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -76,43 +76,60 @@ trajectories.</p>
 <dd><p>a mousetrap data object created using one of the mt_import
 functions (see <a href="mt_example.html">mt_example</a> for details). Alternatively, a trajectory
 array can be provided directly (in this case <code>use</code> will be ignored).</p></dd>
+
+
 <dt>use</dt>
 <dd><p>a character string specifying which trajectory data should be
 used.</p></dd>
+
+
 <dt>save_as</dt>
 <dd><p>a character string specifying where the resulting data should
 be stored.</p></dd>
+
+
 <dt>dimensions</dt>
 <dd><p>a character vector specifying which trajectory variables
 should be used. Can be of length 2 or 3 for two-dimensional or
 three-dimensional trajectories respectively.</p></dd>
+
+
 <dt>weights</dt>
 <dd><p>numeric vector specifying the relative importance of the
 variables specified in <code>dimensions</code>. Defaults to a vector of 1s
 implying equal importance. Technically, each variable is rescaled so that
 the standard deviation matches the corresponding value in <code>weights</code>.
 To use the original variables, set <code>weights = NULL</code>.</p></dd>
+
+
 <dt>pointwise</dt>
 <dd><p>boolean specifying the way dissimilarity between the
 trajectories is measured (see Details). If <code>TRUE</code> (the default),
 <code>mt_distmat</code> measures the average dissimilarity and then sums the
 results. If <code>FALSE</code>, <code>mt_distmat</code>  measures dissimilarity once
 (by treating the various points as independent dimensions).</p></dd>
+
+
 <dt>minkowski_p</dt>
 <dd><p>an integer specifying the distance metric.
 <code>minkowski_p = 1</code> computes the city-block distance, <code>minkowski_p 
   = 2</code> (the default) computes the Euclidian distance, <code>minkowski_p = 3</code>
 the cubic distance, etc.</p></dd>
+
+
 <dt>na_rm</dt>
 <dd><p>logical specifying whether trajectory points containing NAs
 should be removed. Removal is done column-wise. That is, if any trajectory
 has a missing value at, e.g., the 10th recorded position, the 10th position
 is removed for all trajectories. This is necessary to compute distance
 between trajectories.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A mousetrap data object (see <a href="mt_example.html">mt_example</a>) with an additional
+    
+
+<p>A mousetrap data object (see <a href="mt_example.html">mt_example</a>) with an additional
 object added (by default called <code>distmat</code>) containing the distance
 matrix. If a trajectory array was provided directly as <code>data</code>, only
 the distance matrix will be returned.</p>
@@ -137,12 +154,12 @@ computed as <code>sqrt(sum((x_i-x_j)^2 + (y_i-y_j)^2))</code>.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Length normalize trajectories</span></span>
-<span class="r-in"><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_length_normalize.html">mt_length_normalize</a></span><span class="op">(</span><span class="va">mt_example</span><span class="op">)</span></span>
-<span class="r-in"> </span>
-<span class="r-in"><span class="co"># Compute distance matrix</span></span>
-<span class="r-in"><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu">mt_distmat</span><span class="op">(</span><span class="va">mt_example</span>, use<span class="op">=</span><span class="st">"ln_trajectories"</span><span class="op">)</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Length normalize trajectories</span></span></span>
+<span class="r-in"><span><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_length_normalize.html">mt_length_normalize</a></span><span class="op">(</span><span class="va">mt_example</span><span class="op">)</span></span></span>
+<span class="r-in"><span> </span></span>
+<span class="r-in"><span><span class="co"># Compute distance matrix</span></span></span>
+<span class="r-in"><span><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu">mt_distmat</span><span class="op">(</span><span class="va">mt_example</span>, use<span class="op">=</span><span class="st">"ln_trajectories"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -157,7 +174,7 @@ computed as <code>sqrt(sum((x_i-x_j)^2 + (y_i-y_j)^2))</code>.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

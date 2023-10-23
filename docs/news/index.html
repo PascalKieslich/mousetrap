@@ -17,13 +17,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
-  <a href="../reference/mousetrap.html">Overview</a>
+  <a href="../reference/mousetrap-package.html">Overview</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -51,11 +51,27 @@
     </div>
 
     <div class="section level2">
+<h2 class="page-header" data-toc-text="3.2.2" id="mousetrap-322">mousetrap 3.2.2<a class="anchor" aria-label="anchor" href="#mousetrap-322"></a></h2>
+<div class="section level3">
+<h3 id="announcements-3-2-2">Announcements<a class="anchor" aria-label="anchor" href="#announcements-3-2-2"></a></h3>
+<ul><li>A tutorial to movement tracking of psychological processes with the <code>mousetrap</code> R package has been published as a preprint. Please cite it as follows when using <code>mousetrap</code> in your research: Wulff, D. U.*, Kieslich, P. J.*, Henninger, F., Haslbeck, J. M. B., &amp; Schulte-Mecklenbeck, M. (2023). <em>Movement tracking of psychological processes: A tutorial using mousetrap.</em> PsyArXiv. <a href="https://doi.org/10.31234/osf.io/v685r" class="external-link uri">https://doi.org/10.31234/osf.io/v685r</a>
+</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bugs-fixed-3-2-2">Bugs fixed<a class="anchor" aria-label="anchor" href="#bugs-fixed-3-2-2"></a></h3>
+<ul><li>
+<code>mt_import_long</code>: Preserve original trial order when importing trajectories. This also fixes the issue that trajectories are imported incorrectly when <code>mt_id_label</code> contains mixed case (closes <a href="https://github.com/pascalkieslich/mousetrap/issues/17" class="external-link">#17</a>, thanks to <a href="https://github.com/LiKao" class="external-link">@LiKao</a>)</li>
+</ul></div>
+<div class="section level3">
+<h3 id="internal-changes-3-2-2">Internal changes<a class="anchor" aria-label="anchor" href="#internal-changes-3-2-2"></a></h3>
+<ul><li>Implemented a suggestion by CRAN team regarding the setup of the package overview help file (accommodating changes in roxygen2)</li>
+</ul></div>
+</div>
+    <div class="section level2">
 <h2 class="page-header" data-toc-text="3.2.1" id="mousetrap-321">mousetrap 3.2.1<small>2022-01-03</small><a class="anchor" aria-label="anchor" href="#mousetrap-321"></a></h2>
 <div class="section level3">
 <h3 id="announcements-3-2-1">Announcements<a class="anchor" aria-label="anchor" href="#announcements-3-2-1"></a></h3>
-<ul><li>A tutorial to movement tracking of cognitive processes with the <code>mousetrap</code> R package has been published as a preprint. Please cite it as follows when using <code>mousetrap</code> in your research: Wulff, D. U., Kieslich, P. J., Henninger, F., Haslbeck, J. M. B., &amp; Schulte-Mecklenbeck, M. (2021). <em>Movement tracking of cognitive processes: A tutorial using mousetrap.</em> PsyArXiv. <a href="https://doi.org/10.31234/osf.io/v685r" class="external-link uri">https://doi.org/10.31234/osf.io/v685r</a>
-</li>
+<ul><li>A tutorial to movement tracking of psychological processes with the <code>mousetrap</code> R package has been published as a preprint. Please cite it as follows when using <code>mousetrap</code> in your research: Wulff, D. U.*, Kieslich, P. J.*, Henninger, F., Haslbeck, J. M. B., &amp; Schulte-Mecklenbeck, M. (2021). <em>Movement tracking of cognitive processes: A tutorial using mousetrap.</em> PsyArXiv. <a href="https://doi.org/10.31234/osf.io/v685r" class="external-link uri">https://doi.org/10.31234/osf.io/v685r</a> Note that this tutorial has been updated and a new preprint has been published (see 3.2.2 release above).</li>
 <li>After more than 5 years, <code>mousetrap</code> finally has a logo (thanks to Dirk Wulff)</li>
 </ul></div>
 <div class="section level3">
@@ -458,7 +474,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

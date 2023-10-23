@@ -19,13 +19,13 @@ this function has beta status."><!-- mathjax --><script src="https://cdnjs.cloud
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
-  <a href="../reference/mousetrap.html">Overview</a>
+  <a href="../reference/mousetrap-package.html">Overview</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -60,15 +60,15 @@ this function has beta status.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">mt_heatmap_ggplot</span><span class="op">(</span>
-  <span class="va">data</span>,
-  use <span class="op">=</span> <span class="st">"trajectories"</span>,
-  dimensions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"xpos"</span>, <span class="st">"ypos"</span><span class="op">)</span>,
-  use2 <span class="op">=</span> <span class="st">"data"</span>,
-  facet_row <span class="op">=</span> <span class="cn">NULL</span>,
-  facet_col <span class="op">=</span> <span class="cn">NULL</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">mt_heatmap_ggplot</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  use <span class="op">=</span> <span class="st">"trajectories"</span>,</span>
+<span>  dimensions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"xpos"</span>, <span class="st">"ypos"</span><span class="op">)</span>,</span>
+<span>  use2 <span class="op">=</span> <span class="st">"data"</span>,</span>
+<span>  facet_row <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  facet_col <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -77,26 +77,39 @@ this function has beta status.</p>
 <dd><p>a mousetrap data object created using one of the mt_import
 functions (see <a href="mt_example.html">mt_example</a> for details). Alternatively, a trajectory
 array can be provided directly (in this case <code>use</code> will be ignored).</p></dd>
+
+
 <dt>use</dt>
 <dd><p>a character string specifying which trajectory data should be
 used.</p></dd>
+
+
 <dt>dimensions</dt>
 <dd><p>a character vector specifying the trajectory variables used
 to create the heatmap. The first two entries are used as x and
 y-coordinates, the third, if provided, will be added as color information.</p></dd>
+
+
 <dt>use2</dt>
 <dd><p>an optional character string specifying where the data that
 contain the variables used for faceting can be found (in case these
 arguments are specified). Defaults to "data" as <code>data[["data"]]</code>
 usually contains all non mouse-tracking trial data.</p></dd>
+
+
 <dt>facet_row</dt>
 <dd><p>an optional character string specifying a variable in
 <code>data[[use2]]</code> that should be used for (row-wise) faceting.</p></dd>
+
+
 <dt>facet_col</dt>
 <dd><p>an optional character string specifying a variable in
 <code>data[[use2]]</code> that should be used for (column-wise) faceting.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>arguments passed to <a href="mt_heatmap_raw.html">mt_heatmap_raw</a>.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -134,13 +147,14 @@ plots.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">mt_heatmap_ggplot</span><span class="op">(</span><span class="va">KH2017</span>, xres<span class="op">=</span><span class="fl">500</span>, n_shades<span class="op">=</span><span class="fl">5</span>, mean_image<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">mt_heatmap_ggplot</span><span class="op">(</span><span class="va">KH2017</span>, xres<span class="op">=</span><span class="fl">500</span>, n_shades<span class="op">=</span><span class="fl">5</span>, mean_image<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> spatializing trajectories </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> calculate image </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> smooth image </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> enhance image by 26.5 </span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Removed 1612 rows containing missing values (`geom_tile()`).</span>
 <span class="r-plt img"><img src="mt_heatmap_ggplot-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -155,7 +169,7 @@ plots.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

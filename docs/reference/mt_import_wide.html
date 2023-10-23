@@ -28,13 +28,13 @@ within this package (see mousetrap for an overview)."><!-- mathjax --><script sr
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
-  <a href="../reference/mousetrap.html">Overview</a>
+  <a href="../reference/mousetrap-package.html">Overview</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -74,46 +74,58 @@ further processing within the mousetrap package. Specifically, it returns a
 list that includes the trajectory data as an array (called
 <code>trajectories</code>), and all other data as a data.frame (called
 <code>data</code>). This data structure can then be passed on to other functions
-within this package (see <a href="mousetrap.html">mousetrap</a> for an overview).</p>
+within this package (see <a href="mousetrap-package.html">mousetrap</a> for an overview).</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">mt_import_wide</span><span class="op">(</span>
-  <span class="va">raw_data</span>,
-  xpos_label <span class="op">=</span> <span class="st">"X"</span>,
-  ypos_label <span class="op">=</span> <span class="st">"Y"</span>,
-  zpos_label <span class="op">=</span> <span class="cn">NULL</span>,
-  timestamps_label <span class="op">=</span> <span class="st">"T"</span>,
-  add_labels <span class="op">=</span> <span class="cn">NULL</span>,
-  mt_id_label <span class="op">=</span> <span class="cn">NULL</span>,
-  pos_sep <span class="op">=</span> <span class="st">"_"</span>,
-  pos_ids <span class="op">=</span> <span class="cn">NULL</span>,
-  reset_timestamps <span class="op">=</span> <span class="cn">TRUE</span>,
-  verbose <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">mt_import_wide</span><span class="op">(</span></span>
+<span>  <span class="va">raw_data</span>,</span>
+<span>  xpos_label <span class="op">=</span> <span class="st">"X"</span>,</span>
+<span>  ypos_label <span class="op">=</span> <span class="st">"Y"</span>,</span>
+<span>  zpos_label <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  timestamps_label <span class="op">=</span> <span class="st">"T"</span>,</span>
+<span>  add_labels <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  mt_id_label <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pos_sep <span class="op">=</span> <span class="st">"_"</span>,</span>
+<span>  pos_ids <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  reset_timestamps <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>raw_data</dt>
 <dd><p>a data.frame containing the raw data.</p></dd>
+
+
 <dt>xpos_label</dt>
 <dd><p>a character string specifying the core of the column labels
 containing the x-positions (e.g., "X" for "X_1", "X_2", ...).</p></dd>
+
+
 <dt>ypos_label</dt>
 <dd><p>a character string specifying the core of the column labels
 containing the y-positions (e.g., "Y" for "Y_1", "Y_2", ...).</p></dd>
+
+
 <dt>zpos_label</dt>
 <dd><p>a character string specifying the core of the column labels
 containing the z-positions.</p></dd>
+
+
 <dt>timestamps_label</dt>
 <dd><p>an optional character string specifying the core of
 the column labels containing the timestamps. If no timestamps are found in
 the data, a timestamps variable with increasing integers will be created
 (assuming equidistant time steps).</p></dd>
+
+
 <dt>add_labels</dt>
 <dd><p>a character vector specifying the core of columns
 containing additional mouse-tracking variables.</p></dd>
+
+
 <dt>mt_id_label</dt>
 <dd><p>an optional character string (or vector) specifying the
 name of the column that provides a unique ID for every trial (the trial
@@ -123,25 +135,36 @@ will be created by combining the values of each variable. The trial
 identifier will be set as the <a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a> of the resulting trajectories
 and trial data, and additionally be stored in the column "mt_id" in the
 trial data.</p></dd>
+
+
 <dt>pos_sep</dt>
 <dd><p>a character string indicating the character that connects the
 core label and the position, (e.g., "_" for "X_1", "Y_1", ...).</p></dd>
+
+
 <dt>pos_ids</dt>
 <dd><p>the vector of IDs used for indexing the x-coordinates,
 y-coordinates etc. (e.g., 1:101 for time-normalized trajectories from
 MouseTracker). If unspecified (the default), column labels for the
 respective variable will be extracted using grep (see Details).</p></dd>
+
+
 <dt>reset_timestamps</dt>
 <dd><p>logical indicating if the first timestamp should be
 subtracted from all timestamps within a trial. Default is <code>TRUE</code> as it
 is recommended for all following analyses in mousetrap.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>logical indicating whether function should report its
 progress.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A mousetrap data object (see <a href="mt_example.html">mt_example</a>).</p>
+    
+
+<p>A mousetrap data object (see <a href="mt_example.html">mt_example</a>).</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -179,20 +202,20 @@ mouse-tracking data in other formats.</p></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Create data in wide format for test purposes</span></span>
-<span class="r-in"><span class="va">mt_data_wide</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_export_long.html">mt_export_wide</a></span><span class="op">(</span><span class="va">mt_example</span>,</span>
-<span class="r-in">  use2_variables<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"subject_nr"</span>, <span class="st">"Condition"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Import the data using mt_import_wide</span></span>
-<span class="r-in"><span class="va">mt_data</span> <span class="op">&lt;-</span> <span class="fu">mt_import_wide</span><span class="op">(</span><span class="va">mt_data_wide</span>,</span>
-<span class="r-in">  xpos_label<span class="op">=</span><span class="st">"xpos"</span>, ypos_label<span class="op">=</span><span class="st">"ypos"</span>,</span>
-<span class="r-in">  timestamps_label<span class="op">=</span><span class="st">"timestamps"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Create data in wide format for test purposes</span></span></span>
+<span class="r-in"><span><span class="va">mt_data_wide</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_export_long.html">mt_export_wide</a></span><span class="op">(</span><span class="va">mt_example</span>,</span></span>
+<span class="r-in"><span>  use2_variables<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"subject_nr"</span>, <span class="st">"Condition"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Import the data using mt_import_wide</span></span></span>
+<span class="r-in"><span><span class="va">mt_data</span> <span class="op">&lt;-</span> <span class="fu">mt_import_wide</span><span class="op">(</span><span class="va">mt_data_wide</span>,</span></span>
+<span class="r-in"><span>  xpos_label<span class="op">=</span><span class="st">"xpos"</span>, ypos_label<span class="op">=</span><span class="st">"ypos"</span>,</span></span>
+<span class="r-in"><span>  timestamps_label<span class="op">=</span><span class="st">"timestamps"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> No mt_id_label provided. A new trial identifying variable called mt_id was created.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> No pos_ids provided. The following variables were found using grep:</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 465 variables found for timestamps.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 465 variables found for xpos.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> 465 variables found for ypos.</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -207,7 +230,7 @@ mouse-tracking data in other formats.</p></div>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

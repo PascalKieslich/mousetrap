@@ -20,13 +20,13 @@ status."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mat
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
-  <a href="../reference/mousetrap.html">Overview</a>
+  <a href="../reference/mousetrap-package.html">Overview</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -62,28 +62,28 @@ status.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">mt_heatmap_raw</span><span class="op">(</span>
-  <span class="va">data</span>,
-  use <span class="op">=</span> <span class="st">"trajectories"</span>,
-  dimensions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"xpos"</span>, <span class="st">"ypos"</span><span class="op">)</span>,
-  variable <span class="op">=</span> <span class="cn">NULL</span>,
-  bounds <span class="op">=</span> <span class="cn">NULL</span>,
-  xres <span class="op">=</span> <span class="fl">1000</span>,
-  upsample <span class="op">=</span> <span class="fl">1</span>,
-  norm <span class="op">=</span> <span class="cn">FALSE</span>,
-  colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="st">"blue"</span>, <span class="st">"white"</span><span class="op">)</span>,
-  n_shades <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">1000</span><span class="op">)</span>,
-  smooth_radius <span class="op">=</span> <span class="fl">1.5</span>,
-  low_pass <span class="op">=</span> <span class="fl">200</span>,
-  auto_enhance <span class="op">=</span> <span class="cn">TRUE</span>,
-  mean_image <span class="op">=</span> <span class="fl">0.15</span>,
-  mean_color <span class="op">=</span> <span class="fl">0.25</span>,
-  aggregate_lwd <span class="op">=</span> <span class="fl">0</span>,
-  aggregate_col <span class="op">=</span> <span class="st">"black"</span>,
-  n_trajectories <span class="op">=</span> <span class="cn">NULL</span>,
-  seed <span class="op">=</span> <span class="cn">NULL</span>,
-  verbose <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">mt_heatmap_raw</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  use <span class="op">=</span> <span class="st">"trajectories"</span>,</span>
+<span>  dimensions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"xpos"</span>, <span class="st">"ypos"</span><span class="op">)</span>,</span>
+<span>  variable <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  bounds <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  xres <span class="op">=</span> <span class="fl">1000</span>,</span>
+<span>  upsample <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  norm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="st">"blue"</span>, <span class="st">"white"</span><span class="op">)</span>,</span>
+<span>  n_shades <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">1000</span><span class="op">)</span>,</span>
+<span>  smooth_radius <span class="op">=</span> <span class="fl">1.5</span>,</span>
+<span>  low_pass <span class="op">=</span> <span class="fl">200</span>,</span>
+<span>  auto_enhance <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  mean_image <span class="op">=</span> <span class="fl">0.15</span>,</span>
+<span>  mean_color <span class="op">=</span> <span class="fl">0.25</span>,</span>
+<span>  aggregate_lwd <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  aggregate_col <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>  n_trajectories <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  seed <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -92,82 +92,123 @@ status.</p>
 <dd><p>a mousetrap data object created using one of the mt_import
 functions (see <a href="mt_example.html">mt_example</a> for details). Alternatively, a trajectory
 array can be provided directly (in this case <code>use</code> will be ignored).</p></dd>
+
+
 <dt>use</dt>
 <dd><p>a character string specifying which trajectory data should be
 used.</p></dd>
+
+
 <dt>dimensions</dt>
 <dd><p>a character vector specifying the trajectory variables used
 to create the heatmap. The first two entries are used as x and
 y-coordinates, the third, if provided, will be added as color information.</p></dd>
+
+
 <dt>variable</dt>
 <dd><p>boolean or numeric vector matching the number of trajectories
 that if provided will be used as color information. <code>variable</code> is only
 considered when <code>length(dimensions) &lt; 3</code>.</p></dd>
+
+
 <dt>bounds</dt>
 <dd><p>numeric vector specifying the corners (xmin, ymin, xmax, ymax)
 of the plot region. By default (<code>bounds = NULL</code>), bounds are
 determined based on the data input.</p></dd>
+
+
 <dt>xres</dt>
 <dd><p>an integer specifying the number of pixels along the x-dimension.
 An <code>xres</code> of 1000 implies an 1000*N px, where N is determined so that
 the trajectories aspect ratio is preserved (provided the <code>bounds</code> are
 unchanged).</p></dd>
+
+
 <dt>upsample</dt>
 <dd><p>a numeric value by which the number of points used to
 represent individual trajectories are increased or decreased. Values of
 smaller than one will improve speed but also introduce a certain level of
 granularity.</p></dd>
+
+
 <dt>norm</dt>
 <dd><p>a logical specifying whether the data should be warped into
 standard space. If <code>norm = TRUE</code>, this overrules <code>bounds</code>.</p></dd>
+
+
 <dt>colors</dt>
 <dd><p>a character vector specifying two or three colors used to color
 the background, the foreground (trajectories), and the values of a third
 dimension (if specified).</p></dd>
+
+
 <dt>n_shades</dt>
 <dd><p>an integer specifying the number of shades for the color
 gradient between the first and second, and the second and third color in
 <code>colors</code>.</p></dd>
+
+
 <dt>smooth_radius</dt>
 <dd><p>a numeric value specifying the standard deviation of the
 gaussian smoothing. If zero, smoothing is omitted.</p></dd>
+
+
 <dt>low_pass</dt>
 <dd><p>an integer specifying the allowed number of counts per pixel.
 This arguments limits the maximum pixel color intensity.</p></dd>
+
+
 <dt>auto_enhance</dt>
 <dd><p>boolean. If <code>TRUE</code> (the default), the image is
 adjusted so that the mean color intensity matches <code>mean_image</code> and
 <code>mean_color</code>.</p></dd>
+
+
 <dt>mean_image</dt>
 <dd><p>a numeric value between 0 and 1 specifying the average
 foreground color intensity across the entire image. Defaults to 0.1.</p></dd>
+
+
 <dt>mean_color</dt>
 <dd><p>a numeric value between 0 and 1 specifying the average
 third dimension's color intensity across the entire image. Defaults to 0.1.
 Only relevant if a third dimension is specified in <code>colors</code>.</p></dd>
+
+
 <dt>aggregate_lwd</dt>
 <dd><p>an integer specifying the width of the aggregate
 trajectory. If <code>aggregate_lwd</code> is 0 (the default), the aggregate
 trajectory is omitted.</p></dd>
+
+
 <dt>aggregate_col</dt>
 <dd><p>a character value specifying the color of the aggregate
 trajectory.</p></dd>
+
+
 <dt>n_trajectories</dt>
 <dd><p>an optional integer specifying the number of
 trajectories used to create the image. By default, all trajectories are
 used. If <code>n_trajectories</code> is specified and smaller than the number of
 trajectories in the trajectory array, then <code>n_trajectories</code> are
 randomly sampled.</p></dd>
+
+
 <dt>seed</dt>
 <dd><p>an optional integer specifying the seed used for the trajectory
 sampling.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>logical indicating whether function should report its
 progress.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>An object of class <code>mt_object_raw</code> containing in a matrix format
+    
+
+<p>An object of class <code>mt_object_raw</code> containing in a matrix format
 the image's pixel information, the aggregate trajectory, and the colors.</p>
     </div>
     <div id="details">
@@ -228,7 +269,7 @@ trajectory heatmaps.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

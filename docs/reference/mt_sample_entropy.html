@@ -18,13 +18,13 @@ of movements along one specific dimension."><!-- mathjax --><script src="https:/
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
-  <a href="../reference/mousetrap.html">Overview</a>
+  <a href="../reference/mousetrap-package.html">Overview</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -58,16 +58,16 @@ of movements along one specific dimension.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">mt_sample_entropy</span><span class="op">(</span>
-  <span class="va">data</span>,
-  use <span class="op">=</span> <span class="st">"tn_trajectories"</span>,
-  save_as <span class="op">=</span> <span class="st">"measures"</span>,
-  dimension <span class="op">=</span> <span class="st">"xpos"</span>,
-  m <span class="op">=</span> <span class="fl">3</span>,
-  r <span class="op">=</span> <span class="cn">NULL</span>,
-  use_diff <span class="op">=</span> <span class="cn">TRUE</span>,
-  verbose <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">mt_sample_entropy</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  use <span class="op">=</span> <span class="st">"tn_trajectories"</span>,</span>
+<span>  save_as <span class="op">=</span> <span class="st">"measures"</span>,</span>
+<span>  dimension <span class="op">=</span> <span class="st">"xpos"</span>,</span>
+<span>  m <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  r <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  use_diff <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -76,37 +76,60 @@ of movements along one specific dimension.</p>
 <dd><p>a mousetrap data object created using one of the mt_import
 functions (see <a href="mt_example.html">mt_example</a> for details). Alternatively, a trajectory
 array can be provided directly (in this case <code>use</code> will be ignored).</p></dd>
+
+
 <dt>use</dt>
 <dd><p>a character string specifying which trajectory data should be
 used.</p></dd>
+
+
 <dt>save_as</dt>
 <dd><p>a character string specifying where the calculated measures
 should be stored.</p></dd>
+
+
 <dt>dimension</dt>
 <dd><p>a character string specifying the dimension based on which
 sample entropy should be calculated. By default (xpos), the x-positions are
 used.</p></dd>
+
+
 <dt>m</dt>
 <dd><p>an integer passed on to the sample entropy function (see Details).</p></dd>
+
+
 <dt>r</dt>
 <dd><p>a numeric value passed on to the sample entropy function (see
 Details).</p></dd>
+
+
 <dt>use_diff</dt>
 <dd><p>logical indicating if the differences of the dimension values
 should be computed before calculating sample entropy (which is done by
 default, see Details).</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>logical indicating whether function should report its
 progress.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A mousetrap data object (see <a href="mt_example.html">mt_example</a>).
-If a data.frame with label specified in <code>save_as</code> (by default
+    
+
+<p>A mousetrap data object (see <a href="mt_example.html">mt_example</a>).</p>
+
+
+<p>If a data.frame with label specified in <code>save_as</code> (by default
 "measures") already exists, the sample entropy values are added as
-additional column.
-If not, an additional <a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a> will be added.
-If a trajectory array was provided directly as <code>data</code>, only the
+additional column.</p>
+
+
+<p>If not, an additional <a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a> will be added.</p>
+
+
+<p>If a trajectory array was provided directly as <code>data</code>, only the
 data.frame will be returned.</p>
     </div>
     <div id="details">
@@ -153,16 +176,16 @@ measures.</p></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Calculate sample entropy based on time-normalized</span></span>
-<span class="r-in"><span class="co"># trajectories and merge results with other meausres</span></span>
-<span class="r-in"><span class="co"># derived from raw trajectories</span></span>
-<span class="r-in"><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_measures.html">mt_measures</a></span><span class="op">(</span><span class="va">mt_example</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_time_normalize.html">mt_time_normalize</a></span><span class="op">(</span><span class="va">mt_example</span>,</span>
-<span class="r-in">  save_as<span class="op">=</span><span class="st">"tn_trajectories"</span>, nsteps<span class="op">=</span><span class="fl">101</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu">mt_sample_entropy</span><span class="op">(</span><span class="va">mt_example</span>,</span>
-<span class="r-in">  use<span class="op">=</span><span class="st">"tn_trajectories"</span>, save_as<span class="op">=</span><span class="st">"measures"</span>,</span>
-<span class="r-in">  dimension<span class="op">=</span><span class="st">"xpos"</span>, m<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Calculate sample entropy based on time-normalized</span></span></span>
+<span class="r-in"><span><span class="co"># trajectories and merge results with other meausres</span></span></span>
+<span class="r-in"><span><span class="co"># derived from raw trajectories</span></span></span>
+<span class="r-in"><span><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_measures.html">mt_measures</a></span><span class="op">(</span><span class="va">mt_example</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_time_normalize.html">mt_time_normalize</a></span><span class="op">(</span><span class="va">mt_example</span>,</span></span>
+<span class="r-in"><span>  save_as<span class="op">=</span><span class="st">"tn_trajectories"</span>, nsteps<span class="op">=</span><span class="fl">101</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu">mt_sample_entropy</span><span class="op">(</span><span class="va">mt_example</span>,</span></span>
+<span class="r-in"><span>  use<span class="op">=</span><span class="st">"tn_trajectories"</span>, save_as<span class="op">=</span><span class="st">"measures"</span>,</span></span>
+<span class="r-in"><span>  dimension<span class="op">=</span><span class="st">"xpos"</span>, m<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -177,7 +200,7 @@ measures.</p></div>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

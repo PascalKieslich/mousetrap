@@ -1,7 +1,7 @@
 # mousetrap 3.2.2
 
 ## Announcements
-* A updated tutorial to movement tracking of psychological processes with the `mousetrap` R package has been published as a preprint. Please cite it as follows when using `mousetrap` in your research: Wulff, D. U.\*, Kieslich, P. J.\*, Henninger, F., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. (2023). _Movement tracking of psychological processes: A tutorial using mousetrap._ PsyArXiv. https://doi.org/10.31234/osf.io/v685r
+* A tutorial to movement tracking of psychological processes with the `mousetrap` R package has been published as a preprint. Please cite it as follows when using `mousetrap` in your research: Wulff, D. U.\*, Kieslich, P. J.\*, Henninger, F., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. (2023). _Movement tracking of psychological processes: A tutorial using mousetrap._ PsyArXiv. https://doi.org/10.31234/osf.io/v685r
 
 ## Bugs fixed
 * `mt_import_long`: Preserve original trial order when importing trajectories. This also fixes the issue that trajectories are imported incorrectly when `mt_id_label` contains mixed case (closes #17, thanks to @LiKao)
@@ -13,6 +13,7 @@
 # mousetrap 3.2.1
 
 ## Announcements
+* A tutorial to movement tracking of psychological processes with the `mousetrap` R package has been published as a preprint. Please cite it as follows when using `mousetrap` in your research: Wulff, D. U.\*, Kieslich, P. J.\*, Henninger, F., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. (2021). _Movement tracking of cognitive processes: A tutorial using mousetrap._ PsyArXiv. https://doi.org/10.31234/osf.io/v685r Note that this tutorial has been updated and a new preprint has been published (see 3.2.2 release above).
 * After more than 5 years, `mousetrap` finally has a logo (thanks to Dirk Wulff)
 
 ## General changes to existing functions

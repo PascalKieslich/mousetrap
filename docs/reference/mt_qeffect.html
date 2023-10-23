@@ -18,13 +18,13 @@ Function in beta and currently only for internal purposes."><!-- mathjax --><scr
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
-  <a href="../reference/mousetrap.html">Overview</a>
+  <a href="../reference/mousetrap-package.html">Overview</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -58,16 +58,16 @@ Function in beta and currently only for internal purposes."><!-- mathjax --><scr
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">mt_qeffect</span><span class="op">(</span>
-  <span class="va">data</span>,
-  <span class="va">compare</span>,
-  use <span class="op">=</span> <span class="st">"measures"</span>,
-  measure <span class="op">=</span> <span class="st">"MAD"</span>,
-  direction <span class="op">=</span> <span class="st">"upward"</span>,
-  n_steps <span class="op">=</span> <span class="fl">100</span>,
-  return_data <span class="op">=</span> <span class="cn">FALSE</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">mt_qeffect</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  <span class="va">compare</span>,</span>
+<span>  use <span class="op">=</span> <span class="st">"measures"</span>,</span>
+<span>  measure <span class="op">=</span> <span class="st">"MAD"</span>,</span>
+<span>  direction <span class="op">=</span> <span class="st">"upward"</span>,</span>
+<span>  n_steps <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>  return_data <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -76,26 +76,43 @@ Function in beta and currently only for internal purposes."><!-- mathjax --><scr
 <dd><p>a mousetrap data object created using one of the mt_import
 functions (see <a href="mt_example.html">mt_example</a> for details). Alternatively, a trajectory
 array can be provided directly (in this case <code>use</code> will be ignored).</p></dd>
+
+
 <dt>compare</dt>
 <dd><p>either a vector, the label of a variable in , or a mousetrap object.</p></dd>
+
+
 <dt>use</dt>
 <dd><p>a character string specifying which trajectory data should be
 used.</p></dd>
+
+
 <dt>measure</dt>
 <dd><p>a character value specifying the variable used to calculate the
 effect between</p></dd>
+
+
 <dt>direction</dt>
 <dd><p>a character value.</p></dd>
+
+
 <dt>n_steps</dt>
 <dd><p>an integer.</p></dd>
+
+
 <dt>return_data</dt>
 <dd><p>boolean.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>additional arguments passed on to <a href="https://rdrr.io/r/graphics/points.html" class="external-link">points</a>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Nothing, when image is plotted using an external device. Otherwise an
+    
+
+<p>Nothing, when image is plotted using an external device. Otherwise an
 object of class <code>mt_object_raw</code> containing in a matrix format the
 image's pixel information.</p>
     </div>
@@ -106,18 +123,18 @@ image's pixel information.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Plot regular heatmap</span></span>
-<span class="r-in"><span class="co">#SpiveyEtAl2005 = mt_import_long(SpiveyEtAl2005_raw,'x','y',NULL,'t',</span></span>
-<span class="r-in"><span class="co">#mt_id_label = c('ptp','trial'))</span></span>
-<span class="r-in"><span class="co">#heatmap = mt_heatmap_raw(SpiveyEtAl2005,xres = 2000)</span></span>
-<span class="r-in"><span class="co">#mt_heatmap(heatmap,file = NULL)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># compute measures</span></span>
-<span class="r-in"><span class="co">#SpiveyEtAl2005 = mt_measures(SpiveyEtAl2005)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Plot heatmap using velocity</span></span>
-<span class="r-in"><span class="co">#mt_heatmap(SpiveyEtAl2005)</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Plot regular heatmap</span></span></span>
+<span class="r-in"><span><span class="co">#SpiveyEtAl2005 = mt_import_long(SpiveyEtAl2005_raw,'x','y',NULL,'t',</span></span></span>
+<span class="r-in"><span><span class="co">#mt_id_label = c('ptp','trial'))</span></span></span>
+<span class="r-in"><span><span class="co">#heatmap = mt_heatmap_raw(SpiveyEtAl2005,xres = 2000)</span></span></span>
+<span class="r-in"><span><span class="co">#mt_heatmap(heatmap,file = NULL)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># compute measures</span></span></span>
+<span class="r-in"><span><span class="co">#SpiveyEtAl2005 = mt_measures(SpiveyEtAl2005)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Plot heatmap using velocity</span></span></span>
+<span class="r-in"><span><span class="co">#mt_heatmap(SpiveyEtAl2005)</span></span></span>
+<span class="r-in"><span></span></span>
 <span class="r-in"></span>
 </code></pre></div>
     </div>
@@ -133,7 +150,7 @@ image's pixel information.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

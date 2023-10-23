@@ -27,13 +27,13 @@ functions within this package (see mousetrap for an overview)."><!-- mathjax -->
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
-  <a href="../reference/mousetrap.html">Overview</a>
+  <a href="../reference/mousetrap-package.html">Overview</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -72,38 +72,46 @@ trajectories and additional data for further processing within the mousetrap
 package. Specifically, it returns a list that includes the trajectory data as
 an array (called <code>trajectories</code>), and all other data as a data.frame
 (called <code>data</code>). This data structure can then be passed on to other
-functions within this package (see <a href="mousetrap.html">mousetrap</a> for an overview).</p>
+functions within this package (see <a href="mousetrap-package.html">mousetrap</a> for an overview).</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">mt_import_mousetrap</span><span class="op">(</span>
-  <span class="va">raw_data</span>,
-  xpos_label <span class="op">=</span> <span class="st">"xpos"</span>,
-  ypos_label <span class="op">=</span> <span class="st">"ypos"</span>,
-  timestamps_label <span class="op">=</span> <span class="st">"timestamps"</span>,
-  mt_id_label <span class="op">=</span> <span class="cn">NULL</span>,
-  split <span class="op">=</span> <span class="st">","</span>,
-  duplicates <span class="op">=</span> <span class="st">"remove_first"</span>,
-  unordered <span class="op">=</span> <span class="st">"warn"</span>,
-  reset_timestamps <span class="op">=</span> <span class="cn">TRUE</span>,
-  digits <span class="op">=</span> <span class="cn">NULL</span>,
-  verbose <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">mt_import_mousetrap</span><span class="op">(</span></span>
+<span>  <span class="va">raw_data</span>,</span>
+<span>  xpos_label <span class="op">=</span> <span class="st">"xpos"</span>,</span>
+<span>  ypos_label <span class="op">=</span> <span class="st">"ypos"</span>,</span>
+<span>  timestamps_label <span class="op">=</span> <span class="st">"timestamps"</span>,</span>
+<span>  mt_id_label <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  split <span class="op">=</span> <span class="st">","</span>,</span>
+<span>  duplicates <span class="op">=</span> <span class="st">"remove_first"</span>,</span>
+<span>  unordered <span class="op">=</span> <span class="st">"warn"</span>,</span>
+<span>  reset_timestamps <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  digits <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>raw_data</dt>
 <dd><p>a data.frame containing the raw data.</p></dd>
+
+
 <dt>xpos_label</dt>
 <dd><p>a character string specifying the name of the column(s) in
 which the x-positions are stored (see Details).</p></dd>
+
+
 <dt>ypos_label</dt>
 <dd><p>a character string specifying the name of the column(s) in
 which the y-positions are stored (see Details).</p></dd>
+
+
 <dt>timestamps_label</dt>
 <dd><p>a character string specifying the name of the column(s)
 in which the timestamps are stored (see Details).</p></dd>
+
+
 <dt>mt_id_label</dt>
 <dd><p>an optional character string (or vector) specifying the
 name of the column that provides a unique ID for every trial (the trial
@@ -113,32 +121,49 @@ will be created by combining the values of each variable. The trial
 identifier will be set as the <a href="https://rdrr.io/r/base/colnames.html" class="external-link">rownames</a> of the resulting trajectories
 and trial data, and additionally be stored in the column "mt_id" in the
 trial data.</p></dd>
+
+
 <dt>split</dt>
 <dd><p>a character string indicating how the different timestamps and
 coordinates within a trial are separated.</p></dd>
+
+
 <dt>duplicates</dt>
 <dd><p>a character string indicating how duplicate timestamps
 within a trial are handled (see Details).</p></dd>
+
+
 <dt>unordered</dt>
 <dd><p>a character string indicating how unordered (i.e.,
 non-monotonically increasing) timestamps within a trial are handled (see
 Details).</p></dd>
+
+
 <dt>reset_timestamps</dt>
 <dd><p>logical indicating if the first timestamp should be
 subtracted from all timestamps within a trial. Default is <code>TRUE</code> as it
 is recommended for all following analyses in mousetrap.</p></dd>
+
+
 <dt>digits</dt>
 <dd><p>an optional integer. If specified, timestamps will be rounded.
 Potentially useful if timestamps are recorded with submillisecond
 precision.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>logical indicating whether function should report its
 progress.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A mousetrap data object (see <a href="mt_example.html">mt_example</a>).
-If mouse-tracking data were recorded using the mousetrap plug-ins for
+    
+
+<p>A mousetrap data object (see <a href="mt_example.html">mt_example</a>).</p>
+
+
+<p>If mouse-tracking data were recorded using the mousetrap plug-ins for
 OpenSesame, the unit of the timestamps is milliseconds.</p>
     </div>
     <div id="details">
@@ -182,7 +207,7 @@ along with the corresponding x-/y-position.</p></li>
     <h2>References</h2>
     <p>Kieslich, P. J., &amp; Henninger, F. (2017). Mousetrap: An
 integrated, open-source mouse-tracking package. <em>Behavior Research
-Methods, 49</em>(5), 1652-1667. doi: <a href="https://doi.org/10.3758/s13428-017-0900-z" class="external-link">10.3758/s13428-017-0900-z</a></p>
+Methods, 49</em>(5), 1652-1667. <a href="https://doi.org/10.3758/s13428-017-0900-z" class="external-link">doi:10.3758/s13428-017-0900-z</a></p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -200,8 +225,8 @@ data from other sources.</p></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">mt_data</span> <span class="op">&lt;-</span> <span class="fu">mt_import_mousetrap</span><span class="op">(</span><span class="va">mt_example_raw</span><span class="op">)</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">mt_data</span> <span class="op">&lt;-</span> <span class="fu">mt_import_mousetrap</span><span class="op">(</span><span class="va">mt_example_raw</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -216,7 +241,7 @@ data from other sources.</p></div>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

@@ -18,13 +18,13 @@ trajectory variables within or across trajectories."><!-- mathjax --><script src
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
-  <a href="../reference/mousetrap.html">Overview</a>
+  <a href="../reference/mousetrap-package.html">Overview</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -58,17 +58,17 @@ trajectory variables within or across trajectories.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">mt_scale_trajectories</span><span class="op">(</span>
-  <span class="va">data</span>,
-  use <span class="op">=</span> <span class="st">"trajectories"</span>,
-  save_as <span class="op">=</span> <span class="va">use</span>,
-  <span class="va">var_names</span>,
-  center <span class="op">=</span> <span class="cn">TRUE</span>,
-  scale <span class="op">=</span> <span class="cn">TRUE</span>,
-  within_trajectory <span class="op">=</span> <span class="cn">FALSE</span>,
-  prefix <span class="op">=</span> <span class="st">"z_"</span>,
-  transform <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">mt_scale_trajectories</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  use <span class="op">=</span> <span class="st">"trajectories"</span>,</span>
+<span>  save_as <span class="op">=</span> <span class="va">use</span>,</span>
+<span>  <span class="va">var_names</span>,</span>
+<span>  center <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  scale <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  within_trajectory <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  prefix <span class="op">=</span> <span class="st">"z_"</span>,</span>
+<span>  transform <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -77,19 +77,29 @@ trajectory variables within or across trajectories.</p>
 <dd><p>a mousetrap data object created using one of the mt_import
 functions (see <a href="mt_example.html">mt_example</a> for details). Alternatively, a trajectory
 array can be provided directly (in this case <code>use</code> will be ignored).</p></dd>
+
+
 <dt>use</dt>
 <dd><p>a character string specifying which trajectory data should be
 used.</p></dd>
+
+
 <dt>save_as</dt>
 <dd><p>a character string specifying where the resulting trajectory
 data should be stored.</p></dd>
+
+
 <dt>var_names</dt>
 <dd><p>character vector giving the labels of the to be
 standardized variables.</p></dd>
+
+
 <dt>center</dt>
 <dd><p>logical specifying whether variables should be centered (i.e.,
 <code>mean = 0</code>). Can be a logical vector, in which case the values of
 <code>scale</code> are mapped to the variables specified in <code>var_names</code>.</p></dd>
+
+
 <dt>scale</dt>
 <dd><p>logical or numeric specifying the scaling of the variables. When
 logical, <code>scale = TRUE</code> normalizes the trajectory variable to sd = 1,
@@ -98,6 +108,8 @@ numeric, the trajectory variables are scaled by (i.e., divided by) the
 specific value in scale. Can also be a numeric vector, in which case the
 values of <code>scale</code> are mapped to the variables specified in
 <code>var_names</code>.</p></dd>
+
+
 <dt>within_trajectory</dt>
 <dd><p>logical specifying whether trajectory variables
 should be scaled within or across trajectories. If <code>within_trajectory
@@ -107,18 +119,25 @@ be standardized trajectory variable will have mean = 0 and sd = 1. If
 only true in the aggregate (i.e., across all trajectories). Can be a
 logical vector, in which case the values of <code>scale</code> are mapped to the
 variables specified in <code>var_names</code>.</p></dd>
+
+
 <dt>prefix</dt>
 <dd><p>character string added to the names of the new standardized
 variables. If <code>prefix = ""</code>, the original variables will be
 overwritten.</p></dd>
+
+
 <dt>transform</dt>
 <dd><p>function that takes a numeric matrix as argument and returns
 a numeric matrix of same size with transformed values. If <code>NULL</code> the
 original values are passed on to standardization.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A mousetrap data object (see <a href="mt_example.html">mt_example</a>) with an additional
+    
+
+<p>A mousetrap data object (see <a href="mt_example.html">mt_example</a>) with an additional
 variable containing the standardized trajectory variable added to the
 trajectory array). If the trajectory array was provided directly as
 <code>data</code>, only the trajectory array will be returned.</p>
@@ -135,12 +154,12 @@ other variables.</p></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Calculate derivatives</span></span>
-<span class="r-in"><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_derivatives.html">mt_derivatives</a></span><span class="op">(</span><span class="va">mt_example</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Standardize velocity across trajectories</span></span>
-<span class="r-in"><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu">mt_scale_trajectories</span><span class="op">(</span><span class="va">mt_example</span>,var_names <span class="op">=</span> <span class="st">"vel"</span><span class="op">)</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Calculate derivatives</span></span></span>
+<span class="r-in"><span><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_derivatives.html">mt_derivatives</a></span><span class="op">(</span><span class="va">mt_example</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Standardize velocity across trajectories</span></span></span>
+<span class="r-in"><span><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu">mt_scale_trajectories</span><span class="op">(</span><span class="va">mt_example</span>,var_names <span class="op">=</span> <span class="st">"vel"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -155,7 +174,7 @@ other variables.</p></div>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

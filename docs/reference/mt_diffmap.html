@@ -19,13 +19,13 @@ gaussian smoothing. Note that this function has beta status."><!-- mathjax --><s
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
-  <a href="../reference/mousetrap.html">Overview</a>
+  <a href="../reference/mousetrap-package.html">Overview</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -60,24 +60,24 @@ gaussian smoothing. Note that this function has beta status.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">mt_diffmap</span><span class="op">(</span>
-  <span class="va">x</span>,
-  y <span class="op">=</span> <span class="cn">NULL</span>,
-  condition <span class="op">=</span> <span class="cn">NULL</span>,
-  use <span class="op">=</span> <span class="st">"trajectories"</span>,
-  dimensions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"xpos"</span>, <span class="st">"ypos"</span><span class="op">)</span>,
-  use2 <span class="op">=</span> <span class="st">"data"</span>,
-  filename <span class="op">=</span> <span class="cn">NULL</span>,
-  bounds <span class="op">=</span> <span class="cn">NULL</span>,
-  xres <span class="op">=</span> <span class="fl">500</span>,
-  upscale <span class="op">=</span> <span class="fl">4</span>,
-  smooth_radius <span class="op">=</span> <span class="fl">10</span>,
-  colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#00863F"</span>, <span class="st">"#000000"</span>, <span class="st">"#FF1900"</span><span class="op">)</span>,
-  n_shades <span class="op">=</span> <span class="fl">1000</span>,
-  plot <span class="op">=</span> <span class="cn">TRUE</span>,
-  <span class="va">...</span>,
-  verbose <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">mt_diffmap</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  y <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  condition <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  use <span class="op">=</span> <span class="st">"trajectories"</span>,</span>
+<span>  dimensions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"xpos"</span>, <span class="st">"ypos"</span><span class="op">)</span>,</span>
+<span>  use2 <span class="op">=</span> <span class="st">"data"</span>,</span>
+<span>  filename <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  bounds <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  xres <span class="op">=</span> <span class="fl">500</span>,</span>
+<span>  upscale <span class="op">=</span> <span class="fl">4</span>,</span>
+<span>  smooth_radius <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#00863F"</span>, <span class="st">"#000000"</span>, <span class="st">"#FF1900"</span><span class="op">)</span>,</span>
+<span>  n_shades <span class="op">=</span> <span class="fl">1000</span>,</span>
+<span>  plot <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -86,11 +86,15 @@ gaussian smoothing. Note that this function has beta status.</p>
 <dd><p>an object of class <code>mousetrap</code>), a trajectory object of class
 <code>array</code>, or an object of class <code>mt_heatmap_raw</code> (as created by
 <a href="mt_heatmap_raw.html">mt_heatmap_raw</a>).</p></dd>
+
+
 <dt>y</dt>
 <dd><p>an object of class <code>mousetrap</code>), a trajectory object of class
 <code>array</code>, or an object of class <code>mt_heatmap_raw</code> (as created by
 <a href="mt_heatmap_raw.html">mt_heatmap_raw</a>). The class of <code>y</code> must match the class of
 <code>x</code>, unless <code>y</code> is <code>NULL</code>.</p></dd>
+
+
 <dt>condition</dt>
 <dd><p>either a character value specifying which variable codes the
 two conditions (in <code>x[[use2]]</code>) that should be compared - or a vector
@@ -99,57 +103,84 @@ levels. <code>mt_diffmap</code> will create a difference-heatmap comparing all
 trajectories between the two conditions. If <code>condition</code> is specified,
 <code>y</code> will be ignored (unless <code>x</code> and <code>y</code> are of class
 <code>heatmap_raw</code>).</p></dd>
+
+
 <dt>use</dt>
 <dd><p>a character string specifying which trajectory data should be
 used.</p></dd>
+
+
 <dt>dimensions</dt>
 <dd><p>a character vector specifying the trajectory variables used
 to create the heatmap. The first two entries are used as x and
 y-coordinates, the third, if provided, will be added as color information.</p></dd>
+
+
 <dt>use2</dt>
 <dd><p>an optional character string specifying where the data that
 contain the condition variable can be found. Defaults to "data" as
 <code>x[["data"]]</code> usually contains all non mouse-tracking trial data.</p></dd>
+
+
 <dt>filename</dt>
 <dd><p>a character string giving the name of the file. If
 <code>NULL</code> (the default), the R standard device is used for plotting.
 Otherwise, the plotting device is inferred from the file extension. Only
 supports devices <a href="https://rdrr.io/r/grDevices/png.html" class="external-link">tiff</a>, <a href="https://rdrr.io/r/grDevices/png.html" class="external-link">png</a>,
 <a href="https://rdrr.io/r/grDevices/pdf.html" class="external-link">pdf</a>.</p></dd>
+
+
 <dt>bounds</dt>
 <dd><p>numeric vector specifying the corners (xmin, ymin, xmax, ymax)
 of the plot region. By default (<code>bounds = NULL</code>), bounds are
 determined based on the data input.</p></dd>
+
+
 <dt>xres</dt>
 <dd><p>an integer specifying the number of pixels along the x-dimension.
 An <code>xres</code> of 1000 implies an 1000*N px, where N is determined so that
 the trajectories aspect ratio is preserved (provided the <code>bounds</code> are
 unchanged).</p></dd>
+
+
 <dt>upscale</dt>
 <dd><p>a numeric value by which the output resolution of the image is
 increased or decreased. Only applies if device is one of tiff, png, or pdf.</p></dd>
+
+
 <dt>smooth_radius</dt>
 <dd><p>a numeric value specifying the standard deviation of the
 gaussian smoothing. If zero, smoothing is omitted.</p></dd>
+
+
 <dt>colors</dt>
 <dd><p>a character vector specifying the colors used to color
 cases of <code>image1 &gt; image2, image1 ~ image2, image1 &lt; image2</code>,
 respectively. Note that the colors are used in that specific order.
 Defaults to c("#00863F", "#FFFFFF", "#FF1900") which specifies
 a green-black-red color gradient.</p></dd>
+
+
 <dt>n_shades</dt>
 <dd><p>integer specifying the number of shades for the color
 gradient between the first and second, and the second and third color in
 <code>colors</code>.</p></dd>
+
+
 <dt>plot</dt>
 <dd><p>logical specifying whether resulting image should be plotted
 (<code>plot = TRUE</code>, the default). If (<code>plot = FALSE</code>), an object of
 class <code>mt_object_raw</code> is returned.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>arguments passed to <a href="mt_heatmap_raw.html">mt_heatmap_raw</a>.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>logical indicating whether function should report its
 progress.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -183,8 +214,8 @@ heatmaps.</p></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu">mt_diffmap</span><span class="op">(</span><span class="va">KH2017</span>, condition<span class="op">=</span><span class="st">"Condition"</span>,</span>
-<span class="r-in">  xres<span class="op">=</span><span class="fl">400</span>, smooth_radius<span class="op">=</span><span class="fl">6</span>, n_shades<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">mt_diffmap</span><span class="op">(</span><span class="va">KH2017</span>, condition<span class="op">=</span><span class="st">"Condition"</span>,</span></span>
+<span class="r-in"><span>  xres<span class="op">=</span><span class="fl">400</span>, smooth_radius<span class="op">=</span><span class="fl">6</span>, n_shades<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Determine joint bounds </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Calculating heatmap for x </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Calculating heatmap for y </span>
@@ -192,7 +223,7 @@ heatmaps.</p></div>
 <span class="r-out co"><span class="r-pr">#&gt;</span> creating heatmap:  400 x 245 px </span>
 <span class="r-plt img"><img src="mt_diffmap-1.png" alt="" width="700" height="433"></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> heatmap created in 2s</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -207,7 +238,7 @@ heatmaps.</p></div>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

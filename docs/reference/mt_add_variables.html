@@ -21,13 +21,13 @@ coordinate and wants to add them to an existing trajectory array."><!-- mathjax 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
-  <a href="../reference/mousetrap.html">Overview</a>
+  <a href="../reference/mousetrap-package.html">Overview</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -64,7 +64,7 @@ coordinate and wants to add them to an existing trajectory array.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">mt_add_variables</span><span class="op">(</span><span class="va">data</span>, use <span class="op">=</span> <span class="st">"trajectories"</span>, save_as <span class="op">=</span> <span class="va">use</span>, <span class="va">variables</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">mt_add_variables</span><span class="op">(</span><span class="va">data</span>, use <span class="op">=</span> <span class="st">"trajectories"</span>, save_as <span class="op">=</span> <span class="va">use</span>, <span class="va">variables</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -73,12 +73,18 @@ coordinate and wants to add them to an existing trajectory array.</p>
 <dd><p>a mousetrap data object created using one of the mt_import
 functions (see <a href="mt_example.html">mt_example</a> for details). Alternatively, a trajectory
 array can be provided directly (in this case <code>use</code> will be ignored).</p></dd>
+
+
 <dt>use</dt>
 <dd><p>a character string specifying which trajectory data should be
 used.</p></dd>
+
+
 <dt>save_as</dt>
 <dd><p>a character string specifying where the resulting trajectory
 data should be stored.</p></dd>
+
+
 <dt>variables</dt>
 <dd><p>a list of matrices that each contain the data of
 one of the to be added variables. In this case, the new variables with
@@ -86,10 +92,13 @@ their values are added as a new entry in the trajectory arrays third
 dimension. Alternatively, a character vector specifying the name of the new
 variables that should be added to the trajectory array. In this case, the
 new variables are filled with <code>NA</code>s.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A mousetrap data object (see <a href="mt_example.html">mt_example</a>) where the new
+    
+
+<p>A mousetrap data object (see <a href="mt_example.html">mt_example</a>) where the new
 variables have been added to the trajectory array.
 Depending on the input to <code>variables</code>, the values for the added
 variables are either <code>NA</code>s or their actual values. If columns of the
@@ -105,16 +114,16 @@ returned.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Calculate new (arbitrary) variables for this example</span></span>
-<span class="r-in"><span class="co"># ... the sum of the x- and y-positions</span></span>
-<span class="r-in"><span class="va">xy_sum</span> <span class="op">&lt;-</span> <span class="va">mt_example</span><span class="op">$</span><span class="va">trajectories</span><span class="op">[</span>,,<span class="st">"xpos"</span><span class="op">]</span> <span class="op">+</span> <span class="va">mt_example</span><span class="op">$</span><span class="va">trajectories</span><span class="op">[</span>,,<span class="st">"ypos"</span><span class="op">]</span></span>
-<span class="r-in"><span class="co"># ... the product of the x- and y-positions</span></span>
-<span class="r-in"><span class="va">xy_prod</span> <span class="op">&lt;-</span> <span class="va">mt_example</span><span class="op">$</span><span class="va">trajectories</span><span class="op">[</span>,,<span class="st">"xpos"</span><span class="op">]</span> <span class="op">*</span> <span class="va">mt_example</span><span class="op">$</span><span class="va">trajectories</span><span class="op">[</span>,,<span class="st">"ypos"</span><span class="op">]</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Add the new variables to the trajectory array</span></span>
-<span class="r-in"><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu">mt_add_variables</span><span class="op">(</span><span class="va">mt_example</span>,</span>
-<span class="r-in">  variables<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>xy_sum<span class="op">=</span><span class="va">xy_sum</span>, xy_prod<span class="op">=</span><span class="va">xy_prod</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Calculate new (arbitrary) variables for this example</span></span></span>
+<span class="r-in"><span><span class="co"># ... the sum of the x- and y-positions</span></span></span>
+<span class="r-in"><span><span class="va">xy_sum</span> <span class="op">&lt;-</span> <span class="va">mt_example</span><span class="op">$</span><span class="va">trajectories</span><span class="op">[</span>,,<span class="st">"xpos"</span><span class="op">]</span> <span class="op">+</span> <span class="va">mt_example</span><span class="op">$</span><span class="va">trajectories</span><span class="op">[</span>,,<span class="st">"ypos"</span><span class="op">]</span></span></span>
+<span class="r-in"><span><span class="co"># ... the product of the x- and y-positions</span></span></span>
+<span class="r-in"><span><span class="va">xy_prod</span> <span class="op">&lt;-</span> <span class="va">mt_example</span><span class="op">$</span><span class="va">trajectories</span><span class="op">[</span>,,<span class="st">"xpos"</span><span class="op">]</span> <span class="op">*</span> <span class="va">mt_example</span><span class="op">$</span><span class="va">trajectories</span><span class="op">[</span>,,<span class="st">"ypos"</span><span class="op">]</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Add the new variables to the trajectory array</span></span></span>
+<span class="r-in"><span><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu">mt_add_variables</span><span class="op">(</span><span class="va">mt_example</span>,</span></span>
+<span class="r-in"><span>  variables<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>xy_sum<span class="op">=</span><span class="va">xy_sum</span>, xy_prod<span class="op">=</span><span class="va">xy_prod</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -129,7 +138,7 @@ returned.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

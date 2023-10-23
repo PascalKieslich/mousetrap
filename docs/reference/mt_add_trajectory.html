@@ -17,13 +17,13 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
-  <a href="../reference/mousetrap.html">Overview</a>
+  <a href="../reference/mousetrap-package.html">Overview</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -56,15 +56,15 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">mt_add_trajectory</span><span class="op">(</span>
-  <span class="va">data</span>,
-  use <span class="op">=</span> <span class="st">"trajectories"</span>,
-  save_as <span class="op">=</span> <span class="va">use</span>,
-  xpos <span class="op">=</span> <span class="cn">NULL</span>,
-  ypos <span class="op">=</span> <span class="cn">NULL</span>,
-  xypos <span class="op">=</span> <span class="cn">NULL</span>,
-  id <span class="op">=</span> <span class="st">"new"</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">mt_add_trajectory</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  use <span class="op">=</span> <span class="st">"trajectories"</span>,</span>
+<span>  save_as <span class="op">=</span> <span class="va">use</span>,</span>
+<span>  xpos <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ypos <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  xypos <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  id <span class="op">=</span> <span class="st">"new"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -73,26 +73,41 @@
 <dd><p>a mousetrap data object created using one of the mt_import
 functions (see <a href="mt_example.html">mt_example</a> for details). Alternatively, a trajectory
 array can be provided directly (in this case <code>use</code> will be ignored).</p></dd>
+
+
 <dt>use</dt>
 <dd><p>a character string specifying which trajectory data should be
 used.</p></dd>
+
+
 <dt>save_as</dt>
 <dd><p>a character string specifying where the resulting trajectory
 data should be stored.</p></dd>
+
+
 <dt>xpos</dt>
 <dd><p>a vector of x positions. Ignored, if <code>xypos</code> is provided.</p></dd>
+
+
 <dt>ypos</dt>
 <dd><p>a vector of y positions. Ignored, if <code>xypos</code> is provided.</p></dd>
+
+
 <dt>xypos</dt>
 <dd><p>a matrix, the first column corresponding to the x positions, the
 second to the y positions.</p></dd>
+
+
 <dt>id</dt>
 <dd><p>a character string specifying the identifier of the to be added
 trajectory.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A mousetrap data object (see <a href="mt_example.html">mt_example</a>) where the new
+    
+
+<p>A mousetrap data object (see <a href="mt_example.html">mt_example</a>) where the new
 trajectory has been added.
 If the trajectory array was provided directly as <code>data</code>, only the
 trajectory array will be returned.</p>
@@ -105,11 +120,11 @@ trajectory array will be returned.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Add additional prototype to mt_prototypes</span></span>
-<span class="r-in"><span class="va">mt_prototypes_ext</span> <span class="op">&lt;-</span> <span class="fu">mt_add_trajectory</span><span class="op">(</span><span class="va">mt_prototypes</span>,</span>
-<span class="r-in">   xpos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="op">-</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="op">-</span><span class="fl">1</span><span class="op">)</span>, ypos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1.5</span>,<span class="fl">1.5</span>,<span class="fl">1.5</span>,<span class="fl">1.5</span><span class="op">)</span>, id <span class="op">=</span> <span class="st">"dCoM3"</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Add additional prototype to mt_prototypes</span></span></span>
+<span class="r-in"><span><span class="va">mt_prototypes_ext</span> <span class="op">&lt;-</span> <span class="fu">mt_add_trajectory</span><span class="op">(</span><span class="va">mt_prototypes</span>,</span></span>
+<span class="r-in"><span>   xpos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span>,<span class="op">-</span><span class="fl">1</span>,<span class="fl">1</span>,<span class="op">-</span><span class="fl">1</span><span class="op">)</span>, ypos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1.5</span>,<span class="fl">1.5</span>,<span class="fl">1.5</span>,<span class="fl">1.5</span><span class="op">)</span>, id <span class="op">=</span> <span class="st">"dCoM3"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -124,7 +139,7 @@ trajectory array will be returned.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

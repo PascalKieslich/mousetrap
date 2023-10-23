@@ -19,13 +19,13 @@ the resulting dissimilarity matrix using a predefined number of clusters."><!-- 
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
-  <a href="../reference/mousetrap.html">Overview</a>
+  <a href="../reference/mousetrap-package.html">Overview</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -60,22 +60,22 @@ the resulting dissimilarity matrix using a predefined number of clusters.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">mt_cluster</span><span class="op">(</span>
-  <span class="va">data</span>,
-  use <span class="op">=</span> <span class="st">"ln_trajectories"</span>,
-  save_as <span class="op">=</span> <span class="st">"clustering"</span>,
-  dimensions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"xpos"</span>, <span class="st">"ypos"</span><span class="op">)</span>,
-  n_cluster <span class="op">=</span> <span class="fl">5</span>,
-  method <span class="op">=</span> <span class="st">"hclust"</span>,
-  weights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">dimensions</span><span class="op">)</span><span class="op">)</span>,
-  pointwise <span class="op">=</span> <span class="cn">TRUE</span>,
-  minkowski_p <span class="op">=</span> <span class="fl">2</span>,
-  hclust_method <span class="op">=</span> <span class="st">"ward.D"</span>,
-  kmeans_nstart <span class="op">=</span> <span class="fl">10</span>,
-  na_rm <span class="op">=</span> <span class="cn">FALSE</span>,
-  cluster_output <span class="op">=</span> <span class="cn">FALSE</span>,
-  verbose <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">mt_cluster</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  use <span class="op">=</span> <span class="st">"ln_trajectories"</span>,</span>
+<span>  save_as <span class="op">=</span> <span class="st">"clustering"</span>,</span>
+<span>  dimensions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"xpos"</span>, <span class="st">"ypos"</span><span class="op">)</span>,</span>
+<span>  n_cluster <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>  method <span class="op">=</span> <span class="st">"hclust"</span>,</span>
+<span>  weights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">dimensions</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  pointwise <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  minkowski_p <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  hclust_method <span class="op">=</span> <span class="st">"ward.D"</span>,</span>
+<span>  kmeans_nstart <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  na_rm <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  cluster_output <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -84,27 +84,41 @@ the resulting dissimilarity matrix using a predefined number of clusters.</p>
 <dd><p>a mousetrap data object created using one of the mt_import
 functions (see <a href="mt_example.html">mt_example</a> for details). Alternatively, a trajectory
 array can be provided directly (in this case <code>use</code> will be ignored).</p></dd>
+
+
 <dt>use</dt>
 <dd><p>a character string specifying which trajectory data should be
 used.</p></dd>
+
+
 <dt>save_as</dt>
 <dd><p>a character string specifying where the resulting data should
 be stored.</p></dd>
+
+
 <dt>dimensions</dt>
 <dd><p>a character vector specifying which trajectory variables
 should be used. Can be of length 2 or 3, for two-dimensional or
 three-dimensional trajectories respectively.</p></dd>
+
+
 <dt>n_cluster</dt>
 <dd><p>an integer specifying the number of clusters to estimate.</p></dd>
+
+
 <dt>method</dt>
 <dd><p>character string specifying the clustering procedure. Either
 <a href="https://rdrr.io/pkg/fastcluster/man/hclust.html" class="external-link">hclust</a> (the default) or <a href="https://rdrr.io/r/stats/kmeans.html" class="external-link">kmeans</a>.</p></dd>
+
+
 <dt>weights</dt>
 <dd><p>numeric vector specifying the relative importance of the
 variables specified in <code>dimensions</code>. Defaults to a vector of 1s
 implying equal importance. Technically, each variable is rescaled so that
 the standard deviation matches the corresponding value in <code>weights</code>.
 To use the original variables, set <code>weights = NULL</code>.</p></dd>
+
+
 <dt>pointwise</dt>
 <dd><p>boolean specifying the way in which dissimilarity between
 the trajectories is measured. If <code>TRUE</code> (the default),
@@ -113,39 +127,54 @@ results. If <code>FALSE</code>, <code>mt_distmat</code>  measures dissimilarity 
 (by treating the various points as independent dimensions). This is only
 relevant if <code>method</code> is "hclust". See <a href="mt_distmat.html">mt_distmat</a> for further
 details.</p></dd>
+
+
 <dt>minkowski_p</dt>
 <dd><p>an integer specifying the distance metric for the cluster
 solution. <code>minkowski_p = 1</code> computes the city-block distance,
 <code>minkowski_p = 2</code> (the default) computes the Euclidian distance,
 <code>minkowski_p = 3</code> the cubic distance, etc. Only relevant if
 <code>method</code> is "hclust". See <a href="mt_distmat.html">mt_distmat</a> for further details.</p></dd>
+
+
 <dt>hclust_method</dt>
 <dd><p>character string specifying the linkage criterion used.
 Passed on to the <code>method</code> argument of <a href="https://rdrr.io/r/stats/hclust.html" class="external-link">hclust</a>. Default is
 set to <code>ward.D</code>. Only relevant if <code>method</code> is "hclust".</p></dd>
+
+
 <dt>kmeans_nstart</dt>
 <dd><p>integer specifying the number of reruns of the kmeans
 procedure. Larger numbers minimize the risk of finding local minima. Passed
 on to the <code>nstart</code> argument of <a href="https://rdrr.io/r/stats/kmeans.html" class="external-link">kmeans</a>. Only relevant if
 <code>method</code> is "kmeans".</p></dd>
+
+
 <dt>na_rm</dt>
 <dd><p>logical specifying whether trajectory points containing NAs
 should be removed. Removal is done column-wise. That is, if any trajectory
 has a missing value at, e.g., the 10th recorded position, the 10th position
 is removed for all trajectories. This is necessary to compute distance
 between trajectories.</p></dd>
+
+
 <dt>cluster_output</dt>
 <dd><p>logical. If <code>FALSE</code> (the default), the mousetrap
 data object with the cluster assignments is returned (see Value). If
 <code>TRUE</code>, the output of the cluster method (<code>kmeans</code> or
 <code>hclust</code>) is returned directly.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>logical indicating whether function should report its
 progress.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A mousetrap data object (see <a href="mt_example.html">mt_example</a>) with an additional
+    
+
+<p>A mousetrap data object (see <a href="mt_example.html">mt_example</a>) with an additional
 <a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a> added to it (by default called <code>clustering</code>) that
 contains the cluster assignments. If a trajectory array was provided
 directly as <code>data</code>, only the clustering <code>data.frame</code> will be
@@ -177,7 +206,7 @@ trajectories share the same direction, e.g., that all trajectories end in the
 top-left corner of the coordinate system (<a href="mt_remap_symmetric.html">mt_remap_symmetric</a> or
 <a href="mt_align.html">mt_align</a> can be used to achieve this). Furthermore, it is recommended
 to use length normalized trajectories (see <a href="mt_length_normalize.html">mt_length_normalize</a>; Wulff
-et al., 2019, Wulff et al., 2021).</p>
+et al., 2019, Wulff et al., 2023).</p>
     </div>
     <div id="references">
     <h2>References</h2>
@@ -187,9 +216,9 @@ movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, &amp; J. G.
 Johnson (Eds.), <em>A Handbook of Process Tracing Methods</em> (pp. 131-145).
 New York, NY: Routledge.</p>
 <p>Wulff, D. U., Kieslich, P. J., Henninger, F., Haslbeck, J. M. B., &amp;
-Schulte-Mecklenbeck, M. (2021). <em>Movement tracking of cognitive
+Schulte-Mecklenbeck, M. (2023). <em>Movement tracking of psychological
 processes: A tutorial using mousetrap.</em> PsyArXiv.
-doi: <a href="https://doi.org/10.31234/osf.io/v685r" class="external-link">10.31234/osf.io/v685r</a></p>
+<a href="https://doi.org/10.31234/osf.io/v685r" class="external-link">doi:10.31234/osf.io/v685r</a></p>
 <p>Wulff, D. U., Haslbeck, J. M. B., &amp; Schulte-Mecklenbeck, M. (2022).
 <em>Measuring the (dis-)continuous mind: What movement trajectories
 reveal about cognition</em>. Manuscript in preparation.</p>
@@ -208,17 +237,17 @@ computed when the hclust method is used.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Length normalize trajectories</span></span>
-<span class="r-in"><span class="va">KH2017</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_length_normalize.html">mt_length_normalize</a></span><span class="op">(</span><span class="va">KH2017</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Cluster trajectories</span></span>
-<span class="r-in"><span class="va">KH2017</span> <span class="op">&lt;-</span> <span class="fu">mt_cluster</span><span class="op">(</span><span class="va">KH2017</span>, use<span class="op">=</span><span class="st">"ln_trajectories"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Plot clustered trajectories</span></span>
-<span class="r-in"><span class="fu"><a href="mt_plot.html">mt_plot</a></span><span class="op">(</span><span class="va">KH2017</span>,use<span class="op">=</span><span class="st">"ln_trajectories"</span>,</span>
-<span class="r-in">  use2<span class="op">=</span><span class="st">"clustering"</span>,facet_col<span class="op">=</span><span class="st">"cluster"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Length normalize trajectories</span></span></span>
+<span class="r-in"><span><span class="va">KH2017</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_length_normalize.html">mt_length_normalize</a></span><span class="op">(</span><span class="va">KH2017</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Cluster trajectories</span></span></span>
+<span class="r-in"><span><span class="va">KH2017</span> <span class="op">&lt;-</span> <span class="fu">mt_cluster</span><span class="op">(</span><span class="va">KH2017</span>, use<span class="op">=</span><span class="st">"ln_trajectories"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Plot clustered trajectories</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="mt_plot.html">mt_plot</a></span><span class="op">(</span><span class="va">KH2017</span>,use<span class="op">=</span><span class="st">"ln_trajectories"</span>,</span></span>
+<span class="r-in"><span>  use2<span class="op">=</span><span class="st">"clustering"</span>,facet_col<span class="op">=</span><span class="st">"cluster"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="mt_cluster-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -233,7 +262,7 @@ computed when the hclust method is used.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

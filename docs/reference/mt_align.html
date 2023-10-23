@@ -18,13 +18,13 @@ or coordinate system."><!-- mathjax --><script src="https://cdnjs.cloudflare.com
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
-  <a href="../reference/mousetrap.html">Overview</a>
+  <a href="../reference/mousetrap-package.html">Overview</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -58,17 +58,17 @@ or coordinate system.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">mt_align</span><span class="op">(</span>
-  <span class="va">data</span>,
-  use <span class="op">=</span> <span class="st">"trajectories"</span>,
-  save_as <span class="op">=</span> <span class="va">use</span>,
-  dimensions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"xpos"</span>, <span class="st">"ypos"</span><span class="op">)</span>,
-  coordinates <span class="op">=</span> <span class="st">"isotropic"</span>,
-  align_start <span class="op">=</span> <span class="cn">FALSE</span>,
-  align_end <span class="op">=</span> <span class="cn">FALSE</span>,
-  align_side <span class="op">=</span> <span class="st">"no"</span>,
-  verbose <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">mt_align</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  use <span class="op">=</span> <span class="st">"trajectories"</span>,</span>
+<span>  save_as <span class="op">=</span> <span class="va">use</span>,</span>
+<span>  dimensions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"xpos"</span>, <span class="st">"ypos"</span><span class="op">)</span>,</span>
+<span>  coordinates <span class="op">=</span> <span class="st">"isotropic"</span>,</span>
+<span>  align_start <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  align_end <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  align_side <span class="op">=</span> <span class="st">"no"</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -77,16 +77,24 @@ or coordinate system.</p>
 <dd><p>a mousetrap data object created using one of the mt_import
 functions (see <a href="mt_example.html">mt_example</a> for details). Alternatively, a trajectory
 array can be provided directly (in this case <code>use</code> will be ignored).</p></dd>
+
+
 <dt>use</dt>
 <dd><p>a character string specifying which trajectory data should be
 used.</p></dd>
+
+
 <dt>save_as</dt>
 <dd><p>a character string specifying where the resulting trajectory
 data should be stored.</p></dd>
+
+
 <dt>dimensions</dt>
 <dd><p>a character string specifying which trajectory variables
 should be used. Can be of length 2 or 3 for two-dimensional or
 three-dimensional alignment respectively.</p></dd>
+
+
 <dt>coordinates</dt>
 <dd><p>either a numeric vector of length 4 specifying the xstart,
 ystart, xend, yend coordinates of the trajectory start and end points. Can
@@ -97,26 +105,37 @@ and dim2, <code>mt</code> to set coordinates to <code>c(0,0,-1,1.5)</code>, <cod
 to set coordinates  to <code>c(0,0,-1,1)</code>, and <code>wide</code> to set
 coordinates  to <code>c(0,0,-1,1.2)</code>. In the three-dimensional case,
 <code>coordinates</code> is a vector of length 6.</p></dd>
+
+
 <dt>align_start</dt>
 <dd><p>boolean specifying whether the start points of all
 trajectories should be aligned to the position specified in
 <code>coordinates</code>. See Details.</p></dd>
+
+
 <dt>align_end</dt>
 <dd><p>boolean specifying whether the end points of all trajectories
 should be aligned to the position specified in <code>coordinates</code>. See
 Details.</p></dd>
+
+
 <dt>align_side</dt>
 <dd><p>character string specifying whether all trajectories should
 be flipped to the left side (<code>left</code>), the right side (<code>right</code>),
 or not at all (<code>no</code>). Assumes that first entry in <code>dimensions</code>
 are the x positions.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>logical indicating whether function should report its
 progress.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A mousetrap data object (see <a href="mt_example.html">mt_example</a>) with aligned
+    
+
+<p>A mousetrap data object (see <a href="mt_example.html">mt_example</a>) with aligned
 trajectories. Per default, the dimensions in the original trajectory array
 will be replaced. If a different trajectory array is specified using
 <code>save_as</code>, a new trajectory array will be created (including only the
@@ -155,10 +174,10 @@ quadrant) of the coordinate system.</p></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu">mt_align</span><span class="op">(</span><span class="va">mt_example</span>,</span>
-<span class="r-in">  align_start <span class="op">=</span> <span class="cn">TRUE</span>, align_end <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span class="r-in">  coordinates <span class="op">=</span> <span class="st">'mt'</span><span class="op">)</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu">mt_align</span><span class="op">(</span><span class="va">mt_example</span>,</span></span>
+<span class="r-in"><span>  align_start <span class="op">=</span> <span class="cn">TRUE</span>, align_end <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>  coordinates <span class="op">=</span> <span class="st">'mt'</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -173,7 +192,7 @@ quadrant) of the coordinate system.</p></div>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

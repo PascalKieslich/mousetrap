@@ -19,13 +19,13 @@ arguments."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
-  <a href="../reference/mousetrap.html">Overview</a>
+  <a href="../reference/mousetrap-package.html">Overview</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -60,7 +60,7 @@ arguments.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">mt_subset</span><span class="op">(</span><span class="va">data</span>, <span class="va">subset</span>, check <span class="op">=</span> <span class="st">"data"</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">mt_subset</span><span class="op">(</span><span class="va">data</span>, <span class="va">subset</span>, check <span class="op">=</span> <span class="st">"data"</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -68,16 +68,23 @@ arguments.</p>
     <dl><dt>data</dt>
 <dd><p>a mousetrap data object created using one of the mt_import
 functions (see <a href="mt_example.html">mt_example</a> for details).</p></dd>
+
+
 <dt>subset</dt>
 <dd><p>a logical expression (passed on to <a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a>) indicating
 the rows to keep. Missing values are taken as <code>FALSE</code>.</p></dd>
+
+
 <dt>check</dt>
 <dd><p>a character string specifying which data should be used for
 checking the subset condition.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A mousetrap data object (see <a href="mt_example.html">mt_example</a>) with filtered
+    
+
+<p>A mousetrap data object (see <a href="mt_example.html">mt_example</a>) with filtered
 data and trajectories.</p>
     </div>
     <div id="details">
@@ -112,13 +119,13 @@ mousetrap functions.</p></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Subset based on trial data</span></span>
-<span class="r-in"><span class="va">mt_example_atypical</span> <span class="op">&lt;-</span> <span class="fu">mt_subset</span><span class="op">(</span><span class="va">mt_example</span>, <span class="va">Condition</span><span class="op">==</span><span class="st">"Atypical"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Subset based on mouse-tracking measure (MAD)</span></span>
-<span class="r-in"><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_measures.html">mt_measures</a></span><span class="op">(</span><span class="va">mt_example</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">mt_example_mad_sub</span> <span class="op">&lt;-</span> <span class="fu">mt_subset</span><span class="op">(</span><span class="va">mt_example</span>, <span class="va">MAD</span><span class="op">&lt;</span><span class="fl">400</span>, check<span class="op">=</span><span class="st">"measures"</span><span class="op">)</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Subset based on trial data</span></span></span>
+<span class="r-in"><span><span class="va">mt_example_atypical</span> <span class="op">&lt;-</span> <span class="fu">mt_subset</span><span class="op">(</span><span class="va">mt_example</span>, <span class="va">Condition</span><span class="op">==</span><span class="st">"Atypical"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Subset based on mouse-tracking measure (MAD)</span></span></span>
+<span class="r-in"><span><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_measures.html">mt_measures</a></span><span class="op">(</span><span class="va">mt_example</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mt_example_mad_sub</span> <span class="op">&lt;-</span> <span class="fu">mt_subset</span><span class="op">(</span><span class="va">mt_example</span>, <span class="va">MAD</span><span class="op">&lt;</span><span class="fl">400</span>, check<span class="op">=</span><span class="st">"measures"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -133,7 +140,7 @@ mousetrap functions.</p></div>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

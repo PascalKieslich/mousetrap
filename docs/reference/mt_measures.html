@@ -23,13 +23,13 @@ Values sections."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
-  <a href="../reference/mousetrap.html">Overview</a>
+  <a href="../reference/mousetrap-package.html">Overview</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -68,18 +68,18 @@ Values sections.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">mt_measures</span><span class="op">(</span>
-  <span class="va">data</span>,
-  use <span class="op">=</span> <span class="st">"trajectories"</span>,
-  save_as <span class="op">=</span> <span class="st">"measures"</span>,
-  dimensions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"xpos"</span>, <span class="st">"ypos"</span><span class="op">)</span>,
-  timestamps <span class="op">=</span> <span class="st">"timestamps"</span>,
-  flip_threshold <span class="op">=</span> <span class="fl">0</span>,
-  hover_threshold <span class="op">=</span> <span class="cn">NULL</span>,
-  hover_incl_initial <span class="op">=</span> <span class="cn">TRUE</span>,
-  initiation_threshold <span class="op">=</span> <span class="fl">0</span>,
-  verbose <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">mt_measures</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  use <span class="op">=</span> <span class="st">"trajectories"</span>,</span>
+<span>  save_as <span class="op">=</span> <span class="st">"measures"</span>,</span>
+<span>  dimensions <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"xpos"</span>, <span class="st">"ypos"</span><span class="op">)</span>,</span>
+<span>  timestamps <span class="op">=</span> <span class="st">"timestamps"</span>,</span>
+<span>  flip_threshold <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  hover_threshold <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  hover_incl_initial <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  initiation_threshold <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -88,26 +88,38 @@ Values sections.</p>
 <dd><p>a mousetrap data object created using one of the mt_import
 functions (see <a href="mt_example.html">mt_example</a> for details). Alternatively, a trajectory
 array can be provided directly (in this case <code>use</code> will be ignored).</p></dd>
+
+
 <dt>use</dt>
 <dd><p>a character string specifying which trajectory data should be
 used.</p></dd>
+
+
 <dt>save_as</dt>
 <dd><p>a character string specifying where the calculated measures
 should be stored.</p></dd>
+
+
 <dt>dimensions</dt>
 <dd><p>a character vector specifying the two dimensions in the
 trajectory array that contain the mouse positions. Usually (and by
 default), the first value in the vector corresponds to the x-positions
 (<code>xpos</code>) and the second to the y-positions (<code>ypos</code>).</p></dd>
+
+
 <dt>timestamps</dt>
 <dd><p>a character string specifying the trajectory dimension
 containing the timestamps.</p></dd>
+
+
 <dt>flip_threshold</dt>
 <dd><p>a numeric value specifying the distance that needs to
 be exceeded in one direction so that a change in direction counts as a
 flip. If several thresholds are specified, flips will be returned in
 separate variables for each threshold value (the variable name will be
 suffixed with the threshold value).</p></dd>
+
+
 <dt>hover_threshold</dt>
 <dd><p>an optional numeric value. If specified, <code>hovers</code>
 (and <code>hover_time</code>)  will be calculated as the number (and total time)
@@ -116,109 +128,151 @@ specified in <code>hover_threshold</code>). If several thresholds are specified,
 hovers and hover_time will be returned in separate variables for each
 threshold value (the variable name will be suffixed with the threshold
 value).</p></dd>
+
+
 <dt>hover_incl_initial</dt>
 <dd><p>logical indicating if the calculation of hovers
 should include a potential initial phase in the trial without mouse
 movements (this initial phase is included by default).</p></dd>
+
+
 <dt>initiation_threshold</dt>
 <dd><p>a numeric value specifying the distance from the
 start point of the trajectory that needs to be exceeded for calculating the
 initiation time. By default, it is 0, meaning that any movement counts as
 movement initiation.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>logical indicating whether function should report its
 progress.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A mousetrap data object (see <a href="mt_example.html">mt_example</a>) where an additional
+    
+
+<p>A mousetrap data object (see <a href="mt_example.html">mt_example</a>) where an additional
 <a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a> has been added (by default called "measures") containing
 the per-trial mouse-tracking measures. Each row in the data.frame
 corresponds to one trajectory (the corresponding trajectory is identified
 via the rownames and, additionally, in the column "mt_id"). Each column in
 the data.frame corresponds to one of the measures. If a trajectory array
 was provided directly as <code>data</code>, only the measures data.frame will be
-returned.
-The following measures are computed for each trajectory (the labels
+returned.</p>
+
+
+<p>The following measures are computed for each trajectory (the labels
 relating to x- and y-positions will be adapted depending on the values
 specified in <code>dimensions</code>). Please note that additional information is
 provided in the Details section.</p>
 <dl><dt>mt_id</dt>
 <dd><p>Trial ID (can be used for merging measures data.frame with
 other trial-level data)</p></dd>
+
 <dt>xpos_max</dt>
 <dd><p>Maximum x-position</p></dd>
+
 <dt>xpos_min</dt>
 <dd><p>Minimum x-position</p></dd>
+
 <dt>ypos_max</dt>
 <dd><p>Maximum y-position</p></dd>
+
 <dt>ypos_min</dt>
 <dd><p>Minimum y-position</p></dd>
+
 <dt>MAD</dt>
 <dd><p>Signed Maximum absolute deviation from the direct path
 connecting start and end point of the trajectory (straight line).
 If the <code>MAD</code> occurs above the direct path, this is denoted by
 a positive value; if it occurs below, by a negative value.</p></dd>
+
 <dt>MAD_time</dt>
 <dd><p>Time at which the maximum absolute deviation was reached
 first</p></dd>
+
 <dt>MD_above</dt>
 <dd><p>Maximum deviation above the direct path</p></dd>
+
 <dt>MD_above_time</dt>
 <dd><p>Time at which the maximum deviation above was reached
 first</p></dd>
+
 <dt>MD_below</dt>
 <dd><p>Maximum deviation below the direct path</p></dd>
+
 <dt>MD_below_time</dt>
 <dd><p>Time at which the maximum deviation below was reached
 first</p></dd>
+
 <dt>AD</dt>
 <dd><p>Average deviation from direct path</p></dd>
+
 <dt>AUC</dt>
 <dd><p>Area under curve, the geometric area between the actual
 trajectory and the direct path where areas below the direct path have been
 subtracted</p></dd>
+
 <dt>xpos_flips</dt>
 <dd><p>Number of directional changes along x-axis (exceeding the
 distance specified in <code>flip_threshold</code>)</p></dd>
+
 <dt>ypos_flips</dt>
 <dd><p>Number of directional changes along y-axis (exceeding the
 distance specified in <code>flip_threshold</code>)</p></dd>
+
 <dt>xpos_reversals</dt>
 <dd><p>Number of crossings of the y-axis</p></dd>
+
 <dt>ypos_reversals</dt>
 <dd><p>Number of crossings of the x-axis</p></dd>
+
 <dt>RT</dt>
 <dd><p>Response time, time at which tracking stopped</p></dd>
+
 <dt>initiation_time</dt>
 <dd><p>Time at which first mouse movement was initiated</p></dd>
+
 <dt>idle_time</dt>
 <dd><p>Total time without mouse movement across the entirety of
 the trial</p></dd>
+
 <dt>hover_time</dt>
 <dd><p>Total time of all periods without movement in a trial
 (whose duration exceeds the value specified in <code>hover_threshold</code>)</p></dd>
+
 <dt>hovers</dt>
 <dd><p>Number of periods without movement in a trial (whose duration
 exceeds the value specified in <code>hover_threshold</code>)</p></dd>
+
 <dt>total_dist</dt>
 <dd><p>Total distance covered by the trajectory</p></dd>
+
 <dt>vel_max</dt>
 <dd><p>Maximum velocity</p></dd>
+
 <dt>vel_max_time</dt>
 <dd><p>Time at which maximum velocity occurred first</p></dd>
+
 <dt>vel_min</dt>
 <dd><p>Minimum velocity</p></dd>
+
 <dt>vel_min_time</dt>
 <dd><p>Time at which minimum velocity occurred first</p></dd>
+
 <dt>acc_max</dt>
 <dd><p>Maximum acceleration</p></dd>
+
 <dt>acc_max_time</dt>
 <dd><p>Time at which maximum acceleration occurred first</p></dd>
+
 <dt>acc_min</dt>
 <dd><p>Minimum acceleration</p></dd>
+
 <dt>acc_min_time</dt>
 <dd><p>Time at which minimum acceleration occurred first</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -300,15 +354,15 @@ measures.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_derivatives.html">mt_derivatives</a></span><span class="op">(</span><span class="va">mt_example</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_deviations.html">mt_deviations</a></span><span class="op">(</span><span class="va">mt_example</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu">mt_measures</span><span class="op">(</span><span class="va">mt_example</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Merge measures with trial data</span></span>
-<span class="r-in"><span class="va">mt_example_results</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">inner_join</a></span><span class="op">(</span></span>
-<span class="r-in">  <span class="va">mt_example</span><span class="op">$</span><span class="va">data</span>, <span class="va">mt_example</span><span class="op">$</span><span class="va">measures</span>,</span>
-<span class="r-in">  by<span class="op">=</span><span class="st">"mt_id"</span><span class="op">)</span></span>
-<span class="r-in">  </span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_derivatives.html">mt_derivatives</a></span><span class="op">(</span><span class="va">mt_example</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_deviations.html">mt_deviations</a></span><span class="op">(</span><span class="va">mt_example</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu">mt_measures</span><span class="op">(</span><span class="va">mt_example</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Merge measures with trial data</span></span></span>
+<span class="r-in"><span><span class="va">mt_example_results</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">inner_join</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="va">mt_example</span><span class="op">$</span><span class="va">data</span>, <span class="va">mt_example</span><span class="op">$</span><span class="va">measures</span>,</span></span>
+<span class="r-in"><span>  by<span class="op">=</span><span class="st">"mt_id"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  </span></span>
 </code></pre></div>
     </div>
   </div>
@@ -323,7 +377,7 @@ measures.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

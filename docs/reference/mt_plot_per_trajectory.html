@@ -22,13 +22,13 @@ acceleration profiles."><!-- mathjax --><script src="https://cdnjs.cloudflare.co
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
-  <a href="../reference/mousetrap.html">Overview</a>
+  <a href="../reference/mousetrap-package.html">Overview</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -66,22 +66,22 @@ acceleration profiles.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">mt_plot_per_trajectory</span><span class="op">(</span>
-  <span class="va">file</span>,
-  <span class="va">data</span>,
-  use <span class="op">=</span> <span class="st">"trajectories"</span>,
-  x <span class="op">=</span> <span class="st">"xpos"</span>,
-  y <span class="op">=</span> <span class="st">"ypos"</span>,
-  xlim <span class="op">=</span> <span class="cn">NULL</span>,
-  ylim <span class="op">=</span> <span class="cn">NULL</span>,
-  axes_exact <span class="op">=</span> <span class="cn">FALSE</span>,
-  points <span class="op">=</span> <span class="cn">FALSE</span>,
-  rect <span class="op">=</span> <span class="cn">NULL</span>,
-  color <span class="op">=</span> <span class="st">"black"</span>,
-  fill <span class="op">=</span> <span class="cn">NA</span>,
-  verbose <span class="op">=</span> <span class="cn">FALSE</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">mt_plot_per_trajectory</span><span class="op">(</span></span>
+<span>  <span class="va">file</span>,</span>
+<span>  <span class="va">data</span>,</span>
+<span>  use <span class="op">=</span> <span class="st">"trajectories"</span>,</span>
+<span>  x <span class="op">=</span> <span class="st">"xpos"</span>,</span>
+<span>  y <span class="op">=</span> <span class="st">"ypos"</span>,</span>
+<span>  xlim <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  ylim <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  axes_exact <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  points <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  rect <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  color <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>  fill <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -89,10 +89,14 @@ acceleration profiles.</p>
     <dl><dt>file</dt>
 <dd><p>a character string specifying the name of the PDF file. Passed on
 to <a href="https://rdrr.io/r/grDevices/pdf.html" class="external-link">pdf</a>.</p></dd>
+
+
 <dt>data</dt>
 <dd><p>a mousetrap data object created using one of the mt_import
 functions (see <a href="mt_example.html">mt_example</a> for details). Alternatively, a trajectory
 array can be provided directly (in this case <code>use</code> will be ignored).</p></dd>
+
+
 <dt>use</dt>
 <dd><p>a character string specifying which trajectories should be
 plotted. The corresponding trajectories are selected from data using
@@ -100,42 +104,65 @@ plotted. The corresponding trajectories are selected from data using
 "trajectories", "tn_trajectories" or "av_trajectories", depending on
 whether the raw, time-normalized or averaged trajectories should be
 plotted.</p></dd>
+
+
 <dt>x</dt>
 <dd><p>a character string specifying which dimension in the trajectory
 array should be displayed on the x-axis (defaults to xpos).</p></dd>
+
+
 <dt>y</dt>
 <dd><p>a character string specifying which dimension in the trajectory
 array should be displayed on the y-axis (defaults to ypos).</p></dd>
+
+
 <dt>xlim</dt>
 <dd><p>optional argument specifying the limits for the x axis (passed on
 to <a href="https://ggplot2.tidyverse.org/reference/coord_cartesian.html" class="external-link">coord_cartesian</a>). If not specified (the default),
 sensible axis limits will be computed.</p></dd>
+
+
 <dt>ylim</dt>
 <dd><p>optional argument specifying the limits for the y axis (passed on
 to <a href="https://ggplot2.tidyverse.org/reference/coord_cartesian.html" class="external-link">coord_cartesian</a>). If not specified (the default),
 sensible axis limits will be computed.</p></dd>
+
+
 <dt>axes_exact</dt>
 <dd><p>logical. If <code>TRUE</code>, axes will be set without offset
 exactly at the limits of the x and y axes (which can be specified using
 <code>xlim</code> and <code>ylim</code>]).</p></dd>
+
+
 <dt>points</dt>
 <dd><p>logical. If <code>TRUE</code>, points will be added to the plot using
 <a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a>.</p></dd>
+
+
 <dt>rect</dt>
 <dd><p>optional argument passed on to <a href="mt_plot_add_rect.html">mt_plot_add_rect</a>. If
 specified, rectangles (usually representing the response buttons) will be
 plotted for each trajectory plot.</p></dd>
+
+
 <dt>color</dt>
 <dd><p>optional argument passed on to <a href="mt_plot_add_rect.html">mt_plot_add_rect</a>. Only
 relevant if <code>rect</code> is specified.</p></dd>
+
+
 <dt>fill</dt>
 <dd><p>optional argument passed on to <a href="mt_plot_add_rect.html">mt_plot_add_rect</a>. Only
 relevant if <code>rect</code> is specified.</p></dd>
+
+
 <dt>verbose</dt>
 <dd><p>logical indicating whether function should report its
 progress.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>additional arguments passed on to <a href="https://rdrr.io/r/grDevices/pdf.html" class="external-link">pdf</a>.</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -155,12 +182,12 @@ is labeled using the <a href="https://rdrr.io/r/base/colnames.html" class="exter
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu">mt_plot_per_trajectory</span><span class="op">(</span><span class="va">mt_example</span>,</span>
-<span class="r-in">  file<span class="op">=</span><span class="st">"trajectories.pdf"</span>,</span>
-<span class="r-in">  use<span class="op">=</span><span class="st">"trajectories"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu">mt_plot_per_trajectory</span><span class="op">(</span><span class="va">mt_example</span>,</span></span>
+<span class="r-in"><span>  file<span class="op">=</span><span class="st">"trajectories.pdf"</span>,</span></span>
+<span class="r-in"><span>  use<span class="op">=</span><span class="st">"trajectories"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -175,7 +202,7 @@ is labeled using the <a href="https://rdrr.io/r/base/colnames.html" class="exter
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

@@ -21,13 +21,13 @@ a wrapper function for mt_reshape."><!-- mathjax --><script src="https://cdnjs.c
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
-  <a href="../reference/mousetrap.html">Overview</a>
+  <a href="../reference/mousetrap-package.html">Overview</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -64,16 +64,16 @@ a wrapper function for <code><a href="mt_reshape.html">mt_reshape</a></code>.</p
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">mt_aggregate</span><span class="op">(</span>
-  <span class="va">data</span>,
-  use <span class="op">=</span> <span class="st">"measures"</span>,
-  use_variables <span class="op">=</span> <span class="cn">NULL</span>,
-  use2 <span class="op">=</span> <span class="st">"data"</span>,
-  use2_variables <span class="op">=</span> <span class="cn">NULL</span>,
-  subject_id <span class="op">=</span> <span class="cn">NULL</span>,
-  trajectories_long <span class="op">=</span> <span class="cn">TRUE</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">mt_aggregate</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  use <span class="op">=</span> <span class="st">"measures"</span>,</span>
+<span>  use_variables <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  use2 <span class="op">=</span> <span class="st">"data"</span>,</span>
+<span>  use2_variables <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  subject_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  trajectories_long <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -82,12 +82,16 @@ a wrapper function for <code><a href="mt_reshape.html">mt_reshape</a></code>.</p
 <dd><p>a mousetrap data object created using one of the mt_import
 functions (see <a href="mt_example.html">mt_example</a> for details). Alternatively, a trajectory
 array can be provided directly (in this case <code>use</code> will be ignored).</p></dd>
+
+
 <dt>use</dt>
 <dd><p>a character string specifying which dataset should be aggregated.
 The corresponding data are selected from <code>data</code> using
 <code>data[[use]]</code>. Usually, this value corresponds to either
 "tn_trajectories" or "measures", depending on whether the time-normalized
 trajectories or derived measures should be aggregated.</p></dd>
+
+
 <dt>use_variables</dt>
 <dd><p>a character vector specifying the mouse-tracking
 variables to aggregate. If a data.frame with mouse-tracking measures is
@@ -95,21 +99,29 @@ provided as <code>data</code>, this corresponds to the column names. If a
 trajectory array is provided, this argument should specify the labels of
 respective array dimensions. If unspecified, all variables will be
 aggregated.</p></dd>
+
+
 <dt>use2</dt>
 <dd><p>a character string specifying where the data containing the
 condition information can be found. Defaults to "data" as
 <code>data[["data"]]</code> usually contains all non mouse-tracking trial data.
 Alternatively, a data.frame can be provided directly.</p></dd>
+
+
 <dt>use2_variables</dt>
 <dd><p>a character string (or vector) specifying the variables
 (in <code>data[[use2]]</code>) across which the trajectories / measures will be
 aggregated. For each combination of levels of the grouping variable(s),
 aggregation will be performed separately using <a href="https://dplyr.tidyverse.org/reference/summarise_all.html" class="external-link">summarize_at</a>.</p></dd>
+
+
 <dt>subject_id</dt>
 <dd><p>an optional character string specifying the column that
 contains the subject identifier. If specified, aggregation will be
 performed within subjects first (i.e., within subjects for all available
 values of the grouping variables specified in <code>use2_variables</code>).</p></dd>
+
+
 <dt>trajectories_long</dt>
 <dd><p>logical indicating if the reshaped trajectories
 should be returned in long or wide format. If <code>TRUE</code>, every recorded
@@ -119,13 +131,18 @@ trajectory is saved in wide format and the respective positions are indexed
 by adding an integer to the corresponding label (e.g., <code>xpos_1</code>,
 <code>xpos_2</code>, ...). Only relevant if <code>data[[use]]</code> contains
 trajectories.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>additional arguments passed on to <a href="mt_reshape.html">mt_reshape</a> (such as
 <code>subset</code>).</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A <a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a> containing the aggregated data.</p>
+    
+
+<p>A <a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a> containing the aggregated data.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -142,33 +159,33 @@ package.</p></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Time-normalize trajectories</span></span>
-<span class="r-in"><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_time_normalize.html">mt_time_normalize</a></span><span class="op">(</span><span class="va">mt_example</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Aggregate time-normalized trajectories per condition</span></span>
-<span class="r-in"><span class="va">average_trajectories</span> <span class="op">&lt;-</span>  <span class="fu">mt_aggregate</span><span class="op">(</span><span class="va">mt_example</span>,</span>
-<span class="r-in">  use<span class="op">=</span><span class="st">"tn_trajectories"</span>,</span>
-<span class="r-in">  use2_variables<span class="op">=</span><span class="st">"Condition"</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Calculate mouse-tracking measures</span></span>
-<span class="r-in"><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_measures.html">mt_measures</a></span><span class="op">(</span><span class="va">mt_example</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Aggregate measures per condition</span></span>
-<span class="r-in"><span class="va">average_measures</span> <span class="op">&lt;-</span> <span class="fu">mt_aggregate</span><span class="op">(</span><span class="va">mt_example</span>,</span>
-<span class="r-in">  use<span class="op">=</span><span class="st">"measures"</span>, use_variables<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"MAD"</span>, <span class="st">"AD"</span><span class="op">)</span>,</span>
-<span class="r-in">  use2_variables<span class="op">=</span><span class="st">"Condition"</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Aggregate measures per condition</span></span>
-<span class="r-in"><span class="co"># first within subjects and then across subjects</span></span>
-<span class="r-in"><span class="va">average_measures</span> <span class="op">&lt;-</span> <span class="fu">mt_aggregate</span><span class="op">(</span><span class="va">mt_example</span>,</span>
-<span class="r-in">  use<span class="op">=</span><span class="st">"measures"</span>, use_variables<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"MAD"</span>, <span class="st">"AD"</span><span class="op">)</span>,</span>
-<span class="r-in">  use2_variables<span class="op">=</span><span class="st">"Condition"</span>,</span>
-<span class="r-in">  subject_id<span class="op">=</span><span class="st">"subject_nr"</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Time-normalize trajectories</span></span></span>
+<span class="r-in"><span><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_time_normalize.html">mt_time_normalize</a></span><span class="op">(</span><span class="va">mt_example</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Aggregate time-normalized trajectories per condition</span></span></span>
+<span class="r-in"><span><span class="va">average_trajectories</span> <span class="op">&lt;-</span>  <span class="fu">mt_aggregate</span><span class="op">(</span><span class="va">mt_example</span>,</span></span>
+<span class="r-in"><span>  use<span class="op">=</span><span class="st">"tn_trajectories"</span>,</span></span>
+<span class="r-in"><span>  use2_variables<span class="op">=</span><span class="st">"Condition"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Calculate mouse-tracking measures</span></span></span>
+<span class="r-in"><span><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_measures.html">mt_measures</a></span><span class="op">(</span><span class="va">mt_example</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Aggregate measures per condition</span></span></span>
+<span class="r-in"><span><span class="va">average_measures</span> <span class="op">&lt;-</span> <span class="fu">mt_aggregate</span><span class="op">(</span><span class="va">mt_example</span>,</span></span>
+<span class="r-in"><span>  use<span class="op">=</span><span class="st">"measures"</span>, use_variables<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"MAD"</span>, <span class="st">"AD"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  use2_variables<span class="op">=</span><span class="st">"Condition"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Aggregate measures per condition</span></span></span>
+<span class="r-in"><span><span class="co"># first within subjects and then across subjects</span></span></span>
+<span class="r-in"><span><span class="va">average_measures</span> <span class="op">&lt;-</span> <span class="fu">mt_aggregate</span><span class="op">(</span><span class="va">mt_example</span>,</span></span>
+<span class="r-in"><span>  use<span class="op">=</span><span class="st">"measures"</span>, use_variables<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"MAD"</span>, <span class="st">"AD"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  use2_variables<span class="op">=</span><span class="st">"Condition"</span>,</span></span>
+<span class="r-in"><span>  subject_id<span class="op">=</span><span class="st">"subject_nr"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -183,7 +200,7 @@ package.</p></div>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

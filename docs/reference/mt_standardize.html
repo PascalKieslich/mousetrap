@@ -20,13 +20,13 @@ stored in a mousetrap data object."><!-- mathjax --><script src="https://cdnjs.c
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
-  <a href="../reference/mousetrap.html">Overview</a>
+  <a href="../reference/mousetrap-package.html">Overview</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -62,15 +62,15 @@ stored in a mousetrap data object.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">mt_standardize</span><span class="op">(</span>
-  <span class="va">data</span>,
-  use <span class="op">=</span> <span class="st">"measures"</span>,
-  use_variables <span class="op">=</span> <span class="cn">NULL</span>,
-  within <span class="op">=</span> <span class="cn">NULL</span>,
-  prefix <span class="op">=</span> <span class="st">"z_"</span>,
-  center <span class="op">=</span> <span class="cn">TRUE</span>,
-  scale <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">mt_standardize</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  use <span class="op">=</span> <span class="st">"measures"</span>,</span>
+<span>  use_variables <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  within <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  prefix <span class="op">=</span> <span class="st">"z_"</span>,</span>
+<span>  center <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  scale <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -78,30 +78,45 @@ stored in a mousetrap data object.</p>
     <dl><dt>data</dt>
 <dd><p>a mousetrap data object created using one of the mt_import
 functions (see <a href="mt_example.html">mt_example</a> for details).</p></dd>
+
+
 <dt>use</dt>
 <dd><p>a character string specifying which data should be used. By
 default points to the <code>measures</code> data.frame created using
 <a href="mt_measures.html">mt_measures</a>.</p></dd>
+
+
 <dt>use_variables</dt>
 <dd><p>a vector specifying which variables should be
 standardized. If unspecified, all variables will be standardized.</p></dd>
+
+
 <dt>within</dt>
 <dd><p>an optional character string specifying one or more variables
 in <code>data[["data"]]</code>. If specified, all measures will be standardized
 separately for each level of the variable (or for each combination of
 levels, if more than one variable is specified).</p></dd>
+
+
 <dt>prefix</dt>
 <dd><p>a character string that is inserted before each standardized
 variable. If an empty string is specified, the original variables are
 replaced.</p></dd>
+
+
 <dt>center</dt>
 <dd><p>argument passed on to <a href="https://rdrr.io/r/base/scale.html" class="external-link">scale</a>.</p></dd>
+
+
 <dt>scale</dt>
 <dd><p>argument passed on to <a href="https://rdrr.io/r/base/scale.html" class="external-link">scale</a>.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A mousetrap data object (see <a href="mt_example.html">mt_example</a>)
+    
+
+<p>A mousetrap data object (see <a href="mt_example.html">mt_example</a>)
 including the standardized measures.</p>
     </div>
     <div id="see-also">
@@ -119,19 +134,19 @@ trajectory arrays.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_measures.html">mt_measures</a></span><span class="op">(</span><span class="va">mt_example</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Standardize MAD and AD per subject</span></span>
-<span class="r-in"><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu">mt_standardize</span><span class="op">(</span><span class="va">mt_example</span>,</span>
-<span class="r-in">  use_variables<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"MAD"</span>, <span class="st">"AD"</span><span class="op">)</span>,</span>
-<span class="r-in">  within<span class="op">=</span><span class="st">"subject_nr"</span>, prefix<span class="op">=</span><span class="st">"z_"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Standardize MAD and AD per subject and Condition</span></span>
-<span class="r-in"><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu">mt_standardize</span><span class="op">(</span><span class="va">mt_example</span>,</span>
-<span class="r-in">  use_variables<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"MAD"</span>, <span class="st">"AD"</span><span class="op">)</span>,</span>
-<span class="r-in">  within<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"subject_nr"</span>, <span class="st">"Condition"</span><span class="op">)</span>,</span>
-<span class="r-in">  prefix<span class="op">=</span><span class="st">"z_"</span><span class="op">)</span></span>
-<span class="r-in">  </span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_measures.html">mt_measures</a></span><span class="op">(</span><span class="va">mt_example</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Standardize MAD and AD per subject</span></span></span>
+<span class="r-in"><span><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu">mt_standardize</span><span class="op">(</span><span class="va">mt_example</span>,</span></span>
+<span class="r-in"><span>  use_variables<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"MAD"</span>, <span class="st">"AD"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  within<span class="op">=</span><span class="st">"subject_nr"</span>, prefix<span class="op">=</span><span class="st">"z_"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Standardize MAD and AD per subject and Condition</span></span></span>
+<span class="r-in"><span><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu">mt_standardize</span><span class="op">(</span><span class="va">mt_example</span>,</span></span>
+<span class="r-in"><span>  use_variables<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"MAD"</span>, <span class="st">"AD"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  within<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"subject_nr"</span>, <span class="st">"Condition"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  prefix<span class="op">=</span><span class="st">"z_"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  </span></span>
 </code></pre></div>
     </div>
   </div>
@@ -146,7 +161,7 @@ trajectory arrays.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

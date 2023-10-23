@@ -26,13 +26,13 @@ Version 2.84 - but please be sure to double-check.'><!-- mathjax --><script src=
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
-  <a href="../reference/mousetrap.html">Overview</a>
+  <a href="../reference/mousetrap-package.html">Overview</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -74,27 +74,36 @@ Version 2.84 - but please be sure to double-check.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">read_mt</span><span class="op">(</span><span class="va">file</span>, columns <span class="op">=</span> <span class="st">"all"</span>, add_trialid <span class="op">=</span> <span class="cn">FALSE</span>, add_filename <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">read_mt</span><span class="op">(</span><span class="va">file</span>, columns <span class="op">=</span> <span class="st">"all"</span>, add_trialid <span class="op">=</span> <span class="cn">FALSE</span>, add_filename <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>file</dt>
 <dd><p>a character string specifying the filename of the .mt file.</p></dd>
+
+
 <dt>columns</dt>
 <dd><p>either 'all' or a character vector specifying the to be
 extracted variables. Defaults to 'all' in which case all existing variables
 will be extracted.</p></dd>
+
+
 <dt>add_trialid</dt>
 <dd><p>boolean specifying whether an additional column containing
 the trial number should be added.</p></dd>
+
+
 <dt>add_filename</dt>
 <dd><p>boolean specifying whether an additional column
 containing the file name should be added.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A <a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a> with one row per trial. Variables are ordered
+    
+
+<p>A <a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a> with one row per trial. Variables are ordered
 according to columns, x-coordinates, y-coordinates, and timestamps.</p>
     </div>
     <div id="references">
@@ -116,21 +125,21 @@ combining multiple raw data files.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># Read a single raw data file from MouseTracker</span></span>
-<span class="r-in"><span class="co"># (stored in the current working directory)</span></span>
-<span class="r-in"><span class="va">mt_data_raw</span> <span class="op">&lt;-</span> <span class="fu">read_mt</span><span class="op">(</span><span class="st">"example.mt"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Use read_bulk to read all raw data files ending with ".mt" that are</span></span>
-<span class="r-in"><span class="co"># stored in the folder "raw_data" (in the current working directory)</span></span>
-<span class="r-in"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/pascalkieslich/readbulk" class="external-link">readbulk</a></span><span class="op">)</span></span>
-<span class="r-in"><span class="va">mt_data_raw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/readbulk/man/read_bulk.html" class="external-link">read_bulk</a></span><span class="op">(</span><span class="st">"raw_data"</span>, fun<span class="op">=</span><span class="va">read_mt</span>, extension<span class="op">=</span><span class="st">".mt"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Import the data into mousetrap</span></span>
-<span class="r-in"><span class="va">mt_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_import_wide.html">mt_import_wide</a></span><span class="op">(</span><span class="va">mt_data_raw</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># Read a single raw data file from MouseTracker</span></span></span>
+<span class="r-in"><span><span class="co"># (stored in the current working directory)</span></span></span>
+<span class="r-in"><span><span class="va">mt_data_raw</span> <span class="op">&lt;-</span> <span class="fu">read_mt</span><span class="op">(</span><span class="st">"example.mt"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use read_bulk to read all raw data files ending with ".mt" that are</span></span></span>
+<span class="r-in"><span><span class="co"># stored in the folder "raw_data" (in the current working directory)</span></span></span>
+<span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/pascalkieslich/readbulk" class="external-link">readbulk</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mt_data_raw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/readbulk/man/read_bulk.html" class="external-link">read_bulk</a></span><span class="op">(</span><span class="st">"raw_data"</span>, fun<span class="op">=</span><span class="va">read_mt</span>, extension<span class="op">=</span><span class="st">".mt"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Import the data into mousetrap</span></span></span>
+<span class="r-in"><span><span class="va">mt_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_import_wide.html">mt_import_wide</a></span><span class="op">(</span><span class="va">mt_data_raw</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -145,7 +154,7 @@ combining multiple raw data files.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

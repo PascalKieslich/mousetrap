@@ -20,13 +20,13 @@ corresponding variables can be specified under grouping_variables."><!-- mathjax
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
-  <a href="../reference/mousetrap.html">Overview</a>
+  <a href="../reference/mousetrap-package.html">Overview</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -62,15 +62,15 @@ corresponding variables can be specified under <code>grouping_variables</code>.<
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">mt_check_bimodality</span><span class="op">(</span>
-  <span class="va">data</span>,
-  use <span class="op">=</span> <span class="st">"measures"</span>,
-  use_variables <span class="op">=</span> <span class="cn">NULL</span>,
-  methods <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BC"</span>, <span class="st">"HDS"</span><span class="op">)</span>,
-  B <span class="op">=</span> <span class="fl">2000</span>,
-  grouping_variables <span class="op">=</span> <span class="cn">NULL</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">mt_check_bimodality</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  use <span class="op">=</span> <span class="st">"measures"</span>,</span>
+<span>  use_variables <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  methods <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BC"</span>, <span class="st">"HDS"</span><span class="op">)</span>,</span>
+<span>  B <span class="op">=</span> <span class="fl">2000</span>,</span>
+<span>  grouping_variables <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -78,32 +78,47 @@ corresponding variables can be specified under <code>grouping_variables</code>.<
     <dl><dt>data</dt>
 <dd><p>a mousetrap data object created using one of the mt_import
 functions (see <a href="mt_example.html">mt_example</a> for details).</p></dd>
+
+
 <dt>use</dt>
 <dd><p>a character string specifying which data should be used. By
 default, points to the <code>measures</code> data.frame created using
 <a href="mt_measures.html">mt_measures</a>.</p></dd>
+
+
 <dt>use_variables</dt>
 <dd><p>a vector specifying for which mouse-tracking measures
 bimodality should be assessed.</p></dd>
+
+
 <dt>methods</dt>
 <dd><p>a character string (or vector) specifying which methods should
 be used for assessing bimodality (see Details).</p></dd>
+
+
 <dt>B</dt>
 <dd><p>an integer specifying the number of replicates used in the Monte
 Carlo test (only relevant if "HDS_sim" is included in methods, see
 Details).</p></dd>
+
+
 <dt>grouping_variables</dt>
 <dd><p>a character string (or vector) specifying one or
 more variables in <code>data[["data"]]</code>. If specified, bimodality will be
 assessed separately for each level of the variable. If unspecified (the
 default), bimodality is checked across all trials.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>additional arguments passed on to <a href="mt_reshape.html">mt_reshape</a> (such as
 <code>subset</code>).</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A list of several data.frames. Each data.frame contains the value
+    
+
+<p>A list of several data.frames. Each data.frame contains the value
 returned by the respective method for assessing bimodality (see Details) -
 separately per condition (specified in the row dimension) and measure
 (specified in the column dimension).</p>
@@ -157,12 +172,12 @@ coefficient.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Calculate measures</span></span>
-<span class="r-in"><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_measures.html">mt_measures</a></span><span class="op">(</span><span class="va">mt_example</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Assess bimodality for untransformed variables</span></span>
-<span class="r-in"><span class="fu">mt_check_bimodality</span><span class="op">(</span><span class="va">mt_example</span>,</span>
-<span class="r-in">  use_variables<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"MAD"</span>, <span class="st">"AD"</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Calculate measures</span></span></span>
+<span class="r-in"><span><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_measures.html">mt_measures</a></span><span class="op">(</span><span class="va">mt_example</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Assess bimodality for untransformed variables</span></span></span>
+<span class="r-in"><span><span class="fu">mt_check_bimodality</span><span class="op">(</span><span class="va">mt_example</span>,</span></span>
+<span class="r-in"><span>  use_variables<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"MAD"</span>, <span class="st">"AD"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $BC</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         MAD        AD</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.6239962 0.7714127</span>
@@ -171,14 +186,14 @@ coefficient.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        MAD        AD</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.949304 0.9805709</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Standardize variables per participant</span></span>
-<span class="r-in"><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_standardize.html">mt_standardize</a></span><span class="op">(</span><span class="va">mt_example</span>,</span>
-<span class="r-in">  use_variables<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"MAD"</span>, <span class="st">"AD"</span><span class="op">)</span>, within<span class="op">=</span><span class="st">"subject_nr"</span><span class="op">)</span></span>
-<span class="r-in">  </span>
-<span class="r-in"><span class="co"># Assess bimodality for standardized variables</span></span>
-<span class="r-in"><span class="fu">mt_check_bimodality</span><span class="op">(</span><span class="va">mt_example</span>,</span>
-<span class="r-in">  use_variables<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"z_MAD"</span>, <span class="st">"z_AD"</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Standardize variables per participant</span></span></span>
+<span class="r-in"><span><span class="va">mt_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_standardize.html">mt_standardize</a></span><span class="op">(</span><span class="va">mt_example</span>,</span></span>
+<span class="r-in"><span>  use_variables<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"MAD"</span>, <span class="st">"AD"</span><span class="op">)</span>, within<span class="op">=</span><span class="st">"subject_nr"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  </span></span>
+<span class="r-in"><span><span class="co"># Assess bimodality for standardized variables</span></span></span>
+<span class="r-in"><span><span class="fu">mt_check_bimodality</span><span class="op">(</span><span class="va">mt_example</span>,</span></span>
+<span class="r-in"><span>  use_variables<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"z_MAD"</span>, <span class="st">"z_AD"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $BC</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       z_MAD      z_AD</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.5099593 0.7212444</span>
@@ -187,24 +202,24 @@ coefficient.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       z_MAD      z_AD</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.7749003 0.7463675</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Assess bimodality with simulated p values for HDS</span></span>
-<span class="r-in"><span class="fu">mt_check_bimodality</span><span class="op">(</span><span class="va">mt_example</span>,</span>
-<span class="r-in">  use_variables<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"z_MAD"</span>, <span class="st">"z_AD"</span><span class="op">)</span>,</span>
-<span class="r-in">  methods<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BC"</span>, <span class="st">"HDS_sim"</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Assess bimodality with simulated p values for HDS</span></span></span>
+<span class="r-in"><span><span class="fu">mt_check_bimodality</span><span class="op">(</span><span class="va">mt_example</span>,</span></span>
+<span class="r-in"><span>  use_variables<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"z_MAD"</span>, <span class="st">"z_AD"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  methods<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"BC"</span>, <span class="st">"HDS_sim"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $BC</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       z_MAD      z_AD</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.5099593 0.7212444</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $HDS_simulated_p_value</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    z_MAD   z_AD</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.7965 0.7475</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    z_MAD  z_AD</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 0.7855 0.753</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"> </span>
-<span class="r-in"><span class="co"># Assess bimodality per condition</span></span>
-<span class="r-in"><span class="fu">mt_check_bimodality</span><span class="op">(</span><span class="va">mt_example</span>,</span>
-<span class="r-in">  use_variables<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"z_MAD"</span>, <span class="st">"z_AD"</span><span class="op">)</span>,</span>
-<span class="r-in">  grouping_variables<span class="op">=</span><span class="st">"Condition"</span><span class="op">)</span></span>
+<span class="r-in"><span> </span></span>
+<span class="r-in"><span><span class="co"># Assess bimodality per condition</span></span></span>
+<span class="r-in"><span><span class="fu">mt_check_bimodality</span><span class="op">(</span><span class="va">mt_example</span>,</span></span>
+<span class="r-in"><span>  use_variables<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"z_MAD"</span>, <span class="st">"z_AD"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  grouping_variables<span class="op">=</span><span class="st">"Condition"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $BC</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Condition     z_MAD      z_AD</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  Atypical 0.4056693 0.3430277</span>
@@ -215,7 +230,7 @@ coefficient.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1  Atypical 0.3458943 0.4716631</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2   Typical 0.9831558 0.9923261</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in">                    </span>
+<span class="r-in"><span>                    </span></span>
 </code></pre></div>
     </div>
   </div>
@@ -230,7 +245,7 @@ coefficient.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>

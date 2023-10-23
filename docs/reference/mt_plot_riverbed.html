@@ -18,13 +18,13 @@ trajectory variable (e.g., the x-positions or velocity) per time step."><!-- mat
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">mousetrap</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">3.2.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
-  <a href="../reference/mousetrap.html">Overview</a>
+  <a href="../reference/mousetrap-package.html">Overview</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -58,62 +58,81 @@ trajectory variable (e.g., the x-positions or velocity) per time step.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">mt_plot_riverbed</span><span class="op">(</span>
-  <span class="va">data</span>,
-  use <span class="op">=</span> <span class="st">"tn_trajectories"</span>,
-  y <span class="op">=</span> <span class="st">"xpos"</span>,
-  y_range <span class="op">=</span> <span class="cn">NULL</span>,
-  y_bins <span class="op">=</span> <span class="fl">250</span>,
-  facet_row <span class="op">=</span> <span class="cn">NULL</span>,
-  facet_col <span class="op">=</span> <span class="cn">NULL</span>,
-  facet_data <span class="op">=</span> <span class="st">"data"</span>,
-  grid_colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"gray30"</span>, <span class="st">"gray10"</span><span class="op">)</span>,
-  na.rm <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">mt_plot_riverbed</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  use <span class="op">=</span> <span class="st">"tn_trajectories"</span>,</span>
+<span>  y <span class="op">=</span> <span class="st">"xpos"</span>,</span>
+<span>  y_range <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  y_bins <span class="op">=</span> <span class="fl">250</span>,</span>
+<span>  facet_row <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  facet_col <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  facet_data <span class="op">=</span> <span class="st">"data"</span>,</span>
+<span>  grid_colors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"gray30"</span>, <span class="st">"gray10"</span><span class="op">)</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>data</dt>
 <dd><p>mousetrap data object containing the data to be plotted.</p></dd>
+
+
 <dt>use</dt>
 <dd><p>character string specifying the set of trajectories to use in the
 plot. The steps of this set will constitute the x axis. Defaults to
 'tn_trajectories', which results in time steps being plotted on the x axis.</p></dd>
+
+
 <dt>y</dt>
 <dd><p>variable in the mousetrap data object to be plotted on the
 output's y dimension. Defaults to 'xpos', the cursor's x coordinate.</p></dd>
+
+
 <dt>y_range</dt>
 <dd><p>numerical vector containing two values that represent the
 upper and lower ends of the y axis. By default, the range is calculated
 from the data provided.</p></dd>
+
+
 <dt>y_bins</dt>
 <dd><p>number of bins to distribute along the y axis (defaults to
 250).</p></dd>
+
+
 <dt>facet_row</dt>
 <dd><p>an optional character string specifying a variable in
 <code>data[[facet_data]]</code> that should be used for (row-wise) faceting. If
 specified, separate riverbed plots for each level of the variable will be
 created.</p></dd>
+
+
 <dt>facet_col</dt>
 <dd><p>an optional character string specifying a variable in
 <code>data[[facet_data]]</code> that should be used for (column-wise) faceting.
 If specified, separate riverbed plots for each level of the variable will
 be created.</p></dd>
+
+
 <dt>facet_data</dt>
 <dd><p>a character string specifying where the (optional) data
 containing the faceting variables can be found.</p></dd>
+
+
 <dt>grid_colors</dt>
 <dd><p>a character string or vector of length 2 specifying the
 grid color(s). If a single value is provided, this will be used as the grid
 color. If a vector of length 2 is provided, the first value will be used as
 the color for the major grid lines, the second value for the minor grid
 lines. If set to <code>NA</code>, no grid lines are plotted.</p></dd>
+
+
 <dt>na.rm</dt>
 <dd><p>logical specifying whether missing values should be removed.
 This is not done by default, because generally riverbed plots are generated
 from preprocess trajectories (e.g., time-normalized trajectories) that all
 have the same length (i.e., the same number of steps).</p></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -147,29 +166,29 @@ Research Methods, 50</em>(5), 2097–2110.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Time-normalize trajectories</span></span>
-<span class="r-in"><span class="va">KH2017</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_time_normalize.html">mt_time_normalize</a></span><span class="op">(</span><span class="va">KH2017</span><span class="op">)</span></span>
-<span class="r-in">  </span>
-<span class="r-in"><span class="co"># Create riverbed plot for all trials</span></span>
-<span class="r-in"><span class="fu">mt_plot_riverbed</span><span class="op">(</span><span class="va">KH2017</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Time-normalize trajectories</span></span></span>
+<span class="r-in"><span><span class="va">KH2017</span> <span class="op">&lt;-</span> <span class="fu"><a href="mt_time_normalize.html">mt_time_normalize</a></span><span class="op">(</span><span class="va">KH2017</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  </span></span>
+<span class="r-in"><span><span class="co"># Create riverbed plot for all trials</span></span></span>
+<span class="r-in"><span><span class="fu">mt_plot_riverbed</span><span class="op">(</span><span class="va">KH2017</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="mt_plot_riverbed-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># Create separate plots for typical and atypical trials</span></span>
-<span class="r-in"><span class="fu">mt_plot_riverbed</span><span class="op">(</span><span class="va">mt_example</span>, facet_col<span class="op">=</span><span class="st">"Condition"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Create riverbed plot for all trials with custom x and y axis labels</span></span>
-<span class="r-in"><span class="fu">mt_plot_riverbed</span><span class="op">(</span><span class="va">mt_example</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Time step"</span><span class="op">)</span> <span class="op">+</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"X coordinate"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Note that it is also possible to replace the</span></span>
-<span class="r-in"><span class="co"># default scale for fill with a custom scale</span></span>
-<span class="r-in"><span class="fu">mt_plot_riverbed</span><span class="op">(</span><span class="va">mt_example</span>, facet_col<span class="op">=</span><span class="st">"Condition"</span><span class="op">)</span> <span class="op">+</span></span>
-<span class="r-in">  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html" class="external-link">scale_fill_gradientn</a></span><span class="op">(</span>colours<span class="op">=</span><span class="fu">grDevices</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">heat.colors</a></span><span class="op">(</span><span class="fl">9</span><span class="op">)</span>,</span>
-<span class="r-in">    name<span class="op">=</span><span class="st">"Frequency"</span>, trans<span class="op">=</span><span class="st">"log"</span>, labels<span class="op">=</span><span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">percent</a></span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># Create separate plots for typical and atypical trials</span></span></span>
+<span class="r-in"><span><span class="fu">mt_plot_riverbed</span><span class="op">(</span><span class="va">mt_example</span>, facet_col<span class="op">=</span><span class="st">"Condition"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Create riverbed plot for all trials with custom x and y axis labels</span></span></span>
+<span class="r-in"><span><span class="fu">mt_plot_riverbed</span><span class="op">(</span><span class="va">mt_example</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Time step"</span><span class="op">)</span> <span class="op">+</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"X coordinate"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Note that it is also possible to replace the</span></span></span>
+<span class="r-in"><span><span class="co"># default scale for fill with a custom scale</span></span></span>
+<span class="r-in"><span><span class="fu">mt_plot_riverbed</span><span class="op">(</span><span class="va">mt_example</span>, facet_col<span class="op">=</span><span class="st">"Condition"</span><span class="op">)</span> <span class="op">+</span></span></span>
+<span class="r-in"><span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html" class="external-link">scale_fill_gradientn</a></span><span class="op">(</span>colours<span class="op">=</span><span class="fu">grDevices</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/grDevices/palettes.html" class="external-link">heat.colors</a></span><span class="op">(</span><span class="fl">9</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    name<span class="op">=</span><span class="st">"Frequency"</span>, trans<span class="op">=</span><span class="st">"log"</span>, labels<span class="op">=</span><span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/percent_format.html" class="external-link">percent</a></span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -184,7 +203,7 @@ Research Methods, 50</em>(5), 2097–2110.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
