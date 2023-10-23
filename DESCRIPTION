@@ -8,7 +8,8 @@ Description: Mouse-tracking, the analysis of mouse movements in computerized
     preprocessing, analyzing, aggregating, and visualizing mouse-tracking data.
     An introduction into mouse-tracking analyses using mousetrap can be found
     in Wulff, Kieslich, Henninger, Haslbeck, & Schulte-Mecklenbeck (2023)
-    <doi:10.31234/osf.io/v685r> (preprint: <https://psyarxiv.com/v685r>).
+    <doi:10.31234/osf.io/v685r> (preprint: 
+    <https://osf.io/preprints/psyarxiv/v685r>).
 Maintainer: Pascal J. Kieslich <pascal.kieslich@gmail.com>
 Authors@R: c(
     person(c("Pascal","J."), "Kieslich", role= c("aut", "cre"),
