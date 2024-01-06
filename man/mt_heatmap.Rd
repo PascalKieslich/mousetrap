@@ -56,7 +56,17 @@ output in \link[grDevices:png]{tiff}, \link[grDevices]{png},
 how the trajectory heatmaps are constructed, see \link{mt_heatmap_raw}.
 }
 \examples{
+# Create heatmap of example data 
+# (as there are only few trajectories in this dataset, it is not very 
+# suitable for a heatmap but the plotting is quick for testing purposes)
+mt_heatmap(mt_example, xres=500, n_shades=5, mean_image=0.2)
+
+\dontrun{
+# Create heatmap of KH2017 data
 mt_heatmap(KH2017, xres=500, n_shades=5, mean_image=0.2)
+}
+
+
 
 }
 \references{

@@ -261,6 +261,7 @@ mt_plot(KH2017,
 \seealso{
 Useful links:
 \itemize{
+  \item \url{https://pascalkieslich.github.io/mousetrap/}
   \item \url{https://github.com/pascalkieslich/mousetrap}
   \item Report bugs at \url{https://github.com/pascalkieslich/mousetrap/issues}
 }

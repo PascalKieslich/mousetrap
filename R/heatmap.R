@@ -478,7 +478,17 @@ mt_heatmap_raw <- function(
 #'   111-130). New York, NY: Routledge.
 #'    
 #' @examples
+#' # Create heatmap of example data 
+#' # (as there are only few trajectories in this dataset, it is not very 
+#' # suitable for a heatmap but the plotting is quick for testing purposes)
+#' mt_heatmap(mt_example, xres=500, n_shades=5, mean_image=0.2)
+#' 
+#' \dontrun{
+#' # Create heatmap of KH2017 data
 #' mt_heatmap(KH2017, xres=500, n_shades=5, mean_image=0.2)
+#' }
+#' 
+#' 
 #' 
 #' @export
 mt_heatmap <- function(
@@ -665,7 +675,15 @@ mt_heatmap <- function(
 #'   111-130). New York, NY: Routledge.
 #'   
 #' @examples
+#' # Create heatmap of example data 
+#' # (as there are only few trajectories in this dataset, it is not very 
+#' # suitable for a heatmap but the plotting is quick for testing purposes)
+#' mt_heatmap_ggplot(mt_example, xres=500, n_shades=5, mean_image=0.2)
+#' 
+#' \dontrun{
+#' # Create heatmap of KH2017 data
 #' mt_heatmap_ggplot(KH2017, xres=500, n_shades=5, mean_image=0.2)
+#' }
 #' 
 #' @export
 mt_heatmap_ggplot <- function(data,
@@ -847,8 +865,21 @@ print.mt_heatmap_raw = function(x,...){
 #'   111-130). New York, NY: Routledge.
 #' 
 #' @examples
-#' mt_diffmap(KH2017, condition="Condition",
-#'   xres=400, smooth_radius=6, n_shades=5)
+#' # Create difference-heatmap of example data 
+#' # (as there are only few trajectories in this dataset, it is not very 
+#' # suitable for a heatmap but the plotting is quick for testing purposes)
+#' mt_diffmap(
+#'   mt_example, condition="Condition",
+#'   xres=400, smooth_radius=6, n_shades=5
+#' )
+#' 
+#' \dontrun{
+#' # Create difference-heatmap of KH2017 data
+#' mt_diffmap(
+#'   KH2017, condition="Condition",
+#'   xres=400, smooth_radius=6, n_shades=5
+#' )
+#' }
 #' 
 #' @export
 mt_diffmap <- function(
