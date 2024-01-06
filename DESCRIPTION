@@ -25,7 +25,7 @@ Authors@R: c(
     		email = "jonas.haslbeck@googlemail.com"),
     person("Sarah", "Brockhaus", role = "ctb")
     )
-URL: https://github.com/pascalkieslich/mousetrap
+URL: https://pascalkieslich.github.io/mousetrap/, https://github.com/pascalkieslich/mousetrap
 BugReports: https://github.com/pascalkieslich/mousetrap/issues
 License: GPL-3
 Depends:
