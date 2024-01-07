@@ -1,3 +1,9 @@
+# mousetrap 3.2.3
+
+## Internal changes
+* Added link to online documentation in package description
+* Improved efficiency of heatmap examples
+
 # mousetrap 3.2.2
 
 ## Announcements
