@@ -104,16 +104,7 @@ or from which trajectory heatmaps can be computed. Difference-heatmaps are
 constructed analogously to \link{mt_heatmap_raw}.
 }
 \examples{
-# Create difference-heatmap of example data 
-# (as there are only few trajectories in this dataset, it is not very 
-# suitable for a heatmap but the plotting is quick for testing purposes)
-mt_diffmap(
-  mt_example, condition="Condition",
-  xres=400, smooth_radius=6, n_shades=5
-)
-
 \dontrun{
-# Create difference-heatmap of KH2017 data
 mt_diffmap(
   KH2017, condition="Condition",
   xres=400, smooth_radius=6, n_shades=5
