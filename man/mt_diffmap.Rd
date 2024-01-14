@@ -104,12 +104,10 @@ or from which trajectory heatmaps can be computed. Difference-heatmaps are
 constructed analogously to \link{mt_heatmap_raw}.
 }
 \examples{
-\dontrun{
 mt_diffmap(
   KH2017, condition="Condition",
   xres=400, smooth_radius=6, n_shades=5
 )
-}
 
 }
 \references{
