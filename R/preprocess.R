@@ -68,13 +68,13 @@ mt_time_normalize <- function(data,
                               nsteps=101,
                               verbose=FALSE) {
   
+  # Preparation
+  trajectories <- extract_data(data=data,use=use)
+  
   if (length(dimensions) == 1 & dimensions[[1]] == "all") {
     dimensions <- dimnames(trajectories)[[3]]
     dimensions <- dimensions[dimensions!=timestamps]
   }
-
-  # Preparation
-  trajectories <- extract_data(data=data,use=use)
 
   # Create empty array for output
   tn_trajectories <- array(
@@ -261,6 +261,9 @@ mt_remap_symmetric <- function(
 #'   returned.
 #'
 #' @seealso \link{mt_measures} for calculating the initiation time.
+#' 
+#' \link{mt_exclude_finish} for removing a potential phase without mouse
+#' movement at the end of the trial.
 #'
 #' @examples
 #' mt_example <- mt_exclude_initiation(mt_example,
@@ -298,7 +301,7 @@ mt_exclude_initiation <- function(data,
     current_points <- current_trajectories[,dimensions,drop=FALSE]
 
     # Vector indicating if mouse has not left the starting point
-    on_start <- cumsum(rowSums(abs(current_points - current_points[1,]))) == 0
+    on_start <- cumsum(rowSums(abs(t(t(current_points) - current_points[1,])))) == 0
 
     # Change last element where mouse is still on starting point so that this
     # point is included in the calculations
@@ -333,80 +336,82 @@ mt_exclude_initiation <- function(data,
 }
 
 
-#' Space normalize trajectories.
+#' Exclude phase without mouse movement at end of trial.
 #'
-#' Adjust trajectories so that all trajectories have an identical start and end 
-#' point. If no end points are provided, trajectories are only adjusted so that 
-#' they have the same start position. Please note that this function is 
-#' \strong{deprecated} and that \link{mt_align_start_end} should be used
-#' instead, which provides the same (and additional) functionality.
+#' Exclude a potential phase at the end of a trial where the mouse was not moved. The
+#' corresponding samples (x- and y-positions and timestamps) in the trajectory
+#' data will be removed.
+#'
+#' \code{mt_exclude_finish} removes all samples (except the first) at the end of
+#' the trial during which the mouse was not moved compared to its final
+#' position. It returns only x- and y-positions as well as timestamps.
+#'
+#' Please note that this operation may result in changes in several
+#' mouse-tracking measures, for example, the response time (RT).
 #'
 #' @inheritParams mt_time_normalize
 #' @param dimensions a character vector specifying the dimensions in the
-#'   trajectory array that should be space-normalized.
-#' @param start a numeric vector specifying the start values for each dimension,
-#'   i.e., the values the first recorded position should have in every trial.
-#' @param end a numeric vector specifying the end values for each dimension,
-#'   i.e., the values the last recorded position should have in every trial. If
-#'   \code{NULL}, trajectories are only adjusted so that they have the same
-#'   start position.
+#'   trajectory array that contain the mouse positions.
 #'
-#' @return A mousetrap data object (see \link{mt_example}) with an additional
-#'   array (by default called \code{sn_trajectories}) containing the
-#'   space-normalized trajectories. All other trajectory dimensions not
-#'   specified in \code{dimensions} (e.g., timestamps) will be kept as is in the
-#'   resulting trajectory array. If a trajectory array was provided directly as
-#'   \code{data}, only the space-normalized trajectories will be returned.
+#' @return A mousetrap data object (see \link{mt_example}) from which a
+#'   potential phase without mouse movement at the end of the trial was removed.
+#'   If the trajectory array was provided directly as \code{data}, only the
+#'   trajectory array will be returned.
 #'
-#' @references Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor
-#'   responses in the time course of categorizing atypical exemplars.
-#'   \emph{Memory & Cognition, 35}(1), 15-28.
-#'
-#' @seealso \link{mt_align_start} for aligning the start position of
-#'   trajectories.
-#'
-#'   \link{mt_remap_symmetric} for remapping trajectories.
+#' @seealso \link{mt_exclude_initiation} for removing a potential initial phase
+#'   without mouse movement.
 #'
 #' @examples
-#' \dontrun{
-#' mt_example <- mt_space_normalize(mt_example,
-#'   save_as ="sn_trajectories",
-#'   start=c(0,0), end=c(-1,1))
-#' }
-#'   
+#' mt_example <- mt_exclude_finish(mt_example,
+#'   save_as="mod_trajectories")
+#'
 #' @author
 #' Pascal J. Kieslich
 #' 
-#' Felix Henninger
-#'
+#' Dirk U. Wulff
+#' 
 #' @export
-mt_space_normalize <- function(
-  data,
-  use="trajectories", save_as="sn_trajectories",
-  dimensions=c("xpos", "ypos"),
-  start=c(0, 0), end=NULL,
+mt_exclude_finish <- function(data,
+  use="trajectories", save_as=use,
+  dimensions=c("xpos","ypos"), timestamps="timestamps",
   verbose=FALSE) {
   
-  .Deprecated("mt_align_start_end")
+  # Gather necessary data
+  trajectories <- extract_data(data=data, use=use)
   
-  # Preparation
-  trajectories <- extract_data(data=data,use=use)
+  # Only keep relevant dimensions
+  trajectories <- trajectories[,,c(timestamps, dimensions),drop=FALSE]
   
-  # Perform alignment
+  # Calculate number of logs
+  nlogs <- mt_count(trajectories, dimensions = timestamps)
+  
+  # Exclude phase where mouse stayed on start coordinates
   for (i in 1:nrow(trajectories)) {
-    for (j in 1:length(dimensions)) {
-      
-      current_positions <- trajectories[i, , dimensions[[j]]]
-      nlogs <- sum(!is.na(current_positions))
-      
-      current_positions <- current_positions - current_positions[1]
-      if (!is.null(end)) {
-        current_positions <- current_positions / (current_positions[nlogs] - current_positions[1])
-        current_positions <- current_positions * (end[[j]]-start[[j]])
-      }
-      trajectories[i, , dimensions[[j]]] <-  current_positions + start[[j]]
-      
-    }
+    
+    # Extract trajectory data
+    current_trajectories <- trajectories[i, 1:nlogs[i],]
+    
+    # Iterate over trajectories
+    current_timestamps <- current_trajectories[,timestamps]
+    current_points <- current_trajectories[,dimensions,drop=FALSE]
+    
+    # Reversed vector indicating if mouse is at the end point
+    on_end <- cumsum(rev(rowSums(abs(t(t(current_points) - current_points[nlogs[i],]))))) == 0
+    
+    # Change last (i.e., first) element where mouse is still on end point so that this
+    # point is included in the calculations
+    on_end[sum(on_end, na.rm=TRUE)] <- FALSE
+    
+    # Exclude data without movements
+    current_timestamps <- current_timestamps[!rev(on_end)]
+    current_points <- current_points[!rev(on_end),]
+    
+    # Clear data in array
+    trajectories[i,,] <- NA
+    
+    # Add data to array
+    trajectories[i, 1:length(current_timestamps), timestamps] <- current_timestamps
+    trajectories[i, 1:length(current_timestamps), dimensions] <- current_points
     
     if (verbose) {
       if (i %% 100 == 0) message(paste(i, "trials finished"))
@@ -689,14 +694,14 @@ mt_resample <- function(data,
   constant_interpolation = NULL,
   verbose=FALSE) {
   
+  # Preparation
+  trajectories <- extract_data(data=data, use=use)
+
   if (length(dimensions) == 1 & dimensions[[1]] == "all") {
     dimensions <- dimnames(trajectories)[[3]]
     dimensions <- dimensions[dimensions != timestamps]
   }
-
-  # Preparation
-  trajectories <- extract_data(data=data, use=use)
-
+  
   # Calculate the number of steps after resampling
   max_steps <- ceiling(
     max(trajectories[,,timestamps], na.rm=TRUE) / step_size
@@ -833,7 +838,6 @@ mt_resample <- function(data,
 #'   of the \code{interval_size}). If specified, only values will be used for
 #'   averaging where the dimension values are smaller than \code{max_interval}.
 #'   If unspecified (the default), all values will be included.
-#' @param dimension Deprecated. Please use \code{av_dimension} instead.
 #'
 #' @return A mousetrap data object (see \link{mt_example}) with an additional
 #'   array (by default called \code{av_trajectories}) that contains the average
@@ -876,18 +880,8 @@ mt_average <- function(data,
   use="trajectories", save_as="av_trajectories",
   dimensions="all", av_dimension="timestamps",
   intervals=NULL, interval_size=100, max_interval=NULL,
-  verbose=FALSE,
-  dimension=NULL) {
+  verbose=FALSE) {
   
-  if (is.null(dimension) == FALSE) {
-    warning(
-      "The argument dimension is deprecated. ",
-      "Please use av_dimension instead.",
-      call.=FALSE
-    )
-    av_dimension <- dimension
-  }
-
   trajectories <- extract_data(data=data,use=use)
 
   if (!av_dimension %in% dimnames(trajectories)[[3]]) {

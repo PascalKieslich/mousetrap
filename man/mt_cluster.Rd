@@ -6,7 +6,7 @@
 \usage{
 mt_cluster(
   data,
-  use = "sp_trajectories",
+  use = "ln_trajectories",
   save_as = "clustering",
   dimensions = c("xpos", "ypos"),
   n_cluster = 5,
@@ -32,8 +32,8 @@ used.}
 \item{save_as}{a character string specifying where the resulting data should
 be stored.}
 
-\item{dimensions}{a character vector specifying which trajectory variables 
-should be used. Can be of length 2 or 3, for two-dimensional or 
+\item{dimensions}{a character vector specifying which trajectory variables
+should be used. Can be of length 2 or 3, for two-dimensional or
 three-dimensional trajectories respectively.}
 
 \item{n_cluster}{an integer specifying the number of clusters to estimate.}
@@ -41,8 +41,8 @@ three-dimensional trajectories respectively.}
 \item{method}{character string specifying the clustering procedure. Either
 \link[fastcluster]{hclust} (the default) or \link[stats]{kmeans}.}
 
-\item{weights}{numeric vector specifying the relative importance of the 
-variables specified in \code{dimensions}. Defaults to a vector of 1s 
+\item{weights}{numeric vector specifying the relative importance of the
+variables specified in \code{dimensions}. Defaults to a vector of 1s
 implying equal importance. Technically, each variable is rescaled so that
 the standard deviation matches the corresponding value in \code{weights}.
 To use the original variables, set \code{weights = NULL}.}
@@ -61,24 +61,24 @@ solution. \code{minkowski_p = 1} computes the city-block distance,
 \code{minkowski_p = 3} the cubic distance, etc. Only relevant if
 \code{method} is "hclust". See \link{mt_distmat} for further details.}
 
-\item{hclust_method}{character string specifying the linkage criterion used. 
+\item{hclust_method}{character string specifying the linkage criterion used.
 Passed on to the \code{method} argument of \link[stats]{hclust}. Default is
 set to \code{ward.D}. Only relevant if \code{method} is "hclust".}
 
-\item{kmeans_nstart}{integer specifying the number of reruns of the kmeans 
+\item{kmeans_nstart}{integer specifying the number of reruns of the kmeans
 procedure. Larger numbers minimize the risk of finding local minima. Passed
-on to the \code{nstart} argument of \link[stats]{kmeans}. Only relevant if 
+on to the \code{nstart} argument of \link[stats]{kmeans}. Only relevant if
 \code{method} is "kmeans".}
 
-\item{na_rm}{logical specifying whether trajectory points containing NAs 
-should be removed. Removal is done column-wise. That is, if any trajectory 
+\item{na_rm}{logical specifying whether trajectory points containing NAs
+should be removed. Removal is done column-wise. That is, if any trajectory
 has a missing value at, e.g., the 10th recorded position, the 10th position
 is removed for all trajectories. This is necessary to compute distance
 between trajectories.}
 
-\item{cluster_output}{logical. If \code{FALSE} (the default), the mousetrap 
-data object with the cluster assignments is returned (see Value). If 
-\code{TRUE}, the output of the cluster method (\code{kmeans} or 
+\item{cluster_output}{logical. If \code{FALSE} (the default), the mousetrap
+data object with the cluster assignments is returned (see Value). If
+\code{TRUE}, the output of the cluster method (\code{kmeans} or
 \code{hclust}) is returned directly.}
 
 \item{verbose}{logical indicating whether function should report its
@@ -86,80 +86,80 @@ progress.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) with an additional
-  \link{data.frame} added to it (by default called \code{clustering}) that
-  contains the cluster assignments. If a trajectory array was provided
-  directly as \code{data}, only the clustering \code{data.frame} will be
-  returned.
+\link{data.frame} added to it (by default called \code{clustering}) that
+contains the cluster assignments. If a trajectory array was provided
+directly as \code{data}, only the clustering \code{data.frame} will be
+returned.
 }
 \description{
 Performs trajectory clustering. It first computes distances between each pair
-of trajectories and then applies off-the-shelf clustering tools to explain 
+of trajectories and then applies off-the-shelf clustering tools to explain
 the resulting dissimilarity matrix using a predefined number of clusters.
 }
 \details{
-\code{mt_cluster} uses off-the-shelf clustering tools, i.e., 
-\link[fastcluster]{hclust} and \link[stats]{kmeans}, for cluster estimation. 
-Cluster estimation using \link[fastcluster]{hclust} relies on distances 
+\code{mt_cluster} uses off-the-shelf clustering tools, i.e.,
+\link[fastcluster]{hclust} and \link[stats]{kmeans}, for cluster estimation.
+Cluster estimation using \link[fastcluster]{hclust} relies on distances
 computed by \link{mt_distmat}.
 
 Mouse trajectories often occur in distinct, qualitative types (see Wulff et
-al., in press; Wulff et al., 2018). Common trajectory types are linear
+al., 2019; Wulff et al., 2022). Common trajectory types are linear
 trajectories, mildly and strongly curved trajctories, and single and multiple
 change-of-mind trials (see also \link{mt_map}). \code{mt_cluster} can tease
 these types apart.
 
-\code{mt_cluster} uses \link[fastcluster]{hclust} or \link[stats]{kmeans} to 
-explain the distances between every pair of trajectories using a predefined 
-number of clusters. If method is "hclust", \code{mt_cluster} computes the 
+\code{mt_cluster} uses \link[fastcluster]{hclust} or \link[stats]{kmeans} to
+explain the distances between every pair of trajectories using a predefined
+number of clusters. If method is "hclust", \code{mt_cluster} computes the
 dissimiliarity matrix for all trajectory pairs using \link{mt_distmat}. If
 method is "kmeans", this is done internally by \link[stats]{kmeans}.
 
-We recommend setting \code{method} to \link[fastcluster]{hclust} using 
-\code{ward.D} as the linkage criterion (via \code{hclust_method}). Relative 
-to \link[stats]{kmeans}, the other implemented clustering method, and other 
-linkage criteria, this setup handles the skewed distribution cluster sizes 
+We recommend setting \code{method} to \link[fastcluster]{hclust} using
+\code{ward.D} as the linkage criterion (via \code{hclust_method}). Relative
+to \link[stats]{kmeans}, the other implemented clustering method, and other
+linkage criteria, this setup handles the skewed distribution cluster sizes
 and trajectory outliers found in the majority of datasets best.
 
 For clustering trajectories, it is often useful that the endpoints of all
 trajectories share the same direction, e.g., that all trajectories end in the
 top-left corner of the coordinate system (\link{mt_remap_symmetric} or
 \link{mt_align} can be used to achieve this). Furthermore, it is recommended
-to use spatialized trajectories (see \link{mt_spatialize}; Wulff et al., in
-press; Haslbeck et al., 2018).
+to use length normalized trajectories (see \link{mt_length_normalize}; Wulff
+et al., 2019, Wulff et al., 2023).
 }
 \examples{
-# Spatialize trajectories
-KH2017 <- mt_spatialize(KH2017)
+# Length normalize trajectories
+KH2017 <- mt_length_normalize(KH2017)
 
 # Cluster trajectories
-KH2017 <- mt_cluster(KH2017, use="sp_trajectories")
+KH2017 <- mt_cluster(KH2017, use="ln_trajectories")
 
 # Plot clustered trajectories
-mt_plot(KH2017,use="sp_trajectories",
+mt_plot(KH2017,use="ln_trajectories",
   use2="clustering",facet_col="cluster")
 
 }
 \references{
 Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F.,
-  & Schulte-Mecklenbeck, M. (2019). Mouse-tracking: Detecting types in
-  movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G.
-  Johnson (Eds.), \emph{A Handbook of Process Tracing Methods} (pp. 131-145). New York, NY:
-  Routledge.
-   
-  Wulff, D. U., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. (2018).
-  \emph{Measuring the (dis-)continuous mind: What movement trajectories
-  reveal about cognition}. Manuscript in preparation.
+& Schulte-Mecklenbeck, M. (2019). Mouse-tracking: Detecting types in
+movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G.
+Johnson (Eds.), \emph{A Handbook of Process Tracing Methods} (pp. 131-145).
+New York, NY: Routledge.
 
-  Haslbeck, J. M. B., Wulff, D. U., Kieslich, P. J., Henninger, F., &
-  Schulte-Mecklenbeck, M. (2018). \emph{Advanced mouse- and hand-tracking
-  analysis: Detecting and visualizing clusters in movement trajectories}.
-  Manuscript in preparation.
+Wulff, D. U., Kieslich, P. J., Henninger, F., Haslbeck, J. M. B., &
+Schulte-Mecklenbeck, M. (2023). \emph{Movement tracking of psychological
+processes: A tutorial using mousetrap.} PsyArXiv.
+\doi{10.31234/osf.io/v685r}
+
+Wulff, D. U., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. (2022).
+\emph{Measuring the (dis-)continuous mind: What movement trajectories
+reveal about cognition}. Manuscript in preparation.
 }
 \seealso{
-\link{mt_distmat} for more information about how the distance matrix is 
-  computed when the hclust method is used.
+\link{mt_distmat} for more information about how the distance matrix is
+computed when the hclust method is used.
 
-  \link{mt_cluster_k} for estimating the optimal number of clusters.
+\link{mt_cluster_k} for estimating the optimal number of clusters.
 }
 \author{
 Dirk U. Wulff

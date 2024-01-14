@@ -26,7 +26,7 @@ The corresponding data are selected from \code{data} using
 "tn_trajectories" or "measures", depending on whether the time-normalized
 trajectories or derived measures should be aggregated.}
 
-\item{use_variables}{a character vector specifying the mouse-tracking 
+\item{use_variables}{a character vector specifying the mouse-tracking
 variables to aggregate. If a data.frame with mouse-tracking measures is
 provided as \code{data}, this corresponds to the column names. If a
 trajectory array is provided, this argument should specify the labels of
@@ -99,10 +99,10 @@ average_measures <- mt_aggregate_per_subject(
 }
 \seealso{
 \link{mt_aggregate} for aggregating mouse-tracking measures and
-  trajectories per condition.
+trajectories per condition.
 
-  \link[dplyr:summarise_all]{summarize_at} for aggregating data using the \code{dplyr} 
-  package.
+\link[dplyr:summarise_all]{summarize_at} for aggregating data using the \code{dplyr}
+package.
 }
 \author{
 Pascal J. Kieslich

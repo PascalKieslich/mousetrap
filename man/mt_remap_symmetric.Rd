@@ -42,8 +42,8 @@ is set to "no", y-values remain untouched.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) with remapped
-  trajectories. If the trajectory array was provided directly as \code{data},
-  only the trajectory array will be returned.
+trajectories. If the trajectory array was provided directly as \code{data},
+only the trajectory array will be returned.
 }
 \description{
 Remap all trajectories to one side (or one quadrant) of the coordinate

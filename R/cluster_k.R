@@ -10,7 +10,7 @@
 #' Cluster stability methods select \code{k} as the number of clusters for which
 #' the assignment of objects to clusters is most stable across bootstrap
 #' samples. This function implements the model-based and model-free methods
-#' described by Haslbeck & Wulff (2016). See references.
+#' described by Haslbeck & Wulff (2020). See references.
 #'
 #' The remaining three methods select \code{k} as the value that optimizes the
 #' gap statistic (Tibshirani, Walther, & Hastie, 2001), the jump statistic
@@ -21,8 +21,8 @@
 #' trajectories share the same direction, e.g., that all trajectories end in the
 #' top-left corner of the coordinate system (\link{mt_remap_symmetric} or
 #' \link{mt_align} can be used to achieve this). Furthermore, it is recommended
-#' to use spatialized trajectories (see \link{mt_spatialize}; Wulff et al., in
-#' press; Haslbeck et al., 2018).
+#' to use length normalized trajectories (see \link{mt_length_normalize}; Wulff
+#' et al., 2019).
 #'
 #' @inheritParams mt_cluster
 #' @param kseq a numeric vector specifying set of candidates for k. Defaults to
@@ -36,7 +36,7 @@
 #'   used by \code{stability}. See \link[cstab]{cStability}.
 #' @param model_based boolean specifying whether the model-based or the
 #'   model-free should be used by \code{stability}, when method is
-#'   \code{kmeans}. See \link[cstab]{cStability} and Haslbeck & Wulff (2016).
+#'   \code{kmeans}. See \link[cstab]{cStability} and Haslbeck & Wulff (2020).
 #' @param n_gap integer specifying the number of simulated datasets used by
 #'   \code{gap}. See Tibshirani et al. (2001).
 #'
@@ -56,11 +56,11 @@
 #' @examples
 #'
 #' \dontrun{
-#' # Spatialize trajectories
-#' KH2017 <- mt_spatialize(KH2017)
+#' # Length normalize trajectories
+#' KH2017 <- mt_length_normalize(KH2017)
 #'
 #' # Find k
-#' results <- mt_cluster_k(KH2017, use="sp_trajectories")
+#' results <- mt_cluster_k(KH2017, use="ln_trajectories")
 #'
 #' # Retrieve results
 #' results$kopt
@@ -72,20 +72,15 @@
 #'
 #' Jonas M. B. Haslbeck
 #'
-#' @references Haslbeck, J., & Wulff, D. U. (2016). Estimating the Number of
-#'   Clusters via Normalized Cluster Instability. \emph{arXiv preprint}
-#'   arXiv:1608.07494.
+#' @references Haslbeck, J. M. B., & Wulff, D. U. (2020). Estimating the Number
+#'   of Clusters via a Corrected Clustering Instability. \emph{Computational
+#'   Statistics, 35}, 1879–1894.
 #'
 #'   Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F., &
 #'   Schulte-Mecklenbeck, M. (2019). Mouse-tracking: Detecting types in movement
 #'   trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G. Johnson
 #'   (Eds.), \emph{A Handbook of Process Tracing Methods} (pp. 131-145). New
 #'   York, NY: Routledge.
-#'
-#'   Haslbeck, J. M. B., Wulff, D. U., Kieslich, P. J., Henninger, F., &
-#'   Schulte-Mecklenbeck, M. (2018). \emph{Advanced mouse- and hand-tracking
-#'   analysis: Detecting and visualizing clusters in movement trajectories}.
-#'   Manuscript in preparation.
 #'   
 #'   Tibshirani, R., Walther, G., & Hastie, T. (2001). Estimating the number of
 #'   clusters in a data set via the gap statistic. \emph{Journal of the Royal
@@ -102,7 +97,7 @@
 #' @export
 mt_cluster_k <- function(
   data,
-  use = 'sp_trajectories',
+  use = 'ln_trajectories',
   dimensions = c('xpos','ypos'),
 
   # k-selection type

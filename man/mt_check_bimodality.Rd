@@ -15,7 +15,7 @@ mt_check_bimodality(
 )
 }
 \arguments{
-\item{data}{a mousetrap data object created using one of the mt_import 
+\item{data}{a mousetrap data object created using one of the mt_import
 functions (see \link{mt_example} for details).}
 
 \item{use}{a character string specifying which data should be used. By
@@ -42,41 +42,41 @@ default), bimodality is checked across all trials.}
 }
 \value{
 A list of several data.frames. Each data.frame contains the value
-  returned by the respective method for assessing bimodality (see Details) - 
-  separately per condition (specified in the row dimension) and measure
-  (specified in the column dimension).
+returned by the respective method for assessing bimodality (see Details) -
+separately per condition (specified in the row dimension) and measure
+(specified in the column dimension).
 }
 \description{
-Assess bimodality of the distribution of mouse-tracking measures using the 
-bimodality coefficient and Hartigan's dip statistic (see Details). If 
-bimodality should be assessed separately for different conditions, the 
+Assess bimodality of the distribution of mouse-tracking measures using the
+bimodality coefficient and Hartigan's dip statistic (see Details). If
+bimodality should be assessed separately for different conditions, the
 corresponding variables can be specified under \code{grouping_variables}.
 }
 \details{
-Different methods have been suggested for assessing the bimodality of 
+Different methods have been suggested for assessing the bimodality of
 mouse-tracking measure distributions, each of which has advantages and
 disadvantages (see Freeman & Dale, 2013).
 
-Hehman et al. (2015) focus on two specific methods (bimodality coefficient 
+Hehman et al. (2015) focus on two specific methods (bimodality coefficient
 and Hartigan's dip statistic) which are implemented here.
 
 If \code{methods} include \code{BC}, the bimodality coefficient is calculated
-using the \link{bimodality_coefficient} function in this package. According 
-to Freeman and Ambady (2010), a distribution is considered bimodal if 
+using the \link{bimodality_coefficient} function in this package. According
+to Freeman and Ambady (2010), a distribution is considered bimodal if
 \code{BC > 0.555}.
 
 Note that MouseTracker (Freeman & Ambady, 2010) standardizes variables within
 each subject before computing the BC. This is also possible here using
 \link{mt_standardize} (see Examples).
 
-If \code{methods} include \code{HDS}, Hartigan's dip statistic is calculated 
-using the \link[diptest]{dip.test} function of the \code{diptest} package. 
+If \code{methods} include \code{HDS}, Hartigan's dip statistic is calculated
+using the \link[diptest]{dip.test} function of the \code{diptest} package.
 The corresponding p value (computed via linear interpolation) is returned.
 
-If \code{methods} include \code{HDS_sim}, Hartigan's dip statistic is 
-calculated using the \link[diptest]{dip.test} function with the additional 
+If \code{methods} include \code{HDS_sim}, Hartigan's dip statistic is
+calculated using the \link[diptest]{dip.test} function with the additional
 argument \code{simulate.p.values=TRUE}. In this case, the p value is computed
-from a Monte Carlo simulation of a uniform distribution with B (default: 
+from a Monte Carlo simulation of a uniform distribution with B (default:
 2000) replicates.
 }
 \examples{
@@ -121,9 +121,9 @@ Processes & Intergroup Relations, 18}(3), 384-401.
 }
 \seealso{
 \link{bimodality_coefficient} for more information about the bimodality
-  coefficient.
+coefficient.
 
-  \link[diptest]{dip.test} for more information about Hartigan's dip test.
+\link[diptest]{dip.test} for more information about Hartigan's dip test.
 }
 \author{
 Pascal J. Kieslich

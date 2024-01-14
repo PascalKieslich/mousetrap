@@ -104,7 +104,7 @@ mt_data <- mt_import_long(exp_data,
 }
 \seealso{
 \link{mt_import_mousetrap} and \link{mt_import_wide} for importing
-  mouse-tracking data in other formats.
+mouse-tracking data in other formats.
 }
 \author{
 Pascal J. Kieslich

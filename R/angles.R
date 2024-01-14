@@ -74,10 +74,10 @@ mt_angles <- function(data,
     stop('Not all dimensions exist.')
 
   # Get angles
-  anglesP <- getAnglesP(trajectories[,,dimensions[1]],
-                        trajectories[,,dimensions[2]])
-  anglesV <- getAnglesV(trajectories[,,dimensions[1]],
-                        trajectories[,,dimensions[2]])
+  anglesP <- getAnglesP(extract_dimensions(trajectories,dimensions[1]),
+                        extract_dimensions(trajectories,dimensions[2]))
+  anglesV <- getAnglesV(extract_dimensions(trajectories,dimensions[1]),
+                        extract_dimensions(trajectories,dimensions[2]))
 
   # Replace NAs (where angle could not be calculated, see documentation)
   if (na_replace == TRUE) {

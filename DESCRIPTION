@@ -1,15 +1,15 @@
 Package: mousetrap
 Type: Package
-Version: 3.1.5
-Date: 2020-08-26
+Version: 3.2.3.9000
 Title: Process and Analyze Mouse-Tracking Data
 Description: Mouse-tracking, the analysis of mouse movements in computerized
     experiments, is a method that is becoming increasingly popular in the
     cognitive sciences. The mousetrap package offers functions for importing,
     preprocessing, analyzing, aggregating, and visualizing mouse-tracking data.
     An introduction into mouse-tracking analyses using mousetrap can be found
-    in Kieslich, Henninger, Wulff, Haslbeck, & Schulte-Mecklenbeck (2019)
-    <doi: 10.4324/9781315160559-9> (preprint: https://psyarxiv.com/zuvqa/).
+    in Wulff, Kieslich, Henninger, Haslbeck, & Schulte-Mecklenbeck (2023)
+    <doi:10.31234/osf.io/v685r> (preprint: 
+    <https://osf.io/preprints/psyarxiv/v685r>).
 Maintainer: Pascal J. Kieslich <pascal.kieslich@gmail.com>
 Authors@R: c(
     person(c("Pascal","J."), "Kieslich", role= c("aut", "cre"),
@@ -25,7 +25,7 @@ Authors@R: c(
     		email = "jonas.haslbeck@googlemail.com"),
     person("Sarah", "Brockhaus", role = "ctb")
     )
-URL: https://github.com/pascalkieslich/mousetrap
+URL: https://pascalkieslich.github.io/mousetrap/, https://github.com/pascalkieslich/mousetrap
 BugReports: https://github.com/pascalkieslich/mousetrap/issues
 License: GPL-3
 Depends:
@@ -49,11 +49,13 @@ Imports:
     fastcluster,
     parallel,
     fields,
-    rlang
+    rlang,
+    lifecycle
 Suggests:
     readbulk,
     testthat
 LinkingTo: Rcpp
 Encoding: UTF-8
 LazyData: TRUE
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.3
+Roxygen: list(markdown = TRUE)

@@ -36,36 +36,36 @@ array can be provided directly (in this case \code{use} will be ignored).}
 used.}
 
 \item{dimensions}{a character vector specifying the trajectory variables used
-to create the heatmap. The first two entries are used as x and 
+to create the heatmap. The first two entries are used as x and
 y-coordinates, the third, if provided, will be added as color information.}
 
 \item{variable}{boolean or numeric vector matching the number of trajectories
 that if provided will be used as color information. \code{variable} is only
 considered when \code{length(dimensions) < 3}.}
 
-\item{bounds}{numeric vector specifying the corners (xmin, ymin, xmax, ymax) 
-of the plot region. By default (\code{bounds = NULL}), bounds are 
+\item{bounds}{numeric vector specifying the corners (xmin, ymin, xmax, ymax)
+of the plot region. By default (\code{bounds = NULL}), bounds are
 determined based on the data input.}
 
 \item{xres}{an integer specifying the number of pixels along the x-dimension.
-An \code{xres} of 1000 implies an 1000*N px, where N is determined so that 
-the trajectories aspect ratio is preserved (provided the \code{bounds} are 
+An \code{xres} of 1000 implies an 1000*N px, where N is determined so that
+the trajectories aspect ratio is preserved (provided the \code{bounds} are
 unchanged).}
 
-\item{upsample}{a numeric value by which the number of points used to 
-represent individual trajectories are increased or decreased. Values of 
-smaller than one will improve speed but also introduce a certain level of 
+\item{upsample}{a numeric value by which the number of points used to
+represent individual trajectories are increased or decreased. Values of
+smaller than one will improve speed but also introduce a certain level of
 granularity.}
 
-\item{norm}{a logical specifying whether the data should be warped into 
+\item{norm}{a logical specifying whether the data should be warped into
 standard space. If \code{norm = TRUE}, this overrules \code{bounds}.}
 
 \item{colors}{a character vector specifying two or three colors used to color
 the background, the foreground (trajectories), and the values of a third
 dimension (if specified).}
 
-\item{n_shades}{an integer specifying the number of shades for the color 
-gradient between the first and second, and the second and third color in 
+\item{n_shades}{an integer specifying the number of shades for the color
+gradient between the first and second, and the second and third color in
 \code{colors}.}
 
 \item{smooth_radius}{a numeric value specifying the standard deviation of the
@@ -74,31 +74,31 @@ gaussian smoothing. If zero, smoothing is omitted.}
 \item{low_pass}{an integer specifying the allowed number of counts per pixel.
 This arguments limits the maximum pixel color intensity.}
 
-\item{auto_enhance}{boolean. If \code{TRUE} (the default), the image is 
-adjusted so that the mean color intensity matches \code{mean_image} and 
+\item{auto_enhance}{boolean. If \code{TRUE} (the default), the image is
+adjusted so that the mean color intensity matches \code{mean_image} and
 \code{mean_color}.}
 
-\item{mean_image}{a numeric value between 0 and 1 specifying the average 
+\item{mean_image}{a numeric value between 0 and 1 specifying the average
 foreground color intensity across the entire image. Defaults to 0.1.}
 
-\item{mean_color}{a numeric value between 0 and 1 specifying the average 
+\item{mean_color}{a numeric value between 0 and 1 specifying the average
 third dimension's color intensity across the entire image. Defaults to 0.1.
 Only relevant if a third dimension is specified in \code{colors}.}
 
-\item{aggregate_lwd}{an integer specifying the width of the aggregate 
-trajectory. If \code{aggregate_lwd} is 0 (the default), the aggregate 
+\item{aggregate_lwd}{an integer specifying the width of the aggregate
+trajectory. If \code{aggregate_lwd} is 0 (the default), the aggregate
 trajectory is omitted.}
 
-\item{aggregate_col}{a character value specifying the color of the aggregate 
+\item{aggregate_col}{a character value specifying the color of the aggregate
 trajectory.}
 
-\item{n_trajectories}{an optional integer specifying the number of 
-trajectories used to create the image. By default, all trajectories are 
-used. If \code{n_trajectories} is specified and smaller than the number of 
-trajectories in the trajectory array, then \code{n_trajectories} are 
+\item{n_trajectories}{an optional integer specifying the number of
+trajectories used to create the image. By default, all trajectories are
+used. If \code{n_trajectories} is specified and smaller than the number of
+trajectories in the trajectory array, then \code{n_trajectories} are
 randomly sampled.}
 
-\item{seed}{an optional integer specifying the seed used for the trajectory 
+\item{seed}{an optional integer specifying the seed used for the trajectory
 sampling.}
 
 \item{verbose}{logical indicating whether function should report its
@@ -106,53 +106,55 @@ progress.}
 }
 \value{
 An object of class \code{mt_object_raw} containing in a matrix format
-  the image's pixel information, the aggregate trajectory, and the colors.
+the image's pixel information, the aggregate trajectory, and the colors.
 }
 \description{
-\code{mt_heatmap_raw} creates a high-resolution heatmap image of the 
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
+\code{mt_heatmap_raw} creates a high-resolution heatmap image of the
 trajectory data using gaussian smoothing. Note that this function has beta
 status.
 }
 \details{
-To create the image, \code{mt_heatmap_raw} takes the following steps. First, 
-the function maps the trajectory points to a pixel space with x ranging from 
-1 to xres and y ranging from 1 to xres divided by the ratio of x and y's 
-value range. Second, the function counts and normalizes the number of 
+To create the image, \code{mt_heatmap_raw} takes the following steps. First,
+the function maps the trajectory points to a pixel space with x ranging from
+1 to xres and y ranging from 1 to xres divided by the ratio of x and y's
+value range. Second, the function counts and normalizes the number of
 trajectory points occupying each of the x,y-pixels to yield image intensities
 between 0 and 1. Third, the function smooths the image using an approximative
-guassian approach governed by \code{smooth_radius}, which controls the 
-dispersion of the gaussian smoothing. Fourth, the function automatically 
-enhances the image (unless \code{auto_enhance = FALSE}) using a non-linear 
-transformation in order to yield a desired \code{mean_image} intensity. 
-Fifth, the function translates the image intensity into color using the 
-colors specified in \code{colors}. Finally, the function returns the image 
+guassian approach governed by \code{smooth_radius}, which controls the
+dispersion of the gaussian smoothing. Fourth, the function automatically
+enhances the image (unless \code{auto_enhance = FALSE}) using a non-linear
+transformation in order to yield a desired \code{mean_image} intensity.
+Fifth, the function translates the image intensity into color using the
+colors specified in \code{colors}. Finally, the function returns the image
 data in a long format containing the x, y, and color information.
 
-\code{mt_heatmap_raw} also offers the possibility to overlay the heatmap with 
-an additional variable, such as for instance velocity, so that both the 
-density of mouse trajectories and the information of the additional variable 
-are visible. In order to do this, specify a third variable label in 
-\code{dimensions} and control its appearance using the \code{color} and 
+\code{mt_heatmap_raw} also offers the possibility to overlay the heatmap with
+an additional variable, such as for instance velocity, so that both the
+density of mouse trajectories and the information of the additional variable
+are visible. In order to do this, specify a third variable label in
+\code{dimensions} and control its appearance using the \code{color} and
 \code{mean_color} arguments.
 }
 \references{
 Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F.,
-  & Schulte-Mecklenbeck, M. (2019). Mouse-tracking: Detecting types in
-  movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G.
-  Johnson (Eds.), \emph{A Handbook of Process Tracing Methods} (pp. 131-145). New York, NY:
-  Routledge.
+& Schulte-Mecklenbeck, M. (2019). Mouse-tracking: Detecting types in
+movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G.
+Johnson (Eds.), \emph{A Handbook of Process Tracing Methods} (pp. 131-145). New York, NY:
+Routledge.
 
-  Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B., &
-  Schulte-Mecklenbeck, M. (2019). Mouse-tracking: A practical guide to
-  implementation and analysis. In M. Schulte-Mecklenbeck, A. Kühberger, & J.
-  G. Johnson (Eds.), \emph{A Handbook of Process Tracing Methods} (pp.
-  111-130). New York, NY: Routledge.
+Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B., &
+Schulte-Mecklenbeck, M. (2019). Mouse-tracking: A practical guide to
+implementation and analysis. In M. Schulte-Mecklenbeck, A. Kühberger, & J.
+G. Johnson (Eds.), \emph{A Handbook of Process Tracing Methods} (pp.
+111-130). New York, NY: Routledge.
 }
 \seealso{
 \link{mt_heatmap} and  \link{mt_heatmap_ggplot} for plotting
-  trajectory heatmaps.
+trajectory heatmaps.
 
-  \link{mt_diffmap} for plotting trajectory difference-heatmaps.
+\link{mt_diffmap} for plotting trajectory difference-heatmaps.
 }
 \author{
 Dirk U. Wulff

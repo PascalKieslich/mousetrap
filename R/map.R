@@ -6,9 +6,9 @@
 #' prototype that produced the smallest distance.
 #' 
 #' Mouse trajectories often occur in distinct, qualitative types (see Wulff et
-#' al., in press; Wulff et al., 2018). Common trajectory types are linear
-#' trajectories, mildly and strongly curved trajctories, and single and multiple
-#' change-of-mind trials. \code{mt_map} allows to map trajectories to a
+#' al., 2019; Wulff et al., 2022). Common trajectory types are linear
+#' trajectories, mildly and strongly curved trajectories, and single and
+#' multiple change-of-mind trials. \code{mt_map} allows to map trajectories to a
 #' predefined set of trajectory types.
 #' 
 #' First, \code{mt_map} adjusts prototypes to match the coordinate system of the
@@ -21,8 +21,8 @@
 #' trajectories (and added prototypes) share the same direction, i.e., that all
 #' trajectories end in the top-left corner of the coordinate system
 #' (\link{mt_remap_symmetric} or \link{mt_align} can be used to achieve this).
-#' Furthermore, it is recommended to use spatialized trajectories (see
-#' \link{mt_spatialize}; Wulff et al., in press; Haslbeck et al., 2018).
+#' Furthermore, it is recommended to use length normalized trajectories (see
+#' \link{mt_length_normalize}; Wulff et al., 2019, Wulff et al., 2023).
 #' 
 #' @inheritParams mt_distmat
 #' @param prototypes a trajectory array containing the prototypes the 
@@ -51,25 +51,25 @@
 #' @references Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F.,
 #'   & Schulte-Mecklenbeck, M. (2019). Mouse-tracking: Detecting types in
 #'   movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G.
-#'   Johnson (Eds.), \emph{A Handbook of Process Tracing Methods} (pp. 131-145). New York, NY:
-#'   Routledge.
+#'   Johnson (Eds.), \emph{A Handbook of Process Tracing Methods} (pp. 131-145).
+#'   New York, NY: Routledge.
 #'    
-#'   Wulff, D. U., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. (2018).
+#'   Wulff, D. U., Kieslich, P. J., Henninger, F., Haslbeck, J. M. B., &
+#'   Schulte-Mecklenbeck, M. (2023). \emph{Movement tracking of psychological
+#'   processes: A tutorial using mousetrap.} PsyArXiv.
+#'   \doi{10.31234/osf.io/v685r}
+#'   
+#'   Wulff, D. U., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. (2022).
 #'   \emph{Measuring the (dis-)continuous mind: What movement trajectories
 #'   reveal about cognition}. Manuscript in preparation.
-#'
-#'   Haslbeck, J. M. B., Wulff, D. U., Kieslich, P. J., Henninger, F., &
-#'   Schulte-Mecklenbeck, M. (2018). \emph{Advanced mouse- and hand-tracking
-#'   analysis: Detecting and visualizing clusters in movement trajectories}.
-#'   Manuscript in preparation.
 #'         
 #' @examples
-#' # Spatialize trajectories
-#' KH2017 <- mt_spatialize(KH2017)
+#' # Length normalize trajectories
+#' KH2017 <- mt_length_normalize(KH2017)
 #' 
 #' # Map trajectories onto standard prototype set
 #' KH2017 <- mt_map(KH2017,
-#'   use="sp_trajectories")
+#'   use="ln_trajectories")
 #' 
 #' 
 #' # Plot prototypes
@@ -77,13 +77,13 @@
 #'   ggplot2::facet_grid(.~factor(mt_id,levels=unique(mt_id)))
 #' 
 #' # Plot trajectories per assigned prototype
-#' mt_plot(KH2017,use="sp_trajectories",
+#' mt_plot(KH2017,use="ln_trajectories",
 #'   use2="prototyping",facet_col="prototype_label")
 #' 
 #' 
 #' # Map trajectories onto reduced prototype set
 #' KH2017 <- mt_map(KH2017,
-#'   use="sp_trajectories",
+#'   use="ln_trajectories",
 #'   prototypes=mt_prototypes[c("straight","curved","cCoM"),,],
 #'   save_as="prototyping_red")
 #' 
@@ -100,7 +100,7 @@
 #' 
 #' # Map trajectories
 #' KH2017 <- mt_map(KH2017,
-#'   use="sp_trajectories", prototypes=mt_prototypes_ext,
+#'   use="ln_trajectories", prototypes=mt_prototypes_ext,
 #'   save_as="prototyping_ext")
 #' 
 #'
@@ -114,7 +114,7 @@
 #' @export
 mt_map <- function(
   data,
-  use = 'sp_trajectories',
+  use = 'ln_trajectories',
   save_as = 'prototyping',
   dimensions = c('xpos','ypos'),
   
@@ -178,7 +178,7 @@ mt_map <- function(
     al_prototypes <- mt_align(prototypes,coordinates = c(
       colMeans(current_trajectories[,1,dimensions]),colMeans(current_trajectories[,n_points,dimensions])
     ))
-    al_prototypes <- mt_spatialize(al_prototypes,n_points = n_points, dimensions = dimensions)
+    al_prototypes <- mt_length_normalize(al_prototypes,n_points = n_points, dimensions = dimensions)
     joint_array <- mt_bind(al_prototypes,current_trajectories,verbose=FALSE)
     
     # limit trajectories to dimensions

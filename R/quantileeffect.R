@@ -1,5 +1,8 @@
 #' Create quantile-effect plot
 #' 
+#' @description 
+#' `r lifecycle::badge("experimental")`
+#' 
 #' Function in beta and currently only for internal purposes.
 #' 
 #' @inheritParams mt_time_normalize

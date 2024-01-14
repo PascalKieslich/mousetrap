@@ -43,23 +43,23 @@ to be created new trajectory dimensions.}
 velocities should be reported. Only relevant if a single dimension is
 specified in \code{dimensions} (see Details).}
 
-\item{return_delta_time}{logical indicating if the timestamp differences 
+\item{return_delta_time}{logical indicating if the timestamp differences
 should be returned as well (as "delta_time").}
 
 \item{verbose}{logical indicating whether function should report its
 progress.}
 }
 \value{
-A mousetrap data object (see \link{mt_example}) with Euclidian 
-  distance, velocity, and acceleration added as additional variables to the 
-  trajectory array (called \code{dist}, \code{vel}, and  \code{acc}, if no 
-  prefix was specified). If the trajectory array was provided directly as 
-  \code{data}, only the trajectory array will be returned.
+A mousetrap data object (see \link{mt_example}) with Euclidian
+distance, velocity, and acceleration added as additional variables to the
+trajectory array (called \code{dist}, \code{vel}, and  \code{acc}, if no
+prefix was specified). If the trajectory array was provided directly as
+\code{data}, only the trajectory array will be returned.
 }
 \description{
-Calculate distance traveled, velocity, and acceleration for each logged 
+Calculate distance traveled, velocity, and acceleration for each logged
 position. Distance is calculated as the Euclidean distance between successive
-coordinates, and velocity as distance covered per time interval. The 
+coordinates, and velocity as distance covered per time interval. The
 acceleration denotes the difference in absolute velocity, again normalized
 per time.
 }
@@ -80,8 +80,8 @@ there will always be one less value computed for acceleration than for
 velocity, the final value in the acceleration vector has been padded with an
 NA.
 
-If the distance is calculated across both horizontal and vertical (x and y) 
-dimensions, distance and velocity is always positive (or 0). If only one 
+If the distance is calculated across both horizontal and vertical (x and y)
+dimensions, distance and velocity is always positive (or 0). If only one
 dimension is used, by default (\code{absolute=FALSE}), increases in x (or y)
 values result in positive distances and velocity values, decreases in
 negative distances and velocity values. If \code{absolute=TRUE}, absolute
@@ -100,10 +100,10 @@ mt_example <- mt_derivatives(mt_example,
 }
 \seealso{
 \link{mt_average} for averaging trajectories across constant time
-  intervals.
+intervals.
 
-  \link{mt_measures} for calculating per-trial mouse-tracking
-  measures.
+\link{mt_measures} for calculating per-trial mouse-tracking
+measures.
 }
 \author{
 Pascal J. Kieslich

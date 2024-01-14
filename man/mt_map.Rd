@@ -6,7 +6,7 @@
 \usage{
 mt_map(
   data,
-  use = "sp_trajectories",
+  use = "ln_trajectories",
   save_as = "prototyping",
   dimensions = c("xpos", "ypos"),
   prototypes = mousetrap::mt_prototypes,
@@ -29,36 +29,36 @@ used.}
 \item{save_as}{a character string specifying where the resulting data should
 be stored.}
 
-\item{dimensions}{a character vector specifying which trajectory variables 
-should be used. Can be of length 2 or 3 for two-dimensional or 
+\item{dimensions}{a character vector specifying which trajectory variables
+should be used. Can be of length 2 or 3 for two-dimensional or
 three-dimensional trajectories respectively.}
 
-\item{prototypes}{a trajectory array containing the prototypes the 
+\item{prototypes}{a trajectory array containing the prototypes the
 trajectories are mapped to. As a starting point, the trajectories stored in
-\link{mt_prototypes} can be used. See Details and Examples for selecting 
+\link{mt_prototypes} can be used. See Details and Examples for selecting
 prototypes and creating new ones.}
 
-\item{weights}{numeric vector specifying the relative importance of the 
-variables specified in \code{dimensions}. Defaults to a vector of 1s 
+\item{weights}{numeric vector specifying the relative importance of the
+variables specified in \code{dimensions}. Defaults to a vector of 1s
 implying equal importance. Technically, each variable is rescaled so that
 the standard deviation matches the corresponding value in \code{weights}.
 To use the original variables, set \code{weights = NULL}.}
 
-\item{pointwise}{boolean specifying the way dissimilarity between the 
-trajectories is measured (see Details). If \code{TRUE} (the default), 
-\code{mt_distmat} measures the average dissimilarity and then sums the 
-results. If \code{FALSE}, \code{mt_distmat}  measures dissimilarity once 
+\item{pointwise}{boolean specifying the way dissimilarity between the
+trajectories is measured (see Details). If \code{TRUE} (the default),
+\code{mt_distmat} measures the average dissimilarity and then sums the
+results. If \code{FALSE}, \code{mt_distmat}  measures dissimilarity once
 (by treating the various points as independent dimensions).}
 
-\item{na_rm}{logical specifying whether trajectory points containing NAs 
-should be removed. Removal is done column-wise. That is, if any trajectory 
+\item{na_rm}{logical specifying whether trajectory points containing NAs
+should be removed. Removal is done column-wise. That is, if any trajectory
 has a missing value at, e.g., the 10th recorded position, the 10th position
 is removed for all trajectories. This is necessary to compute distance
 between trajectories.}
 
-\item{minkowski_p}{an integer specifying the distance metric. 
+\item{minkowski_p}{an integer specifying the distance metric.
 \code{minkowski_p = 1} computes the city-block distance, \code{minkowski_p 
-= 2} (the default) computes the Euclidian distance, \code{minkowski_p = 3} 
+  = 2} (the default) computes the Euclidian distance, \code{minkowski_p = 3}
 the cubic distance, etc.}
 
 \item{use2}{an optional character string specifying where the data that
@@ -73,31 +73,31 @@ level of the variable(s). If unspecified (the default), the prototypes are
 rescaled in the same way across all trajectories.}
 }
 \value{
-A mousetrap data object (see \link{mt_example}) with an additional 
-  \link{data.frame} (by default called \code{prototyping}) that contains the 
-  best fitting prototype for each trajectory (the number of the prototype is 
-  specified under \code{prototype}, the label of the prototype under 
-  \code{prototype_label}) and the distance of the trajectory to the best 
-  fitting prototype (\code{min_dist}). If a trajectory array was provided
-  directly as \code{data}, only the data.frame containing the results will be
-  returned.
+A mousetrap data object (see \link{mt_example}) with an additional
+\link{data.frame} (by default called \code{prototyping}) that contains the
+best fitting prototype for each trajectory (the number of the prototype is
+specified under \code{prototype}, the label of the prototype under
+\code{prototype_label}) and the distance of the trajectory to the best
+fitting prototype (\code{min_dist}). If a trajectory array was provided
+directly as \code{data}, only the data.frame containing the results will be
+returned.
 }
 \description{
-\code{mt_map} maps trajectories onto a predefined set of prototype 
-trajectories. It first computes distances between the trajectories and each 
-of the supplied trajectory types and then assigns each trajectory to the 
+\code{mt_map} maps trajectories onto a predefined set of prototype
+trajectories. It first computes distances between the trajectories and each
+of the supplied trajectory types and then assigns each trajectory to the
 prototype that produced the smallest distance.
 }
 \details{
 Mouse trajectories often occur in distinct, qualitative types (see Wulff et
-al., in press; Wulff et al., 2018). Common trajectory types are linear
-trajectories, mildly and strongly curved trajctories, and single and multiple
-change-of-mind trials. \code{mt_map} allows to map trajectories to a
+al., 2019; Wulff et al., 2022). Common trajectory types are linear
+trajectories, mildly and strongly curved trajectories, and single and
+multiple change-of-mind trials. \code{mt_map} allows to map trajectories to a
 predefined set of trajectory types.
 
 First, \code{mt_map} adjusts prototypes to match the coordinate system of the
-trajectories specified by \code{use}. Next, \code{mt_map} computes the 
-distances between each trajectory and each of the supplied prototypes (see 
+trajectories specified by \code{use}. Next, \code{mt_map} computes the
+distances between each trajectory and each of the supplied prototypes (see
 \link{mt_distmat}) and then assigns each trajectory to the closest prototype
 (i.e., the prototype that produced the smallest distance).
 
@@ -105,16 +105,16 @@ Mapping trajectories to prototypes requires that the endpoints of all
 trajectories (and added prototypes) share the same direction, i.e., that all
 trajectories end in the top-left corner of the coordinate system
 (\link{mt_remap_symmetric} or \link{mt_align} can be used to achieve this).
-Furthermore, it is recommended to use spatialized trajectories (see
-\link{mt_spatialize}; Wulff et al., in press; Haslbeck et al., 2018).
+Furthermore, it is recommended to use length normalized trajectories (see
+\link{mt_length_normalize}; Wulff et al., 2019, Wulff et al., 2023).
 }
 \examples{
-# Spatialize trajectories
-KH2017 <- mt_spatialize(KH2017)
+# Length normalize trajectories
+KH2017 <- mt_length_normalize(KH2017)
 
 # Map trajectories onto standard prototype set
 KH2017 <- mt_map(KH2017,
-  use="sp_trajectories")
+  use="ln_trajectories")
 
 
 # Plot prototypes
@@ -122,13 +122,13 @@ mt_plot(mt_prototypes,facet_col="mt_id") +
   ggplot2::facet_grid(.~factor(mt_id,levels=unique(mt_id)))
 
 # Plot trajectories per assigned prototype
-mt_plot(KH2017,use="sp_trajectories",
+mt_plot(KH2017,use="ln_trajectories",
   use2="prototyping",facet_col="prototype_label")
 
 
 # Map trajectories onto reduced prototype set
 KH2017 <- mt_map(KH2017,
-  use="sp_trajectories",
+  use="ln_trajectories",
   prototypes=mt_prototypes[c("straight","curved","cCoM"),,],
   save_as="prototyping_red")
 
@@ -145,26 +145,26 @@ mt_prototypes_ext <- mt_add_trajectory(mt_prototypes_ext,
 
 # Map trajectories
 KH2017 <- mt_map(KH2017,
-  use="sp_trajectories", prototypes=mt_prototypes_ext,
+  use="ln_trajectories", prototypes=mt_prototypes_ext,
   save_as="prototyping_ext")
 
 
 }
 \references{
 Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F.,
-  & Schulte-Mecklenbeck, M. (2019). Mouse-tracking: Detecting types in
-  movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G.
-  Johnson (Eds.), \emph{A Handbook of Process Tracing Methods} (pp. 131-145). New York, NY:
-  Routledge.
-   
-  Wulff, D. U., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. (2018).
-  \emph{Measuring the (dis-)continuous mind: What movement trajectories
-  reveal about cognition}. Manuscript in preparation.
+& Schulte-Mecklenbeck, M. (2019). Mouse-tracking: Detecting types in
+movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G.
+Johnson (Eds.), \emph{A Handbook of Process Tracing Methods} (pp. 131-145).
+New York, NY: Routledge.
 
-  Haslbeck, J. M. B., Wulff, D. U., Kieslich, P. J., Henninger, F., &
-  Schulte-Mecklenbeck, M. (2018). \emph{Advanced mouse- and hand-tracking
-  analysis: Detecting and visualizing clusters in movement trajectories}.
-  Manuscript in preparation.
+Wulff, D. U., Kieslich, P. J., Henninger, F., Haslbeck, J. M. B., &
+Schulte-Mecklenbeck, M. (2023). \emph{Movement tracking of psychological
+processes: A tutorial using mousetrap.} PsyArXiv.
+\doi{10.31234/osf.io/v685r}
+
+Wulff, D. U., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. (2022).
+\emph{Measuring the (dis-)continuous mind: What movement trajectories
+reveal about cognition}. Manuscript in preparation.
 }
 \author{
 Dirk U. Wulff

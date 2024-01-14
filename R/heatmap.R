@@ -1,8 +1,13 @@
 #' Creates high-resolution heatmap of trajectory data.
 #' 
+#' @description 
+#' `r lifecycle::badge("experimental")`
+#' 
 #' \code{mt_heatmap_raw} creates a high-resolution heatmap image of the 
 #' trajectory data using gaussian smoothing. Note that this function has beta
 #' status.
+#' 
+#' @details 
 #' 
 #' To create the image, \code{mt_heatmap_raw} takes the following steps. First, 
 #' the function maps the trajectory points to a pixel space with x ranging from 
@@ -426,8 +431,13 @@ mt_heatmap_raw <- function(
 
 #' Plot trajectory heatmap.
 #' 
+#' @description 
+#' `r lifecycle::badge("experimental")`
+#' 
 #' \code{mt_heatmap} plots high resolution raw trajectory maps. Note that this
 #' function has beta status.
+#' 
+#' @details 
 #' 
 #' \code{mt_heatmap} wraps \link{mt_heatmap_raw} and provides direct plotting 
 #' output in \link[grDevices:png]{tiff}, \link[grDevices]{png},
@@ -470,6 +480,8 @@ mt_heatmap_raw <- function(
 #' @examples
 #' mt_heatmap(KH2017, xres=500, n_shades=5, mean_image=0.2)
 #' 
+#' 
+#' 
 #' @export
 mt_heatmap <- function(
   x,
@@ -501,7 +513,7 @@ mt_heatmap <- function(
   if(is_mousetrap_data(x) | is.array(x)){
     if(is_mousetrap_data(x)) x = extract_data(data = x, use = use)
     if(!all(dimensions %in% dimnames(x)[[3]])) stop('Not all dimensions found.')
-    heatmap = mt_heatmap_raw(x,use,dimensions,...)
+    heatmap = mt_heatmap_raw(x,use,dimensions,verbose=verbose,...)
     img = heatmap$img
     agg = heatmap$agg
     bg  = heatmap$colors[1]
@@ -605,8 +617,13 @@ mt_heatmap <- function(
 
 #' Plot trajectory heatmap using ggplot.
 #' 
+#' @description 
+#' `r lifecycle::badge("experimental")`
+#' 
 #' \code{mt_heatmap_ggplot} plots high resolution raw trajectory maps. Note that
 #' this function has beta status.
+#' 
+#' @details 
 #'
 #' \code{mt_heatmap_ggplot} wraps \link{mt_heatmap_raw} and returns a ggplot
 #' object containing the plot. In contrast to \code{mt_heatmap_plot} plots
@@ -766,8 +783,13 @@ print.mt_heatmap_raw = function(x,...){
 
 #' Creates a difference-heatmap of two trajectory heatmap images.
 #'
+#' @description 
+#' `r lifecycle::badge("experimental")`
+#' 
 #' \code{mt_diffmap} creates a difference-heatmap of the trajectory data using
 #' gaussian smoothing. Note that this function has beta status.
+#' 
+#' @details 
 #' 
 #' \code{mt_diffmap} takes two objects that either contain trajectory heatmaps
 #' or from which trajectory heatmaps can be computed. Difference-heatmaps are
@@ -827,8 +849,10 @@ print.mt_heatmap_raw = function(x,...){
 #'   111-130). New York, NY: Routledge.
 #' 
 #' @examples
-#' mt_diffmap(KH2017, condition="Condition",
-#'   xres=400, smooth_radius=6, n_shades=5)
+#' mt_diffmap(
+#'   KH2017, condition="Condition",
+#'   xres=400, smooth_radius=6, n_shades=5
+#' )
 #' 
 #' @export
 mt_diffmap <- function(

@@ -41,8 +41,8 @@ interval. The unit corresponds to the unit of the timestamps.}
 always be appended (which is the case by default). If \code{FALSE}, the
 last timestamp is only appended if it is a multiple of the step_size.}
 
-\item{constant_interpolation}{an optional integer. If specified, constant 
-instead of linear interpolation will be performed for all adjacent 
+\item{constant_interpolation}{an optional integer. If specified, constant
+instead of linear interpolation will be performed for all adjacent
 timestamps whose difference exceeds the number specified for
 \code{constant_interpolation}. The unit corresponds to the unit of the
 timestamps.}
@@ -52,9 +52,9 @@ progress.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) with an additional
-  array (by default called \code{rs_trajectories}) containing the resampled
-  trajectories. If a trajectory array was provided directly as \code{data},
-  only the resampled trajectories will be returned.
+array (by default called \code{rs_trajectories}) containing the resampled
+trajectories. If a trajectory array was provided directly as \code{data},
+only the resampled trajectories will be returned.
 }
 \description{
 Resample trajectory positions using a constant time interval. If no timestamp
@@ -77,11 +77,13 @@ interest). In case that a trial does not contain samples at the specified
 timestamps, linear interpolation is performed using the two adjacent
 timestamps.
 
-If a number is specified for \code{constant_interpolation}, constant instead 
-of linear interpolation will be performed for all adjacent timestamps whose 
+If a number is specified for \code{constant_interpolation}, constant instead
+of linear interpolation will be performed for all adjacent timestamps whose
 difference exceeds this number. Specifically, a period without mouse movement
 will be assumed starting at the respective timestamp until the next timestamp
-- \code{constant_interpolation/2}.
+\itemize{
+\item \code{constant_interpolation/2}.
+}
 
 Note that \code{mt_resample} does not average across time intervals. For
 this, \link{mt_average} can be used.
@@ -94,11 +96,11 @@ mt_example <- mt_resample(mt_example,
 }
 \seealso{
 \link[stats:approxfun]{approx} for information about the function used for
-  linear interpolation.
+linear interpolation.
 
-  \link{mt_average} for averaging trajectories across constant time intervals.
+\link{mt_average} for averaging trajectories across constant time intervals.
 
-  \link{mt_time_normalize} for time-normalizing trajectories.
+\link{mt_time_normalize} for time-normalizing trajectories.
 }
 \author{
 Pascal J. Kieslich

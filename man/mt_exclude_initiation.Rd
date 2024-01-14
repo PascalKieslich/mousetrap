@@ -39,9 +39,9 @@ progress.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) from which the
-  initial phase without mouse movement was removed. If the trajectory array
-  was provided directly as \code{data}, only the trajectory array will be
-  returned.
+initial phase without mouse movement was removed. If the trajectory array
+was provided directly as \code{data}, only the trajectory array will be
+returned.
 }
 \description{
 Exclude the initial phase in a trial where the mouse was not moved. The
@@ -71,6 +71,9 @@ mt_example <- mt_exclude_initiation(mt_example,
 }
 \seealso{
 \link{mt_measures} for calculating the initiation time.
+
+\link{mt_exclude_finish} for removing a potential phase without mouse
+movement at the end of the trial.
 }
 \author{
 Pascal J. Kieslich

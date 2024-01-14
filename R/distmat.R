@@ -45,11 +45,11 @@
 #'   the distance matrix will be returned.
 #'
 #' @examples
-#' # Spatialize trajectories
-#' mt_example <- mt_spatialize(mt_example)
+#' # Length normalize trajectories
+#' mt_example <- mt_length_normalize(mt_example)
 #'  
 #' # Compute distance matrix
-#' mt_example <- mt_distmat(mt_example, use="sp_trajectories")
+#' mt_example <- mt_distmat(mt_example, use="ln_trajectories")
 #'
 #' @author
 #' Dirk U. Wulff
@@ -58,7 +58,7 @@
 #'
 #' @export
 mt_distmat <- function(data,
-                       use = 'sp_trajectories',
+                       use = 'ln_trajectories',
                        save_as = 'distmat',
                        dimensions = c('xpos','ypos'),
                        weights = rep(1,length(dimensions)),

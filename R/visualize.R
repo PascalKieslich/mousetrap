@@ -14,12 +14,14 @@
 #' etc.; in addition, the group mapping is set to the internal trial identifier
 #' (by default called "mt_id").
 #' 
-#' If \code{only_ggplot==FALSE}, the trajectories are plotted using the 
-#' \link[ggplot2]{geom_path} function of the \code{ggplot2} package. If 
-#' \code{only_ggplot==TRUE}, the ggplot object is returned without layers, which
-#' can be used to further customize the plot, e.g., to specify a custom size for
-#' the lines or to create semitransparent lines by specifying an alpha level < 1
-#' (see Examples).
+#' If \code{return_type == "plot"} (the default), a new ggplot is created and
+#' the trajectories are plotted using the \link[ggplot2]{geom_path} function of
+#' the \code{ggplot2} package. If \code{return_type == "mapping"}, the ggplot
+#' object is returned without layers, which can be used to further customize the
+#' plot (see Examples). If \code{return_type == "geoms"}, only the geoms are
+#' returned, which allows adding the plotted trajectories to an existing ggplot
+#' (e.g., adding aggregate trajectories on top of the individual trajectories,
+#' see Examples).
 #'
 #' \code{mt_plot_aggregate} works similarly, but uses \link{mt_aggregate} for
 #' reshaping and aggregating trajectories prior to plotting.
@@ -65,9 +67,12 @@
 #'   wrapping is used.
 #' @param points logical. If \code{TRUE}, points will be added to the plot using
 #'   \link[ggplot2]{geom_point}.
-#' @param only_ggplot logical. If \code{TRUE}, only the ggplot object without
-#'   geoms is returned. If \code{FALSE} (the default), the trajectories are
-#'   plotted using \link[ggplot2]{geom_path}.
+#' @param return_type a character string specifying which type of object should
+#'   be returned. If \code{"plot"} (the default), a new ggplot is created and
+#'   the trajectories are plotted using \link[ggplot2]{geom_path}. If
+#'   \code{"mapping"}, only the ggplot object containing the mapping but without
+#'   any geoms is returned. If \code{"geoms"}, only the geoms are returned,
+#'   which allows adding the plotted trajectories to an existing ggplot.
 #' @param mt_id a character string specifying the internal label used for the
 #'   trial identifier (passed on to the group aesthetic). Only relevant for
 #'   \code{mt_plot}.
@@ -76,6 +81,7 @@
 #'   specified, aggregation will be performed within subjects first. Note that
 #'   aggregation will be performed separately for each level, including all
 #'   subjects for whom data are available.
+#' @param only_ggplot Deprecated. Please use \code{return_type} instead.
 #' @param ... additional arguments passed on to \link{mt_reshape} (such as
 #'   \code{subset}).
 #'
@@ -89,10 +95,6 @@
 #'   individual pdf files.
 #'
 #' @examples
-#' # Load ggplot2
-#' library(ggplot2)
-#' 
-#' 
 #' ## Plot individual example trajectories
 #'
 #' # Time-normalize trajectories
@@ -103,6 +105,10 @@
 #' mt_plot(mt_example, use="tn_trajectories",
 #'   color="Condition")
 #'
+#' # ... setting alpha < 1 for semi-transparency
+#' mt_plot(mt_example, use="tn_trajectories",
+#'   color="Condition", alpha=.2)
+#'
 #' # ... with custom colors
 #' mt_plot(mt_example, use="tn_trajectories",
 #'   color="Condition") +
@@ -112,10 +118,17 @@
 #' mt_plot(mt_example, use="tn_trajectories",
 #'   facet_col="Condition")
 #'
+#' # Create customized plot by setting the return_type option to "mapping"
+#' # to setup an empty plot. In a next step, a geom is added.
+#' # In this example, only points are plotted.
+#' mt_plot(mt_example, use="tn_trajectories",
+#'   color="Condition", return_type="mapping") + 
+#'   ggplot2::geom_point()
+#' 
 #' # Plot velocity profiles based on the averaged trajectories
 #' # varying the color depending on the condition
 #' mt_example <- mt_derivatives(mt_example)
-#' mt_example <- mt_average(mt_example, interval_size = 100)
+#' mt_example <- mt_average(mt_example, interval_size=100)
 #' mt_plot(mt_example, use="av_trajectories",
 #'   x="timestamps", y="vel", color="Condition")
 #'
@@ -138,19 +151,14 @@
 #'   color="Condition", points=TRUE)
 #'
 #' \dontrun{
-#' # Create customized aggregate trajectory plot
-#' # by using only_ggplot option to return a ggplot object without geoms
-#' # and by adding a geom to it with a custom line width
-#' mt_plot_aggregate(KH2017, use="tn_trajectories",
-#'   color="Condition", only_ggplot=TRUE) + 
-#'   geom_path(size=1.5)
 #'   
-#' # Create customized plot of individual trajectories
-#' # by using only_ggplot option to return a ggplot object without geoms
-#' # and by adding a geom to it with semitransparent lines 
-#' # (by specifying alpha < 1)
-#' mt_plot(KH2017, use="tn_trajectories", only_ggplot=TRUE) + 
-#'   geom_path(alpha=0.2)
+#' # Create combined plot of individual and aggregate trajectories
+#' # by first plotting the individual trajectories using mt_plot.
+#' # In a next step, the aggregate trajectories are added using the
+#' # mt_plot_aggregate function with the return_type argument set to "geom".
+#' mt_plot(KH2017, use="tn_trajectories", color="Condition", alpha=.05) + 
+#'   mt_plot_aggregate(KH2017, use="tn_trajectories",
+#'     color="Condition", return_type="geom", size=2)
 #' }
 #'
 #' @author
@@ -168,10 +176,36 @@ mt_plot <- function(data,
   facet_row=NULL, facet_col=NULL,
   wrap_var=NULL, wrap_ncol=NULL,
   points=FALSE,
-  only_ggplot=FALSE, mt_id="mt_id", ...) {
+  return_type="plot",
+  mt_id="mt_id",
+  only_ggplot=NULL,
+  ...) {
   
   if((!is.null(facet_row) | !is.null(facet_col))& !is.null(wrap_var)) {
     stop("wrap_var cannot be used in combination with facet_row and facet_col.")
+  }
+  
+  if(!return_type %in% c("plot", "mapping", "geom")){
+    stop("return_type can only be one of the following: plot, mapping, geom")
+  }
+  
+  if(return_type == "geom"){
+    if(!is.null(facet_row) | !is.null(facet_col) | !is.null(wrap_var)){
+      stop("When return_type is geom, no facet or wrapping can be used")
+    }
+  }
+  
+  if (is.null(only_ggplot) == FALSE) {
+    warning(
+      "The argument only_ggplot is deprecated. ",
+      "Please use return_type instead and consult the function documentation for its enhanced functionality.",
+      call.=FALSE
+    )
+    if(only_ggplot==TRUE){
+      return_type <- "mapping"
+    } else{
+      return_type <- "plot"
+    }
   }
 
   # Extract plotting options from metadata
@@ -189,48 +223,86 @@ mt_plot <- function(data,
       trajectories[,var] <- factor(trajectories[,var])
     }
   }
-
-  # Build plot
-  current_plot <- ggplot2::ggplot(
-    trajectories,
+  
+  # Setup basic mapping
+  current_mapping <-
     ggplot2::aes_string(
       x=x, y=y,
       group=mt_id,
       color=color,
       linetype=linetype
-      )
     )
-  
-  # Add facets (optional)
-  if(!is.null(facet_row) | !is.null(facet_col)) {
-    facet_row <- ifelse(is.null(facet_row),".",facet_row)
-    facet_col <- ifelse(is.null(facet_col),".",facet_col)
-    facet_formula <- stats::as.formula(paste(facet_row,facet_col,sep="~"))
-    current_plot <- current_plot + ggplot2::facet_grid(facet_formula)
-  }
-  
-  # Add wrapping (optional)
-  if(is.null(wrap_var)==FALSE) {
-    current_plot <- current_plot + ggplot2::facet_wrap(facets=wrap_var, ncol=wrap_ncol)
-  }
 
-  if (only_ggplot == TRUE) {
-    # Return empty plot object
-    return(current_plot)
-  } else {
-
-    # Add path geom to plot
-    current_plot <- current_plot +
-      ggplot2::geom_path(alpha=alpha, size=size)
-
-    # Add points to plot (optional)
-    if (points) {
-      current_plot <- current_plot +
-        ggplot2::geom_point(alpha=alpha)
+  # Build geom in case only geom should be returned
+  if (return_type == "geom"){
+    
+    current_geom <- ggplot2::geom_path(
+      mapping = current_mapping,
+      data = trajectories,
+      alpha = alpha, size = size,
+      inherit.aes = FALSE
+      )
+    
+    # ... and return this geom if no points are required
+    if (points == FALSE) {
+      return(current_geom)
+      
+    # ... and return list of geoms if points are required as well
+    } else {
+      return(
+        list(
+          current_geom,
+          ggplot2::geom_point(
+            mapping = current_mapping,
+            data = trajectories,
+            alpha = alpha,
+            inherit.aes = FALSE
+          )
+        )
+      ) 
     }
-
-    return(current_plot)
-
+    
+  # Otherwise, setup new ggplot
+  } else{
+    
+    current_plot <- ggplot2::ggplot(
+      data = trajectories,
+      mapping = current_mapping
+    )
+    
+    # Add facets (optional)
+    if(!is.null(facet_row) | !is.null(facet_col)) {
+      facet_row <- ifelse(is.null(facet_row),".",facet_row)
+      facet_col <- ifelse(is.null(facet_col),".",facet_col)
+      facet_formula <- stats::as.formula(paste(facet_row,facet_col,sep="~"))
+      current_plot <- current_plot + ggplot2::facet_grid(facet_formula)
+    }
+    
+    # Add wrapping (optional)
+    if(is.null(wrap_var)==FALSE) {
+      current_plot <- current_plot + ggplot2::facet_wrap(facets=wrap_var, ncol=wrap_ncol)
+    }
+    
+    # Return empty plot object if only mapping should be returned
+    if (return_type == "mapping") {
+      return(current_plot)
+    
+    # Otherwise, add geoms to ggplot
+    } else {
+      
+      current_plot <- current_plot +
+        ggplot2::geom_path(alpha=alpha, size=size)
+      
+      if (points) {
+        current_plot <- current_plot +
+          ggplot2::geom_point(alpha=alpha)
+      }
+      
+      return(current_plot)
+      
+    }
+    
+    
   }
 
 }
@@ -245,11 +317,38 @@ mt_plot_aggregate <- function(data,
   facet_row=NULL, facet_col=NULL,
   wrap_var=NULL, wrap_ncol=NULL,
   points=FALSE,
-  only_ggplot=FALSE, subject_id=NULL, ...) {
+  return_type="plot",
+  subject_id=NULL,
+  only_ggplot=NULL,
+  ...) {
   
   if((!is.null(facet_row) | !is.null(facet_col))& !is.null(wrap_var)) {
     stop("wrap_var cannot be used in combination with facet_row and facet_col.")
   }
+  
+  if(!return_type %in% c("plot", "mapping", "geom")){
+    stop("return_type can only be one of the following: plot, mapping, geom")
+  }
+  
+  if(return_type == "geom"){
+    if(!is.null(facet_row) | !is.null(facet_col) | !is.null(wrap_var)){
+      stop("When return_type is geom, no facet or wrapping can be used")
+    }
+  }
+  
+  if (is.null(only_ggplot) == FALSE) {
+    warning(
+      "The argument only_ggplot is deprecated. ",
+      "Please use return_type instead and consult the function documentation for its enhanced functionality.",
+      call.=FALSE
+    )
+    if(only_ggplot==TRUE){
+      return_type <- "mapping"
+    } else{
+      return_type <- "plot"
+    }
+  }
+  
 
   # Extract plotting options from metadata
   use2_variables <- c(color, linetype, facet_row, facet_col, wrap_var)
@@ -265,48 +364,87 @@ mt_plot_aggregate <- function(data,
     use=use, use2=use2, use2_variables=use2_variables,
     subject_id=subject_id, ...
   )
-
-  # Build plot
-  current_plot <- ggplot2::ggplot(
-    trajectories,
+  
+  # Setup basic mapping
+  current_mapping <-
     ggplot2::aes_string(
       x=x, y=y,
       color=color, linetype=linetype
     )
-  )
   
-  # Add facets (optional)
-  if(!is.null(facet_row) | !is.null(facet_col)) {
-    facet_row <- ifelse(is.null(facet_row),".",facet_row)
-    facet_col <- ifelse(is.null(facet_col),".",facet_col)
-    facet_formula <- stats::as.formula(paste(facet_row,facet_col,sep="~"))
-    current_plot <- current_plot + ggplot2::facet_grid(facet_formula)
-  }
-  
-  # Add wrapping (optional)
-  if(is.null(wrap_var)==FALSE) {
-    current_plot <- current_plot + ggplot2::facet_wrap(facets=wrap_var, ncol=wrap_ncol)
-  }
-  
-
-  if (only_ggplot == TRUE) {
-    # Return empty plot object
-    return(current_plot)
-  } else {
-
-    # Add path geom to plot
-    current_plot <- current_plot +
-      ggplot2::geom_path(alpha = alpha, size = size)
-
-    # Add points to plot (optional)
-    if (points) {
-      current_plot <- current_plot +
-        ggplot2::geom_point(alpha = alpha)
+  # Build geom in case only geom should be returned
+  if (return_type == "geom"){
+    
+    current_geom <- ggplot2::geom_path(
+      mapping = current_mapping,
+      data = trajectories,
+      alpha = alpha, size = size,
+      inherit.aes = FALSE
+    )
+    
+    # ... and return this geom if no points are required
+    if (points == FALSE) {
+      return(current_geom)
+      
+      # ... and return list of geoms if points are required as well
+    } else {
+      return(
+        list(
+          current_geom,
+          ggplot2::geom_point(
+            mapping = current_mapping,
+            data = trajectories,
+            alpha = alpha,
+            inherit.aes = FALSE
+          )
+        )
+      ) 
     }
-
-    return(current_plot)
-
+    
+  # Otherwise, setup new ggplot
+  } else{
+    
+    current_plot <- ggplot2::ggplot(
+      data = trajectories,
+      mapping = current_mapping
+    )
+    
+    # Add facets (optional)
+    if(!is.null(facet_row) | !is.null(facet_col)) {
+      facet_row <- ifelse(is.null(facet_row),".",facet_row)
+      facet_col <- ifelse(is.null(facet_col),".",facet_col)
+      facet_formula <- stats::as.formula(paste(facet_row,facet_col,sep="~"))
+      current_plot <- current_plot + ggplot2::facet_grid(facet_formula)
+    }
+    
+    # Add wrapping (optional)
+    if(is.null(wrap_var)==FALSE) {
+      current_plot <- current_plot + ggplot2::facet_wrap(facets=wrap_var, ncol=wrap_ncol)
+    }
+    
+    
+    if (return_type == "mapping") {
+      # Return empty plot object
+      return(current_plot)
+    } else {
+      
+      # Add path geom to plot
+      current_plot <- current_plot +
+        ggplot2::geom_path(alpha = alpha, size = size)
+      
+      # Add points to plot (optional)
+      if (points) {
+        current_plot <- current_plot +
+          ggplot2::geom_point(alpha = alpha)
+      }
+      
+      return(current_plot)
+      
+    }
+    
+    
   }
+
 
 }
 

@@ -23,7 +23,7 @@ The calculation of the bimodality coefficient involves calculating the
 skewness and kurtosis of the distribution first. For this, the
 \link[psych]{skew} and \link[psych:skew]{kurtosi} functions of the \code{psych}
 package are used.
-Note that type is set to "2" for these functions in accordance with 
+Note that type is set to "2" for these functions in accordance with
 Pfister et al. (2013).
 }
 \examples{
@@ -37,13 +37,13 @@ bimodality_coefficient(pfister_data_b) #.79
 Pfister, R., Schwarz, K. A., Janczyk, M., Dale, R., & Freeman, J. B. (2013).
 Good things peak in pairs: A note on the bimodality coefficient.
 \emph{Frontiers in Psychology, 4}, 700.
-\url{http://dx.doi.org/10.3389/fpsyg.2013.00700}
+\doi{10.3389/fpsyg.2013.00700}
 }
 \seealso{
 \link[psych]{skew} for calculating skewness and kurtosis.
 
-  \link{mt_check_bimodality} for assessing bimodality using several methods in
-  a mousetrap data object.
+\link{mt_check_bimodality} for assessing bimodality using several methods in
+a mousetrap data object.
 }
 \author{
 Pascal J. Kieslich

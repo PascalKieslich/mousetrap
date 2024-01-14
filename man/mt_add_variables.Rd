@@ -26,12 +26,12 @@ new variables are filled with \code{NA}s.}
 }
 \value{
 A mousetrap data object (see \link{mt_example}) where the new
-  variables have been added to the trajectory array.
-  Depending on the input to \code{variables}, the values for the added
-  variables are either \code{NA}s or their actual values. If columns of the
-  same name already existed, they have been removed. If the trajectory array
-  was provided directly as \code{data}, only the trajectory array will be
-  returned.
+variables have been added to the trajectory array.
+Depending on the input to \code{variables}, the values for the added
+variables are either \code{NA}s or their actual values. If columns of the
+same name already existed, they have been removed. If the trajectory array
+was provided directly as \code{data}, only the trajectory array will be
+returned.
 }
 \description{
 Add new variables to the trajectory array (and remove potentially existing

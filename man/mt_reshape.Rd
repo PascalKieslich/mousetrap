@@ -167,17 +167,17 @@ trajectories_wide <- mt_reshape(mt_example,
 }
 \seealso{
 \link{mt_aggregate} for aggregating mouse-tracking measures and
-  trajectories.
+trajectories.
 
-  \link{mt_aggregate_per_subject} for aggregating mouse-tracking measures and
-  trajectories per subject.
+\link{mt_aggregate_per_subject} for aggregating mouse-tracking measures and
+trajectories per subject.
 
-  \link{mt_export_long} for exporting mouse-tracking data in long format.
+\link{mt_export_long} for exporting mouse-tracking data in long format.
 
-  \link{mt_export_wide} for exporting mouse-tracking data in wide format.
+\link{mt_export_wide} for exporting mouse-tracking data in wide format.
 
-  \link[dplyr:mutate-joins]{inner_join} for merging data and \code{\link[dplyr:summarise_all]{summarize_at}}
-  for aggregating data using the \code{dplyr} package.
+\link[dplyr:mutate-joins]{inner_join} for merging data and \code{\link[dplyr:summarise_all]{summarize_at}}
+for aggregating data using the \code{dplyr} package.
 }
 \author{
 Pascal J. Kieslich

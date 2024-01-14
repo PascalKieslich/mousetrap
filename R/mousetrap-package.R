@@ -64,6 +64,8 @@
 #'   \link{mt_exclude_initiation}	excludes the initial phase of a trial without 
 #'   mouse movement.
 #'
+#'   \link{mt_exclude_finish}	excludes a potential phase without mouse movement at the end of a trial.
+#'
 #'   \link{mt_time_normalize}	performs time-normalization using equidistant time
 #'   intervals, resulting in an identical number of samples for all 
 #'   trajectories.
@@ -74,7 +76,7 @@
 #'   \link{mt_average} averages trajectory coordinates (and related variables)
 #'   for time bins of constant duration.
 #'
-#'   \link{mt_spatialize} re-represents each trajectory spatially so that
+#'   \link{mt_length_normalize} re-represents each trajectory spatially so that
 #'   adjacent points on the trajectory become equidistant to each other.
 #'   
 #' @section Data handling functions:
@@ -227,8 +229,9 @@
 #'   x="xpos", y="ypos", color="Condition"
 #' )
 #' }
-#' 
-#' @docType package
-#' @name mousetrap
+#' @keywords internal
+"_PACKAGE"
+
+## usethis namespace: start
+## usethis namespace: end
 NULL
-#> NULL

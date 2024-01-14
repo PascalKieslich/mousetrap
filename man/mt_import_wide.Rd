@@ -66,9 +66,9 @@ progress.}
 A mousetrap data object (see \link{mt_example}).
 }
 \description{
-\code{mt_import_wide} receives a data.frame where mouse-tracking data are 
+\code{mt_import_wide} receives a data.frame where mouse-tracking data are
 stored in wide format, i.e., where one row contains the data of one trial and
-every recorded mouse position and variable is saved in a separate variable 
+every recorded mouse position and variable is saved in a separate variable
 (e.g., X_1, X_2, ..., Y_1, Y_2, ...). This is, e.g., the case when collecting
 data using \href{http://www.mousetracker.org/}{MouseTracker} (Freeman &
 Ambady, 2010). From this data.frame, \code{mt_import_wide} creates a
@@ -80,14 +80,14 @@ list that includes the trajectory data as an array (called
 within this package (see \link{mousetrap} for an overview).
 }
 \details{
-\code{mt_import_wide} is designed to import mouse-tracking data saved in a 
-wide format. The defaults are set so that usually only the \code{raw_data} 
+\code{mt_import_wide} is designed to import mouse-tracking data saved in a
+wide format. The defaults are set so that usually only the \code{raw_data}
 need to be provided when data have been collecting using MouseTracker
 (Freeman & Ambady, 2010) and have been read into R using \link{read_mt}.
 
-If no \code{pos_ids} are provided, column labels for the respective variable 
-(e.g., x-positions) are extracted using \code{\link{grep}} returning all 
-variables that start with the respective character string (e.g., "X_" if 
+If no \code{pos_ids} are provided, column labels for the respective variable
+(e.g., x-positions) are extracted using \code{\link{grep}} returning all
+variables that start with the respective character string (e.g., "X_" if
 \code{xpos_label="X"} and \code{pos_sep="_"}).
 
 If no timestamps are found in the data, \code{mt_import_wide} automatically
@@ -112,8 +112,8 @@ studying real-time mental processing using a computer mouse-tracking method.
 }
 \seealso{
 \link{read_mt} for reading raw data that was collected using
-  MouseTracker (Freeman & Ambady, 2010) and stored as a file in the ".mt"
-  format.
+MouseTracker (Freeman & Ambady, 2010) and stored as a file in the ".mt"
+format.
 
 \link{mt_import_mousetrap} and \link{mt_import_long} for importing
 mouse-tracking data in other formats.

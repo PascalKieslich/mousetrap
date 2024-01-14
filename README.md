@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# mousetrap
+# mousetrap <img src="man/figures/mousetrap.png" align="right" alt="" width="120" />
 
 [![cran
 version](http://www.r-pkg.org/badges/version/mousetrap)](https://CRAN.R-project.org/package=mousetrap)
@@ -45,32 +45,20 @@ To install the latest development version from GitHub, you need the
 `devtools` package . The development version can be installed via
 `devtools::install_github("pascalkieslich/mousetrap@master")`.
 
-## Mailing list
+## Questions
 
-If you would like to receive information about new releases, you can add
-your email to the [mailing list](http://eepurl.com/co1AqX). Questions
-about using `mousetrap` can be asked in the
+Questions about using `mousetrap` can be asked in the
 [forum](https://forum.cogsci.nl/index.php?p=/categories/mousetrap).
 
 ## Citation
 
 If you use the `mousetrap` package in your published research, we kindly
-ask that you cite it as follows:
+ask that you cite the associated preprint:
 
-Kieslich, P. J., Henninger, F., Wulff, D. U., Haslbeck, J. M. B., &
-Schulte-Mecklenbeck, M. (2019). Mouse-tracking: A practical guide to
-implementation and analysis. In M. Schulte-Mecklenbeck, A. Kühberger, &
-J. G. Johnson (Eds.), *A Handbook of Process Tracing Methods*
-(pp. 111-130). New York, NY: Routledge.
-
-Besides, if you use functions for clustering and mapping trajectories,
-please also include the following reference:
-
-Wulff, D. U., Haslbeck, J. M. B., Kieslich, P. J., Henninger, F., &
-Schulte-Mecklenbeck, M. (2019). Mouse-tracking: Detecting types in
-movement trajectories. In M. Schulte-Mecklenbeck, A. Kühberger, & J. G.
-Johnson (Eds.), *A Handbook of Process Tracing Methods* (pp. 131-145).
-New York, NY: Routledge.
+Wulff, D. U.\*, Kieslich, P. J.\*, Henninger, F., Haslbeck, J. M. B., &
+Schulte-Mecklenbeck, M. (2023). *Movement tracking of psychological
+processes: A tutorial using mousetrap.* PsyArXiv.
+<https://doi.org/10.31234/osf.io/v685r>
 
 ## Acknowledgments
 

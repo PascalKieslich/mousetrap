@@ -7,3 +7,6 @@ cran-comments.md
 LICENSE
 ^docs$
 ^_pkgdown\.yml$
+^\.github$
+^actions$
+^Makefile$

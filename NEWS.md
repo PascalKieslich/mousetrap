@@ -1,3 +1,61 @@
+# mousetrap 3.2.3
+
+## Internal changes
+* Added link to online documentation in package description
+* Improved efficiency of heatmap examples
+
+# mousetrap 3.2.2
+
+## Announcements
+* A tutorial to movement tracking of psychological processes with the `mousetrap` R package has been published as a preprint. Please cite it as follows when using `mousetrap` in your research: Wulff, D. U.\*, Kieslich, P. J.\*, Henninger, F., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. (2023). _Movement tracking of psychological processes: A tutorial using mousetrap._ PsyArXiv. https://doi.org/10.31234/osf.io/v685r
+
+## Bugs fixed
+* `mt_import_long`: Preserve original trial order when importing trajectories. This also fixes the issue that trajectories are imported incorrectly when `mt_id_label` contains mixed case (closes #17, thanks to @LiKao)
+
+## Internal changes
+* Implemented a suggestion by CRAN team regarding the setup of the package overview help file (accommodating changes in roxygen2)
+
+
+# mousetrap 3.2.1
+
+## Announcements
+* A tutorial to movement tracking of psychological processes with the `mousetrap` R package has been published as a preprint. Please cite it as follows when using `mousetrap` in your research: Wulff, D. U.\*, Kieslich, P. J.\*, Henninger, F., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. (2021). _Movement tracking of cognitive processes: A tutorial using mousetrap._ PsyArXiv. https://doi.org/10.31234/osf.io/v685r Note that this tutorial has been updated and a new preprint has been published (see 3.2.2 release above).
+* After more than 5 years, `mousetrap` finally has a logo (thanks to Dirk Wulff)
+
+## General changes to existing functions
+* Introduction of lifecycle badges for experimental and deprecated functions using the `lifecycle` package
+* `mt_space_normalize` function that was already deprecated and replaced with `mt_align_start_end` has been removed
+
+## New functions
+* `mt_exclude_finish`: Remove a potential phase without mouse movement at the end of the trial
+
+## Changes in specific functions
+* `mt_average`: Removed `dimension` argument which was already deprecated and replaced with `av_dimension`
+
+## Bugs fixed
+* `mt_time_normalize` and `mt_resample`: Setting the `dimensions` argument to `"all"` now works (up to now, the functions simply returned an error when setting `dimensions = "all"`)
+* `mt_angles`: Now also works for the edge case that the trajectory array only contains a single trajectory (closes #15)
+* `mt_heatmap`: Now passes on the `verbose` argument to the internally used `mt_heatmap_raw` function to prevent messages from `mt_heatmap_raw` if `verbose = FALSE`
+
+## Internal changes
+* Added internal `extract_dimensions` function for extracting dimensions from trajectory array that also handles edge case of trajectory array with single trajectory
+
+
+# mousetrap 3.2.0
+
+## General changes to existing functions
+* The `mt_spatialize` function has been replaced with `mt_length_normalize` (to achieve consistent naming analogous to `mt_time_normalize`). The new function offers the same functionality with the exception that the created trajectories are now by default called `ln_trajectories` (instead of `sp_trajectories`), which stands for length-normalized trajectories and should ensure consistency in naming with time-normalized trajectories.
+* Because of the renaming of `sp_trajectories` to `ln_trajectories`, all functions that by default were using the `sp_trajectories` are now by default using `ln_trajectories` (e.g., `mt_cluster` and `mt_map`). Additionally, to ease the transition many mousetrap functions now internally flexibly exchange `ln_trajectories` and `sp_trajectories` in the `use` argument (if the specified trajectories are missing and the other trajectories are found) and throw a warning if they replace one with the other.
+
+## Changes in specific functions
+* `mt_spatialize`: function is deprecated and replaced with `mt_length_normalize`. The reason for this is to achieve consistent naming analogous to `mt_time_normalize`. The `mt_length_normalize` function offers the same functionality as `mt_spatialize` with the exception that the created trajectories are now by default called `ln_trajectories` (instead of `sp_trajectories`), which stands for length-normalized trajectories and should ensure consistency in naming with time-normalized trajectories.
+* `mt_import_mousetrap`: Now can also import trajectory coordinates when they are stored in scientific notation in the raw data (e.g., `2.98e-8`).
+* `mt_plot` and `mt_plot_aggregate`: Replaced `only_ggplot` with `return_type` argument. The new `return_type` argument allows for further customization of the plots: `If return_type == "plot"` (the default), a new ggplot is created and the trajectories are plotted using `geom_path` (corresponds to the old default behavior, where `only_ggplot` was set to `FALSE`). If `return_type == "mapping"`, only the ggplot object containing the mapping but without any geoms is returned (corresponds to the old behavior where `only_ggplot` was set to `TRUE`). If `return_type == "geoms"`, only the geoms are returned, which allows adding the plotted trajectories to an existing ggplot (new functionality).
+
+## Bugs fixed
+* `mt_exclude_initiation`: Bug fixed so that the correct initial position is used when removing the initial period without movement in a trial. Previously, `mt_exclude_initiation` was only behaving as intended when the initial position was (0,0), which probably was the case in many settings (in particular, if the trajectories were aligned using `mt_align_start` with default start values). If the initial position in a trial corresponded to a different value, the initial period without movement in most cases was simply not removed. This has now been fixed (closes #14).
+
+
 # mousetrap 3.1.5
 
 ## Changes in specific functions

@@ -38,10 +38,12 @@ effect between}
 }
 \value{
 Nothing, when image is plotted using an external device. Otherwise an
-  object of class \code{mt_object_raw} containing in a matrix format the
-  image's pixel information.
+object of class \code{mt_object_raw} containing in a matrix format the
+image's pixel information.
 }
 \description{
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
+
 Function in beta and currently only for internal purposes.
 }
 \examples{

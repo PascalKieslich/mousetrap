@@ -25,11 +25,11 @@
 #'
 #' @references Kieslich, P. J., & Henninger, F. (2017). Mousetrap: An
 #'   integrated, open-source mouse-tracking package. \emph{Behavior Research
-#'   Methods, 49}(5), 1652-1667. \url{https://doi.org/10.3758/s13428-017-0900-z}
+#'   Methods, 49}(5), 1652-1667. \doi{10.3758/s13428-017-0900-z}
 #'
 #'   Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor responses in the
 #'   time course of categorizing atypical exemplars. \emph{Memory & Cognition,
-#'   35}(1), 15-28. \url{https://doi.org/10.3758/BF03195938}
+#'   35}(1), 15-28. \doi{10.3758/BF03195938}
 #'   
 #' @format A \link{data.frame} with 38 rows and 19 variables. The data.frame is 
 #'   based on the combined raw data that were created using 
@@ -126,11 +126,11 @@
 #'
 #' @references Kieslich, P. J., & Henninger, F. (2017). Mousetrap: An
 #'   integrated, open-source mouse-tracking package. \emph{Behavior Research
-#'   Methods, 49}(5), 1652-1667. \url{https://doi.org/10.3758/s13428-017-0900-z}
+#'   Methods, 49}(5), 1652-1667. \doi{10.3758/s13428-017-0900-z}
 #'
 #'   Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor responses in the
 #'   time course of categorizing atypical exemplars. \emph{Memory & Cognition,
-#'   35}(1), 15-28. \url{https://doi.org/10.3758/BF03195938}
+#'   35}(1), 15-28. \doi{10.3758/BF03195938}
 #'
 #' @format A \link{data.frame} with 1140 rows and 19 variables. The data.frame is 
 #'   based on the combined raw data that were created using 
@@ -171,11 +171,11 @@
 #'
 #' @references Kieslich, P. J., & Henninger, F. (2017). Mousetrap: An 
 #'   integrated, open-source mouse-tracking package. \emph{Behavior Research 
-#'   Methods, 49}(5), 1652-1667. \url{https://doi.org/10.3758/s13428-017-0900-z}
+#'   Methods, 49}(5), 1652-1667. \doi{10.3758/s13428-017-0900-z}
 #'   
 #'   Dale, R., Kehoe, C., & Spivey, M. J. (2007). Graded motor responses in the 
 #'   time course of categorizing atypical exemplars. \emph{Memory & Cognition, 
-#'   35}(1), 15-28. \url{https://doi.org/10.3758/BF03195938}
+#'   35}(1), 15-28. \doi{10.3758/BF03195938}
 #'   
 #' @format A mousetrap data object is a \link{list} containing  at least the
 #'   following objects:
@@ -215,18 +215,23 @@
 #' trajectory, the discrete change-of-mind trajectory, and the double discrete
 #' change-of-mind trajectory.
 #' 
-#' Mouse- and hand-trajectories often occur in types (Wulff, Haslbeck, & 
-#' Schulte-Mecklenbeck, 2017). In such cases, movement trajectory data should be
-#' analyzed in terms of discrete type assignments. To this end \link{mt_map} can
-#' be used to map mouse- or hand-trajectory to the closest of several predefined
-#' prototypes. \code{mt_prototypes} provides a core set of prototypes that has 
-#' been shown to represent well a large fraction of empirical movement 
-#' trajectories.
+#' Mouse- and hand-trajectories often occur in types. In such cases, movement
+#' trajectory data should be analyzed in terms of discrete type assignments
+#' (Wulff et al., 2023). To this end \link{mt_map} can be used to map mouse- or
+#' hand-trajectory to the closest of several predefined prototypes.
+#' \code{mt_prototypes} provides a core set of prototypes that has been shown to
+#' represent well a large fraction of empirical movement trajectories (Wulff et
+#' al., 2022).
 #' 
 #' To tailor the set of prototypes to a given study, \code{mt_prototypes} can be
 #' extended using \link{mt_add_trajectory}.
 #' 
-#' @references Wulff, D. U., Haslbeck, J. M. B., Schulte-Mecklenbeck, M. (2018).
+#' @references  Wulff, D. U., Kieslich, P. J., Henninger, F., Haslbeck, J. M.
+#'   B., & Schulte-Mecklenbeck, M. (2023). \emph{Movement tracking of psychological
+#'   processes: A tutorial using mousetrap.} PsyArXiv.
+#'   \doi{10.31234/osf.io/v685r}
+#'   
+#'   Wulff, D. U., Haslbeck, J. M. B., Schulte-Mecklenbeck, M. (2022).
 #'   \emph{Measuring the (dis-)continuous mind: What movement trajectories
 #'   reveal about cognition}. Manuscript in preparation.
 #'   
