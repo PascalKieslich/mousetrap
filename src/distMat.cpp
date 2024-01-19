@@ -97,7 +97,7 @@ NumericMatrix distMat3d(NumericMatrix x,
                         int power = 2) {
   int ni = x.ncol(), nt = x.nrow();
   double xd,yd,zd,d = 0;
-  NumericMatrix dist(nt, nt);
+  NumericMatrix dist(nt,nt);
   for(int r = 0; r < nt; r++) {     // loop rows
     for(int c = r; c < nt; c++) {   // loop cols (only half due to symmetry)
       d = 0;                        //dummy value of final matrix entry
