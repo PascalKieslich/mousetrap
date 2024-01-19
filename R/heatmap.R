@@ -478,9 +478,7 @@ mt_heatmap_raw <- function(
 #'   111-130). New York, NY: Routledge.
 #'    
 #' @examples
-#' \dontrun{
 #' mt_heatmap(KH2017, xres=500, n_shades=5, mean_image=0.2)
-#' }
 #' 
 #' 
 #' 
@@ -669,9 +667,7 @@ mt_heatmap <- function(
 #'   111-130). New York, NY: Routledge.
 #'   
 #' @examples
-#' \dontrun{
 #' mt_heatmap_ggplot(KH2017, xres=500, n_shades=5, mean_image=0.2)
-#' }
 #' 
 #' @export
 mt_heatmap_ggplot <- function(data,
@@ -853,12 +849,10 @@ print.mt_heatmap_raw = function(x,...){
 #'   111-130). New York, NY: Routledge.
 #' 
 #' @examples
-#' \dontrun{
 #' mt_diffmap(
 #'   KH2017, condition="Condition",
 #'   xres=400, smooth_radius=6, n_shades=5
 #' )
-#' }
 #' 
 #' @export
 mt_diffmap <- function(
