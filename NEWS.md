@@ -2,7 +2,8 @@
 
 ## Internal changes
 * Added link to online documentation in package description
-* Improved efficiency of heatmap examples
+* Moved heatmap examples to dontrun to temporarily address CRAN clang18 issue
+
 
 # mousetrap 3.2.2
 
