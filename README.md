@@ -56,8 +56,8 @@ If you use the `mousetrap` package in your published research, we kindly
 ask that you cite the associated preprint:
 
 Wulff, D. U.\*, Kieslich, P. J.\*, Henninger, F., Haslbeck, J. M. B., &
-Schulte-Mecklenbeck, M. (in press). *Movement tracking of psychological
-processes: A tutorial using mousetrap.* Behavior Research Methods.
+Schulte-Mecklenbeck, M. (in press). Movement tracking of psychological
+processes: A tutorial using mousetrap. *Behavior Research Methods*.
 <https://doi.org/10.31234/osf.io/v685r>
 
 ## Acknowledgments
