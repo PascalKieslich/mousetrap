@@ -26,9 +26,9 @@
 #'   To use the original variables, set \code{weights = NULL}.
 #' @param pointwise boolean specifying the way dissimilarity between the 
 #'   trajectories is measured (see Details). If \code{TRUE} (the default), 
-#'   \code{mt_distmat} measures the average dissimilarity and then sums the 
-#'   results. If \code{FALSE}, \code{mt_distmat}  measures dissimilarity once 
-#'   (by treating the various points as independent dimensions).
+#'   \code{mt_distmat} measures the dissimilarity per point and then sums the 
+#'   results. If \code{FALSE}, \code{mt_distmat}  measures dissimilarity once, 
+#'   treating the various points as separate dimensions.
 #' @param minkowski_p an integer specifying the distance metric. 
 #'   \code{minkowski_p = 1} computes the city-block distance, \code{minkowski_p 
 #'   = 2} (the default) computes the Euclidian distance, \code{minkowski_p = 3} 
