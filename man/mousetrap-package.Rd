@@ -274,7 +274,7 @@ Authors:
 \itemize{
   \item Dirk U. Wulff \email{dirk.wulff@gmail.com} (\href{https://orcid.org/0000-0002-4008-8022}{ORCID})
   \item Felix Henninger \email{mailbox@felixhenninger.com} (\href{https://orcid.org/0000-0002-7730-9511}{ORCID})
-  \item Jonas M. B. Haslbeck \email{jonas.haslbeck@googlemail.com}
+  \item Jonas M. B. Haslbeck \email{jonas.haslbeck@googlemail.com} (\href{https://orcid.org/0000-0001-9096-7837}{ORCID})
 }
 
 Other contributors:

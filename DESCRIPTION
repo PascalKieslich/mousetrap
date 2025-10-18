@@ -7,9 +7,8 @@ Description: Mouse-tracking, the analysis of mouse movements in computerized
     cognitive sciences. The mousetrap package offers functions for importing,
     preprocessing, analyzing, aggregating, and visualizing mouse-tracking data.
     An introduction into mouse-tracking analyses using mousetrap can be found
-    in Wulff, Kieslich, Henninger, Haslbeck, & Schulte-Mecklenbeck (2023)
-    <doi:10.31234/osf.io/v685r> (preprint: 
-    <https://osf.io/preprints/psyarxiv/v685r>).
+    in Wulff, Kieslich, Henninger, Haslbeck, & Schulte-Mecklenbeck (2025)
+    <doi:10.3758/s13428-025-02695-2>.
 Maintainer: Pascal J. Kieslich <pascal.kieslich@gmail.com>
 Authors@R: c(
     person(c("Pascal","J."), "Kieslich", role= c("aut", "cre"),
@@ -22,7 +21,8 @@ Authors@R: c(
         email= "mailbox@felixhenninger.com",
         comment = c(ORCID = "0000-0002-7730-9511")),
     person(c("Jonas","M. B."), "Haslbeck", role = "aut",
-    		email = "jonas.haslbeck@googlemail.com"),
+    		email = "jonas.haslbeck@googlemail.com",
+    		comment = c(ORCID = "0000-0001-9096-7837")),
     person("Sarah", "Brockhaus", role = "ctb")
     )
 URL: https://pascalkieslich.github.io/mousetrap/, https://github.com/pascalkieslich/mousetrap
@@ -57,5 +57,5 @@ Suggests:
 LinkingTo: Rcpp
 Encoding: UTF-8
 LazyData: TRUE
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.3
 Roxygen: list(markdown = TRUE)

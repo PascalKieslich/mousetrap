@@ -53,12 +53,12 @@ Questions about using `mousetrap` can be asked in the
 ## Citation
 
 If you use the `mousetrap` package in your published research, we kindly
-ask that you cite the associated preprint:
+ask that you cite the associated article:
 
 Wulff, D. U.\*, Kieslich, P. J.\*, Henninger, F., Haslbeck, J. M. B., &
-Schulte-Mecklenbeck, M. (in press). Movement tracking of psychological
-processes: A tutorial using mousetrap. *Behavior Research Methods*.
-<https://doi.org/10.31234/osf.io/v685r>
+Schulte-Mecklenbeck, M. (2025). Movement tracking of psychological
+processes: A tutorial using mousetrap. *Behavior Research Methods, 57*,
+307. <https://doi.org/10.3758/s13428-025-02695-2>
 
 ## Acknowledgments
 
