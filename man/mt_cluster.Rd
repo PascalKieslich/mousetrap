@@ -47,13 +47,12 @@ implying equal importance. Technically, each variable is rescaled so that
 the standard deviation matches the corresponding value in \code{weights}.
 To use the original variables, set \code{weights = NULL}.}
 
-\item{pointwise}{boolean specifying the way in which dissimilarity between
-the trajectories is measured. If \code{TRUE} (the default),
-\code{mt_distmat} measures the average dissimilarity and then sums the
-results. If \code{FALSE}, \code{mt_distmat}  measures dissimilarity once
-(by treating the various points as independent dimensions). This is only
-relevant if \code{method} is "hclust". See \link{mt_distmat} for further
-details.}
+\item{pointwise}{boolean specifying the way dissimilarity between the
+trajectories is measured. If \code{TRUE} (the default), \code{mt_distmat}
+measures the dissimilarity per point and then sums the results. If
+\code{FALSE}, \code{mt_distmat}  measures dissimilarity once, treating the
+various points as separate dimensions. This is only relevant if
+\code{method} is "hclust". See \link{mt_distmat} for further details.}
 
 \item{minkowski_p}{an integer specifying the distance metric for the cluster
 solution. \code{minkowski_p = 1} computes the city-block distance,

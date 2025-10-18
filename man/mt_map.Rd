@@ -46,9 +46,9 @@ To use the original variables, set \code{weights = NULL}.}
 
 \item{pointwise}{boolean specifying the way dissimilarity between the
 trajectories is measured (see Details). If \code{TRUE} (the default),
-\code{mt_distmat} measures the average dissimilarity and then sums the
-results. If \code{FALSE}, \code{mt_distmat}  measures dissimilarity once
-(by treating the various points as independent dimensions).}
+\code{mt_distmat} measures the dissimilarity per point and then sums the
+results. If \code{FALSE}, \code{mt_distmat}  measures dissimilarity once,
+treating the various points as separate dimensions.}
 
 \item{na_rm}{logical specifying whether trajectory points containing NAs
 should be removed. Removal is done column-wise. That is, if any trajectory
