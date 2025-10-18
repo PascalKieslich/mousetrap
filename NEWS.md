@@ -1,3 +1,12 @@
+# mousetrap (development version)
+
+## Announcements
+* A tutorial to movement tracking of psychological processes with the `mousetrap` R package has been published in Behavior Research Methods. Please cite it as follows when using `mousetrap` in your research: Wulff, D. U.\*, Kieslich, P. J.\*, Henninger, F., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. (2025). Movement tracking of psychological processes: A tutorial using mousetrap. _Behavior Research Methods, 57_, 307. https://doi.org/10.3758/s13428-025-02695-2
+
+## Changes in specific functions
+* `mt_distmat`, `mt_cluster`, `mt_cluster_k`, and `mt_map`: Improved documentation of `pointwise` argument 
+
+
 # mousetrap 3.2.3
 
 ## Internal changes
