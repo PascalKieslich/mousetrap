@@ -32,7 +32,7 @@
 #' top-left corner of the coordinate system (\link{mt_remap_symmetric} or
 #' \link{mt_align} can be used to achieve this). Furthermore, it is recommended
 #' to use length normalized trajectories (see \link{mt_length_normalize}; Wulff
-#' et al., 2019, Wulff et al., 2023).
+#' et al., 2019, Wulff et al., 2025).
 #'
 #' @inheritParams mt_time_normalize
 #' @param save_as a character string specifying where the resulting data should
@@ -89,9 +89,9 @@
 #'   New York, NY: Routledge.
 #'   
 #'   Wulff, D. U., Kieslich, P. J., Henninger, F., Haslbeck, J. M. B., &
-#'   Schulte-Mecklenbeck, M. (2023). \emph{Movement tracking of psychological
-#'   processes: A tutorial using mousetrap.} PsyArXiv.
-#'   \doi{10.31234/osf.io/v685r}
+#'   Schulte-Mecklenbeck, M. (2025). Movement tracking of psychological
+#'   processes: A tutorial using mousetrap. \emph{Behavior Research
+#'   Methods, 57}, 307. \doi{10.3758/s13428-025-02695-2}
 #'    
 #'   Wulff, D. U., Haslbeck, J. M. B., & Schulte-Mecklenbeck, M. (2022).
 #'   \emph{Measuring the (dis-)continuous mind: What movement trajectories

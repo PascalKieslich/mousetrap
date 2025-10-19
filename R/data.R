@@ -217,7 +217,7 @@
 #' 
 #' Mouse- and hand-trajectories often occur in types. In such cases, movement
 #' trajectory data should be analyzed in terms of discrete type assignments
-#' (Wulff et al., 2023). To this end \link{mt_map} can be used to map mouse- or
+#' (Wulff et al., 2025). To this end \link{mt_map} can be used to map mouse- or
 #' hand-trajectory to the closest of several predefined prototypes.
 #' \code{mt_prototypes} provides a core set of prototypes that has been shown to
 #' represent well a large fraction of empirical movement trajectories (Wulff et
@@ -227,14 +227,14 @@
 #' extended using \link{mt_add_trajectory}.
 #' 
 #' @references  Wulff, D. U., Kieslich, P. J., Henninger, F., Haslbeck, J. M.
-#'   B., & Schulte-Mecklenbeck, M. (2023). \emph{Movement tracking of psychological
-#'   processes: A tutorial using mousetrap.} PsyArXiv.
-#'   \doi{10.31234/osf.io/v685r}
+#'   B., & Schulte-Mecklenbeck, M. (2025). Movement tracking of psychological
+#'   processes: A tutorial using mousetrap. \emph{Behavior Research
+#'   Methods, 57}, 307. \doi{10.3758/s13428-025-02695-2}
 #'   
 #'   Wulff, D. U., Haslbeck, J. M. B., Schulte-Mecklenbeck, M. (2022).
 #'   \emph{Measuring the (dis-)continuous mind: What movement trajectories
 #'   reveal about cognition}. Manuscript in preparation.
-#'   
+#'
 #'
 "mt_prototypes"
 NULL
