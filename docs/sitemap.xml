@@ -1,207 +1,70 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/bezier.html</loc>
-  </url>
-  <url>
-    <loc>/reference/bimodality_coefficient.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/KH2017.html</loc>
-  </url>
-  <url>
-    <loc>/reference/KH2017_raw.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mousetrap-package.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mousetrap.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_add_trajectory.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_add_variables.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_aggregate.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_aggregate_per_subject.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_align.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_align_start.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_align_start_end.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_angles.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_animate.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_average.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_bind.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_check_bimodality.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_check_resolution.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_cluster.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_cluster_k.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_count.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_derivatives.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_deviations.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_diffmap.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_distmat.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_example.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_example_raw.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_exclude_finish.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_exclude_initiation.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_export_long.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_heatmap.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_heatmap_ggplot.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_heatmap_raw.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_import_long.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_import_mousetrap.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_import_wide.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_length_normalize.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_map.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_measures.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_movement_angle.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_plot.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_plot_add_rect.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_plot_per_trajectory.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_plot_riverbed.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_prototypes.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_qeffect.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_remap_symmetric.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_resample.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_reshape.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_sample_entropy.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_scale_trajectories.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_space_normalize.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_spatialize.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_standardize.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_subset.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mt_time_normalize.html</loc>
-  </url>
-  <url>
-    <loc>/reference/print.mt_heatmap_raw.html</loc>
-  </url>
-  <url>
-    <loc>/reference/read_mousetracker.html</loc>
-  </url>
-  <url>
-    <loc>/reference/read_mt.html</loc>
-  </url>
-  <url>
-    <loc>/reference/reexports.html</loc>
-  </url>
-  <url>
-    <loc>/reference/scale_within.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/bezier.html</loc></url>
+<url><loc>/reference/bimodality_coefficient.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/KH2017.html</loc></url>
+<url><loc>/reference/KH2017_raw.html</loc></url>
+<url><loc>/reference/mousetrap-package.html</loc></url>
+<url><loc>/reference/mt_add_trajectory.html</loc></url>
+<url><loc>/reference/mt_add_variables.html</loc></url>
+<url><loc>/reference/mt_aggregate.html</loc></url>
+<url><loc>/reference/mt_aggregate_per_subject.html</loc></url>
+<url><loc>/reference/mt_align.html</loc></url>
+<url><loc>/reference/mt_align_start.html</loc></url>
+<url><loc>/reference/mt_align_start_end.html</loc></url>
+<url><loc>/reference/mt_angles.html</loc></url>
+<url><loc>/reference/mt_animate.html</loc></url>
+<url><loc>/reference/mt_average.html</loc></url>
+<url><loc>/reference/mt_bind.html</loc></url>
+<url><loc>/reference/mt_check_bimodality.html</loc></url>
+<url><loc>/reference/mt_check_resolution.html</loc></url>
+<url><loc>/reference/mt_cluster.html</loc></url>
+<url><loc>/reference/mt_cluster_k.html</loc></url>
+<url><loc>/reference/mt_count.html</loc></url>
+<url><loc>/reference/mt_derivatives.html</loc></url>
+<url><loc>/reference/mt_deviations.html</loc></url>
+<url><loc>/reference/mt_diffmap.html</loc></url>
+<url><loc>/reference/mt_distmat.html</loc></url>
+<url><loc>/reference/mt_example.html</loc></url>
+<url><loc>/reference/mt_example_raw.html</loc></url>
+<url><loc>/reference/mt_exclude_finish.html</loc></url>
+<url><loc>/reference/mt_exclude_initiation.html</loc></url>
+<url><loc>/reference/mt_export_long.html</loc></url>
+<url><loc>/reference/mt_heatmap.html</loc></url>
+<url><loc>/reference/mt_heatmap_ggplot.html</loc></url>
+<url><loc>/reference/mt_heatmap_raw.html</loc></url>
+<url><loc>/reference/mt_import_long.html</loc></url>
+<url><loc>/reference/mt_import_mousetrap.html</loc></url>
+<url><loc>/reference/mt_import_wide.html</loc></url>
+<url><loc>/reference/mt_length_normalize.html</loc></url>
+<url><loc>/reference/mt_map.html</loc></url>
+<url><loc>/reference/mt_measures.html</loc></url>
+<url><loc>/reference/mt_movement_angle.html</loc></url>
+<url><loc>/reference/mt_plot.html</loc></url>
+<url><loc>/reference/mt_plot_add_rect.html</loc></url>
+<url><loc>/reference/mt_plot_per_trajectory.html</loc></url>
+<url><loc>/reference/mt_plot_riverbed.html</loc></url>
+<url><loc>/reference/mt_prototypes.html</loc></url>
+<url><loc>/reference/mt_qeffect.html</loc></url>
+<url><loc>/reference/mt_remap_symmetric.html</loc></url>
+<url><loc>/reference/mt_resample.html</loc></url>
+<url><loc>/reference/mt_reshape.html</loc></url>
+<url><loc>/reference/mt_sample_entropy.html</loc></url>
+<url><loc>/reference/mt_scale_trajectories.html</loc></url>
+<url><loc>/reference/mt_space_normalize.html</loc></url>
+<url><loc>/reference/mt_spatialize.html</loc></url>
+<url><loc>/reference/mt_standardize.html</loc></url>
+<url><loc>/reference/mt_subset.html</loc></url>
+<url><loc>/reference/mt_time_normalize.html</loc></url>
+<url><loc>/reference/print.mt_heatmap_raw.html</loc></url>
+<url><loc>/reference/read_mousetracker.html</loc></url>
+<url><loc>/reference/read_mt.html</loc></url>
+<url><loc>/reference/reexports.html</loc></url>
+<url><loc>/reference/scale_within.html</loc></url>
 </urlset>
+
